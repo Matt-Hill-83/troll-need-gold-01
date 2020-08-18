@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { fetchEvents } from "../questActions"
 import { RETAIN_STATE } from "../questConstants"
 import EventFilters from "./EventFilters"
-import EventList from "./EventList"
+import QuestList from "./QuestList"
 import EventListItemPlaceholder from "./EventListItemPlaceholder"
 import EventsFeed from "./EventsFeed"
 
@@ -39,6 +39,7 @@ export default function QuestDashboard() {
     dispatch(fetchEvents(filter, startDate, limit, lastVisible))
   }
 
+  console.log({ events })
   return (
     <Grid>
       Quests!!!!
@@ -49,7 +50,7 @@ export default function QuestDashboard() {
             <EventListItemPlaceholder />
           </>
         )}
-        <EventList
+        <QuestList
           events={events}
           getNextEvents={handleFetchNextEvents}
           loading={loading}

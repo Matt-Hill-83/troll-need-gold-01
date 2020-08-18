@@ -1,8 +1,8 @@
-import React from 'react';
-import EventListItem from './EventListItem';
-import InfiniteScroll from 'react-infinite-scroller';
+import React from "react"
+import QuestListItem from "./QuestListItem"
+import InfiniteScroll from "react-infinite-scroller"
 
-export default function EventList({
+export default function QuestList({
   events,
   getNextEvents,
   loading,
@@ -18,10 +18,10 @@ export default function EventList({
           initialLoad={false}
         >
           {events.map((event) => (
-            <EventListItem event={event} key={event.id} />
+            <QuestListItem event={event} key={event.id} />
           ))}
         </InfiniteScroll>
       )}
     </>
-  );
+  )
 }
