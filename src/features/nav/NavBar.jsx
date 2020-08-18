@@ -15,6 +15,7 @@ export default function NavBar({ setFormOpen }) {
           <img src="/assets/logo.png" alt="logo" style={{ marginRight: 15 }} />
           Troll Need Gold
         </Menu.Item>
+        <Menu.Item as={NavLink} to="/quests" name="Quests" />
         <Menu.Item as={NavLink} to="/events" name="Events" />
         <Menu.Item as={NavLink} to="/sandbox" name="Sandbox" />
         {authenticated && (

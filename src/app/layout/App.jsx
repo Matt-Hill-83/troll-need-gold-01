@@ -16,6 +16,7 @@ import NavBar from "../../features/nav/NavBar"
 import PrivateRoute from "./PrivateRoute"
 import ProfilePage from "../../features/profiles/profilePage/ProfilePage"
 import Sandbox from "../../features/sandbox/Sandbox"
+import QuestDashboard from "../../features/quests/questDashboard/QuestDashboard"
 
 export default function App() {
   const { key } = useLocation()
@@ -34,6 +35,7 @@ export default function App() {
           <>
             <NavBar />
             <Container className="main">
+              <Route exact path="/quests" component={QuestDashboard} />
               <Route exact path="/events" component={EventDashboard} />
               <Route exact path="/sandbox" component={Sandbox} />
               <Route path="/events/:id" component={EventDetailedPage} />
