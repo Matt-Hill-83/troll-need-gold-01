@@ -1,7 +1,10 @@
 import { Route, useLocation } from "react-router-dom"
+import { Container } from "semantic-ui-react"
+import React from "react"
+import { ToastContainer } from "react-toastify"
+import { useSelector } from "react-redux"
 
 import AccountPage from "../../features/auth/AccountPage"
-import { Container } from "semantic-ui-react"
 import ErrorComponent from "../common/errors/ErrorComponent"
 import EventDashboard from "../../features/events/eventDashboard/EventDashboard"
 import EventDetailedPage from "../../features/events/eventDetailed/EventDetailedPage"
@@ -9,14 +12,10 @@ import EventForm from "../../features/events/eventForm/EventForm"
 import HomePage from "../../features/home/HomePage"
 import LoadingComponent from "./LoadingComponent"
 import ModalManager from "../common/modals/ModalManager"
-
 import NavBar from "../../features/nav/NavBar"
 import PrivateRoute from "./PrivateRoute"
 import ProfilePage from "../../features/profiles/profilePage/ProfilePage"
-import React from "react"
 import Sandbox from "../../features/sandbox/Sandbox"
-import { ToastContainer } from "react-toastify"
-import { useSelector } from "react-redux"
 
 export default function App() {
   const { key } = useLocation()
