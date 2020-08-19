@@ -10,7 +10,7 @@ export default class QuestStatusUtils {
   // Object getter functions --- START
   static updateSceneVisibilityProps = () => {
     const activeWorld = localStateStore.getActiveWorld()
-    const { newGrid5 } = activeWorld.data
+    const { newGrid5 } = activeWorld
 
     const questStatus = localStateStore.getQuestStatus()
     const { activeMissionIndex } = questStatus
@@ -28,7 +28,7 @@ export default class QuestStatusUtils {
 
       const parentSubQuestIndexFromScene = this.getParentSubQuestIndexFromScene(
         {
-          world: activeWorld.data,
+          world: activeWorld,
           sceneId: scene.id,
         }
       )
@@ -239,13 +239,13 @@ export default class QuestStatusUtils {
 
   static getActiveQuestConfig = () => {
     const activeWorld = localStateStore.getActiveWorld()
-    const { questConfig } = activeWorld.data
+    const { questConfig } = activeWorld
     return questConfig
   }
 
   static getActiveSubQuest = ({ world }) => {
     const activeWorld = localStateStore.getActiveWorld()
-    const { questConfig } = activeWorld.data
+    const { questConfig } = activeWorld
     const { subQuests } = questConfig
 
     const questStatus = localStateStore.getQuestStatus()

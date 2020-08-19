@@ -41,6 +41,7 @@ class TopLevel extends React.Component {
     // TODO - start cleanup here
     // TODO - start cleanup here
     // TODO - start cleanup here
+
     const defaultWorldId = "GhVDXZV8prb1XmwQVZjx"
     // const defaultWorldId = localStateStore.getDefaultWorldId()
 
@@ -302,13 +303,15 @@ class TopLevel extends React.Component {
 
     const { className } = this.props
     const activeWorld = localStateStore.getActiveWorld()
-    console.log("activeWorld", activeWorld) // zzz
 
     if (!activeWorld || !activeWorld.title) {
       return null
     }
+    console.log("activeWorld", activeWorld) // zzz
 
     const activeScene = localStateStore.getActiveScene()
+    console.log("activeScene", activeScene) // zzz
+
     if (!activeScene) {
       return null
     }

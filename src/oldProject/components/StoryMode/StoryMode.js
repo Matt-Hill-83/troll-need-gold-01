@@ -13,13 +13,13 @@ class StoryMode extends React.Component {
     const { activeScene, updateActiveScene, openQuestPicker } = this.props
     const activeWorld = localStateStore.getActiveWorld()
 
-    if (!activeWorld || !activeWorld.data || !activeWorld.data.title) {
+    if (!activeWorld || !activeWorld || !activeWorld.title) {
       return null
     }
 
     const renderWorldName = (
       <div tabIndex={0} className={css.worldTitle}>
-        <span> {activeWorld.data.title} </span>
+        <span> {activeWorld.title} </span>
       </div>
     )
 

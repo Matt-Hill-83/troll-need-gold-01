@@ -1,7 +1,6 @@
 import React from "react"
 import { FormControl, MenuItem, OutlinedInput, Select } from "@material-ui/core"
 import _get from "lodash.get"
-// import { toJS } from "mobx"
 
 import Images from "../../images/images.js"
 import Utils from "../../Utils/Utils.js"
@@ -195,7 +194,7 @@ class MiniLocation extends React.Component {
     const world = localStateStore.getActiveWorld()
 
     const backgroundColor = QuestStatusUtils.getSubQuestColor({
-      world: world.data,
+      world: world,
       sceneId: scene.id,
     })
 

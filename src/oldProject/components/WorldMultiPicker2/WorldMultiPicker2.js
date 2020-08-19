@@ -76,15 +76,15 @@ export default function WorldMultiPicker2({ props }) {
 
   const worlds = [...allWorlds]
   worlds.docs.map((world) => {
-    const { title } = world.data
+    const { title } = world
     const worldId = world.id
 
     const belongsToABook = Utils.belongsToABook({ bookId, worldId })
 
     if (belongsToABook) {
-      world.data.newTitle = `xxx - ${title} - [${belongsToABook.toString()}]`
+      world.newTitle = `xxx - ${title} - [${belongsToABook.toString()}]`
     } else {
-      world.data.newTitle = title
+      world.newTitle = title
     }
   })
 
