@@ -54,10 +54,6 @@ export function fetchQuestsFromFirestore(
 ) {
   const user = firebase.auth().currentUser
   let eventsRef = db.collection("quests")
-  // let eventsRef = db.collection("maps")
-  // .orderBy("date")
-  // .startAfter(lastDocSnapshot)
-  // .limit(limit)
   return eventsRef
   switch (filter) {
     case "isGoing":
@@ -71,10 +67,6 @@ export function fetchQuestsFromFirestore(
     default:
     // return eventsRef.where("date", ">=", startDate)
   }
-}
-
-export function listenToQuestFromFirestore(eventId) {
-  return db.collection("maps").doc(eventId)
 }
 
 export function listenToQuestFromFirestore2(eventId) {
