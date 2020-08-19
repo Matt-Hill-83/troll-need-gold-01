@@ -16,10 +16,7 @@ import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 class WorldViewer extends React.Component {
   renderSceneRows = () => {
     const map = localStateStore.getActiveWorld()
-
-    const {
-      data: { gridDimensions, newGrid5 },
-    } = map
+    const { gridDimensions, newGrid5 } = map
 
     const grid = Utils.reCreateGridFromCondensedGrid({
       gridDimensions,

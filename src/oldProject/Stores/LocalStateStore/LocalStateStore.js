@@ -338,6 +338,7 @@ class LocalStateStore {
 
   getActiveWorldGrid = () => {
     const map = Utils.getWorldFromId({ id: this.activeMapId })
+    console.log("map", map) // zzz
     return map.newGrid5 || []
   }
 
@@ -382,8 +383,9 @@ class LocalStateStore {
 
   getActiveScene = () => {
     const activeSceneId = this.getActiveSceneId()
+    console.log("activeSceneId", activeSceneId) // zzz
     const scenesGrid = this.getActiveWorldGrid()
-
+    console.log("scenesGrid", scenesGrid) // zzz
     const activeScene = scenesGrid.find((item) => item.id === activeSceneId)
     return activeScene
   }

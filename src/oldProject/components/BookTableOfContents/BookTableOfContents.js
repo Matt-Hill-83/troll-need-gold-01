@@ -31,7 +31,7 @@ class BookTableOfContents extends React.Component {
     const sortedWorlds = Utils.sortWorlds({ worlds: maps })
 
     const filteredMaps = sortedWorlds.filter((map) => {
-      const chapters = _get(selectedBook, "data.chapters") || []
+      const chapters = _get(selectedBook, "chapters") || []
       return map.released && chapters.includes(map.id)
     })
 

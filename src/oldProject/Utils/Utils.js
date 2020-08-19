@@ -60,9 +60,9 @@ export default class Utils {
 
     let bookFound = false
     books.docs.forEach((book) => {
-      const belongstoThisBook = book.data.chapters.includes(worldId)
+      const belongstoThisBook = book.chapters.includes(worldId)
       if (belongstoThisBook) {
-        owningBooks.push(book.data.name)
+        owningBooks.push(book.name)
         bookFound = true
       }
     })

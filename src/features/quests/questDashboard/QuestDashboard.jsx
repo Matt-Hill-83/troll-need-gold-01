@@ -39,6 +39,9 @@ export default function QuestDashboard() {
   }
 
   console.log({ events })
+
+  if (!events || events.length === 0) return <div>no data</div>
+
   return (
     <Grid>
       Quests!!!!
