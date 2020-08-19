@@ -13,7 +13,7 @@ import Utils from "../../Utils/Utils"
 import css from "./TopLevel.module.scss"
 
 let useDefaultWorldId
-useDefaultWorldId = true
+// useDefaultWorldId = true
 useDefaultWorldId = false
 
 const toaster = Toaster.create({
@@ -32,10 +32,17 @@ class TopLevel extends React.Component {
 
   async componentWillMount() {
     console.log("this.props", this.props) // zzz
-    const defaultWorldId = localStateStore.getDefaultWorldId()
     maps.length = 0
     maps.push(...this.props.quests)
     console.log("maps", maps) // zzz
+
+    // TODO - start cleanup here
+    // TODO - start cleanup here
+    // TODO - start cleanup here
+    // TODO - start cleanup here
+    // TODO - start cleanup here
+    const defaultWorldId = "GhVDXZV8prb1XmwQVZjx"
+    // const defaultWorldId = localStateStore.getDefaultWorldId()
 
     if (maps[0]) {
       const defaultMap = maps[0]

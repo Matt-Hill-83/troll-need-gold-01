@@ -43,6 +43,7 @@ class LocalStateStore {
 
   getDefaultWorldId = () => this.defaultWorldId
   setDefaultWorldId = (defaultWorldId) => {
+    console.log("defaultWorldId", defaultWorldId) // zzz
     this.defaultWorldId = defaultWorldId
   }
 
