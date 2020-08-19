@@ -1,21 +1,19 @@
 import React from "react"
 import { observer } from "mobx-react"
-import { toJS } from "mobx"
+// import { toJS } from "mobx"
 import _get from "lodash.get"
 import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core"
 
 import { maps, books } from "../../Stores/InitStores.js"
+import BookPicker from "../BookPicker/BookPicker.js"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
-import StoryMode from "../StoryMode/StoryMode"
 import QuestDialog from "../QuestDialog/QuestDialog.js"
+import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
+import StoryMode from "../StoryMode/StoryMode"
 import Utils from "../../Utils/Utils"
 import WorldBuilder from "../WorldBuilder/WorldBuilder.js"
-// import { UserConfigStore } from "../../Stores/UserConfigStore.js"
 
 import css from "./TopLevel.module.scss"
-import BookPicker from "../BookPicker/BookPicker.js"
-import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
-// import BookBuilder from "../BookBuilder/BookBuilder.js"
 
 let useDefaultWorldId
 useDefaultWorldId = false
@@ -302,7 +300,7 @@ class TopLevel extends React.Component {
     console.log("main story render")
 
     // this console.log needs to be here, or else the children won't render correctly
-    console.log("books.docs", toJS(books.docs.length))
+    console.log("books.docs", books.docs.length)
 
     const { className } = this.props
     const activeWorld = localStateStore.getActiveWorld()

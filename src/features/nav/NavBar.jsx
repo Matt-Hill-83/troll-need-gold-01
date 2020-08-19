@@ -16,6 +16,7 @@ export default function NavBar({ setFormOpen }) {
           Troll Need Gold
         </Menu.Item>
         <Menu.Item as={NavLink} to="/quests" name="Quests" />
+        <Menu.Item as={NavLink} to="/top-level" name="Top Level" />
         {/* <Menu.Item as={NavLink} to="/events" name="Events" /> */}
         <Menu.Item as={NavLink} to="/sandbox" name="Sandbox" />
         {authenticated && (
