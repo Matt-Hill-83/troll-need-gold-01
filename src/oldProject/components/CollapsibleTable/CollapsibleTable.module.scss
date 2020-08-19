@@ -1,0 +1,79 @@
+.main {
+  width: 100%;
+  height: 100%;
+  border: 4px solid blue !important;
+  position: relative;
+
+  .content {
+    display: flex;
+    flex: 1;
+    border: 6px solid red !important;
+    overflow: auto;
+    height: 88%;
+
+    .subQuest {
+      display: flex;
+      flex: 1 1;
+      flex-direction: column;
+
+      border: 1px solid green !important;
+      height: min-content;
+      padding: 0.5vh;
+      font-size: 2vh;
+      margin-bottom: 1vh;
+
+      .listGroup {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid blue !important;
+        margin-bottom: 1vh;
+
+        .listGroupTitle {
+          display: flex;
+          border: 1px solid green !important;
+          background: lightblue;
+          font-size: 1.8vh;
+          padding-left: 1vh;
+        }
+
+        .listItemName {
+          display: flex;
+          border: 1px solid orange !important;
+        }
+
+        .listItem {
+          font-size: 1.5vh;
+          display: flex;
+          border: 1px solid purple !important;
+          padding-left: 2vh;
+        }
+
+        .triggerName {
+          border: 1px solid red !important;
+          min-width: 20%;
+        }
+
+        .scenes {
+          .scene {
+            .sceneName {
+            }
+          }
+        }
+
+        .triggers {
+          .trigger {
+          }
+        }
+      }
+    }
+  }
+
+  .buttonGroup {
+    display: flex;
+    flex: 1 1;
+    border: 1px solid green !important;
+    position: relative;
+    overflow: hidden;
+    justify-content: flex-end;
+  }
+}

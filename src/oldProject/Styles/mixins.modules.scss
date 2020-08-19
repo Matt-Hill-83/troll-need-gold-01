@@ -1,0 +1,41 @@
+@mixin item-label {
+  position: absolute;
+  border: 1px solid red !important;
+  background: var(--light-pink);
+  border-radius: 3px;
+  padding: 0 3px;
+  top: 2%;
+  left: 2%;
+}
+
+@mixin character-image {
+  max-height: var(--cell-height);
+  min-height: var(--cell-height);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--light-pink);
+  border: 1px solid red !important;
+
+  & > img {
+    display: flex;
+    height: 150px;
+    width: auto;
+  }
+
+  .characterLabel {
+    @include item-label;
+  }
+}
+
+@mixin set-1 {
+  border: 2px solid var(--set1-purple-brdr);
+  background: var(--set1-lav-bk);
+}
+
+@mixin set-2 {
+  border: 2px solid var(--set1-purple-brdr);
+  background: var(--light-pink);
+}

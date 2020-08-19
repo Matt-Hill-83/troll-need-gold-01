@@ -1,0 +1,131 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1;
+  background: #ffffffa6;
+  border-radius: 1vh;
+  box-shadow: 5px 5px 15px 5px #000000;
+  padding-right: 1.5vw;
+
+  .header {
+    display: flex;
+    flex: 1 1;
+    border-radius: 0.5vh;
+    width: 100%;
+  }
+
+  .title {
+    position: relative;
+    display: flex;
+    flex: 1 1;
+    border-radius: 0.5vh;
+    width: 100%;
+  }
+
+  .row {
+    position: relative;
+    display: flex;
+    flex: 1 1;
+    justify-content: space-between;
+    border-radius: 0.5vh;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .left,
+  .right {
+    position: relative;
+    display: flex;
+    flex: 1 1;
+    border-radius: 0.5vh;
+    font-size: 2vh;
+    overflow: hidden;
+    border: 1px solid black !important;
+    margin: 0.5vh;
+  }
+
+  .left {
+  }
+  .right {
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .itemsContainerBox {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .itemContainerTitle {
+    display: flex;
+    align-items: center;
+    border: 1px solid green !important;
+    background: white;
+    white-space: nowrap;
+    font-size: 1vh;
+    padding: 0 0.2rem;
+  }
+
+  .itemsContainer {
+    --box-height: 4.8vh;
+    z-index: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    min-width: 24vh;
+    min-height: var(--box-height);
+    overflow: hidden;
+    background: white;
+    margin: 0.5vh;
+    padding: 0;
+
+    :global {
+      [className*="ImageDisplay_itemLabel__"] {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        border: 1px solid red !important;
+        background: var(--light-pink);
+        padding: 0 3px;
+        top: 0vh;
+        left: 0vh;
+        width: 100%;
+        font-size: 1.1vh;
+        font-weight: 600;
+        margin: 0px;
+      }
+    }
+
+    .itemContainer {
+      position: relative;
+      display: flex;
+      flex: 1 1;
+      border: 1px solid red;
+      border-radius: 2px;
+      margin-right: 1vh;
+      max-width: var(--box-height);
+      border-left: 1px solid red;
+
+      &:first-of-type {
+      }
+
+      [class*="ImageDisplay_imageContainer"] {
+        background: white;
+        z-index: 1 !important;
+        height: var(--box-height);
+        width: var(--box-height);
+
+        > img {
+          height: 100%;
+          width: auto;
+        }
+      }
+    }
+  }
+
+  .items {
+    display: flex;
+  }
+}

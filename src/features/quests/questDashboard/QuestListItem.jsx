@@ -9,12 +9,8 @@ export default function EventListItem({ event }) {
       <Segment>
         <Item.Group>
           <Item>
-            {/* <Item.Image size="tiny" circular src={event.hostPhotoURL} /> */}
             <Item.Content>
               <Item.Header content={event.title} />
-              {/* <Item.Description>
-                <Link to={`/profile/${event.hostUid}`}>{event.hostedBy}</Link>{" "}
-              </Item.Description> */}
               <Button
                 as={Link}
                 to={`/quests/${event.id}`}

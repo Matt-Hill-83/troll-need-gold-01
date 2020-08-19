@@ -34,15 +34,12 @@ export function fetchEvents(filter, startDate, limit, lastDocSnapshot) {
       const moreEvents = snapshot.docs.length >= limit
       const events = snapshot.docs.map((doc) => dataFromSnapshot(doc))
 
-      console.log("events", events) // zzz
       dispatch({
         type: FETCH_EVENTS,
         payload: { events, moreEvents, lastVisible },
       })
       dispatch(asyncActionFinish())
-      console.log(" no error") // zzz
     } catch (error) {
-      console.log("error", error) // zzz
       dispatch(asyncActionError(error))
     }
   }
