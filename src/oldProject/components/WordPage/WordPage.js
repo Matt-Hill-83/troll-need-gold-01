@@ -1,7 +1,5 @@
 import React from "react"
 import _get from "lodash.get"
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
 
 import FrameViewer from "../FrameViewer/FrameViewer.js"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
@@ -49,4 +47,4 @@ class WordPage extends React.Component {
     )
   }
 }
-export default observer(WordPage)
+export default WordPage

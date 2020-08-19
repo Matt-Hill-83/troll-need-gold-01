@@ -1,6 +1,4 @@
 import React from "react"
-import { observer } from "mobx-react"
-
 import Sounds from "../../Sounds/Sounds"
 
 import css from "./WordGroup.module.scss"
@@ -76,4 +74,4 @@ class WordGroup extends React.Component {
     )
   }
 }
-export default observer(WordGroup)
+export default WordGroup

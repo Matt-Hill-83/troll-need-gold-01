@@ -6,7 +6,7 @@ import {
   PopoverInteractionKind,
 } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
-import { toJS } from "mobx"
+// import { toJS } from "mobx"
 import cx from "classnames"
 import React from "react"
 

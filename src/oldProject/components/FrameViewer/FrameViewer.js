@@ -3,8 +3,7 @@ import React, { Component } from "react"
 import cx from "classnames"
 
 import Character from "../Character/Character"
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
+// import { toJS } from "mobx"
 import _get from "lodash.get"
 
 import Images from "../../images/images"
@@ -270,4 +269,4 @@ class FrameViewer extends Component {
   }
 }
 
-export default observer(FrameViewer)
+export default FrameViewer

@@ -2,8 +2,7 @@ import React, { Component } from "react"
 
 import cx from "classnames"
 
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
+// import { toJS } from "mobx"
 import _get from "lodash.get"
 import css from "./MissionConsole.module.scss"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
@@ -67,14 +66,6 @@ class MissionConsole extends Component {
     const newMissions = QuestStatusUtils.getActiveSubQuestMissions({ world })
 
     missions = newMissions
-    // if (newMissions && newMissions[0]) {
-    //   missions = newMissions
-    //   // console.log("newMissions") // K
-    // } else {
-    //   // for BW compatibility
-    //   missions = []
-    //   // missions = questStatus.questConfig.missions
-    // }
 
     const { activeMissionIndex } = questStatus
     const columnNames = [
@@ -130,4 +121,4 @@ class MissionConsole extends Component {
   }
 }
 
-export default observer(MissionConsole)
+export default MissionConsole

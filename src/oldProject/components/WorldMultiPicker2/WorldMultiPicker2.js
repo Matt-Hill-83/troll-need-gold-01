@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
-import { toJS } from "mobx"
+// import { toJS } from "mobx"
 import Chip from "@material-ui/core/Chip"
 
 import FormControl from "@material-ui/core/FormControl"
@@ -74,7 +74,7 @@ export default function WorldMultiPicker2({ props }) {
     setSelectedItems(event.target.value)
   }
 
-  const worlds = toJS(allWorlds)
+  const worlds = [...allWorlds]
   worlds.docs.map((world) => {
     const { title } = world.data
     const worldId = world.id

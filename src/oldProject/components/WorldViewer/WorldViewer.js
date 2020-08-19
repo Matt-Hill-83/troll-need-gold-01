@@ -1,7 +1,5 @@
 import _get from "lodash.get"
 import { Button } from "@blueprintjs/core"
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
 import React from "react"
 import cx from "classnames"
 
@@ -155,4 +153,4 @@ class WorldViewer extends React.Component {
     )
   }
 }
-export default observer(WorldViewer)
+export default WorldViewer

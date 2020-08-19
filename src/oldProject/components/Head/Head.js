@@ -1,8 +1,6 @@
 import React, { Component } from "react"
 
 import css from "./Head.module.scss"
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
 
 class Head extends Component {
   render() {
@@ -35,4 +33,4 @@ class Head extends Component {
   }
 }
 
-export default observer(Head)
+export default Head

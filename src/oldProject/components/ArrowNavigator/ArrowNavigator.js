@@ -2,8 +2,6 @@ import { Button } from "@blueprintjs/core"
 import React, { Component } from "react"
 import cx from "classnames"
 
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
 import _get from "lodash.get"
 
 import Images from "../../images/images"
@@ -69,4 +67,4 @@ class ArrowNavigator extends Component {
   }
 }
 
-export default observer(ArrowNavigator)
+export default ArrowNavigator

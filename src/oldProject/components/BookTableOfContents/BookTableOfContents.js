@@ -1,6 +1,5 @@
 import React from "react"
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
+// import { toJS } from "mobx"
 import _get from "lodash.get"
 import Images from "../../images/images.js"
 import cx from "classnames"
@@ -77,4 +76,4 @@ class BookTableOfContents extends React.Component {
   }
 }
 
-export default observer(BookTableOfContents)
+export default BookTableOfContents

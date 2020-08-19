@@ -1,15 +1,12 @@
 import _get from "lodash.get"
 import { ButtonGroup, Button, Dialog } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
 import cx from "classnames"
 import React from "react"
 
 import { maps, books } from "../../Stores/InitStores.js"
 import BookTableOfContents from "../BookTableOfContents/BookTableOfContents.js"
 import Images from "../../images/images.js"
-import JSONEditorDemo from "../JsonEdtor/JSONEditorDemo.js"
 import Utils from "../../Utils/Utils.js"
 import WorldMultiPicker2 from "../WorldMultiPicker2/WorldMultiPicker2.js"
 
@@ -73,7 +70,7 @@ class BookPicker extends React.Component {
     const isProdRelease = false
 
     const worldMultiPickerProps = {
-      selectedWorlds: toJS(chapters) || [],
+      selectedWorlds: chapters || [],
       allWorlds: maps,
       bookId,
       onClose: ({ selectedItems }) => {
@@ -119,10 +116,10 @@ class BookPicker extends React.Component {
           title={"Edit Book"}
         >
           <div className="contents">
-            <JSONEditorDemo
+            {/* <JSONEditorDemo
               json={jsonUnderEdit}
               onChangeJSON={this.onChangeJSON}
-            />
+            /> */}
           </div>
           <WorldMultiPicker2 props={worldMultiPickerProps}></WorldMultiPicker2>
           <Button
@@ -150,7 +147,7 @@ class BookPicker extends React.Component {
   updateBook = async ({ bookId, newProps }) => {
     const bookUnderEdit = books.docs.find((item) => item.id === bookId)
 
-    Object.assign(bookUnderEdit.data, toJS(newProps))
+    Object.assign(bookUnderEdit.data, newProps)
     await bookUnderEdit.update(bookUnderEdit.data)
   }
 
@@ -230,4 +227,4 @@ class BookPicker extends React.Component {
   }
 }
 
-export default observer(BookPicker)
+export default BookPicker

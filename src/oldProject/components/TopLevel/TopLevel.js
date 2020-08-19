@@ -1,6 +1,4 @@
 import React from "react"
-import { observer } from "mobx-react"
-// import { toJS } from "mobx"
 import _get from "lodash.get"
 import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core"
 
@@ -334,4 +332,4 @@ class TopLevel extends React.Component {
   }
 }
 
-export default observer(TopLevel)
+export default TopLevel

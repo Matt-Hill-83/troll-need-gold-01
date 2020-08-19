@@ -1,9 +1,7 @@
 import React from "react"
-import { observer } from "mobx-react"
 import { FormControl, MenuItem, OutlinedInput, Select } from "@material-ui/core"
-import cx from "classnames"
 import _get from "lodash.get"
-import { toJS } from "mobx"
+// import { toJS } from "mobx"
 
 import Images from "../../images/images.js"
 import Utils from "../../Utils/Utils.js"
@@ -277,4 +275,4 @@ class MiniLocation extends React.Component {
   }
 }
 
-export default observer(MiniLocation)
+export default MiniLocation

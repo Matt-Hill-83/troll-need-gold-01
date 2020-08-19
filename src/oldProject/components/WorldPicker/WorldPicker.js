@@ -1,6 +1,4 @@
 import React, { Component } from "react"
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
 
 import {
   Button,
@@ -128,4 +126,4 @@ class WorldPicker extends Component {
     return worldPicker
   }
 }
-export default observer(WorldPicker)
+export default WorldPicker

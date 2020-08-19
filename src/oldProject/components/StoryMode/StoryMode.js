@@ -1,6 +1,4 @@
 import _get from "lodash.get"
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
 import React from "react"
 import cx from "classnames"
 
@@ -46,4 +44,4 @@ class StoryMode extends React.Component {
     )
   }
 }
-export default observer(StoryMode)
+export default StoryMode
