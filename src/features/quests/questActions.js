@@ -16,7 +16,6 @@ import {
   asyncActionError,
 } from "../../app/async/asyncReducer"
 import {
-  fetchEventsFromFirestore,
   fetchQuestsFromFirestore,
   dataFromSnapshot,
 } from "../../app/firestore/firestoreService"

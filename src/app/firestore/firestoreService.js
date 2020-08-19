@@ -53,7 +53,8 @@ export function fetchQuestsFromFirestore(
   lastDocSnapshot = null
 ) {
   const user = firebase.auth().currentUser
-  let eventsRef = db.collection("maps")
+  let eventsRef = db.collection("quests")
+  // let eventsRef = db.collection("maps")
   // .orderBy("date")
   // .startAfter(lastDocSnapshot)
   // .limit(limit)
@@ -74,6 +75,10 @@ export function fetchQuestsFromFirestore(
 
 export function listenToQuestFromFirestore(eventId) {
   return db.collection("maps").doc(eventId)
+}
+
+export function listenToQuestFromFirestore2(eventId) {
+  return db.collection("quests").doc(eventId)
 }
 
 export function listenToEventFromFirestore(eventId) {

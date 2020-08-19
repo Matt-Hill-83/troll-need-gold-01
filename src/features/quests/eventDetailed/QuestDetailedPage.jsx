@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import React from "react"
 
-import { listenToQuestFromFirestore } from "../../../app/firestore/firestoreService"
+import { listenToQuestFromFirestore2 } from "../../../app/firestore/firestoreService"
 import { listenToSelectedQuest } from "../questActions"
 import LoadingComponent from "../../../app/layout/LoadingComponent"
 import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc"
@@ -15,7 +15,7 @@ export default function QuestDetailedPage({ match }) {
   const { loading, error } = useSelector((state) => state.async)
 
   useFirestoreDoc({
-    query: () => listenToQuestFromFirestore(match.params.id),
+    query: () => listenToQuestFromFirestore2(match.params.id),
     data: (quest) => {
       console.log("quest", quest) // zzz
       dispatch(listenToSelectedQuest(quest))
