@@ -13,23 +13,18 @@ export default function EventListItem({ event }) {
             <Item.Content>
               <Item.Header content={event.title} />
               <Item.Description>
-                Hosted by{" "}
                 <Link to={`/profile/${event.hostUid}`}>{event.hostedBy}</Link>{" "}
               </Item.Description>
+              <Button
+                as={Link}
+                to={`/quests/${event.id}`}
+                color="teal"
+                floated="right"
+                content="View"
+              />
             </Item.Content>
           </Item>
         </Item.Group>
-      </Segment>
-
-      <Segment clearing>
-        <div>{event.description}</div>
-        <Button
-          as={Link}
-          to={`/quests/${event.id}`}
-          color="teal"
-          floated="right"
-          content="View"
-        />
       </Segment>
     </Segment.Group>
   )
