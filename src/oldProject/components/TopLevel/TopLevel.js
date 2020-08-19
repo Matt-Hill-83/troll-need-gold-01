@@ -14,8 +14,8 @@ import Utils from "../../Utils/Utils"
 import css from "./TopLevel.module.scss"
 
 let useDefaultWorldId
-useDefaultWorldId = false
 useDefaultWorldId = true
+useDefaultWorldId = false
 
 const toaster = Toaster.create({
   position: Position.TOP,
@@ -34,8 +34,9 @@ class TopLevel extends React.Component {
   async componentWillMount() {
     console.log("this.props", this.props) // zzz
     const defaultWorldId = localStateStore.getDefaultWorldId()
-
-    await books.fetch()
+    console.log("maps", maps) // zzz
+    maps.length = 0
+    maps.push(...this.props.quests)
 
     if (maps.docs && maps.docs[0]) {
       const defaultMap = Utils.getFirstReleasedMap()
@@ -94,7 +95,6 @@ class TopLevel extends React.Component {
     if (!startScene) return
 
     localStateStore.setVisitedScenes([])
-    // localStateStore.setUnlockedSubQuests([0])
     this.updateActiveScene({ sceneId: startScene.id })
   }
 
@@ -102,7 +102,6 @@ class TopLevel extends React.Component {
     localStateStore.setActiveSceneId(sceneId)
     localStateStore.setActiveFrameIndex(0)
     localStateStore.addVisitedScenes(sceneId)
-    // localStateStore.unlockSubQuestForActiveScene()
 
     const questStatus = localStateStore.getQuestStatus()
     const { hideMissionConsole } = questStatus
@@ -115,8 +114,6 @@ class TopLevel extends React.Component {
   }
 
   updateQuestStatus = () => {
-    // QuestStatusUtils.updateSceneVisibilityProps()
-
     toaster.clear()
     const activeScene = localStateStore.getActiveScene()
     const { location } = activeScene
@@ -297,9 +294,7 @@ class TopLevel extends React.Component {
   render() {
     console.log("")
     console.log("main story render")
-
-    // this console.log needs to be here, or else the children won't render correctly
-    console.log("books.docs", books.docs.length)
+    console.log("this.props.quests", this.props.quests) // zzz
 
     const { className } = this.props
     const activeWorld = localStateStore.getActiveWorld()

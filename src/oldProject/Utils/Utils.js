@@ -130,7 +130,7 @@ export default class Utils {
   }
 
   static getWorldFromId = ({ id }) => {
-    const mapsDocs = maps.docs
+    const mapsDocs = maps
     const defaultMap = this.getFirstReleasedMap() || {}
 
     if (!id) return defaultMap
@@ -148,7 +148,7 @@ export default class Utils {
     return booksDocs.find((map) => map.id === id)
   }
 
-  static getFirstReleasedMap = () => maps.docs.find((map) => map.data.released)
+  static getFirstReleasedMap = () => maps.find((map) => map.released)
 
   static generateUuid() {
     const sepStr = "-"

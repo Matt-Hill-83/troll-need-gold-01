@@ -59,7 +59,7 @@ export default function QuestDashboard() {
       <Grid.Column width={10}>
         <Loader active={loading} />
       </Grid.Column>
-      <TopLevel props={{ quests: events }}></TopLevel>
+      <TopLevel quests={events}></TopLevel>
     </Grid>
   )
 }
