@@ -72,6 +72,10 @@ export function fetchQuestsFromFirestore(
   }
 }
 
+export function listenToQuestFromFirestore(eventId) {
+  return db.collection("maps").doc(eventId)
+}
+
 export function listenToEventFromFirestore(eventId) {
   return db.collection("events").doc(eventId)
 }

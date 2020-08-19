@@ -41,7 +41,9 @@ export function fetchEvents(filter, startDate, limit, lastDocSnapshot) {
         payload: { events, moreEvents, lastVisible },
       })
       dispatch(asyncActionFinish())
+      console.log(" no error") // zzz
     } catch (error) {
+      console.log("error", error) // zzz
       dispatch(asyncActionError(error))
     }
   }
@@ -58,6 +60,13 @@ export function setStartDate(date) {
   return function (dispatch) {
     dispatch(clearEvents())
     dispatch({ type: SET_START_DATE, payload: date })
+  }
+}
+
+export function listenToSelectedQuest(event) {
+  return {
+    type: LISTEN_TO_SELECTED_EVENT,
+    payload: event,
   }
 }
 

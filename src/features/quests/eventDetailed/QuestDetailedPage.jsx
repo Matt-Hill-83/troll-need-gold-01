@@ -6,43 +6,45 @@ import EventDetailedChat from "./EventDetailedChat"
 import EventDetailedSidebar from "./EventDetailedSidebar"
 import { useSelector, useDispatch } from "react-redux"
 import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc"
-import { listenToEventFromFirestore } from "../../../app/firestore/firestoreService"
+import {
+  listenToEventFromFirestore,
+  listenToQuestFromFirestore,
+} from "../../../app/firestore/firestoreService"
 import LoadingComponent from "../../../app/layout/LoadingComponent"
 import { Redirect } from "react-router-dom"
-import { listenToSelectedEvent } from "../questActions"
+import { listenToSelectedEvent, listenToSelectedQuest } from "../questActions"
 
 export default function QuestDetailedPage({ match }) {
   const dispatch = useDispatch()
   const { currentUser } = useSelector((state) => state.auth)
-  const event = useSelector((state) => state.event.selectedEvent)
+  const quest = useSelector((state) => state.quest.selectedEvent)
   const { loading, error } = useSelector((state) => state.async)
-  const isHost = event?.hostUid === currentUser?.uid
-  const isGoing = event?.attendees?.some((a) => a.id === currentUser?.uid)
+  // const isHost = quest?.hostUid === currentUser?.uid
+  // const isGoing = quest?.attendees?.some((a) => a.id === currentUser?.uid)
+
+  console.log("match", match) // zzz
 
   useFirestoreDoc({
-    query: () => listenToEventFromFirestore(match.params.id),
-    data: (event) => dispatch(listenToSelectedEvent(event)),
+    query: () => listenToQuestFromFirestore(match.params.id),
+    data: (quest) => {
+      console.log("quest", quest) // zzz
+      dispatch(listenToSelectedQuest(quest))
+    },
     deps: [match.params.id, dispatch],
   })
 
-  if (loading || (!event && !error))
-    return <LoadingComponent content="Loading event..." />
+  if (loading || (!quest && !error))
+    return <LoadingComponent content="Loading quest..." />
 
   if (error) return <Redirect to="/error" />
 
   return (
     <Grid>
       <Grid.Column width={10}>
-        <EventDetailedHeader event={event} isGoing={isGoing} isHost={isHost} />
-        <EventDetailedInfo event={event} />
-        <EventDetailedChat eventId={event.id} />
+        <EventDetailedHeader event={quest} isGoing={false} isHost={false} />
+        <EventDetailedInfo event={quest} />
       </Grid.Column>
-      <Grid.Column width={6}>
-        <EventDetailedSidebar
-          attendees={event?.attendees}
-          hostUid={event.hostUid}
-        />
-      </Grid.Column>
+      <Grid.Column width={6}></Grid.Column>
     </Grid>
   )
 }
