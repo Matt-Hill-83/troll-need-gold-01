@@ -155,6 +155,7 @@ class LocalStateStore {
 
   getActiveMission = () => {
     const world = localStateStore.getActiveWorld()
+    console.log("world", world) // zzz
     const missions = QuestStatusUtils.getActiveSubQuestMissions({ world })
     return missions[this.questStatus.activeMissionIndex] || null
   }
@@ -336,7 +337,7 @@ class LocalStateStore {
 
   getActiveWorldGrid = () => {
     const map = Utils.getWorldFromId({ id: this.activeMapId })
-    return map.data.newGrid5 || []
+    return map.newGrid5 || []
   }
 
   getActiveWorldId = () => this.activeMapId
@@ -386,18 +387,6 @@ class LocalStateStore {
     return activeScene
   }
 }
-
-// decorate(LocalStateStore, {
-//   activeFrameIndex: observable,
-//   activeMapId: observable,
-//   activeSceneId: observable,
-//   defaultWorldId: observable,
-//   desiredItems: observable,
-//   mapBuilderWorld: observable,
-//   questStatus: observable,
-//   showBookPicker: observable,
-//   showWorldBuilder: observable,
-// })
 
 const localStateStore = new LocalStateStore()
 export default localStateStore
