@@ -135,7 +135,7 @@ export default class Utils {
 
     if (!id) return defaultMap
 
-    const filteredMaps = mapsDocs.filter((map) => map.data.released)
+    const filteredMaps = mapsDocs.filter((map) => map.released)
     const foundMap = filteredMaps
       ? filteredMaps.find((map) => map.id === id)
       : defaultMap

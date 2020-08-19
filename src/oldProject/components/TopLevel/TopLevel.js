@@ -2,14 +2,13 @@ import React from "react"
 import _get from "lodash.get"
 import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core"
 
-import { maps, books } from "../../Stores/InitStores.js"
+import { maps } from "../../Stores/InitStores.js"
 import BookPicker from "../BookPicker/BookPicker.js"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
 import QuestDialog from "../QuestDialog/QuestDialog.js"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 import StoryMode from "../StoryMode/StoryMode"
 import Utils from "../../Utils/Utils"
-// import WorldBuilder from "../WorldBuilder/WorldBuilder.js"
 
 import css from "./TopLevel.module.scss"
 
@@ -34,12 +33,12 @@ class TopLevel extends React.Component {
   async componentWillMount() {
     console.log("this.props", this.props) // zzz
     const defaultWorldId = localStateStore.getDefaultWorldId()
-    console.log("maps", maps) // zzz
     maps.length = 0
     maps.push(...this.props.quests)
+    console.log("maps", maps) // zzz
 
-    if (maps.docs && maps.docs[0]) {
-      const defaultMap = Utils.getFirstReleasedMap()
+    if (maps[0]) {
+      const defaultMap = maps[0]
       const mapId = _get(defaultMap, "id")
 
       if (useDefaultWorldId) {
@@ -78,10 +77,8 @@ class TopLevel extends React.Component {
     const map = localStateStore.getActiveWorld()
     const scenesGrid = _get(map, "data.newGrid5") || []
 
-    const endScene = scenesGrid.find((item) => item.id === map.data.endSceneId)
-    const startScene = scenesGrid.find(
-      (item) => item.id === map.data.startSceneId
-    )
+    const endScene = scenesGrid.find((item) => item.id === map.endSceneId)
+    const startScene = scenesGrid.find((item) => item.id === map.startSceneId)
     const terminalScene = start ? startScene : endScene
     const firstScene = scenesGrid[0]
     const lastScene = scenesGrid[scenesGrid.length - 1]
@@ -182,10 +179,10 @@ class TopLevel extends React.Component {
 
     localStateStore.setActiveMapId(mapId)
     const map = localStateStore.getActiveWorld()
-    if (!map || !map.data) {
+    if (!map || !map) {
       return
     }
-    const { questConfig } = map.data
+    const { questConfig } = map
     if (questConfig) {
       const missions = QuestStatusUtils.getActiveSubQuestMissions({
         world: map,
@@ -298,9 +295,9 @@ class TopLevel extends React.Component {
 
     const { className } = this.props
     const activeWorld = localStateStore.getActiveWorld()
-    const showWorldBuilder = localStateStore.getShowWorldBuilder()
+    console.log("activeWorld", activeWorld) // zzz
 
-    if (!activeWorld || !activeWorld.data || !activeWorld.data.title) {
+    if (!activeWorld || !activeWorld.title) {
       return null
     }
 

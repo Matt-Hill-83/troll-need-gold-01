@@ -23,7 +23,7 @@ class WorldPicker extends Component {
     const { onChangeWorld } = this.props
     const map = Utils.getWorldFromId({ id: mapId })
 
-    const mapName = map ? map.data && map.data.title : ""
+    const mapName = map ? map && map.title : ""
 
     onChangeWorld({ index, mapId })
     this.setState({ selectedMap: mapName })
@@ -47,7 +47,7 @@ class WorldPicker extends Component {
 
     const filteredMaps = showReleased
       ? savedMaps
-      : savedMaps.filter((map) => map.data.released)
+      : savedMaps.filter((map) => map.released)
 
     if (!filteredMaps[0]) {
       return null
@@ -61,7 +61,7 @@ class WorldPicker extends Component {
 
     const mapList = sortedMaps.map((map, index) => {
       const { id } = map
-      const { name, title, released, releasedToProd, description } = map.data
+      const { name, title, released, releasedToProd, description } = map
       const { updateIsReleasedProperty, updateReleasedToProd } = this.props
 
       const text = (

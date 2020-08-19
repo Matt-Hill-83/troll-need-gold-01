@@ -47,11 +47,11 @@ class QuestDialog extends React.Component {
 
     if (showProd) {
       filteredMaps = savedMaps.filter((map) => {
-        return map.data.releasedToProd
+        return map.releasedToProd
       })
     } else {
       filteredMaps = savedMaps.filter((map) => {
-        return map.data.released && !map.data.releasedToProd
+        return map.released && !map.releasedToProd
       })
     }
 
@@ -64,7 +64,7 @@ class QuestDialog extends React.Component {
     const isProdRelease = localStateStore.getIsProdRelease()
 
     const mapList = sortedMaps.map((map) => {
-      const { title } = map.data
+      const { title } = map
 
       const mapId = map.id
       const text = (
