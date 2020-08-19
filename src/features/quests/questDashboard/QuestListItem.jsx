@@ -1,7 +1,6 @@
 import React from "react"
 import { Segment, Item, Icon, List, Button, Label } from "semantic-ui-react"
 import { Link } from "react-router-dom"
-import { format } from "date-fns"
 
 export default function EventListItem({ event }) {
   return (
