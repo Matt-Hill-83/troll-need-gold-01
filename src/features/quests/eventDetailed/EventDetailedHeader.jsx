@@ -53,15 +53,8 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
 
   return (
     <>
-      {modalOpen && <UnauthModal setModalOpen={setModalOpen} />}
       <Segment.Group>
         <Segment basic attached="top" style={{ padding: "0" }}>
-          <Image
-            src={`/assets/categoryImages/${event.category}.jpg`}
-            fluid
-            style={eventImageStyle}
-          />
-
           <Segment basic style={eventImageTextStyle}>
             <Item.Group>
               <Item>
@@ -71,7 +64,6 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
                     content={event.title}
                     style={{ color: "white" }}
                   />
-                  {/* <p>{format(event.date, 'MMMM d, yyyy h:mm a')}</p> */}
                   <p>
                     Hosted by{" "}
                     <strong>
@@ -84,41 +76,6 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
               </Item>
             </Item.Group>
           </Segment>
-        </Segment>
-
-        <Segment attached="bottom" clearing>
-          {!isHost && (
-            <>
-              {isGoing ? (
-                <Button onClick={handleUserLeaveEvent} loading={loading}>
-                  Cancel My Place
-                </Button>
-              ) : (
-                <Button
-                  onClick={
-                    authenticated
-                      ? handleUserJoinEvent
-                      : () => setModalOpen(true)
-                  }
-                  loading={loading}
-                  color="teal"
-                >
-                  JOIN THIS EVENT
-                </Button>
-              )}
-            </>
-          )}
-
-          {isHost && (
-            <Button
-              as={Link}
-              to={`/manage/${event.id}`}
-              color="orange"
-              floated="right"
-            >
-              Manage Event
-            </Button>
-          )}
         </Segment>
       </Segment.Group>
     </>

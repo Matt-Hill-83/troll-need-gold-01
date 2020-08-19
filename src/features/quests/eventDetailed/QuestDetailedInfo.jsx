@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Segment, Grid, Icon, Button } from "semantic-ui-react"
 
-export default function EventDetailedInfo({ event }) {
+export default function QuestDetailedInfo({ event }) {
   return (
     <Segment.Group>
       <Segment attached="top">
