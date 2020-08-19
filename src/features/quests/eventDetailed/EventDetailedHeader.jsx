@@ -1,53 +1,53 @@
-import React from 'react';
-import { Segment, Image, Item, Header, Button } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import { format } from 'date-fns';
-import { useState } from 'react';
-import { toast } from 'react-toastify';
+import React from "react"
+import { Segment, Image, Item, Header, Button } from "semantic-ui-react"
+import { Link } from "react-router-dom"
+import { format } from "date-fns"
+import { useState } from "react"
+import { toast } from "react-toastify"
 import {
   addUserAttendance,
   cancelUserAttendance,
-} from '../../../app/firestore/firestoreService';
-import { useSelector } from 'react-redux';
-import UnauthModal from '../../auth/UnauthModal';
+} from "../../../app/firestore/firestoreService"
+import { useSelector } from "react-redux"
+import UnauthModal from "../../auth/UnauthModal"
 
 const eventImageStyle = {
-  filter: 'brightness(30%)',
-};
+  filter: "brightness(30%)",
+}
 
 const eventImageTextStyle = {
-  position: 'absolute',
-  bottom: '5%',
-  left: '5%',
-  width: '100%',
-  height: 'auto',
-  color: 'white',
-};
+  position: "absolute",
+  bottom: "5%",
+  left: "5%",
+  width: "100%",
+  height: "auto",
+  color: "white",
+}
 
 export default function EventDetailedHeader({ event, isHost, isGoing }) {
-  const [loading, setLoading] = useState(false);
-  const { authenticated } = useSelector((state) => state.auth);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false)
+  const { authenticated } = useSelector((state) => state.auth)
+  const [modalOpen, setModalOpen] = useState(false)
 
   async function handleUserJoinEvent() {
-    setLoading(true);
+    setLoading(true)
     try {
-      await addUserAttendance(event);
+      await addUserAttendance(event)
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.message)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   }
 
   async function handleUserLeaveEvent() {
-    setLoading(true);
+    setLoading(true)
     try {
-      await cancelUserAttendance(event);
+      await cancelUserAttendance(event)
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.message)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   }
 
@@ -55,7 +55,7 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
     <>
       {modalOpen && <UnauthModal setModalOpen={setModalOpen} />}
       <Segment.Group>
-        <Segment basic attached='top' style={{ padding: '0' }}>
+        <Segment basic attached="top" style={{ padding: "0" }}>
           <Image
             src={`/assets/categoryImages/${event.category}.jpg`}
             fluid
@@ -67,17 +67,17 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
               <Item>
                 <Item.Content>
                   <Header
-                    size='huge'
+                    size="huge"
                     content={event.title}
-                    style={{ color: 'white' }}
+                    style={{ color: "white" }}
                   />
-                  <p>{format(event.date, 'MMMM d, yyyy h:mm a')}</p>
+                  {/* <p>{format(event.date, 'MMMM d, yyyy h:mm a')}</p> */}
                   <p>
-                    Hosted by{' '}
+                    Hosted by{" "}
                     <strong>
                       <Link to={`/profile/${event.hostUid}`}>
                         {event.hostedBy}
-                      </Link>{' '}
+                      </Link>{" "}
                     </strong>
                   </p>
                 </Item.Content>
@@ -86,7 +86,7 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
           </Segment>
         </Segment>
 
-        <Segment attached='bottom' clearing>
+        <Segment attached="bottom" clearing>
           {!isHost && (
             <>
               {isGoing ? (
@@ -95,9 +95,13 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
                 </Button>
               ) : (
                 <Button
-                  onClick={authenticated ? handleUserJoinEvent : () => setModalOpen(true)}
+                  onClick={
+                    authenticated
+                      ? handleUserJoinEvent
+                      : () => setModalOpen(true)
+                  }
                   loading={loading}
-                  color='teal'
+                  color="teal"
                 >
                   JOIN THIS EVENT
                 </Button>
@@ -109,8 +113,8 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
             <Button
               as={Link}
               to={`/manage/${event.id}`}
-              color='orange'
-              floated='right'
+              color="orange"
+              floated="right"
             >
               Manage Event
             </Button>
@@ -118,5 +122,5 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
         </Segment>
       </Segment.Group>
     </>
-  );
+  )
 }
