@@ -47,14 +47,8 @@ class BookPicker extends React.Component {
     })
   }
 
-  // forceUpdateTopLevel = () => {
-  //   this.props.forceUpdate()
-  // }
-
   onChangeJSON = (json) => {
     this.setState({ jsonUnderEdit: json })
-    // selectedBook.update(json)
-    // this.forceUpdateTopLevel()
   }
 
   updateTime = () => {
@@ -125,12 +119,6 @@ class BookPicker extends React.Component {
           title={"Edit Book"}
         >
           <div className="contents">
-            {/* <div className="menu">
-              <button onClick={this.updateTime}>
-                Create/update a field "time"
-              </button>
-            </div> */}
-
             <JSONEditorDemo
               json={jsonUnderEdit}
               onChangeJSON={this.onChangeJSON}
@@ -153,7 +141,6 @@ class BookPicker extends React.Component {
   onDeleteBook = async ({ book }) => {
     await book.delete()
     this.setState({ selectedBook: books.docs[0] || null })
-    // this.forceUpdateTopLevel()
   }
 
   onClose = async ({ book }) => {
@@ -174,7 +161,6 @@ class BookPicker extends React.Component {
       imageName: "bookCover01BatOfDoom",
     }
     await books.add(newBook)
-    // this.forceUpdateTopLevel()
   }
 
   onChooseQuests = async ({ book }) => {

@@ -1,11 +1,11 @@
-import localStateStore from "../Stores/LocalStateStore/LocalStateStore.js"
-import { gameConfig, maps, books } from "../Stores/InitStores.js"
-import { toJS } from "mobx"
+import {} from "mobx"
 import _get from "lodash.get"
+
+import { maps, books } from "../Stores/InitStores.js"
 import Constants from "./Constants/Constants.js"
+import localStateStore from "../Stores/LocalStateStore/LocalStateStore.js"
 import worldBuilderStore from "../Stores/WorldBuilderStore.js"
 import WorldBuilderUtils from "./WorldBuilderUtils.js"
-
 export default class Utils {
   static addArrayElement = ({ newElement, before, index, array }) => {
     const adder = before === true ? 0 : 1
@@ -48,11 +48,6 @@ export default class Utils {
     return Math.floor(Math.random() * Math.floor(max))
   }
 
-  static getGameConfig = () => {
-    const output = _get(gameConfig, "docs[0].data") || {}
-    return output
-  }
-
   static sortWorlds = ({ worlds, keys }) => {
     const sortedWorlds = Utils.sortDataByNestedKey({
       data: worlds.docs,
@@ -61,26 +56,6 @@ export default class Utils {
     })
 
     return sortedWorlds
-  }
-
-  static sortWorlds2 = ({ worlds }) => {
-    const sortedWorlds = Utils.sortDataByNestedKey({
-      data: worlds.docs,
-      keys: ["data", "title"],
-      order: "ASC",
-    })
-
-    return sortedWorlds
-  }
-
-  static sortScenes = ({ scenes }) => {
-    const sortedData = Utils.sortDataByNestedKey({
-      data: scenes,
-      keys: ["location", "name"],
-      order: "ASC",
-    })
-
-    return sortedData
   }
 
   static belongsToABook = ({ worldId }) => {
@@ -158,7 +133,7 @@ export default class Utils {
   }
 
   static getWorldFromId = ({ id }) => {
-    const mapsDocs = toJS(maps.docs)
+    const mapsDocs = maps.docs
     const defaultMap = this.getFirstReleasedMap() || {}
 
     if (!id) return defaultMap
@@ -171,26 +146,12 @@ export default class Utils {
     return foundMap
   }
 
-  static getWorldFromId2 = ({ id }) => {
-    const mapsDocs = toJS(maps.docs)
-    const defaultMap = this.getFirstReleasedMap() || {}
-
-    if (!id) return defaultMap
-
-    const foundMap = mapsDocs
-      ? mapsDocs.find((map) => map.id === id)
-      : defaultMap
-
-    return foundMap
-  }
-
   static getBookFromId = ({ id }) => {
-    const booksDocs = toJS(books.docs)
+    const booksDocs = books.docs
     return booksDocs.find((map) => map.id === id)
   }
 
-  static getFirstReleasedMap = () =>
-    toJS(maps.docs).find((map) => map.data.released)
+  static getFirstReleasedMap = () => maps.docs.find((map) => map.data.released)
 
   static generateUuid() {
     const sepStr = "-"
@@ -272,24 +233,6 @@ export default class Utils {
     })
 
     return grid
-  }
-
-  static createCondensedGridFromGrid = ({ world }) => {
-    // trim down the grid to just the non-bank scenes and make them accessible by id, instead of
-    // defined by the 2 array position
-
-    const condensedGrid = []
-    const worldBuilderGrid = worldBuilderStore.getWorldBuilderScenesGrid()
-
-    worldBuilderGrid.forEach((row) => {
-      row.forEach((col) => {
-        if (col.location.name && col.location.name !== "blank") {
-          condensedGrid.push(col)
-        }
-      })
-    })
-
-    return condensedGrid
   }
 
   static getNeighbor = ({ coordinates, direction }) => {

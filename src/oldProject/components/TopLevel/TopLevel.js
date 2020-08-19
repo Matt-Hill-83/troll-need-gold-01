@@ -11,7 +11,7 @@ import QuestDialog from "../QuestDialog/QuestDialog.js"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 import StoryMode from "../StoryMode/StoryMode"
 import Utils from "../../Utils/Utils"
-import WorldBuilder from "../WorldBuilder/WorldBuilder.js"
+// import WorldBuilder from "../WorldBuilder/WorldBuilder.js"
 
 import css from "./TopLevel.module.scss"
 
@@ -34,6 +34,7 @@ class TopLevel extends React.Component {
   }
 
   async componentWillMount() {
+    console.log("this.props", this.props) // zzz
     const defaultWorldId = localStateStore.getDefaultWorldId()
 
     await books.fetch()
@@ -306,15 +307,6 @@ class TopLevel extends React.Component {
     const activeWorld = localStateStore.getActiveWorld()
     const showWorldBuilder = localStateStore.getShowWorldBuilder()
 
-    if (showWorldBuilder) {
-      return (
-        <div className={`${css.main} ${className}`}>
-          {showWorldBuilder && <WorldBuilder />}
-          {this.renderButtons()}
-        </div>
-      )
-    }
-
     if (!activeWorld || !activeWorld.data || !activeWorld.data.title) {
       return null
     }
@@ -335,8 +327,8 @@ class TopLevel extends React.Component {
           activeScene={activeScene}
           openQuestPicker={this.openQuestPicker}
         />
-        {!isProdRelease && showBookPicker && this.renderBookPicker()}
-        {this.state.showQuestPicker && this.renderWorldPicker()}
+        {/* {!isProdRelease && showBookPicker && this.renderBookPicker()} */}
+        {/* {this.state.showQuestPicker && this.renderWorldPicker()} */}
       </div>
     )
   }

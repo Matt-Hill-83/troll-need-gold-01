@@ -37,7 +37,7 @@ export default function App() {
           <>
             <NavBar />
             <Container className="main">
-              <Route exact path="/top-level" component={TopLevel} />
+              {/* <Route exact path="/top-level" component={TopLevel} /> */}
               <Route exact path="/quests" component={QuestDashboard} />
               <Route exact path="/events" component={EventDashboard} />
               <Route exact path="/sandbox" component={Sandbox} />

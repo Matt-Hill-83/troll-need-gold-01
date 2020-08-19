@@ -1,6 +1,5 @@
-import { decorate, observable, toJS } from "mobx"
-import Utils from "../../Utils/Utils"
 import _get from "lodash.get"
+import Utils from "../../Utils/Utils"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils"
 
 class LocalStateStore {
@@ -388,17 +387,17 @@ class LocalStateStore {
   }
 }
 
-decorate(LocalStateStore, {
-  activeFrameIndex: observable,
-  activeMapId: observable,
-  activeSceneId: observable,
-  defaultWorldId: observable,
-  desiredItems: observable,
-  mapBuilderWorld: observable,
-  questStatus: observable,
-  showBookPicker: observable,
-  showWorldBuilder: observable,
-})
+// decorate(LocalStateStore, {
+//   activeFrameIndex: observable,
+//   activeMapId: observable,
+//   activeSceneId: observable,
+//   defaultWorldId: observable,
+//   desiredItems: observable,
+//   mapBuilderWorld: observable,
+//   questStatus: observable,
+//   showBookPicker: observable,
+//   showWorldBuilder: observable,
+// })
 
 const localStateStore = new LocalStateStore()
 export default localStateStore

@@ -4,10 +4,9 @@ import { useSelector, useDispatch } from "react-redux"
 
 import { fetchEvents } from "../questActions"
 import { RETAIN_STATE } from "../questConstants"
-import EventFilters from "./EventFilters"
 import QuestList from "./QuestList"
 import EventListItemPlaceholder from "./EventListItemPlaceholder"
-import EventsFeed from "./EventsFeed"
+import TopLevel from "../../../oldProject/components/TopLevel/TopLevel"
 
 export default function QuestDashboard() {
   const limit = 2
@@ -60,6 +59,7 @@ export default function QuestDashboard() {
       <Grid.Column width={10}>
         <Loader active={loading} />
       </Grid.Column>
+      <TopLevel props={{ quests: events }}></TopLevel>
     </Grid>
   )
 }

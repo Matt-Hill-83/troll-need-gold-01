@@ -1,19 +1,17 @@
-import React from "react"
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
 import _get from "lodash.get"
-import Images from "../../images/images.js"
-import cx from "classnames"
-import { IconNames } from "@blueprintjs/icons"
-
 import { Button, Dialog, ButtonGroup, Icon } from "@blueprintjs/core"
-import Utils from "../../Utils/Utils.js"
+import { IconNames } from "@blueprintjs/icons"
+import { Link } from "react-router-dom"
+import cx from "classnames"
+import React from "react"
+
+import Images from "../../images/images.js"
 
 import { maps } from "../../Stores/InitStores.js"
+import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
+import Utils from "../../Utils/Utils.js"
 
 import css from "./QuestDialog.module.scss"
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
-import { Link } from "react-router-dom"
 
 class QuestDialog extends React.Component {
   state = {}
@@ -136,4 +134,4 @@ class QuestDialog extends React.Component {
   }
 }
 
-export default observer(QuestDialog)
+export default QuestDialog
