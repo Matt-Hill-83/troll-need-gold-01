@@ -8,6 +8,7 @@ import AccountPage from "../../features/auth/AccountPage"
 import ErrorComponent from "../common/errors/ErrorComponent"
 import EventDashboard from "../../features/events/eventDashboard/EventDashboard"
 import EventDetailedPage from "../../features/events/eventDetailed/EventDetailedPage"
+import QuestDetailedPage from "../../features/quests/eventDetailed/QuestDetailedPage"
 import EventForm from "../../features/events/eventForm/EventForm"
 import HomePage from "../../features/home/HomePage"
 import LoadingComponent from "./LoadingComponent"
@@ -39,6 +40,7 @@ export default function App() {
               <Route exact path="/events" component={EventDashboard} />
               <Route exact path="/sandbox" component={Sandbox} />
               <Route path="/events/:id" component={EventDetailedPage} />
+              <Route path="/quests/:id" component={QuestDetailedPage} />
               <PrivateRoute
                 path={["/createEvent", "/manage/:id"]}
                 component={EventForm}
