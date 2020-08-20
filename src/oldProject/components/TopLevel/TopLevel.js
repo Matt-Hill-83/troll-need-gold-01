@@ -5,7 +5,6 @@ import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core"
 import { maps } from "../../Stores/InitStores.js"
 import BookPicker from "../BookPicker/BookPicker.js"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
-import QuestDialog from "../QuestDialog/QuestDialog.js"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 import StoryMode from "../StoryMode/StoryMode"
 import Utils from "../../Utils/Utils"
@@ -246,35 +245,6 @@ class TopLevel extends React.Component {
     localStateStore.setShowBookPicker(false)
   }
 
-  // closeQuestPicker = () => {
-  //   this.setState({ showQuestPicker: false })
-  // }
-
-  // openQuestPicker = () => {
-  //   this.setState({ showQuestPicker: true })
-  // }
-
-  // toggleQuestPicker = () => {
-  //   localStateStore.setShowBookPicker(false)
-  //   this.setState({
-  //     showQuestPicker: !this.state.showQuestPicker,
-  //   })
-  // }
-
-  // renderQuestPicker = () => {
-  //   const { showProd, showQuestPicker } = this.state
-  //   toaster.clear()
-
-  //   return (
-  //     <QuestDialog
-  //       showProd={showProd}
-  //       closeQuestPicker={this.closeQuestPicker}
-  //       showQuestPicker={showQuestPicker}
-  //       onChangeWorld={this.onChangeWorld}
-  //     />
-  //   )
-  // }
-
   renderBookPicker = () => {
     return (
       <BookPicker
@@ -336,7 +306,6 @@ class TopLevel extends React.Component {
           openQuestPicker={this.openQuestPicker}
         />
         {/* {!isProdRelease && showBookPicker && this.renderBookPicker()} */}
-        {/* {this.state.showQuestPicker && this.renderQuestPicker()} */}
       </div>
     )
   }
