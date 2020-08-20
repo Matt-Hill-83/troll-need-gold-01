@@ -9,12 +9,10 @@
   :global {
     .bp3-table-truncated-format-text {
       display: flex;
-      // border: 1px solid red !important;
     }
 
     .bp3-table-header {
       display: flex;
-      // border: 1px solid red !important;
       line-height: var(--line-height);
       min-height: unset;
       height: var(--cell-height);
@@ -24,17 +22,10 @@
     .bp3-table-quadrant.bp3-table-quadrant-top,
     .bp3-table-top-container {
       max-height: 5.1vh;
-      // max-height: 2.1vh;
     }
 
-    // .bp3-table-container {
-    //   min-height: unset;
-    // }
-
     .bp3-table-column-name-text {
-      // font-size: 1.2vh;
       font-size: var(--font-size);
-      // border: 1px solid red !important;
       padding: unset;
       display: flex;
       align-items: center;
@@ -48,7 +39,6 @@
   }
 
   .cellClass {
-    // border: 1px solid blue !important;
     display: flex;
     line-height: var(--line-height);
     border: 1px solid red !important;

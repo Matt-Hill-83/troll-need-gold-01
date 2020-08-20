@@ -7,6 +7,7 @@ import { listenToQuestFromFirestore2 } from "../../../app/firestore/firestoreSer
 import { listenToSelectedQuest } from "../questActions"
 import LoadingComponent from "../../../app/layout/LoadingComponent"
 import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc"
+import TopLevel from "../../../oldProject/components/TopLevel/TopLevel"
 
 export default function QuestDetailedPage({ match }) {
   const dispatch = useDispatch()
@@ -28,5 +29,6 @@ export default function QuestDetailedPage({ match }) {
 
   if (error) return <Redirect to="/error" />
 
-  return <Grid>{`title: ${quest.title}`}</Grid>
+  return <TopLevel quests={[quest]}></TopLevel>
+  // return <Grid>{`title: ${quest.title}`}</Grid>
 }
