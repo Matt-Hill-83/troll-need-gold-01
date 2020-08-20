@@ -13,6 +13,8 @@ body {
 
 .ui.main.container {
   margin-top: 7em;
+  border: 4px solid green !important;
+  width: 100vw;
 }
 
 .masthead {
@@ -38,5 +40,5 @@ body {
 .react-calendar {
   width: 100%;
   border: none;
-  box-shadow: 0 1px 2px 0 rgba(34, 36, 38, .15);
+  box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
 }
