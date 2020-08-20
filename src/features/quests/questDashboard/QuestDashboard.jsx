@@ -1,6 +1,7 @@
 import { Grid, Loader } from "semantic-ui-react"
 import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core"
 
 import { fetchEvents } from "../questActions"
 import { RETAIN_STATE } from "../questConstants"
@@ -10,6 +11,8 @@ import TopLevel from "../../../oldProject/components/TopLevel/TopLevel"
 import localStateStore from "../../../oldProject/Stores/LocalStateStore/LocalStateStore"
 import QuestStatusUtils from "../../../oldProject/Utils/QuestStatusUtils"
 import QuestDialog from "../../../oldProject/components/QuestDialog/QuestDialog"
+
+import css from "./QuestDashboard.module.scss"
 
 export default function QuestDashboard() {
   const limit = 2
@@ -124,12 +127,30 @@ export default function QuestDashboard() {
     setShowQuestPicker(!setShowQuestPicker)
   }
 
+  const renderButtons = () => {
+    const isProdRelease = localStateStore.getIsProdRelease()
+
+    return (
+      <div className={css.floatingButtons}>
+        <ButtonGroup color="primary">
+          <Button onClick={toggleQuestPicker}>Pick a Single Quest...</Button>
+          {/* {!isProdRelease && (
+            <Button onClick={this.toggleBookPicker}>
+              Pick a Book of Quests...
+            </Button>
+          )} */}
+        </ButtonGroup>
+      </div>
+    )
+  }
+
   if (showQuestPicker) {
     return renderQuestPicker()
   }
 
   return (
-    <Grid>
+    <Grid className={css.main} width={10}>
+      {renderButtons()}
       <Grid.Column width={10}>
         {loadingInitial && (
           <>
@@ -137,12 +158,14 @@ export default function QuestDashboard() {
             <EventListItemPlaceholder />
           </>
         )}
-        <QuestList
-          events={events}
-          getNextEvents={handleFetchNextEvents}
-          loading={loading}
-          moreEvents={moreEvents}
-        />
+        <div className={css.questList}>
+          <QuestList
+            events={events}
+            getNextEvents={handleFetchNextEvents}
+            loading={loading}
+            moreEvents={moreEvents}
+          />
+        </div>
       </Grid.Column>
       <Grid.Column width={10}>
         <Loader active={loading} />
