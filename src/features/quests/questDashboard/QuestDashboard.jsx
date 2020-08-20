@@ -150,7 +150,8 @@ export default function QuestDashboard() {
 
   return (
     <Grid className={css.main} width={10}>
-      {renderButtons()}
+      {/* quest picker already exists on this page.  oops... */}
+      {/* {renderButtons()} */}
       <Grid.Column width={10}>
         {loadingInitial && (
           <>
