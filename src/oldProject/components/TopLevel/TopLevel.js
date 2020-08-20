@@ -246,34 +246,34 @@ class TopLevel extends React.Component {
     localStateStore.setShowBookPicker(false)
   }
 
-  closeQuestPicker = () => {
-    this.setState({ showQuestPicker: false })
-  }
+  // closeQuestPicker = () => {
+  //   this.setState({ showQuestPicker: false })
+  // }
 
-  openQuestPicker = () => {
-    this.setState({ showQuestPicker: true })
-  }
+  // openQuestPicker = () => {
+  //   this.setState({ showQuestPicker: true })
+  // }
 
-  toggleQuestPicker = () => {
-    localStateStore.setShowBookPicker(false)
-    this.setState({
-      showQuestPicker: !this.state.showQuestPicker,
-    })
-  }
+  // toggleQuestPicker = () => {
+  //   localStateStore.setShowBookPicker(false)
+  //   this.setState({
+  //     showQuestPicker: !this.state.showQuestPicker,
+  //   })
+  // }
 
-  renderWorldPicker = () => {
-    const { showProd, showQuestPicker } = this.state
-    toaster.clear()
+  // renderQuestPicker = () => {
+  //   const { showProd, showQuestPicker } = this.state
+  //   toaster.clear()
 
-    return (
-      <QuestDialog
-        showProd={showProd}
-        closeQuestPicker={this.closeQuestPicker}
-        showQuestPicker={showQuestPicker}
-        onChangeWorld={this.onChangeWorld}
-      />
-    )
-  }
+  //   return (
+  //     <QuestDialog
+  //       showProd={showProd}
+  //       closeQuestPicker={this.closeQuestPicker}
+  //       showQuestPicker={showQuestPicker}
+  //       onChangeWorld={this.onChangeWorld}
+  //     />
+  //   )
+  // }
 
   renderBookPicker = () => {
     return (
@@ -336,7 +336,7 @@ class TopLevel extends React.Component {
           openQuestPicker={this.openQuestPicker}
         />
         {/* {!isProdRelease && showBookPicker && this.renderBookPicker()} */}
-        {/* {this.state.showQuestPicker && this.renderWorldPicker()} */}
+        {/* {this.state.showQuestPicker && this.renderQuestPicker()} */}
       </div>
     )
   }
