@@ -2,6 +2,7 @@
   display: flex;
   border: 1px solid purple !important;
   justify-content: center;
+  position: relative;
 }
 
 .questList {
@@ -9,4 +10,13 @@
   border: 1px solid blue !important;
   justify-content: center;
   padding: 1vh;
+}
+
+.floatingButtons {
+  position: absolute;
+  display: flex;
+  z-index: 5;
+  right: 10vw;
+  z-index: 100;
+  top: 2vh;
 }

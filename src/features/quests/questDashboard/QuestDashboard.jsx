@@ -124,7 +124,7 @@ export default function QuestDashboard() {
   }
 
   const toggleQuestPicker = () => {
-    setShowQuestPicker(!setShowQuestPicker)
+    setShowQuestPicker(!showQuestPicker)
   }
 
   const renderButtons = () => {
