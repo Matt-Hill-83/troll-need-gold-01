@@ -1,6 +1,8 @@
 import Utils from "../Utils"
 
 export default class Constants {
+  static posableCharacters = ["liz2", "kat"]
+
   static getNewScene = ({ name = "blank" }) => {
     const id = Utils.generateUuid()
     return {

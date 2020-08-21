@@ -2,16 +2,17 @@ import { Button } from "@blueprintjs/core"
 import React, { Component } from "react"
 import cx from "classnames"
 
-import Character from "../Character/Character"
-// import { toJS } from "mobx"
 import _get from "lodash.get"
 
-import Images from "../../images/images"
-import WordGroup from "../WordGroup/WordGroup"
-import css from "./FrameViewer.module.scss"
-import Utils from "../../Utils/Utils"
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 import ArrowNavigator from "../ArrowNavigator/ArrowNavigator"
+import Character from "../Character/Character"
+import Images from "../../images/images"
+import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
+import Utils from "../../Utils/Utils"
+import WordGroup from "../WordGroup/WordGroup"
+import Constants from "../../Utils/Constants/Constants"
+
+import css from "./FrameViewer.module.scss"
 
 class FrameViewer extends Component {
   state = {}
@@ -125,29 +126,35 @@ class FrameViewer extends Component {
     )
   }
 
-  renderCritters2 = () => {
-    const { frame } = this.props
-    if (!frame) return null
+  renderCritters = ({ critters, className }) => {
+    const filteredCritters =
+      critters.filter((item) => {
+        return !Constants.posableCharacters.includes(item.name)
+      }) || []
 
-    const critters = frame.critters2 || []
-    const critterNames = critters.map((item) => item.name)
+    const critterNames = filteredCritters.map((item) => item.name)
 
     return critterNames.map((character, index) => {
       return (
-        <div className={`${css.characterContainer}`} key={index}>
+        <div className={cx(css.characterContainer, className)} key={index}>
           <Character name={character} isEditMode={false} showHeadOnly={false} />
         </div>
       )
     })
   }
 
-  renderCritters1 = () => {
+  renderPosableCritters = () => {
     const { frame } = this.props
     const { faces = [] } = frame
 
     if (!frame) return null
 
-    const critters = frame.critters1 || []
+    const posableCharacters = Constants.posableCharacters
+
+    const critters =
+      frame.critters1.filter((item) => {
+        return posableCharacters.includes(item.name)
+      }) || []
 
     const critterNames = critters.map((item) => item.name)
     return critterNames.map((character, index) => {
@@ -224,8 +231,9 @@ class FrameViewer extends Component {
   }
 
   renderFrame = () => {
-    const { scene, isLastFrame } = this.props
-
+    const { frame, scene, isLastFrame } = this.props
+    const critters1 = frame.critters1 || []
+    const critters2 = frame.critters2 || []
     const sceneName = scene.location.name
 
     return (
@@ -243,10 +251,20 @@ class FrameViewer extends Component {
           </div>
           <div className={css.imageGroupsContainer}>
             <div className={css.lizAndKatContainer}>
-              {this.renderCritters1()}
+              {this.renderPosableCritters()}
             </div>
             <div className={css.charactersContainer}>
-              {this.renderCritters2()}
+              {this.renderCritters({
+                critters: critters1,
+                // className: css.critters1,
+              })}
+            </div>
+            <div
+              className={cx(css.charactersContainer, css.charactersContainer2)}
+            >
+              {this.renderCritters({
+                critters: critters2,
+              })}
             </div>
           </div>
         </div>
