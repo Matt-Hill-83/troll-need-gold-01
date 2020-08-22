@@ -2,6 +2,7 @@ import React from "react"
 import _get from "lodash.get"
 import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core"
 
+import { Link } from "react-router-dom"
 import { maps } from "../../Stores/InitStores.js"
 import BookPicker from "../BookPicker/BookPicker.js"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
@@ -258,11 +259,12 @@ class TopLevel extends React.Component {
   renderButtons = () => {
     const isProdRelease = localStateStore.getIsProdRelease()
 
+    const path = "/quests"
     return (
       <div className={css.floatingButtons}>
         <ButtonGroup color="primary">
-          <Button onClick={this.toggleQuestPicker}>
-            Pick a Single Quest...
+          <Button xxxonClick={this.toggleQuestPicker}>
+            <Link to={path}>Back to Quest Picker</Link>
           </Button>
           {!isProdRelease && (
             <Button onClick={this.toggleBookPicker}>

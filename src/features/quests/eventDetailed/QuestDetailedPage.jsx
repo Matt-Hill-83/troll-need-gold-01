@@ -30,5 +30,4 @@ export default function QuestDetailedPage({ match }) {
   if (error) return <Redirect to="/error" />
 
   return <TopLevel quests={[quest]}></TopLevel>
-  // return <Grid>{`title: ${quest.title}`}</Grid>
 }
