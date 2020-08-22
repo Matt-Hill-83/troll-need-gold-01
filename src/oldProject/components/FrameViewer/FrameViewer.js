@@ -173,15 +173,15 @@ class FrameViewer extends Component {
     })
   }
 
-  nextButtonRow = () => {
-    return (
-      <div className={css.nextPageButtonRow}>
-        <Button onClick={this.onClickNext} className={css.nextButton}>
-          Next Page
-        </Button>
-      </div>
-    )
-  }
+  // nextButtonRow = () => {
+  //   return (
+  //     <div className={css.nextPageButtonRow}>
+  //       <Button onClick={this.onClickNext} className={css.nextButton}>
+  //         Next Page
+  //       </Button>
+  //     </div>
+  //   )
+  // }
 
   onClickNext = () => {
     localStateStore.incrementActiveFrameIndex()

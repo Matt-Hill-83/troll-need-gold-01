@@ -338,7 +338,6 @@ class LocalStateStore {
 
   getActiveWorldGrid = () => {
     const map = Utils.getWorldFromId({ id: this.activeMapId })
-    console.log("map", map) // zzz
     return map.newGrid5 || []
   }
 
@@ -372,8 +371,9 @@ class LocalStateStore {
     } else {
       newIndex = this.getActiveFrameIndex() + 1
     }
-
+    console.log("this.activeFrameIndex", this.activeFrameIndex) // zzz
     this.setActiveFrameIndex(newIndex)
+    console.log("this.activeFrameIndex------ 2", this.activeFrameIndex) // zzz
   }
 
   getActiveSceneId = () => this.activeSceneId
