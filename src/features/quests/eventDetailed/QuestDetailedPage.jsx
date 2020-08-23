@@ -31,8 +31,8 @@ export default function QuestDetailedPage({ match }) {
   if (error) return <Redirect to="/error" />
 
   return (
-    <MyProvider>
-      <TopLevel quests={[quest]}></TopLevel>
-    </MyProvider>
+    // <MyProvider>
+    <TopLevel quests={[quest]}></TopLevel>
+    // </MyProvider>
   )
 }

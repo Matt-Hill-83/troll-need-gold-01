@@ -1,17 +1,19 @@
+import { ConnectedRouter } from "connected-react-router"
+import { Provider } from "react-redux"
+import App from "./app/layout/App"
 import React from "react"
 import ReactDOM from "react-dom"
+
+import * as serviceWorker from "./serviceWorker"
+import { configureStore, history } from "./app/store/configureStore"
+import ScrollToTop from "./app/layout/ScrollToTop"
+import { MyProvider } from "./myProvider"
+
 import "semantic-ui-css/semantic.min.css"
 import "react-toastify/dist/ReactToastify.min.css"
 import "react-calendar/dist/Calendar.css"
 import "./app/layout/styles.css"
-import App from "./app/layout/App"
-import * as serviceWorker from "./serviceWorker"
-import { Provider } from "react-redux"
-import { configureStore, history } from "./app/store/configureStore"
-import ScrollToTop from "./app/layout/ScrollToTop"
-import { ConnectedRouter } from "connected-react-router"
 
-// import { MyProvider } from "./MyProvider"
 const store = configureStore()
 
 const rootEl = document.getElementById("root")
@@ -21,9 +23,9 @@ function render() {
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <ScrollToTop />
-        {/* <MyProvider> */}
-        <App />
-        {/* </MyProvider> */}
+        <MyProvider>
+          <App />
+        </MyProvider>
       </ConnectedRouter>
     </Provider>,
     rootEl
