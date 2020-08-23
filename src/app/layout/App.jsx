@@ -1,14 +1,13 @@
-import { Route, useLocation } from "react-router-dom"
 import { Container } from "semantic-ui-react"
-import React from "react"
+import { Route, useLocation } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 import { useSelector } from "react-redux"
+import React from "react"
 
 import AccountPage from "../../features/auth/AccountPage"
 import ErrorComponent from "../common/errors/ErrorComponent"
 import EventDashboard from "../../features/events/eventDashboard/EventDashboard"
 import EventDetailedPage from "../../features/events/eventDetailed/EventDetailedPage"
-import QuestDetailedPage from "../../features/quests/eventDetailed/QuestDetailedPage"
 import EventForm from "../../features/events/eventForm/EventForm"
 import HomePage from "../../features/home/HomePage"
 import LoadingComponent from "./LoadingComponent"
@@ -16,8 +15,9 @@ import ModalManager from "../common/modals/ModalManager"
 import NavBar from "../../features/nav/NavBar"
 import PrivateRoute from "./PrivateRoute"
 import ProfilePage from "../../features/profiles/profilePage/ProfilePage"
-import Sandbox from "../../features/sandbox/Sandbox"
 import QuestDashboard from "../../features/quests/questDashboard/QuestDashboard"
+import QuestDetailedPage from "../../features/quests/eventDetailed/QuestDetailedPage"
+import Sandbox from "../../features/sandbox/Sandbox"
 
 export default function App() {
   const { key } = useLocation()
@@ -36,7 +36,6 @@ export default function App() {
           <>
             <NavBar />
             <Container className="main">
-              {/* <Route exact path="/top-level" component={TopLevel} /> */}
               <Route exact path="/quests" component={QuestDashboard} />
               <Route exact path="/events" component={EventDashboard} />
               <Route exact path="/sandbox" component={Sandbox} />

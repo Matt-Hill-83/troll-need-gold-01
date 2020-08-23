@@ -26,7 +26,6 @@ export default function profileReducer(
   state = initialState,
   { type, payload }
 ) {
-  console.log("state", state) // zzz
   switch (type) {
     case LISTEN_TO_CURRENT_USER_PROFILE:
       return {
