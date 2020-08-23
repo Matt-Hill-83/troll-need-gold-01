@@ -185,6 +185,9 @@ class FrameViewer extends Component {
 
   onClickNext = () => {
     localStateStore.incrementActiveFrameIndex()
+    // update component here.
+
+    this.props.forceUpdate()
   }
 
   renderArrowNavigator = () => {

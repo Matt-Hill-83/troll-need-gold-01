@@ -11,6 +11,7 @@ class WordPage extends React.Component {
   render() {
     const { activeScene, openQuestPicker, updateActiveScene } = this.props
     const activeFrameIndex = localStateStore.getActiveFrameIndex()
+    console.log("activeFrameIndex--------------WP", activeFrameIndex) // zzz
     const frameSet = activeScene.frameSet
     let frame
 
@@ -42,6 +43,7 @@ class WordPage extends React.Component {
           openQuestPicker={openQuestPicker}
           scene={activeScene}
           updateActiveScene={updateActiveScene}
+          forceUpdate={this.props.forceUpdate}
         />
       </div>
     )

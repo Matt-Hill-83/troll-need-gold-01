@@ -79,27 +79,23 @@ class TopLevel extends React.Component {
 
   forceUpdate = () => {
     this.setState({ test: Math.random() })
+    console.log("forceUpdate---------------------->>>") // zzz
   }
 
   getTerminalScene = ({ start = true }) => {
     const map = localStateStore.getActiveWorld()
     const scenesGrid = _get(map, "newGrid5") || []
-    console.log("map========================+>>>>", map) // zzz
-    console.log("map========================+>>>>", map) // zzz
-    console.log("map========================+>>>>", map) // zzz
     const endScene = scenesGrid.find((item) => item.id === map.endSceneId)
     const startScene = scenesGrid.find((item) => item.id === map.startSceneId)
     const terminalScene = start ? startScene : endScene
     const firstScene = scenesGrid[0]
     const lastScene = scenesGrid[scenesGrid.length - 1]
-    console.log("terminalScene", terminalScene) // zzz
     // If no start and finish scenes are marked, choose some, so the program doesn't break
     return terminalScene || (start ? firstScene : lastScene)
   }
 
   initWorld = async () => {
     const startScene = this.getTerminalScene({})
-    console.log("startScene", startScene) // zzz
     if (!startScene) return
 
     localStateStore.setVisitedScenes([])
@@ -107,10 +103,6 @@ class TopLevel extends React.Component {
   }
 
   updateActiveScene = ({ sceneId }) => {
-    console.log("updateActiveScene=====================================>>") // zzz
-    console.log("updateActiveScene=====================================>>") // zzz
-    console.log("updateActiveScene=====================================>>") // zzz
-    console.log("sceneId------------------->>", sceneId) // zzz
     localStateStore.setActiveSceneId(sceneId)
 
     localStateStore.setActiveFrameIndex(0)
@@ -305,6 +297,7 @@ class TopLevel extends React.Component {
         <StoryMode
           updateActiveScene={this.updateActiveScene}
           activeScene={activeScene}
+          forceUpdate={this.forceUpdate}
           openQuestPicker={this.openQuestPicker}
         />
         {/* {!isProdRelease && showBookPicker && this.renderBookPicker()} */}

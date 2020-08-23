@@ -31,6 +31,7 @@ class StoryMode extends React.Component {
             updateActiveScene={updateActiveScene}
             activeScene={activeScene}
             openQuestPicker={openQuestPicker}
+            forceUpdate={this.props.forceUpdate}
           />
         </div>
 
