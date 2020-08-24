@@ -315,8 +315,8 @@ class LocalStateStore {
     this.activeFrameIndex = activeFrameIndex
   }
 
-  getFirstFrame = () => {
-    const activeScene = localStateStore.getActiveScene()
+  getFirstFrame = ({ activeScene }) => {
+    // const activeScene = localStateStore.getActiveScene()
     const { frameSet } = activeScene
     const firstFrame = _get(frameSet, "frames[0]")
     return firstFrame

@@ -1,18 +1,17 @@
 import React, { useContext, useState, useEffect } from "react"
 import _get from "lodash.get"
 import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core"
-
 import { Link } from "react-router-dom"
-import { maps } from "../../Stores/InitStores.js"
+
+import { myContext } from "../../../myProvider.js"
 import BookPicker from "../BookPicker/BookPicker.js"
+import Constants from "../../Utils/Constants/Constants.js"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 import StoryMode from "../StoryMode/StoryMode"
 import Utils from "../../Utils/Utils"
-import { myContext } from "../../../myProvider.js"
 
 import css from "./TopLevel.module.scss"
-import Constants from "../../Utils/Constants/Constants.js"
 
 const toaster = Toaster.create({
   position: Position.TOP,
@@ -90,10 +89,11 @@ export default function TopLevel(props) {
 
   const updateQuestStatus = () => {
     toaster.clear()
-    const activeScene = localStateStore.getActiveScene()
+    const activeScene = localStorage.activeScene
     const { location } = activeScene
 
-    const activeFrame = localStateStore.getFirstFrame() || {}
+    const activeFrame = localStateStore.getFirstFrame({ activeScene }) || {}
+    // const activeFrame = localStateStore.getFirstFrame() || {}
     const { critters1 = [], critters2 = [] } = activeFrame
 
     const { foundItem, completedMission } = localStateStore.updateQuestState({
@@ -237,8 +237,9 @@ export default function TopLevel(props) {
     return null
   }
 
-  const activeSceneId = localStorage.activeSceneId
-  const activeScene = localStateStore.getActiveScene({ world, activeSceneId })
+  // const activeSceneId = localStorage.activeSceneId
+  // const activeScene = localStateStore.getActiveScene({ world, activeSceneId })
+  const activeScene = localStorage.activeScene
 
   if (!activeScene) {
     return null
