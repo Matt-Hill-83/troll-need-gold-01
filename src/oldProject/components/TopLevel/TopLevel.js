@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useState, useEffect } from "react"
 import _get from "lodash.get"
 import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core"
 
@@ -9,9 +9,9 @@ import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 import StoryMode from "../StoryMode/StoryMode"
 import Utils from "../../Utils/Utils"
+import { myContext } from "../../../myProvider.js"
 
 import css from "./TopLevel.module.scss"
-import { myContext } from "../../../myProvider.js"
 
 let useDefaultWorldId
 // useDefaultWorldId = true
@@ -23,36 +23,35 @@ const toaster = Toaster.create({
   canEscapeKeyClear: true,
 })
 
-// export default function TopLevel({ match }) {
-//   const [number, setNumber] = useContext(myContext)
-
-//   const increaseNumber = () => {
-//     setNumber((prevNumber) => prevNumber + 1)
-//   }
-
-//   return (
-//     <div>
-//       <div>
-//         <h1>Number: {number}</h1>
-//         <button onClick={increaseNumber}>+1</button>
-//       </div>
-//     </div>
-//   )
-// }
-// class TopLevel extends React.Component {
-export default function TopLevel({ match }) {
+export default function TopLevel(props) {
   const isProdRelease = localStateStore.getIsProdRelease()
+  const [activeScene, setActiveScene] = useState({})
+  const activeWorld = props.quest
+  const world = props.quest
 
-  const state = {
-    activeScene: undefined,
-    showQuestPicker: isProdRelease,
+  const [localStorage, setLocalStorage] = useContext(myContext)
+
+  const increaseNumber = () => {
+    setLocalStorage((prevVal) => {
+      const newVal = { ...prevVal }
+
+      console.log("prevVal", prevVal) // zzz
+      newVal.number += 1
+      // const newVal = newVal.number + 1
+      // prevVal.number = newVal
+      return newVal
+    })
   }
 
-  const componentWillMount = () => {
+  useEffect(() => {
+    console.log("mount---------------------------->>>>>") // zzz
+    console.log("mount---------------------------->>>>>") // zzz
     console.log("props", props) // zzz
-    maps.length = 0
-    maps.push(...props.quests)
-    console.log("maps", maps) // zzz
+    // maps.length = 0
+    // maps.push(...props.quests)
+    // console.log("maps", maps) // zzz
+
+    // localStateStore.setActiveMapId(mapId)
 
     // TODO - start cleanup here
     // TODO - start cleanup here
@@ -63,41 +62,80 @@ export default function TopLevel({ match }) {
     const defaultWorldId = "GhVDXZV8prb1XmwQVZjx"
     // const defaultWorldId = localStateStore.getDefaultWorldId()
 
-    if (maps[0]) {
-      const defaultMap = maps[0]
-      const mapId = _get(defaultMap, "id")
+    // if (maps[0]) {
+    //   const defaultMap = maps[0]
+    //   localStateStore.setActiveMapId(mapId)
+    //   const mapId = _get(defaultMap, "id")
 
-      if (useDefaultWorldId) {
-        localStateStore.setActiveMapId(defaultWorldId)
-      } else {
-        localStateStore.setActiveMapId(mapId)
-      }
-    }
+    //   if (useDefaultWorldId) {
+    //     localStateStore.setActiveMapId(defaultWorldId)
+    //   } else {
+    //     localStateStore.setActiveMapId(mapId)
+    //   }
+    // }
 
-    localStateStore.setShowBookPicker(true)
+    // localStateStore.setShowBookPicker(true)
 
     init()
+    // on mount
+
+    // returned function will be called on component unmount
+    return () => {}
+  }, [])
+
+  // on change in props
+  useEffect(() => {
+    console.log("newProps===============================+>>>>>>>>>>>") // zzz
+    console.log("newProps===============================+>>>>>>>>>>>") // zzz
+    console.log("props", props) // zzz
+    // const worldId = _get(props, "match.params.worldId")
+    // console.log("worldId", worldId) // zzz
+    // // setState({ showQuestPicker: false })
+
+    // if (worldId) {
+    //   localStateStore.setActiveMapId(worldId)
+    //   init()
+    // }
+    // init()
+  }, [props])
+
+  const componentWillMount = () => {
+    // console.log("props", props) // zzz
+    // maps.length = 0
+    // maps.push(...props.quests)
+    // console.log("maps", maps) // zzz
+    // const defaultWorldId = "GhVDXZV8prb1XmwQVZjx"
+    // // const defaultWorldId = localStateStore.getDefaultWorldId()
+    // if (maps[0]) {
+    //   const defaultMap = maps[0]
+    //   const mapId = _get(defaultMap, "id")
+    //   if (useDefaultWorldId) {
+    //     localStateStore.setActiveMapId(defaultWorldId)
+    //   } else {
+    //     localStateStore.setActiveMapId(mapId)
+    //   }
+    // }
+    // localStateStore.setShowBookPicker(true)
+    // init()
   }
 
   const UNSAFE_componentWillReceiveProps = (newProps) => {
-    const worldId = _get(newProps, "match.params.worldId")
-
-    setState({ showQuestPicker: false })
-
-    if (worldId) {
-      localStateStore.setActiveMapId(worldId)
-      init()
-    }
+    // const worldId = _get(newProps, "match.params.worldId")
+    // // setState({ showQuestPicker: false })
+    // if (worldId) {
+    //   localStateStore.setActiveMapId(worldId)
+    //   init()
+    // }
   }
 
   const init = () => {
-    x
-    const mapId = localStateStore.getActiveWorldId()
-    onChangeWorld({ mapId })
+    console.log("init") // zzz
+    // const mapId = localStateStore.getActiveWorldId()
+    onChangeWorld({ mapId: activeWorld.id })
   }
 
   const forceUpdate = () => {
-    setState({ test: Math.random() })
+    // setState({ test: Math.random() })
     console.log("forceUpdate---------------------->>>") // zzz
   }
 
@@ -114,7 +152,10 @@ export default function TopLevel({ match }) {
   }
 
   const initWorld = async () => {
+    console.log("initWorld------------------------>>>") // zzz
+    console.log("initWorld------------------------>>>") // zzz
     const startScene = getTerminalScene({})
+    console.log("startScene", startScene) // zzz
     if (!startScene) return
 
     localStateStore.setVisitedScenes([])
@@ -191,10 +232,10 @@ export default function TopLevel({ match }) {
     }
     QuestStatusUtils.updateSceneVisibilityProps()
 
-    setState({ dummy: new Date() })
+    // setState({ dummy: new Date() })
   }
 
-  onChangeWorld = ({ mapId }) => {
+  const onChangeWorld = ({ mapId }) => {
     console.log("")
     console.log("")
     console.log("-------------------------------------")
@@ -205,14 +246,13 @@ export default function TopLevel({ match }) {
     toaster.clear()
 
     localStateStore.setActiveMapId(mapId)
-    const map = localStateStore.getActiveWorld()
-    if (!map || !map) {
+    if (!world || !world) {
       return
     }
-    const { questConfig } = map
+    const { questConfig } = world
     if (questConfig) {
       const missions = QuestStatusUtils.getActiveSubQuestMissions({
-        world: map,
+        world,
       })
       const desiredItems =
         (missions && missions.map((mission) => mission.item)) || []
@@ -243,12 +283,12 @@ export default function TopLevel({ match }) {
     // uncomment this after building feature
     localStateStore.setShowBookPicker(false)
 
-    setState({ showQuestPicker: false })
+    // setState({ showQuestPicker: false })
     initWorld()
   }
 
   const toggleBookPicker = () => {
-    setState({ showQuestPicker: false })
+    // setState({ showQuestPicker: false })
     const show = localStateStore.getShowBookPicker()
     localStateStore.setShowBookPicker(!show)
   }
@@ -261,7 +301,7 @@ export default function TopLevel({ match }) {
     return (
       <BookPicker
         closeQuestPicker={closeBookPicker}
-        onChangeWorld={onChangeWorld}
+        // onChangeWorld={onChangeWorld}
         forceUpdate={forceUpdate}
       />
     )
@@ -274,9 +314,6 @@ export default function TopLevel({ match }) {
     return (
       <div className={css.floatingButtons}>
         <ButtonGroup color="primary">
-          <Button xxxonClick={toggleQuestPicker}>
-            <Link to={path}>Back to Quest Picker</Link>
-          </Button>
           {!isProdRelease && (
             <Button onClick={toggleBookPicker}>Pick a Book of Quests...</Button>
           )}
@@ -285,42 +322,46 @@ export default function TopLevel({ match }) {
     )
   }
 
-  const render = () => {
-    console.log("")
-    console.log("main story render")
-    console.log("props.quests", props.quests) // zzz
+  console.log("")
+  console.log("main story render")
+  // const activeWorld = localStateStore.getActiveWorld()
 
-    const { className } = props
-    const activeWorld = localStateStore.getActiveWorld()
+  const { className } = props
+  console.log("activeWorld", activeWorld) // zzz
 
-    if (!activeWorld || !activeWorld.title) {
-      return null
-    }
-    console.log("activeWorld", activeWorld) // zzz
-
-    const activeScene = localStateStore.getActiveScene()
-    console.log("activeScene", activeScene) // zzz
-
-    if (!activeScene) {
-      return null
-    }
-
-    const showBookPicker = localStateStore.getShowBookPicker()
-    const isProdRelease = localStateStore.getIsProdRelease()
-
-    return (
-      <div className={`${css.main} ${className}`}>
-        {renderButtons()}
-        <StoryMode
-          updateActiveScene={updateActiveScene}
-          activeScene={activeScene}
-          forceUpdate={forceUpdate}
-          openQuestPicker={openQuestPicker}
-        />
-        {/* {!isProdRelease && showBookPicker && renderBookPicker()} */}
-      </div>
-    )
+  if (!activeWorld || !activeWorld.title) {
+    return null
   }
-}
 
-// export default TopLevel
+  // const activeScene = localStateStore.getActiveScene()
+  console.log("activeScene", activeScene) // zzz
+
+  if (!activeScene) {
+    return null
+  }
+
+  // const showBookPicker = localStateStore.getShowBookPicker()
+  // const isProdRelease = localStateStore.getIsProdRelease()
+
+  console.log("localStorage", localStorage) // zzz
+  console.log("localStorage.number", localStorage.number) // zzz
+
+  return (
+    <div className={`${css.main} ${className}`}>
+      <div>
+        <div>
+          <h1>Number: {localStorage.number}</h1>
+          <button onClick={increaseNumber}>+1</button>
+        </div>
+      </div>
+      {renderButtons()}
+      <StoryMode
+        updateActiveScene={updateActiveScene}
+        activeScene={activeScene}
+        forceUpdate={forceUpdate}
+        // openQuestPicker={openQuestPicker}
+      />
+      {/* {!isProdRelease && showBookPicker && renderBookPicker()} */}
+    </div>
+  )
+}

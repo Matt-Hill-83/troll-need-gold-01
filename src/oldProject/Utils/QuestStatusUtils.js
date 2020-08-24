@@ -3,6 +3,8 @@ import localStateStore from "../Stores/LocalStateStore/LocalStateStore.js"
 import _get from "lodash.get"
 import Constants from "./Constants/Constants.js"
 import Utils from "./Utils.js"
+// import { myContext } from "../../myProvider.js"
+// import { useContext } from "react"
 
 export default class QuestStatusUtils {
   // update new scene visibility props based on rules in subQuest
@@ -239,13 +241,16 @@ export default class QuestStatusUtils {
 
   static getActiveQuestConfig = () => {
     const activeWorld = localStateStore.getActiveWorld()
+    console.log("localStorage", localStorage) // zzz
     const { questConfig } = activeWorld
     return questConfig
   }
 
   static getActiveSubQuest = ({ world }) => {
-    const activeWorld = localStateStore.getActiveWorld()
-    const { questConfig } = activeWorld
+    console.log("getActiveSubQuest---------===================>>>") // zzz
+    // const [localStorage, setLocalStorage] = useContext(myContext)
+    // const activeWorld = localStateStore.getActiveWorld()
+    const { questConfig } = world
     const { subQuests } = questConfig
 
     const questStatus = localStateStore.getQuestStatus()
@@ -275,7 +280,9 @@ export default class QuestStatusUtils {
   }
 
   static getActiveSubQuestMissions = ({ world }) => {
+    console.log("world", world) // zzz
     const activeSubQuest = this.getActiveSubQuest({ world })
+    console.log("activeSubQuest", activeSubQuest) // zzz
     return (activeSubQuest && activeSubQuest.missions) || null
   }
 

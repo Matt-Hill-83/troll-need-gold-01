@@ -8,7 +8,6 @@ import { listenToSelectedQuest } from "../questActions"
 import LoadingComponent from "../../../app/layout/LoadingComponent"
 import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc"
 import TopLevel from "../../../oldProject/components/TopLevel/TopLevel"
-import { MyProvider, myContext } from "../../../myProvider"
 
 export default function QuestDetailedPage({ match }) {
   const dispatch = useDispatch()
@@ -30,9 +29,5 @@ export default function QuestDetailedPage({ match }) {
 
   if (error) return <Redirect to="/error" />
 
-  return (
-    // <MyProvider>
-    <TopLevel quests={[quest]}></TopLevel>
-    // </MyProvider>
-  )
+  return <TopLevel quest={quest}></TopLevel>
 }

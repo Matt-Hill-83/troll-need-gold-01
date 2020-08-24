@@ -1,5 +1,5 @@
 import { Grid, Loader } from "semantic-ui-react"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core"
 
@@ -7,14 +7,17 @@ import { fetchEvents } from "../questActions"
 import { RETAIN_STATE } from "../questConstants"
 import QuestList from "./QuestList"
 import EventListItemPlaceholder from "./EventListItemPlaceholder"
-import TopLevel from "../../../oldProject/components/TopLevel/TopLevel"
 import localStateStore from "../../../oldProject/Stores/LocalStateStore/LocalStateStore"
 import QuestStatusUtils from "../../../oldProject/Utils/QuestStatusUtils"
 import QuestDialog from "../../../oldProject/components/QuestDialog/QuestDialog"
+import { myContext } from "../../../myProvider"
 
 import css from "./QuestDashboard.module.scss"
 
 export default function QuestDashboard() {
+  const [localStorage, setLocalStorage] = useContext(myContext)
+
+  console.log("localStorage", localStorage) // zzz
   const limit = 2
   const dispatch = useDispatch()
   const {
@@ -58,61 +61,9 @@ export default function QuestDashboard() {
         // showProd={showProd}
         closeQuestPicker={closeQuestPicker}
         showQuestPicker={showQuestPicker}
-        onChangeWorld={onChangeWorld}
+        // onChangeWorld={onChangeWorld}
       />
     )
-  }
-
-  const onChangeWorld = ({ mapId }) => {
-    console.log("")
-    console.log("")
-    console.log("-------------------------------------")
-    console.log(
-      "-----------------------mapId---------------------------",
-      mapId
-    )
-
-    localStateStore.setActiveMapId(mapId)
-    const map = localStateStore.getActiveWorld()
-    if (!map || !map) {
-      return
-    }
-    const { questConfig } = map
-    if (questConfig) {
-      const missions = QuestStatusUtils.getActiveSubQuestMissions({
-        world: map,
-      })
-      const desiredItems =
-        (missions && missions.map((mission) => mission.item)) || []
-
-      const desiredItemsFiltered = desiredItems.filter((item) => !!item)
-      const clonedQuestConfig = JSON.parse(JSON.stringify(questConfig))
-
-      const combinedPockets = localStateStore.addToPockets({
-        newPockets: clonedQuestConfig.pockets,
-      })
-      const defaultQuestStatus = localStateStore.getDefaultQuestStatus()
-
-      const newProps = {
-        activeMissionIndex: 0,
-        pockets: combinedPockets,
-        questConfig: clonedQuestConfig,
-        desiredItems: desiredItemsFiltered,
-      }
-      const newQuestStatus = { ...defaultQuestStatus, ...newProps }
-
-      localStateStore.setQuestStatus(newQuestStatus)
-    } else {
-      localStateStore.setQuestStatus({
-        activeMissionIndex: 0,
-        hideMissionConsole: true,
-      })
-    }
-    // uncomment this after building feature
-    localStateStore.setShowBookPicker(false)
-
-    this.setState({ showQuestPicker: false })
-    this.initWorld()
   }
 
   const closeQuestPicker = () => {
@@ -171,7 +122,6 @@ export default function QuestDashboard() {
       <Grid.Column width={10}>
         <Loader active={loading} />
       </Grid.Column>
-      {/* <TopLevel quests={events}></TopLevel> */}
     </Grid>
   )
 }
