@@ -5,7 +5,7 @@ import Constants from "../../Utils/Constants/Constants"
 
 class LocalStateStore {
   activeFrameIndex = 0
-  activeMapId = null
+  activeWorldId = null
   activeSceneId = null
   defaultWorldId = null
   showBookPicker = false
@@ -296,12 +296,12 @@ class LocalStateStore {
   }
 
   getActiveWorld = () => {
-    const world = Utils.getWorldFromId({ id: this.activeMapId })
+    const world = Utils.getWorldFromId({ id: this.activeWorldId })
     return world
   }
 
   getActiveWorldGrid = () => {
-    const map = Utils.getWorldFromId({ id: this.activeMapId })
+    const map = Utils.getWorldFromId({ id: this.activeWorldId })
     return map.newGrid5 || []
   }
 

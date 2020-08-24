@@ -1,99 +1,15 @@
 import React from "react"
-import { FormControl, MenuItem, OutlinedInput, Select } from "@material-ui/core"
 import _get from "lodash.get"
 
-import Images from "../../images/images.js"
-import Utils from "../../Utils/Utils.js"
 import Constants from "../../Utils/Constants/Constants.js"
+import Images from "../../images/images.js"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
+import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
+import Utils from "../../Utils/Utils.js"
 
 import css from "./MiniLocation.module.scss"
-import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 
 class MiniLocation extends React.Component {
-  defaultDoorIsOpen = {
-    left: { image: "doorGreen", open: true },
-    right: { image: "doorGreen", open: false },
-    top: { image: "doorGreen", open: true },
-    bottom: { image: "doorGreen", open: true },
-  }
-
-  changeDoor = ({ event }) => {
-    this.setState({
-      name: event.target.name,
-    })
-  }
-
-  async componentWillMount() {
-    const {
-      scene: { doors },
-      isStartScene,
-      isEndScene,
-    } = this.props
-
-    this.setState({ isStartScene, isEndScene })
-
-    if (doors) {
-      this.setState({ doors })
-    }
-  }
-
-  componentWillReceiveProps(newProps) {
-    const {
-      scene: { doors },
-      isStartScene,
-      isEndScene,
-    } = newProps
-
-    this.setState({ isStartScene, isEndScene })
-
-    if (doors) {
-      this.setState({ doors })
-    }
-  }
-
-  state = {
-    doors: this.defaultDoorIsOpen,
-  }
-
-  createDoorPickerOptions = () => {
-    const doors = ["doorYellow", "door", "doorGreen"]
-    const renderedMenuItems = doors.map((door, index) => {
-      const doorImage = Images.doors[door]
-      return (
-        <MenuItem key={index} value={door}>
-          <div className={css.doorPickerItem}>
-            <img src={doorImage} alt={"imagex"} />
-          </div>
-          {/* {door && door.toUpperCase()} */}
-        </MenuItem>
-      )
-    })
-
-    return renderedMenuItems
-  }
-
-  renderButton = ({ className }) => {
-    const defaultDoorName = "door"
-
-    return (
-      <div className={`${className} ${css.doorPickerContainer}`}>
-        <FormControl variant="outlined">
-          <Select
-            className={css.doorPickerDropdown}
-            value={defaultDoorName}
-            onChange={(event) => {
-              this.changeDoor({ event })
-            }}
-            input={<OutlinedInput id="outlined-age-simple" />}
-          >
-            {this.createDoorPickerOptions()}
-          </Select>
-        </FormControl>
-      </div>
-    )
-  }
-
   renderCreatures = ({ isActive }) => {
     if (!isActive) {
       return null
@@ -126,18 +42,11 @@ class MiniLocation extends React.Component {
 
   render() {
     const { scene, isActive, className, id } = this.props
-    const {
-      coordinates,
-      sceneConfig: { subQuestId = 0 } = {},
-      isStartScene,
-      onClick,
-    } = scene
+    const { coordinates, isStartScene, onClick } = scene
     const isVisitedScene = localStateStore.isVisitedScene(scene.id)
     const locationName = scene.location.name
 
     const showNothing = QuestStatusUtils.isSceneHidden({ sceneId: scene.id })
-    if (showNothing) {
-    }
     const isBlank = locationName === "blank" || showNothing
     if (isBlank) {
       return this.renderBlankScene({ id })
@@ -187,11 +96,10 @@ class MiniLocation extends React.Component {
     const locationImage = Images.all[locationName]
     const rockImage = Images.backgrounds["rock"]
     const rockImageVertical = Images.backgrounds["rock02Vertical"]
-    const defaultDoorImage = Images.backgrounds["door"]
     const showBottomPath = neighbors[Constants.neighborPositionsEnum.bottom]
     const showRightPath = neighbors[Constants.neighborPositionsEnum.right]
 
-    const world = localStateStore.getActiveWorld()
+    const { world } = this.props
 
     const backgroundColor = QuestStatusUtils.getSubQuestColor({
       world: world,
@@ -242,19 +150,6 @@ class MiniLocation extends React.Component {
             </div>
           )}
 
-          {/* Right door */}
-          {false &&
-            this.renderButton({
-              position: "right",
-              className: css.rightDoor,
-              defaultDoorImage: defaultDoorImage,
-            })}
-          {false &&
-            this.renderButton({
-              position: "bottom",
-              className: css.bottomDoor,
-              defaultDoorImage: defaultDoorImage,
-            })}
           <div className={css.imagesBox}>
             <img
               className={css.miniLocationImage}

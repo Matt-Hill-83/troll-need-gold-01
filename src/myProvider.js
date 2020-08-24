@@ -7,7 +7,7 @@ export const MyProvider = (props) => {
     number: 0,
 
     activeFrameIndex: 0,
-    activeMapId: null,
+    activeWorldId: null,
     activeSceneId: null,
     defaultWorldId: null,
     showBookPicker: false,

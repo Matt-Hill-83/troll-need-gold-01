@@ -62,7 +62,6 @@ export default function TopLevel(props) {
   }
 
   const getTerminalScene = ({ start = true }) => {
-    // const map = world
     console.log("world", world) // zzz
     const scenesGrid = _get(world, "newGrid5") || []
     const endScene = scenesGrid.find((item) => item.id === world.endSceneId)
@@ -77,8 +76,6 @@ export default function TopLevel(props) {
   const initWorld = async () => {
     console.log("initWorld------------------------>>>") // zzz
     const startScene = getTerminalScene({})
-    console.log("startScene===================================", startScene) // zzz
-    console.log("startScene===================================", startScene) // zzz
     if (!startScene) return
 
     localStateStore.setVisitedScenes([])
@@ -100,8 +97,6 @@ export default function TopLevel(props) {
     if (!hideMissionConsole) {
       updateQuestStatus({ sceneId })
     }
-
-    // setState({ test: Math.random() })
   }
 
   const updateQuestStatus = () => {
@@ -165,7 +160,7 @@ export default function TopLevel(props) {
 
     const questStatus = { ...Constants.defaultQuestStatus }
     setLocalStorageProp({ prop: "world", value: world })
-    setLocalStorageProp({ prop: "activeMapId", value: mapId })
+    setLocalStorageProp({ prop: "activeWorldId", value: mapId })
     setLocalStorageProp({ prop: "questStatus", value: questStatus })
 
     if (!world) {

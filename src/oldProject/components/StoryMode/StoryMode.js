@@ -2,7 +2,6 @@ import _get from "lodash.get"
 import React from "react"
 import cx from "classnames"
 
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
 import WordPage from "../WordPage/WordPage.js"
 import WorldViewer from "../WorldViewer/WorldViewer.js"
 
@@ -43,6 +42,7 @@ class StoryMode extends React.Component {
           <WorldViewer
             updateActiveScene={updateActiveScene}
             activeScene={activeScene}
+            world={world}
           />
         </div>
       </div>
