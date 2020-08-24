@@ -3,7 +3,6 @@ import { Segment, Item, Icon, List, Button, Label } from "semantic-ui-react"
 import { Link } from "react-router-dom"
 
 export default function EventListItem({ event }) {
-  console.log("event", event) // zzz
   return (
     <Segment.Group>
       <Segment>

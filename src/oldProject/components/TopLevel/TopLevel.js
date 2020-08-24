@@ -21,8 +21,6 @@ const toaster = Toaster.create({
 })
 
 export default function TopLevel(props) {
-  // const isProdRelease = localStateStore.getIsProdRelease()
-  // const [activeScene, setActiveScene] = useState({})
   const world = props.quest
   const [localStorage, setLocalStorage] = useContext(myContext)
 
@@ -42,8 +40,6 @@ export default function TopLevel(props) {
 
   // on mount
   useEffect(() => {
-    console.log("mount---------------------------->>>>>") // zzz
-    console.log("props", props) // zzz
     init()
 
     // returned function will be called on component unmount
@@ -51,18 +47,13 @@ export default function TopLevel(props) {
   }, [])
 
   // on change in props
-  useEffect(() => {
-    console.log("newProps===============================+>>>>>>>>>>>") // zzz
-    console.log("props", props) // zzz
-  }, [props])
+  useEffect(() => {}, [props])
 
   const init = () => {
-    console.log("init") // zzz
     onChangeWorld({ mapId: world.id })
   }
 
   const getTerminalScene = ({ start = true }) => {
-    console.log("world", world) // zzz
     const scenesGrid = _get(world, "newGrid5") || []
     const endScene = scenesGrid.find((item) => item.id === world.endSceneId)
     const startScene = scenesGrid.find((item) => item.id === world.startSceneId)
@@ -74,7 +65,6 @@ export default function TopLevel(props) {
   }
 
   const initWorld = async () => {
-    console.log("initWorld------------------------>>>") // zzz
     const startScene = getTerminalScene({})
     if (!startScene) return
 
@@ -85,7 +75,6 @@ export default function TopLevel(props) {
   }
 
   const updateActiveScene = ({ sceneId }) => {
-    console.log("updateActiveScene") // zzz
     localStateStore.setActiveSceneId(sceneId)
 
     localStateStore.setActiveFrameIndex(0)
@@ -243,7 +232,6 @@ export default function TopLevel(props) {
   console.log("main story render")
 
   const { className } = props
-  console.log("world", world) // zzz
 
   if (!world || !world.title) {
     return null
@@ -251,13 +239,10 @@ export default function TopLevel(props) {
 
   const activeSceneId = localStorage.activeSceneId
   const activeScene = localStateStore.getActiveScene({ world, activeSceneId })
-  console.log("activeScene", activeScene) // zzz
 
   if (!activeScene) {
     return null
   }
-
-  console.log("localStorage", localStorage) // zzz
 
   return (
     <div className={`${css.main} ${className}`}>

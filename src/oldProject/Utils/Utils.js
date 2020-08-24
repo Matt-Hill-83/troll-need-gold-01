@@ -262,7 +262,6 @@ export default class Utils {
   }
 
   static getNeighbors = ({ coordinates, grid }) => {
-    console.log("coordinates", coordinates) // zzz
     const directions = Object.keys(Constants.neighborPositionsEnum)
     const neighbors = {}
 

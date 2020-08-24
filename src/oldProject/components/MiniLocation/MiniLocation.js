@@ -88,7 +88,6 @@ class MiniLocation extends React.Component {
       )
     }
 
-    console.log("neighbors", neighbors) // zzz
     const showLock = QuestStatusUtils.isSceneLocked({ sceneId: scene.id })
     // apply position based clouded state
     // If cloud is still hidden, apply config based state

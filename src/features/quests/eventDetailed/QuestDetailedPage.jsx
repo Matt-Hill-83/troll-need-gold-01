@@ -18,7 +18,6 @@ export default function QuestDetailedPage({ match }) {
   useFirestoreDoc({
     query: () => listenToQuestFromFirestore2(match.params.id),
     data: (quest) => {
-      console.log("quest", quest) // zzz
       dispatch(listenToSelectedQuest(quest))
     },
     deps: [match.params.id, dispatch],

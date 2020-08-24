@@ -17,7 +17,6 @@ import css from "./QuestDashboard.module.scss"
 export default function QuestDashboard() {
   const [localStorage, setLocalStorage] = useContext(myContext)
 
-  console.log("localStorage", localStorage) // zzz
   const limit = 2
   const dispatch = useDispatch()
   const {
