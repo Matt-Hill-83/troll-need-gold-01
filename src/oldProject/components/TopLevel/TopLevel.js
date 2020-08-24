@@ -21,10 +21,9 @@ const toaster = Toaster.create({
 })
 
 export default function TopLevel(props) {
-  const isProdRelease = localStateStore.getIsProdRelease()
+  // const isProdRelease = localStateStore.getIsProdRelease()
   // const [activeScene, setActiveScene] = useState({})
   const world = props.quest
-
   const [localStorage, setLocalStorage] = useContext(myContext)
 
   const increaseNumber = () => {
@@ -36,10 +35,8 @@ export default function TopLevel(props) {
   }
 
   const setLocalStorageProp = ({ prop, value }) => {
-    setLocalStorage((prevVal) => {
-      const newVal = { ...prevVal }
-      newVal[prop] = value
-      return newVal
+    setLocalStorage((state) => {
+      return { ...state, [prop]: value }
     })
   }
 
@@ -90,6 +87,7 @@ export default function TopLevel(props) {
   }
 
   const updateActiveScene = ({ sceneId }) => {
+    console.log("updateActiveScene") // zzz
     localStateStore.setActiveSceneId(sceneId)
 
     localStateStore.setActiveFrameIndex(0)
@@ -265,11 +263,8 @@ export default function TopLevel(props) {
     return null
   }
 
-  // const showBookPicker = localStateStore.getShowBookPicker()
-  // const isProdRelease = localStateStore.getIsProdRelease()
-
   console.log("localStorage", localStorage) // zzz
-  console.log("localStorage.number", localStorage.number) // zzz
+  // console.log("localStorage.number", localStorage.number) // zzz
 
   return (
     <div className={`${css.main} ${className}`}>
