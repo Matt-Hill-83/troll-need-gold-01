@@ -212,7 +212,9 @@ export default function TopLevel(props) {
     const { questConfig } = world
 
     if (questConfig) {
-      const questStatus = localStorage.questStatus
+      // const questStatus = localStorage.questStatus
+      console.log("localStorage", localStorage) // zzz
+      console.log("questStatus", questStatus) // zzz
       const missions = QuestStatusUtils.getActiveSubQuestMissions({
         world,
         questStatus,
