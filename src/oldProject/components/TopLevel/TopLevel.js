@@ -26,7 +26,6 @@ const toaster = Toaster.create({
 export default function TopLevel(props) {
   const isProdRelease = localStateStore.getIsProdRelease()
   const [activeScene, setActiveScene] = useState({})
-  const activeWorld = props.quest
   const world = props.quest
 
   const [localStorage, setLocalStorage] = useContext(myContext)
@@ -39,41 +38,27 @@ export default function TopLevel(props) {
     })
   }
 
+  const setMapId = ({ mapId }) => {
+    setLocalStorage((prevVal) => {
+      const newVal = { ...prevVal }
+      newVal.activeMapId = mapId
+      return newVal
+    })
+  }
+
+  const setLocalStorageProp = ({ prop, value }) => {
+    setLocalStorage((prevVal) => {
+      const newVal = { ...prevVal }
+      newVal[prop] = value
+      return newVal
+    })
+  }
+
   useEffect(() => {
-    console.log("mount---------------------------->>>>>") // zzz
+    // on mount
     console.log("mount---------------------------->>>>>") // zzz
     console.log("props", props) // zzz
-    // maps.length = 0
-    // maps.push(...props.quests)
-    // console.log("maps", maps) // zzz
-
-    // localStateStore.setActiveMapId(mapId)
-
-    // TODO - start cleanup here
-    // TODO - start cleanup here
-    // TODO - start cleanup here
-    // TODO - start cleanup here
-    // TODO - start cleanup here
-
-    const defaultWorldId = "GhVDXZV8prb1XmwQVZjx"
-    // const defaultWorldId = localStateStore.getDefaultWorldId()
-
-    // if (maps[0]) {
-    //   const defaultMap = maps[0]
-    //   localStateStore.setActiveMapId(mapId)
-    //   const mapId = _get(defaultMap, "id")
-
-    //   if (useDefaultWorldId) {
-    //     localStateStore.setActiveMapId(defaultWorldId)
-    //   } else {
-    //     localStateStore.setActiveMapId(mapId)
-    //   }
-    // }
-
-    // localStateStore.setShowBookPicker(true)
-
     init()
-    // on mount
 
     // returned function will be called on component unmount
     return () => {}
@@ -82,61 +67,18 @@ export default function TopLevel(props) {
   // on change in props
   useEffect(() => {
     console.log("newProps===============================+>>>>>>>>>>>") // zzz
-    console.log("newProps===============================+>>>>>>>>>>>") // zzz
     console.log("props", props) // zzz
-    // const worldId = _get(props, "match.params.worldId")
-    // console.log("worldId", worldId) // zzz
-    // // setState({ showQuestPicker: false })
-
-    // if (worldId) {
-    //   localStateStore.setActiveMapId(worldId)
-    //   init()
-    // }
-    // init()
   }, [props])
-
-  const componentWillMount = () => {
-    // console.log("props", props) // zzz
-    // maps.length = 0
-    // maps.push(...props.quests)
-    // console.log("maps", maps) // zzz
-    // const defaultWorldId = "GhVDXZV8prb1XmwQVZjx"
-    // // const defaultWorldId = localStateStore.getDefaultWorldId()
-    // if (maps[0]) {
-    //   const defaultMap = maps[0]
-    //   const mapId = _get(defaultMap, "id")
-    //   if (useDefaultWorldId) {
-    //     localStateStore.setActiveMapId(defaultWorldId)
-    //   } else {
-    //     localStateStore.setActiveMapId(mapId)
-    //   }
-    // }
-    // localStateStore.setShowBookPicker(true)
-    // init()
-  }
-
-  const UNSAFE_componentWillReceiveProps = (newProps) => {
-    // const worldId = _get(newProps, "match.params.worldId")
-    // // setState({ showQuestPicker: false })
-    // if (worldId) {
-    //   localStateStore.setActiveMapId(worldId)
-    //   init()
-    // }
-  }
 
   const init = () => {
     console.log("init") // zzz
     // const mapId = localStateStore.getActiveWorldId()
-    onChangeWorld({ mapId: activeWorld.id })
-  }
-
-  const forceUpdate = () => {
-    // setState({ test: Math.random() })
-    console.log("forceUpdate---------------------->>>") // zzz
+    onChangeWorld({ mapId: world.id })
   }
 
   const getTerminalScene = ({ start = true }) => {
-    const map = localStateStore.getActiveWorld()
+    const map = world
+    console.log("map", map) // zzz
     const scenesGrid = _get(map, "newGrid5") || []
     const endScene = scenesGrid.find((item) => item.id === map.endSceneId)
     const startScene = scenesGrid.find((item) => item.id === map.startSceneId)
@@ -149,13 +91,14 @@ export default function TopLevel(props) {
 
   const initWorld = async () => {
     console.log("initWorld------------------------>>>") // zzz
-    console.log("initWorld------------------------>>>") // zzz
     const startScene = getTerminalScene({})
-    console.log("startScene", startScene) // zzz
+    console.log("startScene===================================", startScene) // zzz
+    console.log("startScene===================================", startScene) // zzz
     if (!startScene) return
 
     localStateStore.setVisitedScenes([])
-    updateActiveScene({ sceneId: startScene.id })
+
+    setLocalStorageProp({ prop: "activeSceneId", value: startScene.id })
   }
 
   const updateActiveScene = ({ sceneId }) => {
@@ -224,27 +167,21 @@ export default function TopLevel(props) {
         timeout: 30000,
       })
       toaster.show({ message, className: css.toaster, timeout: 30000 })
-      // QuestStatusUtils.updateSceneVisibilityProps()
     }
     QuestStatusUtils.updateSceneVisibilityProps()
-
-    // setState({ dummy: new Date() })
   }
 
   const onChangeWorld = ({ mapId }) => {
     console.log("")
-    console.log("")
-    console.log("-------------------------------------")
-    console.log(
-      "-----------------------mapId---------------------------",
-      mapId
-    )
+    console.log("-----------------------mapId-------------", mapId)
     toaster.clear()
 
-    localStateStore.setActiveMapId(mapId)
-    if (!world || !world) {
+    setLocalStorageProp({ prop: "activeMapId", value: mapId })
+
+    if (!world) {
       return
     }
+
     const { questConfig } = world
     if (questConfig) {
       const missions = QuestStatusUtils.getActiveSubQuestMissions({
@@ -298,7 +235,6 @@ export default function TopLevel(props) {
       <BookPicker
         closeQuestPicker={closeBookPicker}
         // onChangeWorld={onChangeWorld}
-        forceUpdate={forceUpdate}
       />
     )
   }
@@ -320,12 +256,12 @@ export default function TopLevel(props) {
 
   console.log("")
   console.log("main story render")
-  // const activeWorld = localStateStore.getActiveWorld()
+  // const world = localStateStore.getActiveWorld()
 
   const { className } = props
-  console.log("activeWorld", activeWorld) // zzz
+  console.log("world", world) // zzz
 
-  if (!activeWorld || !activeWorld.title) {
+  if (!world || !world.title) {
     return null
   }
 
@@ -354,7 +290,6 @@ export default function TopLevel(props) {
       <StoryMode
         updateActiveScene={updateActiveScene}
         activeScene={activeScene}
-        forceUpdate={forceUpdate}
         // openQuestPicker={openQuestPicker}
       />
       {/* {!isProdRelease && showBookPicker && renderBookPicker()} */}

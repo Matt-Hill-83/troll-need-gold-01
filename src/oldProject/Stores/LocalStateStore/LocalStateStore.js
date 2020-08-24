@@ -1,6 +1,7 @@
 import _get from "lodash.get"
 import Utils from "../../Utils/Utils"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils"
+import Constants from "../../Utils/Constants/Constants"
 
 class LocalStateStore {
   activeFrameIndex = 0
@@ -10,22 +11,22 @@ class LocalStateStore {
   showBookPicker = false
   showWorldBuilder = false
 
-  _defaultQuestStatus = {
-    visitedScenes: [],
-    completedMissions: [],
-    lockedScenes: [],
-    hiddenScenes: [],
-    cloudedScenes: [],
-    activeSubQuestIndex: 0,
-    activeMissionIndex: 0,
-    pockets: { gold: { amount: 0 } },
-    desiredItems: [],
-    questConfig: {
-      missions: [],
-    },
-  }
+  // _defaultQuestStatus = {
+  //   visitedScenes: [],
+  //   completedMissions: [],
+  //   lockedScenes: [],
+  //   hiddenScenes: [],
+  //   cloudedScenes: [],
+  //   activeSubQuestIndex: 0,
+  //   activeMissionIndex: 0,
+  //   pockets: { gold: { amount: 0 } },
+  //   desiredItems: [],
+  //   questConfig: {
+  //     missions: [],
+  //   },
+  // }
 
-  questStatus = { ...this._defaultQuestStatus }
+  questStatus = { ...Constants.defaultQuestStatus }
 
   getQuestNames = () => this.questStatus.quests.map((item) => item.name)
 
@@ -39,7 +40,7 @@ class LocalStateStore {
     this.questStatus = questStatus
   }
 
-  getDefaultQuestStatus = () => this._defaultQuestStatus
+  getDefaultQuestStatus = () => Constants.defaultQuestStatus
 
   getDefaultWorldId = () => this.defaultWorldId
   setDefaultWorldId = (defaultWorldId) => {
@@ -126,7 +127,7 @@ class LocalStateStore {
   }
 
   setQuestStatusToDefault = () => {
-    this.questStatus = { ...this._defaultQuestStatus }
+    this.questStatus = { ...Constants.defaultQuestStatus }
   }
 
   getDesiredItem = () => {
