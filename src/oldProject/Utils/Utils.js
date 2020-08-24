@@ -232,9 +232,7 @@ export default class Utils {
     return grid
   }
 
-  static getNeighbor = ({ coordinates, direction }) => {
-    const grid = localStateStore.getActiveWorldGrid()
-
+  static getNeighbor = ({ coordinates, direction, grid = [] }) => {
     const neighborPositions = {
       [Constants.neighborPositionsEnum.left]: {
         row: coordinates.row,
@@ -263,13 +261,15 @@ export default class Utils {
     })
   }
 
-  static getNeighbors = ({ coordinates }) => {
+  static getNeighbors = ({ coordinates, grid }) => {
+    console.log("coordinates", coordinates) // zzz
     const directions = Object.keys(Constants.neighborPositionsEnum)
     const neighbors = {}
 
     directions.forEach((direction) => {
       neighbors[direction] = Utils.getNeighbor({
         coordinates,
+        grid,
         direction,
       })
     })
@@ -277,7 +277,7 @@ export default class Utils {
     return neighbors
   }
 
-  static getNeighborsAsArray = ({ coordinates }) => {
+  static getNeighborsAsArray = ({ coordinates, grid }) => {
     const directions = Object.keys(Constants.neighborPositionsEnum)
     const neighbors = []
 
@@ -285,6 +285,7 @@ export default class Utils {
       neighbors.push(
         Utils.getNeighbor({
           coordinates,
+          grid,
           direction,
         })
       )

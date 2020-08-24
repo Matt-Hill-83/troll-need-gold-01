@@ -41,7 +41,7 @@ class MiniLocation extends React.Component {
   }
 
   render() {
-    const { scene, isActive, className, id } = this.props
+    const { scene, isActive, className, id, world } = this.props
     const { coordinates, isStartScene, onClick } = scene
     const isVisitedScene = localStateStore.isVisitedScene(scene.id)
     const locationName = scene.location.name
@@ -59,8 +59,9 @@ class MiniLocation extends React.Component {
     const lockImage = Images.items["lock02"]
 
     const showLocationOnly = locationName === "roadLeftRight01"
+    const scenesGrid = _get(world, "newGrid5") || []
 
-    const neighbors = Utils.getNeighbors({ coordinates })
+    const neighbors = Utils.getNeighbors({ coordinates, grid: scenesGrid })
     const neighborsArray = Utils.getNeighborsAsArray({ coordinates }).filter(
       (neighbor) => neighbor && neighbor.id
     )
@@ -87,6 +88,7 @@ class MiniLocation extends React.Component {
       )
     }
 
+    console.log("neighbors", neighbors) // zzz
     const showLock = QuestStatusUtils.isSceneLocked({ sceneId: scene.id })
     // apply position based clouded state
     // If cloud is still hidden, apply config based state
@@ -99,10 +101,10 @@ class MiniLocation extends React.Component {
     const showBottomPath = neighbors[Constants.neighborPositionsEnum.bottom]
     const showRightPath = neighbors[Constants.neighborPositionsEnum.right]
 
-    const { world } = this.props
+    // const { world } = this.props
 
     const backgroundColor = QuestStatusUtils.getSubQuestColor({
-      world: world,
+      world,
       sceneId: scene.id,
     })
 

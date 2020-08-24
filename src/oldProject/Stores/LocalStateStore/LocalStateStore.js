@@ -344,10 +344,6 @@ class LocalStateStore {
       const activeScene = scenesGrid.find((item) => item.id === activeSceneId)
       return activeScene
     }
-    const activeSceneId2 = this.getActiveSceneId()
-    const scenesGrid = this.getActiveWorldGrid()
-    const activeScene = scenesGrid.find((item) => item.id === activeSceneId2)
-    return activeScene
   }
 }
 
