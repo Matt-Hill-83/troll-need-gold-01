@@ -10,16 +10,20 @@ import css from "./StoryMode.module.scss"
 
 class StoryMode extends React.Component {
   render() {
-    const { activeScene, updateActiveScene, openQuestPicker } = this.props
-    const activeWorld = localStateStore.getActiveWorld()
+    const {
+      world,
+      activeScene,
+      updateActiveScene,
+      openQuestPicker,
+    } = this.props
 
-    if (!activeWorld || !activeWorld || !activeWorld.title) {
+    if (!world || !world.title) {
       return null
     }
 
     const renderWorldName = (
       <div tabIndex={0} className={css.worldTitle}>
-        <span> {activeWorld.title} </span>
+        <span> {world.title} </span>
       </div>
     )
 

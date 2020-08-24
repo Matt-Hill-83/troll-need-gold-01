@@ -84,6 +84,7 @@ export default function TopLevel(props) {
     localStateStore.setVisitedScenes([])
 
     setLocalStorageProp({ prop: "activeSceneId", value: startScene.id })
+    setLocalStorageProp({ prop: "activeScene", value: startScene })
   }
 
   const updateActiveScene = ({ sceneId }) => {
@@ -163,9 +164,7 @@ export default function TopLevel(props) {
     toaster.clear()
 
     const questStatus = { ...Constants.defaultQuestStatus }
-    console.log("questStatus=============>>", questStatus) // zzz
-    console.log("questStatus=============>>", questStatus) // zzz
-    console.log("questStatus=============>>", questStatus) // zzz
+    setLocalStorageProp({ prop: "world", value: world })
     setLocalStorageProp({ prop: "activeMapId", value: mapId })
     setLocalStorageProp({ prop: "questStatus", value: questStatus })
 
@@ -264,7 +263,6 @@ export default function TopLevel(props) {
   }
 
   console.log("localStorage", localStorage) // zzz
-  // console.log("localStorage.number", localStorage.number) // zzz
 
   return (
     <div className={`${css.main} ${className}`}>
@@ -278,6 +276,7 @@ export default function TopLevel(props) {
       <StoryMode
         updateActiveScene={updateActiveScene}
         activeScene={activeScene}
+        world={world}
         // openQuestPicker={openQuestPicker}
       />
       {/* {!isProdRelease && showBookPicker && renderBookPicker()} */}

@@ -1,24 +1,25 @@
 import { Button } from "@blueprintjs/core"
-import React, { Component } from "react"
+import React, { Component, useContext } from "react"
 import cx from "classnames"
 
 import _get from "lodash.get"
 
+import { myContext } from "../../../myProvider"
 import ArrowNavigator from "../ArrowNavigator/ArrowNavigator"
 import Character from "../Character/Character"
+import Constants from "../../Utils/Constants/Constants"
 import Images from "../../images/images"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 import Utils from "../../Utils/Utils"
 import WordGroup from "../WordGroup/WordGroup"
-import Constants from "../../Utils/Constants/Constants"
 
 import css from "./FrameViewer.module.scss"
 
-class FrameViewer extends Component {
-  state = {}
+export default function FrameViewer(props) {
+  const [localStorage, setLocalStorage] = useContext(myContext)
 
-  renderDialog = ({ cloneIndex }) => {
-    const { frame, scene } = this.props
+  const renderDialog = ({ cloneIndex }) => {
+    const { frame, scene } = props
     const dialog = (frame && frame.dialog) || []
     const allCharactersInScene = {}
     scene.frameSet &&
@@ -83,15 +84,15 @@ class FrameViewer extends Component {
     )
   }
 
-  getMood = ({ name, faces }) => {
+  const getMood = ({ name, faces }) => {
     let mood = "ok"
     const newMood = faces && faces.find((face) => face.character === name)
     mood = (newMood && newMood.face) || mood
     return mood
   }
 
-  renderLocationImage = () => {
-    const locationName = _get(this.props, "scene.location.name")
+  const renderLocationImage = () => {
+    const locationName = _get(props, "scene.location.name")
     const locationImage = Images.all[locationName]
 
     return (
@@ -102,7 +103,7 @@ class FrameViewer extends Component {
     )
   }
 
-  renderBackground = () => {
+  const renderBackground = () => {
     const backgroundImageHill = Images.backgrounds["hill01"]
     const brokenMonitor01 = Images.backgrounds["brokenMonitor01"]
 
@@ -126,7 +127,7 @@ class FrameViewer extends Component {
     )
   }
 
-  renderCritters = ({ critters, className }) => {
+  const renderCritters = ({ critters, className }) => {
     const filteredCritters =
       critters.filter((item) => {
         return !Constants.posableCharacters.includes(item.name)
@@ -143,8 +144,8 @@ class FrameViewer extends Component {
     })
   }
 
-  renderPosableCritters = () => {
-    const { frame } = this.props
+  const renderPosableCritters = () => {
+    const { frame } = props
     const { faces = [] } = frame
 
     if (!frame) return null
@@ -158,7 +159,7 @@ class FrameViewer extends Component {
 
     const critterNames = critters.map((item) => item.name)
     return critterNames.map((character, index) => {
-      const mood = this.getMood({ name: character, faces })
+      const mood = getMood({ name: character, faces })
 
       return (
         <div className={`${css.characterContainer2}`} key={index}>
@@ -173,26 +174,14 @@ class FrameViewer extends Component {
     })
   }
 
-  // nextButtonRow = () => {
-  //   return (
-  //     <div className={css.nextPageButtonRow}>
-  //       <Button onClick={this.onClickNext} className={css.nextButton}>
-  //         Next Page
-  //       </Button>
-  //     </div>
-  //   )
-  // }
-
-  onClickNext = () => {
+  const onClickNext = () => {
     localStateStore.incrementActiveFrameIndex()
-    // update component here.
-
-    this.props.forceUpdate()
   }
 
-  renderArrowNavigator = () => {
-    const activeScene = localStateStore.getActiveScene()
-    const { isLastFrame, updateActiveScene, openQuestPicker } = this.props
+  const renderArrowNavigator = () => {
+    const activeScene = localStorage.activeScene
+    // const activeScene = localStateStore.getActiveScene()
+    const { isLastFrame, updateActiveScene, openQuestPicker } = props
     const { isEndScene } = activeScene
 
     if (isEndScene && isLastFrame) {
@@ -207,7 +196,7 @@ class FrameViewer extends Component {
       <div className={css.arrowNavigatorBox}>
         {!isLastFrame && (
           <div className={css.nextPageButtonRow}>
-            <Button onClick={this.onClickNext} className={css.nextButton}>
+            <Button onClick={onClickNext} className={css.nextButton}>
               Next Page
             </Button>
           </div>
@@ -222,49 +211,47 @@ class FrameViewer extends Component {
     )
   }
 
-  cloneDialogs = () => {
+  const cloneDialogs = () => {
     const numPages = 3
     const dialogClones = []
     for (let cloneIndex = 0; cloneIndex < numPages; cloneIndex++) {
-      const dialog = this.renderDialog({ cloneIndex })
+      const dialog = renderDialog({ cloneIndex })
       dialogClones.push(dialog)
     }
 
     return dialogClones
   }
 
-  renderFrame = () => {
-    const { frame, scene, isLastFrame } = this.props
+  const renderFrame = () => {
+    const { frame, scene, isLastFrame } = props
     const critters1 = frame.critters1 || []
     const critters2 = frame.critters2 || []
     const sceneName = scene.location.name
 
     return (
       <div className={`${css.scenes}`}>
-        {this.renderBackground()}
-        {this.renderLocationImage()}
+        {renderBackground()}
+        {renderLocationImage()}
 
         <div className={css.relativePositionedContent}>
           <div className={css.wordsAndButtons}>
             <div className={css.sceneName}>{sceneName}</div>
-            <div className={css.wordsContainer}>{this.cloneDialogs()}</div>
-            <div className={css.buttonsContainer}>
-              {this.renderArrowNavigator()}
-            </div>
+            <div className={css.wordsContainer}>{cloneDialogs()}</div>
+            <div className={css.buttonsContainer}>{renderArrowNavigator()}</div>
           </div>
           <div className={css.imageGroupsContainer}>
             <div className={css.lizAndKatContainer}>
-              {this.renderPosableCritters()}
+              {renderPosableCritters()}
             </div>
             <div className={css.charactersContainer}>
-              {this.renderCritters({
+              {renderCritters({
                 critters: critters2,
               })}
             </div>
             <div
               className={cx(css.charactersContainer, css.charactersContainer2)}
             >
-              {this.renderCritters({
+              {renderCritters({
                 critters: critters1,
               })}
             </div>
@@ -274,19 +261,17 @@ class FrameViewer extends Component {
     )
   }
 
-  render() {
-    const { frame } = this.props
+  const { frame } = props
 
-    if (!frame) {
-      return null
-    }
-
-    return (
-      <div className={css.main}>
-        <div className={css.scenesContainer}>{this.renderFrame()}</div>
-      </div>
-    )
+  if (!frame) {
+    return null
   }
+
+  return (
+    <div className={css.main}>
+      <div className={css.scenesContainer}>{renderFrame()}</div>
+    </div>
+  )
 }
 
-export default FrameViewer
+// export default FrameViewer

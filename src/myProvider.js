@@ -12,6 +12,7 @@ export const MyProvider = (props) => {
     defaultWorldId: null,
     showBookPicker: false,
     showWorldBuilder: false,
+    world: null,
   })
 
   return (
