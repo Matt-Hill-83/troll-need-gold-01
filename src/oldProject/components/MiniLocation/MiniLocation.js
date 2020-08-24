@@ -106,9 +106,9 @@ class MiniLocation extends React.Component {
       sceneId: scene.id,
     })
 
-    const sceneTrggerConfig = QuestStatusUtils.getSceneTriggerConfigFromScene({
-      sceneId: scene.id,
-    })
+    // const sceneTrggerConfig = QuestStatusUtils.getSceneTriggerConfigFromScene({
+    //   sceneId: scene.id,
+    // })
 
     const largeLocation = false
     // const largeLocation = sceneTrggerConfig.largeImage ? css.large : ""
@@ -159,7 +159,8 @@ class MiniLocation extends React.Component {
           </div>
 
           <div className={css.characters}>
-            {this.renderCreatures({ isActive })}
+            {/* add this back after refactor */}
+            {false && this.renderCreatures({ isActive })}
           </div>
 
           <span className={css.locationTitle}>{locationName}</span>
