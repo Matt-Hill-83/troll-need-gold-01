@@ -34,11 +34,7 @@ export default function TopLevel(props) {
   const increaseNumber = () => {
     setLocalStorage((prevVal) => {
       const newVal = { ...prevVal }
-
-      console.log("prevVal", prevVal) // zzz
       newVal.number += 1
-      // const newVal = newVal.number + 1
-      // prevVal.number = newVal
       return newVal
     })
   }
