@@ -1,8 +1,7 @@
-import { Button } from "@blueprintjs/core"
-import React, { Component, useContext } from "react"
-import cx from "classnames"
-
 import _get from "lodash.get"
+import { Button } from "@blueprintjs/core"
+import cx from "classnames"
+import React, { useContext } from "react"
 
 import { myContext } from "../../../myProvider"
 import ArrowNavigator from "../ArrowNavigator/ArrowNavigator"
@@ -10,7 +9,6 @@ import Character from "../Character/Character"
 import Constants from "../../Utils/Constants/Constants"
 import Images from "../../images/images"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
-import Utils from "../../Utils/Utils"
 import WordGroup from "../WordGroup/WordGroup"
 
 import css from "./FrameViewer.module.scss"
@@ -180,7 +178,6 @@ export default function FrameViewer(props) {
 
   const renderArrowNavigator = () => {
     const activeScene = localStorage.activeScene
-    // const activeScene = localStateStore.getActiveScene()
     const { isLastFrame, updateActiveScene, openQuestPicker } = props
     const { isEndScene } = activeScene
 
@@ -273,5 +270,3 @@ export default function FrameViewer(props) {
     </div>
   )
 }
-
-// export default FrameViewer
