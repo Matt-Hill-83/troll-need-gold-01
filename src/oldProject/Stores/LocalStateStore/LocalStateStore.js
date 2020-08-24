@@ -151,60 +151,60 @@ class LocalStateStore {
     return existingPockets
   }
 
-  updateQuestState = ({ itemsInScene, charactersInScene }) => {
-    const questStatus = this.questStatus
+  // updateQuestState = ({ itemsInScene, charactersInScene }) => {
+  //   const questStatus = this.questStatus
 
-    if (!questStatus.questConfig) {
-      return {}
-    }
+  //   if (!questStatus.questConfig) {
+  //     return {}
+  //   }
 
-    const world = localStateStore.getActiveWorld()
-    const missions = QuestStatusUtils.getActiveSubQuestMissions({ world })
-    const { pockets, completedMissions } = questStatus
-    if (!questStatus.completedMissions) {
-      questStatus.completedMissions = []
-    }
+  //   const world = localStateStore.getActiveWorld()
+  //   const missions = QuestStatusUtils.getActiveSubQuestMissions({ world })
+  //   const { pockets, completedMissions } = questStatus
+  //   if (!questStatus.completedMissions) {
+  //     questStatus.completedMissions = []
+  //   }
 
-    if (!missions) {
-      return {}
-    }
+  //   if (!missions) {
+  //     return {}
+  //   }
 
-    const activeMissionIndex = questStatus.activeMissionIndex
-    const activeMission = missions[activeMissionIndex] || null
-    if (!activeMission) {
-      return {}
-    }
+  //   const activeMissionIndex = questStatus.activeMissionIndex
+  //   const activeMission = missions[activeMissionIndex] || null
+  //   if (!activeMission) {
+  //     return {}
+  //   }
 
-    const isMissionCompleted = this._completeMission({
-      charactersInScene,
-      questStatus,
-    })
+  //   const isMissionCompleted = this._completeMission({
+  //     charactersInScene,
+  //     questStatus,
+  //   })
 
-    if (isMissionCompleted) {
-      completedMissions.push(activeMissionIndex)
+  //   if (isMissionCompleted) {
+  //     completedMissions.push(activeMissionIndex)
 
-      // remove item from pocket
-      const desiredItem = this.getDesiredItem()
-      delete pockets[desiredItem.name]
-      activeMission.completed = true
-      questStatus.activeMissionIndex++
+  //     // remove item from pocket
+  //     const desiredItem = this.getDesiredItem()
+  //     delete pockets[desiredItem.name]
+  //     activeMission.completed = true
+  //     questStatus.activeMissionIndex++
 
-      const newPockets = this.convertItemToObjFormat({
-        itemsArray: activeMission.rewards,
-      })
+  //     const newPockets = this.convertItemToObjFormat({
+  //       itemsArray: activeMission.rewards,
+  //     })
 
-      this.addToPockets({ newPockets })
-      this.setQuestStatus(questStatus)
-    }
+  //     this.addToPockets({ newPockets })
+  //     this.setQuestStatus(questStatus)
+  //   }
 
-    const foundItem = this._findItem({ itemsInScene })
-    this.removeItemFromDesiredItems({ itemToRemove: foundItem })
+  //   const foundItem = this._findItem({ itemsInScene })
+  //   this.removeItemFromDesiredItems({ itemToRemove: foundItem })
 
-    return {
-      foundItem,
-      completedMission: isMissionCompleted ? activeMission : false,
-    }
-  }
+  //   return {
+  //     foundItem,
+  //     completedMission: isMissionCompleted ? activeMission : false,
+  //   }
+  // }
 
   _isDesiredItemInPocket = ({ desiredItem, pockets }) => {
     const itemsInPockets = Object.keys(pockets)

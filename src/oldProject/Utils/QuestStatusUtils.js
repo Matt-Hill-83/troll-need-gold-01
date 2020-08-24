@@ -246,14 +246,14 @@ export default class QuestStatusUtils {
     return questConfig
   }
 
-  static getActiveSubQuest = ({ world }) => {
+  static getActiveSubQuest = ({ world, questStatus }) => {
     console.log("getActiveSubQuest---------===================>>>") // zzz
     // const [localStorage, setLocalStorage] = useContext(myContext)
     // const activeWorld = localStateStore.getActiveWorld()
     const { questConfig } = world
     const { subQuests } = questConfig
 
-    const questStatus = localStateStore.getQuestStatus()
+    // const questStatus = localStateStore.getQuestStatus()
     const { activeSubQuestIndex } = questStatus
 
     return subQuests && subQuests[activeSubQuestIndex]
@@ -279,9 +279,9 @@ export default class QuestStatusUtils {
     return parentSubQuest
   }
 
-  static getActiveSubQuestMissions = ({ world }) => {
+  static getActiveSubQuestMissions = ({ world, questStatus }) => {
     console.log("world", world) // zzz
-    const activeSubQuest = this.getActiveSubQuest({ world })
+    const activeSubQuest = this.getActiveSubQuest({ world, questStatus })
     console.log("activeSubQuest", activeSubQuest) // zzz
     return (activeSubQuest && activeSubQuest.missions) || null
   }
