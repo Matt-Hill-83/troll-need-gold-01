@@ -11,21 +11,6 @@ class LocalStateStore {
   showBookPicker = false
   showWorldBuilder = false
 
-  // _defaultQuestStatus = {
-  //   visitedScenes: [],
-  //   completedMissions: [],
-  //   lockedScenes: [],
-  //   hiddenScenes: [],
-  //   cloudedScenes: [],
-  //   activeSubQuestIndex: 0,
-  //   activeMissionIndex: 0,
-  //   pockets: { gold: { amount: 0 } },
-  //   desiredItems: [],
-  //   questConfig: {
-  //     missions: [],
-  //   },
-  // }
-
   questStatus = { ...Constants.defaultQuestStatus }
 
   getQuestNames = () => this.questStatus.quests.map((item) => item.name)
@@ -53,35 +38,13 @@ class LocalStateStore {
     this.hiddenScenes = hiddenScenes
   }
 
-  getLockedScenes = () => this.questStatus.lockedScenes || []
-  setLockedScenes = (lockedScenes) => {
-    this.lockedScenes = lockedScenes
-  }
-
-  // is this obsolete?
-  setUnlockedSubQuests = (unlockedSubQuests) => {
-    this.unlockedSubQuests = unlockedSubQuests
-  }
-
-  getCompletedMissions = () => this.questStatus.completedMissions
-  setCompletedMissions = (completedMissions) => {
-    const questStatus = this.questStatus
-    questStatus.completedMissions = completedMissions
-    this.questStatus = questStatus
-  }
-
-  // addCompletedMission = (completedMission) => {
+  // getCompletedMissions = () => this.questStatus.completedMissions
+  // setCompletedMissions = (completedMissions) => {
   //   const questStatus = this.questStatus
-  //   if (!questStatus.completedMissions) {
-  //     questStatus.completedMissions = []
-  //   }
-  //   questStatus.completedMissions.push(completedMission)
+  //   questStatus.completedMissions = completedMissions
   //   this.questStatus = questStatus
   // }
 
-  ///////////////
-  ///////////////
-  ///////////////
   getVisitedScenes = () => this.questStatus.visitedScenes
   setVisitedScenes = (visitedScenes) => {
     const questStatus = this.questStatus
@@ -89,14 +52,14 @@ class LocalStateStore {
     this.questStatus = questStatus
   }
 
-  clearVisitedScenes = () => {
-    const questStatus = this.questStatus
-    if (!questStatus.visitedScenes) {
-      questStatus.visitedScenes = []
-    }
-    questStatus.visitedScenes.length = 0
-    this.questStatus = questStatus
-  }
+  // clearVisitedScenes = () => {
+  //   const questStatus = this.questStatus
+  //   if (!questStatus.visitedScenes) {
+  //     questStatus.visitedScenes = []
+  //   }
+  //   questStatus.visitedScenes.length = 0
+  //   this.questStatus = questStatus
+  // }
 
   addVisitedScenes = (sceneId) => {
     const questStatus = this.questStatus
@@ -342,11 +305,6 @@ class LocalStateStore {
     return map.newGrid5 || []
   }
 
-  getActiveWorldId = () => this.activeMapId
-  setActiveMapId = (activeMapId) => {
-    this.activeMapId = activeMapId
-  }
-
   getIsProdRelease = () => this.isProdRelease
   setIsProdRelease = (isProdRelease) => {
     this.isProdRelease = isProdRelease
@@ -372,9 +330,7 @@ class LocalStateStore {
     } else {
       newIndex = this.getActiveFrameIndex() + 1
     }
-    console.log("this.activeFrameIndex", this.activeFrameIndex) // zzz
     this.setActiveFrameIndex(newIndex)
-    console.log("this.activeFrameIndex------ 2", this.activeFrameIndex) // zzz
   }
 
   getActiveSceneId = () => this.activeSceneId
@@ -382,12 +338,15 @@ class LocalStateStore {
     this.activeSceneId = activeSceneId
   }
 
-  getActiveScene = () => {
-    const activeSceneId = this.getActiveSceneId()
-    console.log("activeSceneId", activeSceneId) // zzz
+  getActiveScene = ({ world, activeSceneId }) => {
+    if (world && activeSceneId) {
+      const scenesGrid = _get(world, "newGrid5") || []
+      const activeScene = scenesGrid.find((item) => item.id === activeSceneId)
+      return activeScene
+    }
+    const activeSceneId2 = this.getActiveSceneId()
     const scenesGrid = this.getActiveWorldGrid()
-    console.log("scenesGrid", scenesGrid) // zzz
-    const activeScene = scenesGrid.find((item) => item.id === activeSceneId)
+    const activeScene = scenesGrid.find((item) => item.id === activeSceneId2)
     return activeScene
   }
 }

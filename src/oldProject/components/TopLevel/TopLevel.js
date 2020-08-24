@@ -12,10 +12,7 @@ import Utils from "../../Utils/Utils"
 import { myContext } from "../../../myProvider.js"
 
 import css from "./TopLevel.module.scss"
-
-let useDefaultWorldId
-// useDefaultWorldId = true
-useDefaultWorldId = false
+import Constants from "../../Utils/Constants/Constants.js"
 
 const toaster = Toaster.create({
   position: Position.TOP,
@@ -25,7 +22,7 @@ const toaster = Toaster.create({
 
 export default function TopLevel(props) {
   const isProdRelease = localStateStore.getIsProdRelease()
-  const [activeScene, setActiveScene] = useState({})
+  // const [activeScene, setActiveScene] = useState({})
   const world = props.quest
 
   const [localStorage, setLocalStorage] = useContext(myContext)
@@ -38,14 +35,6 @@ export default function TopLevel(props) {
     })
   }
 
-  const setMapId = ({ mapId }) => {
-    setLocalStorage((prevVal) => {
-      const newVal = { ...prevVal }
-      newVal.activeMapId = mapId
-      return newVal
-    })
-  }
-
   const setLocalStorageProp = ({ prop, value }) => {
     setLocalStorage((prevVal) => {
       const newVal = { ...prevVal }
@@ -54,8 +43,8 @@ export default function TopLevel(props) {
     })
   }
 
+  // on mount
   useEffect(() => {
-    // on mount
     console.log("mount---------------------------->>>>>") // zzz
     console.log("props", props) // zzz
     init()
@@ -72,16 +61,15 @@ export default function TopLevel(props) {
 
   const init = () => {
     console.log("init") // zzz
-    // const mapId = localStateStore.getActiveWorldId()
     onChangeWorld({ mapId: world.id })
   }
 
   const getTerminalScene = ({ start = true }) => {
-    const map = world
-    console.log("map", map) // zzz
-    const scenesGrid = _get(map, "newGrid5") || []
-    const endScene = scenesGrid.find((item) => item.id === map.endSceneId)
-    const startScene = scenesGrid.find((item) => item.id === map.startSceneId)
+    // const map = world
+    console.log("world", world) // zzz
+    const scenesGrid = _get(world, "newGrid5") || []
+    const endScene = scenesGrid.find((item) => item.id === world.endSceneId)
+    const startScene = scenesGrid.find((item) => item.id === world.startSceneId)
     const terminalScene = start ? startScene : endScene
     const firstScene = scenesGrid[0]
     const lastScene = scenesGrid[scenesGrid.length - 1]
@@ -176,7 +164,12 @@ export default function TopLevel(props) {
     console.log("-----------------------mapId-------------", mapId)
     toaster.clear()
 
+    const questStatus = { ...Constants.defaultQuestStatus }
+    console.log("questStatus=============>>", questStatus) // zzz
+    console.log("questStatus=============>>", questStatus) // zzz
+    console.log("questStatus=============>>", questStatus) // zzz
     setLocalStorageProp({ prop: "activeMapId", value: mapId })
+    setLocalStorageProp({ prop: "questStatus", value: questStatus })
 
     if (!world) {
       return
@@ -256,7 +249,6 @@ export default function TopLevel(props) {
 
   console.log("")
   console.log("main story render")
-  // const world = localStateStore.getActiveWorld()
 
   const { className } = props
   console.log("world", world) // zzz
@@ -265,7 +257,8 @@ export default function TopLevel(props) {
     return null
   }
 
-  // const activeScene = localStateStore.getActiveScene()
+  const activeSceneId = localStorage.activeSceneId
+  const activeScene = localStateStore.getActiveScene({ world, activeSceneId })
   console.log("activeScene", activeScene) // zzz
 
   if (!activeScene) {

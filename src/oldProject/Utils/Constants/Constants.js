@@ -1,7 +1,7 @@
 import Utils from "../Utils"
 
 export default class Constants {
-  defaultQuestStatus = {
+  static defaultQuestStatus = {
     visitedScenes: [],
     completedMissions: [],
     lockedScenes: [],
