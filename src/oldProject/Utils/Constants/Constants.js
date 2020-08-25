@@ -1,19 +1,21 @@
 import Utils from "../Utils"
 
 export default class Constants {
-  static defaultQuestStatus = {
-    visitedScenes: [],
-    completedMissions: [],
-    lockedScenes: [],
-    hiddenScenes: [],
-    cloudedScenes: [],
-    activeSubQuestIndex: 0,
-    activeMissionIndex: 0,
-    pockets: { gold: { amount: 0 } },
-    desiredItems: [],
-    questConfig: {
-      missions: [],
-    },
+  static getDefaultQuestStatus = () => {
+    return {
+      visitedScenes: [],
+      completedMissions: [],
+      lockedScenes: [],
+      hiddenScenes: [],
+      cloudedScenes: [],
+      activeSubQuestIndex: 0,
+      activeMissionIndex: 0,
+      pockets: { gold: { amount: 0 } },
+      desiredItems: [],
+      questConfig: {
+        missions: [],
+      },
+    }
   }
 
   static posableCharacters = ["liz2", "kat"]

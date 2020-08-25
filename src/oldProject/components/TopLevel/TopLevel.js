@@ -52,13 +52,148 @@ export default function TopLevel(props) {
     onChangeWorld({ mapId: world.id })
   }
 
+  const convertItemToObjFormat = ({ itemsArray = [] }) => {
+    const newObj = {}
+    itemsArray.forEach((item) => {
+      const itemName = item.name
+      const value = newObj[itemName]
+      if (value) {
+        value.ammount += item.amount
+      } else {
+        newObj[itemName] = { amount: item.amount }
+      }
+    })
+
+    return newObj
+  }
+
+  const _isDesiredRecipientHere = ({ desiredRecipient, charactersInScene }) => {
+    const characterNames = charactersInScene.map((item) => item.name)
+
+    return characterNames.includes(desiredRecipient.name)
+  }
+
+  const _isDesiredItemInPocket = ({ desiredItem, pockets }) => {
+    const itemsInPockets = Object.keys(pockets)
+    return itemsInPockets.includes(desiredItem.name)
+  }
+
+  const getDesiredRecipient = ({ activeMission }) => {
+    // const activeMission = getActiveMission()
+    if (!activeMission) {
+      return null
+    }
+    return activeMission.recipient
+  }
+
+  const getDesiredItem = ({ activeMission }) => {
+    // const activeMission = getActiveMission()
+    if (!activeMission) {
+      return null
+    }
+    return activeMission.item
+  }
+
+  const removeItemFromDesiredItems = ({ itemToRemove, questStatus }) => {
+    if (!itemToRemove) {
+      return
+    }
+
+    const modifiedArray = questStatus.desiredItems.filter((item) => {
+      return item.name !== itemToRemove.name
+    })
+
+    questStatus.desiredItems.length = 0
+    questStatus.desiredItems.push(...modifiedArray)
+    return questStatus
+  }
+
+  const _findItem = ({ itemsInScene, questStatus }) => {
+    const desiredItems = questStatus.desiredItems || []
+    const { pockets = {} } = questStatus
+
+    const foundItems = []
+    desiredItems.forEach((desiredItem) => {
+      const foundItem =
+        itemsInScene.find((item) => {
+          return item.name === (desiredItem && desiredItem.name)
+        }) || null
+      if (foundItem) {
+        foundItems.push(foundItem)
+      }
+    })
+    const foundItem = foundItems[0]
+    if (!foundItem) {
+      return null
+    }
+
+    if (!foundItem.amount) {
+      foundItem.amount = 1
+    }
+
+    const itemsInPockets = pockets[foundItem.name]
+
+    if (itemsInPockets) {
+      itemsInPockets.amount = itemsInPockets.amount + foundItem.amount
+    } else {
+      pockets[foundItem.name] = { amount: foundItem.amount }
+    }
+
+    setLocalStorageProp({ prop: "questStatus", value: questStatus })
+    return foundItem
+  }
+
+  const addToPockets = ({ newPockets, questStatus }) => {
+    const existingPockets = questStatus.pockets || {}
+    for (const newPocketName in newPockets) {
+      const newPocket = newPockets[newPocketName]
+      const existingItemWithSameName = existingPockets[newPocketName]
+
+      if (existingItemWithSameName) {
+        existingItemWithSameName.amount =
+          existingItemWithSameName.amount + newPocket.amount
+      } else {
+        existingPockets[newPocketName] = {
+          amount: newPocket.amount,
+        }
+      }
+    }
+    return existingPockets
+  }
+
+  const _completeMission = ({
+    charactersInScene,
+    activeMission,
+    questStatus,
+  }) => {
+    const desiredItem = getDesiredItem({ activeMission })
+    const desiredRecipient = getDesiredRecipient({ activeMission })
+    const { pockets = {} } = questStatus
+
+    const isDesiredItemInPocket = _isDesiredItemInPocket({
+      desiredItem,
+      pockets,
+    })
+
+    const isDesiredRecipientHere = _isDesiredRecipientHere({
+      desiredRecipient,
+      charactersInScene,
+    })
+
+    return isDesiredRecipientHere && isDesiredItemInPocket
+  }
+
   const updateQuestState = ({ itemsInScene, charactersInScene }) => {
     const questStatus = localStorage.questStatus
     if (!questStatus.questConfig) {
       return {}
     }
 
-    const missions = QuestStatusUtils.getActiveSubQuestMissions({ world })
+    const missions = QuestStatusUtils.getActiveSubQuestMissions({
+      world,
+      questStatus,
+    })
+    console.log("missions", missions) // zzz
     const { pockets, completedMissions } = questStatus
     if (!questStatus.completedMissions) {
       questStatus.completedMissions = []
@@ -74,30 +209,32 @@ export default function TopLevel(props) {
       return {}
     }
 
-    const isMissionCompleted = this._completeMission({
+    const isMissionCompleted = _completeMission({
       charactersInScene,
       questStatus,
+      activeMission,
     })
 
     if (isMissionCompleted) {
       completedMissions.push(activeMissionIndex)
 
       // remove item from pocket
-      const desiredItem = this.getDesiredItem()
+      const desiredItem = getDesiredItem({ activeMission })
       delete pockets[desiredItem.name]
       activeMission.completed = true
       questStatus.activeMissionIndex++
 
-      const newPockets = this.convertItemToObjFormat({
+      const newPockets = convertItemToObjFormat({
         itemsArray: activeMission.rewards,
       })
 
-      this.addToPockets({ newPockets })
-      this.setQuestStatus(questStatus)
+      addToPockets({ newPockets, questStatus })
+      setLocalStorageProp({ prop: "questStatus", value: questStatus })
+      // setQuestStatus(questStatus)
     }
 
-    const foundItem = this._findItem({ itemsInScene })
-    this.removeItemFromDesiredItems({ itemToRemove: foundItem })
+    const foundItem = _findItem({ itemsInScene, questStatus })
+    removeItemFromDesiredItems({ itemToRemove: foundItem, questStatus })
 
     return {
       foundItem,
@@ -192,7 +329,11 @@ export default function TopLevel(props) {
       })
       toaster.show({ message, className: css.toaster, timeout: 30000 })
     }
-    QuestStatusUtils.updateSceneVisibilityProps()
+    const questStatus = localStorage.questStatus
+    QuestStatusUtils.updateSceneVisibilityProps({
+      questStatus,
+      activeWorld: world,
+    })
   }
 
   const onChangeWorld = ({ mapId }) => {
@@ -200,7 +341,7 @@ export default function TopLevel(props) {
     console.log("-----------------------mapId-------------", mapId)
     toaster.clear()
 
-    const questStatus = { ...Constants.defaultQuestStatus }
+    const questStatus = { ...Constants.getDefaultQuestStatus() }
     setLocalStorageProp({ prop: "world", value: world })
     setLocalStorageProp({ prop: "activeWorldId", value: mapId })
     setLocalStorageProp({ prop: "questStatus", value: questStatus })
@@ -212,7 +353,6 @@ export default function TopLevel(props) {
     const { questConfig } = world
 
     if (questConfig) {
-      // const questStatus = localStorage.questStatus
       console.log("localStorage", localStorage) // zzz
       console.log("questStatus", questStatus) // zzz
       const missions = QuestStatusUtils.getActiveSubQuestMissions({
@@ -225,10 +365,11 @@ export default function TopLevel(props) {
       const desiredItemsFiltered = desiredItems.filter((item) => !!item)
       const clonedQuestConfig = JSON.parse(JSON.stringify(questConfig))
 
-      const combinedPockets = localStateStore.addToPockets({
+      const combinedPockets = addToPockets({
         newPockets: clonedQuestConfig.pockets,
+        questStatus,
       })
-      const defaultQuestStatus = localStateStore.getDefaultQuestStatus()
+      const defaultQuestStatus = Constants.getDefaultQuestStatus()
 
       const newProps = {
         activeMissionIndex: 0,

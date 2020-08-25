@@ -10,13 +10,13 @@ export default class QuestStatusUtils {
   // update new scene visibility props based on rules in subQuest
 
   // Object getter functions --- START
-  static updateSceneVisibilityProps = () => {
-    const activeWorld = localStateStore.getActiveWorld()
-    const { newGrid5 } = activeWorld
+  static updateSceneVisibilityProps = ({ questStatus, activeWorld }) => {
+    // const activeWorld = localStateStore.getActiveWorld()
+    const { newGrid5, questConfig } = activeWorld
 
-    const questStatus = localStateStore.getQuestStatus()
+    // const questStatus = localStateStore.getQuestStatus()
     const { activeMissionIndex } = questStatus
-    const questConfig = this.getActiveQuestConfig()
+    // const questConfig = this.getActiveQuestConfig()
     const { subQuests } = questConfig
     if (!subQuests) {
       return
