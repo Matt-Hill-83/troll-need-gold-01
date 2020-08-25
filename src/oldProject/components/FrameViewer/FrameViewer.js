@@ -173,7 +173,12 @@ export default function FrameViewer(props) {
   }
 
   const onClickNext = () => {
-    localStateStore.incrementActiveFrameIndex()
+    setLocalStorage((prevVal) => {
+      return {
+        ...prevVal,
+        activeFrameIndex: (prevVal.activeFrameIndex += 1),
+      }
+    })
   }
 
   const renderArrowNavigator = () => {

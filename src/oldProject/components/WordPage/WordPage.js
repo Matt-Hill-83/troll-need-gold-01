@@ -9,17 +9,14 @@ import Utils from "../../Utils/Utils.js"
 import { myContext } from "../../../myProvider.js"
 
 export default function WordPage(props) {
-  // class WordPage extends React.Component {
   const [localStorage, setLocalStorage] = useContext(myContext)
 
   const { activeScene, openQuestPicker, updateActiveScene } = props
   const { activeFrameIndex } = localStorage
-  // const activeFrameIndex = localStateStore.getActiveFrameIndex()
+
   console.log("activeFrameIndex--------------WP", activeFrameIndex) // zzz
   const frameSet = activeScene.frameSet
   let frame
-
-  // const questStatus = localStateStore.getQuestStatus()
 
   // const missionToUnlockFramesAfter =
   //   _get(
