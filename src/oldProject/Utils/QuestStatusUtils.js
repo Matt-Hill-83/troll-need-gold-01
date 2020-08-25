@@ -1,22 +1,13 @@
 import localStateStore from "../Stores/LocalStateStore/LocalStateStore.js"
-// import { toJS } from "mobx"
 import _get from "lodash.get"
 import Constants from "./Constants/Constants.js"
-import Utils from "./Utils.js"
-// import { myContext } from "../../myProvider.js"
-// import { useContext } from "react"
 
 export default class QuestStatusUtils {
   // update new scene visibility props based on rules in subQuest
 
-  // Object getter functions --- START
   static updateSceneVisibilityProps = ({ questStatus, activeWorld }) => {
-    // const activeWorld = localStateStore.getActiveWorld()
     const { newGrid5, questConfig } = activeWorld
-
-    // const questStatus = localStateStore.getQuestStatus()
     const { activeMissionIndex } = questStatus
-    // const questConfig = this.getActiveQuestConfig()
     const { subQuests } = questConfig
     if (!subQuests) {
       return
@@ -26,6 +17,7 @@ export default class QuestStatusUtils {
     newGrid5.forEach((scene) => {
       const sceneTriggers = this.getSceneTriggersFromScene({
         sceneId: scene.id,
+        questConfig,
       })
 
       const parentSubQuestIndexFromScene = this.getParentSubQuestIndexFromScene(
@@ -41,6 +33,7 @@ export default class QuestStatusUtils {
       const accumulatedPropertyValuesForSubQuest = this.calcAccumulatedPropertyValues(
         {
           triggers: subQuestTriggers,
+          questStatus,
           scene,
           activeMissionIndex,
         }
@@ -49,6 +42,7 @@ export default class QuestStatusUtils {
       const accumulatedPropertyValuesForScene = this.calcAccumulatedPropertyValues(
         {
           triggers: sceneTriggers,
+          questStatus,
           scene,
           activeMissionIndex,
         }
@@ -74,7 +68,11 @@ export default class QuestStatusUtils {
     })
   }
 
-  static calcAccumulatedPropertyValues = ({ triggers, activeMissionIndex }) => {
+  static calcAccumulatedPropertyValues = ({
+    triggers,
+    activeMissionIndex,
+    questStatus,
+  }) => {
     const triggerTypes = Constants.triggers.triggerTypes
 
     //  The accumulators store the cumulative value of the props while the evaluators run.
@@ -142,7 +140,7 @@ export default class QuestStatusUtils {
       })
     }
     if (triggers && triggers.length > 0) {
-      const completedMissions = localStateStore.getCompletedMissions()
+      const completedMissions = questStatus.completedMissions
       const lockScene = () => (propValueAccumulators.sceneIsLocked.value = true)
       const unLockScene = () =>
         (propValueAccumulators.sceneIsLocked.value = false)
@@ -286,8 +284,8 @@ export default class QuestStatusUtils {
     return (activeSubQuest && activeSubQuest.missions) || null
   }
 
-  static getSceneTriggerConfigFromScene = ({ sceneId }) => {
-    const questConfig = this.getActiveQuestConfig()
+  static getSceneTriggerConfigFromScene = ({ sceneId, questConfig }) => {
+    // const questConfig = this.getActiveQuestConfig()
     const allScenes = []
 
     questConfig.subQuests &&
@@ -299,8 +297,11 @@ export default class QuestStatusUtils {
     return foundScene || {}
   }
 
-  static getSceneTriggersFromScene = ({ sceneId }) => {
-    const foundScene = this.getSceneTriggerConfigFromScene({ sceneId })
+  static getSceneTriggersFromScene = ({ sceneId, questConfig }) => {
+    const foundScene = this.getSceneTriggerConfigFromScene({
+      sceneId,
+      questConfig,
+    })
     return (foundScene && foundScene.sceneTriggers) || []
   }
 

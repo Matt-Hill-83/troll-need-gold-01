@@ -185,7 +185,8 @@ export default function TopLevel(props) {
 
   const updateQuestState = ({ itemsInScene, charactersInScene }) => {
     const questStatus = localStorage.questStatus
-    if (!questStatus.questConfig) {
+    const questConfig = localStorage.questConfig
+    if (!questConfig) {
       return {}
     }
 
@@ -257,16 +258,20 @@ export default function TopLevel(props) {
     const startScene = getTerminalScene({})
     if (!startScene) return
 
-    localStateStore.setVisitedScenes([])
+    const questStatus = { ...localStorage.questStatus }
+    questStatus.visitedScenes = []
+    // questStatus.localStateStore.setVisitedScenes([])
 
+    setLocalStorageProp({ prop: "questStatus", value: questStatus })
     setLocalStorageProp({ prop: "activeSceneId", value: startScene.id })
     setLocalStorageProp({ prop: "activeScene", value: startScene })
   }
 
   const updateActiveScene = ({ sceneId }) => {
-    localStateStore.setActiveSceneId(sceneId)
-
-    localStateStore.setActiveFrameIndex(0)
+    // localStateStore.setActiveSceneId(sceneId)
+    // localStateStore.setActiveFrameIndex(0)
+    setLocalStorageProp({ prop: "activeFrameIndex", value: 0 })
+    setLocalStorageProp({ prop: "activeSceneId", value: sceneId })
     localStateStore.addVisitedScenes(sceneId)
 
     const questStatus = localStateStore.getQuestStatus()

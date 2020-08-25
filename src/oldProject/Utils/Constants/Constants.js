@@ -12,9 +12,6 @@ export default class Constants {
       activeMissionIndex: 0,
       pockets: { gold: { amount: 0 } },
       desiredItems: [],
-      questConfig: {
-        missions: [],
-      },
     }
   }
 

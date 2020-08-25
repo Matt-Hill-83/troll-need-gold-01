@@ -70,9 +70,9 @@ class LocalStateStore {
     this.questStatus = questStatus
   }
 
-  isVisitedScene = (sceneId) => {
-    return this.questStatus.visitedScenes.some((scene) => scene === sceneId)
-  }
+  // isVisitedScene = (sceneId) => {
+  //   return this.questStatus.visitedScenes.some((scene) => scene === sceneId)
+  // }
 
   convertItemToObjFormat = ({ itemsArray = [] }) => {
     const newObj = {}

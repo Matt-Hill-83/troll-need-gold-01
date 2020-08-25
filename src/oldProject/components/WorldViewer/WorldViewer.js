@@ -51,6 +51,7 @@ export default function WorldViewer(props) {
     let onClick = () => {}
     if (scene.location.name !== "blank") {
       onClick = () => {
+        console.log("onClick") // zzz
         updateActiveScene({
           sceneId: scene.id,
         })
@@ -65,6 +66,7 @@ export default function WorldViewer(props) {
           scene={scene}
           world={world}
           isActive={isActive}
+          onClick={onClick}
         />
       </div>
     )

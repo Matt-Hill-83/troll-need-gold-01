@@ -13,7 +13,7 @@ import { myContext } from "../../../myProvider.js"
 export default function MiniLocation(props) {
   const { scene, isActive, className, id, world } = props
   const [localStorage, setLocalStorage] = useContext(myContext)
-  // class MiniLocation extends React.Component {
+
   const renderCreatures = ({ isActive }) => {
     if (!isActive) {
       return null
@@ -47,7 +47,10 @@ export default function MiniLocation(props) {
   }
 
   const { coordinates, isStartScene, onClick } = scene
-  const isVisitedScene = localStateStore.isVisitedScene(scene.id)
+  const isVisitedScene = localStorage.questStatus.visitedScenes.some(
+    (item) => item === scene.id
+  )
+  // const isVisitedScene = localStateStore.isVisitedScene(scene.id)
   const locationName = scene.location.name
 
   const showNothing = QuestStatusUtils.isSceneHidden({ sceneId: scene.id })
