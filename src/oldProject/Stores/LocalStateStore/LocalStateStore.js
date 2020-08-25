@@ -61,14 +61,14 @@ class LocalStateStore {
   //   this.questStatus = questStatus
   // }
 
-  addVisitedScenes = (sceneId) => {
-    const questStatus = this.questStatus
-    if (!questStatus.visitedScenes) {
-      questStatus.visitedScenes = []
-    }
-    questStatus.visitedScenes.push(sceneId)
-    this.questStatus = questStatus
-  }
+  // addVisitedScenes = (sceneId) => {
+  //   const questStatus = this.questStatus
+  //   if (!questStatus.visitedScenes) {
+  //     questStatus.visitedScenes = []
+  //   }
+  //   questStatus.visitedScenes.push(sceneId)
+  //   this.questStatus = questStatus
+  // }
 
   // isVisitedScene = (sceneId) => {
   //   return this.questStatus.visitedScenes.some((scene) => scene === sceneId)

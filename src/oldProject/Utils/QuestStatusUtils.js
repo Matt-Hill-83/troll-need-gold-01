@@ -108,7 +108,7 @@ export default class QuestStatusUtils {
 
     const evaluateCompletedMission = ({
       completedMission,
-      completedMissions,
+      completedMissions = [],
       trueFunc = () => {},
     }) => {
       if (
