@@ -255,6 +255,7 @@ export default function TopLevel(props) {
   }
 
   const initWorld = async () => {
+    console.log("initWorld") // zzz
     const startScene = getTerminalScene({})
     if (!startScene) return
 
@@ -267,10 +268,20 @@ export default function TopLevel(props) {
   }
 
   const updateActiveScene = ({ sceneId }) => {
+    console.log("sceneId", sceneId) // zzz
+    console.log("updateActiveScene") // zzz
     setLocalStorageProp({ prop: "activeFrameIndex", value: 0 })
     setLocalStorageProp({ prop: "activeSceneId", value: sceneId })
+    const scenesGrid = _get(world, "newGrid5") || []
+    const activeScene = scenesGrid.find((item) => item.id === sceneId)
+    console.log("activeScene", activeScene) // zzz
+
+    setLocalStorageProp({ prop: "activeScene", value: activeScene })
+
     const questStatus = { ...localStorage.questStatus }
     questStatus.visitedScenes.push(sceneId)
+
+    setLocalStorageProp({ prop: "questStatus", value: questStatus })
 
     const { hideMissionConsole } = questStatus
 
@@ -280,8 +291,10 @@ export default function TopLevel(props) {
   }
 
   const updateQuestStatus = () => {
+    console.log("updateQuestStatus") // zzz
     toaster.clear()
     const activeScene = localStorage.activeScene
+    console.log("activeScene", activeScene) // zzz
     const { location } = activeScene
 
     const activeFrame = localStateStore.getFirstFrame({ activeScene }) || {}
@@ -445,7 +458,7 @@ export default function TopLevel(props) {
   if (!activeScene) {
     return null
   }
-
+  console.log("localStorage", localStorage) // zzz
   return (
     <div className={`${css.main} ${className}`}>
       <div>
