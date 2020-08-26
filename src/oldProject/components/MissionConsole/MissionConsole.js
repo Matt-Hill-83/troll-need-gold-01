@@ -17,8 +17,8 @@ export default function MissionConsole(props) {
   const [localStorage, setLocalStorage] = useContext(myContext)
 
   const renderPocketItems = ({ goldOnly = false }) => {
-    const questStatus = localStateStore.getQuestStatus()
-    const items = _get(questStatus, "pockets") || null
+    const { questStatus } = localStorage
+    const items = _get(questStatus, "pockets") || []
 
     const itemKeys = Object.keys(items)
     if (itemKeys.length === 0 || !items) {
