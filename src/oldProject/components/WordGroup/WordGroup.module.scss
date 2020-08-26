@@ -2,7 +2,7 @@
   .narrative {
     display: flex;
     flex-direction: column;
-
+    line-height: 1.4;
     margin: auto;
 
     .sentence {
@@ -10,13 +10,12 @@
       align-items: center;
 
       font-size: var(--story-font-size);
-      height: calc(1 * var(--story-font-size));
+      // height: calc(1 * var(--story-font-size));
 
       flex-wrap: wrap;
 
       padding-right: 0.5rem;
       padding-left: 0.5rem;
-      // border: 4px solid green !important;
 
       .sentenceWord {
         border: 1px solid transparent !important;
@@ -35,10 +34,6 @@
         outline: none;
         cursor: wait;
       }
-    }
-
-    .sentence:nth-of-type(3n) {
-      // margin-bottom: 24px;
     }
   }
 }
