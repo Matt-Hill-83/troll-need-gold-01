@@ -1,6 +1,4 @@
 import _get from "lodash.get"
-import { maps, books } from "../Stores/InitStores.js"
-import Constants from "./Constants/Constants.js"
 
 export default class TopLevelUtils {
   static convertItemToObjFormat = ({ itemsArray = [] }) => {
