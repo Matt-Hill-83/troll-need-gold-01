@@ -2,11 +2,9 @@ import React, { useContext } from "react"
 import _get from "lodash.get"
 
 import FrameViewer from "../FrameViewer/FrameViewer.js"
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
+import { myContext } from "../../../myProvider.js"
 
 import css from "./WordPage.module.scss"
-import Utils from "../../Utils/Utils.js"
-import { myContext } from "../../../myProvider.js"
 
 export default function WordPage(props) {
   const [localStorage, setLocalStorage] = useContext(myContext)

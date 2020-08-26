@@ -84,18 +84,18 @@
 }
 
 .mapScroller {
-  position: absolute;
-  overflow: hidden;
+  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: center;
   border: 1px solid #656565 !important;
+  overflow: hidden;
   border-radius: 10px;
   background: #efddef;
   box-shadow: 6px 2px 10px 6px rgba(0, 0, 0, 0.64);
   height: 45vh;
-  top: 2vh;
-  left: 5.4vh;
+  top: 12vh;
+  left: 50vw;
   right: 1vw;
 }
 

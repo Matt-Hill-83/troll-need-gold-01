@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react"
 import _get from "lodash.get"
 import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core"
-import { Link } from "react-router-dom"
 
 import { myContext } from "../../../myProvider.js"
 import BookPicker from "../BookPicker/BookPicker.js"
@@ -9,7 +8,6 @@ import Constants from "../../Utils/Constants/Constants.js"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 import StoryMode from "../StoryMode/StoryMode"
-import Utils from "../../Utils/Utils"
 
 import css from "./TopLevel.module.scss"
 
@@ -79,7 +77,6 @@ export default function TopLevel(props) {
   }
 
   const getDesiredRecipient = ({ activeMission }) => {
-    // const activeMission = getActiveMission()
     if (!activeMission) {
       return null
     }
@@ -87,7 +84,6 @@ export default function TopLevel(props) {
   }
 
   const getDesiredItem = ({ activeMission }) => {
-    // const activeMission = getActiveMission()
     if (!activeMission) {
       return null
     }

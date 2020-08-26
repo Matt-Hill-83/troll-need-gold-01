@@ -165,18 +165,16 @@ export default class Utils {
   }
 
   static getBlankScene = ({ props }) => {
-    const dummyFrame = WorldBuilderUtils.getNewFrame({ props: {} })
     const id = Utils.generateUuid()
 
     const blankScene = {
-      isStartScene: false,
-      isEndScene: false,
+      // isStartScene: false,
+      // isEndScene: false,
       location: { name: "blank" },
-      characters: [],
-      critters1: [],
-      critters2: [],
-      // characters: [{ name: "kat" }, { name: "liz2" }],
-      frameSet: { frames: [dummyFrame] },
+      // characters: [],
+      // critters1: [],
+      // critters2: [],
+      // frameSet: { frames: [] },
       id,
     }
 
