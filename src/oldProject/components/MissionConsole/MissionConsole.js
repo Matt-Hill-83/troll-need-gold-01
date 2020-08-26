@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { Component, useContext } from "react"
 
 import cx from "classnames"
 
@@ -9,11 +9,14 @@ import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 import ImageDisplay from "../ImageDisplay/ImageDisplay"
 import MiniTable2 from "../MiniTable2/MiniTable2"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils"
+import { myContext } from "../../../myProvider"
 
-class MissionConsole extends Component {
-  state = {}
+export default function MissionConsole(props) {
+  console.log("MissionConsole") // zzz
+  console.log("props", props) // zzz
+  const [localStorage, setLocalStorage] = useContext(myContext)
 
-  renderPocketItems = ({ goldOnly = false }) => {
+  const renderPocketItems = ({ goldOnly = false }) => {
     const questStatus = localStateStore.getQuestStatus()
     const items = _get(questStatus, "pockets") || null
 
@@ -51,74 +54,75 @@ class MissionConsole extends Component {
     return <div className={css.items}>{renderedItems}</div>
   }
 
-  render = () => {
-    const { showHeader = false } = this.props
-    let missions
+  const { showHeader = false } = props
+  let missions
 
-    const questStatus = localStateStore.getQuestStatus()
+  const questStatus = localStateStore.getQuestStatus()
 
-    if (!questStatus.questConfig) {
-      return null
-    }
+  if (!questStatus.questConfig) {
+    return null
+  }
 
-    const { completedMissions } = questStatus
-    const world = localStateStore.getActiveWorld()
-    const newMissions = QuestStatusUtils.getActiveSubQuestMissions({ world })
+  const { completedMissions } = questStatus
+  const world = localStorage.world
 
-    missions = newMissions
+  const newMissions = QuestStatusUtils.getActiveSubQuestMissions({
+    world,
+    questStatus,
+  })
 
-    const { activeMissionIndex } = questStatus
-    const columnNames = [
-      "Mission",
-      "Bring the...",
-      "to the...",
-      "Gold",
-      "Complete",
-    ]
+  missions = newMissions
 
-    if (!missions || missions.length === 0) {
-      return null
-    }
-    const tableData = missions.map((mission, missionIndex) => {
-      const { name, item = {}, recipient = "", rewards = [] } = mission
+  const { activeMissionIndex } = questStatus
+  const columnNames = [
+    "Mission",
+    "Bring the...",
+    "to the...",
+    "Gold",
+    "Complete",
+  ]
 
-      const rewardString = `${_get(rewards, "[0]amount")}`
+  if (!missions || missions.length === 0) {
+    return null
+  }
 
-      const completed = completedMissions.includes(missionIndex)
+  const tableData = missions.map((mission, missionIndex) => {
+    const { name, item = {}, recipient = "", rewards = [] } = mission
 
-      return [name, item.name, recipient.name, rewardString, completed]
-    })
+    const rewardString = `${_get(rewards, "[0]amount")}`
 
-    return (
-      <div className={css.main}>
-        activeMissionIndex: {activeMissionIndex}
-        {showHeader && (
-          <div className={css.header}>
-            <div className={css.title}>Your Stuff</div>
+    const completed = completedMissions.includes(missionIndex)
+
+    return [name, item.name, recipient.name, rewardString, completed]
+  })
+
+  return (
+    <div className={css.main}>
+      activeMissionIndex: {activeMissionIndex}
+      {showHeader && (
+        <div className={css.header}>
+          <div className={css.title}>Your Stuff</div>
+        </div>
+      )}
+      <div className={css.body}>
+        <div className={css.row}>
+          <div className={css.left}>
+            <MiniTable2 columnNames={columnNames} tableData={tableData} />
           </div>
-        )}
-        <div className={css.body}>
-          <div className={css.row}>
-            <div className={css.left}>
-              <MiniTable2 columnNames={columnNames} tableData={tableData} />
-            </div>
-            <div className={css.right}>
-              <div className={css.itemsContainerBox}>
-                <div className={css.itemsContainer}>
-                  <div className={css.itemContainerTitle}>Your Pockets</div>
-                  {this.renderPocketItems({ goldOnly: false })}
-                </div>
-                <div className={css.itemsContainer}>
-                  <div className={css.itemContainerTitle}>Prizes</div>
-                  {this.renderPocketItems({ goldOnly: true })}
-                </div>
+          <div className={css.right}>
+            <div className={css.itemsContainerBox}>
+              <div className={css.itemsContainer}>
+                <div className={css.itemContainerTitle}>Your Pockets</div>
+                {renderPocketItems({ goldOnly: false })}
+              </div>
+              <div className={css.itemsContainer}>
+                <div className={css.itemContainerTitle}>Prizes</div>
+                {renderPocketItems({ goldOnly: true })}
               </div>
             </div>
           </div>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
-
-export default MissionConsole

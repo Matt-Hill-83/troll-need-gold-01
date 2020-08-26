@@ -59,8 +59,9 @@ export default class QuestStatusUtils {
       propertyNames.forEach((propertyName) => {
         const value = accumulatedPropertyValuesCombined[propertyName]
 
-        this.updateProperty({
+        questStatus = this.updateProperty({
           propertyName,
+          questStatus,
           sceneId: scene.id,
           value,
         })
@@ -249,7 +250,6 @@ export default class QuestStatusUtils {
     const { questConfig } = world
     const { subQuests } = questConfig
 
-    // const questStatus = localStateStore.getQuestStatus()
     const { activeSubQuestIndex } = questStatus
 
     return subQuests && subQuests[activeSubQuestIndex]
@@ -319,8 +319,7 @@ export default class QuestStatusUtils {
   // Object getter functions --- END
 
   // Data Manupulation --- START
-  static updateProperty = ({ sceneId, propertyName, value }) => {
-    const questStatus = localStateStore.getQuestStatus()
+  static updateProperty = ({ questStatus, sceneId, propertyName, value }) => {
     if (!questStatus[propertyName]) {
       questStatus[propertyName] = []
     }
@@ -335,7 +334,7 @@ export default class QuestStatusUtils {
         (item) => item !== sceneId
       )
     }
-    localStateStore.setQuestStatus(questStatus)
+    return questStatus
   }
 
   static isSceneLocked = ({ sceneId }) => {

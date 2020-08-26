@@ -38,41 +38,12 @@ class LocalStateStore {
     this.hiddenScenes = hiddenScenes
   }
 
-  // getCompletedMissions = () => this.questStatus.completedMissions
-  // setCompletedMissions = (completedMissions) => {
-  //   const questStatus = this.questStatus
-  //   questStatus.completedMissions = completedMissions
-  //   this.questStatus = questStatus
-  // }
-
   getVisitedScenes = () => this.questStatus.visitedScenes
   setVisitedScenes = (visitedScenes) => {
     const questStatus = this.questStatus
     questStatus.visitedScenes = visitedScenes
     this.questStatus = questStatus
   }
-
-  // clearVisitedScenes = () => {
-  //   const questStatus = this.questStatus
-  //   if (!questStatus.visitedScenes) {
-  //     questStatus.visitedScenes = []
-  //   }
-  //   questStatus.visitedScenes.length = 0
-  //   this.questStatus = questStatus
-  // }
-
-  // addVisitedScenes = (sceneId) => {
-  //   const questStatus = this.questStatus
-  //   if (!questStatus.visitedScenes) {
-  //     questStatus.visitedScenes = []
-  //   }
-  //   questStatus.visitedScenes.push(sceneId)
-  //   this.questStatus = questStatus
-  // }
-
-  // isVisitedScene = (sceneId) => {
-  //   return this.questStatus.visitedScenes.some((scene) => scene === sceneId)
-  // }
 
   convertItemToObjFormat = ({ itemsArray = [] }) => {
     const newObj = {}
