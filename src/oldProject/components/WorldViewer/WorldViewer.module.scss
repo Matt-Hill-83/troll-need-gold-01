@@ -37,7 +37,6 @@
   justify-self: center;
   right: 4%;
   top: 23%;
-  // z-index: 1;
 }
 
 .bookCoil01 {
@@ -107,11 +106,6 @@
   background: none;
   border: none;
   overflow: auto;
-  // padding: 1vh 27vh;
-}
-
-.innerMapScroller::-webkit-scrollbar {
-  // -webkit-appearance: none;
 }
 
 .innerMapScroller::-webkit-scrollbar:vertical {
@@ -160,5 +154,4 @@
 }
 
 .minilocationWrapper {
-  // position: relative;
 }

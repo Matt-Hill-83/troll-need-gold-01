@@ -1,8 +1,6 @@
 import _get from "lodash.get"
 import { maps, books } from "../Stores/InitStores.js"
 import Constants from "./Constants/Constants.js"
-import localStateStore from "../Stores/LocalStateStore/LocalStateStore.js"
-import WorldBuilderUtils from "./WorldBuilderUtils.js"
 export default class Utils {
   static addArrayElement = ({ newElement, before, index, array }) => {
     const adder = before === true ? 0 : 1
@@ -168,13 +166,7 @@ export default class Utils {
     const id = Utils.generateUuid()
 
     const blankScene = {
-      // isStartScene: false,
-      // isEndScene: false,
       location: { name: "blank" },
-      // characters: [],
-      // critters1: [],
-      // critters2: [],
-      // frameSet: { frames: [] },
       id,
     }
 
