@@ -246,8 +246,6 @@ export default class QuestStatusUtils {
 
   static getActiveSubQuest = ({ world, questStatus }) => {
     console.log("getActiveSubQuest---------===================>>>") // zzz
-    // const [localStorage, setLocalStorage] = useContext(myContext)
-    // const activeWorld = localStateStore.getActiveWorld()
     const { questConfig } = world
     const { subQuests } = questConfig
 
@@ -285,7 +283,6 @@ export default class QuestStatusUtils {
   }
 
   static getSceneTriggerConfigFromScene = ({ sceneId, questConfig }) => {
-    // const questConfig = this.getActiveQuestConfig()
     const allScenes = []
 
     questConfig.subQuests &&
