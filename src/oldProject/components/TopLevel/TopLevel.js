@@ -8,6 +8,7 @@ import Constants from "../../Utils/Constants/Constants.js"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 import StoryMode from "../StoryMode/StoryMode"
+import TopLevelUtils from "../../Utils/TopLevelUtils.js"
 
 import css from "./TopLevel.module.scss"
 
@@ -50,38 +51,17 @@ export default function TopLevel(props) {
     onChangeWorld({ mapId: world.id })
   }
 
-  const convertItemToObjFormat = ({ itemsArray = [] }) => {
-    const newObj = {}
-    itemsArray.forEach((item) => {
-      const itemName = item.name
-      const value = newObj[itemName]
-      if (value) {
-        value.ammount += item.amount
-      } else {
-        newObj[itemName] = { amount: item.amount }
-      }
-    })
+  // const _isDesiredItemInPocket = ({ desiredItem, pockets }) => {
+  //   const itemsInPockets = Object.keys(pockets)
+  //   return itemsInPockets.includes(desiredItem.name)
+  // }
 
-    return newObj
-  }
-
-  const _isDesiredRecipientHere = ({ desiredRecipient, charactersInScene }) => {
-    const characterNames = charactersInScene.map((item) => item.name)
-
-    return characterNames.includes(desiredRecipient.name)
-  }
-
-  const _isDesiredItemInPocket = ({ desiredItem, pockets }) => {
-    const itemsInPockets = Object.keys(pockets)
-    return itemsInPockets.includes(desiredItem.name)
-  }
-
-  const getDesiredRecipient = ({ activeMission }) => {
-    if (!activeMission) {
-      return null
-    }
-    return activeMission.recipient
-  }
+  // const getDesiredRecipient = ({ activeMission }) => {
+  //   if (!activeMission) {
+  //     return null
+  //   }
+  //   return activeMission.recipient
+  // }
 
   const getDesiredItem = ({ activeMission }) => {
     if (!activeMission) {
@@ -90,19 +70,19 @@ export default function TopLevel(props) {
     return activeMission.item
   }
 
-  const removeItemFromDesiredItems = ({ itemToRemove, questStatus }) => {
-    if (!itemToRemove) {
-      return
-    }
+  // const removeItemFromDesiredItems = ({ itemToRemove, questStatus }) => {
+  //   if (!itemToRemove) {
+  //     return
+  //   }
 
-    const modifiedArray = questStatus.desiredItems.filter((item) => {
-      return item.name !== itemToRemove.name
-    })
+  //   const modifiedArray = questStatus.desiredItems.filter((item) => {
+  //     return item.name !== itemToRemove.name
+  //   })
 
-    questStatus.desiredItems.length = 0
-    questStatus.desiredItems.push(...modifiedArray)
-    return questStatus
-  }
+  //   questStatus.desiredItems.length = 0
+  //   questStatus.desiredItems.push(...modifiedArray)
+  //   return questStatus
+  // }
 
   const _findItem = ({ itemsInScene, questStatus }) => {
     const desiredItems = questStatus.desiredItems || []
@@ -139,45 +119,45 @@ export default function TopLevel(props) {
     return foundItem
   }
 
-  const addToPockets = ({ newPockets, questStatus }) => {
-    const existingPockets = questStatus.pockets || {}
-    for (const newPocketName in newPockets) {
-      const newPocket = newPockets[newPocketName]
-      const existingItemWithSameName = existingPockets[newPocketName]
+  // const addToPockets = ({ newPockets, questStatus }) => {
+  //   const existingPockets = questStatus.pockets || {}
+  //   for (const newPocketName in newPockets) {
+  //     const newPocket = newPockets[newPocketName]
+  //     const existingItemWithSameName = existingPockets[newPocketName]
 
-      if (existingItemWithSameName) {
-        existingItemWithSameName.amount =
-          existingItemWithSameName.amount + newPocket.amount
-      } else {
-        existingPockets[newPocketName] = {
-          amount: newPocket.amount,
-        }
-      }
-    }
-    return existingPockets
-  }
+  //     if (existingItemWithSameName) {
+  //       existingItemWithSameName.amount =
+  //         existingItemWithSameName.amount + newPocket.amount
+  //     } else {
+  //       existingPockets[newPocketName] = {
+  //         amount: newPocket.amount,
+  //       }
+  //     }
+  //   }
+  //   return existingPockets
+  // }
 
-  const _completeMission = ({
-    charactersInScene,
-    activeMission,
-    questStatus,
-  }) => {
-    const desiredItem = getDesiredItem({ activeMission })
-    const desiredRecipient = getDesiredRecipient({ activeMission })
-    const { pockets = {} } = questStatus
+  // const _completeMission = ({
+  //   charactersInScene,
+  //   activeMission,
+  //   questStatus,
+  // }) => {
+  //   const desiredItem = getDesiredItem({ activeMission })
+  //   const desiredRecipient = getDesiredRecipient({ activeMission })
+  //   const { pockets = {} } = questStatus
 
-    const isDesiredItemInPocket = _isDesiredItemInPocket({
-      desiredItem,
-      pockets,
-    })
+  //   const isDesiredItemInPocket = isDesiredItemInPocket({
+  //     desiredItem,
+  //     pockets,
+  //   })
 
-    const isDesiredRecipientHere = _isDesiredRecipientHere({
-      desiredRecipient,
-      charactersInScene,
-    })
+  //   const isDesiredRecipientHere = TopLevelUtils.isDesiredRecipientHere({
+  //     desiredRecipient,
+  //     charactersInScene,
+  //   })
 
-    return isDesiredRecipientHere && isDesiredItemInPocket
-  }
+  //   return isDesiredRecipientHere && isDesiredItemInPocket
+  // }
 
   const updateQuestState = ({ itemsInScene, charactersInScene }) => {
     const questStatus = localStorage.questStatus
@@ -206,7 +186,7 @@ export default function TopLevel(props) {
       return {}
     }
 
-    const isMissionCompleted = _completeMission({
+    const isMissionCompleted = TopLevelUtils.completeMission({
       charactersInScene,
       questStatus,
       activeMission,
@@ -221,17 +201,20 @@ export default function TopLevel(props) {
       activeMission.completed = true
       questStatus.activeMissionIndex++
 
-      const newPockets = convertItemToObjFormat({
+      const newPockets = TopLevelUtils.convertItemToObjFormat({
         itemsArray: activeMission.rewards,
       })
 
-      addToPockets({ newPockets, questStatus })
+      TopLevelUtils.addToPockets({ newPockets, questStatus })
       setLocalStorageProp({ prop: "questStatus", value: questStatus })
       // setQuestStatus(questStatus)
     }
 
     const foundItem = _findItem({ itemsInScene, questStatus })
-    removeItemFromDesiredItems({ itemToRemove: foundItem, questStatus })
+    TopLevelUtils.removeItemFromDesiredItems({
+      itemToRemove: foundItem,
+      questStatus,
+    })
 
     return {
       foundItem,
@@ -376,7 +359,7 @@ export default function TopLevel(props) {
       const desiredItemsFiltered = desiredItems.filter((item) => !!item)
       const clonedQuestConfig = JSON.parse(JSON.stringify(questConfig))
 
-      const combinedPockets = addToPockets({
+      const combinedPockets = TopLevelUtils.addToPockets({
         newPockets: clonedQuestConfig.pockets,
         questStatus,
       })
@@ -397,15 +380,12 @@ export default function TopLevel(props) {
         hideMissionConsole: true,
       })
     }
-    // uncomment this after building feature
     localStateStore.setShowBookPicker(false)
 
-    // setState({ showQuestPicker: false })
     initWorld()
   }
 
   const toggleBookPicker = () => {
-    // setState({ showQuestPicker: false })
     const show = localStateStore.getShowBookPicker()
     localStateStore.setShowBookPicker(!show)
   }
@@ -415,12 +395,7 @@ export default function TopLevel(props) {
   }
 
   const renderBookPicker = () => {
-    return (
-      <BookPicker
-        closeQuestPicker={closeBookPicker}
-        // onChangeWorld={onChangeWorld}
-      />
-    )
+    return <BookPicker closeQuestPicker={closeBookPicker} />
   }
 
   const renderButtons = () => {
