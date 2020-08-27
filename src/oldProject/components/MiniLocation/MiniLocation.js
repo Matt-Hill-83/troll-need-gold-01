@@ -14,7 +14,6 @@ export default function MiniLocation(props) {
   const { scene, isActive, className, id, world } = props
   const [localStorage, setLocalStorage] = useContext(myContext)
   const { questStatus } = localStorage
-  console.log("localStorage", localStorage) // zzz
 
   const renderCreatures = ({ isActive }) => {
     if (!isActive) {
@@ -116,8 +115,6 @@ export default function MiniLocation(props) {
   const rockImageVertical = Images.backgrounds["rock02Vertical"]
   const showBottomPath = neighbors[Constants.neighborPositionsEnum.bottom]
   const showRightPath = neighbors[Constants.neighborPositionsEnum.right]
-
-  // const { world } = props
 
   const backgroundColor = QuestStatusUtils.getSubQuestColor({
     world,

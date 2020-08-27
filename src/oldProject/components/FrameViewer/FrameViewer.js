@@ -8,7 +8,6 @@ import ArrowNavigator from "../ArrowNavigator/ArrowNavigator"
 import Character from "../Character/Character"
 import Constants from "../../Utils/Constants/Constants"
 import Images from "../../images/images"
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 import WordGroup from "../WordGroup/WordGroup"
 
 import css from "./FrameViewer.module.scss"
@@ -20,20 +19,28 @@ export default function FrameViewer(props) {
     const { frame, scene } = props
     const dialog = (frame && frame.dialog) || []
     const allCharactersInScene = {}
+
     scene.frameSet &&
       scene.frameSet.frames &&
       scene.frameSet.frames.forEach((frame) => {
         const test = [...frame.critters1, ...frame.critters2]
         test.forEach((char) => {
+          console.log("char", char) // zzz
+          console.log("char.id", char.id) // zzz
           allCharactersInScene[char.id] = char
         })
       })
 
     const allCharactersInScene2 = Object.values(allCharactersInScene)
 
-    allCharactersInScene2.forEach((item) => {})
     const charIndexMap = {}
-    allCharactersInScene2.forEach((char, charIndex) => {
+    const charactersAndLocation = [...allCharactersInScene2, scene.location]
+    console.log("-----------------------------------------") // zzz
+    console.log("-----------------------------------------") // zzz
+    console.log("charactersAndLocation", charactersAndLocation) // zzz
+
+    charactersAndLocation.forEach((char, charIndex) => {
+      // allCharactersInScene2.forEach((char, charIndex) => {
       charIndexMap[char.name] = charIndex
     })
 

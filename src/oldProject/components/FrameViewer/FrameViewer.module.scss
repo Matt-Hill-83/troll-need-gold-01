@@ -262,15 +262,6 @@
     }
   }
 
-  .narrativeClass {
-    :global {
-      [class*="WordGroup_sentenceWord__"] {
-        border: 1px solid green !important;
-        font-size: 3vmin;
-      }
-    }
-  }
-
   .scenesContainer {
     display: flex;
     height: 100%;

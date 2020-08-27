@@ -38,11 +38,9 @@ export default function WordPage(props) {
       <FrameViewer
         frame={frame}
         isLastFrame={isLastFrame}
-        // onClickNext={incrementFrameIndex}
         openQuestPicker={openQuestPicker}
         scene={activeScene}
         updateActiveScene={updateActiveScene}
-        // forceUpdate={props.forceUpdate}
       />
     </div>
   )
