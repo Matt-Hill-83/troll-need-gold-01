@@ -40,10 +40,10 @@ export default function FrameViewer(props) {
     console.log("charactersAndLocation", charactersAndLocation) // zzz
 
     charactersAndLocation.forEach((char, charIndex) => {
-      // allCharactersInScene2.forEach((char, charIndex) => {
       charIndexMap[char.name] = charIndex
     })
 
+    // TODO: for some reason, probably from cloning, some characters share the same id.
     const renderedDialogs = dialog.map((line, lineIndex) => {
       const { text } = line
 

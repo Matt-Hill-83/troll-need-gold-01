@@ -22,6 +22,8 @@ export default function TopLevel(props) {
   const world = props.quest
   const [localStorage, setLocalStorage] = useContext(myContext)
 
+  console.log("localStorage", localStorage) // zzz
+
   const increaseNumber = () => {
     setLocalStorage((prevVal) => {
       const newVal = { ...prevVal }

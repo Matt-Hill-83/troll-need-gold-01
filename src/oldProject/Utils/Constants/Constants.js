@@ -15,6 +15,20 @@ export default class Constants {
     }
   }
 
+  static getDefaultLocalStorage = () => {
+    return {
+      number: 0,
+
+      activeFrameIndex: 0,
+      activeWorldId: null,
+      activeSceneId: null,
+      defaultWorldId: null,
+      showBookPicker: false,
+      showWorldBuilder: false,
+      world: null,
+    }
+  }
+
   static posableCharacters = ["liz2", "kat"]
 
   static getNewScene = ({ name = "blank" }) => {
