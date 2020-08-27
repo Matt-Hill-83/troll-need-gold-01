@@ -241,7 +241,6 @@ export default class QuestStatusUtils {
     console.log("getActiveSubQuest---------===================>>>") // zzz
     const { questConfig } = world
     const { subQuests } = questConfig
-
     const { activeSubQuestIndex } = questStatus
 
     return subQuests && subQuests[activeSubQuestIndex]
@@ -270,6 +269,10 @@ export default class QuestStatusUtils {
   static getActiveSubQuestMissions = ({ world, questStatus }) => {
     console.log("world", world) // zzz
     const activeSubQuest = this.getActiveSubQuest({ world, questStatus })
+    console.log("activeSubQuest", activeSubQuest) // zzz
+    console.log("activeSubQuest", activeSubQuest) // zzz
+    console.log("activeSubQuest", activeSubQuest) // zzz
+    console.log("activeSubQuest", activeSubQuest) // zzz
     console.log("activeSubQuest", activeSubQuest) // zzz
     return (activeSubQuest && activeSubQuest.missions) || null
   }

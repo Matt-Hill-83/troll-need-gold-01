@@ -62,7 +62,7 @@ export default function MissionConsole(props) {
   }
 
   const { completedMissions, activeMissionIndex } = questStatus
-  const world = localStorage.world
+  const { world } = localStorage
 
   const newMissions = QuestStatusUtils.getActiveSubQuestMissions({
     world,
@@ -70,6 +70,7 @@ export default function MissionConsole(props) {
   })
 
   missions = newMissions
+  console.log("missions", missions) // zzz
 
   const columnNames = [
     "Mission",

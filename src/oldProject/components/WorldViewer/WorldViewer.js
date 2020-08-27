@@ -79,7 +79,7 @@ export default function WorldViewer(props) {
   const mapBackground = Images.backgrounds["mapBackground11"]
 
   const { showMissionConsole } = localStorage
-
+  console.log("showMissionConsole", showMissionConsole) // zzz
   return (
     <>
       <img className={css.backgroundImage} src={mainBackground} alt={"bk"} />

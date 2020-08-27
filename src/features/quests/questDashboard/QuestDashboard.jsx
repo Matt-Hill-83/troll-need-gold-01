@@ -13,7 +13,7 @@ import QuestList from "./QuestList"
 import css from "./QuestDashboard.module.scss"
 
 export default function QuestDashboard() {
-  const [localStorage, setLocalStorage] = useContext(myContext)
+  // const [localStorage, setLocalStorage] = useContext(myContext)
 
   const limit = 2
   const dispatch = useDispatch()
@@ -67,9 +67,9 @@ export default function QuestDashboard() {
     setShowQuestPicker(false)
   }
 
-  const openQuestPicker = () => {
-    setShowQuestPicker(true)
-  }
+  // const openQuestPicker = () => {
+  //   setShowQuestPicker(true)
+  // }
 
   const toggleQuestPicker = () => {
     setShowQuestPicker(!showQuestPicker)

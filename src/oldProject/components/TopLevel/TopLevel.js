@@ -21,7 +21,9 @@ export default function TopLevel(props) {
   const world = props.quest
   const [localStorage, setLocalStorage] = useContext(myContext)
 
-  console.log("localStorage", localStorage) // zzz
+  console.log("localStorage-----------------------------------1", localStorage) // zzz
+  console.log("localStorage-----------------------------------1", localStorage) // zzz
+  console.log("localStorage-----------------------------------1", localStorage) // zzz
 
   const increaseNumber = () => {
     setLocalStorage((prevVal) => {
@@ -33,6 +35,9 @@ export default function TopLevel(props) {
 
   const setLocalStorageProp = ({ prop, value }) => {
     setLocalStorage((state) => {
+      console.log("prop", prop) // zzz
+      console.log("value", value) // zzz
+
       return { ...state, [prop]: value }
     })
   }
@@ -172,7 +177,7 @@ export default function TopLevel(props) {
     console.log("initWorld") // zzz
     const startScene = getTerminalScene({})
     if (!startScene) return
-
+    console.log("localStorage.questStatus", localStorage.questStatus) // zzz
     const questStatus = { ...localStorage.questStatus }
     questStatus.visitedScenes = []
 
@@ -265,14 +270,18 @@ export default function TopLevel(props) {
   }
 
   const onChangeWorld = ({ mapId }) => {
+    console.log("onChangeWorld") // zzz
     console.log("")
     console.log("-----------------------mapId-------------", mapId)
     toaster.clear()
 
     const questStatus = { ...Constants.getDefaultQuestStatus() }
+    console.log("questStatus", questStatus) // zzz
     setLocalStorageProp({ prop: "world", value: world })
     setLocalStorageProp({ prop: "activeWorldId", value: mapId })
     setLocalStorageProp({ prop: "questStatus", value: questStatus })
+
+    console.log("localStorage    ----- change world", localStorage) // zzz
 
     if (!world) {
       return

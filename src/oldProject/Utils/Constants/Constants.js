@@ -1,20 +1,6 @@
 import Utils from "../Utils"
 
 export default class Constants {
-  static getDefaultLocalStorage = () => {
-    return {
-      activeFrameIndex: 0,
-      activeSceneId: null,
-      activeWorldId: null,
-      defaultWorldId: null,
-      showMissionConsole: true,
-      number: 0,
-      showBookPicker: false,
-      showWorldBuilder: false,
-      world: null,
-    }
-  }
-
   static getDefaultQuestStatus = () => {
     return {
       activeMissionIndex: 0,
@@ -26,6 +12,21 @@ export default class Constants {
       lockedScenes: [],
       pockets: { gold: { amount: 0 } },
       visitedScenes: [],
+    }
+  }
+
+  static getDefaultLocalStorage = () => {
+    return {
+      activeFrameIndex: 0,
+      activeSceneId: null,
+      activeWorldId: null,
+      defaultWorldId: null,
+      showMissionConsole: true,
+      number: 0,
+      showBookPicker: false,
+      showWorldBuilder: false,
+      world: null,
+      questStatus: Constants.getDefaultQuestStatus(),
     }
   }
 
