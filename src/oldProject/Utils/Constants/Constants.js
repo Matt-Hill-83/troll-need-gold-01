@@ -7,7 +7,7 @@ export default class Constants {
       activeSceneId: null,
       activeWorldId: null,
       defaultWorldId: null,
-      showMissionConsole: false,
+      showMissionConsole: true,
       number: 0,
       showBookPicker: false,
       showWorldBuilder: false,
@@ -56,14 +56,14 @@ export default class Constants {
   static getNewWorld = ({ props = {} }) => {
     const questConfig = Constants.getNewQuestConfig({ props: {} })
     const defaultProps = {
+      gridDimensions: {},
+      ignore: false,
       name: "My New Name",
-      title: "My New Title",
       newGrid5: [],
+      questConfig,
       released: true,
       releasedToProd: true,
-      ignore: false,
-      gridDimensions: {},
-      questConfig,
+      title: "My New Title",
     }
 
     return { ...defaultProps, ...props }

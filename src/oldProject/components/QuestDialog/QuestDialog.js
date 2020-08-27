@@ -40,22 +40,10 @@ class QuestDialog extends React.Component {
 
   render = () => {
     const { showProd, showToggle } = this.state
-
     const savedMaps = Utils.getItemsFromDbObj({ dbList: maps })
-    let filteredMaps = []
-
-    if (showProd) {
-      filteredMaps = savedMaps.filter((map) => {
-        return map.releasedToProd
-      })
-    } else {
-      filteredMaps = savedMaps.filter((map) => {
-        return map.released && !map.releasedToProd
-      })
-    }
 
     const sortedMaps = Utils.sortDataByNestedKey({
-      data: filteredMaps,
+      data: savedMaps,
       keys: ["data", "title"],
       order: "ASC",
     })
