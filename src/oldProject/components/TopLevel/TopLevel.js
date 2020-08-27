@@ -4,13 +4,12 @@ import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core"
 
 import { myContext } from "../../../myProvider.js"
 import Constants from "../../Utils/Constants/Constants.js"
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 import StoryMode from "../StoryMode/StoryMode"
 import TopLevelUtils from "../../Utils/TopLevelUtils.js"
+import Utils from "../../Utils/Utils.js"
 
 import css from "./TopLevel.module.scss"
-import Utils from "../../Utils/Utils.js"
 
 const toaster = Toaster.create({
   position: Position.TOP,
@@ -198,9 +197,9 @@ export default function TopLevel(props) {
 
     setLocalStorageProp({ prop: "questStatus", value: questStatus })
 
-    const { hideMissionConsole } = questStatus
+    const { showMissionConsole } = localStorage
 
-    if (!hideMissionConsole) {
+    if (!showMissionConsole) {
       updateQuestStatus({ sceneId })
     }
   }
@@ -314,7 +313,7 @@ export default function TopLevel(props) {
         prop: "questStatus",
         value: {
           activeMissionIndex: 0,
-          hideMissionConsole: true,
+          showMissionConsole: false,
         },
       })
     }
@@ -323,7 +322,7 @@ export default function TopLevel(props) {
   }
 
   const renderButtons = () => {
-    const isProdRelease = localStateStore.getIsProdRelease()
+    const isProdRelease = false
 
     const path = "/quests"
     return (

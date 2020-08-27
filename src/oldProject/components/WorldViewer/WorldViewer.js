@@ -78,8 +78,7 @@ export default function WorldViewer(props) {
   const bookCoil01 = Images.backgrounds["bookCoil01"]
   const mapBackground = Images.backgrounds["mapBackground11"]
 
-  const { questStatus } = localStorage
-  const { hideMissionConsole } = questStatus
+  const { showMissionConsole } = localStorage
 
   return (
     <>
@@ -87,7 +86,7 @@ export default function WorldViewer(props) {
       <img className={css.backgroundImage2} src={mainBackground2} alt={"bk"} />
       <div className={`${css.mapScroller}`}>
         <div className={`${css.missionConsoleBox}`}>
-          {!hideMissionConsole && <MissionConsole world={world} key={key} />}
+          {!showMissionConsole && <MissionConsole world={world} key={key} />}
         </div>
         <div className={`${css.innerMapScroller}`}>
           <img

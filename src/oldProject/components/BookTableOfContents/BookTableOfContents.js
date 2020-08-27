@@ -1,23 +1,20 @@
-import React from "react"
-// import { toJS } from "mobx"
 import _get from "lodash.get"
-import Images from "../../images/images.js"
+import { Link } from "react-router-dom"
 import cx from "classnames"
-
-import Utils from "../../Utils/Utils.js"
+import React from "react"
 
 import { maps } from "../../Stores/InitStores.js"
+import Images from "../../images/images.js"
+import Utils from "../../Utils/Utils.js"
 
 import css from "./BookTableOfContents.module.scss"
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
-import { Link } from "react-router-dom/cjs/react-router-dom.min"
 
 class BookTableOfContents extends React.Component {
   state = {}
 
   constructor(props) {
     super(props)
-    const showProdInitialValue = localStateStore.getIsProdRelease()
+    const showProdInitialValue = true
     this.state = { showProd: true, showToggle: !showProdInitialValue }
   }
 

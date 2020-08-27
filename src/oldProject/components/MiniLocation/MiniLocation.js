@@ -4,7 +4,6 @@ import _get from "lodash.get"
 import { myContext } from "../../../myProvider.js"
 import Constants from "../../Utils/Constants/Constants.js"
 import Images from "../../images/images.js"
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 import Utils from "../../Utils/Utils.js"
 
@@ -80,10 +79,6 @@ export default function MiniLocation(props) {
   const neighborsArray = Utils.getNeighborsAsArray({ coordinates }).filter(
     (neighbor) => neighbor && neighbor.id
   )
-
-  // const neighborWasVisited = neighborsArray.some((neighbor) =>
-  //   localStateStore.isVisitedScene(neighbor && neighbor.id)
-  // )
 
   const neighborIsActive = neighborsArray.some((neighbor) => {
     // const activeSceneId = localStorage.activeScene.id

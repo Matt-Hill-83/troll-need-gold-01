@@ -8,7 +8,6 @@ import React from "react"
 import Images from "../../images/images.js"
 
 import { maps } from "../../Stores/InitStores.js"
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
 import Utils from "../../Utils/Utils.js"
 
 import css from "./QuestDialog.module.scss"
@@ -18,7 +17,7 @@ class QuestDialog extends React.Component {
 
   constructor(props) {
     super(props)
-    const showProdInitialValue = localStateStore.getIsProdRelease()
+    const showProdInitialValue = true
     this.state = { showProd: true, showToggle: !showProdInitialValue }
   }
 
@@ -61,7 +60,7 @@ class QuestDialog extends React.Component {
       order: "ASC",
     })
 
-    const isProdRelease = localStateStore.getIsProdRelease()
+    const isProdRelease = false
 
     const mapList = sortedMaps.map((map) => {
       const { title } = map

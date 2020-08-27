@@ -4,13 +4,11 @@ import { useSelector, useDispatch } from "react-redux"
 import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core"
 
 import { fetchEvents } from "../questActions"
-import { RETAIN_STATE } from "../questConstants"
-import QuestList from "./QuestList"
-import EventListItemPlaceholder from "./EventListItemPlaceholder"
-import localStateStore from "../../../oldProject/Stores/LocalStateStore/LocalStateStore"
-import QuestStatusUtils from "../../../oldProject/Utils/QuestStatusUtils"
-import QuestDialog from "../../../oldProject/components/QuestDialog/QuestDialog"
 import { myContext } from "../../../myProvider"
+import { RETAIN_STATE } from "../questConstants"
+import EventListItemPlaceholder from "./EventListItemPlaceholder"
+import QuestDialog from "../../../oldProject/components/QuestDialog/QuestDialog"
+import QuestList from "./QuestList"
 
 import css from "./QuestDashboard.module.scss"
 
@@ -78,8 +76,6 @@ export default function QuestDashboard() {
   }
 
   const renderButtons = () => {
-    const isProdRelease = localStateStore.getIsProdRelease()
-
     return (
       <div className={css.floatingButtons}>
         <ButtonGroup color="primary">

@@ -1,31 +1,31 @@
 import Utils from "../Utils"
 
 export default class Constants {
-  static getDefaultQuestStatus = () => {
-    return {
-      visitedScenes: [],
-      completedMissions: [],
-      lockedScenes: [],
-      hiddenScenes: [],
-      cloudedScenes: [],
-      activeSubQuestIndex: 0,
-      activeMissionIndex: 0,
-      pockets: { gold: { amount: 0 } },
-      desiredItems: [],
-    }
-  }
-
   static getDefaultLocalStorage = () => {
     return {
-      number: 0,
-
       activeFrameIndex: 0,
-      activeWorldId: null,
       activeSceneId: null,
+      activeWorldId: null,
       defaultWorldId: null,
+      showMissionConsole: false,
+      number: 0,
       showBookPicker: false,
       showWorldBuilder: false,
       world: null,
+    }
+  }
+
+  static getDefaultQuestStatus = () => {
+    return {
+      activeMissionIndex: 0,
+      activeSubQuestIndex: 0,
+      cloudedScenes: [],
+      completedMissions: [],
+      desiredItems: [],
+      hiddenScenes: [],
+      lockedScenes: [],
+      pockets: { gold: { amount: 0 } },
+      visitedScenes: [],
     }
   }
 
