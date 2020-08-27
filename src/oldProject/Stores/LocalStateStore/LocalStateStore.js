@@ -12,19 +12,6 @@ class LocalStateStore {
   setIsProdRelease = (isProdRelease) => {
     this.isProdRelease = isProdRelease
   }
-
-  getActiveSceneId = () => this.activeSceneId
-  setActiveSceneId = (activeSceneId) => {
-    this.activeSceneId = activeSceneId
-  }
-
-  getActiveScene = ({ world, activeSceneId }) => {
-    if (world && activeSceneId) {
-      const scenesGrid = _get(world, "newGrid5") || []
-      const activeScene = scenesGrid.find((item) => item.id === activeSceneId)
-      return activeScene
-    }
-  }
 }
 
 const localStateStore = new LocalStateStore()
