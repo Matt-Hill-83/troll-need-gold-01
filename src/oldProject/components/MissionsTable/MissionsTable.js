@@ -22,7 +22,6 @@ export default function MissionsTable({ props }) {
     questConfig,
     scenes,
     sceneId,
-    worldId,
   } = props
 
   const allItems = Utils.getAllItemsInScenes({ scenes })

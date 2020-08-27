@@ -96,7 +96,8 @@ export default function TopLevel(props) {
   }
 
   const updateQuestState = ({ itemsInScene, charactersInScene }) => {
-    const { questStatus, questConfig } = localStorage
+    const { questStatus } = localStorage
+    const { questConfig } = world
 
     if (!questConfig) {
       return {}
