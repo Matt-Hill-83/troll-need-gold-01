@@ -1,70 +1,75 @@
-import { Button } from "@blueprintjs/core"
-import React, { Component } from "react"
-import cx from "classnames"
-
 import _get from "lodash.get"
+import { Button } from "@blueprintjs/core"
+import cx from "classnames"
+import React, { useContext } from "react"
 
 import Images from "../../images/images"
-import css from "./ArrowNavigator.module.scss"
 import Utils from "../../Utils/Utils"
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
+import { myContext } from "../../../myProvider"
 
-class ArrowNavigator extends Component {
-  changeLocation = ({ sceneId }) => {
-    localStateStore.incrementActiveFrameIndex(true)
-    this.props.updateActiveScene({ sceneId })
+import css from "./ArrowNavigator.module.scss"
+
+export default function ArrowNavigator(props) {
+  const [localStorage, setLocalStorage] = useContext(myContext)
+
+  const setLocalStorageProp = ({ prop, value }) => {
+    setLocalStorage((state) => {
+      return { ...state, [prop]: value }
+    })
   }
 
-  render = () => {
-    const { activeScene } = this.props
-    const { coordinates } = activeScene
+  const changeLocation = ({ sceneId }) => {
+    setLocalStorageProp({ prop: "activeFrameIndex", value: 0 })
 
-    const neighbors = Utils.getNeighbors({
-      coordinates,
-    })
+    props.updateActiveScene({ sceneId })
+  }
 
-    const buttons = Object.keys(neighbors).map((neighborKey, i) => {
-      const neighbor = neighbors[neighborKey]
+  const { activeScene } = props
+  const { coordinates } = activeScene
 
-      const neighborName = _get(neighbor, "location.name") || ""
+  const neighbors = Utils.getNeighbors({
+    coordinates,
+  })
 
-      const onClick = neighbor
-        ? () =>
-            this.changeLocation({
-              sceneId: neighbor.id,
-            })
-        : null
+  const buttons = Object.keys(neighbors).map((neighborKey, i) => {
+    const neighbor = neighbors[neighborKey]
 
-      const classNames = {
-        left: css.sceneLeft,
-        right: css.sceneRight,
-        top: css.sceneTop,
-        bottom: css.sceneBottom,
-      }
+    const neighborName = _get(neighbor, "location.name") || ""
 
-      const className = classNames[neighborKey]
+    const onClick = neighbor
+      ? () =>
+          changeLocation({
+            sceneId: neighbor.id,
+          })
+      : null
 
-      return (
-        <Button
-          key={i}
-          onClick={onClick}
-          className={cx(css.choiceButton, className)}
-        >
-          {neighborName}
-        </Button>
-      )
-    })
+    const classNames = {
+      left: css.sceneLeft,
+      right: css.sceneRight,
+      top: css.sceneTop,
+      bottom: css.sceneBottom,
+    }
 
-    const fourArrows = Images.backgrounds["four_arrows"]
-    const diamond2 = Images.backgrounds["diamond2"]
+    const className = classNames[neighborKey]
+
     return (
-      <div className={css.arrowNavigatorContainer}>
-        <img className={css.diamond2Image} src={diamond2} alt={"imagex"} />
-        <img className={css.fourArrowsImage} src={fourArrows} alt={"imagex"} />
-        {buttons}
-      </div>
+      <Button
+        key={i}
+        onClick={onClick}
+        className={cx(css.choiceButton, className)}
+      >
+        {neighborName}
+      </Button>
     )
-  }
-}
+  })
 
-export default ArrowNavigator
+  const fourArrows = Images.backgrounds["four_arrows"]
+  const diamond2 = Images.backgrounds["diamond2"]
+  return (
+    <div className={css.arrowNavigatorContainer}>
+      <img className={css.diamond2Image} src={diamond2} alt={"imagex"} />
+      <img className={css.fourArrowsImage} src={fourArrows} alt={"imagex"} />
+      {buttons}
+    </div>
+  )
+}
