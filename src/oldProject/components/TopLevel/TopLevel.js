@@ -199,7 +199,7 @@ export default function TopLevel(props) {
 
     const { showMissionConsole } = localStorage
 
-    if (!showMissionConsole) {
+    if (showMissionConsole) {
       updateQuestStatus({ sceneId })
     }
   }
