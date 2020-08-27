@@ -1,7 +1,4 @@
 import _get from "lodash.get"
-import Utils from "../../Utils/Utils"
-import QuestStatusUtils from "../../Utils/QuestStatusUtils"
-import Constants from "../../Utils/Constants/Constants"
 
 class LocalStateStore {
   activeFrameIndex = 0
@@ -19,24 +16,6 @@ class LocalStateStore {
   getActiveFrameIndex = () => this.activeFrameIndex
   setActiveFrameIndex = (activeFrameIndex) => {
     this.activeFrameIndex = activeFrameIndex
-  }
-
-  getFirstFrame = ({ activeScene }) => {
-    // const activeScene = localStateStore.getActiveScene()
-    const { frameSet } = activeScene
-    const firstFrame = _get(frameSet, "frames[0]")
-    return firstFrame
-  }
-
-  incrementActiveFrameIndex = (reset) => {
-    let newIndex
-
-    if (reset) {
-      newIndex = 0
-    } else {
-      newIndex = this.getActiveFrameIndex() + 1
-    }
-    this.setActiveFrameIndex(newIndex)
   }
 
   getActiveSceneId = () => this.activeSceneId

@@ -10,6 +10,7 @@ import StoryMode from "../StoryMode/StoryMode"
 import TopLevelUtils from "../../Utils/TopLevelUtils.js"
 
 import css from "./TopLevel.module.scss"
+import Utils from "../../Utils/Utils.js"
 
 const toaster = Toaster.create({
   position: Position.TOP,
@@ -211,7 +212,7 @@ export default function TopLevel(props) {
     console.log("activeScene", activeScene) // zzz
     const { location } = activeScene
 
-    const activeFrame = localStateStore.getFirstFrame({ activeScene }) || {}
+    const activeFrame = Utils.getFirstFrame({ activeScene }) || {}
     const { critters1 = [], critters2 = [] } = activeFrame
 
     const { foundItem, completedMission } = updateQuestState({

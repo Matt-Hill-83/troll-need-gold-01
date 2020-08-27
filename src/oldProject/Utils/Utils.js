@@ -29,6 +29,9 @@ export default class Utils {
     return Object.values(allItems)
   }
 
+  static getFirstFrame = ({ activeScene }) =>
+    _get(activeScene, "frameSet.frames[0]")
+
   static getSimpleSceneObjects = ({ scenes }) => {
     return scenes.map((scene) => {
       return { name: scene.location.name, id: scene.id }

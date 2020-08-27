@@ -15,13 +15,15 @@ export default function MiniLocation(props) {
   const [localStorage, setLocalStorage] = useContext(myContext)
   const { questStatus } = localStorage
 
+  // These are the critters1 creatures from the first frame that hover over the active location.
   const renderCreatures = ({ isActive }) => {
     if (!isActive) {
       return null
     }
 
-    const activeScene = localStorage.activeScene
-    const activeFrame = localStateStore.getFirstFrame({ activeScene }) || {}
+    const { activeScene } = localStorage
+    const activeFrame = Utils.getFirstFrame({ activeScene }) || {}
+    console.log("activeFrame", activeFrame) // zzz
     const { critters1 = [] } = activeFrame
 
     const renderedCharacters = critters1
@@ -175,7 +177,7 @@ export default function MiniLocation(props) {
 
         <div className={css.characters}>
           {/* add this back after refactor */}
-          {false && renderCreatures({ isActive })}
+          {renderCreatures({ isActive })}
         </div>
 
         <span className={css.locationTitle}>{locationName}</span>
