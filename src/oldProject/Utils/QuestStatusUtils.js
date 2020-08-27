@@ -337,29 +337,19 @@ export default class QuestStatusUtils {
     return questStatus
   }
 
-  static isSceneLocked = ({ sceneId }) => {
-    const questStatus = localStateStore.getQuestStatus()
+  static isSceneLocked = ({ sceneId, questStatus }) => {
     const { lockedScenes = [] } = questStatus
     return lockedScenes.includes(sceneId) ? true : false
   }
 
-  static isSceneClouded = ({ sceneId }) => {
-    const questStatus = localStateStore.getQuestStatus()
+  static isSceneClouded = ({ sceneId, questStatus }) => {
     const { cloudedScenes = [] } = questStatus
     return cloudedScenes.includes(sceneId) ? true : false
   }
 
-  static isSceneHidden = ({ sceneId }) => {
-    const questStatus = localStateStore.getQuestStatus()
+  static isSceneHidden = ({ sceneId, questStatus }) => {
     const { hiddenScenes = [] } = questStatus
     return hiddenScenes.includes(sceneId) ? true : false
   }
   // Data Manupulation --- END
-
-  // unused
-  static incrementActiveSubQuest = () => {
-    const questStatus = localStateStore.getQuestStatus()
-    questStatus.activeSubQuestIndex++
-    localStateStore.setQuestStatus(questStatus)
-  }
 }

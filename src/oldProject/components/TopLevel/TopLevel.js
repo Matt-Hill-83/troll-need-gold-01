@@ -210,7 +210,6 @@ export default function TopLevel(props) {
     const { location } = activeScene
 
     const activeFrame = localStateStore.getFirstFrame({ activeScene }) || {}
-    // const activeFrame = localStateStore.getFirstFrame() || {}
     const { critters1 = [], critters2 = [] } = activeFrame
 
     const { foundItem, completedMission } = updateQuestState({

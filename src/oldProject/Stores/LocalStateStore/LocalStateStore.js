@@ -20,6 +20,10 @@ class LocalStateStore {
     this.showWorldBuilder = showWorldBuilder
   }
 
+  // TODO: clean up all these functions
+  // TODO: clean up all these functions
+  // TODO: clean up all these functions
+  // TODO: clean up all these functions
   getQuestStatus = () => this.questStatus
   setQuestStatus = (questStatus) => {
     this.questStatus = questStatus

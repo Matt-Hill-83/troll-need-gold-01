@@ -1,6 +1,7 @@
 import React, { useContext } from "react"
 import _get from "lodash.get"
 
+import { myContext } from "../../../myProvider.js"
 import Constants from "../../Utils/Constants/Constants.js"
 import Images from "../../images/images.js"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
@@ -8,11 +9,12 @@ import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 import Utils from "../../Utils/Utils.js"
 
 import css from "./MiniLocation.module.scss"
-import { myContext } from "../../../myProvider.js"
 
 export default function MiniLocation(props) {
   const { scene, isActive, className, id, world } = props
   const [localStorage, setLocalStorage] = useContext(myContext)
+  const { questStatus } = localStorage
+  console.log("localStorage", localStorage) // zzz
 
   const renderCreatures = ({ isActive }) => {
     if (!isActive) {
@@ -47,19 +49,24 @@ export default function MiniLocation(props) {
   }
 
   const { coordinates, isStartScene, onClick } = scene
-  const isVisitedScene = localStorage.questStatus.visitedScenes.some(
+  const isVisitedScene = questStatus.visitedScenes.some(
     (item) => item === scene.id
   )
-  // const isVisitedScene = localStateStore.isVisitedScene(scene.id)
   const locationName = scene.location.name
 
-  const showNothing = QuestStatusUtils.isSceneHidden({ sceneId: scene.id })
+  const showNothing = QuestStatusUtils.isSceneHidden({
+    sceneId: scene.id,
+    questStatus,
+  })
   const isBlank = locationName === "blank" || showNothing
   if (isBlank) {
     return renderBlankScene({ id })
   }
 
-  const isClouded = QuestStatusUtils.isSceneClouded({ sceneId: scene.id })
+  const isClouded = QuestStatusUtils.isSceneClouded({
+    sceneId: scene.id,
+    questStatus,
+  })
 
   const localClass = isActive ? css.activeClass : ""
   const cloudImage = Images.backgrounds["cloud"]
@@ -95,7 +102,10 @@ export default function MiniLocation(props) {
     )
   }
 
-  const showLock = QuestStatusUtils.isSceneLocked({ sceneId: scene.id })
+  const showLock = QuestStatusUtils.isSceneLocked({
+    sceneId: scene.id,
+    questStatus,
+  })
   // apply position based clouded state
   // If cloud is still hidden, apply config based state
   const hideCloud = isVisitedScene || neighborIsActive || !isClouded

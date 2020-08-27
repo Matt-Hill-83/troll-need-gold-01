@@ -57,13 +57,13 @@ export default function MissionConsole(props) {
   const { showHeader = false } = props
   let missions
 
-  const questStatus = localStateStore.getQuestStatus()
+  const { questStatus } = localStorage
 
-  if (!questStatus.questConfig) {
+  if (!questStatus) {
     return null
   }
 
-  const { completedMissions } = questStatus
+  const { completedMissions, activeMissionIndex } = questStatus
   const world = localStorage.world
 
   const newMissions = QuestStatusUtils.getActiveSubQuestMissions({
@@ -73,7 +73,6 @@ export default function MissionConsole(props) {
 
   missions = newMissions
 
-  const { activeMissionIndex } = questStatus
   const columnNames = [
     "Mission",
     "Bring the...",
