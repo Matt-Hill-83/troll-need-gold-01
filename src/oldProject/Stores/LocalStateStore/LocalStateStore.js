@@ -11,150 +11,71 @@ class LocalStateStore {
   showBookPicker = false
   showWorldBuilder = false
 
-  questStatus = { ...Constants.defaultQuestStatus }
+  // questStatus = { ...Constants.defaultQuestStatus }
 
-  getQuestNames = () => this.questStatus.quests.map((item) => item.name)
-
-  getShowWorldBuilder = () => this.showWorldBuilder
-  setShowWorldBuilder = (showWorldBuilder) => {
-    this.showWorldBuilder = showWorldBuilder
-  }
+  // getShowWorldBuilder = () => this.showWorldBuilder
+  // setShowWorldBuilder = (showWorldBuilder) => {
+  //   this.showWorldBuilder = showWorldBuilder
+  // }
 
   // TODO: clean up all these functions
   // TODO: clean up all these functions
   // TODO: clean up all these functions
   // TODO: clean up all these functions
-  getQuestStatus = () => this.questStatus
-  setQuestStatus = (questStatus) => {
-    this.questStatus = questStatus
-  }
+  // setQuestStatus = (questStatus) => {
+  //   this.questStatus = questStatus
+  // }
 
-  getDefaultQuestStatus = () => Constants.getDefaultQuestStatus()
+  // getDefaultQuestStatus = () => Constants.getDefaultQuestStatus()
 
-  getDefaultWorldId = () => this.defaultWorldId
-  setDefaultWorldId = (defaultWorldId) => {
-    console.log("defaultWorldId", defaultWorldId) // zzz
-    this.defaultWorldId = defaultWorldId
-  }
+  // getDefaultWorldId = () => this.defaultWorldId
+  // setDefaultWorldId = (defaultWorldId) => {
+  //   console.log("defaultWorldId", defaultWorldId) // zzz
+  //   this.defaultWorldId = defaultWorldId
+  // }
 
-  getHiddenScenes = () => this.hiddenScenes
-  setHiddenScenes = (hiddenScenes) => {
-    this.hiddenScenes = hiddenScenes
-  }
+  // getHiddenScenes = () => this.hiddenScenes
+  // setHiddenScenes = (hiddenScenes) => {
+  //   this.hiddenScenes = hiddenScenes
+  // }
 
-  getVisitedScenes = () => this.questStatus.visitedScenes
-  setVisitedScenes = (visitedScenes) => {
-    const questStatus = this.questStatus
-    questStatus.visitedScenes = visitedScenes
-    this.questStatus = questStatus
-  }
+  // getVisitedScenes = () => this.questStatus.visitedScenes
+  // setVisitedScenes = (visitedScenes) => {
+  //   const questStatus = this.questStatus
+  //   questStatus.visitedScenes = visitedScenes
+  //   this.questStatus = questStatus
+  // }
 
-  // convertItemToObjFormat = ({ itemsArray = [] }) => {
-  //   const newObj = {}
-  //   itemsArray.forEach((item) => {
-  //     const itemName = item.name
-  //     const value = newObj[itemName]
-  //     if (value) {
-  //       value.ammount += item.amount
-  //     } else {
-  //       newObj[itemName] = { amount: item.amount }
-  //     }
+  // getQuestItems = () => {
+  //   const questItems = []
+  //   this.questStatus.questConfig.missions.forEach((mission) => {
+  //     questItems.push(...mission.items)
   //   })
-
-  //   return newObj
+  //   return questItems
   // }
 
-  setQuestStatusToDefault = () => {
-    this.questStatus = { ...Constants.getDefaultQuestStatus() }
-  }
-
-  // getDesiredItem = () => {
-  //   const activeMission = this.getActiveMission()
-  //   if (!activeMission) {
-  //     return null
-  //   }
-  //   return activeMission.item
-  // }
-
-  // getDesiredItems = () => {
-  //   return this.questStatus.desiredItems
-  // }
-
-  // removeItemFromDesiredItems = ({ itemToRemove }) => {
-  //   if (!itemToRemove) {
-  //     return
-  //   }
-
-  //   const modifiedArray = this.questStatus.desiredItems.filter((item) => {
-  //     return item.name !== itemToRemove.name
+  // getQuestRewards = () => {
+  //   const questItems = []
+  //   this.questStatus.questConfig.missions.forEach((mission) => {
+  //     questItems.push(...mission.rewards)
   //   })
-
-  //   this.questStatus.desiredItems.length = 0
-  //   this.questStatus.desiredItems.push(...modifiedArray)
+  //   return questItems
   // }
 
-  // getActiveMission = () => {
-  //   const world = localStateStore.getActiveWorld()
-  //   const missions = QuestStatusUtils.getActiveSubQuestMissions({ world })
-  //   return missions[this.questStatus.activeMissionIndex] || null
+  // getShowBookPicker = () => this.showBookPicker
+  // setShowBookPicker = (showBookPicker) => {
+  //   this.showBookPicker = showBookPicker
   // }
 
-  // getDesiredRecipient = () => {
-  //   const activeMission = this.getActiveMission()
-  //   if (!activeMission) {
-  //     return null
-  //   }
-  //   return activeMission.recipient
+  // getActiveWorld = () => {
+  //   const world = Utils.getWorldFromId({ id: this.activeWorldId })
+  //   return world
   // }
 
-  // addToPockets = ({ newPockets }) => {
-  //   const existingPockets = this.getQuestStatus().pockets || {}
-  //   for (const newPocketName in newPockets) {
-  //     const newPocket = newPockets[newPocketName]
-  //     const existingItemWithSameName = existingPockets[newPocketName]
-
-  //     if (existingItemWithSameName) {
-  //       existingItemWithSameName.amount =
-  //         existingItemWithSameName.amount + newPocket.amount
-  //     } else {
-  //       existingPockets[newPocketName] = {
-  //         amount: newPocket.amount,
-  //       }
-  //     }
-  //   }
-  //   return existingPockets
+  // getActiveWorldGrid = () => {
+  //   const map = Utils.getWorldFromId({ id: this.activeWorldId })
+  //   return map.newGrid5 || []
   // }
-
-  getQuestItems = () => {
-    const questItems = []
-    this.questStatus.questConfig.missions.forEach((mission) => {
-      questItems.push(...mission.items)
-    })
-    return questItems
-  }
-
-  getQuestRewards = () => {
-    const questItems = []
-    this.questStatus.questConfig.missions.forEach((mission) => {
-      questItems.push(...mission.rewards)
-    })
-    return questItems
-  }
-
-  getShowBookPicker = () => this.showBookPicker
-  setShowBookPicker = (showBookPicker) => {
-    this.showBookPicker = showBookPicker
-  }
-
-  getActiveWorld = () => {
-    const world = Utils.getWorldFromId({ id: this.activeWorldId })
-    return world
-  }
-
-  getActiveWorldGrid = () => {
-    const map = Utils.getWorldFromId({ id: this.activeWorldId })
-    return map.newGrid5 || []
-  }
 
   getIsProdRelease = () => this.isProdRelease
   setIsProdRelease = (isProdRelease) => {

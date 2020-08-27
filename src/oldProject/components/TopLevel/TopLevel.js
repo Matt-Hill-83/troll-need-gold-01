@@ -308,25 +308,28 @@ export default function TopLevel(props) {
       }
       const newQuestStatus = { ...defaultQuestStatus, ...newProps }
 
-      localStateStore.setQuestStatus(newQuestStatus)
+      setLocalStorageProp({ prop: "questStatus", value: newQuestStatus })
     } else {
-      localStateStore.setQuestStatus({
-        activeMissionIndex: 0,
-        hideMissionConsole: true,
+      setLocalStorageProp({
+        prop: "questStatus",
+        value: {
+          activeMissionIndex: 0,
+          hideMissionConsole: true,
+        },
       })
     }
-    localStateStore.setShowBookPicker(false)
+    // localStateStore.setShowBookPicker(false)
 
     initWorld()
   }
 
   const toggleBookPicker = () => {
-    const show = localStateStore.getShowBookPicker()
-    localStateStore.setShowBookPicker(!show)
+    // const show = localStateStore.getShowBookPicker()
+    // localStateStore.setShowBookPicker(!show)
   }
 
   const closeBookPicker = () => {
-    localStateStore.setShowBookPicker(false)
+    // localStateStore.setShowBookPicker(false)
   }
 
   const renderBookPicker = () => {
@@ -340,9 +343,7 @@ export default function TopLevel(props) {
     return (
       <div className={css.floatingButtons}>
         <ButtonGroup color="primary">
-          {!isProdRelease && (
-            <Button onClick={toggleBookPicker}>Pick a Book of Quests...</Button>
-          )}
+          {!isProdRelease && <Button>Pick a Book of Quests...</Button>}
         </ButtonGroup>
       </div>
     )

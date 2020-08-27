@@ -1,18 +1,18 @@
 import _get from "lodash.get"
-import React from "react"
+import React, { useContext } from "react"
 import cx from "classnames"
 
 import Images from "../../images/images.js"
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
 import MiniLocation from "../MiniLocation/MiniLocation.js"
-
 import MissionConsole from "../MissionConsole/MissionConsole.js"
 import Utils from "../../Utils/Utils.js"
 
 import css from "./WorldViewer.module.scss"
+import { myContext } from "../../../myProvider.js"
 
 export default function WorldViewer(props) {
   const { world } = props
+  const [localStorage, setLocalStorage] = useContext(myContext)
 
   const renderSceneRows = () => {
     const { gridDimensions, newGrid5 } = world
@@ -73,13 +73,13 @@ export default function WorldViewer(props) {
   }
 
   const key = new Date()
-
   const mainBackground = Images.backgrounds["hill01"]
   const mainBackground2 = Images.backgrounds["planetGlorp03"]
   const bookCoil01 = Images.backgrounds["bookCoil01"]
-
   const mapBackground = Images.backgrounds["mapBackground11"]
-  const { hideMissionConsole } = localStateStore.getQuestStatus()
+
+  const { questStatus } = localStorage
+  const { hideMissionConsole } = questStatus
 
   return (
     <>

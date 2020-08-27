@@ -238,13 +238,6 @@ export default class QuestStatusUtils {
     return output
   }
 
-  static getActiveQuestConfig = () => {
-    const activeWorld = localStateStore.getActiveWorld()
-    console.log("localStorage", localStorage) // zzz
-    const { questConfig } = activeWorld
-    return questConfig
-  }
-
   static getActiveSubQuest = ({ world, questStatus }) => {
     console.log("getActiveSubQuest---------===================>>>") // zzz
     const { questConfig } = world
