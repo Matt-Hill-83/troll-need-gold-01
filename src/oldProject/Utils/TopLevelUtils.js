@@ -16,10 +16,7 @@ export default class TopLevelUtils {
     return newObj
   }
 
-  static _isDesiredRecipientHere = ({
-    desiredRecipient,
-    charactersInScene,
-  }) => {
+  static isDesiredRecipientHere = ({ desiredRecipient, charactersInScene }) => {
     const characterNames = charactersInScene.map((item) => item.name)
 
     return characterNames.includes(desiredRecipient.name)
@@ -41,17 +38,17 @@ export default class TopLevelUtils {
     })
     const { pockets = {} } = questStatus
 
-    const isDesiredItemInPocket = isDesiredItemInPocket({
+    const desiredItemIsInPocket = TopLevelUtils.isDesiredItemInPocket({
       desiredItem,
       pockets,
     })
 
-    const isDesiredRecipientHere = TopLevelUtils.isDesiredRecipientHere({
+    const desiredRecipientIsHere = TopLevelUtils.isDesiredRecipientHere({
       desiredRecipient,
       charactersInScene,
     })
 
-    return isDesiredRecipientHere && isDesiredItemInPocket
+    return desiredRecipientIsHere && desiredItemIsInPocket
   }
 
   static getDesiredItem = ({ activeMission }) => {
