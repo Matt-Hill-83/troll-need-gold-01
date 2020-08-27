@@ -25,8 +25,6 @@ export default function FrameViewer(props) {
       scene.frameSet.frames.forEach((frame) => {
         const test = [...frame.critters1, ...frame.critters2]
         test.forEach((char) => {
-          console.log("char", char) // zzz
-          console.log("char.id", char.id) // zzz
           allCharactersInScene[char.id] = char
         })
       })
@@ -35,9 +33,6 @@ export default function FrameViewer(props) {
 
     const charIndexMap = {}
     const charactersAndLocation = [...allCharactersInScene2, scene.location]
-    console.log("-----------------------------------------") // zzz
-    console.log("-----------------------------------------") // zzz
-    console.log("charactersAndLocation", charactersAndLocation) // zzz
 
     charactersAndLocation.forEach((char, charIndex) => {
       charIndexMap[char.name] = charIndex
