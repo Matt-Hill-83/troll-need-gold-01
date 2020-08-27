@@ -13,11 +13,6 @@ class LocalStateStore {
     this.isProdRelease = isProdRelease
   }
 
-  getActiveFrameIndex = () => this.activeFrameIndex
-  setActiveFrameIndex = (activeFrameIndex) => {
-    this.activeFrameIndex = activeFrameIndex
-  }
-
   getActiveSceneId = () => this.activeSceneId
   setActiveSceneId = (activeSceneId) => {
     this.activeSceneId = activeSceneId

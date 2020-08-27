@@ -86,8 +86,8 @@ export default function MiniLocation(props) {
   // )
 
   const neighborIsActive = neighborsArray.some((neighbor) => {
-    const activeSceneId = localStateStore.getActiveSceneId()
-    return neighbor && neighbor.id === activeSceneId
+    // const activeSceneId = localStorage.activeScene.id
+    return neighbor && neighbor.id === localStorage.activeScene.id
   })
 
   if (showLocationOnly) {
