@@ -14,12 +14,12 @@ export default class QuestStatusUtils {
 
     // For each scene, calculate new visibility props based on conditions defined in triggers
     newGrid5.forEach((scene) => {
-      const sceneTriggers = this.getSceneTriggersFromScene({
+      const sceneTriggers = this._getSceneTriggersFromScene({
         sceneId: scene.id,
         questConfig,
       })
 
-      const parentSubQuestIndexFromScene = this.getParentSubQuestIndexFromScene(
+      const parentSubQuestIndexFromScene = this._getParentSubQuestIndexFromScene(
         {
           world: activeWorld,
           sceneId: scene.id,
@@ -29,7 +29,7 @@ export default class QuestStatusUtils {
       const parentSubQuestFromScene = subQuests[parentSubQuestIndexFromScene]
       const subQuestTriggers = _get(parentSubQuestFromScene, "triggers") || []
 
-      const accumulatedPropertyValuesForSubQuest = this.calcAccumulatedPropertyValues(
+      const accumulatedPropertyValuesForSubQuest = this._calcAccumulatedPropertyValues(
         {
           triggers: subQuestTriggers,
           questStatus,
@@ -38,7 +38,7 @@ export default class QuestStatusUtils {
         }
       )
 
-      const accumulatedPropertyValuesForScene = this.calcAccumulatedPropertyValues(
+      const accumulatedPropertyValuesForScene = this._calcAccumulatedPropertyValues(
         {
           triggers: sceneTriggers,
           questStatus,
@@ -58,7 +58,7 @@ export default class QuestStatusUtils {
       propertyNames.forEach((propertyName) => {
         const value = accumulatedPropertyValuesCombined[propertyName]
 
-        questStatus = this.updateProperty({
+        questStatus = this._updateProperty({
           propertyName,
           questStatus,
           sceneId: scene.id,
@@ -68,7 +68,7 @@ export default class QuestStatusUtils {
     })
   }
 
-  static calcAccumulatedPropertyValues = ({
+  static _calcAccumulatedPropertyValues = ({
     triggers,
     activeMissionIndex,
     questStatus,
@@ -237,7 +237,7 @@ export default class QuestStatusUtils {
     return output
   }
 
-  static getParentSubQuestIndexFromScene = ({ world, sceneId }) => {
+  static _getParentSubQuestIndexFromScene = ({ world, sceneId }) => {
     if (!world) return 0
 
     const { questConfig } = world
@@ -269,7 +269,7 @@ export default class QuestStatusUtils {
     return foundScene || {}
   }
 
-  static getSceneTriggersFromScene = ({ sceneId, questConfig }) => {
+  static _getSceneTriggersFromScene = ({ sceneId, questConfig }) => {
     const foundScene = this.getSceneTriggerConfigFromScene({
       sceneId,
       questConfig,
@@ -280,7 +280,7 @@ export default class QuestStatusUtils {
   static getSubQuestColor = ({ world, sceneId }) => {
     const colors = Constants.subQuestColors
 
-    const parentSubQuestFromScene = this.getParentSubQuestIndexFromScene({
+    const parentSubQuestFromScene = this._getParentSubQuestIndexFromScene({
       world,
       sceneId,
     })
@@ -291,10 +291,9 @@ export default class QuestStatusUtils {
     }
     return style
   }
-  // Object getter functions --- END
 
   // Data Manupulation --- START
-  static updateProperty = ({ questStatus, sceneId, propertyName, value }) => {
+  static _updateProperty = ({ questStatus, sceneId, propertyName, value }) => {
     if (!questStatus[propertyName]) {
       questStatus[propertyName] = []
     }
@@ -312,6 +311,7 @@ export default class QuestStatusUtils {
     return questStatus
   }
 
+  // Object getter functions --- END
   static isSceneLocked = ({ sceneId, questStatus }) => {
     const { lockedScenes = [] } = questStatus
     return lockedScenes.includes(sceneId) ? true : false

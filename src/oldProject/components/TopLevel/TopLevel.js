@@ -95,8 +95,11 @@ export default function TopLevel(props) {
     console.log("charactersInScene", charactersInScene) // zzz
     console.log("itemsInScene", itemsInScene) // zzz
 
-    const { questStatus, world } = localStorage
-    const { questConfig } = world
+    const {
+      questStatus,
+      world: { questConfig },
+    } = localStorage
+
     console.log("questStatus", questStatus) // zzz
 
     if (!questConfig) {
@@ -107,17 +110,11 @@ export default function TopLevel(props) {
 
     const { pockets, completedMissions } = questStatus
 
-    if (!questStatus.completedMissions) {
-      questStatus.completedMissions = []
-    }
-
     console.log("missions", missions) // zzz
-    if (!missions) {
-      return {}
-    }
 
     const activeMissionIndex = questStatus.activeMissionIndex
     const activeMission = missions[activeMissionIndex] || null
+
     if (!activeMission) {
       return {}
     }
