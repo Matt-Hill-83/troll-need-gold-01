@@ -8,6 +8,7 @@ import QuestStatusUtils from "../../Utils/QuestStatusUtils"
 import { myContext } from "../../../myProvider"
 
 import css from "./MissionConsole.module.scss"
+import TopLevelUtils from "../../Utils/TopLevelUtils"
 
 export default function MissionConsole(props) {
   console.log("MissionConsole") // zzz
@@ -53,23 +54,18 @@ export default function MissionConsole(props) {
   }
 
   const { showHeader = false } = props
-  let missions
-
-  const { questStatus } = localStorage
+  const {
+    questStatus,
+    world: { questConfig },
+  } = localStorage
 
   if (!questStatus) {
-    return null
+    return <div>no quest status</div>
   }
 
   const { completedMissions, activeMissionIndex } = questStatus
-  const { world } = localStorage
 
-  const newMissions = QuestStatusUtils.getActiveSubQuestMissions({
-    world,
-    questStatus,
-  })
-
-  missions = newMissions
+  const missions = TopLevelUtils.getMissions({ questConfig })
   console.log("missions", missions) // zzz
 
   const columnNames = [

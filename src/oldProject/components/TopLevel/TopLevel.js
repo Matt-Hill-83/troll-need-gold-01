@@ -18,7 +18,6 @@ const toaster = Toaster.create({
 })
 
 export default function TopLevel(props) {
-  // const world = props.quest
   const [localStorage, setLocalStorage] = useContext(myContext)
 
   console.log("localStorage-----------------------------------1", localStorage)
@@ -39,7 +38,9 @@ export default function TopLevel(props) {
 
   // on mount
   useEffect(() => {
-    onChangeWorld({ mapId: props.quest.id })
+    const world = props.quest
+    setLocalStorageProp({ prop: "world", value: world })
+    onChangeWorld({ mapId: world.id })
 
     // returned function will be called on component unmount
     return () => {}
@@ -102,11 +103,10 @@ export default function TopLevel(props) {
       return {}
     }
 
-    const missions = QuestStatusUtils.getActiveSubQuestMissions({
-      world,
-      questStatus,
-    })
+    const missions = TopLevelUtils.getMissions({ questConfig })
+
     const { pockets, completedMissions } = questStatus
+
     if (!questStatus.completedMissions) {
       questStatus.completedMissions = []
     }
@@ -261,8 +261,9 @@ export default function TopLevel(props) {
   }
 
   const onChangeWorld = () => {
-    const world = props.quest
     console.log("onChangeWorld")
+    const world = props.quest
+    console.log("world", world) // zzz
     console.log("")
     console.log("-----------------------mapId-------------", world.id)
     toaster.clear()
@@ -287,7 +288,7 @@ export default function TopLevel(props) {
         value: false,
       })
     } else {
-      const missions = _get(questConfig, "subQuests[0].missions") || []
+      const missions = TopLevelUtils.getMissions({ questConfig })
       const desiredItems =
         missions.map((mission) => !!mission.item && mission.item) || []
 
