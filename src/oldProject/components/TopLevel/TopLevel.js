@@ -18,7 +18,7 @@ const toaster = Toaster.create({
 })
 
 export default function TopLevel(props) {
-  const world = props.quest
+  // const world = props.quest
   const [localStorage, setLocalStorage] = useContext(myContext)
 
   console.log("localStorage-----------------------------------1", localStorage)
@@ -39,7 +39,7 @@ export default function TopLevel(props) {
 
   // on mount
   useEffect(() => {
-    init()
+    onChangeWorld({ mapId: props.quest.id })
 
     // returned function will be called on component unmount
     return () => {}
@@ -47,10 +47,6 @@ export default function TopLevel(props) {
 
   // on change in props
   useEffect(() => {}, [props])
-
-  const init = () => {
-    onChangeWorld({ mapId: world.id })
-  }
 
   const getDesiredItem = ({ activeMission }) => {
     if (!activeMission) {
@@ -95,8 +91,12 @@ export default function TopLevel(props) {
   }
 
   const updateQuestState = ({ itemsInScene, charactersInScene }) => {
-    const { questStatus } = localStorage
+    console.log("charactersInScene", charactersInScene) // zzz
+    console.log("itemsInScene", itemsInScene) // zzz
+
+    const { questStatus, world } = localStorage
     const { questConfig } = world
+    console.log("questStatus", questStatus) // zzz
 
     if (!questConfig) {
       return {}
@@ -111,6 +111,7 @@ export default function TopLevel(props) {
       questStatus.completedMissions = []
     }
 
+    console.log("missions", missions) // zzz
     if (!missions) {
       return {}
     }
@@ -157,6 +158,7 @@ export default function TopLevel(props) {
   }
 
   const getTerminalScene = ({ start = true }) => {
+    const { world } = localStorage
     const scenesGrid = _get(world, "newGrid5") || []
     const endScene = scenesGrid.find((item) => item.id === world.endSceneId)
     const startScene = scenesGrid.find((item) => item.id === world.startSceneId)
@@ -167,21 +169,20 @@ export default function TopLevel(props) {
     return terminalScene || (start ? firstScene : lastScene)
   }
 
-  const initWorld = async () => {
-    console.log("initWorld")
-    const startScene = getTerminalScene({})
-    if (!startScene) return
-    const questStatus = { ...localStorage.questStatus }
-    questStatus.visitedScenes = []
+  // const initWorld = async () => {
+  //   console.log("initWorld")
+  //   const startScene = getTerminalScene({})
+  //   if (!startScene) return
+  //   const questStatus = { ...localStorage.questStatus }
+  //   questStatus.visitedScenes = []
 
-    setLocalStorageProp({ prop: "questStatus", value: questStatus })
-    setLocalStorageProp({ prop: "activeSceneId", value: startScene.id })
-    setLocalStorageProp({ prop: "activeScene", value: startScene })
-  }
+  //   setLocalStorageProp({ prop: "questStatus", value: questStatus })
+  //   setLocalStorageProp({ prop: "activeScene", value: startScene })
+  // }
 
   const updateActiveScene = ({ sceneId }) => {
     setLocalStorageProp({ prop: "activeFrameIndex", value: 0 })
-    setLocalStorageProp({ prop: "activeSceneId", value: sceneId })
+    const { world } = localStorage
     const scenesGrid = _get(world, "newGrid5") || []
     const activeScene = scenesGrid.find((item) => item.id === sceneId)
 
@@ -202,7 +203,7 @@ export default function TopLevel(props) {
   const updateQuestStatus = () => {
     console.log("updateQuestStatus")
     toaster.clear()
-    const activeScene = localStorage.activeScene
+    const { activeScene, world } = localStorage
     console.log("activeScene", activeScene)
     const { location } = activeScene
 
@@ -259,16 +260,20 @@ export default function TopLevel(props) {
     })
   }
 
-  const onChangeWorld = ({ mapId }) => {
+  const onChangeWorld = () => {
+    const world = props.quest
     console.log("onChangeWorld")
     console.log("")
-    console.log("-----------------------mapId-------------", mapId)
+    console.log("-----------------------mapId-------------", world.id)
     toaster.clear()
 
     const questStatus = { ...Constants.getDefaultQuestStatus() }
-    setLocalStorageProp({ prop: "world", value: world })
-    setLocalStorageProp({ prop: "activeWorldId", value: mapId })
-    setLocalStorageProp({ prop: "questStatus", value: questStatus })
+    const startScene = getTerminalScene({})
+
+    if (!startScene) return
+
+    setLocalStorageProp({ prop: "world", value: props.quest })
+    setLocalStorageProp({ prop: "activeScene", value: startScene })
 
     if (!world) {
       return
@@ -276,49 +281,26 @@ export default function TopLevel(props) {
 
     const { questConfig } = world
 
-    if (questConfig) {
-      const missions = QuestStatusUtils.getActiveSubQuestMissions({
-        world,
-        questStatus,
+    if (!questConfig) {
+      setLocalStorageProp({
+        prop: "showMissionConsole",
+        value: false,
       })
-      const desiredItems =
-        (missions && missions.map((mission) => mission.item)) || []
-
-      const desiredItemsFiltered = desiredItems.filter((item) => !!item)
-      const clonedQuestConfig = JSON.parse(JSON.stringify(questConfig))
-
-      const combinedPockets = TopLevelUtils.addToPockets({
-        newPockets: clonedQuestConfig.pockets,
-        questStatus,
-      })
-      const defaultQuestStatus = Constants.getDefaultQuestStatus()
-
-      const newProps = {
-        activeMissionIndex: 0,
-        pockets: combinedPockets,
-        questConfig: clonedQuestConfig,
-        desiredItems: desiredItemsFiltered,
-      }
-      const newQuestStatus = { ...defaultQuestStatus, ...newProps }
-
-      setLocalStorageProp({ prop: "questStatus", value: newQuestStatus })
     } else {
+      const missions = _get(questConfig, "subQuests[0].missions") || []
+      const desiredItems =
+        missions.map((mission) => !!mission.item && mission.item) || []
+
       setLocalStorageProp({
         prop: "questStatus",
-        value: {
-          activeMissionIndex: 0,
-          showMissionConsole: false,
-        },
+        value: { ...questStatus, desiredItems },
       })
     }
-
-    initWorld()
   }
 
   const renderButtons = () => {
     const isProdRelease = false
 
-    const path = "/quests"
     return (
       <div className={css.floatingButtons}>
         <ButtonGroup color="primary">
@@ -332,16 +314,16 @@ export default function TopLevel(props) {
   console.log("main story render")
 
   const { className } = props
+  const { world, activeScene } = localStorage
 
   if (!world || !world.title) {
-    return null
+    return <div>no world</div>
   }
-
-  const activeScene = localStorage.activeScene
 
   if (!activeScene) {
-    return null
+    return <div>no active scene</div>
   }
+
   return (
     <div className={`${css.main} ${className}`}>
       <div>

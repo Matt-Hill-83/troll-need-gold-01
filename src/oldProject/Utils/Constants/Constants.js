@@ -4,7 +4,6 @@ export default class Constants {
   static getDefaultQuestStatus = () => {
     return {
       activeMissionIndex: 0,
-      activeSubQuestIndex: 0,
       cloudedScenes: [],
       completedMissions: [],
       desiredItems: [],

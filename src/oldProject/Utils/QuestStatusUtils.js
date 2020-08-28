@@ -237,14 +237,6 @@ export default class QuestStatusUtils {
     return output
   }
 
-  static getActiveSubQuest = ({ world, questStatus }) => {
-    const { questConfig } = world
-    const { subQuests } = questConfig
-    const { activeSubQuestIndex } = questStatus
-
-    return subQuests && subQuests[activeSubQuestIndex]
-  }
-
   static getParentSubQuestIndexFromScene = ({ world, sceneId }) => {
     if (!world) return 0
 
@@ -263,11 +255,6 @@ export default class QuestStatusUtils {
       })
 
     return parentSubQuest
-  }
-
-  static getActiveSubQuestMissions = ({ world, questStatus }) => {
-    const activeSubQuest = this.getActiveSubQuest({ world, questStatus })
-    return (activeSubQuest && activeSubQuest.missions) || null
   }
 
   static getSceneTriggerConfigFromScene = ({ sceneId, questConfig }) => {

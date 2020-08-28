@@ -17,8 +17,9 @@ export default class TopLevelUtils {
   }
 
   static isDesiredRecipientHere = ({ desiredRecipient, charactersInScene }) => {
+    console.log("desiredRecipient", desiredRecipient) // zzz
+    console.log("charactersInScene", charactersInScene) // zzz
     const characterNames = charactersInScene.map((item) => item.name)
-
     return characterNames.includes(desiredRecipient.name)
   }
 
@@ -36,6 +37,10 @@ export default class TopLevelUtils {
     const desiredRecipient = TopLevelUtils.getDesiredRecipient({
       activeMission,
     })
+
+    console.log("desiredRecipient", desiredRecipient) // zzz
+    console.log("desiredItem", desiredItem) // zzz
+
     const { pockets = {} } = questStatus
 
     const desiredItemIsInPocket = TopLevelUtils.isDesiredItemInPocket({
@@ -47,6 +52,9 @@ export default class TopLevelUtils {
       desiredRecipient,
       charactersInScene,
     })
+
+    console.log("desiredRecipientIsHere", desiredRecipientIsHere) // zzz
+    console.log("desiredItemIsInPocket", desiredItemIsInPocket) // zzz
 
     return desiredRecipientIsHere && desiredItemIsInPocket
   }
@@ -78,6 +86,8 @@ export default class TopLevelUtils {
     questStatus.desiredItems.push(...modifiedArray)
     return questStatus
   }
+
+  // TODO: Use this to add gold from user data to current pockets
   static addToPockets = ({ newPockets, questStatus }) => {
     const existingPockets = questStatus.pockets || {}
     for (const newPocketName in newPockets) {
