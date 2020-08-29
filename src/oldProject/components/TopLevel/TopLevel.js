@@ -39,28 +39,14 @@ export default function TopLevel(props) {
 
   // on mount
   useEffect(() => {
-    const world = props.quest
-    if (!world) {
-      return <div>no world on mount</div>
-    }
-
     // returned function will be called on component unmount
     return () => {}
   }, [])
 
   // on change in props
   useEffect(() => {
-    const world = props.quest
-    // setLocalStorageProp({ prop: "world", value: world })
     onChangeWorld()
   }, [props.quest])
-
-  const getDesiredItem = ({ activeMission }) => {
-    if (!activeMission) {
-      return null
-    }
-    return activeMission.item
-  }
 
   const findItem = ({ itemsInScene, questStatus }) => {
     const desiredItems = questStatus.desiredItems || []
@@ -154,6 +140,7 @@ export default function TopLevel(props) {
       })
       toaster.show({ message, className: css.toaster, timeout: 30000 })
     }
+
     const questStatus = localStorage.questStatus
     QuestStatusUtils.updateSceneVisibilityProps({
       questStatus,
@@ -188,7 +175,7 @@ export default function TopLevel(props) {
       completedMissions.push(activeMissionIndex)
 
       // remove item from pocket
-      const desiredItem = getDesiredItem({ activeMission })
+      const desiredItem = TopLevelUtils.getDesiredItem({ activeMission })
       delete pockets[desiredItem.name]
       activeMission.completed = true
       questStatus.activeMissionIndex++

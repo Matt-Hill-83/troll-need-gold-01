@@ -16,6 +16,13 @@ export default class TopLevelUtils {
     return newObj
   }
 
+  static getDesiredItem = ({ activeMission }) => {
+    if (!activeMission) {
+      return null
+    }
+    return activeMission.item
+  }
+
   static getTerminalScene = ({ start = true, world }) => {
     // const { world } = localStorage
     if (!world) return null
