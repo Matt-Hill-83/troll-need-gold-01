@@ -16,6 +16,22 @@ export default class TopLevelUtils {
     return newObj
   }
 
+  static getTerminalScene = ({ start = true, world }) => {
+    // const { world } = localStorage
+    if (!world) return null
+    const scenesGrid = _get(world, "newGrid5") || []
+    const endScene = scenesGrid.find((item) => item.id === world.endSceneId)
+    const startScene = scenesGrid.find((item) => item.id === world.startSceneId)
+
+    const terminalScene = start ? startScene : endScene
+
+    const firstScene = scenesGrid[0]
+    const lastScene = scenesGrid[scenesGrid.length - 1]
+
+    // If no start and finish scenes are marked, choose some, so the program doesn't break
+    return terminalScene || (start ? firstScene : lastScene)
+  }
+
   static isDesiredRecipientHere = ({ desiredRecipient, charactersInScene }) => {
     console.log("desiredRecipient", desiredRecipient) // zzz
     console.log("charactersInScene", charactersInScene) // zzz

@@ -215,23 +215,8 @@ export default function TopLevel(props) {
     }
   }
 
-  const getTerminalScene = ({ start = true, world }) => {
-    // const { world } = localStorage
-    if (!world) return null
-    const scenesGrid = _get(world, "newGrid5") || []
-    const endScene = scenesGrid.find((item) => item.id === world.endSceneId)
-    const startScene = scenesGrid.find((item) => item.id === world.startSceneId)
-
-    const terminalScene = start ? startScene : endScene
-
-    const firstScene = scenesGrid[0]
-    const lastScene = scenesGrid[scenesGrid.length - 1]
-
-    // If no start and finish scenes are marked, choose some, so the program doesn't break
-    return terminalScene || (start ? firstScene : lastScene)
-  }
-
   const updateActiveScene = ({ sceneId }) => {
+    console.log("updateActiveScene")
     setLocalStorageProp({ prop: "activeFrameIndex", value: 0 })
     const { world } = localStorage
     const scenesGrid = _get(world, "newGrid5") || []
@@ -262,7 +247,7 @@ export default function TopLevel(props) {
 
     const questStatus = { ...Constants.getDefaultQuestStatus() }
     // For some reason, I need to pass world here, because localStorage is not updating correctly.
-    const startScene = getTerminalScene({ world })
+    const startScene = TopLevelUtils.getTerminalScene({ world })
     if (!startScene) return
 
     setLocalStorageProp({ prop: "world", value: world })
