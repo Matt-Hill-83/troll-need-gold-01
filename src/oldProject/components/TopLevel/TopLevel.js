@@ -47,7 +47,15 @@ export default function TopLevel(props) {
   }, [])
 
   // on change in props
-  useEffect(() => {}, [props])
+  useEffect(() => {
+    console.log("new props=================================>>>>") // zzz
+    console.log("new props=================================>>>>") // zzz
+    console.log("new props=================================>>>>") // zzz
+    const world = props.quest
+    console.log("world", world) // zzz
+    setLocalStorageProp({ prop: "world", value: world })
+    onChangeWorld({ mapId: world.id })
+  }, [props.quest])
 
   const getDesiredItem = ({ activeMission }) => {
     if (!activeMission) {
@@ -215,13 +223,23 @@ export default function TopLevel(props) {
   }
 
   const getTerminalScene = ({ start = true }) => {
+    console.log("getTerminalScene") // zzz
+    console.log("localStorage", localStorage) // zzz
     const { world } = localStorage
+    if (!world) return null
     const scenesGrid = _get(world, "newGrid5") || []
     const endScene = scenesGrid.find((item) => item.id === world.endSceneId)
     const startScene = scenesGrid.find((item) => item.id === world.startSceneId)
+
     const terminalScene = start ? startScene : endScene
+
     const firstScene = scenesGrid[0]
     const lastScene = scenesGrid[scenesGrid.length - 1]
+
+    console.log("world", world) // zzz
+    console.log("world.startSceneId", world.startSceneId) // zzz
+    console.log("scenesGrid", scenesGrid) // zzz
+
     // If no start and finish scenes are marked, choose some, so the program doesn't break
     return terminalScene || (start ? firstScene : lastScene)
   }
@@ -319,9 +337,9 @@ export default function TopLevel(props) {
     return <div>no world</div>
   }
 
-  // if (!activeScene) {
-  //   return <div>no active scene</div>
-  // }
+  if (!activeScene) {
+    return <div>no active scene</div>
+  }
 
   const test = () => {
     setLocalStorageProp({ prop: "number", value: 999 })

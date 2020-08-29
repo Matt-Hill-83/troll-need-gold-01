@@ -35,9 +35,10 @@
 }
 
 .toasterContainer {
-  top: 70vh !important;
-  left: 50vw;
-  transform: translateY(-50%);
+  top: 6vh !important;
+  left: 1vw;
+  /* transform: translateY(-263%); */
+  position: absolute !important;
 }
 
 .toaster {
@@ -49,6 +50,7 @@
   padding: 0.5vh;
   font-size: 2vh;
   max-width: 70vw;
+  width: 25vw;
 
   :global {
     .bp3-icon > svg:not([fill]) {
