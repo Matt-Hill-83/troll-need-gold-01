@@ -37,6 +37,13 @@ export default function TopLevel(props) {
     })
   }
 
+  const setLocalStorageProp2 = (props) => {
+    setLocalStorage((state) => {
+      const test = { ...state, ...props }
+      return test
+    })
+  }
+
   // on mount
   useEffect(() => {
     // returned function will be called on component unmount
@@ -153,6 +160,9 @@ export default function TopLevel(props) {
       questStatus,
       activeWorld: world,
     })
+    //TODO:  Do I need to udpate questStatus here?
+    //TODO:  Do I need to udpate questStatus here?
+    //TODO:  Do I need to udpate questStatus here?
   }
 
   const updateQuestState = ({ itemsInScene, charactersInScene }) => {
@@ -216,17 +226,17 @@ export default function TopLevel(props) {
       questStatus,
     } = localStorage
 
-    setLocalStorageProp({ prop: "activeFrameIndex", value: 0 })
-
     const activeScene = TopLevelUtils.getActiveScene({ world, sceneId })
-    setLocalStorageProp({ prop: "activeScene", value: activeScene })
+
+    setLocalStorageProp2({ activeScene, activeFrameIndex: 0 })
+    // setLocalStorageProp({ prop: "activeScene", value: activeScene })
+    // setLocalStorageProp({ prop: "activeFrameIndex", value: 0 })
 
     questStatus.visitedScenes.push(sceneId)
-
     setLocalStorageProp({ prop: "questStatus", value: { ...questStatus } })
 
     if (showMissionConsole && questConfig) {
-      updateQuestStatus({ sceneId })
+      updateQuestStatus()
     }
   }
 
