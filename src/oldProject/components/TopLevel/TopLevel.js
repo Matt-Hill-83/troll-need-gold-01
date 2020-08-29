@@ -31,16 +31,29 @@ export default function TopLevel(props) {
   }
 
   const setLocalStorageProp = ({ prop, value }) => {
+    console.log("setLocalStorageProp") // zzz
     setLocalStorage((state) => {
-      return { ...state, [prop]: value }
+      console.log("") // zzz
+      console.log("") // zzz
+      console.log("setLocalStorage====================================>>>>>>") // zzz
+      console.log("setLocalStorage====================================>>>>>>") // zzz
+
+      const test = { ...state, [prop]: value }
+      console.log("test", test) // zzz
+      console.log("test.world", test.world) // zzz
+      // return { test: 444 }
+      return test
     })
   }
 
   // on mount
   useEffect(() => {
     const world = props.quest
-    setLocalStorageProp({ prop: "world", value: world })
-    onChangeWorld({ mapId: world.id })
+    if (!world) {
+      return <div>no world on mount</div>
+    }
+    // setLocalStorageProp({ prop: "world", value: world })
+    // onChangeWorld({ mapId: world.id })
 
     // returned function will be called on component unmount
     return () => {}
@@ -222,10 +235,11 @@ export default function TopLevel(props) {
     }
   }
 
-  const getTerminalScene = ({ start = true }) => {
+  const getTerminalScene = ({ start = true, world }) => {
     console.log("getTerminalScene") // zzz
     console.log("localStorage", localStorage) // zzz
-    const { world } = localStorage
+    // const { world } = localStorage
+    console.log("world", world) // zzz
     if (!world) return null
     const scenesGrid = _get(world, "newGrid5") || []
     const endScene = scenesGrid.find((item) => item.id === world.endSceneId)
@@ -243,17 +257,6 @@ export default function TopLevel(props) {
     // If no start and finish scenes are marked, choose some, so the program doesn't break
     return terminalScene || (start ? firstScene : lastScene)
   }
-
-  // const initWorld = async () => {
-  //   console.log("initWorld")
-  //   const startScene = getTerminalScene({})
-  //   if (!startScene) return
-  //   const questStatus = { ...localStorage.questStatus }
-  //   questStatus.visitedScenes = []
-
-  //   setLocalStorageProp({ prop: "questStatus", value: questStatus })
-  //   setLocalStorageProp({ prop: "activeScene", value: startScene })
-  // }
 
   const updateActiveScene = ({ sceneId }) => {
     setLocalStorageProp({ prop: "activeFrameIndex", value: 0 })
@@ -277,18 +280,23 @@ export default function TopLevel(props) {
 
   const onChangeWorld = () => {
     console.log("onChangeWorld")
+    console.log("localStorage", localStorage) // zzz
     const world = props.quest
     console.log("world", world) // zzz
+    setLocalStorageProp({ prop: "world", value: world })
+    console.log("localStorage", localStorage) // zzz
+
     console.log("")
     console.log("-----------------------mapId-------------", world.id)
     toaster.clear()
 
     const questStatus = { ...Constants.getDefaultQuestStatus() }
-    const startScene = getTerminalScene({})
+    // For some reason, I need to pass world here, because localStorage is not updating correctly.
+    const startScene = getTerminalScene({ world })
     console.log("startScene", startScene) // zzz
     if (!startScene) return
 
-    setLocalStorageProp({ prop: "world", value: props.quest })
+    setLocalStorageProp({ prop: "world", value: world })
     setLocalStorageProp({ prop: "activeScene", value: startScene })
     console.log("localStorage-----------change", localStorage) // zzz
 
