@@ -73,8 +73,7 @@ export default function TopLevel(props) {
       foundItem.amount = 1
     }
 
-    const newPockets = updatePocket({ foundItem, pockets })
-    questStatus.pockets = newPockets
+    questStatus.pockets = updatePocket({ foundItem, pockets })
 
     setLocalStorageProp({ prop: "questStatus", value: questStatus })
     return foundItem
@@ -210,21 +209,21 @@ export default function TopLevel(props) {
 
   const updateActiveScene = ({ sceneId }) => {
     console.log("updateActiveScene")
-    setLocalStorageProp({ prop: "activeFrameIndex", value: 0 })
     const {
       showMissionConsole,
       world,
       world: { questConfig },
+      questStatus,
     } = localStorage
 
-    const scenesGrid = _get(world, "newGrid5") || []
-    const activeScene = scenesGrid.find((item) => item.id === sceneId)
+    setLocalStorageProp({ prop: "activeFrameIndex", value: 0 })
+
+    const activeScene = TopLevelUtils.getActiveScene({ world, sceneId })
     setLocalStorageProp({ prop: "activeScene", value: activeScene })
 
-    const questStatus = { ...localStorage.questStatus }
     questStatus.visitedScenes.push(sceneId)
 
-    setLocalStorageProp({ prop: "questStatus", value: questStatus })
+    setLocalStorageProp({ prop: "questStatus", value: { ...questStatus } })
 
     if (showMissionConsole && questConfig) {
       updateQuestStatus({ sceneId })

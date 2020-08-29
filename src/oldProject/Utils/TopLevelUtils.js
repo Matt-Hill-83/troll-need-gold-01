@@ -96,6 +96,11 @@ export default class TopLevelUtils {
     return activeMission.recipient
   }
 
+  static getActiveScene = ({ world, sceneId }) => {
+    const scenesGrid = _get(world, "newGrid5") || []
+    return scenesGrid.find((item) => item.id === sceneId)
+  }
+
   static getMissions = ({ questConfig }) => {
     return _get(questConfig, "subQuests[0].missions") || []
   }
