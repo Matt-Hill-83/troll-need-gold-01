@@ -117,10 +117,13 @@ export default function TopLevel(props) {
     }
 
     const questStatus = localStorage.questStatus
-    QuestStatusUtils.updateSceneVisibilityProps({
+    const modifiedQuestStatus = QuestStatusUtils.updateSceneVisibilityProps({
       questStatus,
       activeWorld: world,
     })
+
+    setLocalStorageProp({ questStatus: { ...modifiedQuestStatus } })
+
     //TODO:  Do I need to udpate questStatus here?
     //TODO:  Do I need to udpate questStatus here?
     //TODO:  Do I need to udpate questStatus here?
@@ -177,6 +180,7 @@ export default function TopLevel(props) {
       questStatus,
       desiredItems: test2,
     })
+
     TopLevelUtils.removeItemFromDesiredItems({
       itemToRemove: foundItem,
       questStatus,

@@ -35,6 +35,7 @@ const Utils2 = () => {
 
     // TODO: I think I need to do this for each found item
     const foundItem = foundItems[0]
+    console.log("foundItem", foundItem) // zzz
     if (!foundItem) {
       return null
     }

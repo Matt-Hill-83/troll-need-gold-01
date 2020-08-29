@@ -66,6 +66,7 @@ export default class QuestStatusUtils {
         })
       })
     })
+    return questStatus
   }
 
   static _calcAccumulatedPropertyValues = ({
