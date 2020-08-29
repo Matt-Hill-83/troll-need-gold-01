@@ -47,43 +47,6 @@ export default function TopLevel(props) {
     onChangeWorld()
   }, [props.quest])
 
-  // const findItem = ({ itemsInScene, questStatus }) => {
-  //   console.log("itemsInScene", itemsInScene) // zzz
-  //   const desiredItems = questStatus.desiredItems || []
-  //   console.log(
-  //     "desiredItems---------------------------->>>>>>>>>>>>>",
-  //     desiredItems
-  //   ) // zzz
-  //   console.log("desiredItems", desiredItems) // zzz
-  //   const { pockets = {} } = questStatus
-
-  //   const foundItems = []
-  //   desiredItems.forEach((desiredItem) => {
-  //     const foundItem =
-  //       itemsInScene.find((item) => {
-  //         return item.name === (desiredItem && desiredItem.name)
-  //       }) || null
-  //     if (foundItem) {
-  //       foundItems.push(foundItem)
-  //     }
-  //   })
-
-  //   // TODO: I think I need to do this for each found item
-  //   const foundItem = foundItems[0]
-  //   if (!foundItem) {
-  //     return null
-  //   }
-
-  //   if (!foundItem.amount) {
-  //     foundItem.amount = 1
-  //   }
-
-  //   questStatus.pockets = TopLevelUtils.updatePocket({ foundItem, pockets })
-
-  //   setLocalStorageProp2({ questStatus: { ...questStatus } })
-  //   return foundItem
-  // }
-
   const updateQuestStatus = ({ theWorld, theActiveScene }) => {
     console.log("updateQuestStatus")
     toaster.clear()
