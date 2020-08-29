@@ -22,10 +22,10 @@ const useLocalStorage = () => {
     })
   }
 
-  const setLocalStorageProp2 = (props) => {
+  const setLocalStorageProp = (props) => {
     console.log("") // zzz
     console.log("") // zzz
-    console.log("setLocalStorageProp2---------------------------->") // zzz
+    console.log("setLocalStorageProp---------------------------->") // zzz
     setLocalStorage((state) => {
       const test = { ...state, ...props, test: new Date() }
       return test
@@ -35,7 +35,7 @@ const useLocalStorage = () => {
 
   return {
     localStorage,
-    setLocalStorageProp2,
+    setLocalStorageProp,
     setLocalStorage,
     setDesiredItems,
     increaseNumber,

@@ -5,16 +5,16 @@ const Utils2 = () => {
   const {
     localStorage,
     setLocalStorage,
-    setLocalStorageProp2,
+    setLocalStorageProp,
   } = useLocalStorage()
 
   const test23 = () => {
     console.log("zippy") // zzz
   }
 
-  const findItem = ({ itemsInScene, questStatus }) => {
+  const findItem = ({ itemsInScene, questStatus, desiredItems = [] }) => {
     console.log("itemsInScene", itemsInScene) // zzz
-    const desiredItems = questStatus.desiredItems || []
+    // const desiredItems = questStatus.desiredItems || []
     console.log(
       "desiredItems---------------------------->>>>>>>>>>>>>",
       desiredItems
@@ -45,7 +45,7 @@ const Utils2 = () => {
 
     questStatus.pockets = TopLevelUtils.updatePocket({ foundItem, pockets })
 
-    setLocalStorageProp2({ questStatus: { ...questStatus } })
+    setLocalStorageProp({ questStatus: { ...questStatus } })
     return foundItem
   }
 

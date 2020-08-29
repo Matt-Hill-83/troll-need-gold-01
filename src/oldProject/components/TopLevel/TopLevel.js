@@ -22,15 +22,25 @@ export default function TopLevel(props) {
   const {
     localStorage,
     increaseNumber,
-    setLocalStorage,
-    setDesiredItems,
-    setLocalStorageProp2,
+    setLocalStorageProp,
   } = useLocalStorage()
 
   const { test23, findItem } = Utils2()
 
-  const [localProps, setLocalProps] = useState({})
-  console.log("localProps", localProps) // zzz
+  const [topLevelState, setTopLevelState] = useState([])
+
+  const setTopLevelProps2 = (props) => {
+    console.log("") // zzz
+    console.log("") // zzz
+    console.log("setTopLevelProps2---------------------------->") // zzz
+    setTopLevelState((state) => {
+      const test = { ...state, ...props, test: new Date() }
+      return test
+    })
+    console.log("topLevelState --- just set", topLevelState) // zzz
+  }
+
+  console.log("topLevelState", topLevelState) // zzz
 
   console.log("localStorage-----------------------------------1", localStorage)
 
@@ -156,11 +166,17 @@ export default function TopLevel(props) {
         questStatus,
       })
 
-      // questStatus.pockets = pockets
-      setLocalStorageProp2({ questStatus: { ...questStatus } })
+      setLocalStorageProp({ questStatus: { ...questStatus } })
     }
 
-    const foundItem = findItem({ itemsInScene, questStatus })
+    const test2 = topLevelState
+    console.log("test2", test2) // zzz
+
+    const foundItem = findItem({
+      itemsInScene,
+      questStatus,
+      desiredItems: test2,
+    })
     TopLevelUtils.removeItemFromDesiredItems({
       itemToRemove: foundItem,
       questStatus,
@@ -184,7 +200,7 @@ export default function TopLevel(props) {
     const activeScene = TopLevelUtils.getActiveScene({ world, sceneId })
     questStatus.visitedScenes.push(sceneId)
 
-    setLocalStorageProp2({ activeScene, activeFrameIndex: 0, questStatus })
+    setLocalStorageProp({ activeScene, activeFrameIndex: 0, questStatus })
     console.log("localStorage ----updateActiveScene", localStorage) // zzz
     if (showMissionConsole && questConfig) {
       updateQuestStatus({ theWorld: world, theActiveScene: activeScene })
@@ -198,7 +214,7 @@ export default function TopLevel(props) {
       "world---------------------------------------------------->",
       world
     ) // zzz
-    setLocalStorageProp2({ world: { ...world } })
+    setLocalStorageProp({ world: { ...world } })
     if (!world) {
       return <div>no world</div>
     }
@@ -213,30 +229,25 @@ export default function TopLevel(props) {
     const startScene = TopLevelUtils.getTerminalScene({ world })
     if (!startScene) return <div>no start scene</div>
 
-    setLocalStorageProp2({ world, activeScene: startScene })
+    setLocalStorageProp({ world, activeScene: startScene })
     const test = []
     if (!questConfig) {
       debugger
-      setLocalStorageProp2({
+      setLocalStorageProp({
         showMissionConsole: false,
       })
     } else {
       const missions = TopLevelUtils.getMissions({ questConfig })
-      console.log("missions", missions) // zzz
       const desiredItems =
         missions.map((mission) => !!mission.item && mission.item) || []
       console.log("desiredItems", desiredItems) // zzz
-      console.log("desiredItems", desiredItems) // zzz
-      console.log("desiredItems", desiredItems) // zzz
-      console.log("desiredItems", desiredItems) // zzz
+      console.log("topLevelState", topLevelState) // zzz
 
-      // setLocalStorageProp2({
-      //   questStatus: { ...questStatus, desiredItems },
-      // })
       test.push(...desiredItems)
     }
     console.log("test", test) // zzz
-    setDesiredItems({ test })
+    // setDesiredItems({ test })
+    setTopLevelState(test)
 
     console.log("localStorage-----------after DI", localStorage) // zzz
     console.log(
