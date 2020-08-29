@@ -227,13 +227,9 @@ export default function TopLevel(props) {
     } = localStorage
 
     const activeScene = TopLevelUtils.getActiveScene({ world, sceneId })
-
-    setLocalStorageProp2({ activeScene, activeFrameIndex: 0 })
-    // setLocalStorageProp({ prop: "activeScene", value: activeScene })
-    // setLocalStorageProp({ prop: "activeFrameIndex", value: 0 })
-
     questStatus.visitedScenes.push(sceneId)
-    setLocalStorageProp({ prop: "questStatus", value: { ...questStatus } })
+
+    setLocalStorageProp2({ activeScene, activeFrameIndex: 0, questStatus })
 
     if (showMissionConsole && questConfig) {
       updateQuestStatus()
