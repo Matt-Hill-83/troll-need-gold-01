@@ -31,17 +31,8 @@ export default function TopLevel(props) {
   }
 
   const setLocalStorageProp = ({ prop, value }) => {
-    console.log("setLocalStorageProp") // zzz
     setLocalStorage((state) => {
-      console.log("") // zzz
-      console.log("") // zzz
-      console.log("setLocalStorage====================================>>>>>>") // zzz
-      console.log("setLocalStorage====================================>>>>>>") // zzz
-
       const test = { ...state, [prop]: value }
-      console.log("test", test) // zzz
-      console.log("test.world", test.world) // zzz
-      // return { test: 444 }
       return test
     })
   }
@@ -61,11 +52,7 @@ export default function TopLevel(props) {
 
   // on change in props
   useEffect(() => {
-    console.log("new props=================================>>>>") // zzz
-    console.log("new props=================================>>>>") // zzz
-    console.log("new props=================================>>>>") // zzz
     const world = props.quest
-    console.log("world", world) // zzz
     setLocalStorageProp({ prop: "world", value: world })
     onChangeWorld({ mapId: world.id })
   }, [props.quest])
@@ -173,15 +160,10 @@ export default function TopLevel(props) {
   }
 
   const updateQuestState = ({ itemsInScene, charactersInScene }) => {
-    console.log("charactersInScene", charactersInScene) // zzz
-    console.log("itemsInScene", itemsInScene) // zzz
-
     const {
       questStatus,
       world: { questConfig },
     } = localStorage
-
-    console.log("questStatus", questStatus) // zzz
 
     if (!questConfig) {
       return {}
@@ -190,8 +172,6 @@ export default function TopLevel(props) {
     const missions = TopLevelUtils.getMissions({ questConfig })
 
     const { pockets, completedMissions } = questStatus
-
-    console.log("missions", missions) // zzz
 
     const activeMissionIndex = questStatus.activeMissionIndex
     const activeMission = missions[activeMissionIndex] || null
@@ -236,10 +216,7 @@ export default function TopLevel(props) {
   }
 
   const getTerminalScene = ({ start = true, world }) => {
-    console.log("getTerminalScene") // zzz
-    console.log("localStorage", localStorage) // zzz
     // const { world } = localStorage
-    console.log("world", world) // zzz
     if (!world) return null
     const scenesGrid = _get(world, "newGrid5") || []
     const endScene = scenesGrid.find((item) => item.id === world.endSceneId)
@@ -249,10 +226,6 @@ export default function TopLevel(props) {
 
     const firstScene = scenesGrid[0]
     const lastScene = scenesGrid[scenesGrid.length - 1]
-
-    console.log("world", world) // zzz
-    console.log("world.startSceneId", world.startSceneId) // zzz
-    console.log("scenesGrid", scenesGrid) // zzz
 
     // If no start and finish scenes are marked, choose some, so the program doesn't break
     return terminalScene || (start ? firstScene : lastScene)
@@ -280,11 +253,8 @@ export default function TopLevel(props) {
 
   const onChangeWorld = () => {
     console.log("onChangeWorld")
-    console.log("localStorage", localStorage) // zzz
     const world = props.quest
-    console.log("world", world) // zzz
     // setLocalStorageProp({ prop: "world", value: world })
-    console.log("localStorage", localStorage) // zzz
 
     console.log("")
     console.log("-----------------------mapId-------------", world.id)
@@ -293,12 +263,10 @@ export default function TopLevel(props) {
     const questStatus = { ...Constants.getDefaultQuestStatus() }
     // For some reason, I need to pass world here, because localStorage is not updating correctly.
     const startScene = getTerminalScene({ world })
-    console.log("startScene", startScene) // zzz
     if (!startScene) return
 
     setLocalStorageProp({ prop: "world", value: world })
     setLocalStorageProp({ prop: "activeScene", value: startScene })
-    console.log("localStorage-----------change", localStorage) // zzz
 
     if (!world) {
       return
@@ -358,8 +326,8 @@ export default function TopLevel(props) {
       <div>
         <div>
           <h1>Number: {localStorage.number}</h1>
-          <button onClick={test}>+1</button>
-          {/* <button onClick={increaseNumber}>+1</button> */}
+          {/* <button onClick={test}>+1</button> */}
+          <button onClick={increaseNumber}>+1</button>
         </div>
       </div>
       {renderButtons()}
