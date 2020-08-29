@@ -43,8 +43,6 @@ export default function TopLevel(props) {
     if (!world) {
       return <div>no world on mount</div>
     }
-    // setLocalStorageProp({ prop: "world", value: world })
-    // onChangeWorld({ mapId: world.id })
 
     // returned function will be called on component unmount
     return () => {}
@@ -53,8 +51,8 @@ export default function TopLevel(props) {
   // on change in props
   useEffect(() => {
     const world = props.quest
-    setLocalStorageProp({ prop: "world", value: world })
-    onChangeWorld({ mapId: world.id })
+    // setLocalStorageProp({ prop: "world", value: world })
+    onChangeWorld()
   }, [props.quest])
 
   const getDesiredItem = ({ activeMission }) => {
@@ -244,6 +242,7 @@ export default function TopLevel(props) {
     if (!world) {
       return <div>no world</div>
     }
+    const { questConfig } = world
 
     console.log("")
     console.log("-----------------------mapId-------------", world.id)
@@ -256,8 +255,6 @@ export default function TopLevel(props) {
 
     setLocalStorageProp({ prop: "world", value: world })
     setLocalStorageProp({ prop: "activeScene", value: startScene })
-
-    const { questConfig } = world
 
     if (!questConfig) {
       setLocalStorageProp({
