@@ -56,7 +56,7 @@ export default function TopLevel(props) {
     return activeMission.item
   }
 
-  const _findItem = ({ itemsInScene, questStatus }) => {
+  const findItem = ({ itemsInScene, questStatus }) => {
     const desiredItems = questStatus.desiredItems || []
     const { pockets = {} } = questStatus
 
@@ -89,112 +89,6 @@ export default function TopLevel(props) {
 
     setLocalStorageProp({ prop: "questStatus", value: questStatus })
     return foundItem
-  }
-
-  const updateQuestState = ({ itemsInScene, charactersInScene }) => {
-    console.log("charactersInScene", charactersInScene) // zzz
-    console.log("itemsInScene", itemsInScene) // zzz
-
-    const {
-      questStatus,
-      world: { questConfig },
-    } = localStorage
-
-    console.log("questStatus", questStatus) // zzz
-
-    if (!questConfig) {
-      return {}
-    }
-
-    const missions = TopLevelUtils.getMissions({ questConfig })
-
-    const { pockets, completedMissions } = questStatus
-
-    console.log("missions", missions) // zzz
-
-    const activeMissionIndex = questStatus.activeMissionIndex
-    const activeMission = missions[activeMissionIndex] || null
-
-    if (!activeMission) {
-      return {}
-    }
-
-    const isMissionCompleted = TopLevelUtils.completeMission({
-      charactersInScene,
-      questStatus,
-      activeMission,
-    })
-
-    if (isMissionCompleted) {
-      completedMissions.push(activeMissionIndex)
-
-      // remove item from pocket
-      const desiredItem = getDesiredItem({ activeMission })
-      delete pockets[desiredItem.name]
-      activeMission.completed = true
-      questStatus.activeMissionIndex++
-
-      const newPockets = TopLevelUtils.convertItemToObjFormat({
-        itemsArray: activeMission.rewards,
-      })
-
-      TopLevelUtils.addToPockets({ newPockets, questStatus })
-      setLocalStorageProp({ prop: "questStatus", value: questStatus })
-    }
-
-    const foundItem = _findItem({ itemsInScene, questStatus })
-    TopLevelUtils.removeItemFromDesiredItems({
-      itemToRemove: foundItem,
-      questStatus,
-    })
-
-    return {
-      foundItem,
-      completedMission: isMissionCompleted ? activeMission : false,
-    }
-  }
-
-  const getTerminalScene = ({ start = true }) => {
-    const { world } = localStorage
-    const scenesGrid = _get(world, "newGrid5") || []
-    const endScene = scenesGrid.find((item) => item.id === world.endSceneId)
-    const startScene = scenesGrid.find((item) => item.id === world.startSceneId)
-    const terminalScene = start ? startScene : endScene
-    const firstScene = scenesGrid[0]
-    const lastScene = scenesGrid[scenesGrid.length - 1]
-    // If no start and finish scenes are marked, choose some, so the program doesn't break
-    return terminalScene || (start ? firstScene : lastScene)
-  }
-
-  // const initWorld = async () => {
-  //   console.log("initWorld")
-  //   const startScene = getTerminalScene({})
-  //   if (!startScene) return
-  //   const questStatus = { ...localStorage.questStatus }
-  //   questStatus.visitedScenes = []
-
-  //   setLocalStorageProp({ prop: "questStatus", value: questStatus })
-  //   setLocalStorageProp({ prop: "activeScene", value: startScene })
-  // }
-
-  const updateActiveScene = ({ sceneId }) => {
-    setLocalStorageProp({ prop: "activeFrameIndex", value: 0 })
-    const { world } = localStorage
-    const scenesGrid = _get(world, "newGrid5") || []
-    const activeScene = scenesGrid.find((item) => item.id === sceneId)
-
-    setLocalStorageProp({ prop: "activeScene", value: activeScene })
-
-    const questStatus = { ...localStorage.questStatus }
-    questStatus.visitedScenes.push(sceneId)
-
-    setLocalStorageProp({ prop: "questStatus", value: questStatus })
-
-    const { showMissionConsole } = localStorage
-
-    if (showMissionConsole) {
-      updateQuestStatus({ sceneId })
-    }
   }
 
   const updateQuestStatus = () => {
@@ -257,6 +151,112 @@ export default function TopLevel(props) {
     })
   }
 
+  const updateQuestState = ({ itemsInScene, charactersInScene }) => {
+    console.log("charactersInScene", charactersInScene) // zzz
+    console.log("itemsInScene", itemsInScene) // zzz
+
+    const {
+      questStatus,
+      world: { questConfig },
+    } = localStorage
+
+    console.log("questStatus", questStatus) // zzz
+
+    if (!questConfig) {
+      return {}
+    }
+
+    const missions = TopLevelUtils.getMissions({ questConfig })
+
+    const { pockets, completedMissions } = questStatus
+
+    console.log("missions", missions) // zzz
+
+    const activeMissionIndex = questStatus.activeMissionIndex
+    const activeMission = missions[activeMissionIndex] || null
+
+    if (!activeMission) {
+      return {}
+    }
+
+    const isMissionCompleted = TopLevelUtils.completeMission({
+      charactersInScene,
+      questStatus,
+      activeMission,
+    })
+
+    if (isMissionCompleted) {
+      completedMissions.push(activeMissionIndex)
+
+      // remove item from pocket
+      const desiredItem = getDesiredItem({ activeMission })
+      delete pockets[desiredItem.name]
+      activeMission.completed = true
+      questStatus.activeMissionIndex++
+
+      const newPockets = TopLevelUtils.convertItemToObjFormat({
+        itemsArray: activeMission.rewards,
+      })
+
+      TopLevelUtils.addToPockets({ newPockets, questStatus })
+      setLocalStorageProp({ prop: "questStatus", value: questStatus })
+    }
+
+    const foundItem = findItem({ itemsInScene, questStatus })
+    TopLevelUtils.removeItemFromDesiredItems({
+      itemToRemove: foundItem,
+      questStatus,
+    })
+
+    return {
+      foundItem,
+      completedMission: isMissionCompleted ? activeMission : false,
+    }
+  }
+
+  const getTerminalScene = ({ start = true }) => {
+    const { world } = localStorage
+    const scenesGrid = _get(world, "newGrid5") || []
+    const endScene = scenesGrid.find((item) => item.id === world.endSceneId)
+    const startScene = scenesGrid.find((item) => item.id === world.startSceneId)
+    const terminalScene = start ? startScene : endScene
+    const firstScene = scenesGrid[0]
+    const lastScene = scenesGrid[scenesGrid.length - 1]
+    // If no start and finish scenes are marked, choose some, so the program doesn't break
+    return terminalScene || (start ? firstScene : lastScene)
+  }
+
+  // const initWorld = async () => {
+  //   console.log("initWorld")
+  //   const startScene = getTerminalScene({})
+  //   if (!startScene) return
+  //   const questStatus = { ...localStorage.questStatus }
+  //   questStatus.visitedScenes = []
+
+  //   setLocalStorageProp({ prop: "questStatus", value: questStatus })
+  //   setLocalStorageProp({ prop: "activeScene", value: startScene })
+  // }
+
+  const updateActiveScene = ({ sceneId }) => {
+    setLocalStorageProp({ prop: "activeFrameIndex", value: 0 })
+    const { world } = localStorage
+    const scenesGrid = _get(world, "newGrid5") || []
+    const activeScene = scenesGrid.find((item) => item.id === sceneId)
+
+    setLocalStorageProp({ prop: "activeScene", value: activeScene })
+
+    const questStatus = { ...localStorage.questStatus }
+    questStatus.visitedScenes.push(sceneId)
+
+    setLocalStorageProp({ prop: "questStatus", value: questStatus })
+
+    const { showMissionConsole } = localStorage
+
+    if (showMissionConsole) {
+      updateQuestStatus({ sceneId })
+    }
+  }
+
   const onChangeWorld = () => {
     console.log("onChangeWorld")
     const world = props.quest
@@ -267,11 +267,12 @@ export default function TopLevel(props) {
 
     const questStatus = { ...Constants.getDefaultQuestStatus() }
     const startScene = getTerminalScene({})
-
+    console.log("startScene", startScene) // zzz
     if (!startScene) return
 
     setLocalStorageProp({ prop: "world", value: props.quest })
     setLocalStorageProp({ prop: "activeScene", value: startScene })
+    console.log("localStorage-----------change", localStorage) // zzz
 
     if (!world) {
       return
@@ -318,8 +319,12 @@ export default function TopLevel(props) {
     return <div>no world</div>
   }
 
-  if (!activeScene) {
-    return <div>no active scene</div>
+  // if (!activeScene) {
+  //   return <div>no active scene</div>
+  // }
+
+  const test = () => {
+    setLocalStorageProp({ prop: "number", value: 999 })
   }
 
   return (
@@ -327,7 +332,8 @@ export default function TopLevel(props) {
       <div>
         <div>
           <h1>Number: {localStorage.number}</h1>
-          <button onClick={increaseNumber}>+1</button>
+          <button onClick={test}>+1</button>
+          {/* <button onClick={increaseNumber}>+1</button> */}
         </div>
       </div>
       {renderButtons()}
