@@ -143,4 +143,15 @@ export default class TopLevelUtils {
     }
     return existingPockets
   }
+
+  static updatePocket = ({ foundItem, pockets }) => {
+    const itemInPocket = pockets[foundItem.name]
+    if (itemInPocket) {
+      itemInPocket.amount = itemInPocket.amount + foundItem.amount
+    } else {
+      pockets[foundItem.name] = { amount: foundItem.amount }
+    }
+
+    return pockets
+  }
 }

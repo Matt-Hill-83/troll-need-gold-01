@@ -80,21 +80,10 @@ export default function TopLevel(props) {
       foundItem.amount = 1
     }
 
-    questStatus.pockets = updatePocket({ foundItem, pockets })
+    questStatus.pockets = TopLevelUtils.updatePocket({ foundItem, pockets })
 
     setLocalStorageProp({ prop: "questStatus", value: questStatus })
     return foundItem
-  }
-
-  const updatePocket = ({ foundItem, pockets }) => {
-    const itemInPocket = pockets[foundItem.name]
-    if (itemInPocket) {
-      itemInPocket.amount = itemInPocket.amount + foundItem.amount
-    } else {
-      pockets[foundItem.name] = { amount: foundItem.amount }
-    }
-
-    return pockets
   }
 
   const updateQuestStatus = () => {
