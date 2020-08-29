@@ -62,6 +62,8 @@ export default function TopLevel(props) {
         foundItems.push(foundItem)
       }
     })
+
+    // TODO: I think I need to do this for each found item
     const foundItem = foundItems[0]
     if (!foundItem) {
       return null
@@ -71,16 +73,22 @@ export default function TopLevel(props) {
       foundItem.amount = 1
     }
 
-    const itemsInPockets = pockets[foundItem.name]
+    const newPockets = updatePocket({ foundItem, pockets })
+    questStatus.pockets = newPockets
 
-    if (itemsInPockets) {
-      itemsInPockets.amount = itemsInPockets.amount + foundItem.amount
+    setLocalStorageProp({ prop: "questStatus", value: questStatus })
+    return foundItem
+  }
+
+  const updatePocket = ({ foundItem, pockets }) => {
+    const itemInPocket = pockets[foundItem.name]
+    if (itemInPocket) {
+      itemInPocket.amount = itemInPocket.amount + foundItem.amount
     } else {
       pockets[foundItem.name] = { amount: foundItem.amount }
     }
 
-    setLocalStorageProp({ prop: "questStatus", value: questStatus })
-    return foundItem
+    return pockets
   }
 
   const updateQuestStatus = () => {
@@ -107,7 +115,7 @@ export default function TopLevel(props) {
         <div>
           <span>{`You find a ${foundItem.name}.`}</span>
           <br />
-          <span>{`You put the ${foundItem.name} in your pocket.`}</span>
+          <span>{`You put the ${foundItem.name} in your pockets.`}</span>
         </div>
       )
       toaster.show({
@@ -155,7 +163,6 @@ export default function TopLevel(props) {
       world: { questConfig },
     } = localStorage
 
-    // const missions = TopLevelUtils.getMissions({ questConfig })
     const activeMissionIndex = questStatus.activeMissionIndex
     const activeMission = TopLevelUtils.getActiveMission({
       questConfig,
@@ -175,7 +182,7 @@ export default function TopLevel(props) {
     if (isMissionCompleted) {
       completedMissions.push(activeMissionIndex)
 
-      // remove item from pocket
+      // remove item from pockets
       const desiredItem = TopLevelUtils.getDesiredItem({ activeMission })
       delete pockets[desiredItem.name]
       activeMission.completed = true
