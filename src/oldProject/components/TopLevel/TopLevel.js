@@ -241,7 +241,9 @@ export default function TopLevel(props) {
   const onChangeWorld = () => {
     console.log("onChangeWorld")
     const world = props.quest
-    // setLocalStorageProp({ prop: "world", value: world })
+    if (!world) {
+      return <div>no world</div>
+    }
 
     console.log("")
     console.log("-----------------------mapId-------------", world.id)
@@ -250,14 +252,10 @@ export default function TopLevel(props) {
     const questStatus = { ...Constants.getDefaultQuestStatus() }
     // For some reason, I need to pass world here, because localStorage is not updating correctly.
     const startScene = TopLevelUtils.getTerminalScene({ world })
-    if (!startScene) return
+    if (!startScene) return <div>no start scene</div>
 
     setLocalStorageProp({ prop: "world", value: world })
     setLocalStorageProp({ prop: "activeScene", value: startScene })
-
-    if (!world) {
-      return
-    }
 
     const { questConfig } = world
 
