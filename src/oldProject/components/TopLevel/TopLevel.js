@@ -151,15 +151,16 @@ export default function TopLevel(props) {
   const updateQuestState = ({ itemsInScene, charactersInScene }) => {
     const {
       questStatus,
+      questStatus: { pockets, completedMissions },
       world: { questConfig },
     } = localStorage
 
-    const missions = TopLevelUtils.getMissions({ questConfig })
-
-    const { pockets, completedMissions } = questStatus
-
+    // const missions = TopLevelUtils.getMissions({ questConfig })
     const activeMissionIndex = questStatus.activeMissionIndex
-    const activeMission = missions[activeMissionIndex] || null
+    const activeMission = TopLevelUtils.getActiveMission({
+      questConfig,
+      questStatus,
+    })
 
     if (!activeMission) {
       return {}

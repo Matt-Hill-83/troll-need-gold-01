@@ -100,6 +100,12 @@ export default class TopLevelUtils {
     return _get(questConfig, "subQuests[0].missions") || []
   }
 
+  static getActiveMission = ({ questConfig, questStatus }) => {
+    const missions = TopLevelUtils.getMissions({ questConfig })
+    const activeMissionIndex = questStatus.activeMissionIndex
+    return missions[activeMissionIndex] || null
+  }
+
   static removeItemFromDesiredItems = ({ itemToRemove, questStatus }) => {
     if (!itemToRemove) {
       return
