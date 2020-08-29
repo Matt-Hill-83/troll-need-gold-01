@@ -242,8 +242,7 @@ export default function TopLevel(props) {
     const startScene = TopLevelUtils.getTerminalScene({ world })
     if (!startScene) return <div>no start scene</div>
 
-    setLocalStorageProp({ prop: "world", value: world })
-    setLocalStorageProp({ prop: "activeScene", value: startScene })
+    setLocalStorageProp2({ world, activeScene: startScene })
 
     if (!questConfig) {
       setLocalStorageProp({
