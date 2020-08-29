@@ -254,9 +254,8 @@ export default function TopLevel(props) {
       const desiredItems =
         missions.map((mission) => !!mission.item && mission.item) || []
 
-      setLocalStorageProp({
-        prop: "questStatus",
-        value: { ...questStatus, desiredItems },
+      setLocalStorageProp2({
+        questStatus: { ...questStatus, desiredItems },
       })
     }
   }
