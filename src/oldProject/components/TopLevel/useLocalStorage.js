@@ -7,6 +7,13 @@ const useLocalStorage = () => {
   console.log("localStorage", localStorage) // zzz
   // Play a specific track
 
+  const setDesiredItems = (props) => {
+    setLocalStorage((prevVal) => {
+      const newVal = { ...prevVal, test: props }
+      return newVal
+    })
+  }
+
   function getState() {
     return localStorage
   }
@@ -20,6 +27,7 @@ const useLocalStorage = () => {
     getState,
     setState,
     setLocalStorage,
+    setDesiredItems,
   }
 }
 

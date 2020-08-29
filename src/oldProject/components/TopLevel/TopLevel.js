@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react"
 import _get from "lodash.get"
 import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core"
 
-import { myContext } from "../../../myProvider.js"
 import Constants from "../../Utils/Constants/Constants.js"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 import StoryMode from "../StoryMode/StoryMode"
@@ -19,7 +18,7 @@ const toaster = Toaster.create({
 })
 
 export default function TopLevel(props) {
-  const { localStorage, setLocalStorage } = useLocalStorage()
+  const { localStorage, setLocalStorage, setDesiredItems } = useLocalStorage()
 
   const [localProps, setLocalProps] = useState({})
   console.log("localProps", localProps) // zzz
@@ -34,13 +33,13 @@ export default function TopLevel(props) {
     })
   }
 
-  const setDesiredItems = (props) => {
-    setLocalStorage((prevVal) => {
-      const newVal = { ...prevVal, test: props }
-      // return { asdf: 324 }
-      return newVal
-    })
-  }
+  // const setDesiredItems = (props) => {
+  //   setLocalStorage((prevVal) => {
+  //     const newVal = { ...prevVal, test: props }
+  //     // return { asdf: 324 }
+  //     return newVal
+  //   })
+  // }
 
   const setLocalStorageProp2 = (props) => {
     console.log("") // zzz
