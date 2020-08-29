@@ -6,8 +6,9 @@ import Constants from "../../Utils/Constants/Constants.js"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 import StoryMode from "../StoryMode/StoryMode"
 import TopLevelUtils from "../../Utils/TopLevelUtils.js"
-import Utils from "../../Utils/Utils.js"
 import useLocalStorage from "./useLocalStorage.js"
+import Utils from "../../Utils/Utils.js"
+import Utils2 from "../../Utils/Utils2.js"
 
 import css from "./TopLevel.module.scss"
 
@@ -25,6 +26,8 @@ export default function TopLevel(props) {
     setDesiredItems,
     setLocalStorageProp2,
   } = useLocalStorage()
+
+  const { test23, findItem } = Utils2()
 
   const [localProps, setLocalProps] = useState({})
   console.log("localProps", localProps) // zzz
@@ -44,47 +47,42 @@ export default function TopLevel(props) {
     onChangeWorld()
   }, [props.quest])
 
-  const findItem = ({ itemsInScene, questStatus }) => {
-    console.log("itemsInScene", itemsInScene) // zzz
-    console.log("itemsInScene", itemsInScene) // zzz
-    console.log("itemsInScene", itemsInScene) // zzz
-    console.log("itemsInScene", itemsInScene) // zzz
-    console.log("itemsInScene", itemsInScene) // zzz
-    console.log("itemsInScene", itemsInScene) // zzz
-    const desiredItems = questStatus.desiredItems || []
-    console.log(
-      "desiredItems---------------------------->>>>>>>>>>>>>",
-      desiredItems
-    ) // zzz
-    console.log("desiredItems", desiredItems) // zzz
-    const { pockets = {} } = questStatus
+  // const findItem = ({ itemsInScene, questStatus }) => {
+  //   console.log("itemsInScene", itemsInScene) // zzz
+  //   const desiredItems = questStatus.desiredItems || []
+  //   console.log(
+  //     "desiredItems---------------------------->>>>>>>>>>>>>",
+  //     desiredItems
+  //   ) // zzz
+  //   console.log("desiredItems", desiredItems) // zzz
+  //   const { pockets = {} } = questStatus
 
-    const foundItems = []
-    desiredItems.forEach((desiredItem) => {
-      const foundItem =
-        itemsInScene.find((item) => {
-          return item.name === (desiredItem && desiredItem.name)
-        }) || null
-      if (foundItem) {
-        foundItems.push(foundItem)
-      }
-    })
+  //   const foundItems = []
+  //   desiredItems.forEach((desiredItem) => {
+  //     const foundItem =
+  //       itemsInScene.find((item) => {
+  //         return item.name === (desiredItem && desiredItem.name)
+  //       }) || null
+  //     if (foundItem) {
+  //       foundItems.push(foundItem)
+  //     }
+  //   })
 
-    // TODO: I think I need to do this for each found item
-    const foundItem = foundItems[0]
-    if (!foundItem) {
-      return null
-    }
+  //   // TODO: I think I need to do this for each found item
+  //   const foundItem = foundItems[0]
+  //   if (!foundItem) {
+  //     return null
+  //   }
 
-    if (!foundItem.amount) {
-      foundItem.amount = 1
-    }
+  //   if (!foundItem.amount) {
+  //     foundItem.amount = 1
+  //   }
 
-    questStatus.pockets = TopLevelUtils.updatePocket({ foundItem, pockets })
+  //   questStatus.pockets = TopLevelUtils.updatePocket({ foundItem, pockets })
 
-    setLocalStorageProp2({ questStatus: { ...questStatus } })
-    return foundItem
-  }
+  //   setLocalStorageProp2({ questStatus: { ...questStatus } })
+  //   return foundItem
+  // }
 
   const updateQuestStatus = ({ theWorld, theActiveScene }) => {
     console.log("updateQuestStatus")

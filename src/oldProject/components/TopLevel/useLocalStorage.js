@@ -26,15 +26,11 @@ const useLocalStorage = () => {
     console.log("") // zzz
     console.log("") // zzz
     console.log("setLocalStorageProp2---------------------------->") // zzz
-    // console.log("props", props) // zzz
     setLocalStorage((state) => {
-      // console.log("state", state) // zzz
       const test = { ...state, ...props, test: new Date() }
-      // console.log("test.world", test.world) // zzz
       return test
     })
     console.log("localStorage --- just set", localStorage) // zzz
-    // console.log("localStorage --- just set", localStorage.world) // zzz
   }
 
   return {
