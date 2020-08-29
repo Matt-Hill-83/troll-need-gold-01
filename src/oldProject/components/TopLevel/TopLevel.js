@@ -102,16 +102,20 @@ export default function TopLevel(props) {
   const updateQuestStatus = () => {
     console.log("updateQuestStatus")
     toaster.clear()
-    const { activeScene, world } = localStorage
-    console.log("activeScene", activeScene)
-    const { location } = activeScene
+    const {
+      activeScene,
+      activeScene: { location },
+      world,
+    } = localStorage
 
-    const activeFrame = Utils.getFirstFrame({ activeScene }) || {}
-    const { critters1 = [], critters2 = [] } = activeFrame
+    const firstFrame = Utils.getFirstFrame({ activeScene }) || {}
+    const { critters1 = [], critters2 = [] } = firstFrame
+
+    const crittersAndLocations = [location, ...critters1, ...critters2]
 
     const { foundItem, completedMission } = updateQuestState({
-      itemsInScene: [location, ...critters1, ...critters2],
-      charactersInScene: [location, ...critters1, ...critters2],
+      itemsInScene: crittersAndLocations,
+      charactersInScene: crittersAndLocations,
     })
 
     if (foundItem) {
@@ -165,10 +169,6 @@ export default function TopLevel(props) {
       world: { questConfig },
     } = localStorage
 
-    if (!questConfig) {
-      return {}
-    }
-
     const missions = TopLevelUtils.getMissions({ questConfig })
 
     const { pockets, completedMissions } = questStatus
@@ -218,10 +218,14 @@ export default function TopLevel(props) {
   const updateActiveScene = ({ sceneId }) => {
     console.log("updateActiveScene")
     setLocalStorageProp({ prop: "activeFrameIndex", value: 0 })
-    const { world } = localStorage
+    const {
+      showMissionConsole,
+      world,
+      world: { questConfig },
+    } = localStorage
+
     const scenesGrid = _get(world, "newGrid5") || []
     const activeScene = scenesGrid.find((item) => item.id === sceneId)
-
     setLocalStorageProp({ prop: "activeScene", value: activeScene })
 
     const questStatus = { ...localStorage.questStatus }
@@ -229,9 +233,7 @@ export default function TopLevel(props) {
 
     setLocalStorageProp({ prop: "questStatus", value: questStatus })
 
-    const { showMissionConsole } = localStorage
-
-    if (showMissionConsole) {
+    if (showMissionConsole && questConfig) {
       updateQuestStatus({ sceneId })
     }
   }
