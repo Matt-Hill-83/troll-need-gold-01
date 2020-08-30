@@ -19,7 +19,7 @@ export default class Constants {
       activeFrameIndex: 0,
       activeScene: null,
       showMissionConsole: true,
-      number: 0,
+      // number: 0,
       // showBookPicker: false,
       // showWorldBuilder: false,
       world: null,

@@ -19,13 +19,20 @@ const toaster = Toaster.create({
 })
 
 export default function TopLevel(props) {
-  const { test23, findItem } = Utils2()
+  const { findItem } = Utils2()
+
+  const [localProps, setLocalProps] = useState(
+    Constants.getDefaultLocalStorage()
+  )
+
+  console.log("localProps - 1", localProps) // zzz
 
   const questStatus = { ...Constants.getDefaultQuestStatus() }
+  // const localProps = Constants.getDefaultLocalStorage()
   let worldGlobal = 0
-  const localProps = Constants.getDefaultLocalStorage()
   const { className } = props
 
+  worldGlobal = props.quest
   // on mount
   useEffect(() => {
     // returned function will be called on component unmount
@@ -36,13 +43,21 @@ export default function TopLevel(props) {
   // on change in props
   useEffect(() => {
     console.log("new props =================================>>>>>")
+    setLocalProps((state) => {
+      console.log("state", state) // zzz
+      const test = { ...state, world: props.quest }
+      console.log("test", test) // zzz
+      return test
+    })
+
+    worldGlobal = props.quest
     onChangeWorld()
     console.log("worldGlobal after onchangeworld>", worldGlobal) // zzz
   }, [props.quest])
 
   const onChangeWorld = () => {
-    console.log("onChangeWorld")
     worldGlobal = props.quest
+    console.log("onChangeWorld")
     console.log(
       "worldGlobal---------------------------------------------------->",
       worldGlobal
@@ -65,6 +80,7 @@ export default function TopLevel(props) {
     if (!questConfig) {
       localProps.showMissionConsole = false
     } else {
+      localProps.showMissionConsole = true
       const missions = TopLevelUtils.getMissions({ questConfig })
 
       const desiredItems =
@@ -223,6 +239,7 @@ export default function TopLevel(props) {
 
   console.log("--------------------RENDER-------------------->") // zzz
   console.log("worldGlobal", worldGlobal) // zzz
+  console.log("localProps", localProps) // zzz
   if (!worldGlobal || !worldGlobal.title) {
     return <div>no world 2</div>
   }

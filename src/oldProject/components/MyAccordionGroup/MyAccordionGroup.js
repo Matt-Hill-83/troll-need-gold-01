@@ -1,15 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles"
-// import { toJS } from "mobx"
-import Accordion from "@material-ui/core/Accordion"
-import AccordionDetails from "@material-ui/core/AccordionDetails"
-import AccordionSummary from "@material-ui/core/AccordionSummary"
 import cx from "classnames"
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import React, { useState } from "react"
-import Typography from "@material-ui/core/Typography"
+import React from "react"
+import MyAccordion from "../MyAccordion/MyAccordion"
 
 import css from "./MyAccordionGroup.module.scss"
-import MyAccordion from "../MyAccordion/MyAccordion"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,7 +27,6 @@ export default function MyAccordionGroup({ props }) {
     return <MyAccordion props={{ ...item }}></MyAccordion>
   })
 
-  // return renderedAccordion
   return (
     <div className={cx(classes.root, css.main, className)}>
       {renderedAccordion}
