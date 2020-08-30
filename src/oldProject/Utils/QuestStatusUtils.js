@@ -4,8 +4,8 @@ import Constants from "./Constants/Constants.js"
 export default class QuestStatusUtils {
   // update new scene visibility props based on rules in subQuest
 
-  static updateSceneVisibilityProps = ({ questStatus, activeWorld }) => {
-    const { newGrid5, questConfig } = activeWorld
+  static updateSceneVisibilityProps = ({ questStatus, world }) => {
+    const { newGrid5, questConfig } = world
     const { activeMissionIndex } = questStatus
     const { subQuests } = questConfig
     if (!subQuests) {
@@ -21,7 +21,7 @@ export default class QuestStatusUtils {
 
       const parentSubQuestIndexFromScene = this._getParentSubQuestIndexFromScene(
         {
-          world: activeWorld,
+          world: world,
           sceneId: scene.id,
         }
       )

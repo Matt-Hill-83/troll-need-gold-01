@@ -17,15 +17,13 @@ export default class Constants {
   static getDefaultLocalStorage = () => {
     return {
       activeFrameIndex: 0,
-      activeSceneId: null,
-      activeWorldId: null,
-      defaultWorldId: null,
+      activeScene: null,
       showMissionConsole: true,
       number: 0,
-      showBookPicker: false,
-      showWorldBuilder: false,
+      // showBookPicker: false,
+      // showWorldBuilder: false,
       world: null,
-      questStatus: Constants.getDefaultQuestStatus(),
+      // questStatus: Constants.getDefaultQuestStatus(),
     }
   }
 
