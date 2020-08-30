@@ -4,6 +4,7 @@ export default class Constants {
   static getDefaultQuestStatus = () => {
     return {
       activeMissionIndex: 0,
+      activeMission: undefined,
       cloudedScenes: [],
       completedMissions: [],
       desiredItems: [],
@@ -14,7 +15,7 @@ export default class Constants {
     }
   }
 
-  static getDefaultLocalStorage = () => {
+  static getDefaultGameStatus = () => {
     return {
       activeFrameIndex: 0,
       activeScene: null,

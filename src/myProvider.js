@@ -4,7 +4,7 @@ import Constants from "./oldProject/Utils/Constants/Constants"
 export const myContext = createContext()
 
 export const MyProvider = (props) => {
-  const initialState = Constants.getDefaultLocalStorage()
+  const initialState = Constants.getDefaultGameStatus()
   const [localStorage, setLocalStorage] = useState(initialState)
 
   return (

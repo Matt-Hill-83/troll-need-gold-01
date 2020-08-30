@@ -21,18 +21,35 @@ const toaster = Toaster.create({
 export default function TopLevel(props) {
   const { findItem } = Utils2()
 
-  const [localProps, setLocalProps] = useState(
-    Constants.getDefaultLocalStorage()
+  const [localProps, setLocalProps] = useState(Constants.getDefaultGameStatus())
+
+  const [questStatusGlobal, setQuestStatusGlobal] = useState(
+    Constants.getDefaultQuestStatus()
   )
 
   console.log("localProps - 1", localProps) // zzz
 
   const questStatus = { ...Constants.getDefaultQuestStatus() }
-  // const localProps = Constants.getDefaultLocalStorage()
-  let worldGlobal = 0
   const { className } = props
+  const worldLocal = props.quest
+  console.log("localProps.activeScene", localProps.activeScene) // zzz
 
-  worldGlobal = props.quest
+  const setLocalStuff = (props) => {
+    setLocalProps((state) => {
+      const test = { ...state, ...props }
+
+      return test
+    })
+  }
+
+  const setQuestStatusStuff = (props) => {
+    setQuestStatusGlobal((state) => {
+      const test = { ...state, ...props }
+
+      return test
+    })
+  }
+
   // on mount
   useEffect(() => {
     // returned function will be called on component unmount
@@ -43,44 +60,38 @@ export default function TopLevel(props) {
   // on change in props
   useEffect(() => {
     console.log("new props =================================>>>>>")
-    setLocalProps((state) => {
-      console.log("state", state) // zzz
-      const test = { ...state, world: props.quest }
-      console.log("test", test) // zzz
-      return test
-    })
 
-    worldGlobal = props.quest
+    // worldLocal = props.quest
     onChangeWorld()
-    console.log("worldGlobal after onchangeworld>", worldGlobal) // zzz
+    console.log("worldLocal after onchangeworld>", worldLocal) // zzz
   }, [props.quest])
 
   const onChangeWorld = () => {
-    worldGlobal = props.quest
+    // worldLocal = props.quest
     console.log("onChangeWorld")
     console.log(
-      "worldGlobal---------------------------------------------------->",
-      worldGlobal
+      "worldLocal---------------------------------------------------->",
+      worldLocal
     ) // zzz
 
-    if (!worldGlobal) {
-      return <div>no worldGlobal 1</div>
+    if (!worldLocal) {
+      return <div>no worldLocal 1</div>
     }
-    const { questConfig } = worldGlobal
+    const { questConfig } = worldLocal
 
     console.log("")
-    console.log("-----------------------mapId-------------", worldGlobal.id)
+    console.log("-----------------------mapId-------------", worldLocal.id)
     toaster.clear()
 
-    const startScene = TopLevelUtils.getTerminalScene({ world: worldGlobal })
+    const startScene = TopLevelUtils.getTerminalScene({ world: worldLocal })
     console.log("startScene", startScene) // zzz
 
     if (!startScene) return <div>no start scene</div>
-    localProps.activeScene = startScene
+    const activeScene = startScene
     if (!questConfig) {
-      localProps.showMissionConsole = false
+      setLocalStuff({ showMissionConsole: false })
     } else {
-      localProps.showMissionConsole = true
+      setLocalStuff({ showMissionConsole: true })
       const missions = TopLevelUtils.getMissions({ questConfig })
 
       const desiredItems =
@@ -92,10 +103,27 @@ export default function TopLevel(props) {
 
     updateActiveScene({
       sceneId: startScene.id,
-      world: worldGlobal,
+      world: worldLocal,
       activeScene: localProps.activeScene,
     })
-    console.log("worldGlobal --- 3--->", worldGlobal) // zzz
+    console.log("worldLocal --- 3--->", worldLocal) // zzz
+  }
+
+  const updateActiveScene = ({ sceneId, world, activeScene }) => {
+    console.log("updateActiveScene")
+    console.log("sceneId", sceneId) // zzz
+
+    console.log("world", world) // zzz
+    const { questConfig } = world
+
+    localProps.activeScene = TopLevelUtils.getActiveScene({ world, sceneId })
+    console.log("localProps.activeScene", localProps.activeScene) // zzz
+    questStatus.visitedScenes.push(sceneId)
+
+    if (localProps.showMissionConsole && questConfig) {
+      updateQuestStatus({ world, activeScene })
+    }
+    console.log("worldLocal ----4--->", worldLocal) // zzz
   }
 
   const updateQuestStatus = ({ world, activeScene }) => {
@@ -210,7 +238,7 @@ export default function TopLevel(props) {
       questStatus,
     })
 
-    console.log("worldGlobal ----5--->", worldGlobal) // zzz
+    console.log("worldLocal ----5--->", worldLocal) // zzz
 
     return {
       foundItem,
@@ -218,29 +246,16 @@ export default function TopLevel(props) {
     }
   }
 
-  const updateActiveScene = ({ sceneId, world, activeScene }) => {
-    console.log("updateActiveScene")
-    console.log("sceneId", sceneId) // zzz
-
-    console.log("world", world) // zzz
-    const { questConfig } = world
-
-    localProps.activeScene = TopLevelUtils.getActiveScene({ world, sceneId })
-    questStatus.visitedScenes.push(sceneId)
-
-    if (localProps.showMissionConsole && questConfig) {
-      updateQuestStatus({ world, activeScene })
-    }
-    console.log("worldGlobal ----4--->", worldGlobal) // zzz
-  }
-
   console.log("")
   console.log("main story render")
 
   console.log("--------------------RENDER-------------------->") // zzz
-  console.log("worldGlobal", worldGlobal) // zzz
+  console.log("localProps.activeScene", localProps.activeScene) // zzz
+  console.log("worldLocal", worldLocal) // zzz
   console.log("localProps", localProps) // zzz
-  if (!worldGlobal || !worldGlobal.title) {
+  console.log("questStatus", questStatus) // zzz
+
+  if (!worldLocal || !worldLocal.title) {
     return <div>no world 2</div>
   }
 
@@ -254,7 +269,7 @@ export default function TopLevel(props) {
       <StoryMode
         updateActiveScene={updateActiveScene}
         activeScene={localProps.activeScene}
-        world={worldGlobal}
+        world={worldLocal}
       />
       {/* {!isProdRelease && showBookPicker && renderBookPicker()} */}
     </div>
