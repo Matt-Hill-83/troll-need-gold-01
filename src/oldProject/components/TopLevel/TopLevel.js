@@ -20,7 +20,7 @@ const toaster = Toaster.create({
 
 export default function TopLevel(props) {
   const { className } = props
-  let worldLocal = props.quest
+  let world = props.quest
 
   console.log("FUNCTION START-----------------------------") // zzz
 
@@ -47,25 +47,25 @@ export default function TopLevel(props) {
     console.log("new props =================================>>>>>")
     console.log("globalStorage - new props", globalStorage.questStatus) // zzz
     setLocalStuff({ questStatus: { ...globalStorage.questStatus } })
-    worldLocal = props.quest
+    world = props.quest
     onChangeWorld()
-    console.log("worldLocal after onchangeworld>", worldLocal) // zzz
+    console.log("world after onchangeworld>", world) // zzz
   }, [props.quest])
 
   const onChangeWorld = () => {
     console.log("onChangeWorld")
 
-    if (!worldLocal) {
-      return <div>no worldLocal 1</div>
+    if (!world) {
+      return <div>no world 1</div>
     }
-    const { questConfig } = worldLocal
+    const { questConfig } = world
 
     console.log("")
-    console.log("-----------------------mapId-------------", worldLocal.id)
+    console.log("-----------------------mapId-------------", world.id)
     toaster.clear()
 
     const startScene = TopLevelUtils.getTerminalScene({
-      world: worldLocal,
+      world,
     })
     console.log("startScene", startScene) // zzz
 
@@ -85,7 +85,7 @@ export default function TopLevel(props) {
 
     updateActiveScene({
       sceneId: startScene.id,
-      world: worldLocal,
+      world,
     })
   }
 
@@ -94,7 +94,7 @@ export default function TopLevel(props) {
 
     const { questConfig } = world
     const activeScene = TopLevelUtils.getSceneFromId({
-      world: worldLocal,
+      world,
       sceneId,
     })
 
@@ -241,9 +241,9 @@ export default function TopLevel(props) {
   console.log("-------------------globalStorage-----------TL", globalStorage) // zzz
   console.log("questStatus", questStatus) // zzz
 
-  console.log("worldLocal", worldLocal) // zzz
+  console.log("world", world) // zzz
 
-  if (!worldLocal || !worldLocal.title) {
+  if (!world || !world.title) {
     return <div>no world 2</div>
   }
 
@@ -257,7 +257,7 @@ export default function TopLevel(props) {
       <StoryMode
         updateActiveScene={updateActiveScene}
         activeScene={localProps.activeScene}
-        world={worldLocal}
+        world={world}
       />
       {/* {!isProdRelease && showBookPicker && renderBookPicker()} */}
     </div>
