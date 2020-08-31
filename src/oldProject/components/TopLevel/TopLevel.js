@@ -19,6 +19,8 @@ const toaster = Toaster.create({
 })
 
 export default function TopLevel(props) {
+  const { className } = props
+
   console.log("FUNCTION START-----------------------------") // zzz
 
   const { globalStorage, setGlobalStorageProps } = useTopLevelStorage()
@@ -29,16 +31,12 @@ export default function TopLevel(props) {
   )
 
   console.log("localProps - 1", localProps) // zzz
-
-  const { questStatus } = globalStorage
-  // const questStatus = { ...Constants.getDefaultQuestStatus() }
-  const { className } = props
+  let questStatus
   let worldLocal
 
   const setLocalStuff = (props) => {
     setLocalProps((state) => {
       const test = { ...state, ...props }
-
       return test
     })
   }
@@ -46,16 +44,17 @@ export default function TopLevel(props) {
   const setQuestStatusStuff = (props) => {
     setQuestStatusGlobal((state) => {
       const test = { ...state, ...props }
-
       return test
     })
   }
 
   // on mount
   useEffect(() => {
+    questStatus = globalStorage.questStatus
+    // worldLocal = props.quest
+    // onChangeWorld()
+
     // returned function will be called on component unmount
-    setGlobalStorageProps({ topLevelStorageTest: 555 })
-    worldLocal = props.quest
     return () => {}
   }, [])
 
@@ -141,6 +140,7 @@ export default function TopLevel(props) {
       displayFoundItemToaster({ foundItem })
       displayCompletedMissionToaster({ completedMission })
     }
+    setGlobalStorageProps({ questStatus: { ...questStatus } })
   }
 
   const updatePockets = ({ questStatus, activeMission }) => {
