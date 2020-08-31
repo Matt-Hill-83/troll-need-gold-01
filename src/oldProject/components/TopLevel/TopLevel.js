@@ -192,7 +192,7 @@ export default function TopLevel(props) {
       })
     }
 
-    const foundItem = findItem({
+    const foundItem = QuestProgressUtils.findItem({
       itemsInScene,
       questStatus,
       desiredItems: questStatus.desiredItems,

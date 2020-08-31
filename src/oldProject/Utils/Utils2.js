@@ -1,43 +1,43 @@
 import QuestProgressUtils from "./QuestProgressUtils.js"
 
 const Utils2 = () => {
-  const findItem = ({ itemsInScene, questStatus, desiredItems = [] }) => {
-    console.log("itemsInScene", itemsInScene) // zzz
-    console.log("desiredItems----------------->>>>>>>>>", desiredItems) // zzz
-    const { pockets = {} } = questStatus
+  // const findItem = ({ itemsInScene, questStatus, desiredItems = [] }) => {
+  //   console.log("itemsInScene", itemsInScene) // zzz
+  //   console.log("desiredItems----------------->>>>>>>>>", desiredItems) // zzz
+  //   const { pockets = {} } = questStatus
 
-    const foundItems = []
-    desiredItems.forEach((desiredItem) => {
-      const foundItem =
-        itemsInScene.find((item) => {
-          return item.name === (desiredItem && desiredItem.name)
-        }) || null
-      if (foundItem) {
-        foundItems.push(foundItem)
-      }
-    })
+  //   const foundItems = []
+  //   desiredItems.forEach((desiredItem) => {
+  //     const foundItem =
+  //       itemsInScene.find((item) => {
+  //         return item.name === (desiredItem && desiredItem.name)
+  //       }) || null
+  //     if (foundItem) {
+  //       foundItems.push(foundItem)
+  //     }
+  //   })
 
-    // TODO: I think I need to do this for each found item
-    const foundItem = foundItems[0]
-    console.log("foundItem", foundItem) // zzz
-    if (!foundItem) {
-      return null
-    }
+  //   // TODO: I think I need to do this for each found item
+  //   const foundItem = foundItems[0]
+  //   console.log("foundItem", foundItem) // zzz
+  //   if (!foundItem) {
+  //     return null
+  //   }
 
-    if (!foundItem.amount) {
-      foundItem.amount = 1
-    }
+  //   if (!foundItem.amount) {
+  //     foundItem.amount = 1
+  //   }
 
-    questStatus.pockets = QuestProgressUtils.updatePocket({
-      foundItem,
-      pockets,
-    })
+  //   questStatus.pockets = QuestProgressUtils.updatePocket({
+  //     foundItem,
+  //     pockets,
+  //   })
 
-    return foundItem
-  }
+  //   return foundItem
+  // }
 
   return {
-    findItem,
+    // findItem,
   }
 }
 
