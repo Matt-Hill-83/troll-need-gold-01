@@ -54,6 +54,7 @@ export default function TopLevel(props) {
 
   const onChangeWorld = () => {
     console.log("onChangeWorld")
+    toaster.clear()
 
     if (!world) {
       return <div>no world 1</div>
@@ -62,7 +63,6 @@ export default function TopLevel(props) {
 
     console.log("")
     console.log("-----------------------mapId-------------", world.id)
-    toaster.clear()
 
     const startScene = TopLevelUtils.getTerminalScene({
       world,
@@ -88,6 +88,7 @@ export default function TopLevel(props) {
 
   const updateActiveScene = ({ sceneId }) => {
     console.log("updateActiveScene")
+    toaster.clear()
 
     const { questConfig } = world
     const activeScene = TopLevelUtils.getSceneFromId({
@@ -99,9 +100,6 @@ export default function TopLevel(props) {
     setLocalStuff({ activeScene })
     setGlobalStorageProps({ activeScene, world })
 
-    // TODO: is this getting published correctly?
-    // TODO: is this getting published correctly?
-    // TODO: is this getting published correctly?
     questStatus.visitedScenes.push(sceneId)
 
     if (localProps.showMissionConsole && questConfig) {
@@ -117,7 +115,7 @@ export default function TopLevel(props) {
       })
 
       // TODO: this should probably happen on the appropriate frame.
-      toaster.clear()
+
       displayFoundItemToaster({ foundItem })
       displayCompletedMissionToaster({ completedMission })
     }
@@ -209,6 +207,7 @@ export default function TopLevel(props) {
 
   const displayCompletedMissionToaster = ({ completedMission }) => {
     if (completedMission) {
+      toaster.clear()
       const { rewards, item, recipient, name } = completedMission
 
       const reward = rewards[0]
