@@ -25,8 +25,6 @@ export default function MiniLocation(props) {
       return null
     }
 
-    const { activeScene } = globalStorage
-
     const activeFrame = Utils.getFirstFrame({ activeScene }) || {}
     console.log("activeFrame", activeFrame) // zzz
     const { critters1 = [] } = activeFrame
@@ -87,8 +85,7 @@ export default function MiniLocation(props) {
   )
 
   const neighborIsActive = neighborsArray.some((neighbor) => {
-    // const activeSceneId = globalStorage.activeScene.id
-    return neighbor && neighbor.id === globalStorage.activeScene.id
+    return neighbor && neighbor.id === activeScene.id
   })
 
   if (showLocationOnly) {

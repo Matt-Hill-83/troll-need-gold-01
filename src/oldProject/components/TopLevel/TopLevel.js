@@ -22,10 +22,7 @@ export default function TopLevel(props) {
   console.log("FUNCTION START-----------------------------") // zzz
   const { findItem } = Utils2()
 
-  // const [globalStorage, setGlobalStorage] = useContext(myContext)
   const { globalStorage, setGlobalStorageProps } = useTopLevelStorage()
-  console.log("globalStorage", globalStorage) // zzz
-
   const [localProps, setLocalProps] = useState(Constants.getDefaultGameStatus())
 
   const [questStatusGlobal, setQuestStatusGlobal] = useState(
@@ -116,6 +113,9 @@ export default function TopLevel(props) {
     const activeScene = TopLevelUtils.getActiveScene({ world, sceneId })
     setLocalStuff({ activeScene })
     console.log("activeScene", activeScene) // zzz
+
+    // Should I do this after
+    setGlobalStorageProps({ activeScene })
 
     // TODO: is this getting published correctly?
     // TODO: is this getting published correctly?
@@ -254,7 +254,7 @@ export default function TopLevel(props) {
   console.log("--------------------RENDER-TopLevel------------------->") // zzz
   console.log("worldLocal", worldLocal) // zzz
   console.log("localProps.activeScene", localProps.activeScene) // zzz
-  // console.log("localProps.activeScene", localProps.activeScene) // zzz
+  console.log("-------------------globalStorage", globalStorage) // zzz
   console.log("questStatus", questStatus) // zzz
 
   if (!worldLocal || !worldLocal.title) {
