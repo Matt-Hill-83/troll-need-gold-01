@@ -14,10 +14,11 @@ export default function MiniLocation(props) {
   // console.log("MiniLocation----------------------") // zzz
   const { scene, isActive, className, id, world } = props
   const [globalStorage, setGlobalStorage] = useContext(myContext)
-  const { questStatus } = globalStorage
+  const { questStatus = {} } = globalStorage
+  console.log("questStatus----------ML-------->>>", questStatus) // zzz
 
   const { activeScene } = globalStorage
-  console.log("activeScene----------------ML", activeScene) // zzz
+  // console.log("activeScene----------------ML", activeScene) // zzz
 
   // These are the critters1 creatures from the first frame that hover over the active location.
   const renderCreatures = ({ isActive }) => {

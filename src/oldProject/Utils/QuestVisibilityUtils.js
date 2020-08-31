@@ -82,6 +82,7 @@ export default class QuestVisibilityUtils {
     const triggerTypes = Constants.triggers.triggerTypes
 
     //  The accumulators store the cumulative value of the props while the evaluators run.
+    // Could I replace this with a simple map?
     const propValueAccumulators = {
       sceneIsLocked: {
         value: null,

@@ -24,7 +24,7 @@ export default class Constants {
       // showBookPicker: false,
       // showWorldBuilder: false,
       world: null,
-      // questStatus: Constants.getDefaultQuestStatus(),
+      questStatus: Constants.getDefaultQuestStatus(),
     }
   }
 

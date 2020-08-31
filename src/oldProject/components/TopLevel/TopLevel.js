@@ -8,7 +8,6 @@ import StoryMode from "../StoryMode/StoryMode"
 import QuestProgressUtils from "../../Utils/QuestProgressUtils.js"
 import TopLevelUtils from "../../Utils/TopLevelUtils.js"
 import Utils from "../../Utils/Utils.js"
-import Utils2 from "../../Utils/Utils2.js"
 import useTopLevelStorage from "../../../Context/useTopLevelStorage.js"
 
 import css from "./TopLevel.module.scss"
@@ -21,7 +20,6 @@ const toaster = Toaster.create({
 
 export default function TopLevel(props) {
   console.log("FUNCTION START-----------------------------") // zzz
-  const { findItem } = Utils2()
 
   const { globalStorage, setGlobalStorageProps } = useTopLevelStorage()
   const [localProps, setLocalProps] = useState(Constants.getDefaultGameStatus())
@@ -32,9 +30,10 @@ export default function TopLevel(props) {
 
   console.log("localProps - 1", localProps) // zzz
 
-  const questStatus = { ...Constants.getDefaultQuestStatus() }
+  const { questStatus } = globalStorage
+  // const questStatus = { ...Constants.getDefaultQuestStatus() }
   const { className } = props
-  let worldLocal = props.quest
+  let worldLocal
 
   const setLocalStuff = (props) => {
     setLocalProps((state) => {
@@ -55,6 +54,7 @@ export default function TopLevel(props) {
   // on mount
   useEffect(() => {
     // returned function will be called on component unmount
+    setGlobalStorageProps({ topLevelStorageTest: 555 })
     worldLocal = props.quest
     return () => {}
   }, [])
@@ -152,7 +152,7 @@ export default function TopLevel(props) {
       itemsArray: activeMission.rewards,
     })
 
-    questStatus.pockets = QuestProgressUtils.addToPockets({
+    return QuestProgressUtils.addToPockets({
       newPockets,
       questStatus,
     })
@@ -162,6 +162,7 @@ export default function TopLevel(props) {
     console.log("updateQuestStatus")
     const { questConfig } = world
     const { location } = activeScene
+    const { activeMissionIndex } = questStatus
 
     const firstFrame = Utils.getFirstFrame({ activeScene }) || {}
     const { critters1 = [], critters2 = [] } = firstFrame
@@ -186,8 +187,7 @@ export default function TopLevel(props) {
     if (isMissionCompleted) {
       questStatus.completedMissions.push(activeMissionIndex)
       questStatus.activeMissionIndex++
-
-      updatePockets({ questStatus, activeMission })
+      questStatus.pockets = updatePockets({ questStatus, activeMission })
     }
 
     // find new items
@@ -256,7 +256,7 @@ export default function TopLevel(props) {
   console.log("--------------------RENDER-TopLevel------------------->") // zzz
   console.log("worldLocal", worldLocal) // zzz
   console.log("localProps.activeScene", localProps.activeScene) // zzz
-  console.log("-------------------globalStorage", globalStorage) // zzz
+  console.log("-------------------globalStorage-----------TL", globalStorage) // zzz
   console.log("questStatus", questStatus) // zzz
 
   if (!worldLocal || !worldLocal.title) {
