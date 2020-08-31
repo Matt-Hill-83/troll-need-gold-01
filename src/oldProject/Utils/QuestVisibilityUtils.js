@@ -5,9 +5,14 @@ export default class QuestVisibilityUtils {
   // update new scene visibility props based on rules in subQuest
 
   static updateSceneVisibility = ({ questStatus, world }) => {
-    const { newGrid5, questConfig } = world
+    const {
+      newGrid5,
+      questConfig,
+      questConfig: { subQuests = null },
+    } = world
+
     const { activeMissionIndex } = questStatus
-    const { subQuests } = questConfig
+
     if (!subQuests) {
       return
     }
@@ -243,17 +248,16 @@ export default class QuestVisibilityUtils {
 
     const { questConfig } = world
     let parentSubQuest = -1
-    questConfig.subQuests &&
-      questConfig.subQuests.forEach((subQuest, subQuestIndex) => {
-        const subQuestMatch =
-          subQuest.scenes &&
-          subQuest.scenes.find((scene) => {
-            return scene.id === sceneId
-          })
-        if (subQuestMatch) {
-          parentSubQuest = subQuestIndex
-        }
-      })
+    questConfig.subQuests.forEach((subQuest, subQuestIndex) => {
+      const subQuestMatch =
+        subQuest.scenes &&
+        subQuest.scenes.find((scene) => {
+          return scene.id === sceneId
+        })
+      if (subQuestMatch) {
+        parentSubQuest = subQuestIndex
+      }
+    })
 
     return parentSubQuest
   }
@@ -261,10 +265,9 @@ export default class QuestVisibilityUtils {
   static _getSceneTriggersFromScene = ({ sceneId, questConfig }) => {
     const allScenes = []
 
-    questConfig.subQuests &&
-      questConfig.subQuests.forEach((subQuest) => {
-        allScenes.push(...subQuest.scenes)
-      })
+    questConfig.subQuests.forEach((subQuest) => {
+      allScenes.push(...subQuest.scenes)
+    })
 
     return allScenes.find((scene) => scene.id === sceneId) || []
   }

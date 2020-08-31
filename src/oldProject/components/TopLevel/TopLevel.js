@@ -125,12 +125,13 @@ export default function TopLevel(props) {
     questStatus.visitedScenes.push(sceneId)
 
     if (localProps.showMissionConsole && questConfig) {
+      // mutates questStatus
       QuestVisibilityUtils.updateSceneVisibility({
         questStatus,
         world,
       })
 
-      const { foundItem, completedMission } = updateQuestStatus({
+      const { foundItem, completedMission } = updateQuestProgress({
         world,
         activeScene,
       })
@@ -141,7 +142,7 @@ export default function TopLevel(props) {
     }
   }
 
-  const updateQuestStatus = ({ world, activeScene }) => {
+  const updateQuestProgress = ({ world, activeScene }) => {
     console.log("updateQuestStatus")
     toaster.clear()
 
@@ -151,14 +152,6 @@ export default function TopLevel(props) {
     const { critters1 = [], critters2 = [] } = firstFrame
     const crittersAndLocations = [location, ...critters1, ...critters2]
 
-    return updateQuestProgress({
-      itemsInScene: crittersAndLocations,
-      charactersInScene: crittersAndLocations,
-      world,
-    })
-  }
-
-  const updateQuestProgress = ({ itemsInScene, charactersInScene, world }) => {
     const { questConfig } = world
     const activeMissionIndex = questStatus.activeMissionIndex
     const activeMission = QuestProgressUtils.getActiveMission({
@@ -171,7 +164,7 @@ export default function TopLevel(props) {
     }
 
     const isMissionCompleted = QuestProgressUtils.completeMission({
-      charactersInScene,
+      charactersInScene: crittersAndLocations,
       questStatus,
       activeMission,
     })
@@ -195,7 +188,7 @@ export default function TopLevel(props) {
     }
 
     const foundItem = QuestProgressUtils.findItem({
-      itemsInScene,
+      itemsInScene: crittersAndLocations,
       questStatus,
       desiredItems: questStatus.desiredItems,
     })
@@ -205,13 +198,15 @@ export default function TopLevel(props) {
       questStatus,
     })
 
-    console.log("worldLocal ----5--->", worldLocal) // zzz
-
     return {
       foundItem,
       completedMission: isMissionCompleted ? activeMission : false,
     }
   }
+
+  // const updateQuestProgress = ({ itemsInScene, charactersInScene, world }) => {
+
+  // }
 
   const displayFoundItemToaster = ({ foundItem }) => {
     if (foundItem) {
