@@ -1,4 +1,4 @@
-import TopLevelUtils from "./TopLevelUtils.js"
+import QuestProgressUtils from "./QuestProgressUtils.js"
 
 const Utils2 = () => {
   const findItem = ({ itemsInScene, questStatus, desiredItems = [] }) => {
@@ -28,7 +28,10 @@ const Utils2 = () => {
       foundItem.amount = 1
     }
 
-    questStatus.pockets = TopLevelUtils.updatePocket({ foundItem, pockets })
+    questStatus.pockets = QuestProgressUtils.updatePocket({
+      foundItem,
+      pockets,
+    })
 
     return foundItem
   }

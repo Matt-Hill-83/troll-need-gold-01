@@ -5,6 +5,7 @@ import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core"
 import Constants from "../../Utils/Constants/Constants.js"
 import QuestVisibilityUtils from "../../Utils/QuestVisibilityUtils.js"
 import StoryMode from "../StoryMode/StoryMode"
+import QuestProgressUtils from "../../Utils/QuestProgressUtils.js"
 import TopLevelUtils from "../../Utils/TopLevelUtils.js"
 import Utils from "../../Utils/Utils.js"
 import Utils2 from "../../Utils/Utils2.js"
@@ -82,7 +83,9 @@ export default function TopLevel(props) {
     console.log("-----------------------mapId-------------", worldLocal.id)
     toaster.clear()
 
-    const startScene = TopLevelUtils.getTerminalScene({ world: worldLocal })
+    const startScene = TopLevelUtils.getTerminalScene({
+      world: worldLocal,
+    })
     console.log("startScene", startScene) // zzz
 
     if (!startScene) return <div>no start scene</div>
@@ -156,7 +159,7 @@ export default function TopLevel(props) {
   const updateQuestState = ({ itemsInScene, charactersInScene, world }) => {
     const { questConfig } = world
     const activeMissionIndex = questStatus.activeMissionIndex
-    const activeMission = TopLevelUtils.getActiveMission({
+    const activeMission = QuestProgressUtils.getActiveMission({
       questConfig,
       questStatus,
     })
@@ -165,7 +168,7 @@ export default function TopLevel(props) {
       return {}
     }
 
-    const isMissionCompleted = TopLevelUtils.completeMission({
+    const isMissionCompleted = QuestProgressUtils.completeMission({
       charactersInScene,
       questStatus,
       activeMission,
@@ -179,11 +182,11 @@ export default function TopLevel(props) {
       delete questStatus.pockets[desiredItem.name]
       questStatus.activeMissionIndex++
 
-      const newPockets = TopLevelUtils.convertItemToObjFormat({
+      const newPockets = QuestProgressUtils.TopLevelUtils({
         itemsArray: activeMission.rewards,
       })
 
-      questStatus.pockets = TopLevelUtils.addToPockets({
+      questStatus.pockets = QuestProgressUtils.addToPockets({
         newPockets,
         questStatus,
       })
@@ -195,7 +198,7 @@ export default function TopLevel(props) {
       desiredItems: questStatus.desiredItems,
     })
 
-    TopLevelUtils.removeItemFromDesiredItems({
+    QuestProgressUtils.removeItemFromDesiredItems({
       itemToRemove: foundItem,
       questStatus,
     })
