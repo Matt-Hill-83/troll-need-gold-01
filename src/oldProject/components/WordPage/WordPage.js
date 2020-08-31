@@ -13,11 +13,10 @@ export default function WordPage(props) {
   const { activeFrameIndex } = globalStorage
 
   console.log("activeFrameIndex--------------WP", activeFrameIndex) // zzz
-  const frameSet = activeScene.frameSet
-  const frame = frameSet && frameSet.frames && frameSet.frames[activeFrameIndex]
+  const { frames = [] } = activeScene.frameSet
+  const frame = frames[activeFrameIndex]
 
-  let isLastFrame =
-    frameSet.frames && activeFrameIndex >= frameSet.frames.length - 1
+  let isLastFrame = activeFrameIndex >= frames.length - 1
 
   return (
     <div className={css.textPage}>
