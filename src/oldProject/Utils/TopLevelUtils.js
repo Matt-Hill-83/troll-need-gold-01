@@ -1,5 +1,4 @@
 import _get from "lodash.get"
-import useLocalStorage from "../components/TopLevel/useLocalStorage"
 
 export default class TopLevelUtils {
   static convertItemToObjFormat = ({ itemsArray = [] }) => {

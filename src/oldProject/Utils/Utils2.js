@@ -1,15 +1,9 @@
-import useLocalStorage from "../components/TopLevel/useLocalStorage.js"
 import TopLevelUtils from "./TopLevelUtils.js"
 
 const Utils2 = () => {
   const findItem = ({ itemsInScene, questStatus, desiredItems = [] }) => {
     console.log("itemsInScene", itemsInScene) // zzz
-    // const desiredItems = questStatus.desiredItems || []
-    console.log(
-      "desiredItems---------------------------->>>>>>>>>>>>>",
-      desiredItems
-    ) // zzz
-    console.log("desiredItems", desiredItems) // zzz
+    console.log("desiredItems----------------->>>>>>>>>", desiredItems) // zzz
     const { pockets = {} } = questStatus
 
     const foundItems = []
@@ -36,7 +30,6 @@ const Utils2 = () => {
 
     questStatus.pockets = TopLevelUtils.updatePocket({ foundItem, pockets })
 
-    // setGlobalStorageProps({ questStatus: { ...questStatus } })
     return foundItem
   }
 

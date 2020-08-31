@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { myContext } from "../../../myProvider.js"
+import { myContext } from "../myProvider"
 
 const useTopLevelStorage = () => {
   const [globalStorage, setGlobalStorage] = useContext(myContext)

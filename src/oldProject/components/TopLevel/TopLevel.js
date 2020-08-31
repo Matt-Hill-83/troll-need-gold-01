@@ -8,9 +8,9 @@ import StoryMode from "../StoryMode/StoryMode"
 import TopLevelUtils from "../../Utils/TopLevelUtils.js"
 import Utils from "../../Utils/Utils.js"
 import Utils2 from "../../Utils/Utils2.js"
+import useTopLevelStorage from "../../../Context/useTopLevelStorage.js"
 
 import css from "./TopLevel.module.scss"
-import useTopLevelStorage from "../../../Context/useTopLevelStorage.js"
 
 const toaster = Toaster.create({
   position: Position.TOP,
@@ -24,6 +24,7 @@ export default function TopLevel(props) {
 
   // const [globalStorage, setGlobalStorage] = useContext(myContext)
   const { globalStorage, setGlobalStorageProps } = useTopLevelStorage()
+  console.log("globalStorage", globalStorage) // zzz
 
   const [localProps, setLocalProps] = useState(Constants.getDefaultGameStatus())
 
