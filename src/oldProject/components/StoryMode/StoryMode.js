@@ -7,46 +7,40 @@ import WorldViewer from "../WorldViewer/WorldViewer.js"
 
 import css from "./StoryMode.module.scss"
 
-class StoryMode extends React.Component {
-  render() {
-    const {
-      world,
-      activeScene,
-      updateActiveScene,
-      openQuestPicker,
-    } = this.props
+export default function StoryMode(props) {
+  console.log("") // zzz
+  console.log("StoryMode------------------------>>>")
+  const { world, activeScene, updateActiveScene, openQuestPicker } = props
 
-    if (!world || !world.title) {
-      return null
-    }
-
-    const renderWorldName = (
-      <div tabIndex={0} className={css.worldTitle}>
-        <span> {world.title} </span>
-      </div>
-    )
-
-    return (
-      <div className={`${css.main}`}>
-        {renderWorldName}
-        <div className={`${css.halfPage} ${css.leftHalf}`}>
-          <WordPage
-            updateActiveScene={updateActiveScene}
-            activeScene={activeScene}
-            openQuestPicker={openQuestPicker}
-            forceUpdate={this.props.forceUpdate}
-          />
-        </div>
-
-        <div className={`${css.halfPage} ${css.rightHalf}`}>
-          <WorldViewer
-            updateActiveScene={updateActiveScene}
-            activeScene={activeScene}
-            world={world}
-          />
-        </div>
-      </div>
-    )
+  console.log("activeScene---------------StoryMode", activeScene) // zzz
+  if (!world || !world.title) {
+    return null
   }
+
+  const renderWorldName = (
+    <div tabIndex={0} className={css.worldTitle}>
+      <span> {world.title} </span>
+    </div>
+  )
+
+  return (
+    <div className={`${css.main}`}>
+      {renderWorldName}
+      <div className={`${css.halfPage} ${css.leftHalf}`}>
+        <WordPage
+          updateActiveScene={updateActiveScene}
+          activeScene={activeScene}
+          openQuestPicker={openQuestPicker}
+        />
+      </div>
+
+      <div className={`${css.halfPage} ${css.rightHalf}`}>
+        <WorldViewer
+          updateActiveScene={updateActiveScene}
+          activeScene={activeScene}
+          world={world}
+        />
+      </div>
+    </div>
+  )
 }
-export default StoryMode

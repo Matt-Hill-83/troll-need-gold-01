@@ -35,13 +35,13 @@ export default function WordPage(props) {
 
   return (
     <div className={css.textPage}>
-      <FrameViewer
+      {/* <FrameViewer
         frame={frame}
         isLastFrame={isLastFrame}
         openQuestPicker={openQuestPicker}
         scene={activeScene}
         updateActiveScene={updateActiveScene}
-      />
+      /> */}
     </div>
   )
 }

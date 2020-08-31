@@ -6,11 +6,14 @@ import Images from "../../images/images.js"
 import MiniLocation from "../MiniLocation/MiniLocation.js"
 import MissionConsole from "../MissionConsole/MissionConsole.js"
 import Utils from "../../Utils/Utils.js"
-
-import css from "./WorldViewer.module.scss"
 import { myContext } from "../../../myProvider.js"
 
+import css from "./WorldViewer.module.scss"
+
 export default function WorldViewer(props) {
+  console.log("") // zzz
+  console.log("WorldViewer-----------------------") // zzz
+
   const { world } = props
   const [localStorage, setLocalStorage] = useContext(myContext)
 

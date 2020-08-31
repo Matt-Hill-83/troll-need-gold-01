@@ -10,6 +10,8 @@ import Utils from "../../Utils/Utils.js"
 import css from "./MiniLocation.module.scss"
 
 export default function MiniLocation(props) {
+  console.log("") // zzz
+  console.log("MiniLocation----------------------") // zzz
   const { scene, isActive, className, id, world } = props
   const [localStorage, setLocalStorage] = useContext(myContext)
   const { questStatus } = localStorage
