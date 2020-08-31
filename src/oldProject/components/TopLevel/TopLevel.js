@@ -83,13 +83,10 @@ export default function TopLevel(props) {
       questStatus.desiredItems = desiredItems
     }
 
-    updateActiveScene({
-      sceneId: startScene.id,
-      world,
-    })
+    updateActiveScene({ sceneId: startScene.id })
   }
 
-  const updateActiveScene = ({ sceneId, world }) => {
+  const updateActiveScene = ({ sceneId }) => {
     console.log("updateActiveScene")
 
     const { questConfig } = world
@@ -129,11 +126,11 @@ export default function TopLevel(props) {
 
   const updatePockets = ({ questStatus, activeMission }) => {
     // remove item from pockets
-    const desiredItem = activeMission.item
-    delete questStatus.pockets[desiredItem.name]
+    const { rewards, item } = activeMission
+    delete questStatus.pockets[item.name]
 
-    const newPockets = QuestProgressUtils.convertItemToObjFormat({
-      itemsArray: activeMission.rewards,
+    const newPockets = TopLevelUtils.convertItemToObjFormat({
+      itemsArray: rewards,
     })
 
     return QuestProgressUtils.addToPockets({
