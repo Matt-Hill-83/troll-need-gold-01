@@ -9,9 +9,8 @@ import TopLevelUtils from "../../Utils/TopLevelUtils.js"
 import Utils from "../../Utils/Utils.js"
 import Utils2 from "../../Utils/Utils2.js"
 
-import useTopLevelStorage from "./useTopLevelStorage.js"
-
 import css from "./TopLevel.module.scss"
+import useTopLevelStorage from "../../../Context/useTopLevelStorage.js"
 
 const toaster = Toaster.create({
   position: Position.TOP,
@@ -22,6 +21,9 @@ const toaster = Toaster.create({
 export default function TopLevel(props) {
   console.log("FUNCTION START-----------------------------") // zzz
   const { findItem } = Utils2()
+
+  // const [globalStorage, setGlobalStorage] = useContext(myContext)
+  const { globalStorage, setGlobalStorageProps } = useTopLevelStorage()
 
   const [localProps, setLocalProps] = useState(Constants.getDefaultGameStatus())
 

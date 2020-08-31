@@ -36,7 +36,7 @@ const Utils2 = () => {
 
     questStatus.pockets = TopLevelUtils.updatePocket({ foundItem, pockets })
 
-    // setGlobalStorageProp({ questStatus: { ...questStatus } })
+    // setGlobalStorageProps({ questStatus: { ...questStatus } })
     return foundItem
   }
 
