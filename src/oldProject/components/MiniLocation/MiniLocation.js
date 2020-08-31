@@ -18,6 +18,7 @@ export default function MiniLocation(props) {
   console.log("questStatus----------ML-------->>>", questStatus) // zzz
 
   const { activeScene } = globalStorage
+  console.log("globalStorage------------mL", globalStorage) // zzz
   // console.log("activeScene----------------ML", activeScene) // zzz
 
   // These are the critters1 creatures from the first frame that hover over the active location.

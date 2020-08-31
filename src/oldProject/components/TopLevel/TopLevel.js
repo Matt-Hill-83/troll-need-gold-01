@@ -20,6 +20,7 @@ const toaster = Toaster.create({
 
 export default function TopLevel(props) {
   const { className } = props
+  let worldLocal = props.quest
 
   console.log("FUNCTION START-----------------------------") // zzz
 
@@ -31,8 +32,10 @@ export default function TopLevel(props) {
   )
 
   console.log("localProps - 1", localProps) // zzz
-  let questStatus
-  let worldLocal
+  // let questStatus = {}
+  const { questStatus } = localProps
+
+  // let worldLocal
 
   const setLocalStuff = (props) => {
     setLocalProps((state) => {
@@ -50,8 +53,8 @@ export default function TopLevel(props) {
 
   // on mount
   useEffect(() => {
-    questStatus = globalStorage.questStatus
-    // worldLocal = props.quest
+    // questStatus = globalStorage.questStatus
+    worldLocal = props.quest
     // onChangeWorld()
 
     // returned function will be called on component unmount
@@ -61,6 +64,8 @@ export default function TopLevel(props) {
   // on change in props
   useEffect(() => {
     console.log("new props =================================>>>>>")
+    console.log("globalStorage - new props", globalStorage.questStatus) // zzz
+    setLocalStuff({ questStatus: { ...globalStorage.questStatus } })
     worldLocal = props.quest
     onChangeWorld()
     console.log("worldLocal after onchangeworld>", worldLocal) // zzz
@@ -68,10 +73,6 @@ export default function TopLevel(props) {
 
   const onChangeWorld = () => {
     console.log("onChangeWorld")
-    console.log(
-      "worldLocal---------------------------------------------------->",
-      worldLocal
-    ) // zzz
 
     if (!worldLocal) {
       return <div>no worldLocal 1</div>
@@ -252,12 +253,12 @@ export default function TopLevel(props) {
 
   console.log("")
   console.log("main story render")
-
   console.log("--------------------RENDER-TopLevel------------------->") // zzz
-  console.log("worldLocal", worldLocal) // zzz
-  console.log("localProps.activeScene", localProps.activeScene) // zzz
+  console.log("localProps", localProps) // zzz
   console.log("-------------------globalStorage-----------TL", globalStorage) // zzz
   console.log("questStatus", questStatus) // zzz
+
+  console.log("worldLocal", worldLocal) // zzz
 
   if (!worldLocal || !worldLocal.title) {
     return <div>no world 2</div>
