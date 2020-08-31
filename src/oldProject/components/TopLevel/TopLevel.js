@@ -27,7 +27,6 @@ export default function TopLevel(props) {
   const { globalStorage, setGlobalStorageProps } = useTopLevelStorage()
   const [localProps, setLocalProps] = useState(Constants.getDefaultGameStatus())
 
-  console.log("localProps - 1", localProps) // zzz
   const { questStatus } = localProps
 
   const setLocalStuff = (props) => {
@@ -39,8 +38,6 @@ export default function TopLevel(props) {
 
   // on mount
   useEffect(() => {
-    // worldLocal = props.quest
-
     // returned function will be called on component unmount
     return () => {}
   }, [])
@@ -97,11 +94,10 @@ export default function TopLevel(props) {
 
     const { questConfig } = world
     const activeScene = TopLevelUtils.getSceneFromId({ world, sceneId })
-    setLocalStuff({ activeScene })
-    console.log("activeScene", activeScene) // zzz
 
-    // Should I do this after
-    setGlobalStorageProps({ activeScene })
+    // This preserves activeScene until the next function render
+    setLocalStuff({ activeScene })
+    setGlobalStorageProps({ activeScene, world: worldLocal })
 
     // TODO: is this getting published correctly?
     // TODO: is this getting published correctly?

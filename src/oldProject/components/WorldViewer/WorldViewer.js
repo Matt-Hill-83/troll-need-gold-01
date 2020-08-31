@@ -89,7 +89,7 @@ export default function WorldViewer(props) {
       <img className={css.backgroundImage2} src={mainBackground2} alt={"bk"} />
       <div className={`${css.mapScroller}`}>
         <div className={`${css.missionConsoleBox}`}>
-          {/* {showMissionConsole && <MissionConsole world={world} key={key} />} */}
+          {showMissionConsole && <MissionConsole world={world} key={key} />}
         </div>
         <div className={`${css.innerMapScroller}`}>
           <img
