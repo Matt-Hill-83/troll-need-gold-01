@@ -125,35 +125,48 @@ export default function TopLevel(props) {
     questStatus.visitedScenes.push(sceneId)
 
     if (localProps.showMissionConsole && questConfig) {
+      const { foundItem, completedMission } = updateQuestProgress({
+        world,
+        activeScene,
+      })
+
       // mutates questStatus
       QuestVisibilityUtils.updateSceneVisibility({
         questStatus,
         world,
       })
 
-      const { foundItem, completedMission } = updateQuestProgress({
-        world,
-        activeScene,
-      })
-
       // TODO: this should probably happen on the appropriate frame.
+      toaster.clear()
       displayFoundItemToaster({ foundItem })
       displayCompletedMissionToaster({ completedMission })
     }
   }
 
+  const updatePockets = ({ questStatus, activeMission }) => {
+    // remove item from pockets
+    const desiredItem = activeMission.item
+    delete questStatus.pockets[desiredItem.name]
+
+    const newPockets = QuestProgressUtils.convertItemToObjFormat({
+      itemsArray: activeMission.rewards,
+    })
+
+    questStatus.pockets = QuestProgressUtils.addToPockets({
+      newPockets,
+      questStatus,
+    })
+  }
+
   const updateQuestProgress = ({ world, activeScene }) => {
     console.log("updateQuestStatus")
-    toaster.clear()
-
+    const { questConfig } = world
     const { location } = activeScene
 
     const firstFrame = Utils.getFirstFrame({ activeScene }) || {}
     const { critters1 = [], critters2 = [] } = firstFrame
     const crittersAndLocations = [location, ...critters1, ...critters2]
 
-    const { questConfig } = world
-    const activeMissionIndex = questStatus.activeMissionIndex
     const activeMission = QuestProgressUtils.getActiveMission({
       questConfig,
       questStatus,
@@ -165,28 +178,19 @@ export default function TopLevel(props) {
 
     const isMissionCompleted = QuestProgressUtils.completeMission({
       charactersInScene: crittersAndLocations,
-      questStatus,
+      pockets: questStatus.pockets,
       activeMission,
     })
 
+    // If mission completed, update pockets
     if (isMissionCompleted) {
       questStatus.completedMissions.push(activeMissionIndex)
-
-      // remove item from pockets
-      const desiredItem = activeMission.item
-      delete questStatus.pockets[desiredItem.name]
       questStatus.activeMissionIndex++
 
-      const newPockets = QuestProgressUtils.TopLevelUtils({
-        itemsArray: activeMission.rewards,
-      })
-
-      questStatus.pockets = QuestProgressUtils.addToPockets({
-        newPockets,
-        questStatus,
-      })
+      updatePockets({ questStatus, activeMission })
     }
 
+    // find new items
     const foundItem = QuestProgressUtils.findItem({
       itemsInScene: crittersAndLocations,
       questStatus,
@@ -203,10 +207,6 @@ export default function TopLevel(props) {
       completedMission: isMissionCompleted ? activeMission : false,
     }
   }
-
-  // const updateQuestProgress = ({ itemsInScene, charactersInScene, world }) => {
-
-  // }
 
   const displayFoundItemToaster = ({ foundItem }) => {
     if (foundItem) {

@@ -17,7 +17,7 @@ export default class QuestProgressUtils {
   static completeMission = ({
     charactersInScene,
     activeMission,
-    questStatus,
+    pockets = {},
   }) => {
     const desiredItem = activeMission.item
     const desiredRecipient = QuestProgressUtils.getDesiredRecipient({
@@ -26,8 +26,6 @@ export default class QuestProgressUtils {
 
     console.log("desiredRecipient", desiredRecipient) // zzz
     console.log("desiredItem", desiredItem) // zzz
-
-    const { pockets = {} } = questStatus
 
     const desiredItemIsInPocket = QuestProgressUtils.isDesiredItemInPocket({
       desiredItem,
