@@ -4,7 +4,7 @@ import Constants from "./Constants/Constants.js"
 export default class QuestVisibilityUtils {
   // update new scene visibility props based on rules in subQuest
 
-  static updateSceneVisibilityProps = ({ questStatus, world }) => {
+  static updateSceneVisibility = ({ questStatus, world }) => {
     const { newGrid5, questConfig } = world
     const { activeMissionIndex } = questStatus
     const { subQuests } = questConfig

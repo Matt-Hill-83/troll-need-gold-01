@@ -140,12 +140,12 @@ export default function TopLevel(props) {
     const { critters1 = [], critters2 = [] } = firstFrame
     const crittersAndLocations = [location, ...critters1, ...critters2]
 
-    QuestVisibilityUtils.updateSceneVisibilityProps({
+    QuestVisibilityUtils.updateSceneVisibility({
       questStatus,
       world,
     })
 
-    const { foundItem, completedMission } = updateQuestState({
+    const { foundItem, completedMission } = updateQuestProgress({
       itemsInScene: crittersAndLocations,
       charactersInScene: crittersAndLocations,
       world,
@@ -156,7 +156,7 @@ export default function TopLevel(props) {
     displayCompletedMissionToaster({ completedMission })
   }
 
-  const updateQuestState = ({ itemsInScene, charactersInScene, world }) => {
+  const updateQuestProgress = ({ itemsInScene, charactersInScene, world }) => {
     const { questConfig } = world
     const activeMissionIndex = questStatus.activeMissionIndex
     const activeMission = QuestProgressUtils.getActiveMission({
