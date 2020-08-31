@@ -269,21 +269,6 @@ export default class QuestVisibilityUtils {
     return allScenes.find((scene) => scene.id === sceneId) || []
   }
 
-  static getSubQuestColor = ({ world, sceneId }) => {
-    const colors = Constants.subQuestColors
-
-    const parentSubQuestFromScene = this._getParentSubQuestIndexFromScene({
-      world,
-      sceneId,
-    })
-    const colorIndex = parentSubQuestFromScene % colors.length
-    const backgroundColor = colors[colorIndex]
-    const style = {
-      "background-color": `#${backgroundColor}`,
-    }
-    return style
-  }
-
   // Data Manupulation --- START
   static _updateProperty = ({ questStatus, sceneId, propertyName, value }) => {
     if (!questStatus[propertyName]) {
@@ -320,5 +305,21 @@ export default class QuestVisibilityUtils {
     const { hiddenScenes = [] } = questStatus
     return hiddenScenes.includes(sceneId) ? true : false
   }
+
+  static getSubQuestColor = ({ world, sceneId }) => {
+    const colors = Constants.subQuestColors
+
+    const parentSubQuestFromScene = this._getParentSubQuestIndexFromScene({
+      world,
+      sceneId,
+    })
+    const colorIndex = parentSubQuestFromScene % colors.length
+    const backgroundColor = colors[colorIndex]
+    const style = {
+      "background-color": `#${backgroundColor}`,
+    }
+    return style
+  }
+
   // Get property functions --- START
 }
