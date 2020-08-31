@@ -128,23 +128,7 @@ export default function TopLevel(props) {
     console.log("worldLocal ----4--->", worldLocal) // zzz
   }
 
-  const updateQuestStatus = ({ world, activeScene }) => {
-    console.log("updateQuestStatus")
-    toaster.clear()
-
-    const { location } = activeScene
-
-    const firstFrame = Utils.getFirstFrame({ activeScene }) || {}
-    const { critters1 = [], critters2 = [] } = firstFrame
-
-    const crittersAndLocations = [location, ...critters1, ...critters2]
-
-    const { foundItem, completedMission } = updateQuestState({
-      itemsInScene: crittersAndLocations,
-      charactersInScene: crittersAndLocations,
-      world,
-    })
-
+  const displayFoundItemToaster = ({ foundItem }) => {
     if (foundItem) {
       const message = (
         <div>
@@ -160,8 +144,9 @@ export default function TopLevel(props) {
         canEscapeKeyClear: true,
       })
     }
+  }
 
-    // TODO: this should probably happen on the last frame.
+  const displayCompletedMissionToaster = ({ completedMission }) => {
     if (completedMission) {
       const { rewards, item, recipient, name } = completedMission
 
@@ -183,6 +168,28 @@ export default function TopLevel(props) {
       })
       toaster.show({ message, className: css.toaster, timeout: 30000 })
     }
+  }
+
+  const updateQuestStatus = ({ world, activeScene }) => {
+    console.log("updateQuestStatus")
+    toaster.clear()
+
+    const { location } = activeScene
+
+    const firstFrame = Utils.getFirstFrame({ activeScene }) || {}
+    const { critters1 = [], critters2 = [] } = firstFrame
+
+    const crittersAndLocations = [location, ...critters1, ...critters2]
+
+    const { foundItem, completedMission } = updateQuestState({
+      itemsInScene: crittersAndLocations,
+      charactersInScene: crittersAndLocations,
+      world,
+    })
+
+    displayFoundItemToaster({ foundItem })
+    // TODO: this should probably happen on the last frame.
+    displayCompletedMissionToaster({ completedMission })
 
     QuestStatusUtils.updateSceneVisibilityProps({
       questStatus,
