@@ -4,7 +4,7 @@ import cx from "classnames"
 
 import ImageDisplay from "../ImageDisplay/ImageDisplay"
 import MiniTable2 from "../MiniTable2/MiniTable2"
-import QuestStatusUtils from "../../Utils/QuestStatusUtils"
+import QuestVisibilityUtils from "../../Utils/QuestVisibilityUtils"
 import { myContext } from "../../../myProvider"
 
 import css from "./MissionConsole.module.scss"

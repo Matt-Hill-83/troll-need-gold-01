@@ -4,7 +4,7 @@ import _get from "lodash.get"
 import { myContext } from "../../../myProvider.js"
 import Constants from "../../Utils/Constants/Constants.js"
 import Images from "../../images/images.js"
-import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
+import QuestVisibilityUtils from "../../Utils/QuestVisibilityUtils.js"
 import Utils from "../../Utils/Utils.js"
 
 import css from "./MiniLocation.module.scss"
@@ -58,7 +58,7 @@ export default function MiniLocation(props) {
   )
   const locationName = scene.location.name
 
-  const showNothing = QuestStatusUtils.isSceneHidden({
+  const showNothing = QuestVisibilityUtils.isSceneHidden({
     sceneId: scene.id,
     questStatus,
   })
@@ -67,7 +67,7 @@ export default function MiniLocation(props) {
     return renderBlankScene({ id })
   }
 
-  const isClouded = QuestStatusUtils.isSceneClouded({
+  const isClouded = QuestVisibilityUtils.isSceneClouded({
     sceneId: scene.id,
     questStatus,
   })
@@ -101,7 +101,7 @@ export default function MiniLocation(props) {
     )
   }
 
-  const showLock = QuestStatusUtils.isSceneLocked({
+  const showLock = QuestVisibilityUtils.isSceneLocked({
     sceneId: scene.id,
     questStatus,
   })
@@ -116,12 +116,12 @@ export default function MiniLocation(props) {
   const showBottomPath = neighbors[Constants.neighborPositionsEnum.bottom]
   const showRightPath = neighbors[Constants.neighborPositionsEnum.right]
 
-  const backgroundColor = QuestStatusUtils.getSubQuestColor({
+  const backgroundColor = QuestVisibilityUtils.getSubQuestColor({
     world,
     sceneId: scene.id,
   })
 
-  // const sceneTrggerConfig = QuestStatusUtils.getSceneTriggerConfigFromScene({
+  // const sceneTrggerConfig = QuestVisibilityUtils.getSceneTriggerConfigFromScene({
   //   sceneId: scene.id,
   // })
 

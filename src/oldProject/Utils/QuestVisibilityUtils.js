@@ -1,7 +1,7 @@
 import _get from "lodash.get"
 import Constants from "./Constants/Constants.js"
 
-export default class QuestStatusUtils {
+export default class QuestVisibilityUtils {
   // update new scene visibility props based on rules in subQuest
 
   static updateSceneVisibilityProps = ({ questStatus, world }) => {

@@ -3,7 +3,7 @@ import _get from "lodash.get"
 import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core"
 
 import Constants from "../../Utils/Constants/Constants.js"
-import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
+import QuestVisibilityUtils from "../../Utils/QuestVisibilityUtils.js"
 import StoryMode from "../StoryMode/StoryMode"
 import TopLevelUtils from "../../Utils/TopLevelUtils.js"
 import Utils from "../../Utils/Utils.js"
@@ -109,7 +109,6 @@ export default function TopLevel(props) {
     console.log("updateActiveScene")
 
     const { questConfig } = world
-
     const activeScene = TopLevelUtils.getSceneFromId({ world, sceneId })
     setLocalStuff({ activeScene })
     console.log("activeScene", activeScene) // zzz
@@ -126,6 +125,87 @@ export default function TopLevel(props) {
       updateQuestStatus({ world, activeScene })
     }
     console.log("worldLocal ----4--->", worldLocal) // zzz
+  }
+
+  const updateQuestStatus = ({ world, activeScene }) => {
+    console.log("updateQuestStatus")
+    toaster.clear()
+
+    const { location } = activeScene
+
+    const firstFrame = Utils.getFirstFrame({ activeScene }) || {}
+    const { critters1 = [], critters2 = [] } = firstFrame
+    const crittersAndLocations = [location, ...critters1, ...critters2]
+
+    QuestVisibilityUtils.updateSceneVisibilityProps({
+      questStatus,
+      world,
+    })
+
+    const { foundItem, completedMission } = updateQuestState({
+      itemsInScene: crittersAndLocations,
+      charactersInScene: crittersAndLocations,
+      world,
+    })
+
+    // TODO: this should probably happen on the appropriate frame.
+    displayFoundItemToaster({ foundItem })
+    displayCompletedMissionToaster({ completedMission })
+  }
+
+  const updateQuestState = ({ itemsInScene, charactersInScene, world }) => {
+    const { questConfig } = world
+    const activeMissionIndex = questStatus.activeMissionIndex
+    const activeMission = TopLevelUtils.getActiveMission({
+      questConfig,
+      questStatus,
+    })
+
+    if (!activeMission) {
+      return {}
+    }
+
+    const isMissionCompleted = TopLevelUtils.completeMission({
+      charactersInScene,
+      questStatus,
+      activeMission,
+    })
+
+    if (isMissionCompleted) {
+      questStatus.completedMissions.push(activeMissionIndex)
+
+      // remove item from pockets
+      const desiredItem = activeMission.item
+      delete questStatus.pockets[desiredItem.name]
+      questStatus.activeMissionIndex++
+
+      const newPockets = TopLevelUtils.convertItemToObjFormat({
+        itemsArray: activeMission.rewards,
+      })
+
+      questStatus.pockets = TopLevelUtils.addToPockets({
+        newPockets,
+        questStatus,
+      })
+    }
+
+    const foundItem = findItem({
+      itemsInScene,
+      questStatus,
+      desiredItems: questStatus.desiredItems,
+    })
+
+    TopLevelUtils.removeItemFromDesiredItems({
+      itemToRemove: foundItem,
+      questStatus,
+    })
+
+    console.log("worldLocal ----5--->", worldLocal) // zzz
+
+    return {
+      foundItem,
+      completedMission: isMissionCompleted ? activeMission : false,
+    }
   }
 
   const displayFoundItemToaster = ({ foundItem }) => {
@@ -167,87 +247,6 @@ export default function TopLevel(props) {
         timeout: 30000,
       })
       toaster.show({ message, className: css.toaster, timeout: 30000 })
-    }
-  }
-
-  const updateQuestStatus = ({ world, activeScene }) => {
-    console.log("updateQuestStatus")
-    toaster.clear()
-
-    const { location } = activeScene
-
-    const firstFrame = Utils.getFirstFrame({ activeScene }) || {}
-    const { critters1 = [], critters2 = [] } = firstFrame
-    const crittersAndLocations = [location, ...critters1, ...critters2]
-
-    QuestStatusUtils.updateSceneVisibilityProps({
-      questStatus,
-      world,
-    })
-
-    const { foundItem, completedMission } = updateQuestState({
-      itemsInScene: crittersAndLocations,
-      charactersInScene: crittersAndLocations,
-      world,
-    })
-
-    // TODO: this should probably happen on the appropriate frame.
-    displayFoundItemToaster({ foundItem })
-    displayCompletedMissionToaster({ completedMission })
-  }
-
-  const updateQuestState = ({ itemsInScene, charactersInScene, world }) => {
-    const { questConfig } = world
-    const activeMissionIndex = questStatus.activeMissionIndex
-    const activeMission = TopLevelUtils.getActiveMission({
-      questConfig,
-      questStatus,
-    })
-
-    if (!activeMission) {
-      return {}
-    }
-
-    const isMissionCompleted = TopLevelUtils.completeMission({
-      charactersInScene,
-      questStatus,
-      activeMission,
-    })
-
-    if (isMissionCompleted) {
-      questStatus.completedMissions.push(activeMissionIndex)
-
-      // remove item from pockets
-      const desiredItem = getDesiredItem
-      delete questStatus.pockets[desiredItem.name]
-      questStatus.activeMissionIndex++
-
-      const newPockets = TopLevelUtils.convertItemToObjFormat({
-        itemsArray: activeMission.rewards,
-      })
-
-      questStatus.pockets = TopLevelUtils.addToPockets({
-        newPockets,
-        questStatus,
-      })
-    }
-
-    const foundItem = findItem({
-      itemsInScene,
-      questStatus,
-      desiredItems: questStatus.desiredItems,
-    })
-
-    TopLevelUtils.removeItemFromDesiredItems({
-      itemToRemove: foundItem,
-      questStatus,
-    })
-
-    console.log("worldLocal ----5--->", worldLocal) // zzz
-
-    return {
-      foundItem,
-      completedMission: isMissionCompleted ? activeMission : false,
     }
   }
 
