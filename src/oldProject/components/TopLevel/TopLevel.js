@@ -27,15 +27,8 @@ export default function TopLevel(props) {
   const { globalStorage, setGlobalStorageProps } = useTopLevelStorage()
   const [localProps, setLocalProps] = useState(Constants.getDefaultGameStatus())
 
-  const [questStatusGlobal, setQuestStatusGlobal] = useState(
-    Constants.getDefaultQuestStatus()
-  )
-
   console.log("localProps - 1", localProps) // zzz
-  // let questStatus = {}
   const { questStatus } = localProps
-
-  // let worldLocal
 
   const setLocalStuff = (props) => {
     setLocalProps((state) => {
@@ -44,18 +37,9 @@ export default function TopLevel(props) {
     })
   }
 
-  const setQuestStatusStuff = (props) => {
-    setQuestStatusGlobal((state) => {
-      const test = { ...state, ...props }
-      return test
-    })
-  }
-
   // on mount
   useEffect(() => {
-    // questStatus = globalStorage.questStatus
-    worldLocal = props.quest
-    // onChangeWorld()
+    // worldLocal = props.quest
 
     // returned function will be called on component unmount
     return () => {}

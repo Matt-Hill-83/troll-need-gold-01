@@ -15,7 +15,7 @@ export default function MiniLocation(props) {
   const { scene, isActive, className, id, world } = props
   const [globalStorage, setGlobalStorage] = useContext(myContext)
   const { questStatus = {} } = globalStorage
-  console.log("questStatus----------ML-------->>>", questStatus) // zzz
+  // console.log("questStatus----------ML-------->>>", questStatus) // zzz
 
   const { activeScene } = globalStorage
   console.log("globalStorage------------mL", globalStorage) // zzz
