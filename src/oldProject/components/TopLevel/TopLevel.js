@@ -125,9 +125,20 @@ export default function TopLevel(props) {
     questStatus.visitedScenes.push(sceneId)
 
     if (localProps.showMissionConsole && questConfig) {
-      updateQuestStatus({ world, activeScene })
+      QuestVisibilityUtils.updateSceneVisibility({
+        questStatus,
+        world,
+      })
+
+      const { foundItem, completedMission } = updateQuestStatus({
+        world,
+        activeScene,
+      })
+
+      // TODO: this should probably happen on the appropriate frame.
+      displayFoundItemToaster({ foundItem })
+      displayCompletedMissionToaster({ completedMission })
     }
-    console.log("worldLocal ----4--->", worldLocal) // zzz
   }
 
   const updateQuestStatus = ({ world, activeScene }) => {
@@ -140,20 +151,11 @@ export default function TopLevel(props) {
     const { critters1 = [], critters2 = [] } = firstFrame
     const crittersAndLocations = [location, ...critters1, ...critters2]
 
-    QuestVisibilityUtils.updateSceneVisibility({
-      questStatus,
-      world,
-    })
-
-    const { foundItem, completedMission } = updateQuestProgress({
+    return updateQuestProgress({
       itemsInScene: crittersAndLocations,
       charactersInScene: crittersAndLocations,
       world,
     })
-
-    // TODO: this should probably happen on the appropriate frame.
-    displayFoundItemToaster({ foundItem })
-    displayCompletedMissionToaster({ completedMission })
   }
 
   const updateQuestProgress = ({ itemsInScene, charactersInScene, world }) => {

@@ -121,12 +121,7 @@ export default function MiniLocation(props) {
     sceneId: scene.id,
   })
 
-  // const sceneTrggerConfig = QuestVisibilityUtils.getSceneTriggerConfigFromScene({
-  //   sceneId: scene.id,
-  // })
-
   const largeLocation = false
-  // const largeLocation = sceneTrggerConfig.largeImage ? css.large : ""
 
   return (
     <div

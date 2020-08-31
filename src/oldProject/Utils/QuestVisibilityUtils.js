@@ -258,7 +258,7 @@ export default class QuestVisibilityUtils {
     return parentSubQuest
   }
 
-  static getSceneTriggerConfigFromScene = ({ sceneId, questConfig }) => {
+  static _getSceneTriggersFromScene = ({ sceneId, questConfig }) => {
     const allScenes = []
 
     questConfig.subQuests &&
@@ -266,16 +266,7 @@ export default class QuestVisibilityUtils {
         allScenes.push(...subQuest.scenes)
       })
 
-    const foundScene = allScenes.find((scene) => scene.id === sceneId)
-    return foundScene || {}
-  }
-
-  static _getSceneTriggersFromScene = ({ sceneId, questConfig }) => {
-    const foundScene = this.getSceneTriggerConfigFromScene({
-      sceneId,
-      questConfig,
-    })
-    return (foundScene && foundScene.sceneTriggers) || []
+    return allScenes.find((scene) => scene.id === sceneId) || []
   }
 
   static getSubQuestColor = ({ world, sceneId }) => {
@@ -312,7 +303,9 @@ export default class QuestVisibilityUtils {
     return questStatus
   }
 
-  // Object getter functions --- END
+  // Data Manupulation --- END
+
+  // Get property functions --- START
   static isSceneLocked = ({ sceneId, questStatus }) => {
     const { lockedScenes = [] } = questStatus
     return lockedScenes.includes(sceneId) ? true : false
@@ -327,5 +320,5 @@ export default class QuestVisibilityUtils {
     const { hiddenScenes = [] } = questStatus
     return hiddenScenes.includes(sceneId) ? true : false
   }
-  // Data Manupulation --- END
+  // Get property functions --- START
 }
