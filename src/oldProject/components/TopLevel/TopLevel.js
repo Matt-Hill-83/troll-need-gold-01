@@ -110,7 +110,7 @@ export default function TopLevel(props) {
 
     const { questConfig } = world
 
-    const activeScene = TopLevelUtils.getActiveScene({ world, sceneId })
+    const activeScene = TopLevelUtils.getSceneFromId({ world, sceneId })
     setLocalStuff({ activeScene })
     console.log("activeScene", activeScene) // zzz
 
@@ -178,8 +178,12 @@ export default function TopLevel(props) {
 
     const firstFrame = Utils.getFirstFrame({ activeScene }) || {}
     const { critters1 = [], critters2 = [] } = firstFrame
-
     const crittersAndLocations = [location, ...critters1, ...critters2]
+
+    QuestStatusUtils.updateSceneVisibilityProps({
+      questStatus,
+      world,
+    })
 
     const { foundItem, completedMission } = updateQuestState({
       itemsInScene: crittersAndLocations,
@@ -187,47 +191,39 @@ export default function TopLevel(props) {
       world,
     })
 
+    // TODO: this should probably happen on the appropriate frame.
     displayFoundItemToaster({ foundItem })
-    // TODO: this should probably happen on the last frame.
     displayCompletedMissionToaster({ completedMission })
-
-    QuestStatusUtils.updateSceneVisibilityProps({
-      questStatus,
-      world,
-    })
   }
 
   const updateQuestState = ({ itemsInScene, charactersInScene, world }) => {
     const { questConfig } = world
     const activeMissionIndex = questStatus.activeMissionIndex
-    localProps.activeMission = TopLevelUtils.getActiveMission({
+    const activeMission = TopLevelUtils.getActiveMission({
       questConfig,
       questStatus,
     })
 
-    if (!localProps.activeMission) {
+    if (!activeMission) {
       return {}
     }
 
     const isMissionCompleted = TopLevelUtils.completeMission({
       charactersInScene,
       questStatus,
-      activeMission: localProps.activeMission,
+      activeMission,
     })
 
     if (isMissionCompleted) {
       questStatus.completedMissions.push(activeMissionIndex)
 
       // remove item from pockets
-      const desiredItem = TopLevelUtils.getDesiredItem({
-        activeMission: localProps.activeMission,
-      })
-
+      const desiredItem = getDesiredItem
       delete questStatus.pockets[desiredItem.name]
       questStatus.activeMissionIndex++
 
       const newPockets = TopLevelUtils.convertItemToObjFormat({
-        itemsArray: localProps.activeMission.rewards,
+        itemsArray: activeMission.rewards,
       })
 
       questStatus.pockets = TopLevelUtils.addToPockets({
@@ -251,7 +247,7 @@ export default function TopLevel(props) {
 
     return {
       foundItem,
-      completedMission: isMissionCompleted ? localProps.activeMission : false,
+      completedMission: isMissionCompleted ? activeMission : false,
     }
   }
 

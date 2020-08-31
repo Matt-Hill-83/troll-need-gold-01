@@ -16,13 +16,6 @@ export default class TopLevelUtils {
     return newObj
   }
 
-  static getDesiredItem = ({ activeMission }) => {
-    if (!activeMission) {
-      return null
-    }
-    return activeMission.item
-  }
-
   static getTerminalScene = ({ start = true, world }) => {
     // const { world } = globalStorage
     if (!world) return null
@@ -56,7 +49,7 @@ export default class TopLevelUtils {
     activeMission,
     questStatus,
   }) => {
-    const desiredItem = TopLevelUtils.getDesiredItem({ activeMission })
+    const desiredItem = activeMission.item
     const desiredRecipient = TopLevelUtils.getDesiredRecipient({
       activeMission,
     })
@@ -82,13 +75,6 @@ export default class TopLevelUtils {
     return desiredRecipientIsHere && desiredItemIsInPocket
   }
 
-  static getDesiredItem = ({ activeMission }) => {
-    if (!activeMission) {
-      return null
-    }
-    return activeMission.item
-  }
-
   static getDesiredRecipient = ({ activeMission }) => {
     if (!activeMission) {
       return null
@@ -96,7 +82,7 @@ export default class TopLevelUtils {
     return activeMission.recipient
   }
 
-  static getActiveScene = ({ world, sceneId }) => {
+  static getSceneFromId = ({ world, sceneId }) => {
     const scenesGrid = _get(world, "newGrid5") || []
     return scenesGrid.find((item) => item.id === sceneId)
   }
@@ -108,7 +94,7 @@ export default class TopLevelUtils {
   static getActiveMission = ({ questConfig, questStatus }) => {
     const missions = TopLevelUtils.getMissions({ questConfig })
     const activeMissionIndex = questStatus.activeMissionIndex
-    return missions[activeMissionIndex] || null
+    return missions[activeMissionIndex]
   }
 
   static removeItemFromDesiredItems = ({ itemToRemove, questStatus }) => {
