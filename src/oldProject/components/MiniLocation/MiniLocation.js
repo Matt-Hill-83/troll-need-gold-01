@@ -10,11 +10,14 @@ import Utils from "../../Utils/Utils.js"
 import css from "./MiniLocation.module.scss"
 
 export default function MiniLocation(props) {
-  console.log("") // zzz
-  console.log("MiniLocation----------------------") // zzz
+  // console.log("") // zzz
+  // console.log("MiniLocation----------------------") // zzz
   const { scene, isActive, className, id, world } = props
-  const [localStorage, setLocalStorage] = useContext(myContext)
-  const { questStatus } = localStorage
+  const [globalStorage, setGlobalStorage] = useContext(myContext)
+  const { questStatus } = globalStorage
+
+  const { activeScene } = globalStorage
+  console.log("activeScene----------------ML", activeScene) // zzz
 
   // These are the critters1 creatures from the first frame that hover over the active location.
   const renderCreatures = ({ isActive }) => {
@@ -22,7 +25,8 @@ export default function MiniLocation(props) {
       return null
     }
 
-    const { activeScene } = localStorage
+    const { activeScene } = globalStorage
+
     const activeFrame = Utils.getFirstFrame({ activeScene }) || {}
     console.log("activeFrame", activeFrame) // zzz
     const { critters1 = [] } = activeFrame
@@ -83,8 +87,8 @@ export default function MiniLocation(props) {
   )
 
   const neighborIsActive = neighborsArray.some((neighbor) => {
-    // const activeSceneId = localStorage.activeScene.id
-    return neighbor && neighbor.id === localStorage.activeScene.id
+    // const activeSceneId = globalStorage.activeScene.id
+    return neighbor && neighbor.id === globalStorage.activeScene.id
   })
 
   if (showLocationOnly) {

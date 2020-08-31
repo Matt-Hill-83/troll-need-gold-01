@@ -13,7 +13,7 @@ import WordGroup from "../WordGroup/WordGroup"
 import css from "./FrameViewer.module.scss"
 
 export default function FrameViewer(props) {
-  const [localStorage, setLocalStorage] = useContext(myContext)
+  const [globalStorage, setGlobalStorage] = useContext(myContext)
 
   const renderDialog = ({ cloneIndex }) => {
     const { frame, scene } = props
@@ -175,7 +175,7 @@ export default function FrameViewer(props) {
   }
 
   const onClickNext = () => {
-    setLocalStorage((prevVal) => {
+    setGlobalStorage((prevVal) => {
       return {
         ...prevVal,
         activeFrameIndex: (prevVal.activeFrameIndex += 1),
@@ -184,7 +184,7 @@ export default function FrameViewer(props) {
   }
 
   const renderArrowNavigator = () => {
-    const activeScene = localStorage.activeScene
+    const activeScene = globalStorage.activeScene
     const { isLastFrame, updateActiveScene, openQuestPicker } = props
     const { isEndScene } = activeScene
 

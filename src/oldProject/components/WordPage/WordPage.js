@@ -7,10 +7,10 @@ import { myContext } from "../../../myProvider.js"
 import css from "./WordPage.module.scss"
 
 export default function WordPage(props) {
-  const [localStorage, setLocalStorage] = useContext(myContext)
+  const [globalStorage, setGlobalStorage] = useContext(myContext)
 
   const { activeScene, openQuestPicker, updateActiveScene } = props
-  const { activeFrameIndex } = localStorage
+  const { activeFrameIndex } = globalStorage
 
   console.log("activeFrameIndex--------------WP", activeFrameIndex) // zzz
   const frameSet = activeScene.frameSet

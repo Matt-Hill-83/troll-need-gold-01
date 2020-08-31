@@ -5,10 +5,10 @@ export const myContext = createContext()
 
 export const MyProvider = (props) => {
   const initialState = Constants.getDefaultGameStatus()
-  const [localStorage, setLocalStorage] = useState(initialState)
+  const [globalStorage, setGlobalStorage] = useState(initialState)
 
   return (
-    <myContext.Provider value={[localStorage, setLocalStorage]}>
+    <myContext.Provider value={[globalStorage, setGlobalStorage]}>
       {props.children}
     </myContext.Provider>
   )

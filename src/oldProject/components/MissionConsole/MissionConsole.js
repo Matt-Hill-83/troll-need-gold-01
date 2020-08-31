@@ -13,10 +13,10 @@ import TopLevelUtils from "../../Utils/TopLevelUtils"
 export default function MissionConsole(props) {
   console.log("MissionConsole") // zzz
   console.log("props", props) // zzz
-  const [localStorage, setLocalStorage] = useContext(myContext)
+  const [globalStorage, setGlobalStorage] = useContext(myContext)
 
   const renderPocketItems = ({ goldOnly = false }) => {
-    const { questStatus } = localStorage
+    const { questStatus } = globalStorage
     const items = _get(questStatus, "pockets") || []
 
     const itemKeys = Object.keys(items)
@@ -57,7 +57,7 @@ export default function MissionConsole(props) {
   const {
     questStatus,
     world: { questConfig },
-  } = localStorage
+  } = globalStorage
 
   if (!questStatus) {
     return <div>no quest status</div>

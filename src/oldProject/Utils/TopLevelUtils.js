@@ -25,7 +25,7 @@ export default class TopLevelUtils {
   }
 
   static getTerminalScene = ({ start = true, world }) => {
-    // const { world } = localStorage
+    // const { world } = globalStorage
     if (!world) return null
     const scenesGrid = _get(world, "newGrid5") || []
     const endScene = scenesGrid.find((item) => item.id === world.endSceneId)

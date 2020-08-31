@@ -15,7 +15,7 @@ export default function WorldViewer(props) {
   console.log("WorldViewer-----------------------") // zzz
 
   const { world } = props
-  const [localStorage, setLocalStorage] = useContext(myContext)
+  const [globalStorage, setGlobalStorage] = useContext(myContext)
 
   const renderSceneRows = () => {
     const { gridDimensions, newGrid5 } = world
@@ -81,7 +81,7 @@ export default function WorldViewer(props) {
   const bookCoil01 = Images.backgrounds["bookCoil01"]
   const mapBackground = Images.backgrounds["mapBackground11"]
 
-  const { showMissionConsole } = localStorage
+  const { showMissionConsole } = globalStorage
   console.log("showMissionConsole", showMissionConsole) // zzz
   return (
     <>
@@ -89,7 +89,7 @@ export default function WorldViewer(props) {
       <img className={css.backgroundImage2} src={mainBackground2} alt={"bk"} />
       <div className={`${css.mapScroller}`}>
         <div className={`${css.missionConsoleBox}`}>
-          {showMissionConsole && <MissionConsole world={world} key={key} />}
+          {/* {showMissionConsole && <MissionConsole world={world} key={key} />} */}
         </div>
         <div className={`${css.innerMapScroller}`}>
           <img

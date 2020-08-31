@@ -6,9 +6,10 @@ import Constants from "../../Utils/Constants/Constants.js"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 import StoryMode from "../StoryMode/StoryMode"
 import TopLevelUtils from "../../Utils/TopLevelUtils.js"
-// import useLocalStorage from "./useLocalStorage.js"
 import Utils from "../../Utils/Utils.js"
 import Utils2 from "../../Utils/Utils2.js"
+
+import useTopLevelStorage from "./useTopLevelStorage.js"
 
 import css from "./TopLevel.module.scss"
 
