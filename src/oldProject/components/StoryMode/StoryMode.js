@@ -12,7 +12,6 @@ export default function StoryMode(props) {
   console.log("StoryMode------------------------>>>")
   const { world, activeScene, updateActiveScene, openQuestPicker } = props
 
-  console.log("activeScene---------------StoryMode", activeScene) // zzz
   if (!world || !world.title) {
     return null
   }
