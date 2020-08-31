@@ -93,11 +93,14 @@ export default function TopLevel(props) {
     console.log("updateActiveScene")
 
     const { questConfig } = world
-    const activeScene = TopLevelUtils.getSceneFromId({ world, sceneId })
+    const activeScene = TopLevelUtils.getSceneFromId({
+      world: worldLocal,
+      sceneId,
+    })
 
     // This preserves activeScene until the next function render
     setLocalStuff({ activeScene })
-    setGlobalStorageProps({ activeScene, world: worldLocal })
+    setGlobalStorageProps({ activeScene, world })
 
     // TODO: is this getting published correctly?
     // TODO: is this getting published correctly?
