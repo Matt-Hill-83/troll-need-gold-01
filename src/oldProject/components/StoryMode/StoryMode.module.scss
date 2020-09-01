@@ -63,8 +63,10 @@
   padding: 1vh 2vh;
   border-radius: 11px;
   border: 1px solid black;
-  right: 51vw;
-  top: 2vh;
+  left: 50%;
+  top: 6vh;
   background: white;
-  position: absolute;
+  position: fixed;
+  height: 3.2vh;
+  transform: translateX(-50%);
 }

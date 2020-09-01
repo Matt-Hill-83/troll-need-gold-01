@@ -38,14 +38,13 @@
     position: relative;
     display: flex;
     flex: 1 1;
-    border-radius: 0.5vh;
     font-size: 2vh;
     overflow: hidden;
-    border: 1px solid black !important;
     margin: 0.5vh;
   }
 
   .left {
+    border: 1px solid black !important;
   }
   .right {
     flex-direction: column;
@@ -60,11 +59,13 @@
   .itemContainerTitle {
     display: flex;
     align-items: center;
-    border: 1px solid green !important;
+    border-bottom: 1px solid black !important;
     background: white;
     white-space: nowrap;
     font-size: 1vh;
     padding: 0 0.2rem;
+    justify-content: center;
+    font-weight: bold;
   }
 
   .itemsContainer {
@@ -77,9 +78,9 @@
     min-width: 24vh;
     min-height: var(--box-height);
     overflow: hidden;
-    background: white;
-    margin: 0.5vh;
+    // margin: 0.5vh;
     padding: 0;
+    border: 1px solid black !important;
 
     :global {
       [className*="ImageDisplay_itemLabel__"] {
@@ -102,11 +103,10 @@
       position: relative;
       display: flex;
       flex: 1 1;
-      border: 1px solid red;
       border-radius: 2px;
       margin-right: 1vh;
       max-width: var(--box-height);
-      border-left: 1px solid red;
+      border-right: 1px solid black;
 
       &:first-of-type {
       }

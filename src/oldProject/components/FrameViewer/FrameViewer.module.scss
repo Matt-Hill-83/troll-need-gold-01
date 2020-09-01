@@ -360,18 +360,17 @@
 
   .buttonsContainer {
     position: fixed;
-
     border: 1px solid black !important;
     overflow: hidden;
     z-index: 15;
     border-radius: 1vh;
-    left: 52vw;
+    left: 46vw;
     bottom: 35vh;
     box-shadow: 5px 5px 15px 5px #000000;
-    transform: translateX(-50%);
     background: #ffffff24;
-    height: 12vh;
+    height: 7vh;
     width: 18vh;
+    background: white;
   }
 
   .newGameButton {
