@@ -11,11 +11,10 @@ import { myContext } from "../../../myProvider.js"
 import css from "./WorldViewer.module.scss"
 
 export default function WorldViewer(props) {
-  console.log("") // zzz
-  console.log("WorldViewer-----------------------") // zzz
+  console.log("WorldViewer-----------------------")
 
   const { world } = props
-  const [globalState, setGlobalState] = useContext(myContext)
+  const [globalState] = useContext(myContext)
 
   const renderSceneRows = () => {
     const { gridDimensions, newGrid5 } = world
@@ -54,7 +53,6 @@ export default function WorldViewer(props) {
     let onClick = () => {}
     if (scene.location.name !== "blank") {
       onClick = () => {
-        console.log("onClick") // zzz
         updateActiveScene({
           sceneId: scene.id,
         })
