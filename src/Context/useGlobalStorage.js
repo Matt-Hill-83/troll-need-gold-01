@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { myContext } from "../myProvider"
 
-const useTopLevelStorage = () => {
+const useGlobalStorage = () => {
   const [globalStorage, setGlobalStorage] = useContext(myContext)
 
   const setGlobalStorageProps = (props) => {
@@ -18,4 +18,4 @@ const useTopLevelStorage = () => {
   }
 }
 
-export default useTopLevelStorage
+export default useGlobalStorage

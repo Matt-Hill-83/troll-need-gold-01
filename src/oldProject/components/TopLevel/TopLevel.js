@@ -8,7 +8,7 @@ import StoryMode from "../StoryMode/StoryMode"
 import QuestProgressUtils from "../../Utils/QuestProgressUtils.js"
 import TopLevelUtils from "../../Utils/TopLevelUtils.js"
 import Utils from "../../Utils/Utils.js"
-import useTopLevelStorage from "../../../Context/useTopLevelStorage.js"
+import useGlobalStorage from "../../../Context/useGlobalStorage.js"
 
 import css from "./TopLevel.module.scss"
 
@@ -24,7 +24,7 @@ export default function TopLevel(props) {
 
   console.log("FUNCTION START-----------------------------") // zzz
 
-  const { globalStorage, setGlobalStorageProps } = useTopLevelStorage()
+  const { globalStorage, setGlobalStorageProps } = useGlobalStorage()
   const [localProps, setLocalProps] = useState(Constants.getDefaultGameStatus())
 
   const { questStatus } = localProps
