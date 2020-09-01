@@ -1,24 +1,30 @@
 import _get from "lodash.get"
-import React, { useContext } from "react"
+import React from "react"
 import cx from "classnames"
 
-import { myContext } from "../../../myProvider.js"
 import Images from "../../images/images.js"
 import MiniLocation from "../MiniLocation/MiniLocation.js"
-import MissionConsole from "../MissionConsole/MissionConsole.js"
 import Utils from "../../Utils/Utils.js"
+import useGlobalState from "../../../Context/useGlobalState.js"
 
 import css from "./WorldViewer.module.scss"
+
+const mainBackground = Images.backgrounds["hill01"]
+const mainBackground2 = Images.backgrounds["planetGlorp03"]
+const bookCoil01 = Images.backgrounds["bookCoil01"]
+const mapBackground = Images.backgrounds["mapBackground11"]
 
 export default function WorldViewer(props) {
   console.log("WorldViewer-----------------------")
 
-  const { world } = props
-  const [globalState] = useContext(myContext)
+  const {
+    globalState: {
+      world: { gridDimensions, newGrid5 },
+      activeScene,
+    },
+  } = useGlobalState()
 
   const renderSceneRows = () => {
-    const { gridDimensions, newGrid5 } = world
-
     const grid = Utils.reCreateGridFromCondensedGrid({
       gridDimensions,
       newGrid5,
@@ -44,7 +50,7 @@ export default function WorldViewer(props) {
   }
 
   const renderMiniLocation = ({ colIndex = 0, rowIndex = 0, scene }) => {
-    const { activeScene, updateActiveScene } = props
+    const { updateActiveScene } = props
     const isActive = scene.id === activeScene.id ? true : false
 
     const id = `${colIndex}-${rowIndex}`
@@ -63,18 +69,12 @@ export default function WorldViewer(props) {
           id={id}
           key={id}
           scene={scene}
-          world={world}
           isActive={isActive}
           onClick={onClick}
         />
       </div>
     )
   }
-
-  const mainBackground = Images.backgrounds["hill01"]
-  const mainBackground2 = Images.backgrounds["planetGlorp03"]
-  const bookCoil01 = Images.backgrounds["bookCoil01"]
-  const mapBackground = Images.backgrounds["mapBackground11"]
 
   return (
     <>

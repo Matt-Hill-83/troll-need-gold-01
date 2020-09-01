@@ -1,18 +1,20 @@
-import React, { useContext } from "react"
+import React from "react"
 import _get from "lodash.get"
 
-import { myContext } from "../../../myProvider.js"
 import Constants from "../../Utils/Constants/Constants.js"
 import Images from "../../images/images.js"
 import QuestVisibilityUtils from "../../Utils/QuestVisibilityUtils.js"
 import Utils from "../../Utils/Utils.js"
+import useGlobalState from "../../../Context/useGlobalState.js"
 
 import css from "./MiniLocation.module.scss"
 
 export default function MiniLocation(props) {
-  const { scene, isActive, className, id, world } = props
-  const [globalState] = useContext(myContext)
-  const { activeScene, questStatus = {} } = globalState
+  const { scene, isActive, className, id } = props
+
+  const {
+    globalState: { world, activeScene, questStatus = {} },
+  } = useGlobalState()
 
   // These are the critters1 creatures from the first frame that hover over the active location.
   const renderCreatures = ({ isActive }) => {
@@ -164,10 +166,7 @@ export default function MiniLocation(props) {
           />
         </div>
 
-        <div className={css.characters}>
-          {/* add this back after refactor */}
-          {renderCreatures({ isActive })}
-        </div>
+        <div className={css.characters}>{renderCreatures({ isActive })}</div>
 
         <span className={css.locationTitle}>{locationName}</span>
       </div>
