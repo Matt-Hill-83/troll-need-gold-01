@@ -2,11 +2,11 @@ import _get from "lodash.get"
 import React, { useContext } from "react"
 import cx from "classnames"
 
+import { myContext } from "../../../myProvider.js"
 import Images from "../../images/images.js"
 import MiniLocation from "../MiniLocation/MiniLocation.js"
 import MissionConsole from "../MissionConsole/MissionConsole.js"
 import Utils from "../../Utils/Utils.js"
-import { myContext } from "../../../myProvider.js"
 
 import css from "./WorldViewer.module.scss"
 
@@ -24,17 +24,15 @@ export default function WorldViewer(props) {
       newGrid5,
     })
 
-    const miniLocationsGrid =
-      grid &&
-      grid.map((locationRow, rowIndex) => {
-        const singleRow = createSingleRow({ locationRow, rowIndex })
+    const miniLocationsGrid = grid.map((locationRow, rowIndex) => {
+      const singleRow = createSingleRow({ locationRow, rowIndex })
 
-        return (
-          <div key={rowIndex} className={css.miniLocationsRow}>
-            {singleRow}
-          </div>
-        )
-      })
+      return (
+        <div key={rowIndex} className={css.miniLocationsRow}>
+          {singleRow}
+        </div>
+      )
+    })
 
     return <div className={css.miniLocationsGrid}>{miniLocationsGrid}</div>
   }
