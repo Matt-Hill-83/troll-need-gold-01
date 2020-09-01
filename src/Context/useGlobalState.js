@@ -2,19 +2,19 @@ import { useContext } from "react"
 import { myContext } from "../myProvider"
 
 const useGlobalState = () => {
-  const [globalStorage, setGlobalStorage] = useContext(myContext)
+  const [globalState, setGlobalState] = useContext(myContext)
 
-  const setGlobalStorageProps = (props) => {
-    setGlobalStorage((state) => {
+  const setGlobalStateProps = (props) => {
+    setGlobalState((state) => {
       const test = { ...state, ...props }
       return test
     })
   }
 
   return {
-    globalStorage,
-    setGlobalStorageProps,
-    setGlobalStorage,
+    globalState,
+    setGlobalStateProps,
+    setGlobalState,
   }
 }
 

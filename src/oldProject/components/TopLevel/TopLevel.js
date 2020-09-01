@@ -9,6 +9,7 @@ import QuestProgressUtils from "../../Utils/QuestProgressUtils.js"
 import TopLevelUtils from "../../Utils/TopLevelUtils.js"
 import Utils from "../../Utils/Utils.js"
 import useGlobalState from "../../../Context/useGlobalState.js"
+import useLocalState from "./useLocalState.js"
 
 import css from "./TopLevel.module.scss"
 
@@ -24,7 +25,8 @@ export default function TopLevel(props) {
 
   console.log("FUNCTION START-----------------------------") // zzz
 
-  const { globalStorage, setGlobalStorageProps } = useGlobalState()
+  const { globalState, setGlobalStateProps } = useGlobalState()
+  // const { useLocalState, setLocalStateProps } = useLocalState()
   const [localProps, setLocalProps] = useState(Constants.getDefaultGameStatus())
 
   const { questStatus } = localProps
@@ -50,8 +52,8 @@ export default function TopLevel(props) {
   // on change in props
   useEffect(() => {
     console.log("new props =================================>>>>>")
-    console.log("globalStorage - new props", globalStorage.questStatus) // zzz
-    // setLocalStuff({ questStatus: { ...globalStorage.questStatus } })
+    console.log("globalState - new props", globalState.questStatus) // zzz
+    // setLocalStuff({ questStatus: { ...globalState.questStatus } })
     world = props.quest
     onChangeWorld()
     console.log("world after onchangeworld>", world) // zzz
@@ -104,7 +106,7 @@ export default function TopLevel(props) {
 
     // This preserves activeScene until the next function render
     setLocalStuff({ activeScene })
-    setGlobalStorageProps({ activeScene, world })
+    setGlobalStateProps({ activeScene, world })
 
     questStatus.visitedScenes.push(sceneId)
 
@@ -125,7 +127,7 @@ export default function TopLevel(props) {
       displayFoundItemToaster({ foundItem })
       displayCompletedMissionToaster({ completedMission })
     }
-    setGlobalStorageProps({ questStatus: { ...questStatus } })
+    setGlobalStateProps({ questStatus: { ...questStatus } })
   }
 
   const updatePockets = ({ questStatus, activeMission }) => {
@@ -245,7 +247,7 @@ export default function TopLevel(props) {
   console.log("main story render")
   console.log("--------------------RENDER-TopLevel------------------->") // zzz
   console.log("localProps", localProps) // zzz
-  console.log("-------------------globalStorage-----------TL", globalStorage) // zzz
+  console.log("-------------------globalState-----------TL", globalState) // zzz
   console.log("questStatus", questStatus) // zzz
 
   console.log("world", world) // zzz

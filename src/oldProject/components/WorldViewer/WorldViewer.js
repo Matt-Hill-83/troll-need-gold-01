@@ -15,7 +15,7 @@ export default function WorldViewer(props) {
   console.log("WorldViewer-----------------------") // zzz
 
   const { world } = props
-  const [globalStorage, setGlobalStorage] = useContext(myContext)
+  const [globalState, setGlobalState] = useContext(myContext)
 
   const renderSceneRows = () => {
     const { gridDimensions, newGrid5 } = world
@@ -81,7 +81,7 @@ export default function WorldViewer(props) {
   const bookCoil01 = Images.backgrounds["bookCoil01"]
   const mapBackground = Images.backgrounds["mapBackground11"]
 
-  const { showMissionConsole } = globalStorage
+  const { showMissionConsole } = globalState
   console.log("showMissionConsole", showMissionConsole) // zzz
   return (
     <>

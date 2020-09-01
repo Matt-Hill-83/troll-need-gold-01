@@ -12,8 +12,8 @@ import css from "./MiniLocation.module.scss"
 export default function MiniLocation(props) {
   // console.log("MiniLocation----------------------") // zzz
   const { scene, isActive, className, id, world } = props
-  const [globalStorage, setGlobalStorage] = useContext(myContext)
-  const { activeScene, questStatus = {} } = globalStorage
+  const [globalState, setGlobalState] = useContext(myContext)
+  const { activeScene, questStatus = {} } = globalState
 
   // These are the critters1 creatures from the first frame that hover over the active location.
   const renderCreatures = ({ isActive }) => {

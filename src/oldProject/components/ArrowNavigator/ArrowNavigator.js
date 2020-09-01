@@ -10,16 +10,16 @@ import { myContext } from "../../../myProvider"
 import css from "./ArrowNavigator.module.scss"
 
 export default function ArrowNavigator(props) {
-  const [globalStorage, setGlobalStorage] = useContext(myContext)
+  const [globalState, setGlobalState] = useContext(myContext)
 
-  const setGlobalStorageProps = ({ prop, value }) => {
-    setGlobalStorage((state) => {
+  const setGlobalStateProps = ({ prop, value }) => {
+    setGlobalState((state) => {
       return { ...state, [prop]: value }
     })
   }
 
   const changeLocation = ({ sceneId }) => {
-    setGlobalStorageProps({ prop: "activeFrameIndex", value: 0 })
+    setGlobalStateProps({ prop: "activeFrameIndex", value: 0 })
 
     props.updateActiveScene({ sceneId })
   }

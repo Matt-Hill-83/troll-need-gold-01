@@ -13,7 +13,7 @@ import QuestList from "./QuestList"
 import css from "./QuestDashboard.module.scss"
 
 export default function QuestDashboard() {
-  // const [globalStorage, setGlobalStorage] = useContext(myContext)
+  // const [globalState, setGlobalState] = useContext(myContext)
 
   const limit = 2
   const dispatch = useDispatch()
