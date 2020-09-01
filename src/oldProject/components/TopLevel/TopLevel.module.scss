@@ -38,35 +38,35 @@
   right: 2vw;
   position: absolute !important;
   z-index: 30;
-}
 
-.toaster {
-  position: relative;
-  display: flex;
-  align-items: center;
+  .toaster {
+    position: relative;
+    display: flex;
+    align-items: center;
 
-  background: #f8ffc1;
-  border: 2px solid #ff00d4 !important;
-  border-radius: 8px;
-  padding: 0.5vh;
-  padding-right: 4vh;
-  font-size: 2vh;
-  line-height: 2vh;
-  max-width: 70vw;
-  margin-bottom: 0.5vh !important;
+    background: #f8ffc1;
+    border: 2px solid #ff00d4 !important;
+    border-radius: 8px;
+    padding: 0.5vh;
+    padding-right: 4vh;
+    font-size: 2vh;
+    line-height: 2vh;
+    max-width: 70vw;
+    margin-bottom: 0.5vh !important;
 
-  :global {
-    .bp3-toast-message div span {
-      // border: 1px solid red !important;
-    }
+    :global {
+      .bp3-toast-message div span {
+        // border: 1px solid red !important;
+      }
 
-    .bp3-button-group {
-      position: absolute;
-      right: 2px;
-      top: 2px;
-      .bp3-icon > svg:not([fill]) {
-        height: 1.9vh !important;
-        width: 1.9vh !important;
+      .bp3-button-group {
+        position: absolute;
+        right: 2px;
+        top: 2px;
+        .bp3-icon > svg:not([fill]) {
+          height: 1.9vh !important;
+          width: 1.9vh !important;
+        }
       }
     }
   }
