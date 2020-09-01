@@ -62,16 +62,15 @@ export default function TopLevel(props) {
     })
 
     if (!startScene) return <div>no start scene</div>
+
     if (!questConfig) {
       setGlobalStateProps({ showMissionConsole: false })
     } else {
       setGlobalStateProps({ showMissionConsole: true })
       const missions = TopLevelUtils.getMissions({ questConfig })
 
-      const desiredItems =
+      questStatus.desiredItems =
         missions.map((mission) => !!mission.item && mission.item) || []
-
-      questStatus.desiredItems = desiredItems
     }
 
     updateActiveScene({ sceneId: startScene.id })
@@ -134,10 +133,6 @@ export default function TopLevel(props) {
     const { location } = activeScene
     const { activeMissionIndex, desiredItems, pockets } = questStatus
 
-    // TODO: what happened to my desired items?
-    // TODO: what happened to my desired items?
-    // TODO: what happened to my desired items?
-    // TODO: what happened to my desired items?
     const firstFrame = Utils.getFirstFrame({ activeScene }) || {}
     const { critters1 = [], critters2 = [] } = firstFrame
     const crittersAndLocations = [location, ...critters1, ...critters2]
@@ -238,13 +233,7 @@ export default function TopLevel(props) {
 
   return (
     <div className={`${css.main} ${className}`}>
-      {/* {renderButtons()} */}
-      <StoryMode
-        updateActiveScene={updateActiveScene}
-        activeScene={globalState.activeScene}
-        world={world}
-      />
-      {/* {!isProdRelease && showBookPicker && renderBookPicker()} */}
+      <StoryMode updateActiveScene={updateActiveScene} />
     </div>
   )
 }

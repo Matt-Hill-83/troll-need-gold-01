@@ -2,19 +2,19 @@ import _get from "lodash.get"
 import React, { useContext } from "react"
 import cx from "classnames"
 
+import { myContext } from "../../../myProvider.js"
+import MissionConsole from "../MissionConsole/MissionConsole.js"
 import WordPage from "../WordPage/WordPage.js"
 import WorldViewer from "../WorldViewer/WorldViewer.js"
 
 import css from "./StoryMode.module.scss"
-import MissionConsole from "../MissionConsole/MissionConsole.js"
-import { myContext } from "../../../myProvider.js"
 
 export default function StoryMode(props) {
   console.log("StoryMode------------------------>>>")
   const [globalState] = useContext(myContext)
-  const { showMissionConsole } = globalState
+  const { activeScene, world, showMissionConsole } = globalState
 
-  const { world, activeScene, updateActiveScene, openQuestPicker } = props
+  const { updateActiveScene } = props
 
   if (!world || !world.title) {
     return null
@@ -31,13 +31,11 @@ export default function StoryMode(props) {
       {renderWorldName}
       <div className={`${css.missionConsoleBox}`}>
         {showMissionConsole && <MissionConsole world={world} />}
-        {/* {showMissionConsole && <MissionConsole world={world} key={key} />} */}
       </div>
       <div className={`${css.halfPage} ${css.leftHalf}`}>
         <WordPage
           updateActiveScene={updateActiveScene}
           activeScene={activeScene}
-          openQuestPicker={openQuestPicker}
         />
       </div>
 

@@ -7,9 +7,9 @@ import { myContext } from "../../../myProvider.js"
 import css from "./WordPage.module.scss"
 
 export default function WordPage(props) {
-  const [globalState, setGlobalState] = useContext(myContext)
+  const [globalState] = useContext(myContext)
 
-  const { activeScene, openQuestPicker, updateActiveScene } = props
+  const { activeScene, updateActiveScene } = props
   const { activeFrameIndex } = globalState
 
   console.log("activeFrameIndex--------------WP", activeFrameIndex) // zzz
@@ -23,7 +23,6 @@ export default function WordPage(props) {
       <FrameViewer
         frame={frame}
         isLastFrame={isLastFrame}
-        openQuestPicker={openQuestPicker}
         scene={activeScene}
         updateActiveScene={updateActiveScene}
       />

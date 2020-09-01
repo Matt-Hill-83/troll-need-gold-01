@@ -4,7 +4,7 @@ import cx from "classnames"
 import React, { useContext } from "react"
 
 import { myContext } from "../../../myProvider"
-import ArrowNavigator from "../ArrowNavigator/ArrowNavigator"
+// import ArrowNavigator from "../ArrowNavigator/ArrowNavigator"
 import Character from "../Character/Character"
 import Constants from "../../Utils/Constants/Constants"
 import Images from "../../images/images"
@@ -185,12 +185,12 @@ export default function FrameViewer(props) {
 
   const renderArrowNavigator = () => {
     const activeScene = globalState.activeScene
-    const { isLastFrame, updateActiveScene, openQuestPicker } = props
+    const { isLastFrame, updateActiveScene } = props
     const { isEndScene } = activeScene
 
     if (isEndScene && isLastFrame) {
       return (
-        <Button onClick={openQuestPicker} className={css.newGameButton}>
+        <Button onClick={() => {}} className={css.newGameButton}>
           New Game
         </Button>
       )

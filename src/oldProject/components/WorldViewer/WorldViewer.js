@@ -71,22 +71,16 @@ export default function WorldViewer(props) {
     )
   }
 
-  const key = new Date()
   const mainBackground = Images.backgrounds["hill01"]
   const mainBackground2 = Images.backgrounds["planetGlorp03"]
   const bookCoil01 = Images.backgrounds["bookCoil01"]
   const mapBackground = Images.backgrounds["mapBackground11"]
-
-  const { showMissionConsole } = globalState
 
   return (
     <>
       <img className={css.backgroundImage} src={mainBackground} alt={"bk"} />
       <img className={css.backgroundImage2} src={mainBackground2} alt={"bk"} />
       <div className={`${css.mapScroller}`}>
-        {/* <div className={`${css.missionConsoleBox}`}>
-          {showMissionConsole && <MissionConsole world={world} key={key} />}
-        </div> */}
         <div className={`${css.innerMapScroller}`}>
           <img
             className={css.mapBackground}
