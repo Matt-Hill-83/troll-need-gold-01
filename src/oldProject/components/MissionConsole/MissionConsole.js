@@ -78,7 +78,6 @@ export default function MissionConsole(props) {
 
   return (
     <div className={css.main}>
-      {/* activeMissionIndex: {activeMissionIndex} */}
       <div className={css.body}>
         <div className={css.row}>
           <div className={css.left}>
