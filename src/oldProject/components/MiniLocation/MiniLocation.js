@@ -74,11 +74,13 @@ export default function MiniLocation(props) {
 
   const showLocationOnly = locationName === "roadLeftRight01"
   const scenesGrid = _get(world, "newGrid5") || []
+  console.log("scenesGrid", scenesGrid) // zzz
 
   const neighbors = Utils.getNeighbors({ coordinates, grid: scenesGrid })
-  const neighborsArray = Utils.getNeighborsAsArray({ coordinates }).filter(
-    (neighbor) => neighbor && neighbor.id
-  )
+  const neighborsArray = Utils.getNeighborsAsArray({
+    coordinates,
+    grid: scenesGrid,
+  }).filter((neighbor) => neighbor && neighbor.id)
 
   const neighborIsActive = neighborsArray.some((neighbor) => {
     return neighbor && neighbor.id === activeScene.id
@@ -101,6 +103,7 @@ export default function MiniLocation(props) {
     sceneId: scene.id,
     questStatus,
   })
+
   // apply position based clouded state
   // If cloud is still hidden, apply config based state
   const hideCloud = isVisitedScene || neighborIsActive || !isClouded
