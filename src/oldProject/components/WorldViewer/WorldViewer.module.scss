@@ -1,16 +1,5 @@
 @import "../../Styles/mixins.modules.scss";
 
-.missionConsoleBox {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  flex: 1 1;
-  z-index: 20;
-  top: 6vh;
-  left: 2vw;
-  right: 51.4vw;
-}
-
 .mapBackground {
   z-index: 0;
   display: flex;
