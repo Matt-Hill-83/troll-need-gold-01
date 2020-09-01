@@ -96,7 +96,7 @@ export default function TopLevel(props) {
     })
 
     // This preserves activeScene until the next function render
-    setLocalStateProps({ activeScene })
+    // setLocalStateProps({ activeScene })
     setGlobalStateProps({ activeScene, world })
 
     questStatus.visitedScenes.push(sceneId)
@@ -247,16 +247,21 @@ export default function TopLevel(props) {
     return <div>no world 2</div>
   }
 
-  if (!localState.activeScene) {
+  if (!globalState.activeScene) {
     return <div>no active scene</div>
   }
+
+  // if (!localState.activeScene) {
+  //   return <div>no active scene</div>
+  // }
 
   return (
     <div className={`${css.main} ${className}`}>
       {/* {renderButtons()} */}
       <StoryMode
         updateActiveScene={updateActiveScene}
-        activeScene={localState.activeScene}
+        activeScene={globalState.activeScene}
+        // activeScene={localState.activeScene}
         world={world}
       />
       {/* {!isProdRelease && showBookPicker && renderBookPicker()} */}
