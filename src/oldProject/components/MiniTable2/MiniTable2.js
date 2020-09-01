@@ -16,18 +16,6 @@ import css from "./MiniTable2.module.scss"
 
 class MiniTable2 extends Component {
   renderCell = ({ content, firstIndex }) => {
-    // if (this.props.renderCell) {
-    //   console.log("firstIndex", firstIndex) // zzz
-    //   return (
-    //     <TableCell
-    //       className={css.cellClass}
-    //       // tooltip={value ? value.toString() : ""}
-    //     >
-    //       {firstIndex}
-    //       {this.props.renderCell({ content })}
-    //     </TableCell>
-    //   )
-    // }
     const value = content
     let cellContent = null
 
@@ -42,12 +30,12 @@ class MiniTable2 extends Component {
     }
 
     console.log("firstIndex", firstIndex) // zzz
+
     return (
       <TableCell
-        className={css.cellClass}
+        className={cx(css.cellClass)}
         tooltip={value ? value.toString() : ""}
       >
-        {firstIndex}
         {cellContent}
       </TableCell>
     )
@@ -68,9 +56,13 @@ class MiniTable2 extends Component {
           </TableHead>
           <TableBody>
             {tableData.map((element, firstIndex) => {
-              console.log("firstIndex", firstIndex) // zzz
+              const activeClass =
+                this.props.activeMissionIndex === firstIndex
+                  ? css.activeClass
+                  : ""
+
               return (
-                <TableRow key={firstIndex}>
+                <TableRow key={firstIndex} className={cx(activeClass)}>
                   {Object.keys(element).map((child, secondIndex) => {
                     return this.renderCell({
                       content: element[child],

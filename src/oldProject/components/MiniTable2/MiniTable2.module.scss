@@ -41,7 +41,10 @@
   .cellClass {
     display: flex;
     line-height: var(--line-height);
-    border: 1px solid red !important;
     font-size: var(--font-size);
   }
+}
+
+.activeClass {
+  background: pink;
 }

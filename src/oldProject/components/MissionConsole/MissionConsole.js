@@ -100,7 +100,11 @@ export default function MissionConsole(props) {
       <div className={css.body}>
         <div className={css.row}>
           <div className={css.left}>
-            <MiniTable2 columnNames={columnNames} tableData={tableData} />
+            <MiniTable2
+              columnNames={columnNames}
+              tableData={tableData}
+              activeMissionIndex={activeMissionIndex}
+            />
           </div>
           <div className={css.right}>
             <div className={css.itemsContainerBox}>
