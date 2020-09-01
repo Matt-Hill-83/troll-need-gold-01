@@ -23,19 +23,13 @@ export default function TopLevel(props) {
   const { className } = props
   let world = props.quest
 
-  console.log("FUNCTION START-----------------------------") // zzz
-
-  const initialLocalState = Constants.getDefaultGameStatus()
   const { globalState, setGlobalStateProps } = useGlobalState()
-  const { localState, setLocalStateProps } = useLocalState(initialLocalState)
+
+  // Save this in case I need localStorage
+  // const initialLocalState = Constants.getDefaultGameStatus()
+  // const { localState, setLocalStateProps } = useLocalState(initialLocalState)
 
   const { questStatus } = globalState
-  // const { questStatus } = localState
-  console.log("questStatus-------------1", questStatus) // zzz
-  console.log(
-    "globalState.questStatus.desiredItems---TL",
-    globalState.questStatus.desiredItems
-  ) // zzz
 
   // on mount
   useEffect(() => {
@@ -67,7 +61,6 @@ export default function TopLevel(props) {
     const startScene = TopLevelUtils.getTerminalScene({
       world,
     })
-    console.log("startScene", startScene) // zzz
 
     if (!startScene) return <div>no start scene</div>
     if (!questConfig) {
@@ -75,11 +68,9 @@ export default function TopLevel(props) {
     } else {
       setGlobalStateProps({ showMissionConsole: true })
       const missions = TopLevelUtils.getMissions({ questConfig })
-      console.log("missions", missions) // zzz
 
       const desiredItems =
         missions.map((mission) => !!mission.item && mission.item) || []
-      console.log("desiredItems", desiredItems) // zzz
 
       questStatus.desiredItems = desiredItems
     }
@@ -143,7 +134,6 @@ export default function TopLevel(props) {
     const { questConfig } = world
     const { location } = activeScene
     const { activeMissionIndex, desiredItems, pockets } = questStatus
-    console.log("desiredItems--------uqp", desiredItems) // zzz
 
     // TODO: what happened to my desired items?
     // TODO: what happened to my desired items?
@@ -238,11 +228,6 @@ export default function TopLevel(props) {
 
   console.log("")
   console.log("main story render")
-  console.log("--------------------RENDER-TopLevel------------------->") // zzz
-  console.log("-------------------globalState-----------TL", globalState) // zzz
-  console.log("questStatus", questStatus) // zzz
-
-  console.log("world", world) // zzz
 
   if (!world || !world.title) {
     return <div>no world 2</div>
