@@ -29,11 +29,12 @@ export default function TopLevel(props) {
   const { globalState, setGlobalStateProps } = useGlobalState()
   const { localState, setLocalStateProps } = useLocalState(initialLocalState)
 
-  const { questStatus } = localState
-  console.log("localState", localState) // zzz
+  const { questStatus } = globalState
+  // const { questStatus } = localState
+  console.log("questStatus-------------1", questStatus) // zzz
   console.log(
-    "localState.questStatus.desiredItems---TL",
-    localState.questStatus.desiredItems
+    "globalState.questStatus.desiredItems---TL",
+    globalState.questStatus.desiredItems
   ) // zzz
 
   // on mount
@@ -47,6 +48,7 @@ export default function TopLevel(props) {
   useEffect(() => {
     console.log("new props =================================>>>>>")
     world = props.quest
+    setGlobalStateProps({ world })
     onChangeWorld()
   }, [props.quest])
 
@@ -69,9 +71,9 @@ export default function TopLevel(props) {
 
     if (!startScene) return <div>no start scene</div>
     if (!questConfig) {
-      setLocalStateProps({ showMissionConsole: false })
+      setGlobalStateProps({ showMissionConsole: false })
     } else {
-      setLocalStateProps({ showMissionConsole: true })
+      setGlobalStateProps({ showMissionConsole: true })
       const missions = TopLevelUtils.getMissions({ questConfig })
       console.log("missions", missions) // zzz
 
@@ -96,12 +98,12 @@ export default function TopLevel(props) {
     })
 
     // This preserves activeScene until the next function render
-    // setLocalStateProps({ activeScene })
-    setGlobalStateProps({ activeScene, world })
+    setGlobalStateProps({ activeScene })
+    // setGlobalStateProps({ activeScene, world })
 
     questStatus.visitedScenes.push(sceneId)
 
-    if (localState.showMissionConsole && questConfig) {
+    if (globalState.showMissionConsole && questConfig) {
       const { foundItem, completedMission } = updateQuestProgress({
         world,
         activeScene,
@@ -237,7 +239,6 @@ export default function TopLevel(props) {
   console.log("")
   console.log("main story render")
   console.log("--------------------RENDER-TopLevel------------------->") // zzz
-  console.log("localState", localState) // zzz
   console.log("-------------------globalState-----------TL", globalState) // zzz
   console.log("questStatus", questStatus) // zzz
 
@@ -250,10 +251,6 @@ export default function TopLevel(props) {
   if (!globalState.activeScene) {
     return <div>no active scene</div>
   }
-
-  // if (!localState.activeScene) {
-  //   return <div>no active scene</div>
-  // }
 
   return (
     <div className={`${css.main} ${className}`}>
