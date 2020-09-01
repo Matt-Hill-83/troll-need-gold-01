@@ -29,6 +29,10 @@ export default function TopLevel(props) {
 
   const { questStatus } = localProps
   console.log("localProps", localProps) // zzz
+  console.log(
+    "localProps.questStatus.desiredItems---TL",
+    localProps.questStatus.desiredItems
+  ) // zzz
 
   const setLocalStuff = (props) => {
     setLocalProps((state) => {
@@ -47,7 +51,7 @@ export default function TopLevel(props) {
   useEffect(() => {
     console.log("new props =================================>>>>>")
     console.log("globalStorage - new props", globalStorage.questStatus) // zzz
-    setLocalStuff({ questStatus: { ...globalStorage.questStatus } })
+    // setLocalStuff({ questStatus: { ...globalStorage.questStatus } })
     world = props.quest
     onChangeWorld()
     console.log("world after onchangeworld>", world) // zzz
