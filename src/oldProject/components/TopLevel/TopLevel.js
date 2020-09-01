@@ -25,11 +25,9 @@ export default function TopLevel(props) {
 
   console.log("FUNCTION START-----------------------------") // zzz
 
+  const initialLocalState = Constants.getDefaultGameStatus()
   const { globalState, setGlobalStateProps } = useGlobalState()
-  const { localState, setLocalStateProps } = useLocalState(
-    Constants.getDefaultGameStatus()
-  )
-  // const [localState, setLocalStateProps] = useState(Constants.getDefaultGameStatus())
+  const { localState, setLocalStateProps } = useLocalState(initialLocalState)
 
   const { questStatus } = localState
   console.log("localState", localState) // zzz
@@ -40,6 +38,7 @@ export default function TopLevel(props) {
 
   // on mount
   useEffect(() => {
+    toaster.clear()
     // returned function will be called on component unmount
     return () => {}
   }, [])
@@ -47,11 +46,8 @@ export default function TopLevel(props) {
   // on change in props
   useEffect(() => {
     console.log("new props =================================>>>>>")
-    console.log("globalState - new props", globalState.questStatus) // zzz
-    // setLocalStateProps({ questStatus: { ...globalState.questStatus } })
     world = props.quest
     onChangeWorld()
-    console.log("world after onchangeworld>", world) // zzz
   }, [props.quest])
 
   const onChangeWorld = () => {
