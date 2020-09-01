@@ -1,15 +1,14 @@
-import React, { useContext, useState, useEffect } from "react"
+import React, { useEffect } from "react"
 import _get from "lodash.get"
-import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core"
+import { Toaster, Position } from "@blueprintjs/core"
 
-import Constants from "../../Utils/Constants/Constants.js"
+import QuestProgressUtils from "../../Utils/QuestProgressUtils.js"
 import QuestVisibilityUtils from "../../Utils/QuestVisibilityUtils.js"
 import StoryMode from "../StoryMode/StoryMode"
-import QuestProgressUtils from "../../Utils/QuestProgressUtils.js"
 import TopLevelUtils from "../../Utils/TopLevelUtils.js"
-import Utils from "../../Utils/Utils.js"
 import useGlobalState from "../../../Context/useGlobalState.js"
-import useLocalState from "./useLocalState.js"
+// import useLocalState from "./useLocalState.js"
+import Utils from "../../Utils/Utils.js"
 
 import css from "./TopLevel.module.scss"
 
@@ -106,7 +105,6 @@ export default function TopLevel(props) {
       })
 
       // TODO: this should probably happen on the appropriate frame.
-
       displayFoundItemToaster({ foundItem })
       displayCompletedMissionToaster({ completedMission })
     }
@@ -244,7 +242,6 @@ export default function TopLevel(props) {
       <StoryMode
         updateActiveScene={updateActiveScene}
         activeScene={globalState.activeScene}
-        // activeScene={localState.activeScene}
         world={world}
       />
       {/* {!isProdRelease && showBookPicker && renderBookPicker()} */}

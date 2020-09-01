@@ -51,14 +51,10 @@ export default function QuestDashboard() {
   if (!events || events.length === 0) return <div>no data</div>
 
   const renderQuestPicker = () => {
-    // toaster.clear()
-
     return (
       <QuestDialog
-        // showProd={showProd}
         closeQuestPicker={closeQuestPicker}
         showQuestPicker={showQuestPicker}
-        // onChangeWorld={onChangeWorld}
       />
     )
   }
@@ -66,10 +62,6 @@ export default function QuestDashboard() {
   const closeQuestPicker = () => {
     setShowQuestPicker(false)
   }
-
-  // const openQuestPicker = () => {
-  //   setShowQuestPicker(true)
-  // }
 
   const toggleQuestPicker = () => {
     setShowQuestPicker(!showQuestPicker)
