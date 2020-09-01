@@ -5,7 +5,6 @@
   flex: 1 1;
   position: relative;
   background: var(--color-pink);
-  // border: 4px solid red !important;
   height: 96vh;
   width: 100vw;
 
@@ -36,26 +35,39 @@
 
 .toasterContainer {
   top: 6vh !important;
-  left: 1vw;
-  /* transform: translateY(-263%); */
+  left: 2vw;
   position: absolute !important;
+  z-index: 30;
 }
 
 .toaster {
-  background: #f8ffc1;
-  border: 4px solid #ff00d4 !important;
-  border-radius: 8px;
-  min-height: 6vh;
+  position: relative;
+  display: flex;
   align-items: center;
+
+  background: #f8ffc1;
+  border: 2px solid #ff00d4 !important;
+  border-radius: 8px;
   padding: 0.5vh;
+  padding-right: 4vh;
   font-size: 2vh;
+  line-height: 2vh;
   max-width: 70vw;
-  width: 25vw;
+  margin-bottom: 0.5vh !important;
 
   :global {
-    .bp3-icon > svg:not([fill]) {
-      height: 75px !important;
-      width: 75px !important;
+    .bp3-toast-message div span {
+      // border: 1px solid red !important;
+    }
+
+    .bp3-button-group {
+      position: absolute;
+      right: 2px;
+      top: 2px;
+      .bp3-icon > svg:not([fill]) {
+        height: 2vh !important;
+        width: 2vh !important;
+      }
     }
   }
 }
