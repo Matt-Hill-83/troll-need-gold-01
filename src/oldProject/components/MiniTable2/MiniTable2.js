@@ -29,8 +29,6 @@ class MiniTable2 extends Component {
       cellContent = value ? value.toString() : ""
     }
 
-    console.log("firstIndex", firstIndex) // zzz
-
     return (
       <TableCell
         className={cx(css.cellClass)}

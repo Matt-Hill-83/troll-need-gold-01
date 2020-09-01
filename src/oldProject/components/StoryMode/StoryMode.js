@@ -8,7 +8,6 @@ import WorldViewer from "../WorldViewer/WorldViewer.js"
 import css from "./StoryMode.module.scss"
 
 export default function StoryMode(props) {
-  console.log("") // zzz
   console.log("StoryMode------------------------>>>")
   const { world, activeScene, updateActiveScene, openQuestPicker } = props
 

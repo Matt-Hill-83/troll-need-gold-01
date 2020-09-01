@@ -3,8 +3,6 @@ import TopLevelUtils from "./TopLevelUtils"
 
 export default class QuestProgressUtils {
   static isDesiredRecipientHere = ({ desiredRecipient, charactersInScene }) => {
-    console.log("desiredRecipient", desiredRecipient) // zzz
-    console.log("charactersInScene", charactersInScene) // zzz
     const characterNames = charactersInScene.map((item) => item.name)
     return characterNames.includes(desiredRecipient.name)
   }
@@ -24,9 +22,6 @@ export default class QuestProgressUtils {
       activeMission,
     })
 
-    console.log("desiredRecipient", desiredRecipient) // zzz
-    console.log("desiredItem", desiredItem) // zzz
-
     const desiredItemIsInPocket = QuestProgressUtils.isDesiredItemInPocket({
       desiredItem,
       pockets,
@@ -36,9 +31,6 @@ export default class QuestProgressUtils {
       desiredRecipient,
       charactersInScene,
     })
-
-    console.log("desiredRecipientIsHere", desiredRecipientIsHere) // zzz
-    console.log("desiredItemIsInPocket", desiredItemIsInPocket) // zzz
 
     return desiredRecipientIsHere && desiredItemIsInPocket
   }
@@ -64,7 +56,6 @@ export default class QuestProgressUtils {
     const modifiedArray = questStatus.desiredItems.filter((item) => {
       return item.name !== itemToRemove.name
     })
-    console.log("modifiedArray", modifiedArray) // zzz
     questStatus.desiredItems.length = 0
     questStatus.desiredItems.push(...modifiedArray)
     return questStatus
@@ -101,8 +92,6 @@ export default class QuestProgressUtils {
   }
 
   static findItem = ({ itemsInScene, questStatus, desiredItems = [] }) => {
-    console.log("itemsInScene", itemsInScene) // zzz
-    console.log("desiredItems----------------->>>>>>>>>", desiredItems) // zzz
     const { pockets = {} } = questStatus
 
     const foundItems = []
@@ -118,7 +107,6 @@ export default class QuestProgressUtils {
 
     // TODO: I think I need to do this for each found item
     const foundItem = foundItems[0]
-    console.log("foundItem", foundItem) // zzz
     if (!foundItem) {
       return null
     }
