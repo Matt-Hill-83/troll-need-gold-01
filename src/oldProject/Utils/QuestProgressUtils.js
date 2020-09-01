@@ -64,7 +64,7 @@ export default class QuestProgressUtils {
     const modifiedArray = questStatus.desiredItems.filter((item) => {
       return item.name !== itemToRemove.name
     })
-
+    console.log("modifiedArray", modifiedArray) // zzz
     questStatus.desiredItems.length = 0
     questStatus.desiredItems.push(...modifiedArray)
     return questStatus

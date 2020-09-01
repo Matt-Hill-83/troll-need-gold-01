@@ -28,6 +28,7 @@ export default function TopLevel(props) {
   const [localProps, setLocalProps] = useState(Constants.getDefaultGameStatus())
 
   const { questStatus } = localProps
+  console.log("localProps", localProps) // zzz
 
   const setLocalStuff = (props) => {
     setLocalProps((state) => {
@@ -75,6 +76,7 @@ export default function TopLevel(props) {
     } else {
       setLocalStuff({ showMissionConsole: true })
       const missions = TopLevelUtils.getMissions({ questConfig })
+      console.log("missions", missions) // zzz
 
       const desiredItems =
         missions.map((mission) => !!mission.item && mission.item) || []
@@ -141,8 +143,13 @@ export default function TopLevel(props) {
     console.log("updateQuestStatus")
     const { questConfig } = world
     const { location } = activeScene
-    const { activeMissionIndex } = questStatus
+    const { activeMissionIndex, desiredItems, pockets } = questStatus
+    console.log("desiredItems--------uqp", desiredItems) // zzz
 
+    // TODO: what happened to my desired items?
+    // TODO: what happened to my desired items?
+    // TODO: what happened to my desired items?
+    // TODO: what happened to my desired items?
     const firstFrame = Utils.getFirstFrame({ activeScene }) || {}
     const { critters1 = [], critters2 = [] } = firstFrame
     const crittersAndLocations = [location, ...critters1, ...critters2]
@@ -158,7 +165,7 @@ export default function TopLevel(props) {
 
     const isMissionCompleted = QuestProgressUtils.completeMission({
       charactersInScene: crittersAndLocations,
-      pockets: questStatus.pockets,
+      pockets,
       activeMission,
     })
 
@@ -173,7 +180,7 @@ export default function TopLevel(props) {
     const foundItem = QuestProgressUtils.findItem({
       itemsInScene: crittersAndLocations,
       questStatus,
-      desiredItems: questStatus.desiredItems,
+      desiredItems,
     })
 
     QuestProgressUtils.removeItemFromDesiredItems({

@@ -289,7 +289,8 @@ export default class QuestVisibilityUtils {
         (item) => item !== sceneId
       )
     }
-    console.log("questStatus - QV", questStatus) // zzz
+    // console.log("questStatus - QV", questStatus) // zzz
+    // console.log("questStatus.desiredItems - QV", questStatus.desiredItems) // zzz
     return questStatus
   }
 
