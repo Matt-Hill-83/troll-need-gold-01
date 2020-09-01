@@ -133,13 +133,13 @@
     position: absolute;
     display: flex;
     bottom: 0;
-    /* border: 2px solid green !important; */
+    border: 2px solid #ff2dc8 !important;
     background: white;
     transform: translate(-63%, 62%);
     left: 0;
     border-radius: 6px;
     overflow: hidden;
-    box-shadow: 0px 0px 7px 5px white !important;
+    box-shadow: 0px 0px 7px 5px grey;
   }
 
   .charactersContainer {

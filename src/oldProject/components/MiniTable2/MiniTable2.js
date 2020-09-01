@@ -1,5 +1,4 @@
 import _get from "lodash.get"
-// import { toJS } from "mobx"
 import cx from "classnames"
 import React, { Component } from "react"
 
@@ -17,17 +16,18 @@ import css from "./MiniTable2.module.scss"
 
 class MiniTable2 extends Component {
   renderCell = ({ content, firstIndex }) => {
-    if (this.props.renderCell) {
-      return (
-        <TableCell
-          className={css.cellClass}
-          // tooltip={value ? value.toString() : ""}
-        >
-          {firstIndex}
-          {this.props.renderCell({ content })}
-        </TableCell>
-      )
-    }
+    // if (this.props.renderCell) {
+    //   console.log("firstIndex", firstIndex) // zzz
+    //   return (
+    //     <TableCell
+    //       className={css.cellClass}
+    //       // tooltip={value ? value.toString() : ""}
+    //     >
+    //       {firstIndex}
+    //       {this.props.renderCell({ content })}
+    //     </TableCell>
+    //   )
+    // }
     const value = content
     let cellContent = null
 
@@ -41,11 +41,13 @@ class MiniTable2 extends Component {
       cellContent = value ? value.toString() : ""
     }
 
+    console.log("firstIndex", firstIndex) // zzz
     return (
       <TableCell
         className={css.cellClass}
         tooltip={value ? value.toString() : ""}
       >
+        {firstIndex}
         {cellContent}
       </TableCell>
     )
@@ -66,6 +68,7 @@ class MiniTable2 extends Component {
           </TableHead>
           <TableBody>
             {tableData.map((element, firstIndex) => {
+              console.log("firstIndex", firstIndex) // zzz
               return (
                 <TableRow key={firstIndex}>
                   {Object.keys(element).map((child, secondIndex) => {

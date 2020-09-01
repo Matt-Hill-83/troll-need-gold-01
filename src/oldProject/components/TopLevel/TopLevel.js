@@ -90,7 +90,6 @@ export default function TopLevel(props) {
 
     // This preserves activeScene until the next function render
     setGlobalStateProps({ activeScene })
-    // setGlobalStateProps({ activeScene, world })
 
     questStatus.visitedScenes.push(sceneId)
 
@@ -111,6 +110,8 @@ export default function TopLevel(props) {
       displayFoundItemToaster({ foundItem })
       displayCompletedMissionToaster({ completedMission })
     }
+
+    // Set mutated questStatus after mutation is complete
     setGlobalStateProps({ questStatus: { ...questStatus } })
   }
 

@@ -10,9 +10,8 @@ import Utils from "../../Utils/Utils.js"
 import css from "./MiniLocation.module.scss"
 
 export default function MiniLocation(props) {
-  // console.log("MiniLocation----------------------") // zzz
   const { scene, isActive, className, id, world } = props
-  const [globalState, setGlobalState] = useContext(myContext)
+  const [globalState] = useContext(myContext)
   const { activeScene, questStatus = {} } = globalState
 
   // These are the critters1 creatures from the first frame that hover over the active location.
@@ -22,7 +21,6 @@ export default function MiniLocation(props) {
     }
 
     const activeFrame = Utils.getFirstFrame({ activeScene }) || {}
-    console.log("activeFrame", activeFrame) // zzz
     const { critters1 = [] } = activeFrame
 
     const renderedCharacters = critters1
@@ -74,7 +72,6 @@ export default function MiniLocation(props) {
 
   const showLocationOnly = locationName === "roadLeftRight01"
   const scenesGrid = _get(world, "newGrid5") || []
-  console.log("scenesGrid", scenesGrid) // zzz
 
   const neighbors = Utils.getNeighbors({ coordinates, grid: scenesGrid })
   const neighborsArray = Utils.getNeighborsAsArray({
