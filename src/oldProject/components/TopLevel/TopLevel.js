@@ -26,7 +26,7 @@ export default function TopLevel(props) {
   console.log("FUNCTION START-----------------------------") // zzz
 
   const { globalState, setGlobalStateProps } = useGlobalState()
-  // const { useLocalState, setLocalStateProps } = useLocalState()
+  const { localState, setLocalStateProps } = useLocalState()
   const [localProps, setLocalProps] = useState(Constants.getDefaultGameStatus())
 
   const { questStatus } = localProps
