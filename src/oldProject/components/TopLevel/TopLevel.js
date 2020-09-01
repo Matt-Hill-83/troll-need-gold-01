@@ -26,8 +26,11 @@ export default function TopLevel(props) {
   console.log("FUNCTION START-----------------------------") // zzz
 
   const { globalState, setGlobalStateProps } = useGlobalState()
-  const { localState, setLocalStateProps } = useLocalState()
-  const [localProps, setLocalProps] = useState(Constants.getDefaultGameStatus())
+  const {
+    localState: localProps,
+    setLocalStateProps: setLocalProps,
+  } = useLocalState(Constants.getDefaultGameStatus())
+  // const [localProps, setLocalProps] = useState(Constants.getDefaultGameStatus())
 
   const { questStatus } = localProps
   console.log("localProps", localProps) // zzz
@@ -36,12 +39,12 @@ export default function TopLevel(props) {
     localProps.questStatus.desiredItems
   ) // zzz
 
-  const setLocalStuff = (props) => {
-    setLocalProps((state) => {
-      const test = { ...state, ...props }
-      return test
-    })
-  }
+  // const setLocalProps = (props) => {
+  //   setLocalProps((state) => {
+  //     const test = { ...state, ...props }
+  //     return test
+  //   })
+  // }
 
   // on mount
   useEffect(() => {
@@ -53,7 +56,7 @@ export default function TopLevel(props) {
   useEffect(() => {
     console.log("new props =================================>>>>>")
     console.log("globalState - new props", globalState.questStatus) // zzz
-    // setLocalStuff({ questStatus: { ...globalState.questStatus } })
+    // setLocalProps({ questStatus: { ...globalState.questStatus } })
     world = props.quest
     onChangeWorld()
     console.log("world after onchangeworld>", world) // zzz
@@ -78,9 +81,9 @@ export default function TopLevel(props) {
 
     if (!startScene) return <div>no start scene</div>
     if (!questConfig) {
-      setLocalStuff({ showMissionConsole: false })
+      setLocalProps({ showMissionConsole: false })
     } else {
-      setLocalStuff({ showMissionConsole: true })
+      setLocalProps({ showMissionConsole: true })
       const missions = TopLevelUtils.getMissions({ questConfig })
       console.log("missions", missions) // zzz
 
@@ -105,7 +108,7 @@ export default function TopLevel(props) {
     })
 
     // This preserves activeScene until the next function render
-    setLocalStuff({ activeScene })
+    setLocalProps({ activeScene })
     setGlobalStateProps({ activeScene, world })
 
     questStatus.visitedScenes.push(sceneId)
