@@ -1,15 +1,19 @@
 import React from "react"
-import { Grid } from "semantic-ui-react"
 import { useDispatch, useSelector } from "react-redux"
+import { Button } from "semantic-ui-react"
 
-import { getUserProfile } from "../../../app/firestore/firestoreService"
-import { listenToSelectedUserProfile } from "../profileActions"
+import {
+  getUserProfile,
+  updateUserProfile,
+} from "../../../app/firestore/firestoreService"
 import LoadingComponent from "../../../app/layout/LoadingComponent"
-import ProfileContent from "./ProfileContent"
-import ProfileHeader from "./ProfileHeader"
 import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc"
+import { listenToSelectedUserProfile } from "../../../features/profiles/profileActions"
 
-export default function ProfilePage({ match }) {
+export default function UpdateProfileWidget({
+  match = { params: { id: "jOAMi0Yy5YP9oI7v1MA4FtkanSV2" } },
+  newProfileProps,
+}) {
   const dispatch = useDispatch()
   const { selectedUserProfile, currentUserProfile } = useSelector(
     (state) => state.profile
@@ -34,18 +38,22 @@ export default function ProfilePage({ match }) {
   if ((loading && !profile) || (!profile && !error))
     return <LoadingComponent content="Loading profile..." />
 
+  const onClick = async () => {
+    try {
+      await updateUserProfile({ ...profile, ...newProfileProps })
+    } catch (error) {
+    } finally {
+    }
+  }
+  console.log("profile", profile) // zzz
   return (
-    <Grid>
-      <Grid.Column width={16}>
-        <ProfileHeader
-          profile={profile}
-          isCurrentUser={currentUser.uid === profile.id}
-        />
-        <ProfileContent
-          profile={profile}
-          isCurrentUser={currentUser.uid === profile.id}
-        />
-      </Grid.Column>
-    </Grid>
+    <Button
+      floated="right"
+      type="submit"
+      size="large"
+      positive
+      content="Update profile"
+      onClick={onClick}
+    />
   )
 }

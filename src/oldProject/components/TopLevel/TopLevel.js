@@ -11,6 +11,7 @@ import useGlobalState from "../../../Context/useGlobalState.js"
 import Utils from "../../Utils/Utils.js"
 
 import css from "./TopLevel.module.scss"
+import UpdateProfileWidget from "./UpdateProfileWidget.js"
 
 const toaster = Toaster.create({
   position: Position.TOP,
@@ -233,6 +234,9 @@ export default function TopLevel(props) {
 
   return (
     <div className={`${css.main} ${className}`}>
+      <UpdateProfileWidget
+        newProfileProps={{ cat: "zippy" }}
+      ></UpdateProfileWidget>
       <StoryMode updateActiveScene={updateActiveScene} />
     </div>
   )
