@@ -112,6 +112,11 @@ export default function TopLevel(props) {
       // TODO: this should probably happen on the appropriate frame.
       displayFoundItemToaster({ foundItem })
       displayCompletedMissionToaster({ completedMission })
+      const newsUserStatus = { ...userStatus, pockets: questStatus.pockets }
+      console.log("newsUserStatus", newsUserStatus) // zzz
+      setGlobalStateProps({
+        userStatus: newsUserStatus,
+      })
     }
 
     // Set mutated questStatus after mutation is complete
