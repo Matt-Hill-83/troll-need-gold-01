@@ -16,6 +16,7 @@ export default function ProfileForm({ profile }) {
         displayName: profile.displayName,
         description: profile.description || "",
         cat: profile.cat || "",
+        userStatus: JSON.stringify(profile.userStatus) || "",
       }}
       validationSchema={Yup.object({
         displayName: Yup.string().required(),
@@ -39,6 +40,11 @@ export default function ProfileForm({ profile }) {
             label="description"
           />
           <MyTextArea name="cat" placeholder="Cat" label="cat" />
+          <MyTextArea
+            name="userStatus"
+            placeholder="userStatus"
+            label="props"
+          />
           <Button
             loading={isSubmitting}
             disabled={isSubmitting || !isValid || !dirty}

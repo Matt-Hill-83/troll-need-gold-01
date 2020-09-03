@@ -9,6 +9,7 @@ import {
 import LoadingComponent from "../../../app/layout/LoadingComponent"
 import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc"
 import { listenToSelectedUserProfile } from "../../../features/profiles/profileActions"
+import _isEqual from "lodash.isequal"
 
 export default function UpdateProfileWidget(props) {
   useEffect(() => {
@@ -37,8 +38,13 @@ export default function UpdateProfileWidget(props) {
   })
 
   const updatePropsIfChanged = async ({ newProfileProps, profile }) => {
+    console.log("newProfileProps", newProfileProps) // zzz
+    console.log("profile", profile) // zzz
+
     const newProps = { ...profile, ...newProfileProps }
-    if 
+    const test = _isEqual(newProps, profile)
+    console.log({ test })
+    onClick()
   }
 
   if (match.params.id === currentUser.uid) {
@@ -59,14 +65,5 @@ export default function UpdateProfileWidget(props) {
   }
   console.log("profile", profile) // zzz
 
-  return (
-    <Button
-      floated="right"
-      type="submit"
-      size="large"
-      positive
-      content="Update profile"
-      onClick={onClick}
-    />
-  )
+  return null
 }

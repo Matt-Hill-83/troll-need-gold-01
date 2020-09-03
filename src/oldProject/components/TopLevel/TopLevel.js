@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import _get from "lodash.get"
-import _isEqual from "lodash.isequal"
+// import _isEqual from "lodash.isequal"
 import { Toaster, Position } from "@blueprintjs/core"
 
 import QuestProgressUtils from "../../Utils/QuestProgressUtils.js"
@@ -30,7 +30,7 @@ export default function TopLevel(props) {
   // const initialLocalState = Constants.getDefaultGameStatus()
   // const { localState, setLocalStateProps } = useLocalState(initialLocalState)
 
-  const { questStatus } = globalState
+  const { questStatus, userStatus } = globalState
 
   // on mount
   useEffect(() => {
@@ -232,12 +232,11 @@ export default function TopLevel(props) {
   if (!globalState.activeScene) {
     return <div>no active scene</div>
   }
-  console.log({ test: _isEqual })
 
   return (
     <div className={`${css.main} ${className}`}>
       <UpdateProfileWidget
-        newProfileProps={{ cat: "zippy" }}
+        newProfileProps={{ userStatus }}
       ></UpdateProfileWidget>
       <StoryMode updateActiveScene={updateActiveScene} />
     </div>
