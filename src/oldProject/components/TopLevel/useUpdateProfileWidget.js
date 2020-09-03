@@ -38,6 +38,7 @@ export default function useUpdateProfileWidget(props) {
   const getProfile = () => profile
 
   const updatePropsIfChanged = async ({ newProfileProps }) => {
+    console.log("newProfileProps", newProfileProps) // zzz
     const newProps = { ...profile, userStatus: newProfileProps }
     const needToUpdateProps = !_isEqual(newProps, profile)
     if (needToUpdateProps) {
@@ -51,9 +52,10 @@ export default function useUpdateProfileWidget(props) {
   const _updateProps = async ({ newProps }) => {
     console.log("_updateProps------------------------>>>") // zzz
     console.log("newProps", newProps) // zzz
+    // debugger
     try {
-      if (newProps.completedQuests) {
-        delete newProps.completedQuests
+      if (newProps.pockets) {
+        delete newProps.pockets
       }
       await updateUserProfile(newProps)
     } catch (error) {

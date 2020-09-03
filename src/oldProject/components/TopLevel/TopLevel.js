@@ -8,7 +8,7 @@ import QuestVisibilityUtils from "../../Utils/QuestVisibilityUtils.js"
 import StoryMode from "../StoryMode/StoryMode"
 import TopLevelUtils from "../../Utils/TopLevelUtils.js"
 import useGlobalState from "../../../Context/useGlobalState.js"
-// import useLocalState from "./useLocalState.js"
+import useLocalState from "./useLocalState.js"
 import Utils from "../../Utils/Utils.js"
 import useUpdateProfileWidget from "./useUpdateProfileWidget.js"
 
@@ -29,11 +29,13 @@ export default function TopLevel(props) {
   const { updatePropsIfChanged, getProfile } = useUpdateProfileWidget()
 
   // Save this in case I need localStorage
-  // const initialLocalState = Constants.getDefaultGameStatus()
-  // const { localState, setLocalStateProps } = useLocalState(initialLocalState)
+  const initialLocalState = {}
+  const { localState, setLocalStateProps } = useLocalState(initialLocalState)
+  const { userStatus } = localStorage
+  console.log("localState", localState) // zzz
+  console.log("userStatus-----------top", userStatus) // zzz
 
-  const { questStatus, userStatus } = globalState
-  console.log("userStatus.pockets.gold", userStatus.pockets.gold) // zzz
+  const { questStatus } = globalState
 
   // on mount
   useEffect(() => {
@@ -50,17 +52,13 @@ export default function TopLevel(props) {
     world = props.quest
 
     const profile = getProfile()
-    const { userStatus } = profile
-    console.log(
-      "userStatus.pockets.gold---------------on props",
-      userStatus.pockets.gold
-    ) // zzz
-
     console.log("profile", profile) // zzz
+    const userStatus = profile.userStatus
+    setLocalStateProps({ userStatus })
 
-    setGlobalStateProps({
-      userStatus,
-    })
+    // setGlobalStateProps({
+    //   userStatus,
+    // })
     setGlobalStateProps({ world })
     onChangeWorld()
   }, [props.quest])
@@ -126,17 +124,17 @@ export default function TopLevel(props) {
       // TODO: this should probably happen on the appropriate frame.
       displayFoundItemToaster({ foundItem })
       displayCompletedMissionToaster({ completedMission })
+      console.log("questStatus.pockets", questStatus.pockets) // zzz
       const newUserStatus = { ...userStatus, pockets: questStatus.pockets }
-      console.log("newUserStatus", newUserStatus) // zzz
-      setGlobalStateProps({
-        userStatus: newUserStatus,
-      })
+      console.log("newUserStatus.pockets.gold", newUserStatus.pockets.gold) // zzz
+
+      setLocalStateProps({ userStatus: newUserStatus })
+      updatePropsIfChanged({ newProfileProps: newUserStatus })
     }
 
     // Set mutated questStatus after mutation is complete
     setGlobalStateProps({ questStatus: { ...questStatus } })
-
-    updatePropsIfChanged({ newProfileProps: userStatus })
+    // console.log("userStatus", userStatus) // zzz
   }
 
   const updatePockets = ({ questStatus, activeMission }) => {
