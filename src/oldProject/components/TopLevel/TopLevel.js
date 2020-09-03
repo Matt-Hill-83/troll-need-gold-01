@@ -1,7 +1,6 @@
 import React, { useEffect } from "react"
 import _get from "lodash.get"
 import _pick from "lodash.pick"
-// import _isEqual from "lodash.isequal"
 import { Toaster, Position } from "@blueprintjs/core"
 
 import QuestProgressUtils from "../../Utils/QuestProgressUtils.js"
@@ -15,9 +14,6 @@ import useUpdateProfileWidget from "./useUpdateProfileWidget.js"
 
 import css from "./TopLevel.module.scss"
 import Constants from "../../Utils/Constants/Constants.js"
-// import useUtils2 from "../../Utils/useUtils2.js"
-
-// const { test23 } = useUtils2
 
 const toaster = Toaster.create({
   position: Position.TOP,
@@ -31,7 +27,6 @@ export default function TopLevel(props) {
 
   const { globalState, setGlobalStateProps } = useGlobalState()
   const { updatePropsIfChanged } = useUpdateProfileWidget()
-  // console.log("test", test) // zzz
 
   // Save this in case I need localStorage
   // const initialLocalState = Constants.getDefaultGameStatus()
@@ -46,13 +41,14 @@ export default function TopLevel(props) {
     const defaultUserStatus = Constants.getDefaultUserStatus()
     const keys = Object.keys(defaultUserStatus)
 
-    const newsUserStatus = _pick(questStatus, keys)
-    console.log("newsUserStatus", newsUserStatus) // zzz
+    const newUserStatus = questStatus.userStatus
+    // const newUserStatus = _pick(questStatus, keys)
+    console.log("newUserStatus", newUserStatus) // zzz
 
-    // const newsUserStatus = { ...userStatus, pockets: questStatus.pockets }
-    console.log("newsUserStatus", newsUserStatus) // zzz
+    // const newUserStatus = { ...userStatus, pockets: questStatus.pockets }
+    console.log("newUserStatus", newUserStatus) // zzz
     setGlobalStateProps({
-      userStatus: newsUserStatus,
+      userStatus: newUserStatus,
     })
     toaster.clear()
     // returned function will be called on component unmount
@@ -128,10 +124,10 @@ export default function TopLevel(props) {
       // TODO: this should probably happen on the appropriate frame.
       displayFoundItemToaster({ foundItem })
       displayCompletedMissionToaster({ completedMission })
-      const newsUserStatus = { ...userStatus, pockets: questStatus.pockets }
-      console.log("newsUserStatus", newsUserStatus) // zzz
+      const newUserStatus = { ...userStatus, pockets: questStatus.pockets }
+      console.log("newUserStatus", newUserStatus) // zzz
       setGlobalStateProps({
-        userStatus: newsUserStatus,
+        userStatus: newUserStatus,
       })
     }
 

@@ -22,6 +22,12 @@ export default function useUpdateProfileWidget(props) {
   const { loading, error } = useSelector((state) => state.async)
   let profile
 
+  if (match.params.id === currentUser.uid) {
+    profile = currentUserProfile
+  } else {
+    profile = selectedUserProfile
+  }
+
   useFirestoreDoc({
     query: () => getUserProfile(match.params.id),
     data: (profile) => dispatch(listenToSelectedUserProfile(profile)),
@@ -33,28 +39,22 @@ export default function useUpdateProfileWidget(props) {
     console.log("newProfileProps", newProfileProps) // zzz
     console.log("profile", profile) // zzz
 
-    const newProps = { ...profile, ...newProfileProps }
+    const newProps = { ...profile, userStatus: newProfileProps }
     console.log("newProps", newProps) // zzz
     const needToUpdateProps = !_isEqual(newProps, profile)
     console.log("needToUpdateProps", needToUpdateProps) // zzz
     if (needToUpdateProps) {
-      updateProps({ newProfileProps, profile })
+      updateProps({ newProps })
     }
-  }
-
-  if (match.params.id === currentUser.uid) {
-    profile = currentUserProfile
-  } else {
-    profile = selectedUserProfile
   }
 
   if ((loading && !profile) || (!profile && !error))
     return <LoadingComponent content="Loading profile..." />
 
-  const updateProps = async ({ newProfileProps, profile }) => {
+  const updateProps = async ({ newProps }) => {
     console.log("updateProps------------------------>>>") // zzz
     try {
-      await updateUserProfile({ ...profile, ...newProfileProps })
+      await updateUserProfile(newProps)
     } catch (error) {
     } finally {
     }
