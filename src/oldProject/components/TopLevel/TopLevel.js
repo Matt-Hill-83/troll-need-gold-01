@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import _get from "lodash.get"
+import _pick from "lodash.pick"
 // import _isEqual from "lodash.isequal"
 import { Toaster, Position } from "@blueprintjs/core"
 
@@ -10,9 +11,13 @@ import TopLevelUtils from "../../Utils/TopLevelUtils.js"
 import useGlobalState from "../../../Context/useGlobalState.js"
 // import useLocalState from "./useLocalState.js"
 import Utils from "../../Utils/Utils.js"
-import UpdateProfileWidget from "./UpdateProfileWidget.js"
+import useUpdateProfileWidget from "./useUpdateProfileWidget.js"
 
 import css from "./TopLevel.module.scss"
+import Constants from "../../Utils/Constants/Constants.js"
+// import useUtils2 from "../../Utils/useUtils2.js"
+
+// const { test23 } = useUtils2
 
 const toaster = Toaster.create({
   position: Position.TOP,
@@ -25,6 +30,8 @@ export default function TopLevel(props) {
   let world = props.quest
 
   const { globalState, setGlobalStateProps } = useGlobalState()
+  const { updatePropsIfChanged } = useUpdateProfileWidget()
+  // console.log("test", test) // zzz
 
   // Save this in case I need localStorage
   // const initialLocalState = Constants.getDefaultGameStatus()
@@ -32,12 +39,21 @@ export default function TopLevel(props) {
 
   const { questStatus, userStatus } = globalState
 
-  // TODO: add previous user profile stuff to new profile on start
-  // TODO: create list of completed quests
-  // make prod server
-
   // on mount
   useEffect(() => {
+    console.log("onMount") // zzz
+
+    const defaultUserStatus = Constants.getDefaultUserStatus()
+    const keys = Object.keys(defaultUserStatus)
+
+    const newsUserStatus = _pick(questStatus, keys)
+    console.log("newsUserStatus", newsUserStatus) // zzz
+
+    // const newsUserStatus = { ...userStatus, pockets: questStatus.pockets }
+    console.log("newsUserStatus", newsUserStatus) // zzz
+    setGlobalStateProps({
+      userStatus: newsUserStatus,
+    })
     toaster.clear()
     // returned function will be called on component unmount
     return () => {}
@@ -121,6 +137,8 @@ export default function TopLevel(props) {
 
     // Set mutated questStatus after mutation is complete
     setGlobalStateProps({ questStatus: { ...questStatus } })
+
+    updatePropsIfChanged({ newProfileProps: userStatus })
   }
 
   const updatePockets = ({ questStatus, activeMission }) => {
@@ -244,9 +262,9 @@ export default function TopLevel(props) {
 
   return (
     <div className={`${css.main} ${className}`}>
-      <UpdateProfileWidget
+      {/* <useUpdateProfileWidget
         newProfileProps={{ userStatus }}
-      ></UpdateProfileWidget>
+      ></useUpdateProfileWidget> */}
       <StoryMode updateActiveScene={updateActiveScene} />
     </div>
   )

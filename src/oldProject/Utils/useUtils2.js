@@ -1,17 +1,11 @@
-import React, { useEffect } from "react"
+import useLocalState from "../../oldProject/components/TopLevel/useLocalState.js"
+import { useState } from "react"
+
+import TopLevelUtils from "./TopLevelUtils.js"
 import { useDispatch, useSelector } from "react-redux"
-import { Button } from "semantic-ui-react"
 
-import {
-  getUserProfile,
-  updateUserProfile,
-} from "../../../app/firestore/firestoreService"
-import LoadingComponent from "../../../app/layout/LoadingComponent"
-import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc"
-import { listenToSelectedUserProfile } from "../../../features/profiles/profileActions"
-import _isEqual from "lodash.isequal"
-
-export default function UpdateProfileWidget(props) {
+export default function useUtils2() {
+  // export default function UpdateProfileWidget(props) {
   useEffect(() => {
     console.log("new props ===UpdateProfileWidget===>>>>>")
     updatePropsIfChanged({ newProfileProps, profile })
@@ -66,6 +60,7 @@ export default function UpdateProfileWidget(props) {
     }
   }
   console.log("profile", profile) // zzz
-
-  return null
+  return { updatePropsIfChanged }
 }
+
+// export default useUtils2
