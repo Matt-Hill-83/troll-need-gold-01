@@ -27,8 +27,6 @@ export default class Constants {
       activeFrameIndex: 0,
       activeScene: null,
       showMissionConsole: true,
-      // showBookPicker: false,
-      // showWorldBuilder: false,
       world: null,
       questStatus: Constants.getDefaultQuestStatus(),
       userStatus: Constants.getDefaultUserStatus(),

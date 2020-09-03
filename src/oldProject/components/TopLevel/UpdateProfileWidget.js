@@ -42,9 +42,11 @@ export default function UpdateProfileWidget(props) {
     console.log("profile", profile) // zzz
 
     const newProps = { ...profile, ...newProfileProps }
-    const test = _isEqual(newProps, profile)
-    console.log({ test })
-    onClick()
+    const needToUpdateProps = _isEqual(newProps, profile)
+    console.log({ needToUpdateProps })
+    if (needToUpdateProps) {
+      updateProps()
+    }
   }
 
   if (match.params.id === currentUser.uid) {
@@ -56,7 +58,8 @@ export default function UpdateProfileWidget(props) {
   if ((loading && !profile) || (!profile && !error))
     return <LoadingComponent content="Loading profile..." />
 
-  const onClick = async () => {
+  const updateProps = async () => {
+    console.log("updateProps------------------------>>>") // zzz
     try {
       await updateUserProfile({ ...profile, ...newProfileProps })
     } catch (error) {

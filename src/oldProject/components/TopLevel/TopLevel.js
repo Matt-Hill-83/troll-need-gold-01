@@ -32,6 +32,10 @@ export default function TopLevel(props) {
 
   const { questStatus, userStatus } = globalState
 
+  // TODO: add previous user profile stuff to new profile on start
+  // TODO: create list of completed quests
+  // make prod server
+
   // on mount
   useEffect(() => {
     toaster.clear()
