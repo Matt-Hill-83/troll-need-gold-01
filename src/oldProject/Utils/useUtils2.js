@@ -32,11 +32,8 @@ export default function useUtils2() {
   })
 
   const updatePropsIfChanged = async ({ newProfileProps, profile }) => {
-    console.log("newProfileProps", newProfileProps) // zzz
-
     const newProps = { ...profile, ...newProfileProps }
     const needToUpdateProps = !_isEqual(newProps, profile)
-    console.log("needToUpdateProps", needToUpdateProps) // zzz
     if (needToUpdateProps) {
       updateProps()
     }
@@ -52,14 +49,12 @@ export default function useUtils2() {
     return <LoadingComponent content="Loading profile..." />
 
   const updateProps = async () => {
-    console.log("updateProps------------------------>>>") // zzz
     try {
       await updateUserProfile({ ...profile, ...newProfileProps })
     } catch (error) {
     } finally {
     }
   }
-  console.log("profile", profile) // zzz
   return { updatePropsIfChanged }
 }
 

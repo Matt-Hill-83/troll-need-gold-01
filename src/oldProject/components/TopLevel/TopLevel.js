@@ -26,30 +26,19 @@ export default function TopLevel(props) {
   let world = props.quest
 
   const { globalState, setGlobalStateProps } = useGlobalState()
-  const { updatePropsIfChanged } = useUpdateProfileWidget()
+  const { updatePropsIfChanged, getProfile } = useUpdateProfileWidget()
 
   // Save this in case I need localStorage
   // const initialLocalState = Constants.getDefaultGameStatus()
   // const { localState, setLocalStateProps } = useLocalState(initialLocalState)
 
   const { questStatus, userStatus } = globalState
+  console.log("userStatus.pockets.gold", userStatus.pockets.gold) // zzz
 
   // on mount
   useEffect(() => {
     console.log("onMount") // zzz
 
-    const defaultUserStatus = Constants.getDefaultUserStatus()
-    const keys = Object.keys(defaultUserStatus)
-
-    const newUserStatus = questStatus.userStatus
-    // const newUserStatus = _pick(questStatus, keys)
-    console.log("newUserStatus", newUserStatus) // zzz
-
-    // const newUserStatus = { ...userStatus, pockets: questStatus.pockets }
-    console.log("newUserStatus", newUserStatus) // zzz
-    setGlobalStateProps({
-      userStatus: newUserStatus,
-    })
     toaster.clear()
     // returned function will be called on component unmount
     return () => {}
@@ -59,6 +48,19 @@ export default function TopLevel(props) {
   useEffect(() => {
     console.log("new props =================================>>>>>")
     world = props.quest
+
+    const profile = getProfile()
+    const { userStatus } = profile
+    console.log(
+      "userStatus.pockets.gold---------------on props",
+      userStatus.pockets.gold
+    ) // zzz
+
+    console.log("profile", profile) // zzz
+
+    setGlobalStateProps({
+      userStatus,
+    })
     setGlobalStateProps({ world })
     onChangeWorld()
   }, [props.quest])

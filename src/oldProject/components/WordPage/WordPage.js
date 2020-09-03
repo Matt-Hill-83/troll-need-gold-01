@@ -12,7 +12,6 @@ export default function WordPage(props) {
   const { activeScene, updateActiveScene } = props
   const { activeFrameIndex } = globalState
 
-  console.log("activeFrameIndex--------------WP", activeFrameIndex) // zzz
   const { frames = [] } = activeScene.frameSet
   const frame = frames[activeFrameIndex]
 

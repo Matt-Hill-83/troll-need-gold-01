@@ -9,7 +9,6 @@ import MyTextArea from "../../../app/common/form/MyTextArea"
 import MyTextInput from "../../../app/common/form/MyTextInput"
 
 export default function ProfileForm({ profile }) {
-  console.log("profile", profile) // zzz
   return (
     <Formik
       initialValues={{

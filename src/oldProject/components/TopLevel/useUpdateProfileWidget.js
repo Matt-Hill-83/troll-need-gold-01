@@ -35,30 +35,31 @@ export default function useUpdateProfileWidget(props) {
     shouldExecute: match.params.id !== currentUser.uid,
   })
 
-  const updatePropsIfChanged = async ({ newProfileProps }) => {
-    console.log("newProfileProps", newProfileProps) // zzz
-    console.log("profile", profile) // zzz
+  const getProfile = () => profile
 
+  const updatePropsIfChanged = async ({ newProfileProps }) => {
     const newProps = { ...profile, userStatus: newProfileProps }
-    console.log("newProps", newProps) // zzz
     const needToUpdateProps = !_isEqual(newProps, profile)
-    console.log("needToUpdateProps", needToUpdateProps) // zzz
     if (needToUpdateProps) {
-      updateProps({ newProps })
+      _updateProps({ newProps })
     }
   }
 
   if ((loading && !profile) || (!profile && !error))
     return <LoadingComponent content="Loading profile..." />
 
-  const updateProps = async ({ newProps }) => {
-    console.log("updateProps------------------------>>>") // zzz
+  const _updateProps = async ({ newProps }) => {
+    console.log("_updateProps------------------------>>>") // zzz
+    console.log("newProps", newProps) // zzz
     try {
+      if (newProps.completedQuests) {
+        delete newProps.completedQuests
+      }
       await updateUserProfile(newProps)
     } catch (error) {
     } finally {
     }
   }
-  console.log("profile", profile) // zzz
-  return { updatePropsIfChanged }
+
+  return { updatePropsIfChanged, getProfile }
 }
