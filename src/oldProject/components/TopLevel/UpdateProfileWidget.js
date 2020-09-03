@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Button } from "semantic-ui-react"
 
@@ -10,10 +10,17 @@ import LoadingComponent from "../../../app/layout/LoadingComponent"
 import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc"
 import { listenToSelectedUserProfile } from "../../../features/profiles/profileActions"
 
-export default function UpdateProfileWidget({
-  match = { params: { id: "jOAMi0Yy5YP9oI7v1MA4FtkanSV2" } },
-  newProfileProps,
-}) {
+export default function UpdateProfileWidget(props) {
+  useEffect(() => {
+    console.log("new props ===UpdateProfileWidget===>>>>>")
+    updatePropsIfChanged({ newProfileProps, profile })
+  }, [props.newProfileProps])
+
+  const {
+    match = { params: { id: "jOAMi0Yy5YP9oI7v1MA4FtkanSV2" } },
+    newProfileProps,
+  } = props
+
   const dispatch = useDispatch()
   const { selectedUserProfile, currentUserProfile } = useSelector(
     (state) => state.profile
@@ -28,6 +35,11 @@ export default function UpdateProfileWidget({
     deps: [dispatch, match.params.id],
     shouldExecute: match.params.id !== currentUser.uid,
   })
+
+  const updatePropsIfChanged = async ({ newProfileProps, profile }) => {
+    const newProps = { ...profile, ...newProfileProps }
+    if 
+  }
 
   if (match.params.id === currentUser.uid) {
     profile = currentUserProfile
@@ -46,6 +58,7 @@ export default function UpdateProfileWidget({
     }
   }
   console.log("profile", profile) // zzz
+
   return (
     <Button
       floated="right"

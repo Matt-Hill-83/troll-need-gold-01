@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import _get from "lodash.get"
+import _isEqual from "lodash.isequal"
 import { Toaster, Position } from "@blueprintjs/core"
 
 import QuestProgressUtils from "../../Utils/QuestProgressUtils.js"
@@ -9,9 +10,9 @@ import TopLevelUtils from "../../Utils/TopLevelUtils.js"
 import useGlobalState from "../../../Context/useGlobalState.js"
 // import useLocalState from "./useLocalState.js"
 import Utils from "../../Utils/Utils.js"
+import UpdateProfileWidget from "./UpdateProfileWidget.js"
 
 import css from "./TopLevel.module.scss"
-import UpdateProfileWidget from "./UpdateProfileWidget.js"
 
 const toaster = Toaster.create({
   position: Position.TOP,
@@ -231,6 +232,7 @@ export default function TopLevel(props) {
   if (!globalState.activeScene) {
     return <div>no active scene</div>
   }
+  console.log({ test: _isEqual })
 
   return (
     <div className={`${css.main} ${className}`}>

@@ -15,6 +15,13 @@ export default class Constants {
     }
   }
 
+  static getDefaultUserStatus = () => {
+    return {
+      pockets: { gold: { amount: 0 } },
+      completedQuests: [],
+    }
+  }
+
   static getDefaultGameStatus = () => {
     return {
       activeFrameIndex: 0,
@@ -24,6 +31,7 @@ export default class Constants {
       // showWorldBuilder: false,
       world: null,
       questStatus: Constants.getDefaultQuestStatus(),
+      userStatus: Constants.getDefaultUserStatus(),
     }
   }
 
