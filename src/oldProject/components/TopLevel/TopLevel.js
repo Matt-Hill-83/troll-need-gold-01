@@ -22,25 +22,31 @@ const toaster = Toaster.create({
 })
 
 export default function TopLevel(props) {
+  console.log("") // zzz
+  console.log("") // zzz
+  console.log("") // zzz
+  console.log("") // zzz
+  console.log("-----------------------Top Level start------------------") // zzz
+  const { updatePropsIfChanged, getProfile } = useUpdateProfileWidget()
   const { className } = props
   let world = props.quest
 
-  const { globalState, setGlobalStateProps } = useGlobalState()
-  const { updatePropsIfChanged, getProfile } = useUpdateProfileWidget()
-
   // Save this in case I need localStorage
-  const initialLocalState = {}
-  const { localState, setLocalStateProps } = useLocalState(initialLocalState)
-  const { userStatus } = localStorage
-  console.log("localState", localState) // zzz
-  console.log("userStatus-----------top", userStatus) // zzz
+  // const initialLocalState = {}
+  // const { localState, setLocalStateProps } = useLocalState(initialLocalState)
+  const { globalState, setGlobalStateProps } = useGlobalState()
 
-  const { questStatus } = globalState
+  const { questStatus = null, pocketsLoaded } = globalState
+  console.log("questStatus", questStatus) // zzz
+  console.log("pocketsLoaded", pocketsLoaded) // zzz
+  console.log("pocketsLoaded", pocketsLoaded) // zzz
+  console.log("pocketsLoaded", pocketsLoaded) // zzz
+  console.log("pocketsLoaded", pocketsLoaded) // zzz
+  console.log("questStatus-top-gold", _get(questStatus, "pockets.gold")) // zzz
 
   // on mount
   useEffect(() => {
     console.log("onMount") // zzz
-
     toaster.clear()
     // returned function will be called on component unmount
     return () => {}
@@ -50,21 +56,29 @@ export default function TopLevel(props) {
   useEffect(() => {
     console.log("new props =================================>>>>>")
     world = props.quest
-
-    const profile = getProfile()
-    console.log("profile", profile) // zzz
-    const userStatus = profile.userStatus
-    setLocalStateProps({ userStatus })
-
-    // setGlobalStateProps({
-    //   userStatus,
-    // })
-    setGlobalStateProps({ world })
-    onChangeWorld()
+    addSavedGold()
   }, [props.quest])
 
-  const onChangeWorld = () => {
+  const addSavedGold = () => {
+    const { userStatus } = getProfile()
+
+    const _questStatus = Constants.getDefaultQuestStatus()
+    // move saved pockets to local pockets
+    const initialQuestStatus = { ..._questStatus, pockets: userStatus.pockets }
+    console.log("add-gold", _get(initialQuestStatus, "pockets.gold")) // zzz
+
+    setGlobalStateProps({
+      pocketsLoaded: true,
+      world,
+    })
+
+    onChangeWorld({ initialQuestStatus })
+  }
+
+  const onChangeWorld = ({ initialQuestStatus }) => {
+    const _questStatus = questStatus || initialQuestStatus
     console.log("onChangeWorld")
+    console.log("pocketsLoaded", pocketsLoaded) // zzz
     toaster.clear()
 
     if (!world) {
@@ -87,15 +101,17 @@ export default function TopLevel(props) {
       setGlobalStateProps({ showMissionConsole: true })
       const missions = TopLevelUtils.getMissions({ questConfig })
 
-      questStatus.desiredItems =
+      _questStatus.desiredItems =
         missions.map((mission) => !!mission.item && mission.item) || []
     }
 
-    updateActiveScene({ sceneId: startScene.id })
+    updateActiveScene({ sceneId: startScene.id, initialQuestStatus })
   }
 
-  const updateActiveScene = ({ sceneId }) => {
+  const updateActiveScene = ({ sceneId, initialQuestStatus }) => {
+    const _questStatus = questStatus || initialQuestStatus
     console.log("updateActiveScene")
+
     toaster.clear()
 
     const { questConfig } = world
@@ -107,34 +123,38 @@ export default function TopLevel(props) {
     // This preserves activeScene until the next function render
     setGlobalStateProps({ activeScene })
 
-    questStatus.visitedScenes.push(sceneId)
+    _questStatus.visitedScenes.push(sceneId)
 
     if (globalState.showMissionConsole && questConfig) {
       const { foundItem, completedMission } = updateQuestProgress({
         world,
         activeScene,
+        questStatus: _questStatus,
       })
 
       // mutates questStatus
       QuestVisibilityUtils.updateSceneVisibility({
-        questStatus,
+        questStatus: _questStatus,
         world,
       })
 
       // TODO: this should probably happen on the appropriate frame.
       displayFoundItemToaster({ foundItem })
       displayCompletedMissionToaster({ completedMission })
-      console.log("questStatus.pockets", questStatus.pockets) // zzz
-      const newUserStatus = { ...userStatus, pockets: questStatus.pockets }
-      console.log("newUserStatus.pockets.gold", newUserStatus.pockets.gold) // zzz
+      console.log("_questStatus.pockets", _questStatus.pockets) // zzz
 
-      setLocalStateProps({ userStatus: newUserStatus })
-      updatePropsIfChanged({ newProfileProps: newUserStatus })
+      // only run update if userStatus has been loaded from profile.
+      if (true) {
+        updatePropsIfChanged({
+          // only add new gold
+          newProfileProps: { pockets: { gold: _questStatus.pockets.gold } },
+        })
+      }
     }
 
     // Set mutated questStatus after mutation is complete
-    setGlobalStateProps({ questStatus: { ...questStatus } })
-    // console.log("userStatus", userStatus) // zzz
+    console.log("writing mutated quest status----------------->>>>") // zzz
+    setGlobalStateProps({ questStatus: { ..._questStatus } })
   }
 
   const updatePockets = ({ questStatus, activeMission }) => {
@@ -152,7 +172,7 @@ export default function TopLevel(props) {
     })
   }
 
-  const updateQuestProgress = ({ world, activeScene }) => {
+  const updateQuestProgress = ({ world, activeScene, questStatus }) => {
     console.log("updateQuestStatus")
     const { questConfig } = world
     const { location } = activeScene
@@ -258,9 +278,6 @@ export default function TopLevel(props) {
 
   return (
     <div className={`${css.main} ${className}`}>
-      {/* <useUpdateProfileWidget
-        newProfileProps={{ userStatus }}
-      ></useUpdateProfileWidget> */}
       <StoryMode updateActiveScene={updateActiveScene} />
     </div>
   )

@@ -40,6 +40,7 @@ export default function useUpdateProfileWidget(props) {
   const updatePropsIfChanged = async ({ newProfileProps }) => {
     console.log("newProfileProps", newProfileProps) // zzz
     const newProps = { ...profile, userStatus: newProfileProps }
+    console.log("newProps", newProps) // zzz
     const needToUpdateProps = !_isEqual(newProps, profile)
     if (needToUpdateProps) {
       _updateProps({ newProps })
@@ -51,10 +52,16 @@ export default function useUpdateProfileWidget(props) {
 
   const _updateProps = async ({ newProps }) => {
     console.log("_updateProps------------------------>>>") // zzz
-    console.log("newProps", newProps) // zzz
-    // debugger
+    console.log("_updateProps------------------------>>>") // zzz
+    console.log("_updateProps------------------------>>>") // zzz
+    console.log("_updateProps------------------------>>>") // zzz
+    console.log("_updateProps------------------------>>>") // zzz
+    console.log("_updateProps------------------------>>>") // zzz
+    const gold = newProps.userStatus.pockets.gold
+    console.log("newProps-gold", gold) // zzz
     try {
       if (newProps.pockets) {
+        newProps.pockets = null
         delete newProps.pockets
       }
       await updateUserProfile(newProps)

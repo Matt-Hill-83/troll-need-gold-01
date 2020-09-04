@@ -26,10 +26,11 @@ export default class Constants {
     return {
       activeFrameIndex: 0,
       activeScene: null,
+      pocketsLoaded: false,
+      questStatus: null,
       showMissionConsole: true,
+      userStatus: null,
       world: null,
-      questStatus: Constants.getDefaultQuestStatus(),
-      userStatus: Constants.getDefaultUserStatus(),
     }
   }
 

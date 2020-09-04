@@ -6,7 +6,9 @@ const useGlobalState = () => {
 
   const setGlobalStateProps = (props) => {
     setGlobalState((state) => {
-      return { ...state, ...props }
+      const test = { ...state, ...props }
+      console.log("test--------------------->>>>>>>>>>>", test) // zzz
+      return test
     })
   }
 
