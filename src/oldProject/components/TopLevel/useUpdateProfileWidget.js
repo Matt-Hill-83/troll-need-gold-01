@@ -38,10 +38,16 @@ export default function useUpdateProfileWidget(props) {
   const getProfile = () => profile
 
   const updatePropsIfChanged = async ({ newProfileProps }) => {
+    console.log("updatePropsIfChanged") // zzz
+    console.log("updatePropsIfChanged") // zzz
+    console.log("updatePropsIfChanged") // zzz
+    console.log("updatePropsIfChanged") // zzz
     console.log("newProfileProps", newProfileProps) // zzz
     const newProps = { ...profile, userStatus: newProfileProps }
-    console.log("newProps", newProps) // zzz
+    console.log("newProps", newProps.userStatus) // zzz
+    console.log("profile", profile.userStatus) // zzz
     const needToUpdateProps = !_isEqual(newProps, profile)
+    console.log("needToUpdateProps", needToUpdateProps) // zzz
     if (needToUpdateProps) {
       _updateProps({ newProps })
     }

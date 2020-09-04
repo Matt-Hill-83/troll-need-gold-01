@@ -64,7 +64,10 @@ export default function TopLevel(props) {
 
     const _questStatus = Constants.getDefaultQuestStatus()
     // move saved pockets to local pockets
-    const initialQuestStatus = { ..._questStatus, pockets: userStatus.pockets }
+    const initialQuestStatus = {
+      ..._questStatus,
+      pockets: { ...userStatus.pockets },
+    }
     console.log("add-gold", _get(initialQuestStatus, "pockets.gold")) // zzz
 
     setGlobalStateProps({
@@ -74,6 +77,8 @@ export default function TopLevel(props) {
 
     onChangeWorld({ initialQuestStatus })
   }
+
+  // TODO: investigate why update userStatus is not called when quest is completed.
 
   const onChangeWorld = ({ initialQuestStatus }) => {
     const _questStatus = questStatus || initialQuestStatus
@@ -147,9 +152,12 @@ export default function TopLevel(props) {
       if (true) {
         updatePropsIfChanged({
           // only add new gold
-          newProfileProps: { pockets: { gold: _questStatus.pockets.gold } },
+          newProfileProps: { pockets: { ..._questStatus.pockets } },
+          // newProfileProps: { pockets: { gold: _questStatus.pockets.gold } },
         })
       }
+    } else {
+      debugger
     }
 
     // Set mutated questStatus after mutation is complete
