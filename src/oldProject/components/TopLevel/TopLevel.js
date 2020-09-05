@@ -22,11 +22,8 @@ const toaster = Toaster.create({
 })
 
 export default function TopLevel(props) {
-  console.log("") // zzz
-  console.log("") // zzz
-  console.log("") // zzz
-  console.log("") // zzz
-  console.log("-----------------------Top Level start------------------") // zzz
+  console.log("")
+  console.log("-----------------------Top Level start------------------")
   const { updatePropsIfChanged, getProfile } = useUpdateProfileWidget()
   const { className } = props
   let world = props.quest
