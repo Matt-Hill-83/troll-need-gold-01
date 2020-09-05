@@ -1,4 +1,7 @@
 import _get from "lodash.get"
+// import _intersection from "lodash.intersection"
+// import _isEqual from "lodash.isequal"
+
 import TopLevelUtils from "./TopLevelUtils"
 
 export default class QuestProgressUtils {
@@ -33,6 +36,12 @@ export default class QuestProgressUtils {
     })
 
     return desiredRecipientIsHere && desiredItemIsInPocket
+  }
+
+  static areAllMissionsCompleted = ({ missions, completedMissions }) => {
+    // console.log("missions", missions) // zzz
+    // console.log("completedMissions", completedMissions) // zzz
+    return missions.length === completedMissions.length
   }
 
   static getDesiredRecipient = ({ activeMission }) => {

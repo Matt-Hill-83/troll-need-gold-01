@@ -31,11 +31,11 @@
 .bookCoil01 {
   position: fixed;
   display: flex;
-  justify-self: center;
-  z-index: 1;
-  left: 47vw;
+  z-index: 21;
+  left: 50vw;
   width: 6.2vw;
   height: 93.9vh;
+  transform: translateX(-50%);
 }
 
 .stoneRectangle01 {
@@ -82,7 +82,7 @@
   box-shadow: 6px 2px 10px 6px rgba(0, 0, 0, 0.64);
   height: 45vh;
   top: 6vh;
-  left: 50vw;
+  left: 51vw;
   right: 1vw;
 }
 

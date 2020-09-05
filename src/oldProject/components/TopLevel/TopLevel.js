@@ -43,7 +43,7 @@ export default function TopLevel(props) {
 
   // on mount
   useEffect(() => {
-    console.log("onMount") // zzz
+    console.log("onMount-------------------------------->>>>") // zzz
     toaster.clear()
     // returned function will be called on component unmount
     return () => {}
@@ -208,6 +208,12 @@ export default function TopLevel(props) {
       questStatus.activeMissionIndex++
       questStatus.pockets = updatePockets({ questStatus, activeMission })
     }
+
+    const areAllMissionsCompleted = QuestProgressUtils.areAllMissionsCompleted({
+      completedMissions: questStatus.completedMissions,
+      missions: TopLevelUtils.getMissions({ questConfig }),
+    })
+    console.log("areAllMissionsCompleted", areAllMissionsCompleted) // zzz
 
     // find new items
     const foundItem = QuestProgressUtils.findItem({

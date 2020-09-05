@@ -1,6 +1,7 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Button } from "semantic-ui-react"
+// import { Button } from "semantic-ui-react"
+import _isEqual from "lodash.isequal"
 
 import {
   getUserProfile,
@@ -9,7 +10,6 @@ import {
 import LoadingComponent from "../../../app/layout/LoadingComponent"
 import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc"
 import { listenToSelectedUserProfile } from "../../../features/profiles/profileActions"
-import _isEqual from "lodash.isequal"
 
 export default function useUpdateProfileWidget(props) {
   const match = { params: { id: "jOAMi0Yy5YP9oI7v1MA4FtkanSV2" } }
