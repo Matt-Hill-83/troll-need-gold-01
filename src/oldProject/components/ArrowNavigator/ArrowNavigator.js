@@ -19,7 +19,7 @@ export default function ArrowNavigator(props) {
   }
 
   const changeLocation = ({ sceneId }) => {
-    setGlobalStateProps({ prop: "activeFrameIndex", value: 0 })
+    // setGlobalStateProps({ prop: "activeFrameIndex", value: 0 })
 
     props.updateActiveScene({ sceneId })
   }

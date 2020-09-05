@@ -123,8 +123,8 @@ export default function TopLevel(props) {
     })
 
     // This preserves activeScene until the next function render
-    setGlobalStateProps({ activeScene })
-
+    setGlobalStateProps({ activeScene, activeFrameIndex: 0 })
+    // setGlobalStateProps({ prop: "activeFrameIndex:0", value: 0 })
     _questStatus.visitedScenes.push(sceneId)
 
     if (globalState.showMissionConsole && questConfig) {
