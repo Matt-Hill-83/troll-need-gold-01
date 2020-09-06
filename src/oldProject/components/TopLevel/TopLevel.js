@@ -155,9 +155,9 @@ export default function TopLevel(props) {
 
       console.log("areAllMissionsCompleted", areAllMissionsCompleted) // zzz
       console.log("isEndScene", isEndScene) // zzz
-      // if (isEndScene && areAllMissionsCompleted) {
-      //   addQuestToCompletedQuests({ completedQuest: world.id })
-      // }
+      if (isEndScene && areAllMissionsCompleted) {
+        addQuestToCompletedQuests({ completedQuest: world.id })
+      }
 
       updateUserStatusPocketsIfChanged({
         pockets: { ..._questStatus.pockets },

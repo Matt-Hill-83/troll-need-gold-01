@@ -62,7 +62,8 @@ export default function useUpdateProfileWidget(props) {
 
   const addQuestToCompletedQuests = async ({ completedQuest }) => {
     console.log("addQuestToCompletedQuests") // zzz
-    const userStatus = getUserStatus()
+    const userStatus = await getUserStatus()
+    console.log("userStatus", userStatus) // zzz
 
     const { completedQuests } = userStatus
     completedQuests.push(completedQuest)
@@ -89,20 +90,6 @@ export default function useUpdateProfileWidget(props) {
       _updateProps({ newProps: updatedProps })
     }
   }
-
-  // const updateUserStatusIfChanged = async ({ newProfileProps }) => {
-  //   console.log("updateUserStatusIfChanged") // zzz
-  //   console.log("updateUserStatusIfChanged") // zzz
-  //   console.log("newProfileProps", newProfileProps) // zzz
-  //   const newProps = { ...profile, userStatus: newProfileProps }
-  //   console.log("newProps", newProps.userStatus) // zzz
-  //   console.log("profile", profile.userStatus) // zzz
-  //   const needToUpdateProps = !_isEqual(newProps, profile)
-  //   console.log("needToUpdateProps", needToUpdateProps) // zzz
-  //   if (needToUpdateProps) {
-  //     _updateProps({ newProps })
-  //   }
-  // }
 
   const updateUserStatusPocketsIfChanged = async ({ pockets }) => {
     const userStatus = await getUserStatus()
@@ -134,7 +121,6 @@ export default function useUpdateProfileWidget(props) {
 
   return {
     addQuestToCompletedQuests,
-    // updateUserStatusIfChanged,
     getProfile,
     updateUserStatusPocketsIfChanged,
   }
