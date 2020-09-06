@@ -24,7 +24,12 @@ const toaster = Toaster.create({
 export default function TopLevel(props) {
   console.log("")
   console.log("-----------------------Top Level start------------------")
-  const { updatePropsIfChanged, getProfile } = useUpdateProfileWidget()
+  const {
+    // updateUserStatusIfChanged,
+    getProfile,
+    addQuestToCompletedQuests,
+    updateUserStatusPocketsIfChanged,
+  } = useUpdateProfileWidget()
   const { className } = props
   let world = props.quest
 
@@ -35,10 +40,6 @@ export default function TopLevel(props) {
 
   const { questStatus = null, pocketsLoaded } = globalState
   console.log("questStatus", questStatus) // zzz
-  console.log("pocketsLoaded", pocketsLoaded) // zzz
-  console.log("pocketsLoaded", pocketsLoaded) // zzz
-  console.log("pocketsLoaded", pocketsLoaded) // zzz
-  console.log("pocketsLoaded", pocketsLoaded) // zzz
   console.log("questStatus-top-gold", _get(questStatus, "pockets.gold")) // zzz
 
   // on mount
@@ -121,10 +122,10 @@ export default function TopLevel(props) {
       world,
       sceneId,
     })
+    const { isEndScene } = activeScene
 
     // This preserves activeScene until the next function render
     setGlobalStateProps({ activeScene, activeFrameIndex: 0 })
-    // setGlobalStateProps({ prop: "activeFrameIndex:0", value: 0 })
     _questStatus.visitedScenes.push(sceneId)
 
     if (globalState.showMissionConsole && questConfig) {
@@ -145,16 +146,22 @@ export default function TopLevel(props) {
       displayCompletedMissionToaster({ completedMission })
       console.log("_questStatus.pockets", _questStatus.pockets) // zzz
 
-      // only run update if userStatus has been loaded from profile.
-      if (true) {
-        updatePropsIfChanged({
-          // only add new gold
-          newProfileProps: { pockets: { ..._questStatus.pockets } },
-          // newProfileProps: { pockets: { gold: _questStatus.pockets.gold } },
-        })
-      }
-    } else {
-      debugger
+      const areAllMissionsCompleted = QuestProgressUtils.areAllMissionsCompleted(
+        {
+          completedMissions: _questStatus.completedMissions,
+          missions: TopLevelUtils.getMissions({ questConfig }),
+        }
+      )
+
+      console.log("areAllMissionsCompleted", areAllMissionsCompleted) // zzz
+      console.log("isEndScene", isEndScene) // zzz
+      // if (isEndScene && areAllMissionsCompleted) {
+      //   addQuestToCompletedQuests({ completedQuest: world.id })
+      // }
+
+      updateUserStatusPocketsIfChanged({
+        pockets: { ..._questStatus.pockets },
+      })
     }
 
     // Set mutated questStatus after mutation is complete
@@ -162,25 +169,10 @@ export default function TopLevel(props) {
     setGlobalStateProps({ questStatus: { ..._questStatus } })
   }
 
-  const updatePockets = ({ questStatus, activeMission }) => {
-    // remove item from pockets
-    const { rewards, item } = activeMission
-    delete questStatus.pockets[item.name]
-
-    const newPockets = TopLevelUtils.convertItemToObjFormat({
-      itemsArray: rewards,
-    })
-
-    return QuestProgressUtils.addToPockets({
-      newPockets,
-      questStatus,
-    })
-  }
-
   const updateQuestProgress = ({ world, activeScene, questStatus }) => {
     console.log("updateQuestStatus")
     const { questConfig } = world
-    const { location } = activeScene
+    const { location, isEndScene } = activeScene
     const { activeMissionIndex, desiredItems, pockets } = questStatus
 
     const firstFrame = Utils.getFirstFrame({ activeScene }) || {}
@@ -213,6 +205,11 @@ export default function TopLevel(props) {
       completedMissions: questStatus.completedMissions,
       missions: TopLevelUtils.getMissions({ questConfig }),
     })
+
+    if (isEndScene && areAllMissionsCompleted) {
+      // QuestProgressUtils.addQuestToCompletedQuests({})
+    }
+
     console.log("areAllMissionsCompleted", areAllMissionsCompleted) // zzz
 
     // find new items
@@ -231,6 +228,21 @@ export default function TopLevel(props) {
       foundItem,
       completedMission: isMissionCompleted ? activeMission : false,
     }
+  }
+
+  const updatePockets = ({ questStatus, activeMission }) => {
+    // remove item from pockets
+    const { rewards, item } = activeMission
+    delete questStatus.pockets[item.name]
+
+    const newPockets = TopLevelUtils.convertItemToObjFormat({
+      itemsArray: rewards,
+    })
+
+    return QuestProgressUtils.addToPockets({
+      newPockets,
+      questStatus,
+    })
   }
 
   const displayFoundItemToaster = ({ foundItem }) => {

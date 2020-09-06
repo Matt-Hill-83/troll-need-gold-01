@@ -1,7 +1,7 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
-// import { Button } from "semantic-ui-react"
 import _isEqual from "lodash.isequal"
+import _get from "lodash.get"
 
 import {
   getUserProfile,
@@ -10,6 +10,7 @@ import {
 import LoadingComponent from "../../../app/layout/LoadingComponent"
 import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc"
 import { listenToSelectedUserProfile } from "../../../features/profiles/profileActions"
+import Constants from "../../Utils/Constants/Constants"
 
 export default function useUpdateProfileWidget(props) {
   const match = { params: { id: "jOAMi0Yy5YP9oI7v1MA4FtkanSV2" } }
@@ -37,19 +38,84 @@ export default function useUpdateProfileWidget(props) {
 
   const getProfile = () => profile
 
-  const updatePropsIfChanged = async ({ newProfileProps }) => {
-    console.log("updatePropsIfChanged") // zzz
-    console.log("updatePropsIfChanged") // zzz
-    console.log("updatePropsIfChanged") // zzz
-    console.log("updatePropsIfChanged") // zzz
+  const getUserStatus = async () => {
+    console.log("getUserStatus") // zzz
+
+    if (!profile.userStatus) {
+      profile.userStatus = Constants.getDefaultUserStatus()
+    } else {
+      if (!profile.userStatus.completedQuests) {
+        profile.userStatus.completedQuests = []
+      }
+
+      if (!profile.userStatus.pockets) {
+        profile.userStatus.pockets = {}
+      }
+    }
+
+    await updateProfilePropsIfChanged({
+      newProfileProps: { userStatus: { ...profile.userStatus } },
+    })
+
+    return profile.userStatus
+  }
+
+  const addQuestToCompletedQuests = async ({ completedQuest }) => {
+    console.log("addQuestToCompletedQuests") // zzz
+    const userStatus = getUserStatus()
+
+    const { completedQuests } = userStatus
+    completedQuests.push(completedQuest)
+
+    console.log("completedQuests", completedQuests) // zzz
+
+    updateProfilePropsIfChanged({
+      newProfileProps: { userStatus },
+    })
+  }
+
+  const updateProfilePropsIfChanged = async ({ newProfileProps }) => {
+    console.log("updateProfilePropsIfChanged------------------------------->>>") // zzz
+    console.log("updateProfilePropsIfChanged------------------------------->>>") // zzz
     console.log("newProfileProps", newProfileProps) // zzz
-    const newProps = { ...profile, userStatus: newProfileProps }
-    console.log("newProps", newProps.userStatus) // zzz
-    console.log("profile", profile.userStatus) // zzz
-    const needToUpdateProps = !_isEqual(newProps, profile)
-    console.log("needToUpdateProps", needToUpdateProps) // zzz
+
+    const updatedProps = { ...profile, ...newProfileProps }
+    console.log("updatedProps", updatedProps) // zzz
+    console.log("profile", profile) // zzz
+
+    const needToUpdateProps = !_isEqual(updatedProps, profile)
+
     if (needToUpdateProps) {
-      _updateProps({ newProps })
+      _updateProps({ newProps: updatedProps })
+    }
+  }
+
+  // const updateUserStatusIfChanged = async ({ newProfileProps }) => {
+  //   console.log("updateUserStatusIfChanged") // zzz
+  //   console.log("updateUserStatusIfChanged") // zzz
+  //   console.log("newProfileProps", newProfileProps) // zzz
+  //   const newProps = { ...profile, userStatus: newProfileProps }
+  //   console.log("newProps", newProps.userStatus) // zzz
+  //   console.log("profile", profile.userStatus) // zzz
+  //   const needToUpdateProps = !_isEqual(newProps, profile)
+  //   console.log("needToUpdateProps", needToUpdateProps) // zzz
+  //   if (needToUpdateProps) {
+  //     _updateProps({ newProps })
+  //   }
+  // }
+
+  const updateUserStatusPocketsIfChanged = async ({ pockets }) => {
+    const userStatus = await getUserStatus()
+    console.log("userStatus", userStatus) // zzz
+    const newUserStatus = { ...userStatus, pockets }
+
+    const needToUpdatePockets = !_isEqual(newUserStatus, userStatus)
+    console.log("needToUpdatePockets", needToUpdatePockets) // zzz
+
+    if (needToUpdatePockets) {
+      updateProfilePropsIfChanged({
+        newProfileProps: { userStatus: { ...newUserStatus } },
+      })
     }
   }
 
@@ -59,22 +125,17 @@ export default function useUpdateProfileWidget(props) {
   const _updateProps = async ({ newProps }) => {
     console.log("_updateProps------------------------>>>") // zzz
     console.log("_updateProps------------------------>>>") // zzz
-    console.log("_updateProps------------------------>>>") // zzz
-    console.log("_updateProps------------------------>>>") // zzz
-    console.log("_updateProps------------------------>>>") // zzz
-    console.log("_updateProps------------------------>>>") // zzz
-    const gold = newProps.userStatus.pockets.gold
-    console.log("newProps-gold", gold) // zzz
     try {
-      if (newProps.pockets) {
-        newProps.pockets = null
-        delete newProps.pockets
-      }
       await updateUserProfile(newProps)
     } catch (error) {
     } finally {
     }
   }
 
-  return { updatePropsIfChanged, getProfile }
+  return {
+    addQuestToCompletedQuests,
+    // updateUserStatusIfChanged,
+    getProfile,
+    updateUserStatusPocketsIfChanged,
+  }
 }

@@ -59,7 +59,7 @@ const renderPocketItems = ({ goldOnly = false, questStatus }) => {
 }
 
 export default function MissionConsole(props) {
-  console.log("MissionConsole")
+  // console.log("MissionConsole")
   const {
     globalState: {
       questStatus,
