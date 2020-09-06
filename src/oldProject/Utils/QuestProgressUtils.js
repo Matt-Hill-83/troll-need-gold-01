@@ -15,13 +15,6 @@ export default class QuestProgressUtils {
     return itemsInPockets.includes(desiredItem.name)
   }
 
-  static addQuestToCompletedQuests = ({ desiredItem, pockets }) => {
-    // const { activeFrameIndex } = globalState
-    // const { frames = [] } = activeScene.frameSet
-    // const frame = frames[activeFrameIndex]
-    // let isLastFrame = activeFrameIndex >= frames.length - 1
-  }
-
   static completeMission = ({
     charactersInScene,
     activeMission,
@@ -46,8 +39,6 @@ export default class QuestProgressUtils {
   }
 
   static areAllMissionsCompleted = ({ missions, completedMissions }) => {
-    // console.log("missions", missions) // zzz
-    // console.log("completedMissions", completedMissions) // zzz
     return missions.length === completedMissions.length
   }
 
