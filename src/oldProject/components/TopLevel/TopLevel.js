@@ -21,6 +21,10 @@ const toaster = Toaster.create({
   canEscapeKeyClear: true,
 })
 
+let isProdRelease
+isProdRelease = true
+isProdRelease = false
+
 export default function TopLevel(props) {
   console.log("")
   console.log("-----------------------Top Level start------------------")

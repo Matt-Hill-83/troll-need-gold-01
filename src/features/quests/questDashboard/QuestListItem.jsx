@@ -4,12 +4,14 @@ import { Link } from "react-router-dom"
 import cx from "classnames"
 import React from "react"
 
+import Constants from "../../../oldProject/Utils/Constants/Constants"
+
 import css from "./QuestListItem.module.scss"
 
 export default function QuestListItem({ event }) {
   const renderItem = () => {
     const { title } = event
-    const isProdRelease = false
+    const { isProdRelease } = Constants
 
     const mapId = event.id
     return (
@@ -23,11 +25,7 @@ export default function QuestListItem({ event }) {
           <span role="img">✅</span>
         </div>
         {/* <span onClick={(event) => this.onDeleteMap({ map, event })}> */}
-        {!isProdRelease && (
-          <span>
-            <Icon icon={IconNames.TRASH} />
-          </span>
-        )}
+        {!isProdRelease && <Button onClick={() => {}} icon={IconNames.TRASH} />}
       </div>
     )
   }

@@ -1,6 +1,9 @@
 import Utils from "../Utils"
 
 export default class Constants {
+  static isProdRelease = true
+  static isProdRelease = false
+
   static getDefaultQuestStatus = () => {
     return {
       activeMissionIndex: 0,
@@ -31,6 +34,7 @@ export default class Constants {
       showMissionConsole: true,
       userStatus: null,
       world: null,
+      isProdRelease: Constants.isProdReleaseDefault,
     }
   }
 

@@ -8,8 +8,10 @@
   width: 100%;
   flex: 1 1;
   background: #e9f0ff;
-  //   margin-bottom: 1vh;
   border-radius: 0.6vh;
+  margin-bottom: 0.5vh;
+  width: 70vw;
+  max-width: 80vh;
 
   &:hover {
     background-color: #cacade;
