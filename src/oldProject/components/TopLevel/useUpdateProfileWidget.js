@@ -66,7 +66,9 @@ export default function useUpdateProfileWidget(props) {
     console.log("userStatus", userStatus) // zzz
 
     const { completedQuests } = userStatus
-    completedQuests.push(completedQuest)
+    if (!completedQuests.includes(completedQuest)) {
+      completedQuests.push(completedQuest)
+    }
 
     console.log("completedQuests", completedQuests) // zzz
 
