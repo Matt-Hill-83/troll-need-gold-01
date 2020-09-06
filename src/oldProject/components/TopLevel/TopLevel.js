@@ -37,23 +37,36 @@ export default function TopLevel(props) {
   const { className } = props
   let world = props.quest
 
+  console.log("world", world) // zzz
+
   // Save this in case I need localStorage
   // const initialLocalState = {}
   // const { localState, setLocalStateProps } = useLocalState(initialLocalState)
   const { globalState, setGlobalStateProps } = useGlobalState()
   const { questStatus = null, pocketsLoaded } = globalState
 
+  console.log("pocketsLoaded---------------------------->>>>", pocketsLoaded) // zzz
+
   // on mount
   useEffect(() => {
     console.log("onMount-------------------------------->>>>") // zzz
+    console.log("onMount-------------------------------->>>>") // zzz
+    console.log("onMount-------------------------------->>>>") // zzz
+    console.log("onMount-------------------------------->>>>") // zzz
     toaster.clear()
+
     // returned function will be called on component unmount
-    return () => {}
+    return () => {
+      console.log("unmount") // zzz
+      toaster.clear()
+      setGlobalStateProps(Constants.getDefaultGameStatus())
+    }
   }, [])
 
   // on change in props
   useEffect(() => {
     console.log("new props =================================>>>>>")
+
     world = props.quest
     addSavedPocketsToLocalPockets()
   }, [props.quest])
@@ -62,6 +75,7 @@ export default function TopLevel(props) {
     const { userStatus } = getProfile()
 
     const _questStatus = Constants.getDefaultQuestStatus()
+    console.log("_questStatus-----------------props", _questStatus) // zzz
     // move saved pockets to local pockets
     const initialQuestStatus = {
       ..._questStatus,
@@ -77,12 +91,10 @@ export default function TopLevel(props) {
     onChangeWorld({ initialQuestStatus })
   }
 
-  // TODO: investigate why update userStatus is not called when quest is completed.
-
   const onChangeWorld = ({ initialQuestStatus }) => {
     const _questStatus = questStatus || initialQuestStatus
     console.log("onChangeWorld")
-    console.log("pocketsLoaded", pocketsLoaded) // zzz
+
     toaster.clear()
 
     if (!world) {

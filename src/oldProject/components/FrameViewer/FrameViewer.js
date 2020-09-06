@@ -183,7 +183,7 @@ export default function FrameViewer(props) {
     })
   }
 
-  const renderArrowNavigator = () => {
+  const renderButtons = () => {
     const activeScene = globalState.activeScene
     const { isLastFrame, updateActiveScene } = props
     const { isEndScene } = activeScene
@@ -193,22 +193,19 @@ export default function FrameViewer(props) {
         <Link to={"/quests"} className={css.newGameButton}>
           New Quest
         </Link>
-        // <Button xonClick={() => {}} className={css.newGameButton} to="/quests">
-        //   New Game
-        // </Button>
       )
     }
 
     return (
-      <div className={css.arrowNavigatorBox}>
+      <div className={css.buttonsContainer}>
         {!isLastFrame && (
-          <div className={css.nextPageButtonRow}>
-            <Button onClick={onClickNext} className={css.nextButton}>
-              Next Page
-            </Button>
-          </div>
+          <Button onClick={onClickNext} className={css.nextButton}>
+            Next Page
+          </Button>
         )}
-        {isLastFrame && <div>Click map to move.</div>}
+        {isLastFrame && (
+          <div className={css.clickMapMsg}>Click map to move.</div>
+        )}
       </div>
     )
   }
@@ -239,7 +236,7 @@ export default function FrameViewer(props) {
           <div className={css.wordsAndButtons}>
             <div className={css.sceneName}>{sceneName}</div>
             <div className={css.wordsContainer}>{cloneDialogs()}</div>
-            <div className={css.buttonsContainer}>{renderArrowNavigator()}</div>
+            {renderButtons()}
           </div>
           <div className={css.imageGroupsContainer}>
             <div className={css.lizAndKatContainer}>
