@@ -11,9 +11,9 @@ import useGlobalState from "../../../Context/useGlobalState.js"
 import useLocalState from "./useLocalState.js"
 import Utils from "../../Utils/Utils.js"
 import useUpdateProfileWidget from "./useUpdateProfileWidget.js"
+import Constants from "../../Utils/Constants/Constants.js"
 
 import css from "./TopLevel.module.scss"
-import Constants from "../../Utils/Constants/Constants.js"
 
 const toaster = Toaster.create({
   position: Position.TOP,

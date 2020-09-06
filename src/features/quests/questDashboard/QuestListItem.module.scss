@@ -1,0 +1,43 @@
+.xxxmain {
+}
+
+.questRow {
+  display: flex;
+  border: 1px solid #cecece !important;
+  border-bottom: none;
+  width: 100%;
+  flex: 1 1;
+  background: #e9f0ff;
+  //   margin-bottom: 1vh;
+  border-radius: 0.6vh;
+
+  &:hover {
+    background-color: #cacade;
+    cursor: pointer;
+  }
+}
+
+.tableCell {
+  display: flex;
+  padding: 0.4vh 1.2vh;
+}
+
+.name,
+.questName {
+  flex: 1 1;
+  display: flex;
+}
+
+.dragonPoints,
+.gold,
+.status,
+.questStatus {
+  display: flex;
+  width: 18%;
+}
+
+.questStatus {
+  display: flex;
+  width: 18%;
+  justify-content: flex-end;
+}
