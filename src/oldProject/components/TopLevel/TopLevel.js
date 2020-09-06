@@ -25,11 +25,11 @@ export default function TopLevel(props) {
   console.log("")
   console.log("-----------------------Top Level start------------------")
   const {
-    // updateUserStatusIfChanged,
     getProfile,
     addQuestToCompletedQuests,
     updateUserStatusPocketsIfChanged,
   } = useUpdateProfileWidget()
+
   const { className } = props
   let world = props.quest
 
@@ -54,10 +54,10 @@ export default function TopLevel(props) {
   useEffect(() => {
     console.log("new props =================================>>>>>")
     world = props.quest
-    addSavedGold()
+    addSavedPocketsToLocalPockets()
   }, [props.quest])
 
-  const addSavedGold = () => {
+  const addSavedPocketsToLocalPockets = () => {
     const { userStatus } = getProfile()
 
     const _questStatus = Constants.getDefaultQuestStatus()
@@ -153,8 +153,6 @@ export default function TopLevel(props) {
         }
       )
 
-      console.log("areAllMissionsCompleted", areAllMissionsCompleted) // zzz
-      console.log("isEndScene", isEndScene) // zzz
       if (isEndScene && areAllMissionsCompleted) {
         addQuestToCompletedQuests({ completedQuest: world.id })
       }
@@ -165,14 +163,13 @@ export default function TopLevel(props) {
     }
 
     // Set mutated questStatus after mutation is complete
-    console.log("writing mutated quest status----------------->>>>") // zzz
     setGlobalStateProps({ questStatus: { ..._questStatus } })
   }
 
   const updateQuestProgress = ({ world, activeScene, questStatus }) => {
     console.log("updateQuestStatus")
     const { questConfig } = world
-    const { location, isEndScene } = activeScene
+    const { location } = activeScene
     const { activeMissionIndex, desiredItems, pockets } = questStatus
 
     const firstFrame = Utils.getFirstFrame({ activeScene }) || {}
@@ -200,17 +197,6 @@ export default function TopLevel(props) {
       questStatus.activeMissionIndex++
       questStatus.pockets = updatePockets({ questStatus, activeMission })
     }
-
-    const areAllMissionsCompleted = QuestProgressUtils.areAllMissionsCompleted({
-      completedMissions: questStatus.completedMissions,
-      missions: TopLevelUtils.getMissions({ questConfig }),
-    })
-
-    if (isEndScene && areAllMissionsCompleted) {
-      // QuestProgressUtils.addQuestToCompletedQuests({})
-    }
-
-    console.log("areAllMissionsCompleted", areAllMissionsCompleted) // zzz
 
     // find new items
     const foundItem = QuestProgressUtils.findItem({

@@ -39,8 +39,6 @@ export default function useUpdateProfileWidget(props) {
   const getProfile = () => profile
 
   const getUserStatus = async () => {
-    console.log("getUserStatus") // zzz
-
     if (!profile.userStatus) {
       profile.userStatus = Constants.getDefaultUserStatus()
     } else {
@@ -61,16 +59,12 @@ export default function useUpdateProfileWidget(props) {
   }
 
   const addQuestToCompletedQuests = async ({ completedQuest }) => {
-    console.log("addQuestToCompletedQuests") // zzz
     const userStatus = await getUserStatus()
-    console.log("userStatus", userStatus) // zzz
 
     const { completedQuests } = userStatus
     if (!completedQuests.includes(completedQuest)) {
       completedQuests.push(completedQuest)
     }
-
-    console.log("completedQuests", completedQuests) // zzz
 
     updateProfilePropsIfChanged({
       newProfileProps: { userStatus },
@@ -78,13 +72,7 @@ export default function useUpdateProfileWidget(props) {
   }
 
   const updateProfilePropsIfChanged = async ({ newProfileProps }) => {
-    console.log("updateProfilePropsIfChanged------------------------------->>>") // zzz
-    console.log("updateProfilePropsIfChanged------------------------------->>>") // zzz
-    console.log("newProfileProps", newProfileProps) // zzz
-
     const updatedProps = { ...profile, ...newProfileProps }
-    console.log("updatedProps", updatedProps) // zzz
-    console.log("profile", profile) // zzz
 
     const needToUpdateProps = !_isEqual(updatedProps, profile)
 
@@ -95,11 +83,9 @@ export default function useUpdateProfileWidget(props) {
 
   const updateUserStatusPocketsIfChanged = async ({ pockets }) => {
     const userStatus = await getUserStatus()
-    console.log("userStatus", userStatus) // zzz
     const newUserStatus = { ...userStatus, pockets }
 
     const needToUpdatePockets = !_isEqual(newUserStatus, userStatus)
-    console.log("needToUpdatePockets", needToUpdatePockets) // zzz
 
     if (needToUpdatePockets) {
       updateProfilePropsIfChanged({
@@ -112,8 +98,6 @@ export default function useUpdateProfileWidget(props) {
     return <LoadingComponent content="Loading profile..." />
 
   const _updateProps = async ({ newProps }) => {
-    console.log("_updateProps------------------------>>>") // zzz
-    console.log("_updateProps------------------------>>>") // zzz
     try {
       await updateUserProfile(newProps)
     } catch (error) {
