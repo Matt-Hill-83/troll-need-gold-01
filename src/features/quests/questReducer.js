@@ -2,6 +2,7 @@ import {
   CREATE_EVENT,
   UPDATE_EVENT,
   DELETE_EVENT,
+  DELETE_QUEST,
   FETCH_EVENTS,
   LISTEN_TO_EVENT_CHAT,
   CLEAR_COMMENTS,
@@ -43,6 +44,11 @@ export default function questReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         events: [...state.events.filter((evt) => evt.id !== payload)],
+      }
+    case DELETE_QUEST:
+      return {
+        ...state,
+        quests: [...state.quests.filter((evt) => evt.id !== payload)],
       }
     case FETCH_EVENTS:
       return {

@@ -1,8 +1,9 @@
 .main {
-  display: flex;
-  border: 1px solid purple !important;
+  // display: flex;
+  // border: 21px solid purple !important;
   justify-content: center;
   position: relative;
+  height: 97%;
 }
 
 .questList {
@@ -10,6 +11,7 @@
   border: 1px solid blue !important;
   justify-content: center;
   padding: 1vh;
+  margin-top: 3vh;
 }
 
 .floatingButtons {

@@ -1,7 +1,7 @@
 import {
   CREATE_EVENT,
   UPDATE_EVENT,
-  DELETE_EVENT,
+  DELETE_QUEST,
   FETCH_EVENTS,
   LISTEN_TO_EVENT_CHAT,
   LISTEN_TO_SELECTED_EVENT,
@@ -93,9 +93,9 @@ export function updateEvent(event) {
   }
 }
 
-export function deleteEvent(eventId) {
+export function deleteQuest(eventId) {
   return {
-    type: DELETE_EVENT,
+    type: DELETE_QUEST,
     payload: eventId,
   }
 }
