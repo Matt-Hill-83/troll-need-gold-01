@@ -208,13 +208,7 @@ export default function FrameViewer(props) {
             </Button>
           </div>
         )}
-        {isLastFrame && (
-          <div>Click a new location on the map to move.</div>
-          // <ArrowNavigator
-          //   activeScene={activeScene}
-          //   updateActiveScene={updateActiveScene}
-          // />
-        )}
+        {isLastFrame && <div>Click map to move.</div>}
       </div>
     )
   }

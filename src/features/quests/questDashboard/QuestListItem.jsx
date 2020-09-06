@@ -16,9 +16,12 @@ export default function QuestListItem({ event }) {
     const mapId = event.id
     return (
       <div key={mapId} className={css.questRow}>
-        <div className={cx(css.tableCell, css.questName)}>
-          <Link to={`/quests/${event.id}`}>{title}</Link>
-        </div>
+        <Link
+          className={cx(css.tableCell, css.questName)}
+          to={`/quests/${event.id}`}
+        >
+          {title}
+        </Link>
 
         <div className={cx(css.tableCell, css.dragonPoints)}>100 </div>
         <div className={cx(css.tableCell, css.questStatus)}>
