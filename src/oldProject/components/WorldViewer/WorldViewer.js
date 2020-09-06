@@ -15,7 +15,7 @@ const bookCoil01 = Images.backgrounds["bookCoil01"]
 const mapBackground = Images.backgrounds["mapBackground11"]
 
 export default function WorldViewer(props) {
-  console.log("WorldViewer-----------------------")
+  // console.log("WorldViewer-----------------------")
 
   const {
     globalState: {

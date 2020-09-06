@@ -41,10 +41,7 @@ export default function TopLevel(props) {
   // const initialLocalState = {}
   // const { localState, setLocalStateProps } = useLocalState(initialLocalState)
   const { globalState, setGlobalStateProps } = useGlobalState()
-
   const { questStatus = null, pocketsLoaded } = globalState
-  console.log("questStatus", questStatus) // zzz
-  console.log("questStatus-top-gold", _get(questStatus, "pockets.gold")) // zzz
 
   // on mount
   useEffect(() => {

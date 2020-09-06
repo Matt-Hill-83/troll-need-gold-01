@@ -42,8 +42,6 @@ export default function QuestDashboard() {
     dispatch(fetchEvents(filter, startDate, limit, lastVisible))
   }
 
-  console.log({ events })
-
   if (!events || events.length === 0) return <div>no data</div>
 
   const renderQuestPicker = () => {
