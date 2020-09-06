@@ -2,9 +2,9 @@ import _get from "lodash.get"
 import { Button } from "@blueprintjs/core"
 import cx from "classnames"
 import React, { useContext } from "react"
+import { Link } from "react-router-dom"
 
 import { myContext } from "../../../myProvider"
-// import ArrowNavigator from "../ArrowNavigator/ArrowNavigator"
 import Character from "../Character/Character"
 import Constants from "../../Utils/Constants/Constants"
 import Images from "../../images/images"
@@ -190,9 +190,12 @@ export default function FrameViewer(props) {
 
     if (isEndScene && isLastFrame) {
       return (
-        <Button onClick={() => {}} className={css.newGameButton}>
-          New Game
-        </Button>
+        <Link to={"/quests"} className={css.newGameButton}>
+          New Quest
+        </Link>
+        // <Button xonClick={() => {}} className={css.newGameButton} to="/quests">
+        //   New Game
+        // </Button>
       )
     }
 
