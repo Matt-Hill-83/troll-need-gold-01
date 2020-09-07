@@ -34,7 +34,6 @@ export default class Constants {
       showMissionConsole: true,
       userStatus: null,
       world: null,
-      isProdRelease: Constants.isProdReleaseDefault,
     }
   }
 

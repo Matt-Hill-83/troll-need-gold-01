@@ -148,9 +148,8 @@ export default class Utils {
     return foundMap
   }
 
-  static getBookFromId = ({ id }) => {
-    const booksDocs = books
-    return booksDocs.find((map) => map.id === id)
+  static getBookFromId = ({ id, books }) => {
+    return books.find((map) => map.id === id)
   }
 
   static getFirstReleasedMap = () => maps.find((map) => map.released)

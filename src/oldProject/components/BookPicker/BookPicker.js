@@ -4,39 +4,30 @@ import { IconNames } from "@blueprintjs/icons"
 import cx from "classnames"
 import React, { useState, useEffect } from "react"
 
-// import { maps, books } from "../../Stores/InitStores.js"
 import BookTableOfContents from "../BookTableOfContents/BookTableOfContents.js"
 import Images from "../../images/images.js"
 import Utils from "../../Utils/Utils.js"
 import WorldMultiPicker2 from "../WorldMultiPicker2/WorldMultiPicker2.js"
+// import JSONEditorDemo from "../JSONEdtor/JSONEditorDemo.js"
 
 import css from "./BookPicker.module.scss"
+import Constants from "../../Utils/Constants/Constants.js"
 
 let maps = []
 let books = []
-// const books = [
-//   {
-//     id: "888",
-//     name: "test",
-//     imageName: "bookCover01BatOfDoom",
-//     chapters: [
-//       "4NB2bhzIpQZCc5801Ju0",
-//       "Y6lTC5po2Pt0vXIwFRA8",
-//       "phSGKxjTKM0HBm5xO4Mv",
-//     ],
-//   },
-// ]
 
 export default function BookPicker(props) {
   maps = props.maps || []
   books = props.books || []
   console.log("maps", maps) // zzz
   console.log("books", books) // zzz
+  const { isProdRelease } = Constants
 
   useEffect(() => {
     console.log("onMount-------------------------------->>>>")
     console.log("props", props) // zzz
     maps = props.maps
+    books = props.books
 
     // returned function will be called on component unmount
     return () => {
@@ -56,64 +47,37 @@ export default function BookPicker(props) {
   const [questToEdit, setQuestToEdit] = useState(null)
   const [jsonUnderEdit, setJsonUnderEdit] = useState("null")
 
-  const state = {
-    showBookBuilder: false,
-    selectedBook: books[0],
-    showBookEditor: false,
-    questToEdit: null,
-    jsonUnderEdit: "null",
-  }
-
   const changeSelectedBook = ({ bookId }) => {
-    const selectedBook = Utils.getBookFromId({ id: bookId })
+    console.log("bookId", bookId) // zzz
+    const selectedBook = Utils.getBookFromId({ id: bookId, books })
+    console.log("selectedBook", selectedBook) // zzz
     setSelectedBook(selectedBook)
-    setState({
-      selectedBook,
-    })
   }
 
   const setState = () => {}
 
   const editBook = ({ selectedBook }) => {
-    setState({
-      showBookBuilder: !state.showBookBuilder,
-      jsonUnderEdit: selectedBook,
-      selectedBook,
-    })
+    setJsonUnderEdit(selectedBook)
+    setShowBookBuilder(!showBookBuilder)
+    setSelectedBook(selectedBook)
   }
 
   const onCloseBookBuilder = () => {
-    setState({
-      showBookBuilder: false,
-      selectedBook: books[0] || {},
-    })
+    setSelectedBook(books[0] || {})
+    setShowBookBuilder(false)
   }
 
   const onChangeJSON = (json) => {
-    setState({ jsonUnderEdit: json })
-  }
-
-  const updateTime = () => {
-    const time = new Date().toISOString()
-
-    setState({
-      // This is updating the wrong object
-      json: Object.assign({}, state.json, { time }),
-    })
+    setJsonUnderEdit(json)
   }
 
   const saveBookChanges = ({ selectedBook, bookId }) => {
-    setState({ showBookBuilder: false })
+    setShowBookBuilder(false)
     updateBook({ newProps: selectedBook, bookId })
   }
 
   const renderChapterView = () => {
-    const { showBookBuilder, selectedBook, jsonUnderEdit } = state
-    const { id: bookId } = selectedBook
-    const { chapters, name } = selectedBook
-
-    // const isProdRelease = true
-    const isProdRelease = false
+    const { id: bookId, chapters, name } = selectedBook
 
     const worldMultiPickerProps = {
       selectedWorlds: chapters || [],
@@ -165,10 +129,7 @@ export default function BookPicker(props) {
           title={"Edit Book"}
         >
           <div className="contents">
-            {/* <JSONEditorDemo
-              json={jsonUnderEdit}
-              onChangeJSON={onChangeJSON}
-            /> */}
+            {/* <JSONEditorDemo json={jsonUnderEdit} onChangeJSON={onChangeJSON} /> */}
           </div>
           <WorldMultiPicker2 props={worldMultiPickerProps}></WorldMultiPicker2>
           <Button
@@ -209,12 +170,6 @@ export default function BookPicker(props) {
     await books.add(newBook)
   }
 
-  const onChooseQuests = async ({ book }) => {
-    setState({ questToEdit: book, showBookEditor: true })
-  }
-
-  const isProdRelease = false
-
   const {} = props
 
   const sortedBooks = Utils.sortDataByNestedKey({
@@ -245,8 +200,6 @@ export default function BookPicker(props) {
   })
 
   const backgroundImage = Images.backgrounds["meadow"]
-
-  // return <div>test----------------------------------</div>
 
   return (
     <div className={css.main}>
