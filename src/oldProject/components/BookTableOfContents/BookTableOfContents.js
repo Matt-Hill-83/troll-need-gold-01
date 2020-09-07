@@ -12,15 +12,12 @@ class BookTableOfContents extends React.Component {
   state = {}
 
   render = () => {
-    console.log("BookTableOfContents---------------") // zzz
-    console.log("BookTableOfContents---------------") // zzz
-    console.log("BookTableOfContents---------------") // zzz
-    const { worlds } = this.props
+    const { worlds, selectedBook } = this.props
     console.log("worlds", worlds) // zzz
 
-    const { selectedBook } = this.props
+    // const { selectedBook } = this.props
     console.log("selectedBook", selectedBook) // zzz
-    const sortedWorlds = Utils.sortWorlds({ worlds: worlds })
+    const sortedWorlds = Utils.sortWorlds({ worlds })
 
     const filteredMaps = sortedWorlds.filter((map) => {
       const chapters = _get(selectedBook, "chapters") || []
@@ -41,7 +38,7 @@ class BookTableOfContents extends React.Component {
         </div>
       )
 
-      return <Link to={`/world/${mapId}`}>{text}</Link>
+      return <Link to={`/quests/${mapId}`}>{text}</Link>
     })
     console.log("mapList", mapList) // zzz
     const tableHeader = (

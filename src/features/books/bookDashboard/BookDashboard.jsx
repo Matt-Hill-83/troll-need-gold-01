@@ -14,11 +14,6 @@ export default function BookDashboard() {
     (state) => state.quest
   )
   const { books } = useSelector((state) => state.book)
-  const test = useSelector((state) => state.book)
-  console.log("test------------------------", test) // zzz
-  console.log("test------------------------", test) // zzz
-  const { loading } = useSelector((state) => state.async)
-  const { authenticated } = useSelector((state) => state.auth)
   const [loadingInitial, setLoadingInitial] = useState(false)
 
   useEffect(() => {
@@ -31,8 +26,6 @@ export default function BookDashboard() {
       dispatch({ type: RETAIN_STATE })
     }
   }, [dispatch, filter, startDate, retainState])
-
-  console.log("books", books) // zzz
 
   if (!events || events.length === 0) return <div>no data</div>
 

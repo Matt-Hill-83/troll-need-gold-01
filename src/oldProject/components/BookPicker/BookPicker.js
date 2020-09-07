@@ -8,10 +8,10 @@ import BookTableOfContents from "../BookTableOfContents/BookTableOfContents.js"
 import Images from "../../images/images.js"
 import Utils from "../../Utils/Utils.js"
 import WorldMultiPicker2 from "../WorldMultiPicker2/WorldMultiPicker2.js"
+import Constants from "../../Utils/Constants/Constants.js"
 // import JSONEditorDemo from "../JSONEdtor/JSONEditorDemo.js"
 
 import css from "./BookPicker.module.scss"
-import Constants from "../../Utils/Constants/Constants.js"
 
 let maps = []
 let books = []
@@ -76,6 +76,8 @@ export default function BookPicker(props) {
   }
 
   const renderChapterView = () => {
+    if (!selectedBook) return null
+
     const { id: bookId, chapters, name } = selectedBook
 
     const worldMultiPickerProps = {
