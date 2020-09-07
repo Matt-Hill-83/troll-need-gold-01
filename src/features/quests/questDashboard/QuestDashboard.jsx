@@ -20,7 +20,7 @@ export default function QuestDashboard() {
     startDate,
     lastVisible,
     retainState,
-  } = useSelector((state) => state.event)
+  } = useSelector((state) => state.quest)
   const { loading } = useSelector((state) => state.async)
   const { authenticated } = useSelector((state) => state.auth)
   const [loadingInitial, setLoadingInitial] = useState(false)
@@ -34,6 +34,7 @@ export default function QuestDashboard() {
       setLoadingInitial(false)
     })
     return () => {
+      //
       dispatch({ type: RETAIN_STATE })
     }
   }, [dispatch, filter, startDate, retainState])
