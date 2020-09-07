@@ -75,7 +75,7 @@ export default function WorldMultiPicker2({ props }) {
   }
 
   const worlds = toJS(allWorlds)
-  worlds.docs.map((world) => {
+  worlds.map((world) => {
     const { title } = world
     const worldId = world.id
 
@@ -114,7 +114,7 @@ export default function WorldMultiPicker2({ props }) {
             return (
               <div className={classes.chips}>
                 {selected.map((item) => {
-                  const { title } = item.data
+                  const { title } = item
                   return (
                     <Chip key={title} label={title} className={classes.chip} />
                   )
@@ -125,7 +125,7 @@ export default function WorldMultiPicker2({ props }) {
           MenuProps={MenuProps}
         >
           {sortedItems.map((item) => {
-            const { title, newTitle } = item.data
+            const { title, newTitle } = item
             return (
               <MenuItem
                 key={title}

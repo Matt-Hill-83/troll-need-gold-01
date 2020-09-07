@@ -9,9 +9,9 @@ import InputLabel from "@material-ui/core/InputLabel"
 import MenuItem from "@material-ui/core/MenuItem"
 import Select from "@material-ui/core/Select"
 import cx from "classnames"
+import Utils from "../../Utils/Utils"
 
 import css from "./WorldMultiPicker2.module.scss"
-import Utils from "../../Utils/Utils"
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -75,7 +75,7 @@ export default function WorldMultiPicker2({ props }) {
   }
 
   const worlds = [...allWorlds]
-  worlds.docs.map((world) => {
+  worlds.map((world) => {
     const { title } = world
     const worldId = world.id
 
@@ -88,7 +88,7 @@ export default function WorldMultiPicker2({ props }) {
     }
   })
 
-  const sortedWorlds = Utils.sortWorlds({ worlds, keys: ["data", "newTitle"] })
+  const sortedWorlds = Utils.sortWorlds({ worlds, keys: ["newTitle"] })
 
   return (
     <div>
@@ -107,7 +107,7 @@ export default function WorldMultiPicker2({ props }) {
             return (
               <div className={classes.chips}>
                 {selected.map((item) => {
-                  const { title } = item.data
+                  const { title } = item
                   return (
                     <Chip key={title} label={title} className={classes.chip} />
                   )
@@ -118,7 +118,7 @@ export default function WorldMultiPicker2({ props }) {
           MenuProps={MenuProps}
         >
           {sortedWorlds.map((item) => {
-            const { title, newTitle } = item.data
+            const { title, newTitle } = item
             return (
               <MenuItem
                 key={title}

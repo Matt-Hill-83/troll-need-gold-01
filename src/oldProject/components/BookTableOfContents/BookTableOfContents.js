@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 import cx from "classnames"
 import React from "react"
 
-import { maps } from "../../Stores/InitStores.js"
 import Images from "../../images/images.js"
 import Utils from "../../Utils/Utils.js"
 
@@ -12,20 +11,16 @@ import css from "./BookTableOfContents.module.scss"
 class BookTableOfContents extends React.Component {
   state = {}
 
-  constructor(props) {
-    super(props)
-    const showProdInitialValue = true
-    this.state = { showProd: true, showToggle: !showProdInitialValue }
-  }
-
-  toggleShowProd = () => {
-    this.setState({ showProd: !this.state.showProd })
-  }
-
   render = () => {
+    console.log("BookTableOfContents---------------") // zzz
+    console.log("BookTableOfContents---------------") // zzz
+    console.log("BookTableOfContents---------------") // zzz
+    const { worlds } = this.props
+    console.log("worlds", worlds) // zzz
+
     const { selectedBook } = this.props
-    const {} = this.state
-    const sortedWorlds = Utils.sortWorlds({ worlds: maps })
+    console.log("selectedBook", selectedBook) // zzz
+    const sortedWorlds = Utils.sortWorlds({ worlds: worlds })
 
     const filteredMaps = sortedWorlds.filter((map) => {
       const chapters = _get(selectedBook, "chapters") || []
@@ -48,7 +43,7 @@ class BookTableOfContents extends React.Component {
 
       return <Link to={`/world/${mapId}`}>{text}</Link>
     })
-
+    console.log("mapList", mapList) // zzz
     const tableHeader = (
       <div className={cx(css.tableHeader)}>
         <div className={cx(css.tableCell, css.name)}>Name</div>
@@ -57,6 +52,7 @@ class BookTableOfContents extends React.Component {
       </div>
     )
     const dummyQuest01 = Images.backgrounds["dummyQuest01"]
+
     return (
       <div className={css.main}>
         <div className={css.questTable}>

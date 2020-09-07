@@ -15,7 +15,6 @@ body {
   margin-top: 4.1vh;
   width: 100vw;
   height: calc(100vh - 4.1vh);
-  border: 1px solid red !important;
 }
 
 .masthead {

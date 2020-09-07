@@ -30,11 +30,13 @@ export default function QuestListItem({ event: world }) {
     const questId = world.id
     const questCompleted = Utils.isQuestCompleted({ questId, completedQuests })
 
+    console.log("questId", questId) // zzz
+
     return (
       <div key={questId} className={css.questRow}>
         <Link
           className={cx(css.tableCell, css.questName)}
-          to={`/quests/${world.id}`}
+          to={`/quests/${questId}`}
         >
           {title}
         </Link>

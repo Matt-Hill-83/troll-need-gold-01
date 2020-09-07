@@ -24,9 +24,6 @@ export default function QuestList({
     allGoldInQuests,
   } = QuestProgressUtils.getTotalGoldInAllQuests({ worlds, completedQuests })
 
-  console.log("allGoldInQuests", allGoldInQuests) // zzz
-  console.log("earnedGold", earnedGold) // zzz
-
   const tableHeader = (
     <div className={cx(css.tableHeader)}>
       <div className={cx(css.tableCell, css.name)}>Name</div>

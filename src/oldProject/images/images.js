@@ -1,6 +1,7 @@
 //locations
 // need to add:
 // warriorGirl01
+// frizzle01
 
 import bag from "./locations/bag.png"
 import barn from "./locations/barn.png"

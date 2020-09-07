@@ -1,7 +1,6 @@
-import { Grid } from "semantic-ui-react"
 import { Redirect } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
-import React, { useContext } from "react"
+import React from "react"
 
 import { listenToQuestFromFirestore2 } from "../../../app/firestore/firestoreService"
 import { listenToSelectedQuest } from "../questActions"
@@ -11,7 +10,7 @@ import TopLevel from "../../../oldProject/components/TopLevel/TopLevel"
 
 export default function QuestDetailedPage({ match }) {
   const dispatch = useDispatch()
-  const { currentUser } = useSelector((state) => state.auth)
+  // const { currentUser } = useSelector((state) => state.auth)
   const quest = useSelector((state) => state.quest.selectedEvent)
   const { loading, error } = useSelector((state) => state.async)
 

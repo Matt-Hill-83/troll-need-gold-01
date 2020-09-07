@@ -46,31 +46,18 @@ export function fetchEventsFromFirestore(
   }
 }
 
-export function fetchQuestsFromFirestore(
-  filter,
-  startDate,
-  limit,
-  lastDocSnapshot = null
-) {
-  const user = firebase.auth().currentUser
-  let eventsRef = db.collection("quests")
-  return eventsRef
-  switch (filter) {
-    case "isGoing":
-      return eventsRef
-        .where("attendeeIds", "array-contains", user.uid)
-        .where("date", ">=", startDate)
-    case "isHost":
-      return eventsRef
-        .where("hostUid", "==", user.uid)
-        .where("date", ">=", startDate)
-    default:
-    // return eventsRef.where("date", ">=", startDate)
-  }
+export function fetchQuestsFromFirestore(eventId) {
+  return db.collection("quests")
 }
 
 export function listenToQuestFromFirestore2(eventId) {
+  // return db.collection("quests")
   return db.collection("quests").doc(eventId)
+}
+
+export function fetchBooksFromFirestore() {
+  let eventsRef = db.collection("books")
+  return eventsRef
 }
 
 export function listenToEventFromFirestore(eventId) {

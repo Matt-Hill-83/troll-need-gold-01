@@ -52,8 +52,8 @@ export default class Utils {
 
   static sortWorlds = ({ worlds, keys }) => {
     const sortedWorlds = Utils.sortDataByNestedKey({
-      data: worlds.docs,
-      keys: keys || ["data", "title"],
+      data: worlds,
+      keys: keys || ["title"],
       order: "ASC",
     })
 
@@ -64,7 +64,7 @@ export default class Utils {
     const owningBooks = []
 
     let bookFound = false
-    books.docs.forEach((book) => {
+    books.forEach((book) => {
       const belongstoThisBook = book.chapters.includes(worldId)
       if (belongstoThisBook) {
         owningBooks.push(book.name)
@@ -80,9 +80,9 @@ export default class Utils {
   }
 
   static getItemsFromDbObj = ({ dbList }) => {
-    const items = dbList.docs
+    const items = dbList
 
-    const filteredItems = items && items.filter((item) => !item.data.ignore)
+    const filteredItems = items && items.filter((item) => !item.ignore)
     return filteredItems || []
   }
 
@@ -149,7 +149,7 @@ export default class Utils {
   }
 
   static getBookFromId = ({ id }) => {
-    const booksDocs = books.docs
+    const booksDocs = books
     return booksDocs.find((map) => map.id === id)
   }
 
