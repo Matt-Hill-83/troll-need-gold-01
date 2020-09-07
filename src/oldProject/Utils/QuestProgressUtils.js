@@ -68,7 +68,6 @@ export default class QuestProgressUtils {
     return questStatus
   }
 
-  // TODO: Use this to add gold from user data to current pockets
   static addToPockets = ({ newPockets, questStatus }) => {
     const existingPockets = questStatus.pockets || {}
     for (const newPocketName in newPockets) {

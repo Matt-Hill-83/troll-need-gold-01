@@ -6,39 +6,59 @@ import cx from "classnames"
 import React from "react"
 
 import Constants from "../../../oldProject/Utils/Constants/Constants"
+import TopLevelUtils from "../../../oldProject/Utils/TopLevelUtils"
+import useGlobalState from "../../../Context/useGlobalState"
 import useUpdateProfileWidget from "../../../oldProject/components/TopLevel/useUpdateProfileWidget"
 import Utils from "../../../oldProject/Utils/Utils"
 
 import css from "./QuestListItem.module.scss"
 
-export default function QuestListItem({ event }) {
+export default function QuestListItem({ event: world }) {
+  const { questConfig = {} } = world
+
   const { getProfile } = useUpdateProfileWidget()
   const profile = getProfile()
   const completedQuests = _get(profile, "userStatus.completedQuests")
 
+  // const { globalState } = useGlobalState()
+  // console.log("globalState", globalState) // zzz
+  // const {
+  //   globalState: {
+  //     world: { questConfig },
+  //   },
+  // } = useGlobalState()
+
+  const missions = TopLevelUtils.getMissions({ questConfig })
+
+  let totalGold = 0
+  missions.forEach((item) => {
+    console.log("item", item) // zzz
+    totalGold += item.rewards[0].amount
+  })
+  console.log("totalGold", totalGold) // zzz
+  // console.log("missions", missions) // zzz
+
   const renderItem = () => {
-    const { title } = event
+    const { title } = world
     const { isProdRelease } = Constants
 
-    const questId = event.id
-    console.log("completedQuests", completedQuests) // zzz
+    const questId = world.id
     const questCompleted = Utils.isQuestCompleted({ questId, completedQuests })
-    console.log("questCompleted", questCompleted) // zzz
 
     return (
       <div key={questId} className={css.questRow}>
         <Link
           className={cx(css.tableCell, css.questName)}
-          to={`/quests/${event.id}`}
+          to={`/quests/${world.id}`}
         >
           {title}
         </Link>
 
-        <div className={cx(css.tableCell, css.dragonPoints)}>100 </div>
+        <div className={cx(css.tableCell, css.dragonPoints)}>{totalGold} </div>
         <div className={cx(css.tableCell, css.questStatus)}>
           <span role="img">{`${questCompleted ? "✅" : "--"}`}</span>
         </div>
-        {/* <span onClick={(event) => this.onDeleteMap({ map, event })}> */}
+        {/* <span onClick={(world) => this.onDeleteMap({ map, world })}> */}
         {!isProdRelease && <Button onClick={() => {}} icon={IconNames.TRASH} />}
       </div>
     )

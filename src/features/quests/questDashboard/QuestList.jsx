@@ -1,6 +1,9 @@
 import React from "react"
 import QuestListItem from "./QuestListItem"
 import InfiniteScroll from "react-infinite-scroller"
+import cx from "classnames"
+
+import css from "./QuestList.module.scss"
 
 export default function QuestList({
   events,
@@ -8,6 +11,14 @@ export default function QuestList({
   loading,
   moreEvents,
 }) {
+  const tableHeader = (
+    <div className={cx(css.tableHeader)}>
+      <div className={cx(css.tableCell, css.name)}>Name</div>
+      <div className={cx(css.tableCell, css.gold)}>Gold</div>
+      <div className={cx(css.tableCell, css.status)}>Completed</div>
+    </div>
+  )
+
   return (
     <>
       {events.length !== 0 && (
@@ -17,6 +28,7 @@ export default function QuestList({
           hasMore={!loading && moreEvents}
           initialLoad={false}
         >
+          {tableHeader}
           {events.map((event) => (
             <QuestListItem event={event} key={event.id} />
           ))}
