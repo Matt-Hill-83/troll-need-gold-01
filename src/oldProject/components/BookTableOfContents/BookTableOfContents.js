@@ -13,20 +13,16 @@ class BookTableOfContents extends React.Component {
 
   render = () => {
     const { worlds, selectedBook } = this.props
-    console.log("worlds", worlds) // zzz
-
-    // const { selectedBook } = this.props
-    console.log("selectedBook", selectedBook) // zzz
     const sortedWorlds = Utils.sortWorlds({ worlds })
 
-    const filteredMaps = sortedWorlds.filter((map) => {
+    const filteredWorlds = sortedWorlds.filter((world) => {
       const chapters = _get(selectedBook, "chapters") || []
-      return map.released && chapters.includes(map.id)
+      return world.released && chapters.includes(world.id)
     })
 
-    const mapList = filteredMaps.map((map) => {
-      const { title } = map
-      const mapId = map.id
+    const mapList = filteredWorlds.map((world) => {
+      const { title } = world
+      const mapId = world.id
 
       const text = (
         <div className={css.questRow}>
