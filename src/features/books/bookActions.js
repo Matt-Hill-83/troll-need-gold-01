@@ -31,10 +31,6 @@ export function fetchBooks(filter, startDate, limit, lastDocSnapshot) {
         lastDocSnapshot
       ).get()
 
-      console.log("snapshot-----------------------", snapshot) // zzz
-      console.log("snapshot-----------------------", snapshot) // zzz
-      console.log("snapshot-----------------------", snapshot) // zzz
-      console.log("snapshot-----------------------", snapshot) // zzz
       const lastVisible = snapshot.docs[snapshot.docs.length - 1]
       const moreEvents = snapshot.docs.length >= limit
       const books = snapshot.docs.map((doc) => dataFromSnapshot(doc))
