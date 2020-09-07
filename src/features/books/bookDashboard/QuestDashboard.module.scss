@@ -1,0 +1,24 @@
+.main {
+  // display: flex;
+  // border: 21px solid purple !important;
+  justify-content: center;
+  position: relative;
+  height: 97%;
+}
+
+.questList {
+  display: flex;
+  border: 1px solid blue !important;
+  justify-content: center;
+  padding: 1vh;
+  margin-top: 3vh;
+}
+
+.floatingButtons {
+  position: absolute;
+  display: flex;
+  z-index: 5;
+  right: 10vw;
+  z-index: 100;
+  top: 2vh;
+}

@@ -1,7 +1,7 @@
 import { combineReducers } from "redux"
 import testReducer from "../../features/sandbox/testReducer"
-// import eventReducer from "../../features/events/eventReducer"
 import questReducer from "../../features/quests/questReducer"
+import bookReducer from "../../features/books/bookReducer"
 import modalReducer from "../common/modals/modalReducer"
 import authReducer from "../../features/auth/authReducer"
 import asyncReducer from "../async/asyncReducer"
@@ -12,8 +12,8 @@ const rootReducer = (history) =>
   combineReducers({
     router: connectRouter(history),
     test: testReducer,
-    // event: eventReducer,
     quest: questReducer,
+    book: bookReducer,
     modals: modalReducer,
     auth: authReducer,
     async: asyncReducer,

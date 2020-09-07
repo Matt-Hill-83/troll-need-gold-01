@@ -1,0 +1,29 @@
+.main {
+  border: 4px solid green !important;
+}
+
+.tableHeader {
+  display: flex;
+  margin-bottom: 1%;
+  width: 100%;
+  border-bottom: 2px solid grey;
+}
+
+.tableCell {
+  display: flex;
+  padding: 0.4vh 1.2vh;
+}
+
+.name,
+.questName {
+  flex: 1 1;
+  display: flex;
+}
+
+.dragonPoints,
+.gold,
+.status,
+.questStatus {
+  display: flex;
+  width: 18%;
+}
