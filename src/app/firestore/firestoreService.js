@@ -50,8 +50,7 @@ export function fetchQuestsFromFirestore(eventId) {
   return db.collection("quests")
 }
 
-export function listenToQuestFromFirestore2(eventId) {
-  // return db.collection("quests")
+export function listenToQuestFromFirestore(eventId) {
   return db.collection("quests").doc(eventId)
 }
 
