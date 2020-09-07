@@ -20,9 +20,8 @@ class BookTableOfContents extends React.Component {
       return world.released && chapters.includes(world.id)
     })
 
-    const mapList = filteredWorlds.map((world) => {
-      const { title } = world
-      const mapId = world.id
+    const worldList = filteredWorlds.map((world) => {
+      const { title, id: worldId } = world
 
       const text = (
         <div className={css.questRow}>
@@ -34,9 +33,9 @@ class BookTableOfContents extends React.Component {
         </div>
       )
 
-      return <Link to={`/quests/${mapId}`}>{text}</Link>
+      return <Link to={`/quests/${worldId}`}>{text}</Link>
     })
-    console.log("mapList", mapList) // zzz
+
     const tableHeader = (
       <div className={cx(css.tableHeader)}>
         <div className={cx(css.tableCell, css.name)}>Name</div>
@@ -50,7 +49,7 @@ class BookTableOfContents extends React.Component {
       <div className={css.main}>
         <div className={css.questTable}>
           {tableHeader}
-          <div className={css.scrollArea}>{mapList}</div>
+          <div className={css.scrollArea}>{worldList}</div>
         </div>
         <img
           className={cx(css.dummyQuest01)}
