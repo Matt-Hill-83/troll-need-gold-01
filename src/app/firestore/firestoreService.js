@@ -54,13 +54,13 @@ export function listenToQuestFromFirestore(eventId) {
   return db.collection("quests").doc(eventId)
 }
 
+export function listenToBookFromFirestore(eventId) {
+  return db.collection("books").doc(eventId)
+}
+
 export function fetchBooksFromFirestore() {
   let eventsRef = db.collection("books")
   return eventsRef
-}
-
-export function listenToEventFromFirestore(eventId) {
-  return db.collection("events").doc(eventId)
 }
 
 export function addEventToFirestore(event) {

@@ -13,21 +13,23 @@ import WorldMultiPicker2 from "../WorldMultiPicker2/WorldMultiPicker2.js"
 import css from "./BookPicker.module.scss"
 
 let maps = []
-const books = [
-  {
-    id: "888",
-    name: "test",
-    imageName: "bookCover01BatOfDoom",
-    chapters: [
-      "4NB2bhzIpQZCc5801Ju0",
-      "Y6lTC5po2Pt0vXIwFRA8",
-      "phSGKxjTKM0HBm5xO4Mv",
-    ],
-  },
-]
+let books = []
+// const books = [
+//   {
+//     id: "888",
+//     name: "test",
+//     imageName: "bookCover01BatOfDoom",
+//     chapters: [
+//       "4NB2bhzIpQZCc5801Ju0",
+//       "Y6lTC5po2Pt0vXIwFRA8",
+//       "phSGKxjTKM0HBm5xO4Mv",
+//     ],
+//   },
+// ]
 
 export default function BookPicker(props) {
   maps = props.maps || []
+  books = props.books || []
   console.log("maps", maps) // zzz
   console.log("books", books) // zzz
 

@@ -39,7 +39,7 @@ export default function App() {
             <Container className="main">
               <Route exact path="/quests" component={QuestDashboard} />
               <Route exact path="/books" component={BookDashboard} />
-              <Route exact path="/books" component={BookPicker} />
+              {/* <Route exact path="/books" component={BookPicker} /> */}
               <Route path="/quests/:id" component={QuestDetailedPage} />
 
               <PrivateRoute path="/account" component={AccountPage} />

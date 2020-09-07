@@ -20,7 +20,7 @@ import {
   dataFromSnapshot,
 } from "../../app/firestore/firestoreService"
 
-export function fetchEvents(filter, startDate, limit, lastDocSnapshot) {
+export function fetchBooks(filter, startDate, limit, lastDocSnapshot) {
   return async function (dispatch) {
     dispatch(asyncActionStart())
     try {
@@ -30,13 +30,18 @@ export function fetchEvents(filter, startDate, limit, lastDocSnapshot) {
         limit,
         lastDocSnapshot
       ).get()
+
+      console.log("snapshot-----------------------", snapshot) // zzz
+      console.log("snapshot-----------------------", snapshot) // zzz
+      console.log("snapshot-----------------------", snapshot) // zzz
+      console.log("snapshot-----------------------", snapshot) // zzz
       const lastVisible = snapshot.docs[snapshot.docs.length - 1]
       const moreEvents = snapshot.docs.length >= limit
-      const events = snapshot.docs.map((doc) => dataFromSnapshot(doc))
+      const books = snapshot.docs.map((doc) => dataFromSnapshot(doc))
 
       dispatch({
         type: FETCH_BOOKS,
-        payload: { events, moreEvents, lastVisible },
+        payload: { books, moreEvents, lastVisible },
       })
       dispatch(asyncActionFinish())
     } catch (error) {

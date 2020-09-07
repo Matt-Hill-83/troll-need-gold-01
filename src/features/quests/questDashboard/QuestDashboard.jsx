@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux"
 
 import { fetchEvents } from "../questActions"
 import { RETAIN_STATE } from "../questConstants"
-import BookPicker from "../../../oldProject/components/BookPicker/BookPicker"
 import EventListItemPlaceholder from "./EventListItemPlaceholder"
 import QuestList from "./QuestList"
 
@@ -25,8 +24,6 @@ export default function QuestDashboard() {
   const { authenticated } = useSelector((state) => state.auth)
   const [loadingInitial, setLoadingInitial] = useState(false)
 
-  const [showBookPicker, setShowBookPicker] = useState(false)
-
   useEffect(() => {
     if (retainState) return
     setLoadingInitial(true)
@@ -44,8 +41,6 @@ export default function QuestDashboard() {
   }
 
   if (!events || events.length === 0) return <div>no data</div>
-
-  // return <BookPicker maps={events}></BookPicker>
 
   return (
     <Grid className={css.main} width={10}>

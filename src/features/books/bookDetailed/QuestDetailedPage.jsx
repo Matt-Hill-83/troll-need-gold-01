@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import React from "react"
 
 import { listenToQuestFromFirestore } from "../../../app/firestore/firestoreService"
-import { listenToSelectedQuest } from "../questActions"
+import { listenToSelectedQuest } from "../bookActions"
 import LoadingComponent from "../../../app/layout/LoadingComponent"
 import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc"
 import TopLevel from "../../../oldProject/components/TopLevel/TopLevel"

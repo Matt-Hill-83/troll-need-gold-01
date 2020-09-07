@@ -12,7 +12,7 @@ import {
 } from "./bookConstants"
 
 const initialState = {
-  events: [],
+  books: [],
   comments: [],
   moreEvents: true,
   selectedEvent: null,
@@ -27,20 +27,17 @@ export default function bookReducer(state = initialState, { type, payload }) {
     case CREATE_EVENT:
       return {
         ...state,
-        events: [...state.events, payload],
+        books: [...state.books, payload],
       }
     case UPDATE_EVENT:
       return {
         ...state,
-        events: [
-          ...state.events.filter((evt) => evt.id !== payload.id),
-          payload,
-        ],
+        books: [...state.books.filter((evt) => evt.id !== payload.id), payload],
       }
     case DELETE_EVENT:
       return {
         ...state,
-        events: [...state.events.filter((evt) => evt.id !== payload)],
+        books: [...state.books.filter((evt) => evt.id !== payload)],
       }
     case DELETE_QUEST:
       return {
@@ -50,7 +47,7 @@ export default function bookReducer(state = initialState, { type, payload }) {
     case FETCH_BOOKS:
       return {
         ...state,
-        events: [...state.events, ...payload.events],
+        books: [...state.books, ...payload.books],
         moreEvents: payload.moreEvents,
         lastVisible: payload.lastVisible,
       }
@@ -68,7 +65,7 @@ export default function bookReducer(state = initialState, { type, payload }) {
     case CLEAR_EVENTS:
       return {
         ...state,
-        events: [],
+        books: [],
         moreEvents: true,
         lastVisible: null,
       }
