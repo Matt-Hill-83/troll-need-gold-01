@@ -4,7 +4,7 @@ import { IconNames } from "@blueprintjs/icons"
 import cx from "classnames"
 import React from "react"
 
-import { maps, books } from "../../Stores/InitStores.js"
+// import { maps, books } from "../../Stores/InitStores.js"
 import BookTableOfContents from "../BookTableOfContents/BookTableOfContents.js"
 import Images from "../../images/images.js"
 import Utils from "../../Utils/Utils.js"
@@ -12,10 +12,13 @@ import WorldMultiPicker2 from "../WorldMultiPicker2/WorldMultiPicker2.js"
 
 import css from "./BookPicker.module.scss"
 
+const maps = []
+const books = []
+
 class BookPicker extends React.Component {
   state = {
     showBookBuilder: false,
-    selectedBook: books.docs[0],
+    selectedBook: books[0],
     showBookEditor: false,
     questToEdit: null,
     jsonUnderEdit: "null",
@@ -40,7 +43,7 @@ class BookPicker extends React.Component {
   onCloseBookBuilder = () => {
     this.setState({
       showBookBuilder: false,
-      selectedBook: books.docs[0] || {},
+      selectedBook: books[0] || {},
     })
   }
 
@@ -137,7 +140,7 @@ class BookPicker extends React.Component {
 
   onDeleteBook = async ({ book }) => {
     await book.delete()
-    this.setState({ selectedBook: books.docs[0] || null })
+    this.setState({ selectedBook: books[0] || null })
   }
 
   onClose = async ({ book }) => {
@@ -145,7 +148,7 @@ class BookPicker extends React.Component {
   }
 
   updateBook = async ({ bookId, newProps }) => {
-    const bookUnderEdit = books.docs.find((item) => item.id === bookId)
+    const bookUnderEdit = books.find((item) => item.id === bookId)
 
     Object.assign(bookUnderEdit.data, newProps)
     await bookUnderEdit.update(bookUnderEdit.data)
@@ -170,7 +173,7 @@ class BookPicker extends React.Component {
     const {} = this.props
 
     const sortedBooks = Utils.sortDataByNestedKey({
-      data: books.docs,
+      data: books,
       keys: ["data", "name"],
       order: "ASC",
     })

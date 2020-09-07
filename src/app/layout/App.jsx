@@ -14,6 +14,7 @@ import PrivateRoute from "./PrivateRoute"
 import ProfilePage from "../../features/profiles/profilePage/ProfilePage"
 import QuestDashboard from "../../features/quests/questDashboard/QuestDashboard"
 import QuestDetailedPage from "../../features/quests/eventDetailed/QuestDetailedPage"
+import BookPicker from "../../oldProject/components/BookPicker/BookPicker"
 
 export default function App() {
   const { key } = useLocation()
@@ -36,6 +37,7 @@ export default function App() {
             <Route exact path="/" component={QuestDashboard} />
             <Container className="main">
               <Route exact path="/quests" component={QuestDashboard} />
+              <Route exact path="/books" component={BookPicker} />
               <Route path="/quests/:id" component={QuestDetailedPage} />
 
               <PrivateRoute path="/account" component={AccountPage} />

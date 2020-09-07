@@ -12,9 +12,10 @@ body {
 }
 
 .ui.main.container {
-  margin-top: 3.5em;
+  margin-top: 4.1vh;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 4.1vh);
+  border: 1px solid red !important;
 }
 
 .masthead {

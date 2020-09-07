@@ -1,5 +1,5 @@
 import { Grid, Loader } from "semantic-ui-react"
-import React, { useEffect, useState, useContext } from "react"
+import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
 import { fetchEvents } from "../questActions"
@@ -11,7 +11,7 @@ import QuestList from "./QuestList"
 import css from "./QuestDashboard.module.scss"
 
 export default function QuestDashboard() {
-  const limit = 2
+  const limit = 20
   const dispatch = useDispatch()
   const {
     events,

@@ -12,6 +12,7 @@ export default function NavBar({ setFormOpen }) {
     <Menu inverted fixed="top">
       <Container>
         <Menu.Item as={NavLink} to="/quests" name="Quests List" />
+        {/* <Menu.Item as={NavLink} to="/books" name="Books" /> */}
         {authenticated ? <SignedInMenu /> : <SignedOutMenu />}
       </Container>
     </Menu>
