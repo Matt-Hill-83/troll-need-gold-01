@@ -7,7 +7,7 @@ import React from "react"
 
 import Constants from "../../../oldProject/Utils/Constants/Constants"
 import TopLevelUtils from "../../../oldProject/Utils/TopLevelUtils"
-import useGlobalState from "../../../Context/useGlobalState"
+import QuestProgressUtils from "../../../oldProject/Utils/QuestProgressUtils"
 import useUpdateProfileWidget from "../../../oldProject/components/TopLevel/useUpdateProfileWidget"
 import Utils from "../../../oldProject/Utils/Utils"
 
@@ -20,23 +20,8 @@ export default function QuestListItem({ event: world }) {
   const profile = getProfile()
   const completedQuests = _get(profile, "userStatus.completedQuests")
 
-  // const { globalState } = useGlobalState()
-  // console.log("globalState", globalState) // zzz
-  // const {
-  //   globalState: {
-  //     world: { questConfig },
-  //   },
-  // } = useGlobalState()
-
   const missions = TopLevelUtils.getMissions({ questConfig })
-
-  let totalGold = 0
-  missions.forEach((item) => {
-    console.log("item", item) // zzz
-    totalGold += item.rewards[0].amount
-  })
-  console.log("totalGold", totalGold) // zzz
-  // console.log("missions", missions) // zzz
+  const totalGold = QuestProgressUtils.getTotalGoldInQuest({ missions })
 
   const renderItem = () => {
     const { title } = world

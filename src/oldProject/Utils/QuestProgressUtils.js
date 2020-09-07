@@ -10,6 +10,15 @@ export default class QuestProgressUtils {
     return characterNames.includes(desiredRecipient.name)
   }
 
+  static getTotalGoldInQuest = ({ missions }) => {
+    let totalGold = 0
+    missions.forEach((item) => {
+      totalGold += item.rewards[0].amount
+    })
+
+    return totalGold
+  }
+
   static isDesiredItemInPocket = ({ desiredItem, pockets }) => {
     const itemsInPockets = Object.keys(pockets)
     return itemsInPockets.includes(desiredItem.name)
