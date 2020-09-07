@@ -6,6 +6,7 @@ export default class Utils {
     const adder = before === true ? 0 : 1
     array.splice(index + adder, 0, newElement)
   }
+
   static isQuestCompleted = ({ questId, completedQuests = [] }) => {
     return completedQuests.includes(questId)
   }

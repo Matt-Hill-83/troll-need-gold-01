@@ -1,8 +1,6 @@
 import _get from "lodash.get"
-// import _intersection from "lodash.intersection"
-// import _isEqual from "lodash.isequal"
-
 import TopLevelUtils from "./TopLevelUtils"
+import Utils from "./Utils"
 
 export default class QuestProgressUtils {
   static isDesiredRecipientHere = ({ desiredRecipient, charactersInScene }) => {
@@ -17,6 +15,28 @@ export default class QuestProgressUtils {
     })
 
     return totalGold
+  }
+
+  static getTotalGoldInAllQuests = ({ worlds, completedQuests }) => {
+    let earnedGold = 0
+    let allGoldInQuests = 0
+
+    worlds.forEach((world) => {
+      const { questConfig = {} } = world
+      const missions = TopLevelUtils.getMissions({ questConfig })
+      const goldInQuest = QuestProgressUtils.getTotalGoldInQuest({ missions })
+      allGoldInQuests += goldInQuest
+
+      const questId = world.id
+      const questCompleted = Utils.isQuestCompleted({
+        questId,
+        completedQuests,
+      })
+      if (questCompleted) {
+        earnedGold += goldInQuest
+      }
+    })
+    return { earnedGold, allGoldInQuests }
   }
 
   static isDesiredItemInPocket = ({ desiredItem, pockets }) => {
