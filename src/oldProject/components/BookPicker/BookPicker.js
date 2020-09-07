@@ -54,11 +54,10 @@ export default function BookPicker(props) {
     setSelectedBook(selectedBook)
   }
 
-  const setState = () => {}
-
   const editBook = ({ selectedBook }) => {
     setJsonUnderEdit(selectedBook)
-    setShowBookBuilder(!showBookBuilder)
+    setShowBookBuilder(true)
+    // setShowBookBuilder(!showBookBuilder)
     setSelectedBook(selectedBook)
   }
 
@@ -146,19 +145,15 @@ export default function BookPicker(props) {
   }
 
   const onDeleteBook = async ({ book }) => {
-    await book.delete()
-    setState({ selectedBook: books[0] || null })
-  }
-
-  const onClose = async ({ book }) => {
-    setState({ questToEdit: book, showBookEditor: true })
+    // await book.delete()
+    setSelectedBook(books[0] || null)
   }
 
   const updateBook = async ({ bookId, newProps }) => {
     const bookUnderEdit = books.find((item) => item.id === bookId)
 
     Object.assign(bookUnderEdit, newProps)
-    await bookUnderEdit.update(bookUnderEdit)
+    // await bookUnderEdit.update(bookUnderEdit)
   }
 
   const addBook = async () => {
@@ -228,5 +223,3 @@ export default function BookPicker(props) {
     </div>
   )
 }
-
-// export default BookPicker
