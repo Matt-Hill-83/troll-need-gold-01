@@ -40,5 +40,5 @@ export default function BookDashboard() {
   const uniqueWorlds = _uniqBy(events, "id")
   console.log("uniqueBooks", uniqueBooks) // zzz
 
-  return <BookPicker maps={uniqueWorlds} books={uniqueBooks}></BookPicker>
+  return <BookPicker worlds={uniqueWorlds} books={uniqueBooks}></BookPicker>
 }

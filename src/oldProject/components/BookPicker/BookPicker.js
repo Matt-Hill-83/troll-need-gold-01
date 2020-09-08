@@ -14,20 +14,20 @@ import JSONEditorDemo from "../JsonEdtor/JSONEditorDemo.js"
 
 import css from "./BookPicker.module.scss"
 
-let maps = []
+let worlds = []
 let books = []
 
 export default function BookPicker(props) {
-  maps = props.maps || []
+  worlds = props.worlds || []
   books = props.books || []
-  console.log("maps", maps) // zzz
+  console.log("worlds", worlds) // zzz
   console.log("books", books) // zzz
   const { isProdRelease } = Constants
 
   useEffect(() => {
     console.log("onMount-------------------------------->>>>")
     console.log("props", props) // zzz
-    maps = props.maps
+    worlds = props.worlds
     books = props.books
 
     // returned function will be called on component unmount
@@ -39,8 +39,8 @@ export default function BookPicker(props) {
   // on change in props
   useEffect(() => {
     console.log("new props =================================>>>>>")
-    maps = props.maps
-  }, [props.maps])
+    worlds = props.worlds
+  }, [props.worlds])
 
   const [showBookBuilder, setShowBookBuilder] = useState(false)
   const [selectedBook, setSelectedBook] = useState(books[0])
@@ -83,7 +83,7 @@ export default function BookPicker(props) {
 
     const worldMultiPickerProps = {
       selectedWorlds: chapters || [],
-      allWorlds: maps,
+      allWorlds: worlds,
       bookId,
       onClose: ({ selectedItems }) => {
         const newChapters = selectedItems.map((item) => item.id)
@@ -108,7 +108,7 @@ export default function BookPicker(props) {
         />
         <BookTableOfContents
           selectedBook={selectedBook}
-          worlds={maps}
+          worlds={worlds}
           onChangeWorld={props.onChangeWorld}
         />
         {!isProdRelease && (
