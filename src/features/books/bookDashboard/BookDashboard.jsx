@@ -11,14 +11,9 @@ import { fetchEvents } from "../../quests/questActions"
 export default function BookDashboard() {
   const limit = 20
   const dispatch = useDispatch()
-  const {
-    events,
-    moreEvents,
-    filter,
-    startDate,
-    lastVisible,
-    retainState,
-  } = useSelector((state) => state.quest)
+  const { events, filter, startDate, retainState } = useSelector(
+    (state) => state.quest
+  )
   const { books } = useSelector((state) => state.book)
   const [loadingInitial, setLoadingInitial] = useState(false)
 
