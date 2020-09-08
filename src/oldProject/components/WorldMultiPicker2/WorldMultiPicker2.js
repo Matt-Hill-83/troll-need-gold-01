@@ -89,7 +89,11 @@ export default function WorldMultiPicker2({ props }) {
   })
 
   const sortedWorlds = Utils.sortWorlds({ worlds, keys: ["newTitle"] })
-
+  console.log("WorldMultiPicker2") // zzz
+  console.log("WorldMultiPicker2") // zzz
+  console.log("WorldMultiPicker2") // zzz
+  console.log("WorldMultiPicker2") // zzz
+  console.log("WorldMultiPicker2") // zzz
   return (
     <div>
       <FormControl className={cx(classes.formControl, css.main)}>

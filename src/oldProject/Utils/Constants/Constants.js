@@ -1,7 +1,7 @@
 import Utils from "../Utils"
 
 export default class Constants {
-  static isProdRelease = true
+  // static isProdRelease = true
   static isProdRelease = false
 
   static getDefaultQuestStatus = () => {

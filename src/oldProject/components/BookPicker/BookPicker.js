@@ -120,18 +120,11 @@ export default function BookPicker(props) {
             />
           </ButtonGroup>
         )}
-        <Dialog
-          canEscapeKeyClose={true}
-          canOutsideClickClose={true}
-          isCloseButtonShown={true}
-          // isOpen={showBookBuilder}
-          isOpen={true}
-          onClose={onCloseBookBuilder}
-          title={"Edit Book"}
-        >
+        <div className={css.bookEditor} title={"Edit Book"}>
           <div className="contents">
             {/* <JSONEditorDemo json={jsonUnderEdit} onChangeJSON={onChangeJSON} /> */}
           </div>
+          zzzzz
           <WorldMultiPicker2 props={worldMultiPickerProps}></WorldMultiPicker2>
           <Button
             className={css.playButton}
@@ -141,7 +134,7 @@ export default function BookPicker(props) {
           >
             Save Changes
           </Button>
-        </Dialog>
+        </div>
       </div>
     )
   }
