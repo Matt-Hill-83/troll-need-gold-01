@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import _uniqBy from "lodash.uniqby"
 
 import { fetchBooks } from "../bookActions"
 import { fetchQuests } from "../../quests/questActions"
@@ -35,5 +36,9 @@ export default function BookDashboard() {
   console.log("events----------book dash", events) // zzz
   if (!events || events.length === 0) return <div>no data</div>
 
-  return <BookPicker maps={events} books={books}></BookPicker>
+  const uniqueBooks = _uniqBy(books, "id")
+  const uniqueWorlds = _uniqBy(events, "id")
+  console.log("uniqueBooks", uniqueBooks) // zzz
+
+  return <BookPicker maps={uniqueWorlds} books={uniqueBooks}></BookPicker>
 }

@@ -1,14 +1,13 @@
-import React, { useEffect } from "react"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
-// import { toJS } from "mobx"
 import Chip from "@material-ui/core/Chip"
-
+import cx from "classnames"
 import FormControl from "@material-ui/core/FormControl"
 import Input from "@material-ui/core/Input"
 import InputLabel from "@material-ui/core/InputLabel"
 import MenuItem from "@material-ui/core/MenuItem"
+import React, { useEffect } from "react"
 import Select from "@material-ui/core/Select"
-import cx from "classnames"
+
 import Utils from "../../Utils/Utils"
 
 import css from "./WorldMultiPicker2.module.scss"
@@ -89,11 +88,9 @@ export default function WorldMultiPicker2({ props }) {
   })
 
   const sortedWorlds = Utils.sortWorlds({ worlds, keys: ["newTitle"] })
-  console.log("WorldMultiPicker2") // zzz
-  console.log("WorldMultiPicker2") // zzz
-  console.log("WorldMultiPicker2") // zzz
-  console.log("WorldMultiPicker2") // zzz
-  console.log("WorldMultiPicker2") // zzz
+  console.log("sortedWorlds", sortedWorlds) // zzz
+  console.log("selectedItems", selectedItems) // zzz
+
   return (
     <div>
       <FormControl className={cx(classes.formControl, css.main)}>

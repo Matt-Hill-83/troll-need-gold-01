@@ -1,5 +1,5 @@
 import _get from "lodash.get"
-import { ButtonGroup, Button, Dialog } from "@blueprintjs/core"
+import { ButtonGroup, Button } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
 import cx from "classnames"
 import React, { useState, useEffect } from "react"
@@ -9,7 +9,8 @@ import Images from "../../images/images.js"
 import Utils from "../../Utils/Utils.js"
 import WorldMultiPicker2 from "../WorldMultiPicker2/WorldMultiPicker2.js"
 import Constants from "../../Utils/Constants/Constants.js"
-// import JSONEditorDemo from "../JSONEdtor/JSONEditorDemo.js"
+import { updateBookInFirestore } from "../../../app/firestore/firestoreService.js"
+import JSONEditorDemo from "../JsonEdtor/JSONEditorDemo.js"
 
 import css from "./BookPicker.module.scss"
 
@@ -95,6 +96,8 @@ export default function BookPicker(props) {
 
     const bookTableOfContents01 = Images.backgrounds["bookTableOfContents01"]
 
+    console.log("showBookBuilder", showBookBuilder) // zzz
+
     return (
       <div className={css.chapterView}>
         <div className={css.selectedBook}>name {name}</div>
@@ -120,21 +123,27 @@ export default function BookPicker(props) {
             />
           </ButtonGroup>
         )}
-        <div className={css.bookEditor} title={"Edit Book"}>
-          <div className="contents">
-            {/* <JSONEditorDemo json={jsonUnderEdit} onChangeJSON={onChangeJSON} /> */}
+        {showBookBuilder && (
+          <div className={css.bookEditor} title={"Edit Book"}>
+            <div className="contents">
+              <JSONEditorDemo
+                json={jsonUnderEdit}
+                onChangeJSON={onChangeJSON}
+              />
+            </div>
+            <WorldMultiPicker2
+              props={worldMultiPickerProps}
+            ></WorldMultiPicker2>
+            <Button
+              className={css.playButton}
+              onClick={() =>
+                saveBookChanges({ selectedBook: jsonUnderEdit, bookId })
+              }
+            >
+              Save Changes
+            </Button>
           </div>
-          zzzzz
-          <WorldMultiPicker2 props={worldMultiPickerProps}></WorldMultiPicker2>
-          <Button
-            className={css.playButton}
-            onClick={() =>
-              saveBookChanges({ selectedBook: jsonUnderEdit, bookId })
-            }
-          >
-            Save Changes
-          </Button>
-        </div>
+        )}
       </div>
     )
   }
@@ -146,9 +155,11 @@ export default function BookPicker(props) {
 
   const updateBook = async ({ bookId, newProps }) => {
     const bookUnderEdit = books.find((item) => item.id === bookId)
-
-    Object.assign(bookUnderEdit, newProps)
-    // await bookUnderEdit.update(bookUnderEdit)
+    console.log("bookUnderEdit", bookUnderEdit) // zzz
+    console.log("newProps", newProps) // zzz
+    const updatedBook = { ...bookUnderEdit, ...newProps }
+    console.log("updatedBook", updatedBook) // zzz
+    updateBookInFirestore(updatedBook)
   }
 
   const addBook = async () => {
@@ -169,10 +180,7 @@ export default function BookPicker(props) {
   })
 
   const renderedBookList = sortedBooks.map((book) => {
-    // const bookItem = book
-    const title = book.name
-
-    const bookId = book.id
+    const { name, id: bookId } = book
     const bookImage = Images.backgrounds[book.imageName]
 
     const renderedBook = (
@@ -181,7 +189,7 @@ export default function BookPicker(props) {
         className={css.questRow}
       >
         <div className={cx(css.tableCell)}>
-          <div className={cx(css.questName)}>{title}</div>
+          <div className={cx(css.questName)}>{name}</div>
           <img className={css.bookImage} src={bookImage} alt={"imagex"} />
         </div>
       </div>
