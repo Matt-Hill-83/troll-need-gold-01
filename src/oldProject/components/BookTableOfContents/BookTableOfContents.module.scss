@@ -122,16 +122,17 @@
   }
 
   .questTable {
+    position: absolute;
     display: flex;
-    /* width: 100%; */
     flex: 1 1;
     flex-direction: column;
+
     font-size: 24px;
     color: black;
-    position: absolute;
     padding: 2vh;
     left: 1vw;
     width: 45vw;
+    top: 9vh;
   }
 
   .scrollArea {

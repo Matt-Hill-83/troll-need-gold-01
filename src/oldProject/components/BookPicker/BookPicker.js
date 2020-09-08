@@ -19,17 +19,14 @@ import css from "./BookPicker.module.scss"
 
 let worlds = []
 let books = []
+const { isProdRelease } = Constants
 
 export default function BookPicker(props) {
   worlds = props.worlds || []
   books = props.books || []
-  console.log("worlds", worlds) // zzz
-  console.log("books", books) // zzz
-  const { isProdRelease } = Constants
 
   useEffect(() => {
     console.log("onMount-------------------------------->>>>")
-    console.log("props", props) // zzz
     worlds = props.worlds
     books = props.books
 
@@ -47,9 +44,7 @@ export default function BookPicker(props) {
 
   const [showBookBuilder, setShowBookBuilder] = useState(false)
   const [selectedBook, setSelectedBook] = useState(books[0])
-  const [showBookEditor, setshowBookEditor] = useState(false)
-  const [questToEdit, setQuestToEdit] = useState(null)
-  const [jsonUnderEdit, setJsonUnderEdit] = useState("null")
+  const [jsonUnderEdit, setJsonUnderEdit] = useState(null)
 
   const changeSelectedBook = ({ bookId }) => {
     console.log("bookId", bookId) // zzz
@@ -61,13 +56,7 @@ export default function BookPicker(props) {
   const editBook = ({ selectedBook }) => {
     setJsonUnderEdit(selectedBook)
     setShowBookBuilder(true)
-    // setShowBookBuilder(!showBookBuilder)
     setSelectedBook(selectedBook)
-  }
-
-  const onCloseBookBuilder = () => {
-    setSelectedBook(books[0] || {})
-    setShowBookBuilder(false)
   }
 
   const onChangeJSON = (json) => {
@@ -174,8 +163,6 @@ export default function BookPicker(props) {
     addBookToFirestore(newBook)
   }
 
-  const {} = props
-
   const sortedBooks = Utils.sortDataByNestedKey({
     data: books,
     keys: ["name"],
@@ -211,9 +198,9 @@ export default function BookPicker(props) {
       />
 
       <div className={css.questPage}>
-        <div className={css.header}>
+        {/* <div className={css.header}>
           <span className={css.gameTitle}>Troll Need Gold</span>
-        </div>
+        </div> */}
 
         <div className={css.content}>
           <div className={css.questTable}>
