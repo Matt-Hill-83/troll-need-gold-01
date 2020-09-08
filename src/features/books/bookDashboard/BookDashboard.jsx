@@ -12,7 +12,7 @@ import css from "./QuestDashboard.module.scss"
 export default function BookDashboard() {
   const limit = 20
   const dispatch = useDispatch()
-  const { events, filter, startDate, retainState } = useSelector(
+  const { quests, filter, startDate, retainState } = useSelector(
     (state) => state.quest
   )
   const { books } = useSelector((state) => state.book)
@@ -33,11 +33,11 @@ export default function BookDashboard() {
   }, [dispatch, filter, startDate, retainState])
 
   console.log("books", books) // zzz
-  console.log("events----------book dash", events) // zzz
-  if (!events || events.length === 0) return <div>no data</div>
+  console.log("quests----------book dash", quests) // zzz
+  if (!quests || quests.length === 0) return <div>no data</div>
 
   const uniqueBooks = _uniqBy(books, "id")
-  const uniqueWorlds = _uniqBy(events, "id")
+  const uniqueWorlds = _uniqBy(quests, "id")
   console.log("uniqueBooks", uniqueBooks) // zzz
 
   return <BookPicker worlds={uniqueWorlds} books={uniqueBooks}></BookPicker>

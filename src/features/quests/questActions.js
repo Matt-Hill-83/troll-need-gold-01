@@ -32,11 +32,11 @@ export function fetchQuests(filter, startDate, limit, lastDocSnapshot) {
       ).get()
       const lastVisible = snapshot.docs[snapshot.docs.length - 1]
       const moreEvents = snapshot.docs.length >= limit
-      const events = snapshot.docs.map((doc) => dataFromSnapshot(doc))
+      const quests = snapshot.docs.map((doc) => dataFromSnapshot(doc))
 
       dispatch({
         type: FETCH_EVENTS,
-        payload: { events, moreEvents, lastVisible },
+        payload: { quests, moreEvents, lastVisible },
       })
       dispatch(asyncActionFinish())
     } catch (error) {

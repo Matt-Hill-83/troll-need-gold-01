@@ -9,7 +9,10 @@ import Images from "../../images/images.js"
 import Utils from "../../Utils/Utils.js"
 import WorldMultiPicker2 from "../WorldMultiPicker2/WorldMultiPicker2.js"
 import Constants from "../../Utils/Constants/Constants.js"
-import { updateBookInFirestore } from "../../../app/firestore/firestoreService.js"
+import {
+  updateBookInFirestore,
+  addBookToFirestore,
+} from "../../../app/firestore/firestoreService.js"
 import JSONEditorDemo from "../JsonEdtor/JSONEditorDemo.js"
 
 import css from "./BookPicker.module.scss"
@@ -100,7 +103,7 @@ export default function BookPicker(props) {
 
     return (
       <div className={css.chapterView}>
-        <div className={css.selectedBook}>name {name}</div>
+        <div className={css.selectedBook}>{name}</div>
         <img
           className={cx(css.bookTableOfContents01)}
           src={bookTableOfContents01}
@@ -168,7 +171,7 @@ export default function BookPicker(props) {
       chapters: [],
       imageName: "bookCover01BatOfDoom",
     }
-    await books.add(newBook)
+    addBookToFirestore(newBook)
   }
 
   const {} = props

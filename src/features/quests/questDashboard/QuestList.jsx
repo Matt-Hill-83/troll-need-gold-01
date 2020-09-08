@@ -10,7 +10,7 @@ import QuestProgressUtils from "../../../oldProject/Utils/QuestProgressUtils"
 import css from "./QuestList.module.scss"
 
 export default function QuestList({
-  events: worlds,
+  worlds,
   getNextEvents,
   loading,
   moreEvents,

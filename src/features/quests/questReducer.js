@@ -15,7 +15,7 @@ import {
 } from "./questConstants"
 
 const initialState = {
-  events: [],
+  quests: [],
   comments: [],
   moreEvents: true,
   selectedEvent: null,
@@ -30,20 +30,20 @@ export default function questReducer(state = initialState, { type, payload }) {
     case CREATE_EVENT:
       return {
         ...state,
-        events: [...state.events, payload],
+        quests: [...state.quests, payload],
       }
     case UPDATE_EVENT:
       return {
         ...state,
-        events: [
-          ...state.events.filter((evt) => evt.id !== payload.id),
+        quests: [
+          ...state.quests.filter((evt) => evt.id !== payload.id),
           payload,
         ],
       }
     case DELETE_EVENT:
       return {
         ...state,
-        events: [...state.events.filter((evt) => evt.id !== payload)],
+        quests: [...state.quests.filter((evt) => evt.id !== payload)],
       }
     case DELETE_QUEST:
       return {
@@ -53,7 +53,7 @@ export default function questReducer(state = initialState, { type, payload }) {
     case FETCH_EVENTS:
       return {
         ...state,
-        events: [...state.events, ...payload.events],
+        quests: [...state.quests, ...payload.quests],
         moreEvents: payload.moreEvents,
         lastVisible: payload.lastVisible,
       }
@@ -80,7 +80,7 @@ export default function questReducer(state = initialState, { type, payload }) {
     case CLEAR_EVENTS:
       return {
         ...state,
-        events: [],
+        quests: [],
         moreEvents: true,
         lastVisible: null,
       }

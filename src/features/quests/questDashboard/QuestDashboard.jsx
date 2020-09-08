@@ -13,7 +13,7 @@ export default function QuestDashboard() {
   const limit = 20
   const dispatch = useDispatch()
   const {
-    events,
+    quests,
     moreEvents,
     filter,
     startDate,
@@ -40,7 +40,7 @@ export default function QuestDashboard() {
     dispatch(fetchQuests(filter, startDate, limit, lastVisible))
   }
 
-  if (!events || events.length === 0) return <div>no data</div>
+  if (!quests || quests.length === 0) return <div>no data</div>
 
   return (
     <Grid className={css.main} width={10}>
@@ -53,7 +53,7 @@ export default function QuestDashboard() {
         )}
         <div className={css.questList}>
           <QuestList
-            events={events}
+            worlds={quests}
             getNextEvents={handleFetchNextEvents}
             loading={loading}
             moreEvents={moreEvents}

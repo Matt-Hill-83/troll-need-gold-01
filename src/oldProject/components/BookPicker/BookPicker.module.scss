@@ -24,22 +24,28 @@
 
   .buttonIcon {
     border: 1px solid red !important;
-    // height: min-content;
 
     > svg {
-      border: 4px solid green !important;
       height: 4vh !important;
       width: 4vh !important;
     }
   }
 
   .selectedBook {
-    border: 1px solid red !important;
-
-    padding: 1vh;
     position: absolute;
     z-index: 10;
+    display: flex;
+
+    border: 2px solid black !important;
+    color: black;
+
+    padding: 1.4vh 1vh;
     background: white;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, -58%);
+    font-size: 4vh;
+    border-radius: 0.5vh;
   }
 
   .worldPicker {
@@ -84,8 +90,6 @@
   }
 
   .buttonGroup {
-    border: 4px solid green !important;
-
     display: flex;
     position: absolute;
 
