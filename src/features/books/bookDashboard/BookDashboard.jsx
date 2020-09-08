@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
 import { fetchBooks } from "../bookActions"
+import { fetchQuests } from "../../quests/questActions"
 import { RETAIN_STATE } from "../bookConstants"
 import BookPicker from "../../../oldProject/components/BookPicker/BookPicker"
 
 import css from "./QuestDashboard.module.scss"
-import { fetchEvents } from "../../quests/questActions"
 
 export default function BookDashboard() {
   const limit = 20
@@ -23,7 +23,7 @@ export default function BookDashboard() {
     dispatch(fetchBooks(filter, startDate, limit)).then(() => {
       setLoadingInitial(false)
     })
-    dispatch(fetchEvents(filter, startDate, limit)).then(() => {
+    dispatch(fetchQuests(filter, startDate, limit)).then(() => {
       setLoadingInitial(false)
     })
     return () => {

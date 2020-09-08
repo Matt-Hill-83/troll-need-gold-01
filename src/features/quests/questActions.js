@@ -20,7 +20,7 @@ import {
   dataFromSnapshot,
 } from "../../app/firestore/firestoreService"
 
-export function fetchEvents(filter, startDate, limit, lastDocSnapshot) {
+export function fetchQuests(filter, startDate, limit, lastDocSnapshot) {
   return async function (dispatch) {
     dispatch(asyncActionStart())
     try {

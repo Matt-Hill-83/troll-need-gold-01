@@ -2,7 +2,7 @@ import { Grid, Loader } from "semantic-ui-react"
 import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
-import { fetchEvents } from "../questActions"
+import { fetchQuests } from "../questActions"
 import { RETAIN_STATE } from "../questConstants"
 import EventListItemPlaceholder from "./EventListItemPlaceholder"
 import QuestList from "./QuestList"
@@ -27,7 +27,7 @@ export default function QuestDashboard() {
   useEffect(() => {
     if (retainState) return
     setLoadingInitial(true)
-    dispatch(fetchEvents(filter, startDate, limit)).then(() => {
+    dispatch(fetchQuests(filter, startDate, limit)).then(() => {
       setLoadingInitial(false)
     })
     return () => {
@@ -37,7 +37,7 @@ export default function QuestDashboard() {
   }, [dispatch, filter, startDate, retainState])
 
   function handleFetchNextEvents() {
-    dispatch(fetchEvents(filter, startDate, limit, lastVisible))
+    dispatch(fetchQuests(filter, startDate, limit, lastVisible))
   }
 
   if (!events || events.length === 0) return <div>no data</div>
