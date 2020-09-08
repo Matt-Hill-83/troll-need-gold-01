@@ -52,15 +52,17 @@ function getStyles(name, selectedItems, theme) {
 
 export default function WorldMultiPicker2({ props }) {
   const { bookId, onClose, allWorlds, selectedWorlds } = props
+
   const [selectedItems, setSelectedItems] = React.useState([])
 
   useEffect(() => {
-    const selectedWorldObjs = selectedWorlds.map((item) => {
-      return Utils.getWorldFromId({ id: item })
-    })
-    const filteredWorlds = selectedWorldObjs.filter((item) => !!item)
-    setSelectedItems(filteredWorlds)
-  }, [props.selectedWorlds])
+    const selectedItems = props.allWorlds.filter((item) =>
+      props.selectedWorlds.includes(item.id)
+    )
+    setSelectedItems(selectedItems)
+  }, [])
+
+  useEffect(() => {}, [props.selectedWorlds])
 
   const classes = useStyles()
   const theme = useTheme()
@@ -74,10 +76,9 @@ export default function WorldMultiPicker2({ props }) {
   }
 
   const worlds = [...allWorlds]
-  worlds.map((world) => {
-    const { title } = world
-    const worldId = world.id
 
+  worlds.map((world) => {
+    const { title, id: worldId } = world
     const belongsToABook = Utils.belongsToABook({ bookId, worldId })
 
     if (belongsToABook) {
@@ -88,8 +89,6 @@ export default function WorldMultiPicker2({ props }) {
   })
 
   const sortedWorlds = Utils.sortWorlds({ worlds, keys: ["newTitle"] })
-  console.log("sortedWorlds", sortedWorlds) // zzz
-  console.log("selectedItems", selectedItems) // zzz
 
   return (
     <div>
