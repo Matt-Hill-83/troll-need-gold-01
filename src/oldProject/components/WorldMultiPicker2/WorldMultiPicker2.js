@@ -1,12 +1,5 @@
 import { makeStyles, useTheme } from "@material-ui/core/styles"
-import Chip from "@material-ui/core/Chip"
-import cx from "classnames"
-import FormControl from "@material-ui/core/FormControl"
-import Input from "@material-ui/core/Input"
-import InputLabel from "@material-ui/core/InputLabel"
-import MenuItem from "@material-ui/core/MenuItem"
 import React, { useEffect } from "react"
-import Select from "@material-ui/core/Select"
 
 import Utils from "../../Utils/Utils"
 
@@ -95,7 +88,7 @@ export default function WorldMultiPicker2({ props }) {
   if (!selectedItems[0]) return <div>no items</div>
 
   return (
-    <div>
+    <div className={css.main}>
       <div className={classes.root}>
         <Autocomplete
           multiple
