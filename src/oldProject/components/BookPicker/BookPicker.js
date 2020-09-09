@@ -73,6 +73,13 @@ export default function BookPicker(props) {
     updateBook({ newProps: selectedBook, bookId: theBookId })
   }
 
+  const updateChapters = ({ newChapters }) => {
+    console.log("updateChapters") // zzz
+    console.log("newChapters", newChapters) // zzz
+    selectedBook.chapters.length = 0
+    selectedBook.chapters.push(...newChapters)
+  }
+
   const renderChapterView = () => {
     if (!selectedBook) return null
 
@@ -81,10 +88,12 @@ export default function BookPicker(props) {
     const worldMultiPickerProps = {
       selectedWorlds: chapters || [],
       allWorlds: worlds,
+      updateChapters,
       bookId,
       onClose: ({ selectedItems }) => {
         const newChapters = selectedItems.map((item) => item.id)
         const newProps = { chapters: newChapters }
+        console.log("newProps", newProps) // zzz
         updateBook({ newProps, bookId })
       },
     }
@@ -153,8 +162,10 @@ export default function BookPicker(props) {
   }
 
   const updateBook = async ({ bookId, newProps }) => {
+    console.log("updateBook") // zzz
     const bookUnderEdit = books.find((item) => item.id === bookId)
     const updatedBook = { ...bookUnderEdit, ...newProps }
+    console.log("updatedBook", updatedBook) // zzz
     updateBookInFirestore(updatedBook)
   }
 

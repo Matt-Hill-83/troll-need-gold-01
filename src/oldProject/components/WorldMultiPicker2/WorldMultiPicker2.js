@@ -56,6 +56,7 @@ function getStyles(name, selectedItems, theme) {
 
 export default function WorldMultiPicker2({ props }) {
   const { bookId, onClose, allWorlds } = props
+  console.log("onClose", onClose) // zzz
 
   const [selectedItems, setSelectedItems] = React.useState([])
   console.log("selectedItems---------main", selectedItems) // zzz
@@ -70,16 +71,10 @@ export default function WorldMultiPicker2({ props }) {
   useEffect(() => {}, [props.selectedWorlds])
 
   const classes = useStyles()
-  const theme = useTheme()
-
-  function onClosePicker({ selectedItems = [] }) {
-    onClose && onClose({ selectedItems })
-  }
 
   const handleChange = (event, value, reason) => {
-    console.log("reason", reason) // zzz
-
     setSelectedItems(value)
+    props.updateChapters({ newChapters: value.map((item) => item.id) })
   }
 
   const worlds = [...allWorlds]
@@ -97,19 +92,6 @@ export default function WorldMultiPicker2({ props }) {
 
   const sortedWorlds = Utils.sortWorlds({ worlds, keys: ["newTitle"] })
 
-  const top100Films = [
-    { title: "The Shawshank Redemption", year: 1994 },
-    { title: "The Godfather", year: 1972 },
-    { title: "The Godfather: Part II", year: 1974 },
-    { title: "The Dark Knight", year: 2008 },
-    { title: "12 Angry Men", year: 1957 },
-    { title: "Schindler's List", year: 1993 },
-    { title: "Pulp Fiction", year: 1994 },
-    { title: "The Lord of the Rings: The Return of the King", year: 2003 },
-  ]
-
-  console.log("selectedItems[0]", selectedItems[0]) // zzz
-
   if (!selectedItems[0]) return <div>no items</div>
 
   return (
@@ -122,7 +104,6 @@ export default function WorldMultiPicker2({ props }) {
           getOptionLabel={(option) => option.title}
           defaultValue={selectedItems}
           filterSelectedOptions
-          onClose={() => onClosePicker({ selectedItems })}
           onChange={handleChange}
           renderInput={(params) => (
             <TextField
@@ -133,49 +114,6 @@ export default function WorldMultiPicker2({ props }) {
             />
           )}
         />
-        <FormControl className={cx(classes.formControl, css.main)}>
-          <InputLabel id="demo-mutiple-chip-label">Quests</InputLabel>
-          <Select
-            className={cx(classes.formControl, css.main2)}
-            labelId="demo-mutiple-chip-label"
-            id="demo-mutiple-chip"
-            multiple
-            value={selectedItems}
-            onChange={handleChange}
-            onClose={() => onClosePicker({ selectedItems })}
-            input={<Input id="select-multiple-chip" />}
-            renderValue={(selected) => {
-              return (
-                <div className={classes.chips}>
-                  {selected.map((item) => {
-                    const { title } = item
-                    return (
-                      <Chip
-                        key={title}
-                        label={title}
-                        // className={classes.chip}
-                      />
-                    )
-                  })}
-                </div>
-              )
-            }}
-            MenuProps={MenuProps}
-          >
-            {sortedWorlds.map((item) => {
-              const { title, newTitle } = item
-              return (
-                <MenuItem
-                  key={title}
-                  value={item}
-                  style={getStyles(title, selectedItems, theme)}
-                >
-                  {newTitle}
-                </MenuItem>
-              )
-            })}
-          </Select>
-        </FormControl>
       </div>
     </div>
   )
