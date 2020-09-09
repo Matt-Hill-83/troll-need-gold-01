@@ -18,16 +18,15 @@ export default function QuestListItem({ event: world }) {
 
   const { getProfile } = useUpdateProfileWidget()
   const profile = getProfile()
-  const completedQuests = _get(profile, "userStatus.completedQuests")
+  const completedQuests = _get(profile, "userStatus.completedQuests") || []
 
-  const missions = TopLevelUtils.getMissions({ questConfig })
+  const missions = TopLevelUtils.getMissions({ questConfig }) || []
   const totalGold = QuestProgressUtils.getTotalGoldInQuest({ missions })
 
   const renderItem = () => {
-    const { title } = world
+    const { title, id: questId } = world
     const { isProdRelease } = Constants
 
-    const questId = world.id
     const questCompleted = Utils.isQuestCompleted({ questId, completedQuests })
 
     console.log("questId", questId) // zzz

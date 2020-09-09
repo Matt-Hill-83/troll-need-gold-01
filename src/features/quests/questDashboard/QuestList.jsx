@@ -15,8 +15,6 @@ export default function QuestList({
   loading,
   moreEvents,
 }) {
-  console.log("useUpdateProfileWidget", useUpdateProfileWidget) // zzz
-  console.log("useUpdateProfileWidget()", useUpdateProfileWidget()) // zzz
   const { getProfile } = useUpdateProfileWidget()
   const profile = getProfile()
   const completedQuests = _get(profile, "userStatus.completedQuests")
