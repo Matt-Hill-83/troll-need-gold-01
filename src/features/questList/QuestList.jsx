@@ -4,8 +4,8 @@ import QuestListItem from "./QuestListItem"
 import InfiniteScroll from "react-infinite-scroller"
 import cx from "classnames"
 
-import useUpdateProfileWidget from "../../../oldProject/components/TopLevel/useUpdateProfileWidget"
-import QuestProgressUtils from "../../../oldProject/Utils/QuestProgressUtils"
+import useUpdateProfileWidget from "../../oldProject/components/TopLevel/useUpdateProfileWidget"
+import QuestProgressUtils from "../../oldProject/Utils/QuestProgressUtils"
 
 import css from "./QuestList.module.scss"
 

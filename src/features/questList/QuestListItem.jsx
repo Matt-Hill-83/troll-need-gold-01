@@ -5,11 +5,11 @@ import { Link } from "react-router-dom"
 import cx from "classnames"
 import React from "react"
 
-import Constants from "../../../oldProject/Utils/Constants/Constants"
-import TopLevelUtils from "../../../oldProject/Utils/TopLevelUtils"
-import QuestProgressUtils from "../../../oldProject/Utils/QuestProgressUtils"
-import useUpdateProfileWidget from "../../../oldProject/components/TopLevel/useUpdateProfileWidget"
-import Utils from "../../../oldProject/Utils/Utils"
+import Constants from "../../oldProject/Utils/Constants/Constants"
+import TopLevelUtils from "../../oldProject/Utils/TopLevelUtils"
+import QuestProgressUtils from "../../oldProject/Utils/QuestProgressUtils"
+import useUpdateProfileWidget from "../../oldProject/components/TopLevel/useUpdateProfileWidget"
+import Utils from "../../oldProject/Utils/Utils"
 
 import css from "./QuestListItem.module.scss"
 

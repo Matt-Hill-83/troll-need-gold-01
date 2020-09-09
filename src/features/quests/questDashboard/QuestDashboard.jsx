@@ -6,7 +6,9 @@ import _uniqBy from "lodash.uniqby"
 import { fetchQuests } from "../questActions"
 import { RETAIN_STATE } from "../questConstants"
 import EventListItemPlaceholder from "./EventListItemPlaceholder"
-import QuestList from "./QuestList"
+import QuestList from "../../questList/QuestList.jsx"
+// import QuestList from "./QuestList"
+// QuestList
 
 import css from "./QuestDashboard.module.scss"
 
@@ -22,7 +24,7 @@ export default function QuestDashboard() {
     retainState,
   } = useSelector((state) => state.quest)
   const { loading } = useSelector((state) => state.async)
-  const { authenticated } = useSelector((state) => state.auth)
+  // const { authenticated } = useSelector((state) => state.auth)
   const [loadingInitial, setLoadingInitial] = useState(false)
 
   useEffect(() => {
@@ -32,7 +34,6 @@ export default function QuestDashboard() {
       setLoadingInitial(false)
     })
     return () => {
-      //
       dispatch({ type: RETAIN_STATE })
     }
   }, [dispatch, filter, startDate, retainState])
@@ -57,7 +58,6 @@ export default function QuestDashboard() {
         <div className={css.questList}>
           <QuestList
             worlds={uniqueWorlds}
-            // worlds={quests}
             getNextEvents={handleFetchNextEvents}
             loading={loading}
             moreEvents={moreEvents}

@@ -53,7 +53,6 @@ export default function BookPicker(props) {
   }
 
   const releaseToProd = ({ selectedBook }) => {
-    console.log("releaseToProd") // zzz
     selectedBook.releaseToProd = !selectedBook.releaseToProd
     saveBookChanges({ selectedBook, bookId: selectedBook.id })
   }
@@ -182,9 +181,11 @@ export default function BookPicker(props) {
       >
         <div className={cx(css.tableCell)}>
           <ButtonGroup className={css.buttonGroup} color="primary">
-            <Button onClick={() => releaseToProd({ selectedBook: book })}>
-              {`prod: ${book.releaseToProd ? "T" : "F"}`}
-            </Button>
+            {!isProdRelease && (
+              <Button onClick={() => releaseToProd({ selectedBook: book })}>
+                {`prod: ${book.releaseToProd ? "T" : "F"}`}
+              </Button>
+            )}
           </ButtonGroup>
           <div className={cx(css.questName)}>{name}</div>
           <img className={css.bookImage} src={bookImage} alt={"imagex"} />
@@ -216,9 +217,11 @@ export default function BookPicker(props) {
           {renderChapterView()}
         </div>
 
-        <Button className={css.addBookButton} onClick={addBook}>
-          Add Book
-        </Button>
+        {!isProdRelease && (
+          <Button className={css.addBookButton} onClick={addBook}>
+            Add Book
+          </Button>
+        )}
       </div>
     </div>
   )
