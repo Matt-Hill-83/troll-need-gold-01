@@ -31,7 +31,7 @@ export default function WorldViewer(props) {
     })
 
     const miniLocationsGrid = grid.map((locationRow, rowIndex) => {
-      const singleRow = createSingleRow({ locationRow, rowIndex })
+      const singleRow = createSingleRow({ locationRow })
 
       return (
         <div key={rowIndex} className={css.miniLocationsRow}>
@@ -43,13 +43,13 @@ export default function WorldViewer(props) {
     return <div className={css.miniLocationsGrid}>{miniLocationsGrid}</div>
   }
 
-  const createSingleRow = ({ locationRow, rowIndex }) => {
-    return locationRow.map((scene, colIndex) => {
-      return renderMiniLocation({ scene, colIndex, rowIndex })
+  const createSingleRow = ({ locationRow }) => {
+    return locationRow.map((scene) => {
+      return renderMiniLocation({ scene })
     })
   }
 
-  const renderMiniLocation = ({ colIndex = 0, rowIndex = 0, scene }) => {
+  const renderMiniLocation = ({ scene }) => {
     const { updateActiveScene } = props
 
     return <MiniLocation scene={scene} updateActiveScene={updateActiveScene} />
