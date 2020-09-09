@@ -51,22 +51,8 @@ export default function WorldViewer(props) {
 
   const renderMiniLocation = ({ colIndex = 0, rowIndex = 0, scene }) => {
     const { updateActiveScene } = props
-    const isActive = scene.id === activeScene.id ? true : false
 
-    const id = `${colIndex}-${rowIndex}`
-
-    return (
-      // This wrapper div seems to be required to make things render withought ghost divs being included in the list.
-      // <div onClick={onClick} className={css.minilocationWrapper}>
-      <MiniLocation
-        id={id}
-        scene={scene}
-        updateActiveScene={updateActiveScene}
-        isActive={isActive}
-        // onClick={onClick}
-      />
-      // </div>
-    )
+    return <MiniLocation scene={scene} updateActiveScene={updateActiveScene} />
   }
 
   return (

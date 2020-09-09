@@ -10,10 +10,8 @@ import useGlobalState from "../../../Context/useGlobalState.js"
 import css from "./MiniLocation.module.scss"
 
 export default function MiniLocation(props) {
-  const { updateActiveScene, scene, className, id } = props
-  // const { updateActiveScene, scene, isActive, className, id } = props
-
-  const { coordinates, isStartScene } = scene
+  const { updateActiveScene, scene, className } = props
+  const { coordinates, isStartScene, id } = scene
 
   const {
     globalState: { world, activeScene, questStatus = {} },
@@ -122,15 +120,13 @@ export default function MiniLocation(props) {
   const preventClick = showCloud || showLock || showNothing
 
   let onClickLocation = () => {}
-  if (!preventClick && scene.location.name !== "blank") {
+  if (!preventClick) {
     onClickLocation = () => {
       updateActiveScene({
         sceneId: scene.id,
       })
     }
   }
-
-  // const onClickLocation = preventClick ? () => {} : onClick
 
   const backgroundColor = QuestVisibilityUtils.getSubQuestColor({
     world,
