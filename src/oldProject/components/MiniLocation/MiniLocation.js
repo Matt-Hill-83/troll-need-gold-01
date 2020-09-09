@@ -10,11 +10,14 @@ import useGlobalState from "../../../Context/useGlobalState.js"
 import css from "./MiniLocation.module.scss"
 
 export default function MiniLocation(props) {
-  const { scene, isActive, className, id } = props
+  const { updateActiveScene, scene, isActive, className, id } = props
+  const { coordinates, isStartScene } = scene
 
   const {
     globalState: { world, activeScene, questStatus = {} },
   } = useGlobalState()
+
+  // const isActive = scene.id === activeScene.id ? true : false
 
   // These are the critters1 creatures from the first frame that hover over the active location.
   const renderCreatures = ({ isActive }) => {
@@ -48,7 +51,6 @@ export default function MiniLocation(props) {
     return <div key={id} className={`${css.main} ${css.isBlank} `}></div>
   }
 
-  const { coordinates, isStartScene, onClick } = scene
   const isVisitedScene = questStatus.visitedScenes.some(
     (item) => item === scene.id
   )
@@ -58,6 +60,12 @@ export default function MiniLocation(props) {
     sceneId: scene.id,
     questStatus,
   })
+
+  const showLock = QuestVisibilityUtils.isSceneLocked({
+    sceneId: scene.id,
+    questStatus,
+  })
+
   const isBlank = locationName === "blank" || showNothing
   if (isBlank) {
     return renderBlankScene({ id })
@@ -98,11 +106,6 @@ export default function MiniLocation(props) {
     )
   }
 
-  const showLock = QuestVisibilityUtils.isSceneLocked({
-    sceneId: scene.id,
-    questStatus,
-  })
-
   // apply position based clouded state
   // If cloud is still hidden, apply config based state
   const hideCloud = isVisitedScene || neighborIsActive || !isClouded
@@ -113,6 +116,19 @@ export default function MiniLocation(props) {
   const rockImageVertical = Images.backgrounds["rock02Vertical"]
   const showBottomPath = neighbors[Constants.neighborPositionsEnum.bottom]
   const showRightPath = neighbors[Constants.neighborPositionsEnum.right]
+
+  const preventClick = showCloud || showLock || showNothing
+
+  let onClickLocation = () => {}
+  if (!preventClick && scene.location.name !== "blank") {
+    onClickLocation = () => {
+      updateActiveScene({
+        sceneId: scene.id,
+      })
+    }
+  }
+
+  // const onClickLocation = preventClick ? () => {} : onClick
 
   const backgroundColor = QuestVisibilityUtils.getSubQuestColor({
     world,
@@ -128,7 +144,7 @@ export default function MiniLocation(props) {
         isStartScene ? css.isStartScene : ""
       }  ${localClass} ${largeLocation}`}
       style={backgroundColor}
-      onClick={onClick}
+      onClick={onClickLocation}
     >
       <div className={css.container}>
         {/* Paths that connect scenes */}

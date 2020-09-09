@@ -19,7 +19,7 @@ export default function useUpdateProfileWidget(props) {
   const { selectedUserProfile, currentUserProfile } = useSelector(
     (state) => state.profile
   )
-  const { currentUser } = useSelector((state) => state.auth)
+  const { currentUser = {} } = useSelector((state) => state.auth)
   const { loading, error } = useSelector((state) => state.async)
   let profile
 

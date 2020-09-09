@@ -54,25 +54,18 @@ export default function WorldViewer(props) {
     const isActive = scene.id === activeScene.id ? true : false
 
     const id = `${colIndex}-${rowIndex}`
-    let onClick = () => {}
-    if (scene.location.name !== "blank") {
-      onClick = () => {
-        updateActiveScene({
-          sceneId: scene.id,
-        })
-      }
-    }
+
     return (
       // This wrapper div seems to be required to make things render withought ghost divs being included in the list.
-      <div onClick={onClick} className={css.minilocationWrapper}>
-        <MiniLocation
-          id={id}
-          key={id}
-          scene={scene}
-          isActive={isActive}
-          onClick={onClick}
-        />
-      </div>
+      // <div onClick={onClick} className={css.minilocationWrapper}>
+      <MiniLocation
+        id={id}
+        scene={scene}
+        updateActiveScene={updateActiveScene}
+        isActive={isActive}
+        // onClick={onClick}
+      />
+      // </div>
     )
   }
 
