@@ -10,7 +10,6 @@ import TopLevel from "../../../oldProject/components/TopLevel/TopLevel"
 
 export default function QuestDetailedPage({ match }) {
   const dispatch = useDispatch()
-  // const { currentUser } = useSelector((state) => state.auth)
   const quest = useSelector((state) => state.quest.selectedEvent)
   const { loading, error } = useSelector((state) => state.async)
 

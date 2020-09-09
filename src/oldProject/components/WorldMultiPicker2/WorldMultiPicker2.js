@@ -26,27 +26,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const ITEM_HEIGHT = 48
-const ITEM_PADDING_TOP = 8
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-}
-
-function getStyles(name, selectedItems, theme) {
-  console.log("selectedItems", selectedItems) // zzz
-  return {
-    fontWeight:
-      selectedItems.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  }
-}
-
 export default function WorldMultiPicker2({ props }) {
   const { bookId, onClose, allWorlds } = props
   console.log("onClose", onClose) // zzz
@@ -89,25 +68,23 @@ export default function WorldMultiPicker2({ props }) {
 
   return (
     <div className={css.main}>
-      <div className={classes.root}>
-        <Autocomplete
-          multiple
-          id="tags-outlined"
-          options={sortedWorlds}
-          getOptionLabel={(option) => option.title}
-          defaultValue={selectedItems}
-          filterSelectedOptions
-          onChange={handleChange}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              variant="outlined"
-              label="filterSelectedOptions"
-              placeholder="Favorites"
-            />
-          )}
-        />
-      </div>
+      <Autocomplete
+        multiple
+        id="tags-outlined"
+        options={sortedWorlds}
+        getOptionLabel={(option) => option.title}
+        defaultValue={selectedItems}
+        filterSelectedOptions
+        onChange={handleChange}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            variant="outlined"
+            label="filterSelectedOptions"
+            placeholder="Favorites"
+          />
+        )}
+      />
     </div>
   )
 }
