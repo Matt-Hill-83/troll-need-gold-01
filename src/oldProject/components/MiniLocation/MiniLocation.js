@@ -48,10 +48,6 @@ export default function MiniLocation(props) {
     return <div className={css.charactersContainer}>{renderedCharacters}</div>
   }
 
-  // const renderBlankScene = () => {
-  //   return <div key={id} className={`${css.main} ${css.isBlank} `}></div>
-  // }
-
   const isVisitedScene = questStatus.visitedScenes.some(
     (item) => item === scene.id
   )
