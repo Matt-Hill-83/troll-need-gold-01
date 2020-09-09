@@ -7,12 +7,12 @@ import Utils from "../../Utils/Utils"
 import css from "./WorldMultiPicker2.module.scss"
 
 export default function WorldMultiPicker2(props) {
-  let { books = [], allWorlds } = props
+  let { books = [], worlds } = props
   const [selectedItems, setSelectedItems] = React.useState([])
   console.log("books---WorldMultiPicker2", books) // zzz
 
   useEffect(() => {
-    const selectedItems = props.allWorlds.filter((item) =>
+    const selectedItems = props.worlds.filter((item) =>
       props.selectedWorlds.includes(item.id)
     )
     setSelectedItems(selectedItems)
@@ -28,7 +28,7 @@ export default function WorldMultiPicker2(props) {
     props.updateChapters({ newChapters: value.map((item) => item.id) })
   }
 
-  const worlds = [...allWorlds]
+  // const worlds = [...worlds]
 
   worlds.map((world) => {
     const { title, id: worldId } = world

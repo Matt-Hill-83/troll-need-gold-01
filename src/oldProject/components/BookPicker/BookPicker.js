@@ -53,6 +53,7 @@ export default function BookPicker(props) {
   }
 
   const releaseToProd = ({ selectedBook }) => {
+    console.log("releaseToProd") // zzz
     selectedBook.releaseToProd = !selectedBook.releaseToProd
     saveBookChanges({ selectedBook, bookId: selectedBook.id })
   }
@@ -85,7 +86,7 @@ export default function BookPicker(props) {
 
     const worldMultiPickerProps = {
       selectedWorlds: chapters || [],
-      allWorlds: worlds,
+      worlds: worlds,
       updateChapters,
       bookId,
       books,
@@ -180,6 +181,11 @@ export default function BookPicker(props) {
         className={css.questRow}
       >
         <div className={cx(css.tableCell)}>
+          <ButtonGroup className={css.buttonGroup} color="primary">
+            <Button onClick={() => releaseToProd({ selectedBook: book })}>
+              {`prod: ${book.releaseToProd ? "T" : "F"}`}
+            </Button>
+          </ButtonGroup>
           <div className={cx(css.questName)}>{name}</div>
           <img className={css.bookImage} src={bookImage} alt={"imagex"} />
         </div>
