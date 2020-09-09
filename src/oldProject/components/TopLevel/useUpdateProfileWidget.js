@@ -96,9 +96,6 @@ export default function useUpdateProfileWidget(props) {
     }
   }
 
-  if ((loading && !profile) || (!profile && !error))
-    return <LoadingComponent content="Loading profile..." />
-
   const _updateProps = async ({ newProps }) => {
     try {
       await updateUserProfile(newProps)

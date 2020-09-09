@@ -32,13 +32,10 @@ export default function BookDashboard() {
     }
   }, [dispatch, filter, startDate, retainState])
 
-  console.log("books", books) // zzz
-  console.log("quests----------book dash", quests) // zzz
   if (!quests || quests.length === 0) return <div>no data</div>
 
   const uniqueBooks = _uniqBy(books, "id")
   const uniqueWorlds = _uniqBy(quests, "id")
-  console.log("uniqueBooks", uniqueBooks) // zzz
 
   return <BookPicker worlds={uniqueWorlds} books={uniqueBooks}></BookPicker>
 }

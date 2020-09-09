@@ -1,6 +1,7 @@
 import { Grid, Loader } from "semantic-ui-react"
 import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import _uniqBy from "lodash.uniqby"
 
 import { fetchQuests } from "../questActions"
 import { RETAIN_STATE } from "../questConstants"
@@ -42,6 +43,8 @@ export default function QuestDashboard() {
 
   if (!quests || quests.length === 0) return <div>no data</div>
 
+  const uniqueWorlds = _uniqBy(quests, "id")
+
   return (
     <Grid className={css.main} width={10}>
       <Grid.Column width={10}>
@@ -53,7 +56,8 @@ export default function QuestDashboard() {
         )}
         <div className={css.questList}>
           <QuestList
-            worlds={quests}
+            worlds={uniqueWorlds}
+            // worlds={quests}
             getNextEvents={handleFetchNextEvents}
             loading={loading}
             moreEvents={moreEvents}

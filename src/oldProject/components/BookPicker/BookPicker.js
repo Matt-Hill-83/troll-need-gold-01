@@ -5,15 +5,16 @@ import cx from "classnames"
 import React, { useState, useEffect } from "react"
 
 import BookTableOfContents from "../BookTableOfContents/BookTableOfContents.js"
+import Constants from "../../Utils/Constants/Constants.js"
 import Images from "../../images/images.js"
+import JSONEditorDemo from "../JsonEdtor/JSONEditorDemo.js"
 import Utils from "../../Utils/Utils.js"
 import WorldMultiPicker2 from "../WorldMultiPicker2/WorldMultiPicker2.js"
-import Constants from "../../Utils/Constants/Constants.js"
+
 import {
   updateBookInFirestore,
   addBookToFirestore,
 } from "../../../app/firestore/firestoreService.js"
-import JSONEditorDemo from "../JsonEdtor/JSONEditorDemo.js"
 
 import css from "./BookPicker.module.scss"
 
@@ -47,9 +48,7 @@ export default function BookPicker(props) {
   const [jsonUnderEdit, setJsonUnderEdit] = useState(null)
 
   const changeSelectedBook = ({ bookId }) => {
-    console.log("bookId", bookId) // zzz
     const selectedBook = Utils.getBookFromId({ id: bookId, books })
-    console.log("selectedBook", selectedBook) // zzz
     setSelectedBook(selectedBook)
   }
 
@@ -90,13 +89,7 @@ export default function BookPicker(props) {
       },
     }
 
-    console.log("selectedBook", selectedBook) // zzz
-
     const bookTableOfContents01 = Images.backgrounds["bookTableOfContents01"]
-
-    console.log("showBookBuilder", showBookBuilder) // zzz
-
-    console.log("selectedBook.releaseToProd", selectedBook.releaseToProd) // zzz
 
     return (
       <div className={css.chapterView}>
@@ -161,10 +154,7 @@ export default function BookPicker(props) {
 
   const updateBook = async ({ bookId, newProps }) => {
     const bookUnderEdit = books.find((item) => item.id === bookId)
-    console.log("bookUnderEdit", bookUnderEdit) // zzz
-    console.log("newProps", newProps) // zzz
     const updatedBook = { ...bookUnderEdit, ...newProps }
-    console.log("updatedBook", updatedBook) // zzz
     updateBookInFirestore(updatedBook)
   }
 
