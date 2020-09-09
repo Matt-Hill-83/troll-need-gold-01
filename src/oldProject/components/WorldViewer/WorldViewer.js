@@ -20,7 +20,6 @@ export default function WorldViewer(props) {
   const {
     globalState: {
       world: { gridDimensions, newGrid5 },
-      activeScene,
     },
   } = useGlobalState()
 
@@ -31,11 +30,9 @@ export default function WorldViewer(props) {
     })
 
     const miniLocationsGrid = grid.map((locationRow, rowIndex) => {
-      const singleRow = createSingleRow({ locationRow })
-
       return (
         <div key={rowIndex} className={css.miniLocationsRow}>
-          {singleRow}
+          {createSingleRow({ locationRow })}
         </div>
       )
     })

@@ -47,9 +47,9 @@ export default function MiniLocation(props) {
     return <div className={css.charactersContainer}>{renderedCharacters}</div>
   }
 
-  const renderBlankScene = ({ id }) => {
-    return <div key={id} className={`${css.main} ${css.isBlank} `}></div>
-  }
+  // const renderBlankScene = () => {
+  //   return <div key={id} className={`${css.main} ${css.isBlank} `}></div>
+  // }
 
   const isVisitedScene = questStatus.visitedScenes.some(
     (item) => item === scene.id
@@ -67,8 +67,9 @@ export default function MiniLocation(props) {
   })
 
   const isBlank = locationName === "blank" || showNothing
+
   if (isBlank) {
-    return renderBlankScene({ id })
+    return <div key={id} className={`${css.main} ${css.isBlank} `}></div>
   }
 
   const isClouded = QuestVisibilityUtils.isSceneClouded({

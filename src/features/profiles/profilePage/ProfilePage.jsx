@@ -1,6 +1,7 @@
 import React from "react"
 import { Grid } from "semantic-ui-react"
 import { useDispatch, useSelector } from "react-redux"
+import _get from "lodash.get"
 
 import { getUserProfile } from "../../../app/firestore/firestoreService"
 import { listenToSelectedUserProfile } from "../profileActions"
@@ -25,7 +26,7 @@ export default function ProfilePage({ match }) {
     shouldExecute: match.params.id !== currentUser.uid,
   })
 
-  if (match.params.id === currentUser.uid) {
+  if (_get(match, "params.id") === _get(currentUser, "uid")) {
     profile = currentUserProfile
   } else {
     profile = selectedUserProfile

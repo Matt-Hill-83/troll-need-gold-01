@@ -23,7 +23,7 @@ export default function useUpdateProfileWidget(props) {
   const { loading, error } = useSelector((state) => state.async)
   let profile
 
-  if (match.params.id === currentUser.uid) {
+  if (_get(match, "params.id") === _get(currentUser, "uid")) {
     profile = currentUserProfile
   } else {
     profile = selectedUserProfile
