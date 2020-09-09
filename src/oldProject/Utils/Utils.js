@@ -60,7 +60,8 @@ export default class Utils {
     return sortedWorlds
   }
 
-  static belongsToABook = ({ worldId }) => {
+  static belongsToABook = ({ books, worldId }) => {
+    console.log("books---belongsToABook", books) // zzz
     const owningBooks = []
 
     let bookFound = false

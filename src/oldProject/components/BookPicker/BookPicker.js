@@ -74,8 +74,6 @@ export default function BookPicker(props) {
   }
 
   const updateChapters = ({ newChapters }) => {
-    console.log("updateChapters") // zzz
-    console.log("newChapters", newChapters) // zzz
     selectedBook.chapters.length = 0
     selectedBook.chapters.push(...newChapters)
   }
@@ -90,6 +88,7 @@ export default function BookPicker(props) {
       allWorlds: worlds,
       updateChapters,
       bookId,
+      books,
     }
 
     const bookTableOfContents01 = Images.backgrounds["bookTableOfContents01"]
@@ -109,10 +108,7 @@ export default function BookPicker(props) {
         />
         {!isProdRelease && (
           <ButtonGroup className={css.buttonGroup} color="primary">
-            <Button
-              onClick={() => releaseToProd({ selectedBook })}
-              // icon={selectedBook.releaseToProd ? IconNames.AIRPLANE : ""}
-            >
+            <Button onClick={() => releaseToProd({ selectedBook })}>
               {`prod: ${selectedBook.releaseToProd ? "T" : "F"}`}
             </Button>
             <Button
@@ -133,9 +129,7 @@ export default function BookPicker(props) {
                 onChangeJSON={onChangeJSON}
               />
             </div>
-            <WorldMultiPicker2
-              props={worldMultiPickerProps}
-            ></WorldMultiPicker2>
+            <WorldMultiPicker2 {...worldMultiPickerProps}></WorldMultiPicker2>
             <Button
               className={css.playButton}
               onClick={() =>
@@ -156,10 +150,8 @@ export default function BookPicker(props) {
   }
 
   const updateBook = async ({ bookId, newProps }) => {
-    console.log("updateBook") // zzz
     const bookUnderEdit = books.find((item) => item.id === bookId)
     const updatedBook = { ...bookUnderEdit, ...newProps }
-    console.log("updatedBook", updatedBook) // zzz
     updateBookInFirestore(updatedBook)
   }
 

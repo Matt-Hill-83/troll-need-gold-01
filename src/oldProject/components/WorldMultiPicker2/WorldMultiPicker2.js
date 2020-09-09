@@ -2,23 +2,26 @@ import React, { useEffect } from "react"
 
 import Autocomplete from "@material-ui/lab/Autocomplete"
 import TextField from "@material-ui/core/TextField"
-
 import Utils from "../../Utils/Utils"
 
 import css from "./WorldMultiPicker2.module.scss"
 
-export default function WorldMultiPicker2({ props }) {
-  const { bookId, allWorlds } = props
+export default function WorldMultiPicker2(props) {
+  let { books = [], allWorlds } = props
   const [selectedItems, setSelectedItems] = React.useState([])
+  console.log("books---WorldMultiPicker2", books) // zzz
 
   useEffect(() => {
     const selectedItems = props.allWorlds.filter((item) =>
       props.selectedWorlds.includes(item.id)
     )
     setSelectedItems(selectedItems)
+    books = props.books || []
   }, [])
 
-  useEffect(() => {}, [props.selectedWorlds])
+  useEffect(() => {
+    books = props.books || []
+  }, [props.books])
 
   const handleChange = (event, value, reason) => {
     setSelectedItems(value)
@@ -29,7 +32,8 @@ export default function WorldMultiPicker2({ props }) {
 
   worlds.map((world) => {
     const { title, id: worldId } = world
-    const belongsToABook = Utils.belongsToABook({ bookId, worldId })
+    const belongsToABook = Utils.belongsToABook({ worldId, books })
+    console.log("belongsToABook", belongsToABook) // zzz
 
     if (belongsToABook) {
       world.newTitle = `xxx - ${title} - [${belongsToABook.toString()}]`
@@ -48,7 +52,8 @@ export default function WorldMultiPicker2({ props }) {
         multiple
         id="tags-outlined"
         options={sortedWorlds}
-        getOptionLabel={(option) => option.title}
+        getOptionLabel={(option) => option.newTitle}
+        // getOptionLabel={(option) => option.title}
         defaultValue={selectedItems}
         filterSelectedOptions
         onChange={handleChange}
