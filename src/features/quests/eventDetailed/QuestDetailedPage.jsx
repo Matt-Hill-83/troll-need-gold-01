@@ -22,6 +22,7 @@ export default function QuestDetailedPage({ match }) {
     deps: [match.params.id, dispatch],
   })
 
+  console.log("quest", quest) // zzz
   if (loading || (!quest && !error))
     return <LoadingComponent content="Loading quest..." />
 
