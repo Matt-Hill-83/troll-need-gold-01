@@ -10,14 +10,16 @@ import useGlobalState from "../../../Context/useGlobalState.js"
 import css from "./MiniLocation.module.scss"
 
 export default function MiniLocation(props) {
-  const { updateActiveScene, scene, isActive, className, id } = props
+  const { updateActiveScene, scene, className, id } = props
+  // const { updateActiveScene, scene, isActive, className, id } = props
+
   const { coordinates, isStartScene } = scene
 
   const {
     globalState: { world, activeScene, questStatus = {} },
   } = useGlobalState()
 
-  // const isActive = scene.id === activeScene.id ? true : false
+  const isActive = scene.id === activeScene.id ? true : false
 
   // These are the critters1 creatures from the first frame that hover over the active location.
   const renderCreatures = ({ isActive }) => {
