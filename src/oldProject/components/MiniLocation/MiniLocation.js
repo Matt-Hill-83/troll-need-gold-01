@@ -1,5 +1,6 @@
 import React from "react"
 import _get from "lodash.get"
+import cx from "classnames"
 
 import Constants from "../../Utils/Constants/Constants.js"
 import Images from "../../images/images.js"
@@ -139,9 +140,19 @@ export default function MiniLocation(props) {
   return (
     <div
       key={id}
-      className={`${css.main} ${className} ${
-        isStartScene ? css.isStartScene : ""
-      }  ${localClass} ${largeLocation}`}
+      className={cx(
+        css.main,
+        className,
+        {
+          [css.isStartScene]: isStartScene,
+        },
+        localClass,
+        largeLocation
+      )}
+      // className={`${css.main} ${className} ${
+      //   isStartScene ? css.isStartScene : ""
+      // }  ${localClass} ${largeLocation}`}
+
       style={backgroundColor}
       onClick={onClickLocation}
     >
