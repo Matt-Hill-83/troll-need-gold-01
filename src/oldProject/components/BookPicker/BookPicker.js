@@ -90,12 +90,6 @@ export default function BookPicker(props) {
       allWorlds: worlds,
       updateChapters,
       bookId,
-      onClose: ({ selectedItems }) => {
-        const newChapters = selectedItems.map((item) => item.id)
-        const newProps = { chapters: newChapters }
-        console.log("newProps", newProps) // zzz
-        updateBook({ newProps, bookId })
-      },
     }
 
     const bookTableOfContents01 = Images.backgrounds["bookTableOfContents01"]
