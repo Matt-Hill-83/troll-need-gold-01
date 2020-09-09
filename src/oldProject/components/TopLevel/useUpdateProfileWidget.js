@@ -35,7 +35,7 @@ export default function useUpdateProfileWidget(props) {
     query: () => getUserProfile(idParam),
     data: (profile) => dispatch(listenToSelectedUserProfile(profile)),
     deps: [dispatch, idParam],
-    shouldExecute: idParam !== currentUser.uid,
+    shouldExecute: idParam !== currentUser && currentUser.uid,
   })
 
   const getProfile = () => profile
