@@ -74,7 +74,7 @@ export default function MiniLocation(props) {
     questStatus,
   })
 
-  const localClass = isActive ? css.activeClass : ""
+  const isActiveClass = isActive ? css.activeClass : ""
   const cloudImage = Images.backgrounds["cloud"]
   const lockImage = Images.items["lock02"]
 
@@ -91,10 +91,11 @@ export default function MiniLocation(props) {
     return neighbor && neighbor.id === activeScene.id
   })
 
+  // for when I add roads
   if (showLocationOnly) {
     const roadLeftRight01 = Images.items["roadLeftRight01"]
     return (
-      <div className={`${css.main} ${className} ${localClass} `}>
+      <div className={`${css.main} ${className} ${isActiveClass} `}>
         <div className={css.container}>
           <div className={css.roadLeftRight01}>
             <img className={css.none} src={roadLeftRight01} alt={"imagex"} />
@@ -140,15 +141,12 @@ export default function MiniLocation(props) {
         css.main,
         className,
         {
-          [css.isStartScene]: isStartScene,
+          [css.showNotAllowed]: preventClick,
+          [css.showPointer]: !preventClick,
         },
-        localClass,
+        isActiveClass,
         largeLocation
       )}
-      // className={`${css.main} ${className} ${
-      //   isStartScene ? css.isStartScene : ""
-      // }  ${localClass} ${largeLocation}`}
-
       style={backgroundColor}
       onClick={onClickLocation}
     >
