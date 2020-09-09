@@ -53,6 +53,11 @@ export default function BookPicker(props) {
     setSelectedBook(selectedBook)
   }
 
+  const releaseToProd = ({ selectedBook }) => {
+    selectedBook.releaseToProd = !selectedBook.releaseToProd
+    saveBookChanges({ selectedBook, bookId: selectedBook.id })
+  }
+
   const editBook = ({ selectedBook }) => {
     setJsonUnderEdit(selectedBook)
     setShowBookBuilder(true)
@@ -64,8 +69,9 @@ export default function BookPicker(props) {
   }
 
   const saveBookChanges = ({ selectedBook, bookId }) => {
+    const theBookId = bookId || selectedBook.id
     setShowBookBuilder(false)
-    updateBook({ newProps: selectedBook, bookId })
+    updateBook({ newProps: selectedBook, bookId: theBookId })
   }
 
   const renderChapterView = () => {
@@ -90,6 +96,8 @@ export default function BookPicker(props) {
 
     console.log("showBookBuilder", showBookBuilder) // zzz
 
+    console.log("selectedBook.releaseToProd", selectedBook.releaseToProd) // zzz
+
     return (
       <div className={css.chapterView}>
         <div className={css.selectedBook}>{name}</div>
@@ -105,6 +113,12 @@ export default function BookPicker(props) {
         />
         {!isProdRelease && (
           <ButtonGroup className={css.buttonGroup} color="primary">
+            <Button
+              onClick={() => releaseToProd({ selectedBook })}
+              // icon={selectedBook.releaseToProd ? IconNames.AIRPLANE : ""}
+            >
+              {`prod: ${selectedBook.releaseToProd ? "T" : "F"}`}
+            </Button>
             <Button
               onClick={() => editBook({ selectedBook })}
               icon={IconNames.EDIT}
