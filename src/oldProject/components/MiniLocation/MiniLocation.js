@@ -170,7 +170,7 @@ export default function MiniLocation(props) {
         )}
         {showLock && (
           <div className={css.cloudImageContainer}>
-            <img className={css.cloudImage} src={lockImage} alt={"imagex"} />
+            <img className={css.lockImage} src={lockImage} alt={"imagex"} />
           </div>
         )}
 
