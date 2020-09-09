@@ -21,11 +21,7 @@ export default function MiniLocation(props) {
   const isActive = scene.id === activeScene.id ? true : false
 
   // These are the critters1 creatures from the first frame that hover over the active location.
-  const renderCreatures = ({ isActive }) => {
-    if (!isActive) {
-      return null
-    }
-
+  const renderCreatures = () => {
     const activeFrame = Utils.getFirstFrame({ activeScene }) || {}
     const { critters1 = [] } = activeFrame
 
@@ -186,7 +182,7 @@ export default function MiniLocation(props) {
           />
         </div>
 
-        <div className={css.characters}>{renderCreatures({ isActive })}</div>
+        {isActive && <div className={css.characters}>{renderCreatures()}</div>}
 
         <span className={css.locationTitle}>{locationName}</span>
       </div>
