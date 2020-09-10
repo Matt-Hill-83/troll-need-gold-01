@@ -7,13 +7,11 @@ import { fetchQuests } from "../questActions"
 import { RETAIN_STATE } from "../questConstants"
 import EventListItemPlaceholder from "./EventListItemPlaceholder"
 import QuestList from "../../questList/QuestList.jsx"
-// import QuestList from "./QuestList"
-// QuestList
 
 import css from "./QuestDashboard.module.scss"
 
 export default function QuestDashboard() {
-  const limit = 20
+  const limit = 50
   const dispatch = useDispatch()
   const {
     quests,
@@ -24,7 +22,6 @@ export default function QuestDashboard() {
     retainState,
   } = useSelector((state) => state.quest)
   const { loading } = useSelector((state) => state.async)
-  // const { authenticated } = useSelector((state) => state.auth)
   const [loadingInitial, setLoadingInitial] = useState(false)
 
   useEffect(() => {

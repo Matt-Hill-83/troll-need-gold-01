@@ -1,8 +1,8 @@
 import Utils from "../Utils"
 
 export default class Constants {
-  static isProdRelease = true
-  // static isProdRelease = false
+  // static isProdRelease = true
+  static isProdRelease = false
 
   static getDefaultQuestStatus = () => {
     return {
@@ -70,7 +70,7 @@ export default class Constants {
       newGrid5: [],
       questConfig,
       released: true,
-      releasedToProd: true,
+      released: true,
       title: "My New Title",
     }
 

@@ -41,7 +41,7 @@ class WorldPicker extends Component {
   }
 
   render() {
-    const { showReleasedToProd, showReleased, showDelete } = this.props
+    const { showreleased, showReleased, showDelete } = this.props
     const { selectedMap } = this.state
     const savedMaps = Utils.getItemsFromDbObj({ dbList: maps })
 
@@ -61,8 +61,8 @@ class WorldPicker extends Component {
 
     const mapList = sortedMaps.map((map, index) => {
       const { id } = map
-      const { name, title, released, releasedToProd, description } = map
-      const { updateIsReleasedProperty, updateReleasedToProd } = this.props
+      const { name, title, released, released } = map
+      const { updateIsReleasedProperty, updatereleased } = this.props
 
       const text = (
         <span className={css.mapPickerRow}>
@@ -81,12 +81,12 @@ class WorldPicker extends Component {
                 />
               </span>
             )}
-            {showReleasedToProd && (
+            {showreleased && (
               <span className={css.mapPickerButton}>
                 To Prod
                 <Checkbox
-                  onClick={() => updateReleasedToProd({ id })}
-                  checked={releasedToProd}
+                  onClick={() => updatereleased({ id })}
+                  checked={released}
                 />
               </span>
             )}

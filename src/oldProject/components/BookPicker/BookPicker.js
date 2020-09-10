@@ -17,6 +17,7 @@ import {
 } from "../../../app/firestore/firestoreService.js"
 
 import css from "./BookPicker.module.scss"
+import QuestList from "../../../features/questList/QuestList.jsx"
 
 let worlds = []
 let books = []
@@ -101,11 +102,20 @@ export default function BookPicker(props) {
           src={bookTableOfContents01}
           alt={"imagex"}
         />
-        <BookTableOfContents
+
+        <QuestList
+          worlds={worlds}
+          className={css.questList}
+          // getNextEvents={handleFetchNextEvents}
+          // loading={loading}
+          // moreEvents={moreEvents}
+        />
+
+        {/* <BookTableOfContents
           selectedBook={selectedBook}
           worlds={worlds}
-          onChangeWorld={props.onChangeWorld}
-        />
+          // onChangeWorld={props.onChangeWorld}
+        /> */}
         {!isProdRelease && (
           <ButtonGroup className={css.buttonGroup} color="primary">
             <Button onClick={() => releaseToProd({ selectedBook })}>
