@@ -67,7 +67,7 @@ export default function TopLevel(props) {
   }, [props.quest])
 
   const addSavedPocketsToLocalPockets = () => {
-    const { userStatus } = getProfile()
+    const { userStatus = { pockets: {} } } = getProfile()
 
     const _questStatus = Constants.getDefaultQuestStatus()
     // move saved pockets to local pockets
