@@ -22,8 +22,8 @@ export default function QuestDetailedPage({ match }) {
   })
 
   console.log("quest", quest) // zzz
-  if (loading || (!quest && !error))
-    return <LoadingComponent content="Loading quest..." />
+  // if (loading || (!quest && !error))
+  //   return <LoadingComponent content="Loading quest..." />
 
   if (error) return <Redirect to="/error" />
 
