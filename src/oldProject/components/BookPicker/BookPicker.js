@@ -43,7 +43,7 @@ export default function BookPicker(props) {
     worlds = props.worlds
   }, [props.worlds])
 
-  const [showBookBuilder, setShowBookBuilder] = useState(false)
+  const [showBookEditor, setShowBookEditor] = useState(false)
   const [selectedBook, setSelectedBook] = useState(books[0])
   const [jsonUnderEdit, setJsonUnderEdit] = useState(null)
 
@@ -59,7 +59,7 @@ export default function BookPicker(props) {
 
   const editBook = ({ selectedBook }) => {
     setJsonUnderEdit(selectedBook)
-    setShowBookBuilder(true)
+    setShowBookEditor(true)
     setSelectedBook(selectedBook)
   }
 
@@ -69,7 +69,7 @@ export default function BookPicker(props) {
 
   const saveBookChanges = ({ selectedBook, bookId }) => {
     const theBookId = bookId || selectedBook.id
-    setShowBookBuilder(false)
+    setShowBookEditor(false)
     updateBook({ newProps: selectedBook, bookId: theBookId })
   }
 
@@ -92,6 +92,7 @@ export default function BookPicker(props) {
     }
 
     const bookTableOfContents01 = Images.backgrounds["bookTableOfContents01"]
+    console.log("bookTableOfContents01", bookTableOfContents01) // zzz
 
     return (
       <div className={css.chapterView}>
@@ -119,7 +120,7 @@ export default function BookPicker(props) {
             />
           </ButtonGroup>
         )}
-        {showBookBuilder && (
+        {showBookEditor && (
           <div className={css.bookEditor} title={"Edit Book"}>
             <div className="contents">
               <JSONEditorDemo

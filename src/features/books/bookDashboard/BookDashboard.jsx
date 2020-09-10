@@ -16,16 +16,16 @@ export default function BookDashboard() {
     (state) => state.quest
   )
   const { books } = useSelector((state) => state.book)
-  const [loadingInitial, setLoadingInitial] = useState(false)
+  // const [loadingInitial, setLoadingInitial] = useState(false)
 
   useEffect(() => {
     if (retainState) return
-    setLoadingInitial(true)
+    // setLoadingInitial(true)
     dispatch(fetchBooks(filter, startDate, limit)).then(() => {
-      setLoadingInitial(false)
+      // setLoadingInitial(false)
     })
     dispatch(fetchQuests(filter, startDate, limit)).then(() => {
-      setLoadingInitial(false)
+      // setLoadingInitial(false)
     })
     return () => {
       dispatch({ type: RETAIN_STATE })

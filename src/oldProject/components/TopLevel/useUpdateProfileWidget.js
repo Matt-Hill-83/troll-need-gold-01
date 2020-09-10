@@ -23,12 +23,12 @@ export default function useUpdateProfileWidget(props) {
   )
   const { currentUser = {} } = useSelector((state) => state.auth)
   const { loading, error } = useSelector((state) => state.async)
-  let profile
+  let profile = {}
 
   if (idParam === _get(currentUser, "uid")) {
-    profile = currentUserProfile
+    profile = currentUserProfile || {}
   } else {
-    profile = selectedUserProfile
+    profile = selectedUserProfile || {}
   }
 
   useFirestoreDoc({
