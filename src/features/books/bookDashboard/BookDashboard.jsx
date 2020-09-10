@@ -7,7 +7,7 @@ import { fetchQuests } from "../../quests/questActions"
 import { RETAIN_STATE } from "../bookConstants"
 import BookPicker from "../../../oldProject/components/BookPicker/BookPicker"
 
-import css from "./QuestDashboard.module.scss"
+import css from "./BookDashboard.module.scss"
 
 export default function BookDashboard() {
   const limit = 20

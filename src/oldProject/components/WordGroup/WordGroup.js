@@ -5,7 +5,6 @@ import css from "./WordGroup.module.scss"
 
 class WordGroup extends React.Component {
   state = {
-    activeScene: undefined,
     sound: null,
   }
 

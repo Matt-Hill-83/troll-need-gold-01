@@ -89,16 +89,16 @@
     z-index: 10;
     position: absolute;
     display: flex;
-    align-items: flex-end;
     justify-content: center;
     background: var(--light-pink);
     border: 1px solid purple !important;
     border-radius: 1vh;
     left: 50%;
-    transform: translate(-50%, 25%);
-    bottom: -3vh;
+    transform: translate(-50%, -100%);
     font-size: 3vh;
     padding: 0 2vh;
+    height: 4vh;
+    align-items: center;
   }
 
   .wordsAndButtons {

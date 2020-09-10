@@ -4,10 +4,10 @@ import { IconNames } from "@blueprintjs/icons"
 import cx from "classnames"
 import React, { useState, useEffect } from "react"
 
-import BookTableOfContents from "../BookTableOfContents/BookTableOfContents.js"
 import Constants from "../../Utils/Constants/Constants.js"
 import Images from "../../images/images.js"
 import JSONEditorDemo from "../JsonEdtor/JSONEditorDemo.js"
+import QuestList from "../../../features/questList/QuestList.jsx"
 import Utils from "../../Utils/Utils.js"
 import WorldMultiPicker2 from "../WorldMultiPicker2/WorldMultiPicker2.js"
 
@@ -17,7 +17,6 @@ import {
 } from "../../../app/firestore/firestoreService.js"
 
 import css from "./BookPicker.module.scss"
-import QuestList from "../../../features/questList/QuestList.jsx"
 
 let worlds = []
 let books = []
@@ -103,19 +102,8 @@ export default function BookPicker(props) {
           alt={"imagex"}
         />
 
-        <QuestList
-          worlds={worlds}
-          className={css.questList}
-          // getNextEvents={handleFetchNextEvents}
-          // loading={loading}
-          // moreEvents={moreEvents}
-        />
+        <QuestList worlds={worlds} className={css.questList} />
 
-        {/* <BookTableOfContents
-          selectedBook={selectedBook}
-          worlds={worlds}
-          // onChangeWorld={props.onChangeWorld}
-        /> */}
         {!isProdRelease && (
           <ButtonGroup className={css.buttonGroup} color="primary">
             <Button onClick={() => releaseToProd({ selectedBook })}>

@@ -43,21 +43,4 @@ export default function QuestList({
       ))}
     </div>
   )
-  // return (
-  //   <>
-  //     {worlds.length !== 0 && (
-  //       <InfiniteScroll
-  //         pageStart={0}
-  //         loadMore={getNextEvents}
-  //         hasMore={!loading && moreEvents}
-  //         initialLoad={false}
-  //       >
-  //         {tableHeader}
-  //         {worlds.map((event) => (
-  //           <QuestListItem event={event} key={event.id} />
-  //         ))}
-  //       </InfiniteScroll>
-  //     )}
-  //   </>
-  // )
 }
