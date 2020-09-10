@@ -28,8 +28,6 @@ export default function WorldMultiPicker2(props) {
     props.updateChapters({ newChapters: value.map((item) => item.id) })
   }
 
-  // const worlds = [...worlds]
-
   worlds.map((world) => {
     const { title, id: worldId } = world
     const belongsToABook = Utils.belongsToABook({ worldId, books })
@@ -44,7 +42,7 @@ export default function WorldMultiPicker2(props) {
 
   const sortedWorlds = Utils.sortWorlds({ worlds, keys: ["newTitle"] })
 
-  if (!selectedItems[0]) return <div>no items</div>
+  // if (!selectedItems[0]) return <div>no items</div>
 
   return (
     <div className={css.main}>
@@ -52,8 +50,8 @@ export default function WorldMultiPicker2(props) {
         multiple
         id="tags-outlined"
         options={sortedWorlds}
-        getOptionLabel={(option) => option.newTitle}
-        // getOptionLabel={(option) => option.title}
+        // getOptionLabel={(option) => option.newTitle}
+        getOptionLabel={(option) => option.title}
         defaultValue={selectedItems}
         filterSelectedOptions
         onChange={handleChange}

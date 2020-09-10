@@ -49,6 +49,7 @@ export default function BookPicker(props) {
   const [jsonUnderEdit, setJsonUnderEdit] = useState(null)
 
   const changeSelectedBook = ({ bookId }) => {
+    setShowBookEditor(false)
     const selectedBook = Utils.getBookFromId({ id: bookId, books })
     setSelectedBook(selectedBook)
   }
@@ -60,7 +61,7 @@ export default function BookPicker(props) {
 
   const editBook = ({ selectedBook }) => {
     setJsonUnderEdit(selectedBook)
-    setShowBookEditor(true)
+    setShowBookEditor(!showBookEditor)
     setSelectedBook(selectedBook)
   }
 
@@ -83,7 +84,15 @@ export default function BookPicker(props) {
     if (!selectedBook) return null
 
     const { id: bookId, chapters, name } = selectedBook
+    console.log("chapters", chapters) // zzz
 
+    const booksFromChapters = chapters.map((item) => {
+      return worlds.find((world) => {
+        return world.id === item
+      })
+    })
+
+    console.log("booksFromChapters", booksFromChapters) // zzz
     const worldMultiPickerProps = {
       selectedWorlds: chapters || [],
       worlds: worlds,
@@ -93,7 +102,6 @@ export default function BookPicker(props) {
     }
 
     const bookTableOfContents01 = Images.backgrounds["bookTableOfContents01"]
-    console.log("bookTableOfContents01", bookTableOfContents01) // zzz
 
     return (
       <div className={css.chapterView}>
@@ -104,7 +112,7 @@ export default function BookPicker(props) {
           alt={"imagex"}
         />
 
-        <QuestList worlds={worlds} className={css.questList} />
+        <QuestList worlds={booksFromChapters} className={css.questList} />
 
         {!isProdRelease && (
           <ButtonGroup className={css.buttonGroup} color="primary">
@@ -145,7 +153,6 @@ export default function BookPicker(props) {
   }
 
   const onDeleteBook = async ({ book }) => {
-    console.log("onDeleteBook") // zzz
     await deleteBookInFirestore(book.id)
     setSelectedBook(books[0] || null)
   }
@@ -209,6 +216,7 @@ export default function BookPicker(props) {
   }
 
   const backgroundImage = Images.backgrounds["meadow"]
+  console.log("backgroundImage", backgroundImage) // zzz
 
   return (
     <div className={css.main}>

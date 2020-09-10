@@ -5,9 +5,10 @@ import { Link } from "react-router-dom"
 import cx from "classnames"
 import React from "react"
 
+import { deleteQuestInFirestore } from "../../app/firestore/firestoreService"
 import Constants from "../../oldProject/Utils/Constants/Constants"
-import TopLevelUtils from "../../oldProject/Utils/TopLevelUtils"
 import QuestProgressUtils from "../../oldProject/Utils/QuestProgressUtils"
+import TopLevelUtils from "../../oldProject/Utils/TopLevelUtils"
 import useUpdateProfileWidget from "../../oldProject/components/TopLevel/useUpdateProfileWidget"
 import Utils from "../../oldProject/Utils/Utils"
 
@@ -45,7 +46,14 @@ export default function QuestListItem({ event: world }) {
           <span role="img">{`${questCompleted ? "✅" : "--"}`}</span>
         </div>
         {/* <span onClick={(world) => this.onDeleteMap({ map, world })}> */}
-        {!isProdRelease && <Button onClick={() => {}} icon={IconNames.TRASH} />}
+        {!isProdRelease && (
+          <Button
+            onClick={() => {
+              deleteQuestInFirestore(questId)
+            }}
+            icon={IconNames.TRASH}
+          />
+        )}
       </div>
     )
   }

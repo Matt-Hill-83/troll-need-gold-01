@@ -70,6 +70,7 @@ export function deleteEventInFirestore(eventId) {
 }
 
 export function deleteQuestInFirestore(eventId) {
+  console.log("deleteQuestInFirestore") // zzz
   return db.collection("quests").doc(eventId).delete()
 }
 
