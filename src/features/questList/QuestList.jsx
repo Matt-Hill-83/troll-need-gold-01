@@ -11,7 +11,7 @@ import css from "./QuestList.module.scss"
 export default function QuestList({ worlds, className }) {
   const { getProfile } = useUpdateProfileWidget()
   const profile = getProfile()
-  const completedQuests = _get(profile, "userStatus.completedQuests")
+  const completedQuests = _get(profile, "userStatus.completedQuests") || []
 
   const {
     earnedGold,
