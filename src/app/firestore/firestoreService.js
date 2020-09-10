@@ -73,6 +73,10 @@ export function deleteQuestInFirestore(eventId) {
   return db.collection("quests").doc(eventId).delete()
 }
 
+export function deleteBookInFirestore(id) {
+  return db.collection("books").doc(id).delete()
+}
+
 export function cancelEventToggle(event) {
   return db.collection("events").doc(event.id).update({
     isCancelled: !event.isCancelled,

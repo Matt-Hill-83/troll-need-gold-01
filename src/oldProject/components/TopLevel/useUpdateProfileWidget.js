@@ -14,6 +14,7 @@ import Constants from "../../Utils/Constants/Constants"
 
 export default function useUpdateProfileWidget(props) {
   // TODO: add correct user ID here
+  // const match = { params: { id: "xxx" } }
   const match = { params: { id: "jOAMi0Yy5YP9oI7v1MA4FtkanSV2" } }
   const idParam = _get(match, "params.id")
 

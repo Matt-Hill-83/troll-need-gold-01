@@ -247,9 +247,11 @@ export default class QuestVisibilityUtils {
   static _getParentSubQuestIndexFromScene = ({ world, sceneId }) => {
     if (!world) return 0
 
-    const { questConfig } = world
+    const {
+      questConfig: { subQuests = [] },
+    } = world
     let parentSubQuest = -1
-    questConfig.subQuests.forEach((subQuest, subQuestIndex) => {
+    subQuests.forEach((subQuest, subQuestIndex) => {
       const subQuestMatch =
         subQuest.scenes &&
         subQuest.scenes.find((scene) => {

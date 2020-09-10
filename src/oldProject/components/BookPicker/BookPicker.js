@@ -14,6 +14,7 @@ import WorldMultiPicker2 from "../WorldMultiPicker2/WorldMultiPicker2.js"
 import {
   updateBookInFirestore,
   addBookToFirestore,
+  deleteBookInFirestore,
 } from "../../../app/firestore/firestoreService.js"
 
 import css from "./BookPicker.module.scss"
@@ -144,7 +145,8 @@ export default function BookPicker(props) {
   }
 
   const onDeleteBook = async ({ book }) => {
-    // await book.delete()
+    console.log("onDeleteBook") // zzz
+    await deleteBookInFirestore(book.id)
     setSelectedBook(books[0] || null)
   }
 
@@ -163,36 +165,48 @@ export default function BookPicker(props) {
     addBookToFirestore(newBook)
   }
 
-  const sortedBooks = Utils.sortDataByNestedKey({
-    data: books,
-    keys: ["name"],
-    order: "ASC",
-  })
+  const renderProdBooks = ({ books }) => {
+    const prodBooks = books.filter((item) => item.releaseToProd)
+    return renderBookList({ books: prodBooks })
+  }
 
-  const renderedBookList = sortedBooks.map((book) => {
-    const { name, id: bookId } = book
-    const bookImage = Images.backgrounds[book.imageName]
+  const renderNonProdBooks = ({ books }) => {
+    const nonProdBooks = books.filter((item) => !item.releaseToProd)
+    return renderBookList({ books: nonProdBooks })
+  }
 
-    const renderedBook = (
-      <div
-        onClick={() => changeSelectedBook({ bookId })}
-        className={css.questRow}
-      >
-        <div className={cx(css.tableCell)}>
-          <ButtonGroup className={css.buttonGroup} color="primary">
-            {!isProdRelease && (
-              <Button onClick={() => releaseToProd({ selectedBook: book })}>
-                {`prod: ${book.releaseToProd ? "T" : "F"}`}
-              </Button>
-            )}
-          </ButtonGroup>
-          <div className={cx(css.questName)}>{name}</div>
-          <img className={css.bookImage} src={bookImage} alt={"imagex"} />
+  const renderBookList = ({ books }) => {
+    const sortedBooks = Utils.sortDataByNestedKey({
+      data: books,
+      keys: ["name"],
+      order: "ASC",
+    })
+
+    return sortedBooks.map((book) => {
+      const { name, id: bookId } = book
+      const bookImage = Images.backgrounds[book.imageName]
+
+      const renderedBook = (
+        <div
+          onClick={() => changeSelectedBook({ bookId })}
+          className={css.questRow}
+        >
+          <div className={cx(css.tableCell)}>
+            <ButtonGroup className={css.buttonGroup} color="primary">
+              {!isProdRelease && (
+                <Button onClick={() => releaseToProd({ selectedBook: book })}>
+                  {`${book.releaseToProd ? "T" : "F"}`}
+                </Button>
+              )}
+            </ButtonGroup>
+            <div className={cx(css.questName)}>{name}</div>
+            <img className={css.bookImage} src={bookImage} alt={"imagex"} />
+          </div>
         </div>
-      </div>
-    )
-    return renderedBook
-  })
+      )
+      return renderedBook
+    })
+  }
 
   const backgroundImage = Images.backgrounds["meadow"]
 
@@ -211,7 +225,12 @@ export default function BookPicker(props) {
 
         <div className={css.content}>
           <div className={css.questTable}>
-            <div className={css.scrollArea}>{renderedBookList}</div>
+            <div className={css.scrollArea}>{renderProdBooks({ books })}</div>
+            {!isProdRelease && (
+              <div className={css.scrollArea}>
+                {renderNonProdBooks({ books })}
+              </div>
+            )}
           </div>
           {renderChapterView()}
         </div>
