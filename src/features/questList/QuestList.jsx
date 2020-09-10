@@ -1,7 +1,6 @@
 import _get from "lodash.get"
 import React from "react"
 import QuestListItem from "./QuestListItem"
-import InfiniteScroll from "react-infinite-scroller"
 import cx from "classnames"
 
 import useUpdateProfileWidget from "../../oldProject/components/TopLevel/useUpdateProfileWidget"
@@ -9,13 +8,7 @@ import QuestProgressUtils from "../../oldProject/Utils/QuestProgressUtils"
 
 import css from "./QuestList.module.scss"
 
-export default function QuestList({
-  worlds,
-  getNextEvents,
-  loading,
-  moreEvents,
-  className,
-}) {
+export default function QuestList({ worlds, className }) {
   const { getProfile } = useUpdateProfileWidget()
   const profile = getProfile()
   const completedQuests = _get(profile, "userStatus.completedQuests")
@@ -34,7 +27,7 @@ export default function QuestList({
       <div className={cx(css.tableCell, css.status)}>Completed</div>
     </div>
   )
-  console.log("worlds---QL", worlds) // zzz
+
   return (
     <div className={className}>
       {tableHeader}
