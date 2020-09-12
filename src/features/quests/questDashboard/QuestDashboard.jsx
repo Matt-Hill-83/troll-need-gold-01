@@ -1,4 +1,4 @@
-import { Grid, Loader } from "semantic-ui-react"
+import { Loader } from "semantic-ui-react"
 import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import _uniqBy from "lodash.uniqby"
@@ -44,8 +44,8 @@ export default function QuestDashboard() {
   const uniqueWorlds = _uniqBy(quests, "id")
 
   return (
-    <Grid className={css.main} width={10}>
-      <Grid.Column width={10}>
+    <div className={css.main}>
+      <div>
         {loadingInitial && (
           <>
             <EventListItemPlaceholder />
@@ -60,10 +60,10 @@ export default function QuestDashboard() {
             moreEvents={moreEvents}
           />
         </div>
-      </Grid.Column>
-      <Grid.Column width={10}>
+      </div>
+      <div>
         <Loader active={loading} />
-      </Grid.Column>
-    </Grid>
+      </div>
+    </div>
   )
 }

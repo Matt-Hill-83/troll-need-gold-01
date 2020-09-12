@@ -53,8 +53,8 @@ export default function BookPicker(props) {
     setShowBookEditor(false)
     const selectedBook = Utils.getBookFromId({ id: bookId, books })
     setSelectedBook(selectedBook)
-    editBook({ selectedBook })
-    setShowBookEditor(true)
+    // editBook({ selectedBook })
+    // setShowBookEditor(true)
   }
 
   const releaseToProd = ({ selectedBook }) => {

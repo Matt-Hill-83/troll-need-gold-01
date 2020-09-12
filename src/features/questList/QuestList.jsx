@@ -29,7 +29,7 @@ export default function QuestList({ worlds, className }) {
   )
 
   return (
-    <div className={className}>
+    <div className={cx(className, css.main)}>
       {tableHeader}
       {worlds.map((event) => (
         <QuestListItem event={event} key={event.id} />
