@@ -169,7 +169,7 @@ export default function BookPicker(props) {
                 Save Changes
               </Button>
               <Button onClick={() => toggleShowUnfiledQuests()}>
-                {`${showUnfiledQuests ? "show" : "hide"} unfiled quests`}
+                {`${showUnfiledQuests ? "hide" : "show"} unfiled quests`}
               </Button>
             </ButtonGroup>
           </div>
