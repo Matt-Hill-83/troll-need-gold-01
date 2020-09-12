@@ -20,7 +20,7 @@ export default class QuestProgressUtils {
   static getTotalGoldInAllQuests = ({ worlds, completedQuests }) => {
     let earnedGold = 0
     let allGoldInQuests = 0
-
+    console.log("worlds", worlds) // zzz
     worlds.forEach((world) => {
       const { questConfig = {} } = world
       const missions = TopLevelUtils.getMissions({ questConfig })

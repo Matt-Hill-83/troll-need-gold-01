@@ -83,6 +83,10 @@ export default function BookPicker(props) {
   const renderChapterView = () => {
     if (!selectedBook) return null
 
+    const allQuestsInAllBooks = Utils.getAllQuestsInAllBooks({ books, worlds })
+    console.log("allQuestsInAllBooks", allQuestsInAllBooks) // zzz
+
+    // TODO: filter our quest already in books, when feeding book picker
     const { id: bookId, chapters, name } = selectedBook
     console.log("chapters", chapters) // zzz
 
@@ -92,7 +96,9 @@ export default function BookPicker(props) {
       })
     })
 
-    console.log("booksFromChapters", booksFromChapters) // zzz
+    const filteredBooksFromChapters = booksFromChapters.filter((item) => !!item)
+
+    console.log("filteredBooksFromChapters", filteredBooksFromChapters) // zzz
     const worldMultiPickerProps = {
       selectedWorlds: chapters || [],
       worlds: worlds,
@@ -112,7 +118,10 @@ export default function BookPicker(props) {
           alt={"imagex"}
         />
 
-        <QuestList worlds={booksFromChapters} className={css.questList} />
+        <QuestList
+          worlds={filteredBooksFromChapters}
+          className={css.questList}
+        />
 
         {!isProdRelease && (
           <ButtonGroup className={css.buttonGroup} color="primary">

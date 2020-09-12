@@ -11,6 +11,19 @@ export default class Utils {
     return completedQuests.includes(questId)
   }
 
+  static getAllQuestsInAllBooks = ({ books, worlds }) => {
+    const questsInBooks = {}
+    books.forEach((book) => {
+      book.chapters.forEach((chapter) => {
+        if (!questsInBooks[chapter]) {
+          questsInBooks[chapter] = true
+        }
+      })
+    })
+    console.log("questsInBooks", questsInBooks) // zzz
+    return Object.keys(questsInBooks)
+  }
+
   static getAllItemsInScene = ({ scene }) => {
     const allItems = []
     scene.frameSet.frames.forEach((item) => {
