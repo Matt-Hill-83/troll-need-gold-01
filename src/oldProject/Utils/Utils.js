@@ -89,10 +89,6 @@ export default class Utils {
     return bookFound ? owningBooks : null
   }
 
-  static getCharacterDialogIndex = ({ characterId, characterName }) => {
-    return Constants.characterDialogIndex[characterName] || 2
-  }
-
   static getItemsFromDbObj = ({ dbList }) => {
     const items = dbList
 

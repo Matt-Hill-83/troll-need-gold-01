@@ -190,9 +190,11 @@ export default function FrameViewer(props) {
 
     if (isEndScene && isLastFrame) {
       return (
-        <Link to={"/quests"} className={css.newGameButton}>
-          New Quest
-        </Link>
+        <div className={css.buttonsContainer}>
+          <Link to={"/quests"} className={css.newGameButton}>
+            New Quest
+          </Link>
+        </div>
       )
     }
 
