@@ -38,7 +38,7 @@ export default function WorldMultiPicker2(props) {
     const belongsToABook = Utils.belongsToABook({ worldId, books })
 
     if (belongsToABook) {
-      world.newTitle = `xxx - ${title} - [${belongsToABook.toString()}]`
+      world.newTitle = `${title} - [${belongsToABook.toString()}]`
     } else {
       world.newTitle = title
     }

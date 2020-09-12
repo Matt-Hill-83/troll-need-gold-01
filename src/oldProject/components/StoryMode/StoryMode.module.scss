@@ -67,6 +67,7 @@
 }
 
 .worldTitle {
+  position: fixed;
   display: flex;
   z-index: 20;
   font-size: 2vh;
@@ -76,7 +77,7 @@
   left: 75%;
   top: 6vh;
   background: white;
-  position: fixed;
   height: 3.2vh;
   transform: translateX(-50%);
+  white-space: nowrap;
 }

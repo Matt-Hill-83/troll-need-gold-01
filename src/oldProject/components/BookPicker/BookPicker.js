@@ -45,7 +45,7 @@ export default function BookPicker(props) {
   }, [props.worlds])
 
   const [showBookEditor, setShowBookEditor] = useState(false)
-  const [showUnfiledQuests, setShowUnfiledQuests] = useState(false)
+  const [showUnfiledQuests, setShowUnfiledQuests] = useState(true)
   const [selectedBook, setSelectedBook] = useState(books[0])
   const [jsonUnderEdit, setJsonUnderEdit] = useState(null)
 
