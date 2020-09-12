@@ -7,15 +7,19 @@ import Utils from "../../Utils/Utils"
 import css from "./WorldMultiPicker2.module.scss"
 
 export default function WorldMultiPicker2(props) {
-  let { books = [], worlds } = props
-  const [selectedItems, setSelectedItems] = React.useState([])
-  console.log("books---WorldMultiPicker2", books) // zzz
+  let { books = [], worlds, worldsForPicker } = props
+
+  const transformSelectedItems = ({ selectedItems }) => {
+    return props.worlds.filter((item) => selectedItems.includes(item.id))
+  }
+
+  const initialSelectedItems = transformSelectedItems({
+    selectedItems: props.selectedWorlds,
+  })
+
+  const [selectedItems, setSelectedItems] = React.useState(initialSelectedItems)
 
   useEffect(() => {
-    const selectedItems = props.worlds.filter((item) =>
-      props.selectedWorlds.includes(item.id)
-    )
-    setSelectedItems(selectedItems)
     books = props.books || []
   }, [])
 
@@ -28,10 +32,10 @@ export default function WorldMultiPicker2(props) {
     props.updateChapters({ newChapters: value.map((item) => item.id) })
   }
 
-  worlds.map((world) => {
+  // append owning chapters to world name
+  worldsForPicker.map((world) => {
     const { title, id: worldId } = world
     const belongsToABook = Utils.belongsToABook({ worldId, books })
-    console.log("belongsToABook", belongsToABook) // zzz
 
     if (belongsToABook) {
       world.newTitle = `xxx - ${title} - [${belongsToABook.toString()}]`
@@ -40,18 +44,36 @@ export default function WorldMultiPicker2(props) {
     }
   })
 
-  const sortedWorlds = Utils.sortWorlds({ worlds, keys: ["newTitle"] })
+  worlds.map((world) => {
+    const { title, id: worldId } = world
+    const belongsToABook = Utils.belongsToABook({ worldId, books })
 
-  // if (!selectedItems[0]) return <div>no items</div>
+    if (belongsToABook) {
+      world.newTitle = `xxx - ${title} - [${belongsToABook.toString()}]`
+    } else {
+      world.newTitle = title
+    }
+  })
 
+  const sortedWorlds = Utils.sortWorlds({
+    worlds: worldsForPicker,
+    keys: ["newTitle"],
+  })
+
+  console.log("sortedWorlds", sortedWorlds) // zzz
+
+  console.log("selectedItems", selectedItems) // zzz
   return (
     <div className={css.main}>
       <Autocomplete
         multiple
         id="tags-outlined"
         options={sortedWorlds}
-        // getOptionLabel={(option) => option.newTitle}
-        getOptionLabel={(option) => option.title}
+        getOptionLabel={(option) => option.newTitle}
+        // getOptionLabel={(option) => {
+        //   const label = option.title
+        //   return label
+        // }}
         defaultValue={selectedItems}
         filterSelectedOptions
         onChange={handleChange}

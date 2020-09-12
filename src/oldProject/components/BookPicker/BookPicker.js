@@ -45,6 +45,7 @@ export default function BookPicker(props) {
   }, [props.worlds])
 
   const [showBookEditor, setShowBookEditor] = useState(false)
+  const [showUnfiledQuests, setShowUnfiledQuests] = useState(false)
   const [selectedBook, setSelectedBook] = useState(books[0])
   const [jsonUnderEdit, setJsonUnderEdit] = useState(null)
 
@@ -75,6 +76,10 @@ export default function BookPicker(props) {
     updateBook({ newProps: selectedBook, bookId: theBookId })
   }
 
+  const toggleShowUnfiledQuests = () => {
+    setShowUnfiledQuests(!showUnfiledQuests)
+  }
+
   const updateChapters = ({ newChapters }) => {
     selectedBook.chapters.length = 0
     selectedBook.chapters.push(...newChapters)
@@ -88,7 +93,6 @@ export default function BookPicker(props) {
 
     // TODO: filter our quest already in books, when feeding book picker
     const { id: bookId, chapters, name } = selectedBook
-    console.log("chapters", chapters) // zzz
 
     const booksFromChapters = chapters.map((item) => {
       return worlds.find((world) => {
@@ -98,10 +102,19 @@ export default function BookPicker(props) {
 
     const filteredBooksFromChapters = booksFromChapters.filter((item) => !!item)
 
-    console.log("filteredBooksFromChapters", filteredBooksFromChapters) // zzz
+    let worldsForPicker = worlds
+    if (!showUnfiledQuests) {
+      worldsForPicker = worlds.filter((world) => {
+        return !allQuestsInAllBooks.includes(world.id)
+      })
+    }
+
+    console.log("worlds", worlds) // zzz
+    console.log("worldsForPicker", worldsForPicker) // zzz
     const worldMultiPickerProps = {
       selectedWorlds: chapters || [],
-      worlds: worlds,
+      worldsForPicker,
+      worlds,
       updateChapters,
       bookId,
       books,
@@ -147,14 +160,18 @@ export default function BookPicker(props) {
               />
             </div>
             <WorldMultiPicker2 {...worldMultiPickerProps}></WorldMultiPicker2>
-            <Button
-              className={css.playButton}
-              onClick={() =>
-                saveBookChanges({ selectedBook: jsonUnderEdit, bookId })
-              }
-            >
-              Save Changes
-            </Button>
+            <ButtonGroup className={css.buttonGroup} color="primary">
+              <Button
+                onClick={() =>
+                  saveBookChanges({ selectedBook: jsonUnderEdit, bookId })
+                }
+              >
+                Save Changes
+              </Button>
+              <Button onClick={() => toggleShowUnfiledQuests()}>
+                {`${showUnfiledQuests ? "show" : "hide"} unfiled quests`}
+              </Button>
+            </ButtonGroup>
           </div>
         )}
       </div>
@@ -225,7 +242,6 @@ export default function BookPicker(props) {
   }
 
   const backgroundImage = Images.backgrounds["meadow"]
-  console.log("backgroundImage", backgroundImage) // zzz
 
   return (
     <div className={css.main}>
@@ -236,10 +252,6 @@ export default function BookPicker(props) {
       />
 
       <div className={css.questPage}>
-        {/* <div className={css.header}>
-          <span className={css.gameTitle}>Troll Need Gold</span>
-        </div> */}
-
         <div className={css.content}>
           <div className={css.questTable}>
             <div className={css.scrollArea}>{renderProdBooks({ books })}</div>

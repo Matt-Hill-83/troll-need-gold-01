@@ -20,7 +20,7 @@ export default class Utils {
         }
       })
     })
-    console.log("questsInBooks", questsInBooks) // zzz
+    // console.log("questsInBooks", questsInBooks) // zzz
     return Object.keys(questsInBooks)
   }
 
@@ -74,7 +74,7 @@ export default class Utils {
   }
 
   static belongsToABook = ({ books, worldId }) => {
-    console.log("books---belongsToABook", books) // zzz
+    // console.log("books---belongsToABook", books) // zzz
     const owningBooks = []
 
     let bookFound = false

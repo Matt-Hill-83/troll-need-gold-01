@@ -30,8 +30,6 @@ export default function QuestListItem({ event: world }) {
 
     const questCompleted = Utils.isQuestCompleted({ questId, completedQuests })
 
-    console.log("questId", questId) // zzz
-
     return (
       <div key={questId} className={css.questRow}>
         <Link
