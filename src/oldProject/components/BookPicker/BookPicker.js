@@ -202,7 +202,7 @@ export default function BookPicker(props) {
 
   const renderProdBooks = ({ books }) => {
     const prodBooks = books.filter((item) => item.releaseToProd)
-    return renderBookList({ books: prodBooks })
+    return renderBookList({ books: prodBooks, showLocks: true })
   }
 
   const renderNonProdBooks = ({ books }) => {
@@ -210,14 +210,16 @@ export default function BookPicker(props) {
     return renderBookList({ books: nonProdBooks })
   }
 
-  const renderBookList = ({ books }) => {
+  const renderBookList = ({ books, showLocks }) => {
     const sortedBooks = Utils.sortDataByNestedKey({
       data: books,
       keys: ["name"],
       order: "ASC",
     })
 
-    return sortedBooks.map((book) => {
+    let prevBookCompleted = true
+
+    return sortedBooks.map((book, index) => {
       const { name, id: bookId } = book
       const bookImage = Images.backgrounds[book.imageName]
 
@@ -236,6 +238,8 @@ export default function BookPicker(props) {
 
       // TODO: put lock icon here.
 
+      const lockImage = Images.items["lock02"]
+
       const renderedBook = (
         <div
           onClick={() => changeSelectedBook({ bookId })}
@@ -247,16 +251,20 @@ export default function BookPicker(props) {
                 <Button onClick={() => releaseToProd({ selectedBook: book })}>
                   {`${book.releaseToProd ? "T" : "F"}`}
                 </Button>
-
-                <Button>{`${bookIsCompleted ? "Comp" : "No Comp"}`}</Button>
-                {bookIsCompleted}
               </ButtonGroup>
             )}
             <div className={cx(css.questName)}>{truncatedTitle}</div>
             <img className={css.bookImage} src={bookImage} alt={"imagex"} />
+            {showLocks && !prevBookCompleted && (
+              <div className={css.lockImageContainer}>
+                <img className={css.lockImage} src={lockImage} alt={"imagex"} />
+              </div>
+            )}
           </div>
         </div>
       )
+
+      prevBookCompleted = bookIsCompleted
       return renderedBook
     })
   }
