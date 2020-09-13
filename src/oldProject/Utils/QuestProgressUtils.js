@@ -8,6 +8,12 @@ export default class QuestProgressUtils {
     return characterNames.includes(desiredRecipient.name)
   }
 
+  static isBookCompleted = ({ chapters, completedQuests }) => {
+    return chapters.every((chapter) => {
+      return completedQuests.includes(chapter)
+    })
+  }
+
   static getTotalGoldInQuest = ({ missions }) => {
     let totalGold = 0
     missions.forEach((item) => {

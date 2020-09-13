@@ -7,7 +7,6 @@ import {
   getUserProfile,
   updateUserProfile,
 } from "../../../app/firestore/firestoreService"
-import LoadingComponent from "../../../app/layout/LoadingComponent"
 import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc"
 import { listenToSelectedUserProfile } from "../../../features/profiles/profileActions"
 import Constants from "../../Utils/Constants/Constants"
@@ -61,6 +60,10 @@ export default function useUpdateProfileWidget(props) {
     return profile.userStatus
   }
 
+  const getCompletedQuests = () => {
+    return profile?.userStatus?.completedQuests || []
+  }
+
   const addQuestToCompletedQuests = async ({ completedQuest }) => {
     const userStatus = await getUserStatus()
 
@@ -109,5 +112,6 @@ export default function useUpdateProfileWidget(props) {
     addQuestToCompletedQuests,
     getProfile,
     updateUserStatusPocketsIfChanged,
+    getCompletedQuests,
   }
 }

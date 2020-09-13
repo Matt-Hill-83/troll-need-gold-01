@@ -8,8 +8,11 @@ import Constants from "../../Utils/Constants/Constants.js"
 import Images from "../../images/images.js"
 import JSONEditorDemo from "../JsonEdtor/JSONEditorDemo.js"
 import QuestList from "../../../features/questList/QuestList.jsx"
+import QuestProgressUtils from "../../Utils/QuestProgressUtils.js"
 import Utils from "../../Utils/Utils.js"
 import WorldMultiPicker2 from "../WorldMultiPicker2/WorldMultiPicker2.js"
+
+import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget.js"
 
 import {
   updateBookInFirestore,
@@ -24,6 +27,8 @@ let books = []
 const { isProdRelease } = Constants
 
 export default function BookPicker(props) {
+  const { getCompletedQuests } = useUpdateProfileWidget()
+
   worlds = props.worlds || []
   books = props.books || []
 
@@ -221,19 +226,32 @@ export default function BookPicker(props) {
         title: name,
       })
 
+      const chapters = book?.chapters || []
+      const completedQuests = getCompletedQuests()
+
+      const bookIsCompleted = QuestProgressUtils.isBookCompleted({
+        chapters,
+        completedQuests,
+      })
+
+      // TODO: put lock icon here.
+
       const renderedBook = (
         <div
           onClick={() => changeSelectedBook({ bookId })}
           className={css.questRow}
         >
           <div className={cx(css.tableCell)}>
-            <ButtonGroup className={css.buttonGroup} color="primary">
-              {!isProdRelease && (
+            {!isProdRelease && (
+              <ButtonGroup className={css.buttonGroup} color="primary">
                 <Button onClick={() => releaseToProd({ selectedBook: book })}>
                   {`${book.releaseToProd ? "T" : "F"}`}
                 </Button>
-              )}
-            </ButtonGroup>
+
+                <Button>{`${bookIsCompleted ? "Comp" : "No Comp"}`}</Button>
+                {bookIsCompleted}
+              </ButtonGroup>
+            )}
             <div className={cx(css.questName)}>{truncatedTitle}</div>
             <img className={css.bookImage} src={bookImage} alt={"imagex"} />
           </div>
