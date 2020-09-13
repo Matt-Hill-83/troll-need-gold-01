@@ -25,8 +25,8 @@ export default class Utils {
 
   static trimToDashIfProd = ({ isProdRelease, title }) => {
     let truncatedTitle = title
-    if (isProdRelease) {
-      // const regex = `-(\s)?(?<secondPart>.*)`
+    if (true || isProdRelease) {
+      // if (isProdRelease) {
       const match = title.match(`-(\s)?(?<secondPart>.*)`)
       truncatedTitle = match?.groups?.secondPart || title
     }
