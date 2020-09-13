@@ -84,7 +84,6 @@ export default class Utils {
   }
 
   static belongsToABook = ({ books, worldId }) => {
-    // console.log("books---belongsToABook", books) // zzz
     const owningBooks = []
 
     let bookFound = false

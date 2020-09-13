@@ -89,7 +89,6 @@ export default function BookPicker(props) {
     if (!selectedBook) return null
 
     const allQuestsInAllBooks = Utils.getAllQuestsInAllBooks({ books, worlds })
-    console.log("allQuestsInAllBooks", allQuestsInAllBooks) // zzz
 
     // TODO: filter our quest already in books, when feeding book picker
     const { id: bookId, chapters, name } = selectedBook
@@ -109,8 +108,6 @@ export default function BookPicker(props) {
       })
     }
 
-    console.log("worlds", worlds) // zzz
-    console.log("worldsForPicker", worldsForPicker) // zzz
     const worldMultiPickerProps = {
       selectedWorlds: chapters || [],
       worldsForPicker,

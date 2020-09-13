@@ -32,7 +32,6 @@ export default function QuestListItem({ event: world }) {
     const truncatedTitle = Utils.trimToDashIfProd({ isProdRelease, title })
     const questCompleted = Utils.isQuestCompleted({ questId, completedQuests })
 
-    console.log("truncatedTitle", truncatedTitle) // zzz
     return (
       <div key={questId} className={css.questRow}>
         <Link
@@ -40,14 +39,12 @@ export default function QuestListItem({ event: world }) {
           to={`/quests/${questId}`}
         >
           {truncatedTitle}
-          {/* {title} */}
         </Link>
 
         <div className={cx(css.tableCell, css.dragonPoints)}>{totalGold} </div>
         <div className={cx(css.tableCell, css.questStatus)}>
           <span role="img">{`${questCompleted ? "✅" : "--"}`}</span>
         </div>
-        {/* <span onClick={(world) => this.onDeleteMap({ map, world })}> */}
         {!isProdRelease && (
           <Button
             onClick={() => {

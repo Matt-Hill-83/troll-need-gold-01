@@ -60,9 +60,6 @@ export default function WorldMultiPicker2(props) {
     keys: ["newTitle"],
   })
 
-  console.log("sortedWorlds", sortedWorlds) // zzz
-
-  console.log("selectedItems", selectedItems) // zzz
   return (
     <div className={css.main}>
       <Autocomplete
@@ -70,10 +67,6 @@ export default function WorldMultiPicker2(props) {
         id="tags-outlined"
         options={sortedWorlds}
         getOptionLabel={(option) => option.newTitle}
-        // getOptionLabel={(option) => {
-        //   const label = option.title
-        //   return label
-        // }}
         defaultValue={selectedItems}
         filterSelectedOptions
         onChange={handleChange}

@@ -21,10 +21,6 @@ export default function QuestDetailedPage({ match }) {
     deps: [match.params.id, dispatch],
   })
 
-  console.log("quest", quest) // zzz
-  // if (loading || (!quest && !error))
-  //   return <LoadingComponent content="Loading quest..." />
-
   if (error) return <Redirect to="/error" />
 
   return <TopLevel quest={quest}></TopLevel>

@@ -13,7 +13,6 @@ export default function StoryMode(props) {
   console.log("StoryMode------------------------>>>")
   const [globalState] = useContext(myContext)
   const { activeScene, world, showMissionConsole } = globalState
-  console.log("globalState", globalState) // zzz
 
   const { updateActiveScene } = props
 
