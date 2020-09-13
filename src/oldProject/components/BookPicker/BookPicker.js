@@ -53,8 +53,6 @@ export default function BookPicker(props) {
     setShowBookEditor(false)
     const selectedBook = Utils.getBookFromId({ id: bookId, books })
     setSelectedBook(selectedBook)
-    // editBook({ selectedBook })
-    // setShowBookEditor(true)
   }
 
   const releaseToProd = ({ selectedBook }) => {
@@ -221,6 +219,11 @@ export default function BookPicker(props) {
       const { name, id: bookId } = book
       const bookImage = Images.backgrounds[book.imageName]
 
+      const truncatedTitle = Utils.trimToDashIfProd({
+        isProdRelease,
+        title: name,
+      })
+
       const renderedBook = (
         <div
           onClick={() => changeSelectedBook({ bookId })}
@@ -234,7 +237,7 @@ export default function BookPicker(props) {
                 </Button>
               )}
             </ButtonGroup>
-            <div className={cx(css.questName)}>{name}</div>
+            <div className={cx(css.questName)}>{truncatedTitle}</div>
             <img className={css.bookImage} src={bookImage} alt={"imagex"} />
           </div>
         </div>

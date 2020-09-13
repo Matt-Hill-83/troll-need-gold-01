@@ -14,6 +14,8 @@ import Utils from "../../oldProject/Utils/Utils"
 
 import css from "./QuestListItem.module.scss"
 
+const { isProdRelease } = Constants
+
 export default function QuestListItem({ event: world }) {
   const { questConfig = {} } = world
 
@@ -26,17 +28,19 @@ export default function QuestListItem({ event: world }) {
 
   const renderItem = () => {
     const { title, id: questId } = world
-    const { isProdRelease } = Constants
 
+    const truncatedTitle = Utils.trimToDashIfProd({ isProdRelease, title })
     const questCompleted = Utils.isQuestCompleted({ questId, completedQuests })
 
+    console.log("truncatedTitle", truncatedTitle) // zzz
     return (
       <div key={questId} className={css.questRow}>
         <Link
           className={cx(css.tableCell, css.questName)}
           to={`/quests/${questId}`}
         >
-          {title}
+          {truncatedTitle}
+          {/* {title} */}
         </Link>
 
         <div className={cx(css.tableCell, css.dragonPoints)}>{totalGold} </div>

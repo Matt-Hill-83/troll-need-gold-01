@@ -20,8 +20,18 @@ export default class Utils {
         }
       })
     })
-    // console.log("questsInBooks", questsInBooks) // zzz
     return Object.keys(questsInBooks)
+  }
+
+  static trimToDashIfProd = ({ isProdRelease, title }) => {
+    let truncatedTitle = title
+    if (isProdRelease) {
+      // const regex = `-(\s)?(?<secondPart>.*)`
+      const match = title.match(`-(\s)?(?<secondPart>.*)`)
+      truncatedTitle = match?.groups?.secondPart || title
+    }
+
+    return truncatedTitle
   }
 
   static getAllItemsInScene = ({ scene }) => {
