@@ -19,6 +19,7 @@ class WordGroup extends React.Component {
   }
 
   playWordSound = (event, { word }) => {
+    console.log("playWordSound") // zzz
     word = word.replace(/[.|,|/?]/, "")
     this.setState({ sound: Sounds[word] })
   }
@@ -40,12 +41,12 @@ class WordGroup extends React.Component {
         return (
           <span
             key={wordIndex}
-            // {...autofocus}
+            {...autofocus}
             autoFocus={true}
             tabIndex={tabIndex}
             className={css.sentenceWord}
-            // onClick={event => this.playWordSound(event, { word })}
-            // onFocus={event => this.playWordSound(event, { word })}
+            onClick={(event) => this.playWordSound(event, { word })}
+            onFocus={(event) => this.playWordSound(event, { word })}
           >
             {word}
           </span>
@@ -64,10 +65,10 @@ class WordGroup extends React.Component {
 
   render() {
     const { className } = this.props
-
+    console.log("Sounds", Sounds) // zzz
     return (
       <div className={`${css.main} ${className}`}>
-        {/* <audio src={this.state.sound} autoPlay /> */}
+        <audio src={this.state.sound} autoPlay />
         {this.renderNarrative()}
       </div>
     )
