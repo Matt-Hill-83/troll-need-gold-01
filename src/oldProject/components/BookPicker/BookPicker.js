@@ -240,6 +240,10 @@ export default function BookPicker(props) {
 
       const lockImage = Images.items["lock02"]
 
+      const onClick = showLocks
+        ? () => {}
+        : () => releaseToProd({ selectedBook: book })
+
       const renderedBook = (
         <div
           onClick={() => changeSelectedBook({ bookId })}
@@ -248,7 +252,7 @@ export default function BookPicker(props) {
           <div className={cx(css.tableCell)}>
             {!isProdRelease && (
               <ButtonGroup className={css.buttonGroup} color="primary">
-                <Button onClick={() => releaseToProd({ selectedBook: book })}>
+                <Button onClick={onClick}>
                   {`${book.releaseToProd ? "T" : "F"}`}
                 </Button>
               </ButtonGroup>

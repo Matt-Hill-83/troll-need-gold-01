@@ -11,25 +11,15 @@ import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc"
 import { listenToSelectedUserProfile } from "../../../features/profiles/profileActions"
 import Constants from "../../Utils/Constants/Constants"
 
-export default function useUpdateProfileWidget(props) {
-  // TODO: add correct user ID here
-  // const match = { params: { id: "xxx" } }
-  const match = { params: { id: "jOAMi0Yy5YP9oI7v1MA4FtkanSV2" } }
-  const idParam = _get(match, "params.id")
-
+export default function useUpdateProfileWidget() {
   const dispatch = useDispatch()
-  const { selectedUserProfile, currentUserProfile } = useSelector(
-    (state) => state.profile
-  )
+  const { currentUserProfile } = useSelector((state) => state.profile)
   const { currentUser = {} } = useSelector((state) => state.auth)
-  const { loading, error } = useSelector((state) => state.async)
-  let profile = {}
 
-  if (idParam === _get(currentUser, "uid")) {
-    profile = currentUserProfile || {}
-  } else {
-    profile = selectedUserProfile || {}
-  }
+  console.log("currentUserProfile", currentUserProfile) // zzz
+  console.log("currentUser", currentUser) // zzz
+  const profile = currentUserProfile || {}
+  const idParam = profile.id
 
   useFirestoreDoc({
     query: () => getUserProfile(idParam),

@@ -15,6 +15,7 @@ import ProfilePage from "../../features/profiles/profilePage/ProfilePage"
 import QuestDashboard from "../../features/quests/questDashboard/QuestDashboard"
 import QuestDetailedPage from "../../features/quests/eventDetailed/QuestDetailedPage"
 import BookDashboard from "../../features/books/bookDashboard/BookDashboard"
+import useUpdateProfileWidget from "../../oldProject/components/TopLevel/useUpdateProfileWidget"
 
 export default function App() {
   const { key } = useLocation()
