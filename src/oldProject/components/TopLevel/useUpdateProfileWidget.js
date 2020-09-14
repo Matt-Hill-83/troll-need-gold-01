@@ -16,11 +16,8 @@ export default function useUpdateProfileWidget() {
   const { currentUserProfile } = useSelector((state) => state.profile)
   const { currentUser = {} } = useSelector((state) => state.auth)
 
-  console.log("currentUserProfile", currentUserProfile) // zzz
-  console.log("currentUser", currentUser) // zzz
   const profile = currentUserProfile || {}
   const idParam = profile.id || "none"
-  // const idParam = profile.id
 
   useFirestoreDoc({
     query: () => getUserProfile(idParam),

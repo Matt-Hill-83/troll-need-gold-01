@@ -48,8 +48,9 @@ export default function QuestDashboard() {
       <div>
         {loadingInitial && (
           <>
-            <EventListItemPlaceholder />
-            <EventListItemPlaceholder />
+            Loading...
+            {/* <EventListItemPlaceholder />
+            <EventListItemPlaceholder /> */}
           </>
         )}
         <div className={css.questList}>

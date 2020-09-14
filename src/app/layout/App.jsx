@@ -17,7 +17,6 @@ import QuestDetailedPage from "../../features/quests/eventDetailed/QuestDetailed
 import BookDashboard from "../../features/books/bookDashboard/BookDashboard"
 
 export default function App() {
-  const { key } = useLocation()
   const { initialized } = useSelector((state) => state.async)
 
   if (!initialized) return <LoadingComponent content="Loading app..." />

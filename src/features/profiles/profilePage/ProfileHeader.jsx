@@ -43,7 +43,7 @@ export default function ProfileHeader({ profile, isCurrentUser }) {
     return () => {
       dispatch({ type: CLEAR_FOLLOWINGS })
     }
-  }, [dispatch, profile.id, isCurrentUser])
+  }, [dispatch, profile && profile.id, isCurrentUser])
 
   async function handleFollowUser() {
     setLoading(true)

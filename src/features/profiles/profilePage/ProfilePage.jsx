@@ -40,11 +40,11 @@ export default function ProfilePage({ match }) {
       <Grid.Column width={16}>
         <ProfileHeader
           profile={profile}
-          isCurrentUser={currentUser.uid === profile.id}
+          isCurrentUser={currentUser.uid === profile && profile.id}
         />
         <ProfileContent
           profile={profile}
-          isCurrentUser={currentUser.uid === profile.id}
+          isCurrentUser={currentUser.uid === profile && profile.id}
         />
       </Grid.Column>
     </Grid>
