@@ -5,7 +5,6 @@ import _uniqBy from "lodash.uniqby"
 
 import { fetchQuests } from "../questActions"
 import { RETAIN_STATE } from "../questConstants"
-import EventListItemPlaceholder from "./EventListItemPlaceholder"
 import QuestList from "../../questList/QuestList.jsx"
 
 import css from "./QuestDashboard.module.scss"
