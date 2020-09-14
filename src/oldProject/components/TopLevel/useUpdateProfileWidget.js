@@ -19,7 +19,8 @@ export default function useUpdateProfileWidget() {
   console.log("currentUserProfile", currentUserProfile) // zzz
   console.log("currentUser", currentUser) // zzz
   const profile = currentUserProfile || {}
-  const idParam = profile.id
+  const idParam = profile.id || "none"
+  // const idParam = profile.id
 
   useFirestoreDoc({
     query: () => getUserProfile(idParam),
