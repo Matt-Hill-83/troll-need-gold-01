@@ -45,9 +45,6 @@ export default function TopLevel(props) {
 
   console.log("pocketsLoaded---------------------------->>>>", pocketsLoaded)
 
-  const test = getProfile()
-  console.log("test", test) // zzz
-
   // on mount
   useEffect(() => {
     console.log("onMount-------------------------------->>>>")

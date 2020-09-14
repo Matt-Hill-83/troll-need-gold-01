@@ -1,8 +1,8 @@
 import _get from "lodash.get"
 import { Button } from "@blueprintjs/core"
+import { Link } from "react-router-dom"
 import cx from "classnames"
 import React, { useContext } from "react"
-import { Link } from "react-router-dom"
 
 import { myContext } from "../../../myProvider"
 import Character from "../Character/Character"
@@ -17,20 +17,19 @@ export default function FrameViewer(props) {
 
   const renderDialog = ({ cloneIndex }) => {
     const { frame, scene } = props
-    const dialog = (frame && frame.dialog) || []
+    const dialog = frame?.dialog || []
     const allCharactersInScene = {}
 
-    scene.frameSet &&
-      scene.frameSet.frames &&
-      scene.frameSet.frames.forEach((frame) => {
-        const test = [...frame.critters1, ...frame.critters2]
-        test.forEach((char) => {
-          allCharactersInScene[char.id] = char
-        })
+    const frames = scene?.frameSet?.frames || []
+
+    frames.forEach((frame) => {
+      const test = [...frame.critters1, ...frame.critters2]
+      test.forEach((char) => {
+        allCharactersInScene[char.name] = char
       })
+    })
 
     const allCharactersInScene2 = Object.values(allCharactersInScene)
-
     const charIndexMap = {}
     const charactersAndLocation = [...allCharactersInScene2, scene.location]
 
@@ -43,7 +42,7 @@ export default function FrameViewer(props) {
       const { text } = line
 
       const characterName = line.character || ""
-      const characterIndex = charIndexMap[characterName]
+      const characterIndex = charIndexMap[characterName] || 0
 
       if (!text) return null
       const className = `character${characterIndex}`
