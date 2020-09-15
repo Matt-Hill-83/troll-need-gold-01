@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useRef } from "react"
 import Sounds from "../../Sounds/Sounds"
 import cx from "classnames"
 import css from "./WordGroup.module.scss"

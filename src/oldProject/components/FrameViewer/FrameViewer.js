@@ -48,22 +48,26 @@ export default function FrameViewer(props) {
       const className = `character${characterIndex}`
 
       const indexIsEven = characterIndex % 2 === 0
+      const renderedWordGroup = (
+        <WordGroup lineIndex={lineIndex} story={[text]} />
+      )
+      const renderedCharacterName = (
+        <div className={cx(css.characterNameContainer)}>
+          <span className={css.characterName}>{characterName}</span>
+        </div>
+      )
 
       const isEven = (
         <div className={cx(css.line, css[className], css.isEven)}>
-          <div className={cx(css.characterNameContainer)}>
-            <span className={css.characterName}>{characterName}</span>
-          </div>
-          <WordGroup lineIndex={lineIndex} story={[text]} />
+          {renderedCharacterName}
+          {renderedWordGroup}
         </div>
       )
 
       const isOdd = (
         <div className={cx(css.line, css[className], css.isOdd)}>
-          <WordGroup lineIndex={lineIndex} story={[text]} />
-          <div className={cx(css.characterNameContainer)}>
-            <span className={css.characterName}>{characterName}</span>
-          </div>
+          {renderedWordGroup}
+          {renderedCharacterName}
         </div>
       )
 
