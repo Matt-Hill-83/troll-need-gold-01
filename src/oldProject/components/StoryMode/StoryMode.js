@@ -4,16 +4,15 @@ import cx from "classnames"
 
 import { myContext } from "../../../myProvider.js"
 import MissionConsole from "../MissionConsole/MissionConsole.js"
-import WordPage from "../WordPage/WordPage.js"
 import WorldViewer from "../WorldViewer/WorldViewer.js"
+import FrameViewer from "../FrameViewer/FrameViewer.js"
 
 import css from "./StoryMode.module.scss"
-import FrameViewer from "../FrameViewer/FrameViewer.js"
 
 export default function StoryMode(props) {
   console.log("StoryMode------------------------>>>")
   const [globalState] = useContext(myContext)
-  const { activeScene, world, showMissionConsole } = globalState
+  const { world, showMissionConsole } = globalState
 
   const { updateActiveScene } = props
 
