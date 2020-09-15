@@ -7,24 +7,19 @@ import { myContext } from "../../../myProvider.js"
 import css from "./WordPage.module.scss"
 
 export default function WordPage(props) {
-  const [globalState] = useContext(myContext)
+  // const [globalState] = useContext(myContext)
 
   // const { activeScene, updateActiveScene } = props
-  const { activeFrameIndex, activeScene } = globalState
+  // const { activeFrameIndex, activeScene } = globalState
 
-  const { frames = [] } = activeScene.frameSet
-  const frame = frames[activeFrameIndex]
+  // const { frames = [] } = activeScene.frameSet
+  // const frame = frames[activeFrameIndex]
 
   // let isLastFrame = activeFrameIndex >= frames.length - 1
 
   return (
     <div className={css.textPage}>
-      <FrameViewer
-      // frame={frame}
-      // isLastFrame={isLastFrame}
-      // scene={activeScene}
-      // updateActiveScene={updateActiveScene}
-      />
+      <FrameViewer />
     </div>
   )
 }

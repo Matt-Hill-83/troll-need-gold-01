@@ -110,8 +110,12 @@ export default function FrameViewer(props) {
     return mood
   }
 
+  const getLocationName = () => {
+    return activeScene?.location?.name
+  }
+
   const renderLocationImage = () => {
-    const locationName = _get(activeScene, "location.name")
+    const locationName = getLocationName()
     const locationImage = Images.all[locationName]
 
     return (
@@ -267,9 +271,8 @@ export default function FrameViewer(props) {
   }
 
   const renderFrame = () => {
-    const critters1 = frame.critters1 || []
-    const critters2 = frame.critters2 || []
-    const sceneName = activeScene.location.name
+    const { critters1, critters2 } = frame
+    const sceneName = getLocationName()
 
     return (
       <div className={`${css.scenes}`}>
