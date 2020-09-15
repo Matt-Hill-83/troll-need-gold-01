@@ -1,34 +1,21 @@
-import React from "react"
+import React, { useState, useRef } from "react"
 import Sounds from "../../Sounds/Sounds"
-
+import cx from "classnames"
 import css from "./WordGroup.module.scss"
 
-class WordGroup extends React.Component {
-  state = {
-    sound: null,
-  }
+export default function WordGroup(props) {
+  const inputEl = useRef(null)
+  const { className } = props
 
-  async componentWillMount() {
-    const { story } = this.props
-    this.setState({ story })
-  }
-
-  componentWillReceiveProps(newProps) {
-    const { story } = newProps
-    this.setState({ story })
-  }
-
-  playWordSound = (event, { word }) => {
-    console.log("playWordSound") // zzz
+  const getAudioFileForWord = ({ word }) => {
     word = word.replace(/[.|,|/?]/, "")
-    this.setState({ sound: Sounds[word] })
+    return Sounds[word] || null
   }
 
-  renderNarrative = () => {
-    const { story } = this.state
-    const { lineIndex } = this.props
+  const renderNarrative = () => {
+    const { lineIndex } = props
 
-    const renderedNarrative = story.map((sentence, sentenceIndex) => {
+    const renderedNarrative = props.story.map((sentence, sentenceIndex) => {
       const parsedSentence = sentence.split(/\s/)
 
       const renderedSentence = parsedSentence.map((word, wordIndex) => {
@@ -37,19 +24,29 @@ class WordGroup extends React.Component {
 
         // TODO - fix autofocus
         const autofocus = tabIndex === 1 ? { autoFocus: true } : { test: 3 }
+        const sound = getAudioFileForWord({ word })
+        if (sound) {
+        }
 
         return (
-          <span
-            key={wordIndex}
-            {...autofocus}
-            autoFocus={true}
-            tabIndex={tabIndex}
-            className={css.sentenceWord}
-            onClick={(event) => this.playWordSound(event, { word })}
-            onFocus={(event) => this.playWordSound(event, { word })}
-          >
-            {word}
-          </span>
+          <>
+            {false && sound && (
+              <button onClick={() => playAudio({ sound })} type="button">
+                Play
+              </button>
+            )}
+            <span
+              key={wordIndex}
+              {...autofocus}
+              autoFocus={true}
+              tabIndex={tabIndex}
+              className={cx(css.sentenceWord, css.hasAudio)}
+              onClick={() => playAudio({ sound })}
+              onFocus={() => playAudio({ sound })}
+            >
+              {word}
+            </span>
+          </>
         )
       })
 
@@ -63,15 +60,18 @@ class WordGroup extends React.Component {
     return <div className={css.narrative}>{renderedNarrative}</div>
   }
 
-  render() {
-    const { className } = this.props
-    console.log("Sounds", Sounds) // zzz
-    return (
-      <div className={`${css.main} ${className}`}>
-        <audio src={this.state.sound} autoPlay />
-        {this.renderNarrative()}
-      </div>
-    )
+  const playAudio = ({ sound }) => {
+    const player = inputEl.current
+    player.src = sound
+    player.play()
   }
+
+  return (
+    <div className={`${css.main} ${className}`}>
+      <audio ref={inputEl}>
+        <source src={"sound"} type="audio/mp3" />
+      </audio>
+      {renderNarrative()}
+    </div>
+  )
 }
-export default WordGroup
