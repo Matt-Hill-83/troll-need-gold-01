@@ -51,27 +51,21 @@ export default function FrameViewer(props) {
       const renderedWordGroup = (
         <WordGroup lineIndex={lineIndex} story={[text]} />
       )
-      const renderedCharacterName = (
-        <div className={cx(css.characterNameContainer)}>
-          <span className={css.characterName}>{characterName}</span>
+
+      return (
+        <div
+          className={cx(css.line, css[className], {
+            [css.isEven]: indexIsEven,
+            [css.isOdd]: !indexIsEven,
+          })}
+        >
+          {!indexIsEven && renderedWordGroup}
+          <div className={cx(css.characterNameContainer)}>
+            <span className={css.characterName}>{characterName}</span>
+          </div>
+          {indexIsEven && renderedWordGroup}
         </div>
       )
-
-      const isEven = (
-        <div className={cx(css.line, css[className], css.isEven)}>
-          {renderedCharacterName}
-          {renderedWordGroup}
-        </div>
-      )
-
-      const isOdd = (
-        <div className={cx(css.line, css[className], css.isOdd)}>
-          {renderedWordGroup}
-          {renderedCharacterName}
-        </div>
-      )
-
-      return indexIsEven ? isEven : isOdd
     })
 
     const scalingFactor = 1.6
