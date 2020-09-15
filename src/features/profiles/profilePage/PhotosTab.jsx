@@ -49,12 +49,14 @@ export default function PhotosTab({ profile, isCurrentUser }) {
     }
   }
 
+  console.log("photos", photos) // zzz
   return (
     <Tab.Pane loading={loading}>
       <Grid>
         <Grid.Column width={16}>
           <Header floated="left" icon="user" content={`Photos`} />
-          {isCurrentUser && (
+          {true && (
+            // {isCurrentUser && (
             <Button
               onClick={() => setEditMode(!editMode)}
               floated="right"
@@ -68,35 +70,49 @@ export default function PhotosTab({ profile, isCurrentUser }) {
             <PhotoUploadWidget setEditMode={setEditMode} />
           ) : (
             <Card.Group itemsPerRow={5}>
-              {photos.map((photo) => (
-                <Card key={photo.id}>
-                  <Image src={photo.url} />
-                  <Button.Group fluid widths={2}>
-                    <Button
-                      name={photo.id}
-                      loading={
-                        updating.isUpdating && updating.target === photo.id
-                      }
-                      onClick={(e) => handleSetMainPhoto(photo, e.target.name)}
-                      disabled={photo.url === profile.photoURL}
-                      basic
-                      color="green"
-                      content="Main"
-                    />
-                    <Button
-                      name={photo.id}
-                      onClick={(e) => handleDeletePhoto(photo, e.target.name)}
-                      loading={
-                        deleting.isDeleting && deleting.target === photo.id
-                      }
-                      disabled={photo.url === profile.photoURL}
-                      basic
-                      color="red"
-                      icon="trash"
-                    />
-                  </Button.Group>
-                </Card>
-              ))}
+              {photos.map((photo) => {
+                if (photo.name.includes("blob")) {
+                  console.log("photo", photo) // zzz
+                  // const blobURL = URL.createObjectURL(photo)
+                  return (
+                    <div>
+                      test
+                      <audio src={photo.url} controls="controls" />
+                    </div>
+                  )
+                }
+                return (
+                  <Card key={photo.id}>
+                    <Image src={photo.url} />
+                    <Button.Group fluid widths={2}>
+                      <Button
+                        name={photo.id}
+                        loading={
+                          updating.isUpdating && updating.target === photo.id
+                        }
+                        onClick={(e) =>
+                          handleSetMainPhoto(photo, e.target.name)
+                        }
+                        disabled={photo.url === profile.photoURL}
+                        basic
+                        color="green"
+                        content="Main"
+                      />
+                      <Button
+                        name={photo.id}
+                        onClick={(e) => handleDeletePhoto(photo, e.target.name)}
+                        loading={
+                          deleting.isDeleting && deleting.target === photo.id
+                        }
+                        disabled={photo.url === profile.photoURL}
+                        basic
+                        color="red"
+                        icon="trash"
+                      />
+                    </Button.Group>
+                  </Card>
+                )
+              })}
             </Card.Group>
           )}
         </Grid.Column>

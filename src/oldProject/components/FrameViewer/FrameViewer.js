@@ -11,6 +11,7 @@ import Images from "../../images/images"
 import WordGroup from "../WordGroup/WordGroup"
 
 import css from "./FrameViewer.module.scss"
+import AudioRecorder from "../AudioRecorder/AudioRecorder"
 
 export default function FrameViewer(props) {
   const [globalState, setGlobalState] = useContext(myContext)
@@ -64,6 +65,7 @@ export default function FrameViewer(props) {
             <span className={css.characterName}>{characterName}</span>
           </div>
           {indexIsEven && renderedWordGroup}
+          <AudioRecorder />
         </div>
       )
     })
