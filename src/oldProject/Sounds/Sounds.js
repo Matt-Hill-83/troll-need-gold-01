@@ -1,5 +1,3 @@
-import mermaid from "./mermaid.m4a"
-
 // words
 import is from ".//words/is.mp3"
 import you from ".//words/you.mp3"

@@ -25,22 +25,15 @@ export default function WordGroup(props) {
         // TODO - fix autofocus
         const autofocus = tabIndex === 1 ? { autoFocus: true } : { test: 3 }
         const sound = getAudioFileForWord({ word })
-        if (sound) {
-        }
 
         return (
           <>
-            {false && sound && (
-              <button onClick={() => playAudio({ sound })} type="button">
-                Play
-              </button>
-            )}
             <span
               key={wordIndex}
               {...autofocus}
               autoFocus={true}
               tabIndex={tabIndex}
-              className={cx(css.sentenceWord, css.hasAudio)}
+              className={cx(css.sentenceWord, { [css.hasAudio]: !!sound })}
               onClick={() => playAudio({ sound })}
               onFocus={() => playAudio({ sound })}
             >
