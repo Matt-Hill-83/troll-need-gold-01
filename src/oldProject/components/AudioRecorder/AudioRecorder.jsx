@@ -17,13 +17,10 @@ class AudioRecorder extends React.Component {
 
   start = () => {
     if (this.state.isBlocked) {
-      console.log("Permission Denied")
     } else {
-      Mp3Recorder.start()
-        .then(() => {
-          this.setState({ isRecording: true })
-        })
-        .catch((e) => console.error(e))
+      Mp3Recorder.start().then(() => {
+        this.setState({ isRecording: true })
+      })
     }
   }
 
@@ -31,7 +28,6 @@ class AudioRecorder extends React.Component {
     Mp3Recorder.stop()
       .getMp3()
       .then(([buffer, blob]) => {
-        // console.log("blob", blob) // zzz
         const blobURL = URL.createObjectURL(blob)
         this.setState({ blobURL, isRecording: false, blob })
       })
@@ -40,7 +36,6 @@ class AudioRecorder extends React.Component {
 
   save = () => {
     const { blob } = this.state
-    // console.log("blob", blob) // zzz
     this.props.saveAudio({ blob })
   }
 
@@ -48,11 +43,9 @@ class AudioRecorder extends React.Component {
     navigator.getUserMedia(
       { audio: true },
       () => {
-        // console.log("Permission Granted")
         this.setState({ isBlocked: false })
       },
       () => {
-        // console.log("Permission Denied")
         this.setState({ isBlocked: true })
       }
     )
@@ -61,7 +54,6 @@ class AudioRecorder extends React.Component {
   render() {
     const { blobURL } = this.state
 
-    // console.log("blobURL", blobURL) // zzz
     return (
       <div className="App">
         <header className="App-header">

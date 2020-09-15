@@ -13,7 +13,10 @@ import Constants from "../../Utils/Constants/Constants"
 import Images from "../../images/images"
 import WordGroup from "../WordGroup/WordGroup"
 
-import { uploadToFirebaseStorage } from "../../../app/firestore/firebaseService"
+import {
+  uploadToFirebaseStorage,
+  updateQuestInFirestore,
+} from "../../../app/firestore/firebaseService"
 
 import css from "./FrameViewer.module.scss"
 
@@ -21,12 +24,15 @@ export default function FrameViewer(props) {
   const [globalState, setGlobalState] = useContext(myContext)
   const [loading, setLoading] = useState(false)
 
+  const { activeFrameIndex, activeScene } = globalState
+  const { frames = [] } = activeScene.frameSet
+
+  const frame = frames[activeFrameIndex]
+  let isLastFrame = activeFrameIndex >= frames.length - 1
+
   const renderDialog = ({ cloneIndex }) => {
-    const { frame, scene } = props
     const dialog = frame?.dialog || []
     const allCharactersInScene = {}
-
-    const frames = scene?.frameSet?.frames || []
 
     frames.forEach((frame) => {
       const test = [...frame.critters1, ...frame.critters2]
@@ -37,7 +43,10 @@ export default function FrameViewer(props) {
 
     const allCharactersInScene2 = Object.values(allCharactersInScene)
     const charIndexMap = {}
-    const charactersAndLocation = [...allCharactersInScene2, scene.location]
+    const charactersAndLocation = [
+      ...allCharactersInScene2,
+      activeScene.location,
+    ]
 
     charactersAndLocation.forEach((char, charIndex) => {
       charIndexMap[char.name] = charIndex
@@ -71,12 +80,10 @@ export default function FrameViewer(props) {
             <span className={css.characterName}>{characterName}</span>
           </div>
           {indexIsEven && renderedWordGroup}
-          <Button
-            // onClick={showAudioRecorder}
-            className={css.nextButton}
-            icon={IconNames.RECORD}
-          ></Button>
-          <AudioRecorder saveAudio={saveAudio} />
+          <Button className={css.nextButton} icon={IconNames.RECORD}></Button>
+          <AudioRecorder
+            saveAudio={({ blob }) => saveAudio({ dialog, blob })}
+          />
 
           {audioURL && <audio src={audioURL} controls="controls" />}
         </div>
@@ -104,7 +111,7 @@ export default function FrameViewer(props) {
   }
 
   const renderLocationImage = () => {
-    const locationName = _get(props, "scene.location.name")
+    const locationName = _get(activeScene, "location.name")
     const locationImage = Images.all[locationName]
 
     return (
@@ -157,7 +164,6 @@ export default function FrameViewer(props) {
   }
 
   const renderPosableCritters = () => {
-    const { frame } = props
     const { faces = [] } = frame
 
     if (!frame) return null
@@ -195,7 +201,7 @@ export default function FrameViewer(props) {
     })
   }
 
-  function saveAudio({ blob }) {
+  function saveAudio({ dialog, blob }) {
     console.log("blob", blob) // zzz
     setLoading(true)
     const filename = cuid() + "-audio" + "." + "blob"
@@ -213,7 +219,9 @@ export default function FrameViewer(props) {
         uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
           console.log("filename", filename) // zzz
           console.log("downloadURL", downloadURL) // zzz
-
+          dialog.audioURL = downloadURL
+          console.log("globalState", globalState) // zzz
+          // updateQuestInFirestore()
           // TODO: attach downloadURL to dialog and save
         })
       }
@@ -221,8 +229,6 @@ export default function FrameViewer(props) {
   }
 
   const renderButtons = () => {
-    const activeScene = globalState.activeScene
-    const { isLastFrame, updateActiveScene } = props
     const { isEndScene } = activeScene
 
     if (isEndScene && isLastFrame) {
@@ -261,10 +267,9 @@ export default function FrameViewer(props) {
   }
 
   const renderFrame = () => {
-    const { frame, scene, isLastFrame } = props
     const critters1 = frame.critters1 || []
     const critters2 = frame.critters2 || []
-    const sceneName = scene.location.name
+    const sceneName = activeScene.location.name
 
     return (
       <div className={`${css.scenes}`}>
@@ -298,8 +303,6 @@ export default function FrameViewer(props) {
       </div>
     )
   }
-
-  const { frame } = props
 
   if (!frame) {
     return null
