@@ -29,7 +29,7 @@ export default function WordGroup(props) {
         return (
           <>
             <span
-              key={wordIndex}
+              key={tabIndex}
               {...autofocus}
               autoFocus={true}
               tabIndex={tabIndex}

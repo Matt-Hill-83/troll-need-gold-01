@@ -1,6 +1,6 @@
 .main {
   .hasAudio {
-    border: 4px solid red !important;
+    border: 1px solid black !important;
   }
 
   .narrative {
@@ -21,7 +21,8 @@
       padding-left: 0.5rem;
 
       .sentenceWord {
-        border: 1px solid transparent !important;
+        border: 1px solid transparent;
+        // border: 1px solid transparent !important;
         border-radius: 10px;
         margin-left: 0;
         padding-right: 0.4em;
