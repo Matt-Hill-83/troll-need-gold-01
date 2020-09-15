@@ -1,8 +1,11 @@
 import _get from "lodash.get"
 import { Button } from "@blueprintjs/core"
+import { IconNames } from "@blueprintjs/icons"
 import { Link } from "react-router-dom"
+import AudioRecorder from "../AudioRecorder/AudioRecorder"
+import cuid from "cuid"
 import cx from "classnames"
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 
 import { myContext } from "../../../myProvider"
 import Character from "../Character/Character"
@@ -10,11 +13,13 @@ import Constants from "../../Utils/Constants/Constants"
 import Images from "../../images/images"
 import WordGroup from "../WordGroup/WordGroup"
 
+import { uploadToFirebaseStorage } from "../../../app/firestore/firebaseService"
+
 import css from "./FrameViewer.module.scss"
-import AudioRecorder from "../AudioRecorder/AudioRecorder"
 
 export default function FrameViewer(props) {
   const [globalState, setGlobalState] = useContext(myContext)
+  const [loading, setLoading] = useState(false)
 
   const renderDialog = ({ cloneIndex }) => {
     const { frame, scene } = props
@@ -39,8 +44,9 @@ export default function FrameViewer(props) {
     })
 
     // TODO: for some reason, probably from cloning, some characters share the same id.
+    console.log("dialog", dialog) // zzz
     const renderedDialogs = dialog.map((line, lineIndex) => {
-      const { text } = line
+      const { text, audioURL } = line
 
       const characterName = line.character || ""
       const characterIndex = charIndexMap[characterName] || 0
@@ -65,7 +71,14 @@ export default function FrameViewer(props) {
             <span className={css.characterName}>{characterName}</span>
           </div>
           {indexIsEven && renderedWordGroup}
-          <AudioRecorder />
+          <Button
+            // onClick={showAudioRecorder}
+            className={css.nextButton}
+            icon={IconNames.RECORD}
+          ></Button>
+          <AudioRecorder saveAudio={saveAudio} />
+
+          {audioURL && <audio src={audioURL} controls="controls" />}
         </div>
       )
     })
@@ -180,6 +193,31 @@ export default function FrameViewer(props) {
         activeFrameIndex: (prevVal.activeFrameIndex += 1),
       }
     })
+  }
+
+  function saveAudio({ blob }) {
+    console.log("blob", blob) // zzz
+    setLoading(true)
+    const filename = cuid() + "-audio" + "." + "blob"
+    const uploadTask = uploadToFirebaseStorage(blob, filename)
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        console.log("Upload is " + progress + "% done")
+      },
+      (error) => {
+        // toast.error(error.messege)
+      },
+      () => {
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+          console.log("filename", filename) // zzz
+          console.log("downloadURL", downloadURL) // zzz
+
+          // TODO: attach downloadURL to dialog and save
+        })
+      }
+    )
   }
 
   const renderButtons = () => {

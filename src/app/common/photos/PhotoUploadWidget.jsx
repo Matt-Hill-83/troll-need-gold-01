@@ -82,7 +82,6 @@ export default function PhotoUploadWidget({ setEditMode }) {
 
   return (
     <Grid>
-      test!!!!!!!!!!!!!!!!
       <AudioRecorder saveAudio={saveAudio} />
       <Grid.Column width={4}>
         <Header color="teal" sub content="Step 1 - Add Photo" />

@@ -73,10 +73,8 @@ export default function PhotosTab({ profile, isCurrentUser }) {
               {photos.map((photo) => {
                 if (photo.name.includes("blob")) {
                   console.log("photo", photo) // zzz
-                  // const blobURL = URL.createObjectURL(photo)
                   return (
                     <div>
-                      test
                       <audio src={photo.url} controls="controls" />
                     </div>
                   )
