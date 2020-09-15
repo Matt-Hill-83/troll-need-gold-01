@@ -1,4 +1,3 @@
-import _get from "lodash.get"
 import { Button } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
 import { Link } from "react-router-dom"

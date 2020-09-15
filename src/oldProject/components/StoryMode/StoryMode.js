@@ -8,6 +8,7 @@ import WordPage from "../WordPage/WordPage.js"
 import WorldViewer from "../WorldViewer/WorldViewer.js"
 
 import css from "./StoryMode.module.scss"
+import FrameViewer from "../FrameViewer/FrameViewer.js"
 
 export default function StoryMode(props) {
   console.log("StoryMode------------------------>>>")
@@ -33,18 +34,11 @@ export default function StoryMode(props) {
         {showMissionConsole && <MissionConsole world={world} />}
       </div>
       <div className={`${css.halfPage} ${css.leftHalf}`}>
-        <WordPage
-          updateActiveScene={updateActiveScene}
-          activeScene={activeScene}
-        />
+        <FrameViewer />
       </div>
 
       <div className={`${css.halfPage} ${css.rightHalf}`}>
-        <WorldViewer
-          updateActiveScene={updateActiveScene}
-          activeScene={activeScene}
-          world={world}
-        />
+        <WorldViewer updateActiveScene={updateActiveScene} />
       </div>
     </div>
   )
