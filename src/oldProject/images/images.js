@@ -2,6 +2,9 @@
 // need to add:
 // warriorGirl01
 // frizzle01
+// mongo01
+
+import mongo01 from "./creatures/mango01.png"
 
 import bag from "./locations/bag.png"
 import barn from "./locations/barn.png"
@@ -457,6 +460,8 @@ const locations = {
 const creatures = {
   blank,
 
+  mongo01,
+  shuri: pantherGirl01,
   taffy01,
   parrot01,
   babyTroll01,

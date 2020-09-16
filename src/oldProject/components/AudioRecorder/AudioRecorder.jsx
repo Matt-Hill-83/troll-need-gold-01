@@ -1,6 +1,8 @@
 import React from "react"
-import "./AudioRecorder.module.scss"
 import MicRecorder from "mic-recorder-to-mp3"
+import css from "./AudioRecorder.module.scss"
+import { Button } from "@blueprintjs/core"
+import { IconNames } from "@blueprintjs/icons"
 
 const Mp3Recorder = new MicRecorder({ bitRate: 128 })
 
@@ -52,21 +54,31 @@ class AudioRecorder extends React.Component {
   }
 
   render() {
-    const { blobURL } = this.state
+    const { isRecording, blobURL } = this.state
 
     return (
-      <div className="App">
+      <div className={css.main}>
         <header className="App-header">
-          <button onClick={this.start} disabled={this.state.isRecording}>
-            Record
-          </button>
-          <button onClick={this.stop} disabled={!this.state.isRecording}>
-            Stop
-          </button>
-          <button onClick={this.save} disabled={this.state.isRecording}>
-            Save
-          </button>
-          <audio src={this.state.blobURL} controls="controls" />
+          {!isRecording && (
+            <Button
+              onClick={this.start}
+              disabled={isRecording}
+              icon={IconNames.RECORD}
+            ></Button>
+          )}
+          {isRecording && (
+            <Button
+              onClick={this.stop}
+              disabled={!isRecording}
+              icon={IconNames.STOP}
+            ></Button>
+          )}
+          <Button
+            onClick={this.save}
+            disabled={isRecording}
+            icon={IconNames.FLOPPY_DISK}
+          ></Button>
+          <audio src={blobURL} controls="controls" />
         </header>
       </div>
     )

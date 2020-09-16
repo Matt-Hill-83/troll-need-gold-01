@@ -1,5 +1,4 @@
 import { Button } from "@blueprintjs/core"
-import { IconNames } from "@blueprintjs/icons"
 import { Link } from "react-router-dom"
 import AudioRecorder from "../AudioRecorder/AudioRecorder"
 import cuid from "cuid"
@@ -79,10 +78,12 @@ export default function FrameViewer(props) {
             <span className={css.characterName}>{characterName}</span>
           </div>
           {indexIsEven && renderedWordGroup}
-          <Button className={css.nextButton} icon={IconNames.RECORD}></Button>
-          <AudioRecorder
-            saveAudio={({ blob }) => saveAudio({ dialog, blob })}
-          />
+          {/* <Button className={css.recordButton} icon={IconNames.RECORD}></Button> */}
+          {true && (
+            <AudioRecorder
+              saveAudio={({ blob }) => saveAudio({ dialog, blob })}
+            />
+          )}
 
           {audioURL && <audio src={audioURL} controls="controls" />}
         </div>
