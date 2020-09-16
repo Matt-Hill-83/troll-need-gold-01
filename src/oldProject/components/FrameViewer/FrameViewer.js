@@ -1,4 +1,4 @@
-import { Button } from "@blueprintjs/core"
+import { Button, ButtonGroup } from "@blueprintjs/core"
 import { Link } from "react-router-dom"
 import AudioRecorder from "../AudioRecorder/AudioRecorder"
 import cuid from "cuid"
@@ -17,6 +17,7 @@ import {
 } from "../../../app/firestore/firebaseService"
 
 import css from "./FrameViewer.module.scss"
+import { IconNames } from "@blueprintjs/icons"
 
 export default function FrameViewer(props) {
   const [globalState, setGlobalState] = useContext(myContext)
@@ -78,14 +79,19 @@ export default function FrameViewer(props) {
             <span className={css.characterName}>{characterName}</span>
           </div>
           {indexIsEven && renderedWordGroup}
-          {/* <Button className={css.recordButton} icon={IconNames.RECORD}></Button> */}
-          {true && (
-            <AudioRecorder
-              saveAudio={({ blob }) => saveAudio({ dialog, blob })}
-            />
+          {false && (
+            <ButtonGroup className={css.recordButton}>
+              {true && <audio src={audioURL} />}
+              {/* {true && <audio src={audioURL} controls="controls" />} */}
+              {/* {audioURL && <audio src={audioURL} controls="controls" />} */}
+              <Button icon={IconNames.STEP_FORWARD} />
+              {true && (
+                <AudioRecorder
+                  saveAudio={({ blob }) => saveAudio({ dialog, blob })}
+                />
+              )}
+            </ButtonGroup>
           )}
-
-          {audioURL && <audio src={audioURL} controls="controls" />}
         </div>
       )
     })
@@ -238,7 +244,7 @@ export default function FrameViewer(props) {
     if (isEndScene && isLastFrame) {
       return (
         <div className={css.buttonsContainer}>
-          <Link to={"/quests"} className={css.newGameButton}>
+          <Link to={"/books"} className={css.newGameButton}>
             New Quest
           </Link>
         </div>
