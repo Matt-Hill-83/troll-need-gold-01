@@ -209,6 +209,8 @@ export default function FrameViewer(props) {
     setLoading(true)
 
     const filename = cuid() + "-audio" + "." + "blob"
+    console.log("filename", filename) // zzz
+    console.log("blob", blob) // zzz
     const uploadTask = uploadToFirebaseStorage(blob, filename)
     uploadTask.on(
       "state_changed",
@@ -222,12 +224,6 @@ export default function FrameViewer(props) {
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
           dialog.audioURL = downloadURL
-          // const mutatedDialog =
-          //   globalState.activeScene.frameSet.frames[0].dialog
-
-          // const mutatedDialog2 =
-          //   globalState.world.newGrid5[0].frameSet.frames[0].dialog
-
           updateQuestInFirestore(globalState.world)
         })
       }
