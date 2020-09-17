@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import AudioRecorder from "../AudioRecorder/AudioRecorder"
 import cuid from "cuid"
 import cx from "classnames"
-import React, { useContext, useState } from "react"
+import React, { useContext, useState, useRef } from "react"
 
 import { myContext } from "../../../myProvider"
 import Character from "../Character/Character"
@@ -22,6 +22,7 @@ import { IconNames } from "@blueprintjs/icons"
 export default function FrameViewer(props) {
   const [globalState, setGlobalState] = useContext(myContext)
   const [loading, setLoading] = useState(false)
+  const audioElement = useRef(null)
 
   const { activeFrameIndex, activeScene } = globalState
   const { frames = [] } = activeScene.frameSet
@@ -79,13 +80,13 @@ export default function FrameViewer(props) {
             <span className={css.characterName}>{characterName}</span>
           </div>
           {indexIsEven && renderedWordGroup}
-          {false && (
+          {true && (
             <ButtonGroup className={css.recordButton}>
               {true && <audio src={audioURL} />}
               {/* {true && <audio src={audioURL} controls="controls" />} */}
               {/* {audioURL && <audio src={audioURL} controls="controls" />} */}
-              <Button icon={IconNames.STEP_FORWARD} />
-              {true && (
+              <Button icon={IconNames.PLAY} />
+              {false && (
                 <AudioRecorder
                   saveAudio={({ blob }) => saveAudio({ dialog, blob })}
                 />
@@ -175,7 +176,6 @@ export default function FrameViewer(props) {
 
   const renderPosableCritters = () => {
     const { faces = [] } = frame
-
     if (!frame) return null
 
     const posableCharacters = Constants.posableCharacters

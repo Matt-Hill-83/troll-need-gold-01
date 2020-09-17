@@ -4,7 +4,7 @@ import cx from "classnames"
 import css from "./WordGroup.module.scss"
 
 export default function WordGroup(props) {
-  const inputEl = useRef(null)
+  const audioElement = useRef(null)
   const { className } = props
 
   const getAudioFileForWord = ({ word }) => {
@@ -54,14 +54,14 @@ export default function WordGroup(props) {
   }
 
   const playAudio = ({ sound }) => {
-    const player = inputEl.current
+    const player = audioElement.current
     player.src = sound
     player.play()
   }
 
   return (
     <div className={`${css.main} ${className}`}>
-      <audio ref={inputEl}>
+      <audio ref={audioElement}>
         <source src={"sound"} type="audio/mp3" />
       </audio>
       {renderNarrative()}
