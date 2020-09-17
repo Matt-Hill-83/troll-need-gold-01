@@ -9,17 +9,17 @@ export default function ProfileContent({ profile, isCurrentUser }) {
     {
       menuItem: "About",
       render: () => (
-        <AboutTab
-          profile={profile}
-          isCurrentUser={isCurrentUser}
-          activeTab={activeTab}
-        />
+        <AboutTab profile={profile} isCurrentUser={isCurrentUser} />
       ),
     },
     {
       menuItem: "Photos",
       render: () => (
-        <PhotosTab profile={profile} isCurrentUser={isCurrentUser} />
+        <PhotosTab
+          profile={profile}
+          isCurrentUser={isCurrentUser}
+          activeTab={activeTab}
+        />
       ),
     },
   ]

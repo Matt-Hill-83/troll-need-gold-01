@@ -70,14 +70,7 @@ export default function FrameViewer(props) {
         <WordGroup lineIndex={lineIndex} story={[text]} />
       )
 
-      const getAudioFileForWord = ({ word }) => {
-        word = word.replace(/[.|,|/?]/, "")
-        return Sounds[word] || null
-      }
-
-      // const test = getAudioFileForWord({ word: "is" })
-      const test =
-        "https://firebasestorage.googleapis.com/v0/b/troll-…=media&token=52107d8b-9aa8-4e92-a910-023e43fbe75a"
+      const test = `https://firebasestorage.googleapis.com/v0/b/troll-need-gold-02.appspot.com/o/mrOWUjrN11g1KsoG2YfDaLH14Pg1%2Fuser_images%2Fckf6e2yz500003h5oz9byr6r5-audio.blob?alt=media&token=d35ef8ae-3411-467b-b9a9-d023d623f98d`
 
       return (
         <div
