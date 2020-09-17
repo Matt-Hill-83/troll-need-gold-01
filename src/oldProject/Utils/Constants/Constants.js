@@ -4,6 +4,8 @@ export default class Constants {
   // static isProdRelease = true
   static isProdRelease = false
 
+  static featureFlags = { recordAudio: true }
+
   static getDefaultQuestStatus = () => {
     return {
       activeMissionIndex: 0,

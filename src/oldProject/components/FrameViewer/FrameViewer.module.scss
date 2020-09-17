@@ -419,8 +419,13 @@
     cursor: pointer;
   }
 
-  .recordButton {
+  .audioButtons {
     cursor: pointer;
+    cursor: pointer;
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 
   .arrowNavigatorBox {

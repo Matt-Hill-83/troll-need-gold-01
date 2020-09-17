@@ -17,12 +17,10 @@ import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
 import AudioPlayer from "../AudioPlayer/AudioPlayer"
 
 import css from "./FrameViewer.module.scss"
-import { IconNames } from "@blueprintjs/icons"
 
 export default function FrameViewer(props) {
   const [globalState, setGlobalState] = useContext(myContext)
   const [loading, setLoading] = useState(false)
-  const [showAudioRecorder, setShowAudioRecorder] = useState(false)
 
   const { activeFrameIndex, activeScene } = globalState
   const { frames = [] } = activeScene.frameSet
@@ -53,10 +51,8 @@ export default function FrameViewer(props) {
     })
 
     // TODO: for some reason, probably from cloning, some characters share the same id.
-    console.log("dialog", dialog) // zzz
     const renderedDialogs = dialog.map((line, lineIndex) => {
       const { text, audioURL } = line
-      console.log("audioURL", audioURL) // zzz
 
       const characterName = line.character || ""
       const characterIndex = charIndexMap[characterName] || 0
@@ -82,18 +78,13 @@ export default function FrameViewer(props) {
           </div>
           {indexIsEven && renderedWordGroup}
 
-          <ButtonGroup className={css.recordButton}>
+          <ButtonGroup className={css.audioButtons}>
             {audioURL && (
               <AudioPlayer className={css.audioPlayer} sound={audioURL} />
             )}
-            {!showAudioRecorder && (
-              <Button onClick={toggleAudioRecorder} icon={IconNames.RECORD} />
-            )}
-            {showAudioRecorder && (
-              <AudioRecorder
-                saveAudio={({ blob }) => saveAudio({ dialog: line, blob })}
-              />
-            )}
+            <AudioRecorder
+              saveAudio={({ blob }) => saveAudio({ dialog: line, blob })}
+            />
           </ButtonGroup>
         </div>
       )
@@ -105,15 +96,12 @@ export default function FrameViewer(props) {
       "margin-top": `${cloneIndex * scalingFactor}vh`,
       border: "3px solid red",
     }
+
     return (
       <div className={css.dialogScroller} style={style}>
         <div className={css.dialog}>{renderedDialogs}</div>
       </div>
     )
-  }
-
-  const toggleAudioRecorder = () => {
-    setShowAudioRecorder(!showAudioRecorder)
   }
 
   const getMood = ({ name, faces }) => {
@@ -218,7 +206,6 @@ export default function FrameViewer(props) {
   }
 
   function saveAudio({ dialog, blob }) {
-    // console.log("blob", blob) // zzz
     setLoading(true)
 
     const filename = cuid() + "-audio" + "." + "blob"
@@ -234,17 +221,12 @@ export default function FrameViewer(props) {
       },
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-          // console.log("filename", filename) // zzz
-          // console.log("downloadURL", downloadURL) // zzz
           dialog.audioURL = downloadURL
-          // console.log("globalState", globalState) // zzz
           // const mutatedDialog =
           //   globalState.activeScene.frameSet.frames[0].dialog
-          // console.log("mutatedDialog", mutatedDialog) // zzz
 
           // const mutatedDialog2 =
           //   globalState.world.newGrid5[0].frameSet.frames[0].dialog
-          // console.log("mutatedDialog2", mutatedDialog2) // zzz
 
           updateQuestInFirestore(globalState.world)
         })

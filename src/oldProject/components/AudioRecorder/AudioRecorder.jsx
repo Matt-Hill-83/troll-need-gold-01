@@ -1,8 +1,9 @@
-import React from "react"
-import MicRecorder from "mic-recorder-to-mp3"
-import css from "./AudioRecorder.module.scss"
-import { Button } from "@blueprintjs/core"
+import { ButtonGroup, Button } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
+import MicRecorder from "mic-recorder-to-mp3"
+import React from "react"
+
+import css from "./AudioRecorder.module.scss"
 
 const Mp3Recorder = new MicRecorder({ bitRate: 128 })
 
@@ -14,6 +15,7 @@ class AudioRecorder extends React.Component {
       blobURL: "",
       isBlocked: false,
       blob: null,
+      showAudioRecorder: false,
     }
   }
 
@@ -39,6 +41,7 @@ class AudioRecorder extends React.Component {
   save = () => {
     const { blob } = this.state
     this.props.saveAudio({ blob })
+    this.toggleAudioRecorder()
   }
 
   componentDidMount() {
@@ -53,33 +56,48 @@ class AudioRecorder extends React.Component {
     )
   }
 
+  toggleAudioRecorder = () => {
+    this.setState({ showAudioRecorder: !this.state.showAudioRecorder })
+  }
+
   render() {
-    const { isRecording, blobURL } = this.state
+    const { isRecording, blobURL, showAudioRecorder } = this.state
+
+    if (!showAudioRecorder) {
+      return (
+        <Button
+          onClick={this.toggleAudioRecorder}
+          icon={IconNames.RECORD}
+          disabled={true}
+        />
+      )
+    }
 
     return (
       <div className={css.main}>
-        <header className="App-header">
+        <ButtonGroup>
           {!isRecording && (
             <Button
               onClick={this.start}
               disabled={isRecording}
               icon={IconNames.RECORD}
-            ></Button>
+            />
           )}
           {isRecording && (
             <Button
               onClick={this.stop}
               disabled={!isRecording}
               icon={IconNames.STOP}
-            ></Button>
+            />
           )}
+
           <Button
             onClick={this.save}
             disabled={isRecording}
             icon={IconNames.FLOPPY_DISK}
-          ></Button>
-          <audio src={blobURL} controls="controls" />
-        </header>
+          />
+        </ButtonGroup>
+        <audio src={blobURL} controls="controls" />
       </div>
     )
   }

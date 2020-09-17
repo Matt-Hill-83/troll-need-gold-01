@@ -1,8 +1,8 @@
 import React, { useRef } from "react"
 import Sounds from "../../Sounds/Sounds"
 import cx from "classnames"
+
 import css from "./WordGroup.module.scss"
-// import AudioPlayer from "../AudioPlayer/AudioPlayer"
 
 export default function WordGroup(props) {
   const audioElement = useRef(null)
@@ -34,13 +34,13 @@ export default function WordGroup(props) {
               {...autofocus}
               autoFocus={true}
               tabIndex={tabIndex}
-              className={cx(css.sentenceWord, { [css.hasAudio]: !!sound })}
-              onClick={sound ? () => playAudio({ sound }) : () => {}}
-              // onFocus={() => playAudio({ sound })}
+              className={cx(css.sentenceWord)}
+              // className={cx(css.sentenceWord, { [css.hasAudio]: !!sound })}
+              onClick={false ? () => playAudio({ sound }) : () => {}}
+              // onClick={sound ? () => playAudio({ sound }) : () => {}}
             >
               {word}
             </span>
-            {/* {sound && <AudioPlayer sound={sound} />} */}
           </>
         )
       })
