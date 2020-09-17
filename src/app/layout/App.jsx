@@ -33,7 +33,7 @@ export default function App() {
         render={() => (
           <>
             <NavBar />
-            <Route exact path="/" component={QuestDashboard} />
+            <Route exact path="/" component={BookDashboard} />
             <Container className="main">
               <Route exact path="/quests" component={QuestDashboard} />
               <Route exact path="/books" component={BookDashboard} />

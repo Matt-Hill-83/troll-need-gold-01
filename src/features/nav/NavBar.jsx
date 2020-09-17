@@ -5,17 +5,19 @@ import SignedOutMenu from "./SignedOutMenu"
 import SignedInMenu from "./SignedInMenu"
 import { useSelector } from "react-redux"
 
+import css from "./NavBar.module.scss"
+import Constants from "../../oldProject/Utils/Constants/Constants"
+
 export default function NavBar({ setFormOpen }) {
   const { authenticated } = useSelector((state) => state.auth)
 
   return (
-    <Menu inverted fixed="top">
-      <Container>
+    <Menu inverted fixed="top" className={css.main}>
+      <Menu.Item as={NavLink} to="/books" name="Books List" />
+      {!Constants.isProdRelease && (
         <Menu.Item as={NavLink} to="/quests" name="Quests List" />
-        <Menu.Item as={NavLink} to="/books" name="Books List" />
-        {/* <Menu.Item as={NavLink} to="/books" name="Books" /> */}
-        {authenticated ? <SignedInMenu /> : <SignedOutMenu />}
-      </Container>
+      )}
+      {authenticated ? <SignedInMenu /> : <SignedOutMenu />}
     </Menu>
   )
 }
