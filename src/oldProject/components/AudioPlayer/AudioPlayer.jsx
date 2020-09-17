@@ -17,7 +17,7 @@ export default function AudioPlayer(props) {
 
   return (
     <Button
-      className={cx(css.main, css.button)}
+      className={cx(css.main)}
       onClick={() => playAudio({ sound })}
       icon={IconNames.PLAY}
     >
