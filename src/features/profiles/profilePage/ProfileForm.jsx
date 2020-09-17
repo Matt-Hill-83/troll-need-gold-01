@@ -5,7 +5,7 @@ import { toast } from "react-toastify"
 import * as Yup from "yup"
 
 import { updateUserProfile } from "../../../app/firestore/firestoreService"
-import MyTextArea from "../../../app/common/form/MyTextArea"
+// import MyTextArea from "../../../app/common/form/MyTextArea"
 import MyTextInput from "../../../app/common/form/MyTextInput"
 
 export default function ProfileForm({ profile }) {
@@ -33,7 +33,7 @@ export default function ProfileForm({ profile }) {
       {({ isSubmitting, isValid, dirty }) => (
         <Form className="ui form">
           <MyTextInput name="displayName" placeholder="Display Name" />
-          <MyTextArea
+          {/* <MyTextArea
             name="description"
             placeholder="Description"
             label="description"
@@ -43,7 +43,7 @@ export default function ProfileForm({ profile }) {
             name="userStatus"
             placeholder="userStatus"
             label="props"
-          />
+          /> */}
           <Button
             loading={isSubmitting}
             disabled={isSubmitting || !isValid || !dirty}

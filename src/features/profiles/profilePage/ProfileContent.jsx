@@ -7,19 +7,19 @@ export default function ProfileContent({ profile, isCurrentUser }) {
   const [activeTab, setActiveTab] = useState(1)
   const panes = [
     {
-      menuItem: "About",
-      render: () => (
-        <AboutTab profile={profile} isCurrentUser={isCurrentUser} />
-      ),
-    },
-    {
       menuItem: "Photos",
       render: () => (
         <PhotosTab
           profile={profile}
           isCurrentUser={isCurrentUser}
-          activeTab={activeTab}
+          // activeTab={activeTab}
         />
+      ),
+    },
+    {
+      menuItem: "About",
+      render: () => (
+        <AboutTab profile={profile} isCurrentUser={isCurrentUser} />
       ),
     },
   ]

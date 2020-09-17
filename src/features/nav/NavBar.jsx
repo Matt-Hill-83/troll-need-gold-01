@@ -13,7 +13,7 @@ export default function NavBar({ setFormOpen }) {
 
   return (
     <Menu inverted fixed="top" className={css.main}>
-      <Menu.Item as={NavLink} to="/books" name="Books List" />
+      <Menu.Item as={NavLink} to="/books" name="Books" />
       {!Constants.isProdRelease && (
         <Menu.Item as={NavLink} to="/quests" name="Quests List" />
       )}
