@@ -6,7 +6,6 @@ import css from "./AudioPlayer.module.scss"
 
 export default function AudioPlayer(props) {
   const audioElement = useRef(null)
-  // const sound = `https://firebasestorage.googleapis.com/v0/b/troll-need-gold-02.appspot.com/o/mrOWUjrN11g1KsoG2YfDaLH14Pg1%2Fuser_images%2Fckf6e2yz500003h5oz9byr6r5-audio.blob?alt=media&token=d35ef8ae-3411-467b-b9a9-d023d623f98d`
   const { sound } = props
 
   const playAudio = ({ sound }) => {

@@ -17,10 +17,12 @@ import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
 import AudioPlayer from "../AudioPlayer/AudioPlayer"
 
 import css from "./FrameViewer.module.scss"
+import { IconNames } from "@blueprintjs/icons"
 
 export default function FrameViewer(props) {
   const [globalState, setGlobalState] = useContext(myContext)
   const [loading, setLoading] = useState(false)
+  const [showAudioRecorder, setShowAudioRecorder] = useState(false)
 
   const { activeFrameIndex, activeScene } = globalState
   const { frames = [] } = activeScene.frameSet
@@ -79,19 +81,20 @@ export default function FrameViewer(props) {
             <span className={css.characterName}>{characterName}</span>
           </div>
           {indexIsEven && renderedWordGroup}
-          {true && (
-            <ButtonGroup className={css.recordButton}>
-              {audioURL && (
-                // <AudioPlayer className={css.audioPlayer} sound={test} />
-                <AudioPlayer className={css.audioPlayer} sound={audioURL} />
-              )}
-              {true && (
-                <AudioRecorder
-                  saveAudio={({ blob }) => saveAudio({ dialog: line, blob })}
-                />
-              )}
-            </ButtonGroup>
-          )}
+
+          <ButtonGroup className={css.recordButton}>
+            {audioURL && (
+              <AudioPlayer className={css.audioPlayer} sound={audioURL} />
+            )}
+            {!showAudioRecorder && (
+              <Button onClick={toggleAudioRecorder} icon={IconNames.RECORD} />
+            )}
+            {showAudioRecorder && (
+              <AudioRecorder
+                saveAudio={({ blob }) => saveAudio({ dialog: line, blob })}
+              />
+            )}
+          </ButtonGroup>
         </div>
       )
     })
@@ -107,6 +110,10 @@ export default function FrameViewer(props) {
         <div className={css.dialog}>{renderedDialogs}</div>
       </div>
     )
+  }
+
+  const toggleAudioRecorder = () => {
+    setShowAudioRecorder(!showAudioRecorder)
   }
 
   const getMood = ({ name, faces }) => {
