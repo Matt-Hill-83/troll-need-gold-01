@@ -13,6 +13,7 @@ import WordGroup from "../WordGroup/WordGroup"
 
 import { uploadToFirebaseStorage } from "../../../app/firestore/firebaseService"
 import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
+import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget"
 
 import AudioPlayer from "../AudioPlayer/AudioPlayer"
 
@@ -21,6 +22,10 @@ import css from "./FrameViewer.module.scss"
 export default function FrameViewer(props) {
   const [globalState, setGlobalState] = useContext(myContext)
   const [loading, setLoading] = useState(false)
+
+  const { getProfile } = useUpdateProfileWidget()
+  const loggedIn = getProfile().id
+  console.log("getProfile().id", getProfile().id) // zzz
 
   const { activeFrameIndex, activeScene } = globalState
   const { frames = [] } = activeScene.frameSet

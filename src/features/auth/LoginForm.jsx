@@ -54,7 +54,7 @@ export default function LoginForm() {
               fluid
               size="large"
               color="teal"
-              content="Login"
+              content="Log in"
             />
             <Divider horizontal>Or</Divider>
             <SocialLogin />
