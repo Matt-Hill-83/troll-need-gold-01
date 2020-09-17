@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import AudioRecorder from "../AudioRecorder/AudioRecorder"
 import cuid from "cuid"
 import cx from "classnames"
-import React, { useContext, useState, useRef } from "react"
+import React, { useContext, useState } from "react"
 
 import { myContext } from "../../../myProvider"
 import Character from "../Character/Character"
@@ -11,20 +11,16 @@ import Constants from "../../Utils/Constants/Constants"
 import Images from "../../images/images"
 import WordGroup from "../WordGroup/WordGroup"
 
-import {
-  uploadToFirebaseStorage,
-  updateQuestInFirestore,
-} from "../../../app/firestore/firebaseService"
+import { uploadToFirebaseStorage } from "../../../app/firestore/firebaseService"
+import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
+
+import AudioPlayer from "../AudioPlayer/AudioPlayer"
 
 import css from "./FrameViewer.module.scss"
-import { IconNames } from "@blueprintjs/icons"
-import AudioPlayer from "../AudioPlayer/AudioPlayer"
-import Sounds from "../../Sounds/Sounds"
 
 export default function FrameViewer(props) {
   const [globalState, setGlobalState] = useContext(myContext)
   const [loading, setLoading] = useState(false)
-  const audioElement = useRef(null)
 
   const { activeFrameIndex, activeScene } = globalState
   const { frames = [] } = activeScene.frameSet
@@ -58,6 +54,7 @@ export default function FrameViewer(props) {
     console.log("dialog", dialog) // zzz
     const renderedDialogs = dialog.map((line, lineIndex) => {
       const { text, audioURL } = line
+      console.log("audioURL", audioURL) // zzz
 
       const characterName = line.character || ""
       const characterIndex = charIndexMap[characterName] || 0
@@ -69,8 +66,6 @@ export default function FrameViewer(props) {
       const renderedWordGroup = (
         <WordGroup lineIndex={lineIndex} story={[text]} />
       )
-
-      const test = `https://firebasestorage.googleapis.com/v0/b/troll-need-gold-02.appspot.com/o/mrOWUjrN11g1KsoG2YfDaLH14Pg1%2Fuser_images%2Fckf6e2yz500003h5oz9byr6r5-audio.blob?alt=media&token=d35ef8ae-3411-467b-b9a9-d023d623f98d`
 
       return (
         <div
@@ -86,17 +81,13 @@ export default function FrameViewer(props) {
           {indexIsEven && renderedWordGroup}
           {true && (
             <ButtonGroup className={css.recordButton}>
-              {true && <audio src={audioURL} />}
-              {/* {true && <audio src={audioURL} controls="controls" />} */}
-              {/* {audioURL && <audio src={audioURL} controls="controls" />} */}
-              {/* <Button icon={IconNames.PLAY} /> */}
-              {true && (
-                <AudioPlayer className={css.audioPlayer} sound={test} />
-                // <AudioPlayer className={css.audioPlayer} sound={audioURL} />
+              {audioURL && (
+                // <AudioPlayer className={css.audioPlayer} sound={test} />
+                <AudioPlayer className={css.audioPlayer} sound={audioURL} />
               )}
-              {false && (
+              {true && (
                 <AudioRecorder
-                  saveAudio={({ blob }) => saveAudio({ dialog, blob })}
+                  saveAudio={({ blob }) => saveAudio({ dialog: line, blob })}
                 />
               )}
             </ButtonGroup>
@@ -220,7 +211,7 @@ export default function FrameViewer(props) {
   }
 
   function saveAudio({ dialog, blob }) {
-    console.log("blob", blob) // zzz
+    // console.log("blob", blob) // zzz
     setLoading(true)
 
     const filename = cuid() + "-audio" + "." + "blob"
@@ -236,12 +227,19 @@ export default function FrameViewer(props) {
       },
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-          console.log("filename", filename) // zzz
-          console.log("downloadURL", downloadURL) // zzz
+          // console.log("filename", filename) // zzz
+          // console.log("downloadURL", downloadURL) // zzz
           dialog.audioURL = downloadURL
-          console.log("globalState", globalState) // zzz
-          // updateQuestInFirestore()
-          // TODO: attach downloadURL to dialog and save
+          // console.log("globalState", globalState) // zzz
+          // const mutatedDialog =
+          //   globalState.activeScene.frameSet.frames[0].dialog
+          // console.log("mutatedDialog", mutatedDialog) // zzz
+
+          // const mutatedDialog2 =
+          //   globalState.world.newGrid5[0].frameSet.frames[0].dialog
+          // console.log("mutatedDialog2", mutatedDialog2) // zzz
+
+          updateQuestInFirestore(globalState.world)
         })
       }
     )
@@ -275,7 +273,7 @@ export default function FrameViewer(props) {
   }
 
   const cloneDialogs = () => {
-    const numPages = 3
+    const numPages = 1
     const dialogClones = []
     for (let cloneIndex = 0; cloneIndex < numPages; cloneIndex++) {
       const dialog = renderDialog({ cloneIndex })
