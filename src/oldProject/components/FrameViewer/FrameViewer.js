@@ -33,8 +33,8 @@ export default function FrameViewer(props) {
     const allCharactersInScene = {}
 
     frames.forEach((frame) => {
-      const test = [...frame.critters1, ...frame.critters2]
-      test.forEach((char) => {
+      const critters = [...frame.critters1, ...frame.critters2]
+      critters.forEach((char) => {
         allCharactersInScene[char.name] = char
       })
     })
@@ -209,8 +209,6 @@ export default function FrameViewer(props) {
     setLoading(true)
 
     const filename = cuid() + "-audio" + "." + "blob"
-    console.log("filename", filename) // zzz
-    console.log("blob", blob) // zzz
     const uploadTask = uploadToFirebaseStorage(blob, filename)
     uploadTask.on(
       "state_changed",
