@@ -1,6 +1,7 @@
 import React, { useRef } from "react"
 import { Button } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
+import cx from "classnames"
 
 import css from "./AudioPlayer.module.scss"
 
@@ -16,7 +17,7 @@ export default function AudioPlayer(props) {
 
   return (
     <Button
-      className={css.main}
+      className={cx(css.main, css.button)}
       onClick={() => playAudio({ sound })}
       icon={IconNames.PLAY}
     >

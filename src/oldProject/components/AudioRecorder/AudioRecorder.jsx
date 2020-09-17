@@ -1,5 +1,7 @@
 import { ButtonGroup, Button } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
+import Constants from "../../Utils/Constants/Constants"
+import cx from "classnames"
 import MicRecorder from "mic-recorder-to-mp3"
 import React from "react"
 
@@ -62,13 +64,15 @@ class AudioRecorder extends React.Component {
 
   render() {
     const { isRecording, blobURL, showAudioRecorder } = this.state
+    const disabled = Constants.featureFlags.recordAudio
 
     if (!showAudioRecorder) {
       return (
         <Button
+          className={cx(css.button, { [css.disabled]: disabled })}
           onClick={this.toggleAudioRecorder}
           icon={IconNames.RECORD}
-          disabled={true}
+          disabled={disabled}
         />
       )
     }
@@ -78,6 +82,7 @@ class AudioRecorder extends React.Component {
         <ButtonGroup>
           {!isRecording && (
             <Button
+              className={css.button}
               onClick={this.start}
               disabled={isRecording}
               icon={IconNames.RECORD}
@@ -85,6 +90,7 @@ class AudioRecorder extends React.Component {
           )}
           {isRecording && (
             <Button
+              className={css.button}
               onClick={this.stop}
               disabled={!isRecording}
               icon={IconNames.STOP}
@@ -92,6 +98,7 @@ class AudioRecorder extends React.Component {
           )}
 
           <Button
+            className={css.button}
             onClick={this.save}
             disabled={isRecording}
             icon={IconNames.FLOPPY_DISK}

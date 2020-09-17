@@ -2,7 +2,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid red !important;
-  // position: absolute;
   overflow: hidden;
+}
+
+.button {
+  cursor: pointer;
+}
+
+.disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
