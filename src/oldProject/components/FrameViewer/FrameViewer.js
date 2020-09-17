@@ -1,21 +1,20 @@
 import { Button, ButtonGroup } from "@blueprintjs/core"
 import { Link } from "react-router-dom"
-import AudioRecorder from "../AudioRecorder/AudioRecorder"
 import cuid from "cuid"
 import cx from "classnames"
 import React, { useContext, useState } from "react"
 
 import { myContext } from "../../../myProvider"
+import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
+import { uploadToFirebaseStorage } from "../../../app/firestore/firebaseService"
 import Character from "../Character/Character"
 import Constants from "../../Utils/Constants/Constants"
 import Images from "../../images/images"
+import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget"
 import WordGroup from "../WordGroup/WordGroup"
 
-import { uploadToFirebaseStorage } from "../../../app/firestore/firebaseService"
-import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
-import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget"
-
 import AudioPlayer from "../AudioPlayer/AudioPlayer"
+import AudioRecorder from "../AudioRecorder/AudioRecorder"
 
 import css from "./FrameViewer.module.scss"
 
@@ -24,7 +23,7 @@ export default function FrameViewer(props) {
   const [loading, setLoading] = useState(false)
 
   const { getProfile } = useUpdateProfileWidget()
-  const loggedIn = getProfile().id
+  const loggedIn = !!getProfile().id
   console.log("getProfile().id", getProfile().id) // zzz
 
   const { activeFrameIndex, activeScene } = globalState
@@ -87,9 +86,11 @@ export default function FrameViewer(props) {
             {audioURL && (
               <AudioPlayer className={css.audioPlayer} sound={audioURL} />
             )}
-            <AudioRecorder
-              saveAudio={({ blob }) => saveAudio({ dialog: line, blob })}
-            />
+            {loggedIn && (
+              <AudioRecorder
+                saveAudio={({ blob }) => saveAudio({ dialog: line, blob })}
+              />
+            )}
           </ButtonGroup>
         </div>
       )

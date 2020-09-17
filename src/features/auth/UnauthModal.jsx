@@ -33,7 +33,7 @@ export default function UnauthModal({ history, setModalOpen }) {
     <Modal open={open} size="mini" onClose={handleClose}>
       <Modal.Header content="You need to be signed in to do that" />
       <Modal.Content>
-        <p>Please either login or register to see this content</p>
+        <p>Please either log in or register to see this content</p>
         <Button.Group widths={4}>
           <Button
             fluid
