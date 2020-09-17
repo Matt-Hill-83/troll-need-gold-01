@@ -6,6 +6,10 @@
   display: flex;
   flex: 1;
 
+  .audioPlayer {
+    border: 4px solid blue !important;
+  }
+
   .clickMapMsg {
     display: flex;
     flex: 1;

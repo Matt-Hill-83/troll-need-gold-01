@@ -18,6 +18,8 @@ import {
 
 import css from "./FrameViewer.module.scss"
 import { IconNames } from "@blueprintjs/icons"
+import AudioPlayer from "../AudioPlayer/AudioPlayer"
+import Sounds from "../../Sounds/Sounds"
 
 export default function FrameViewer(props) {
   const [globalState, setGlobalState] = useContext(myContext)
@@ -68,6 +70,15 @@ export default function FrameViewer(props) {
         <WordGroup lineIndex={lineIndex} story={[text]} />
       )
 
+      const getAudioFileForWord = ({ word }) => {
+        word = word.replace(/[.|,|/?]/, "")
+        return Sounds[word] || null
+      }
+
+      // const test = getAudioFileForWord({ word: "is" })
+      const test =
+        "https://firebasestorage.googleapis.com/v0/b/troll-…=media&token=52107d8b-9aa8-4e92-a910-023e43fbe75a"
+
       return (
         <div
           className={cx(css.line, css[className], {
@@ -85,7 +96,11 @@ export default function FrameViewer(props) {
               {true && <audio src={audioURL} />}
               {/* {true && <audio src={audioURL} controls="controls" />} */}
               {/* {audioURL && <audio src={audioURL} controls="controls" />} */}
-              <Button icon={IconNames.PLAY} />
+              {/* <Button icon={IconNames.PLAY} /> */}
+              {true && (
+                <AudioPlayer className={css.audioPlayer} sound={test} />
+                // <AudioPlayer className={css.audioPlayer} sound={audioURL} />
+              )}
               {false && (
                 <AudioRecorder
                   saveAudio={({ blob }) => saveAudio({ dialog, blob })}
@@ -214,6 +229,7 @@ export default function FrameViewer(props) {
   function saveAudio({ dialog, blob }) {
     console.log("blob", blob) // zzz
     setLoading(true)
+
     const filename = cuid() + "-audio" + "." + "blob"
     const uploadTask = uploadToFirebaseStorage(blob, filename)
     uploadTask.on(

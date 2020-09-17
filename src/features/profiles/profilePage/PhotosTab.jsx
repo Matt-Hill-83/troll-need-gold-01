@@ -14,7 +14,8 @@ import { deleteFromFirebaseStorage } from "../../../app/firestore/firebaseServic
 
 export default function PhotosTab({ profile, isCurrentUser }) {
   const dispatch = useDispatch()
-  const [editMode, setEditMode] = useState(true)
+  // const [editMode, setEditMode] = useState(true)
+  const [editMode, setEditMode] = useState(false)
   const { loading } = useSelector((state) => state.async)
   const { photos } = useSelector((state) => state.profile)
   const [updating, setUpdating] = useState({ isUpdating: false, target: null })
@@ -73,6 +74,7 @@ export default function PhotosTab({ profile, isCurrentUser }) {
               {photos.map((photo) => {
                 if (photo.name.includes("blob")) {
                   console.log("photo", photo) // zzz
+                  console.log("photo.url", photo.url) // zzz
                   return (
                     <div>
                       <audio src={photo.url} controls="controls" />
