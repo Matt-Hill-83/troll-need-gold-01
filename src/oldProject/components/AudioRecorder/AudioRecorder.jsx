@@ -64,15 +64,15 @@ class AudioRecorder extends React.Component {
 
   render() {
     const { isRecording, blobURL, showAudioRecorder } = this.state
-    const disabled = Constants.featureFlags.recordAudio
+    const recordAudioEnabled = Constants.featureFlags.recordAudio
 
     if (!showAudioRecorder) {
       return (
         <Button
-          className={cx(css.button, { [css.disabled]: disabled })}
+          className={cx(css.button, { [css.disabled]: !recordAudioEnabled })}
           onClick={this.toggleAudioRecorder}
           icon={IconNames.RECORD}
-          disabled={disabled}
+          disabled={!recordAudioEnabled}
         />
       )
     }
