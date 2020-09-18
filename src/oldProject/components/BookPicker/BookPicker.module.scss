@@ -32,6 +32,15 @@
   margin: unset;
   border: 2px solid #000 !important;
 
+  .titlePageImage {
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    left: 53vw;
+    width: 42%;
+    top: 4vh;
+  }
+
   .buttonIcon {
     border: 1px solid red !important;
 
@@ -53,6 +62,8 @@
 
   .bookEditor {
     position: absolute;
+    z-index: 2;
+
     border: 1px solid black !important;
     width: 50vw;
     height: 60vh;

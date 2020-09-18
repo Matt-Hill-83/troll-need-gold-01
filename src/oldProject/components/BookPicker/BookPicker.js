@@ -123,6 +123,13 @@ export default function BookPicker(props) {
     }
 
     const bookTableOfContents01 = Images.backgrounds["bookTableOfContents01"]
+    // const titlePageImage = selectedBook.titlePageImage || ""
+    let titlePageImage = ""
+    if (selectedBook.titlePageImage) {
+      titlePageImage = Images.backgrounds[selectedBook.titlePageImage]
+    }
+
+    console.log("titlePageImage", titlePageImage) // zzz
 
     return (
       <div className={css.chapterView}>
@@ -132,12 +139,16 @@ export default function BookPicker(props) {
           src={bookTableOfContents01}
           alt={"imagex"}
         />
-
+        test
+        <img
+          className={cx(css.titlePageImage)}
+          src={titlePageImage}
+          alt={"imagex"}
+        />
         <QuestList
           worlds={filteredBooksFromChapters}
           className={css.questList}
         />
-
         {!isProdRelease && (
           <ButtonGroup className={css.buttonGroup} color="primary">
             <Button onClick={() => releaseToProd({ selectedBook })}>
@@ -196,6 +207,7 @@ export default function BookPicker(props) {
       name: "new book",
       chapters: [],
       imageName: "bookCover01BatOfDoom",
+      titlePageImage: "bookCoverMongo01",
     }
     addBookToFirestore(newBook)
   }
@@ -210,12 +222,21 @@ export default function BookPicker(props) {
     return renderBookList({ books: nonProdBooks })
   }
 
-  const renderBookList = ({ books, showLocks }) => {
+  // TODO: sort book correctly
+  // TODO: sort book correctly
+  // TODO: sort book correctly
+  const filterAndSortBooks = ({ books }) => {
     const sortedBooks = Utils.sortDataByNestedKey({
       data: books,
       keys: ["name"],
       order: "ASC",
     })
+
+    return sortedBooks
+  }
+
+  const renderBookList = ({ books, showLocks }) => {
+    const sortedBooks = filterAndSortBooks({ books })
 
     let prevBookCompleted = true
 
