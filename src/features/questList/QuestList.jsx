@@ -20,7 +20,7 @@ export default function QuestList({ worlds, className }) {
 
   const tableHeader = (
     <div className={cx(css.tableHeader)}>
-      <div className={cx(css.tableCell, css.name)}>Name</div>
+      <div className={cx(css.tableCell, css.name)}>Quest</div>
       <div
         className={cx(css.tableCell, css.gold)}
       >{`Gold (${earnedGold} out of ${allGoldInQuests})`}</div>

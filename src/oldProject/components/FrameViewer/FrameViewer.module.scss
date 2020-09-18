@@ -187,7 +187,7 @@
       [class*="WordGroup_sentence__"] {
         padding-right: 0.5rem;
         padding-left: 0.5rem;
-        font-size: var(--font-height-1);
+        font-size: var(--font-size-1);
       }
     }
 
@@ -401,7 +401,7 @@
     align-items: center;
     flex: 1 1;
     text-transform: capitalize;
-    font-size: var(--font-height-1);
+    font-size: var(--font-size-1);
     border-radius: 1vh;
     background: var(--color-yellow) !important;
     width: 100%;

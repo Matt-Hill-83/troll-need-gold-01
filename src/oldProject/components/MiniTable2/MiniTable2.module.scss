@@ -4,7 +4,7 @@
   align-self: flex-start;
   --cell-height: 2vh;
   --line-height: 4vh;
-  --font-siz: 2vh;
+  --font-size: 2vh;
 
   :global {
     .bp3-table-truncated-format-text {
@@ -42,6 +42,7 @@
     display: flex;
     line-height: var(--line-height);
     font-size: var(--font-size);
+    // font-size: var(--font-size-1);
   }
 }
 

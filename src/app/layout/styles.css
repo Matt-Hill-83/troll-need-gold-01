@@ -56,5 +56,6 @@ body {
   --set1-lav-bk: #a1a1ff;
   --set1-pink-bk: #ff85a5;
 
-  --font-height-1: 2.5vh;
+  --font-size-1: 2.5vh;
+  --story-font-size: 2.3vh;
 }

@@ -1,10 +1,13 @@
 //locations
 // need to add:
-// warriorGirl01
-// frizzle01
-// mongo01
+
+import warriorGirl01 from "./creatures/warriorGirl01.png"
+import frizzle01 from "./creatures/frizzle01.png"
+import rockets01 from "./creatures/rockets01.png"
 
 import mongo01 from "./creatures/mango01.png"
+import fionaFlying01 from "./creatures/fionaFlying01.png"
+import mongoFlying01 from "./creatures/mongoFlying01.png"
 
 import bag from "./locations/bag.png"
 import barn from "./locations/barn.png"
@@ -463,6 +466,13 @@ const creatures = {
 
   mongo01,
   shuri: pantherGirl01,
+  fionaFlying01,
+  mongoFlying01,
+
+  warriorGirl01,
+  frizzle01,
+  rockets01,
+
   taffy01,
   parrot01,
   babyTroll01,
@@ -599,6 +609,7 @@ const creatures = {
   goose01,
   lucy02,
   charlie02,
+  fiona: charlie02,
   goose02,
   // goose03,
   littleGoose: goose03,
