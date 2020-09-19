@@ -94,12 +94,12 @@ export default function MissionConsole(props) {
           <div className={css.right}>
             <div className={css.itemsContainerBox}>
               <div className={css.itemsContainer}>
-                <div className={css.itemContainerTitle}>Your Pockets</div>
-                {renderPocketItems({ goldOnly: false, questStatus })}
-              </div>
-              <div className={css.itemsContainer}>
                 <div className={css.itemContainerTitle}>Prizes</div>
                 {renderPocketItems({ goldOnly: true, questStatus })}
+              </div>
+              <div className={css.itemsContainer}>
+                <div className={css.itemContainerTitle}>Your Pockets</div>
+                {renderPocketItems({ goldOnly: false, questStatus })}
               </div>
             </div>
           </div>

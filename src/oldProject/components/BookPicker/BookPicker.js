@@ -26,16 +26,43 @@ let worlds = []
 let books = []
 const { isProdRelease } = Constants
 
+const sortBooks = ({ books }) => {
+  const sortedBooks = Utils.sortDataByNestedKey({
+    data: books,
+    keys: ["name"],
+    order: "ASC",
+  })
+
+  return sortedBooks
+}
+
+const getInitialBook = ({ books }) => {
+  const prodBooks = getProdBooks({ books })
+  console.log("prodBooks", prodBooks) // zzz
+  const initialBook = prodBooks[0] || books[0]
+  console.log("initialBook", initialBook) // zzz
+  return initialBook
+}
+
+const getProdBooks = ({ books }) => {
+  return books.filter((item) => item.releaseToProd)
+}
+
+const getNonProdBooks = ({ books }) => {
+  return books.filter((item) => !item.releaseToProd)
+}
+
 export default function BookPicker(props) {
   const { getCompletedQuests } = useUpdateProfileWidget()
 
   worlds = props.worlds || []
   books = props.books || []
+  console.log("books", books) // zzz
 
   useEffect(() => {
     console.log("onMount-------------------------------->>>>")
     worlds = props.worlds
-    books = props.books
+    books = sortBooks({ books: props.books })
 
     // returned function will be called on component unmount
     return () => {
@@ -49,10 +76,20 @@ export default function BookPicker(props) {
     worlds = props.worlds
   }, [props.worlds])
 
+  useEffect(() => {
+    console.log("new props =================================>>>>>")
+    books = sortBooks({ books: props.books })
+  }, [props.books])
+
+  const [jsonUnderEdit, setJsonUnderEdit] = useState(null)
+
   const [showBookEditor, setShowBookEditor] = useState(false)
   const [showUnfiledQuests, setShowUnfiledQuests] = useState(true)
-  const [selectedBook, setSelectedBook] = useState(books[0])
-  const [jsonUnderEdit, setJsonUnderEdit] = useState(null)
+  // const [selectedBook, setSelectedBook] = useState(books[0])
+  const sortedBooks = sortBooks({ books })
+  const [selectedBook, setSelectedBook] = useState(
+    getInitialBook({ books: sortedBooks })
+  )
 
   const changeSelectedBook = ({ bookId }) => {
     setShowBookEditor(false)
@@ -207,30 +244,18 @@ export default function BookPicker(props) {
   }
 
   const renderProdBooks = ({ books }) => {
-    const prodBooks = books.filter((item) => item.releaseToProd)
+    const prodBooks = getProdBooks({ books })
     return renderBookList({ books: prodBooks, showLocks: true })
   }
 
   const renderNonProdBooks = ({ books }) => {
-    const nonProdBooks = books.filter((item) => !item.releaseToProd)
+    const nonProdBooks = getNonProdBooks({ books })
+    // const nonProdBooks = books.filter((item) => !item.releaseToProd)
     return renderBookList({ books: nonProdBooks })
   }
 
-  // TODO: sort book correctly
-  // TODO: sort book correctly
-  // TODO: sort book correctly
-  const filterAndSortBooks = ({ books }) => {
-    const sortedBooks = Utils.sortDataByNestedKey({
-      data: books,
-      keys: ["name"],
-      order: "ASC",
-    })
-
-    return sortedBooks
-  }
-
   const renderBookList = ({ books, showLocks }) => {
-    const sortedBooks = filterAndSortBooks({ books })
+    const sortedBooks = sortBooks({ books })
 
     let prevBookCompleted = true
 
