@@ -38,7 +38,7 @@ body {
   --light-pink: #fbf3f3;
   --color-yellow: #fff547;
 
-  --translucent-white: rgba(255, 255, 255, 0.45098039215686275);
+  --translucent-white: rgba(255, 255, 255, 0.451);
 
   /* // flash cards */
   --color-blue: blue;

@@ -9,15 +9,19 @@ import useGlobalState from "../../../Context/useGlobalState.js"
 
 import css from "./MissionConsole.module.scss"
 
-const columnNames = ["Mission", "Bring the...", "to the...", "Gold", "Complete"]
+const columnNames = ["Mission", "Gold", "Complete"]
+// const columnNames = ["Mission", "Bring the...", "to the...", "Gold", "Complete"]
 
 const getTableData = ({ missions, completedMissions }) => {
   return missions.map((mission, missionIndex) => {
-    const { name, item = {}, recipient = "", rewards = [] } = mission
+    const { item = {}, recipient = "", rewards = [] } = mission
+    // const { name, item = {}, recipient = "", rewards = [] } = mission
     const rewardString = `${_get(rewards, "[0]amount")}`
     const completed = completedMissions.includes(missionIndex)
 
-    return [name, item.name, recipient.name, rewardString, completed]
+    const name = `Bring the ${item.name} to the ${recipient.name}`
+    return [name, rewardString, completed]
+    // return [name, item.name, recipient.name, rewardString, completed]
   })
 }
 

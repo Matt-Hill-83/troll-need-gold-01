@@ -7,6 +7,14 @@
   border-radius: 1vh;
   box-shadow: 5px 5px 15px 5px #000000;
   padding-right: 1.5vw;
+  width: min-content;
+
+  :global {
+    .MuiTableCell-sizeSmall {
+      padding: 0px 0.5vh;
+      border: 1px solid green !important;
+    }
+  }
 
   .header {
     display: flex;
@@ -76,7 +84,7 @@
     display: flex;
     flex-direction: column;
     width: fit-content;
-    min-width: 24vh;
+    // min-width: 24vh;
     min-height: var(--box-height);
     overflow: hidden;
     // margin: 0.5vh;
@@ -128,5 +136,6 @@
 
   .items {
     display: flex;
+    width: min-content;
   }
 }

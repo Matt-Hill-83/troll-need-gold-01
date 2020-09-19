@@ -203,13 +203,7 @@ export default function BookPicker(props) {
   }
 
   const addBook = async () => {
-    const newBook = {
-      name: "new book",
-      chapters: [],
-      imageName: "bookCover01BatOfDoom",
-      titlePageImage: "bookCoverMongo01",
-    }
-    addBookToFirestore(newBook)
+    addBookToFirestore(Constants.getNewBook())
   }
 
   const renderProdBooks = ({ books }) => {

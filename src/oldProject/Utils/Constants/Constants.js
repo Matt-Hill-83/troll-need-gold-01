@@ -52,6 +52,14 @@ export default class Constants {
       sceneTriggers: [],
     }
   }
+  static getNewBook = ({ name = "blank" }) => {
+    const id = Utils.generateUuid()
+    return {
+      name,
+      id,
+      sceneTriggers: [],
+    }
+  }
 
   static getNewSubQuest = ({ name = "new SubQuest" }) => {
     const id = Utils.generateUuid()
