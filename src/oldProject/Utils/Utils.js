@@ -14,11 +14,12 @@ export default class Utils {
   static getAllQuestsInAllBooks = ({ books, worlds }) => {
     const questsInBooks = {}
     books.forEach((book) => {
-      book.chapters?.forEach((chapter) => {
-        if (!questsInBooks[chapter]) {
-          questsInBooks[chapter] = true
-        }
-      })
+      book.chapters &&
+        book.chapters.forEach((chapter) => {
+          if (!questsInBooks[chapter]) {
+            questsInBooks[chapter] = true
+          }
+        })
     })
     return Object.keys(questsInBooks)
   }
