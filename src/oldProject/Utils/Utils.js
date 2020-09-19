@@ -14,7 +14,7 @@ export default class Utils {
   static getAllQuestsInAllBooks = ({ books, worlds }) => {
     const questsInBooks = {}
     books.forEach((book) => {
-      book.chapters.forEach((chapter) => {
+      book.chapters?.forEach((chapter) => {
         if (!questsInBooks[chapter]) {
           questsInBooks[chapter] = true
         }
