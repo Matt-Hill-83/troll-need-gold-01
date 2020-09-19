@@ -87,10 +87,8 @@
     display: flex;
     flex-direction: column;
     width: fit-content;
-    // min-width: 24vh;
     min-height: var(--box-height);
     overflow: hidden;
-    // margin: 0.5vh;
     padding: 0;
     border: 1px solid black !important;
 
@@ -99,7 +97,7 @@
         position: absolute;
         display: flex;
         justify-content: center;
-        border: 1px solid red !important;
+        border: 1px solid black !important;
         background: var(--light-pink);
         padding: 0 3px;
         top: 0vh;
