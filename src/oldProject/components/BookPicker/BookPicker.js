@@ -134,7 +134,7 @@ export default function BookPicker(props) {
     const allQuestsInAllBooks = Utils.getAllQuestsInAllBooks({ books, worlds })
 
     // TODO: filter our quest already in books, when feeding book picker
-    const { id: bookId, chapters, name } = selectedBook
+    const { id: bookId, chapters = [], name } = selectedBook
 
     const booksFromChapters = chapters.map((item) => {
       return worlds.find((world) => {
