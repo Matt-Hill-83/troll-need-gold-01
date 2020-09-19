@@ -37,8 +37,9 @@
     z-index: 1;
     display: flex;
     left: 53vw;
-    width: 42%;
     top: 4vh;
+    height: 85%;
+    width: auto;
   }
 
   .buttonIcon {
@@ -107,8 +108,9 @@
     justify-self: flex-end;
     margin-top: 1vh;
     position: relative;
-    height: 68vh;
     width: 97vw;
+    border: 4px solid green !important;
+    height: inherit;
   }
 
   .bookImageChapterView {
@@ -219,12 +221,16 @@
   .content {
     position: absolute;
     display: flex;
+    flex-direction: column;
     align-self: center;
     justify-self: center;
+
     margin-top: 0vh;
     padding: 0px;
-    flex-direction: column;
     width: 100%;
+    border: 4px solid blue !important;
+    height: 100%;
+    overflow: hidden;
   }
 
   .playerStatsRow {
