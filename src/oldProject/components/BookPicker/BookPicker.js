@@ -274,8 +274,8 @@ export default function BookPicker(props) {
         completedQuests,
       })
 
-      // TODO: put lock icon here.
-
+      console.log("book.name", book.name) // zzz
+      console.log("bookIsCompleted", bookIsCompleted) // zzz
       const lockImage = Images.items["lock02"]
 
       const onClick = showLocks
