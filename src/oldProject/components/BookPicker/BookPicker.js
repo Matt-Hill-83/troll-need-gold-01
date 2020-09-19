@@ -56,7 +56,8 @@ export default function BookPicker(props) {
   const { getCompletedQuests } = useUpdateProfileWidget()
 
   worlds = props.worlds || []
-  books = props.books || []
+  // books = props.books || []
+  books = sortBooks({ books: props.books })
   console.log("books", books) // zzz
 
   useEffect(() => {
@@ -250,16 +251,13 @@ export default function BookPicker(props) {
 
   const renderNonProdBooks = ({ books }) => {
     const nonProdBooks = getNonProdBooks({ books })
-    // const nonProdBooks = books.filter((item) => !item.releaseToProd)
     return renderBookList({ books: nonProdBooks })
   }
 
   const renderBookList = ({ books, showLocks }) => {
-    const sortedBooks = sortBooks({ books })
-
     let prevBookCompleted = true
 
-    return sortedBooks.map((book, index) => {
+    return books.map((book, index) => {
       const { name, id: bookId } = book
       const bookImage = Images.backgrounds[book.imageName]
 
