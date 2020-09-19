@@ -67,7 +67,6 @@ export default function useUpdateProfileWidget() {
 
   const updateProfilePropsIfChanged = async ({ newProfileProps }) => {
     const updatedProps = { ...profile, ...newProfileProps }
-
     const needToUpdateProps = !_isEqual(updatedProps, profile)
 
     if (needToUpdateProps) {
@@ -76,8 +75,10 @@ export default function useUpdateProfileWidget() {
   }
 
   const updateUserStatusPocketsIfChanged = async ({ pockets }) => {
+    const pockets2 = { gold: pockets.gold }
     const userStatus = await getUserStatus()
-    const newUserStatus = { ...userStatus, pockets }
+    const newUserStatus = { ...userStatus, pockets: pockets2 }
+    // const newUserStatus = { ...userStatus, pockets }
 
     const needToUpdatePockets = !_isEqual(newUserStatus, userStatus)
 
