@@ -83,7 +83,6 @@ export default class Constants {
       newGrid5: [],
       questConfig,
       released: true,
-      released: true,
       title: "My New Title",
     }
 
