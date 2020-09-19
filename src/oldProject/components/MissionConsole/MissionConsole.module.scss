@@ -116,11 +116,12 @@
       display: flex;
       flex: 1 1;
       border-radius: 2px;
-      margin-right: 1vh;
+      // margin-right: 1vh;
       max-width: var(--box-height);
       border-right: 1px solid black;
 
-      &:first-of-type {
+      &:last-of-type {
+        border-right: none;
       }
 
       [class*="ImageDisplay_imageContainer"] {
