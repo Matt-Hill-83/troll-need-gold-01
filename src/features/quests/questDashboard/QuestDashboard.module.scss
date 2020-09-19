@@ -3,13 +3,12 @@
   position: relative;
   height: 97%;
   width: 100%;
-  border: 4px solid red !important;
+  // border: 4px solid red !important;
   overflow: auto;
 }
 
 .questList {
   display: flex;
-  /* border: 1px solid blue !important; */
   justify-content: center;
   padding: 1vh;
   margin-top: 3vh;
