@@ -56,6 +56,9 @@ export function addEventToFirestore(event) {
 export function addBookToFirestore(item) {
   return db.collection("books").add({ ...item })
 }
+export function addQuestToFirestore(item) {
+  return db.collection("quests").add({ ...item })
+}
 
 export function updateQuestInFirestore(quest) {
   return db.collection("quests").doc(quest.id).update(quest)
@@ -70,7 +73,6 @@ export function deleteEventInFirestore(eventId) {
 }
 
 export function deleteQuestInFirestore(eventId) {
-  console.log("deleteQuestInFirestore") // zzz
   return db.collection("quests").doc(eventId).delete()
 }
 

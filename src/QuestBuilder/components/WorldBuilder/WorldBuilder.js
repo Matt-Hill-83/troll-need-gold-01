@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import cx from "classnames"
 
+import { addQuestToFirestore } from "../../../app/firestore/firestoreService.js"
+
 import {
   Button,
   Menu,
@@ -34,15 +36,15 @@ class WorldBuilder extends Component {
   state = {
     sceneToEdit: null,
     showFrameBuilder: false,
-    showQuestConfig: false,
-    showSceneConfig: false,
     showSubQuestWizard: false,
     showDialogBuilder: true,
     expandedDialogAccordions: {},
   }
 
+  maps = []
   // Changing this to DidMount breaks things
   async componentWillMount() {
+    this.maps = this.props.maps || []
     const defaultWorldId = "sdf"
     this.onChangeWorld({ mapId: defaultWorldId })
   }
@@ -50,21 +52,18 @@ class WorldBuilder extends Component {
   hideAllModals = () => {
     this.setState({
       showFrameBuilder: false,
-      showQuestConfig: false,
-      showSceneConfig: false,
       showSubQuestWizard: false,
       showDialogBuilder: false,
     })
   }
 
   onChangeWorld = ({ mapId, newWorld }) => {
-    this.setState({ showQuestConfig: false })
     // new map
     if (newWorld) {
       this.addNewWorld()
       return
     } else {
-      const world = this.props.maps.find((item) => item.id === mapId)
+      const world = this.maps.find((item) => item.id === mapId)
       if (!world || !world.data) {
         return
       }
@@ -84,7 +83,7 @@ class WorldBuilder extends Component {
   }
 
   getMapById = (mapId) => {
-    const savedWorlds = Utils.getItemsFromDbObj({ dbList: this.props.maps })
+    const savedWorlds = Utils.getItemsFromDbObj({ dbList: this.maps })
 
     return savedWorlds.find((map) => {
       return map.id === mapId
@@ -204,7 +203,9 @@ class WorldBuilder extends Component {
 
     const newWorld = Constants.getNewWorld({ props: newWorldProps })
 
-    const newMapReturned = await this.props.maps.add(newWorld)
+    const newMapReturned = await addQuestToFirestore(newWorld)
+    console.log({ newMapReturned })
+
     worldBuilderStore.setWorldBuilderWorld(newMapReturned)
   }
 
@@ -338,6 +339,7 @@ class WorldBuilder extends Component {
     return (
       <div className={css.subTitle}>
         <WorldPicker
+          maps={this.maps}
           initialValue={title}
           showDelete={true}
           showReleased={true}
@@ -422,6 +424,8 @@ class WorldBuilder extends Component {
       showDialogBuilder,
       dialogBuilderKey,
     } = this.state
+
+    console.log("this.maps", this.maps) // zzz
 
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
 

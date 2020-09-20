@@ -10,19 +10,19 @@ import {
 } from "@blueprintjs/core"
 
 import { IconNames } from "@blueprintjs/icons"
+
 import Utils from "../../Utils/Utils"
 
 import css from "./WorldPicker.module.scss"
-import { Checkbox } from "material-ui"
-const maps = []
+
 class WorldPicker extends Component {
   state = { selectedMap: this.props.initialValue || "Select Map" }
 
   changeMap = ({ index, mapId }) => {
-    const { onChangeWorld } = this.props
-    const map = Utils.getWorldFromId({ id: mapId })
+    const { maps, onChangeWorld } = this.props
+    const map = maps.find((map) => map.id === mapId)
 
-    const mapName = map ? map.data && map.data.title : ""
+    const mapName = map?.title || ""
 
     onChangeWorld({ index, mapId })
     this.setState({ selectedMap: mapName })
@@ -41,13 +41,11 @@ class WorldPicker extends Component {
   }
 
   render() {
-    const { showReleasedToProd, showReleased, showDelete } = this.props
+    const { showDelete } = this.props
     const { selectedMap } = this.state
-    const savedMaps = Utils.getItemsFromDbObj({ dbList: maps })
+    const savedMaps = this.props.maps
 
-    const filteredMaps = showReleased
-      ? savedMaps
-      : savedMaps.filter((map) => map.data.released)
+    const filteredMaps = savedMaps
 
     if (!filteredMaps[0]) {
       return null
@@ -55,41 +53,21 @@ class WorldPicker extends Component {
 
     const sortedMaps = Utils.sortDataByNestedKey({
       data: filteredMaps,
-      keys: ["data", "title"],
+      keys: ["title"],
       order: "ASC",
     })
-
+    console.log("sortedMaps", sortedMaps) // zzz
     const mapList = sortedMaps.map((map, index) => {
-      const { id } = map
-      const { name, title, released, releasedToProd, description } = map.data
-      const { updateIsReleasedProperty, updateReleasedToProd } = this.props
+      const { id, name, title } = map
 
       const text = (
         <span className={css.mapPickerRow}>
           {`${title}`}
-          {/* {`${description}`} */}
           {/* {`map ${name}: ${title}`} */}
           {/* {`id: ${id}`} */}
           <div className={css.mapPickerRowButtons}>
             <span xxxclassName={css.mapPickerButton}>{`${name}  ---  `}</span>
-            {showReleased && (
-              <span className={css.mapPickerButton}>
-                Released
-                <Checkbox
-                  onClick={() => updateIsReleasedProperty({ id })}
-                  checked={released}
-                />
-              </span>
-            )}
-            {showReleasedToProd && (
-              <span className={css.mapPickerButton}>
-                To Prod
-                <Checkbox
-                  onClick={() => updateReleasedToProd({ id })}
-                  checked={releasedToProd}
-                />
-              </span>
-            )}
+
             {showDelete && (
               <span onClick={() => this.onDeleteMap({ map })}>
                 <Icon icon={IconNames.TRASH} />

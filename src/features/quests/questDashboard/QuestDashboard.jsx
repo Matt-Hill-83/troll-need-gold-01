@@ -35,7 +35,7 @@ export default function QuestDashboard() {
     }
   }, [dispatch, filter, startDate, retainState])
 
-  function handleFetchNextEvents() {
+  function handleFetchNextQuests() {
     dispatch(fetchQuests(filter, startDate, limit, lastVisible))
   }
 
@@ -58,7 +58,7 @@ export default function QuestDashboard() {
         <div className={css.questList}>
           <QuestList
             worlds={uniqueWorlds}
-            getNextEvents={handleFetchNextEvents}
+            getNextEvents={handleFetchNextQuests}
             loading={loading}
             moreEvents={moreEvents}
           />
