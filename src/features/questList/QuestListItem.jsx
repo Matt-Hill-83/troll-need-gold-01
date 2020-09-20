@@ -28,7 +28,10 @@ export default function QuestListItem({ event: world }) {
 
   const renderItem = () => {
     const { title, id: questId } = world
-
+    console.log("world", world) // zzz
+    if (!world.title) {
+      return <div>Quest not found</div>
+    }
     const truncatedTitle = Utils.trimToDashIfProd({ isProdRelease, title })
     const questCompleted = Utils.isQuestCompleted({ questId, completedQuests })
 

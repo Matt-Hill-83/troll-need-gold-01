@@ -1,11 +1,11 @@
 import Utils from "../Utils"
 
 export default class Constants {
-  static isProdRelease = true
-  // static isProdRelease = false
+  // static isProdRelease = true
+  static isProdRelease = false
 
   static featureFlags = {
-    recordAudio: false,
+    recordAudio: !this.isProdRelease,
     // recordAudio: true,
   }
 

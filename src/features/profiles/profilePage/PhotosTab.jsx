@@ -1,16 +1,18 @@
 import React, { useState } from "react"
 import { Grid, Header, Button, Tab, Card, Image } from "semantic-ui-react"
-import PhotoUploadWidget from "../../../app/common/photos/PhotoUploadWidget"
-import useFirestoreColection from "../../../app/hooks/useFirestoreCollection"
+import { toast } from "react-toastify"
+import { useDispatch, useSelector } from "react-redux"
+
 import {
   getUserPhotos,
   setMainPhoto,
   deletePhotoFromCollection,
 } from "../../../app/firestore/firestoreService"
-import { useDispatch, useSelector } from "react-redux"
-import { listenToUserPhotos } from "../profileActions"
-import { toast } from "react-toastify"
+
 import { deleteFromFirebaseStorage } from "../../../app/firestore/firebaseService"
+import { listenToUserPhotos } from "../profileActions"
+import PhotoUploadWidget from "../../../app/common/photos/PhotoUploadWidget"
+import useFirestoreColection from "../../../app/hooks/useFirestoreCollection"
 
 export default function PhotosTab({ profile, isCurrentUser }) {
   const dispatch = useDispatch()
