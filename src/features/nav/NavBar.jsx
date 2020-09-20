@@ -1,14 +1,15 @@
 import React from "react"
-import { Menu, Container, Button } from "semantic-ui-react"
+import { Menu } from "semantic-ui-react"
 import { NavLink } from "react-router-dom"
 import SignedOutMenu from "./SignedOutMenu"
 import SignedInMenu from "./SignedInMenu"
 import { useSelector } from "react-redux"
 
-import css from "./NavBar.module.scss"
 import Constants from "../../oldProject/Utils/Constants/Constants"
 
-export default function NavBar({ setFormOpen }) {
+import css from "./NavBar.module.scss"
+
+export default function NavBar() {
   const { authenticated } = useSelector((state) => state.auth)
 
   return (
