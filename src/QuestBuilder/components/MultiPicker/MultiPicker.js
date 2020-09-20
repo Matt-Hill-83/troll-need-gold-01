@@ -1,3 +1,4 @@
+// dead?
 import React, { useEffect } from "react"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 
@@ -76,16 +77,16 @@ export default function WorldMultiPicker2({ props }) {
 
   const worlds = toJS(allWorlds)
   worlds.docs.map((world) => {
-    const { title } = world.data
+    const { title } = world
     const worldId = world.id
 
     const belongsToABook = Utils.belongsToABook({ bookId, worldId })
 
     // convert this to remove items that have been selected
     if (belongsToABook) {
-      world.data.newTitle = `xxx - ${title} - [${belongsToABook.toString()}]`
+      world.newTitle = `xxx - ${title} - [${belongsToABook.toString()}]`
     } else {
-      world.data.newTitle = title
+      world.newTitle = title
     }
   })
 
@@ -114,7 +115,7 @@ export default function WorldMultiPicker2({ props }) {
             return (
               <div className={classes.chips}>
                 {selected.map((item) => {
-                  const { title } = item.data
+                  const { title } = item
                   return (
                     <Chip key={title} label={title} className={classes.chip} />
                   )
@@ -125,7 +126,7 @@ export default function WorldMultiPicker2({ props }) {
           MenuProps={MenuProps}
         >
           {sortedItems.map((item) => {
-            const { title, newTitle } = item.data
+            const { title, newTitle } = item
             return (
               <MenuItem
                 key={title}

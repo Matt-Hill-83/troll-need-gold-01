@@ -56,7 +56,6 @@ class WorldPicker extends Component {
       keys: ["title"],
       order: "ASC",
     })
-    console.log("sortedMaps", sortedMaps) // zzz
     const mapList = sortedMaps.map((map, index) => {
       const { id, name, title } = map
 

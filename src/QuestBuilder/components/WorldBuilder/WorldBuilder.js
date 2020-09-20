@@ -58,19 +58,18 @@ class WorldBuilder extends Component {
   }
 
   onChangeWorld = ({ mapId, newWorld }) => {
+    console.log("onChangeWorld") // zzz
     // new map
     if (newWorld) {
       this.addNewWorld()
       return
     } else {
       const world = this.maps.find((item) => item.id === mapId)
-      if (!world || !world.data) {
+      if (!world) {
         return
       }
 
-      const {
-        data: { gridDimensions, newGrid5 },
-      } = world
+      const { gridDimensions, newGrid5 } = world
 
       const reCreatedScenesGrid = Utils.reCreateGridFromCondensedGrid({
         gridDimensions,
@@ -92,13 +91,13 @@ class WorldBuilder extends Component {
 
   updateIsReleasedProperty = ({ id }) => {
     const map = this.getMapById(id)
-    const released = !map.data.released
+    const released = !map.released
     map.update({ released })
   }
 
   updateReleasedToProd = ({ id }) => {
     const map = this.getMapById(id)
-    const releasedToProd = !map.data.releasedToProd
+    const releasedToProd = !map.releasedToProd
     map.update({ releasedToProd })
   }
 
@@ -113,15 +112,15 @@ class WorldBuilder extends Component {
 
     if (isStartScene) {
       scene.isStartScene = true
-      map.data.startSceneId = scene.id
-      map.data.startScene = name
+      map.startSceneId = scene.id
+      map.startScene = name
     } else {
       scene.isEndScene = true
-      map.data.endSceneId = scene.id
-      map.data.endScene = name
+      map.endSceneId = scene.id
+      map.endScene = name
     }
 
-    WorldBuilderUtils.updateMap({ newProps: { ...map.data }, mapToUpdate: map })
+    WorldBuilderUtils.updateMap({ newProps: { ...map }, mapToUpdate: map })
   }
 
   // turn this into a component
@@ -129,11 +128,11 @@ class WorldBuilder extends Component {
     const map = worldBuilderStore.getWorldBuilderWorld()
     if (!map) return null
 
-    if (!map.data) {
+    if (!map) {
       return null
     }
 
-    const { startScene, endScene, newGrid5 } = map.data
+    const { startScene, endScene, newGrid5 } = map
 
     const buttonText = isStartScene
       ? `${startScene || "Start Scene"}`
@@ -211,7 +210,7 @@ class WorldBuilder extends Component {
 
   onChangeTitle = async ({ event }) => {
     const world = worldBuilderStore.getWorldBuilderWorld()
-    world.data.title = event.target.value
+    world.title = event.target.value
     worldBuilderStore.setWorldBuilderWorld(world)
     this.setState({ world })
   }
@@ -383,7 +382,7 @@ class WorldBuilder extends Component {
   renderDialogBuilder = ({ world }) => {
     const { expandedDialogAccordions } = this.state
 
-    const scenes = _get(world, "data.newGrid5") || []
+    const scenes = _get(world, "newGrid5") || []
 
     const dialogBuilders = scenes.map((scene, sceneIndex) => {
       const dialogBuilderProps = {
@@ -425,23 +424,20 @@ class WorldBuilder extends Component {
       dialogBuilderKey,
     } = this.state
 
-    console.log("this.maps", this.maps) // zzz
-
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
 
     let questConfig
     let newGrid5
     let title = "no title"
 
-    if (world.data) {
-      questConfig = world.data.questConfig || {}
-      newGrid5 = world.data.newGrid5 || []
+    if (world) {
+      questConfig = world.questConfig || {}
+      newGrid5 = world.newGrid5 || []
 
       // Record title for when map is copied
-      this.previousTitle =
-        (world.data && world.data.title) || this.previousTitle
+      this.previousTitle = (world && world.title) || this.previousTitle
 
-      title = (world.data && world.data.title) || this.previousTitle + " copy"
+      title = (world && world.title) || this.previousTitle + " copy"
     }
 
     return (

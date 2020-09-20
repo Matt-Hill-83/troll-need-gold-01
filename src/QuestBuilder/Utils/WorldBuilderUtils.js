@@ -2,7 +2,6 @@ import _get from "lodash.get"
 import worldBuilderStore from "../Stores/WorldBuilderStore.js"
 import Utils from "./Utils.js"
 
-const quests = []
 const toJS = (item) => item
 
 export default class WorldBuilderUtils {
@@ -77,17 +76,15 @@ export default class WorldBuilderUtils {
     console.log("updateMap-------------")
     console.log("updateMap-------------")
     const map = mapToUpdate || worldBuilderStore.getWorldBuilderWorld()
-    Object.assign(map.data, toJS(newProps))
+    Object.assign(map, { ...newProps })
 
-    map.data.newGrid5 = WorldBuilderUtils.createCondensedGridFromGrid({})
-    map.data.newGrid5.forEach((scene) => {
+    map.newGrid5 = WorldBuilderUtils.createCondensedGridFromGrid({})
+    map.newGrid5.forEach((scene) => {
       Utils.addIdToAllItemsInScene({ scene })
     })
-    console.log("map.data.newGrid5", toJS(map.data.newGrid5)) // zzz
 
-    delete map.data.grid
-    console.log("map.data", toJS(map.data)) // zzz
-    await map.update(map.data)
+    delete map.grid
+    // await map.update(map)
   }
 
   static getCritters1New = ({ frameConfig, sceneConfig }) => {

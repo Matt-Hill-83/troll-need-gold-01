@@ -4,13 +4,9 @@ import React, { Component } from "react"
 
 import Frame from "../Frame/Frame"
 import { IconNames } from "@blueprintjs/icons"
-
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
-
-import Utils from "../../Utils/Utils"
+import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 
 import css from "./FrameBuilder.module.scss"
-import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 
 class FrameBuilder extends Component {
   state = {
