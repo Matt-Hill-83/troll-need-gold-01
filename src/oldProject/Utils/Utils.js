@@ -1,6 +1,6 @@
 import _get from "lodash.get"
-import { maps, books } from "../Stores/InitStores.js"
 import Constants from "./Constants/Constants.js"
+const maps = []
 export default class Utils {
   static addArrayElement = ({ newElement, before, index, array }) => {
     const adder = before === true ? 0 : 1

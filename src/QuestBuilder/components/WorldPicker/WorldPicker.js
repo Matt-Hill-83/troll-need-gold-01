@@ -1,6 +1,4 @@
 import React, { Component } from "react"
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
 
 import {
   Button,
@@ -12,12 +10,11 @@ import {
 } from "@blueprintjs/core"
 
 import { IconNames } from "@blueprintjs/icons"
-import { maps } from "../../Stores/InitStores"
 import Utils from "../../Utils/Utils"
 
 import css from "./WorldPicker.module.scss"
 import { Checkbox } from "material-ui"
-
+const maps = []
 class WorldPicker extends Component {
   state = { selectedMap: this.props.initialValue || "Select Map" }
 
@@ -129,4 +126,4 @@ class WorldPicker extends Component {
     return worldPicker
   }
 }
-export default observer(WorldPicker)
+export default WorldPicker

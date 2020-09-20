@@ -1,6 +1,4 @@
-import { observer } from "mobx-react"
 import React, { Component } from "react"
-import { toJS } from "mobx"
 
 import Images from "../../../Common/images/images"
 
@@ -45,4 +43,4 @@ class ImageDisplay extends Component {
   }
 }
 
-export default observer(ImageDisplay)
+export default ImageDisplay

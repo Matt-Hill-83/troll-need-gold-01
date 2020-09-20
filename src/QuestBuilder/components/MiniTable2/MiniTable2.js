@@ -1,5 +1,5 @@
 import _get from "lodash.get"
-import { toJS } from "mobx"
+
 import cx from "classnames"
 import React, { Component } from "react"
 

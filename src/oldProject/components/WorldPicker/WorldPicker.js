@@ -10,7 +10,7 @@ import {
 } from "@blueprintjs/core"
 
 import { IconNames } from "@blueprintjs/icons"
-import { maps } from "../../Stores/InitStores"
+const maps = []
 import Utils from "../../Utils/Utils"
 
 import css from "./WorldPicker.module.scss"

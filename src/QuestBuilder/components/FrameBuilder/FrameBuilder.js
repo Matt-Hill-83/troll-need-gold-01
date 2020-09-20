@@ -4,8 +4,6 @@ import React, { Component } from "react"
 
 import Frame from "../Frame/Frame"
 import { IconNames } from "@blueprintjs/icons"
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
 
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 
@@ -143,4 +141,4 @@ class FrameBuilder extends Component {
   }
 }
 
-export default observer(FrameBuilder)
+export default FrameBuilder

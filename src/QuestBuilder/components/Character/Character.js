@@ -3,8 +3,6 @@ import React, { Component } from "react"
 import Head from "../Head/Head"
 import Images from "../../../Common/images/images"
 import css from "./Character.module.scss"
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
 
 const girlImages = Images.posableGirls
 
@@ -64,4 +62,4 @@ class Character extends Component {
   }
 }
 
-export default observer(Character)
+export default Character

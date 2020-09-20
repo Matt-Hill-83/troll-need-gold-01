@@ -1,7 +1,6 @@
 import { Button, Popover, PopoverInteractionKind } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
+
 import React, { Component } from "react"
 
 import images from "../../images/images"
@@ -225,4 +224,4 @@ class CrudMachine extends Component {
   }
 }
 
-export default observer(CrudMachine)
+export default CrudMachine

@@ -1,6 +1,4 @@
 import React, { Component } from "react"
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
 
 import css from "./CharacterPicker.module.scss"
 
@@ -72,4 +70,4 @@ class CharacterPicker extends Component {
   }
 }
 
-export default observer(CharacterPicker)
+export default CharacterPicker

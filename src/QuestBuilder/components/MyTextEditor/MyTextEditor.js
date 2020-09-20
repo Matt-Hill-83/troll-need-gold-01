@@ -1,7 +1,7 @@
 import { Button } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
 import { TextareaAutosize } from "@material-ui/core"
-import { toJS } from "mobx"
+
 import cx from "classnames"
 import React, { useState, useEffect } from "react"
 

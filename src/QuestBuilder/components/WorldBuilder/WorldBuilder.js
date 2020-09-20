@@ -1,6 +1,4 @@
 import React, { Component } from "react"
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
 import cx from "classnames"
 
 import {
@@ -16,26 +14,20 @@ import {
 
 import _get from "lodash.get"
 
-import { maps, gameConfig } from "../../Stores/InitStores"
-import { worldNameStore } from "../../Stores/FrameSetStore"
-import Constants from "../../Utils/Constants/Constants"
 import DialogBuilder2 from "../DialogBuilder2/DialogBuilder2"
-import ExportJson from "../ExportJson/ExportJson"
 import FrameBuilder from "../FrameBuilder/FrameBuilder"
-import JsonEditor2 from "../JsonEditor2/JsonEditor2"
-import JsonUtils from "../../Utils/JsonUtils"
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
+import MyAccordion from "../MyAccordion/MyAccordion"
 import SubQuestWizard from "../SubQuestWizard/SubQuestWizard"
 import Utils from "../../Utils/Utils"
 import WorldBuilderScenesGrid from "../WorldBuilderScenesGrid/WorldBuilderScenesGrid"
 import worldBuilderStore from "../../Stores/WorldBuilderStore"
+import Constants from "../../../oldProject/Utils/Constants/Constants"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 import WorldPicker from "../WorldPicker/WorldPicker"
 
 import css from "./WorldBuilder.module.scss"
-import MyAccordion from "../MyAccordion/MyAccordion"
-import FrameSetUploader from "../FrameSetUploader/FrameSetUploader"
 
+const maps = []
 const NUM_ROWS_LOCATIONS_GRID = 8
 const NUM_COLS_LOCATIONS_GRID = 20
 
@@ -54,15 +46,8 @@ class WorldBuilder extends Component {
 
   // Changing this to DidMount breaks things
   async componentWillMount() {
-    await worldNameStore.fetch()
-    await gameConfig.fetch()
-    // const gameConfigData = Utils.getGameConfig()
-    const defaultWorldId = localStateStore.getDefaultWorldId()
+    const defaultWorldId = "sdf"
     this.onChangeWorld({ mapId: defaultWorldId })
-  }
-
-  forceUpdate2 = () => {
-    this.setState({ test: Math.random() })
   }
 
   hideAllModals = () => {
@@ -82,7 +67,8 @@ class WorldBuilder extends Component {
       this.addNewWorld()
       return
     } else {
-      const world = Utils.getWorldFromId2({ id: mapId })
+      const world = maps.find((item) => item.id === mapId)
+      // const world = Utils.getWorldFromId2({ id: mapId })
       if (!world || !world.data) {
         return
       }
@@ -207,21 +193,10 @@ class WorldBuilder extends Component {
   }
 
   addNewWorld = async () => {
-    let previousMapName =
-      toJS(
-        worldNameStore.docs &&
-          worldNameStore.docs[0] &&
-          worldNameStore.docs[0].data.previousMapName
-      ) || 100
+    let previousMapName = 100
 
     const newName = previousMapName + 1
-    if (worldNameStore.docs[0]) {
-      await worldNameStore.docs[0].update({
-        previousMapName: newName,
-        // Transitioning to this new name
-        previousWorld: newName,
-      })
-    }
+
     const { grid, gridDimensions } = this.createNewGrid()
 
     worldBuilderStore.setWorldBuilderScenesGrid(grid)
@@ -299,78 +274,12 @@ class WorldBuilder extends Component {
     await WorldBuilderUtils.updateMap({ mapToUpdate: world })
   }
 
-  importWorldFromJson = async ({ newWorld }) => {
-    await this.addNewWorld()
-
-    // I should probably create a new scenesGrid here, based on the required dimensions
-    // I should probably create a new scenesGrid here, based on the required dimensions
-    // I should probably create a new scenesGrid here, based on the required dimensions
-    const scenesGrid = worldBuilderStore.getWorldBuilderScenesGrid()
-    const newProps = JsonUtils.importWorldFromJson({ newWorld, scenesGrid })
-    WorldBuilderUtils.updateMap({ newProps })
-  }
-
-  onChangeJSON = (json) => {
-    // this.setState({ jsonUnderEdit: json })
-  }
-
-  onSaveJSON = ({ json }) => {
-    const world = worldBuilderStore.getWorldBuilderWorld() || {}
-    WorldBuilderUtils.updateMap({
-      newProps: { questConfig: json },
-      mapToUpdate: world,
-    })
-  }
-
   onSaveQuestConfig = async ({ questConfig }) => {
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
     await WorldBuilderUtils.updateMap({
       newProps: { questConfig },
       mapToUpdate: world,
     })
-    // this.setState({ update: Math.random() })
-  }
-
-  onCloseJsonEditor = () => {
-    this.setState({ showQuestConfig: false })
-  }
-
-  renderSceneConfig = ({ world }) => {
-    const { showSceneConfig } = this.state
-    if (!showSceneConfig) {
-      return null
-    }
-
-    return (
-      <div className={css.buttonHolder}>
-        world config for download
-        <ExportJson
-          className={css.frameSetUploaderBox1}
-          onSave={this.onChangeDialog}
-          world={world.data}
-        />
-      </div>
-    )
-  }
-
-  renderQuestConfig = ({ questConfig }) => {
-    const { showQuestConfig } = this.state
-    if (!showQuestConfig) {
-      return null
-    }
-
-    const jsonEditorProps = {
-      json: questConfig,
-      onChangeJSON: this.onChangeJSON,
-      onSaveJSON: this.onSaveJSON,
-      onClose: this.onCloseJsonEditor,
-    }
-
-    return (
-      <div className={css.jsonEditor}>
-        <JsonEditor2 props={jsonEditorProps} />
-      </div>
-    )
   }
 
   renderSubQuestWizard = ({ questConfig, newGrid5 }) => {
@@ -406,14 +315,9 @@ class WorldBuilder extends Component {
   }
 
   renderMainButtonGroup = () => {
-    const { showQuestConfig, showSceneConfig } = this.state
-
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
     const dialogBuilderButton = (
-      <Button
-        className={css.xxxsaveButton}
-        onClick={() => this.openDialogBuilder({ world })}
-      >
+      <Button onClick={() => this.openDialogBuilder({ world })}>
         Dialog Builder
       </Button>
     )
@@ -426,62 +330,10 @@ class WorldBuilder extends Component {
       />
     )
 
-    const questConfigButton = (
-      <Button
-        icon="document"
-        text="quest config"
-        onClick={() =>
-          this.setState({
-            showQuestConfig: !showQuestConfig,
-          })
-        }
-      />
-    )
-    const getJsonButton = (
-      <Button
-        icon="document"
-        text="get JSON for world"
-        onClick={() =>
-          this.setState({
-            showSceneConfig: !showSceneConfig,
-          })
-        }
-      />
-    )
-    const uploadJsonButton = (
-      <Button
-        icon="document"
-        text="upload JSON"
-        onClick={() =>
-          this.setState({
-            showSceneConfig: !showSceneConfig,
-          })
-        }
-      />
-    )
-
     return (
       <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}>
         {dialogBuilderButton}
         {subQuestWizardButton}
-        <Popover
-          content={
-            <ButtonGroup
-              vertical={true}
-              className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
-            >
-              {questConfigButton}
-              {getJsonButton}
-              {uploadJsonButton}
-              <FrameSetUploader
-                onImportJson={this.importWorldFromJson}
-              ></FrameSetUploader>
-            </ButtonGroup>
-          }
-          target={
-            <Button icon="document" rightIcon="caret-down" text="Config" />
-          }
-        ></Popover>
       </ButtonGroup>
     )
   }
@@ -594,9 +446,6 @@ class WorldBuilder extends Component {
 
     return (
       <div className={css.main}>
-        {this.renderSceneConfig({ world })}
-        {this.renderQuestConfig({ questConfig })}
-
         <InputGroup
           value={title}
           id="text-input"
@@ -641,4 +490,4 @@ class WorldBuilder extends Component {
     )
   }
 }
-export default observer(WorldBuilder)
+export default WorldBuilder

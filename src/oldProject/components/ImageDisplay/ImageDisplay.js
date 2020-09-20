@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-// import { toJS } from "mobx"
 
 import Images from "../../../Common/images/images"
 

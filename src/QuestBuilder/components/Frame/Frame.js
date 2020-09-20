@@ -1,8 +1,7 @@
 import _get from "lodash.get"
 import { Button, Icon, TextArea } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
+
 import cx from "classnames"
 import React, { Component } from "react"
 
@@ -328,4 +327,4 @@ class Frame extends Component {
   }
 }
 
-export default observer(Frame)
+export default Frame

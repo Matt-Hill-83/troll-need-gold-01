@@ -2,7 +2,7 @@ import _get from "lodash.get"
 import { Button, Classes, ButtonGroup } from "@blueprintjs/core"
 import { createMuiTheme } from "@material-ui/core/styles"
 import { IconNames } from "@blueprintjs/icons"
-import { toJS } from "mobx"
+
 import cx from "classnames"
 import React, { useEffect, useState } from "react"
 

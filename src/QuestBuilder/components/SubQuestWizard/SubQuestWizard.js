@@ -3,7 +3,6 @@ import { Button, Classes, ButtonGroup } from "@blueprintjs/core"
 import { Checkbox } from "material-ui"
 import { TextField } from "@material-ui/core"
 import { IconNames } from "@blueprintjs/icons"
-import { toJS } from "mobx"
 import cx from "classnames"
 import React, { useEffect, useState } from "react"
 

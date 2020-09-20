@@ -1,9 +1,6 @@
 import _get from "lodash.get"
 import { Button, Icon } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
-import cx from "classnames"
 import React, { Component } from "react"
 
 import CrudMachine from "../CrudMachine/CrudMachine"
@@ -202,4 +199,4 @@ class WorldBuilderScenesGrid extends Component {
     return this.renderScenesGrid()
   }
 }
-export default observer(WorldBuilderScenesGrid)
+export default WorldBuilderScenesGrid
