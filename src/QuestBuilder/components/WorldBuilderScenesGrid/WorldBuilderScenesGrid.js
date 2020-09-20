@@ -6,12 +6,11 @@ import React, { Component } from "react"
 import CrudMachine from "../CrudMachine/CrudMachine"
 import ImageDisplay from "../ImageDisplay/ImageDisplay"
 import images from "../../images/images"
-import QuestStatusUtils from "../../Utils/QuestStatusUtils"
 import worldBuilderStore from "../../Stores/WorldBuilderStore"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
+import QuestVisibilityUtils from "../../../oldProject/Utils/QuestVisibilityUtils"
 
 import css from "./WorldBuilderScenesGrid.module.scss"
-import QuestVisibilityUtils from "../../../oldProject/Utils/QuestVisibilityUtils"
 class WorldBuilderScenesGrid extends Component {
   state = {}
 
