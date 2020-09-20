@@ -130,10 +130,11 @@ class WorldBuilderScenesGrid extends Component {
     const locations = [scene.location]
 
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
-    const backgroundColor = QuestStatusUtils.getSubQuestColor({
-      world: world.data,
-      sceneId: scene.id,
-    })
+    const backgroundColor = "pink"
+    // const backgroundColor = QuestStatusUtils.getSubQuestColor({
+    //   world: world.data,
+    //   sceneId: scene.id,
+    // })
 
     const allCritters1 = this.getAllCritters1InScene({ scene })
     const allCritters2 = this.getAllCritters2InScene({ scene })
@@ -158,7 +159,8 @@ class WorldBuilderScenesGrid extends Component {
     const hideScene = scene.location && scene.location.name === "blank"
 
     return (
-      <div className={css.gridCell} style={backgroundColor}>
+      <div className={css.gridCell}>
+        {/* <div className={css.gridCell} style={backgroundColor}> */}
         {!hideScene && (
           <Button
             className={css.scenePropsButton}

@@ -66,7 +66,7 @@ class WorldBuilder extends Component {
     } else {
       const world = this.maps.find((item) => item.id === mapId)
       if (!world) {
-        return
+        return <div>world not found</div>
       }
 
       const { gridDimensions, newGrid5 } = world
@@ -79,26 +79,7 @@ class WorldBuilder extends Component {
       worldBuilderStore.setWorldBuilderWorld(world)
       worldBuilderStore.setWorldBuilderScenesGrid(reCreatedScenesGrid)
     }
-  }
-
-  getMapById = (mapId) => {
-    const savedWorlds = Utils.getItemsFromDbObj({ dbList: this.maps })
-
-    return savedWorlds.find((map) => {
-      return map.id === mapId
-    })
-  }
-
-  updateIsReleasedProperty = ({ id }) => {
-    const map = this.getMapById(id)
-    const released = !map.released
-    map.update({ released })
-  }
-
-  updateReleasedToProd = ({ id }) => {
-    const map = this.getMapById(id)
-    const releasedToProd = !map.releasedToProd
-    map.update({ releasedToProd })
+    this.setState({ update: new Date() })
   }
 
   changeTerminalScene = ({ name, scenesList, scene, map, isStartScene }) => {
@@ -425,6 +406,8 @@ class WorldBuilder extends Component {
     } = this.state
 
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
+
+    console.log("world", world) // zzz
 
     let questConfig
     let newGrid5

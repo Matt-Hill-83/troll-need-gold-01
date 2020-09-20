@@ -41,7 +41,4 @@ export default class QuestStatusUtils {
     }
     return style
   }
-  // Object getter functions --- END
-
-  // Data Manupulation --- END
 }
