@@ -52,12 +52,14 @@ export default class Constants {
       sceneTriggers: [],
     }
   }
-  static getNewBook = ({ name = "blank" }) => {
+  static getNewBook = () => {
     const id = Utils.generateUuid()
     return {
-      name,
+      name: "new book",
       id,
-      sceneTriggers: [],
+      chapters: [],
+      imageName: "bookCover01BatOfDoom",
+      releaseToProd: false,
     }
   }
 

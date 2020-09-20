@@ -1,6 +1,7 @@
 import _get from "lodash.get"
 import worldBuilderStore from "../Stores/WorldBuilderStore.js"
 import Utils from "./Utils.js"
+import { updateQuestInFirestore } from "../../app/firestore/firestoreService.js"
 
 const toJS = (item) => item
 
@@ -84,7 +85,7 @@ export default class WorldBuilderUtils {
     })
 
     delete map.grid
-    // await map.update(map)
+    await updateQuestInFirestore(map)
   }
 
   static getCritters1New = ({ frameConfig, sceneConfig }) => {

@@ -241,7 +241,7 @@ export default function BookPicker(props) {
   }
 
   const addBook = async () => {
-    addBookToFirestore(Constants.getNewBook())
+    addBookToFirestore(Constants.getNewBook({}))
   }
 
   const renderProdBooks = ({ books }) => {

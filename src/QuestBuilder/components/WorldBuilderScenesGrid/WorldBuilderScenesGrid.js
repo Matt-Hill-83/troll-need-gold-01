@@ -11,6 +11,7 @@ import worldBuilderStore from "../../Stores/WorldBuilderStore"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 
 import css from "./WorldBuilderScenesGrid.module.scss"
+import QuestVisibilityUtils from "../../../oldProject/Utils/QuestVisibilityUtils"
 class WorldBuilderScenesGrid extends Component {
   state = {}
 
@@ -20,7 +21,7 @@ class WorldBuilderScenesGrid extends Component {
 
   generateRandomUnusedLocation = ({ location, locationNames }) => {
     const world = worldBuilderStore.getWorldBuilderWorld()
-    const { newGrid5 } = world.data
+    const { newGrid5 } = world
     const usedNames = newGrid5.map((scene) => scene.location.name)
 
     const filteredLocationNames = locationNames.filter((name) => {
@@ -130,11 +131,11 @@ class WorldBuilderScenesGrid extends Component {
     const locations = [scene.location]
 
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
-    const backgroundColor = "pink"
-    // const backgroundColor = QuestStatusUtils.getSubQuestColor({
-    //   world: world.data,
-    //   sceneId: scene.id,
-    // })
+    // const backgroundColor = "pink"
+    const backgroundColor = QuestVisibilityUtils.getSubQuestColor({
+      world: world,
+      sceneId: scene.id,
+    })
 
     const allCritters1 = this.getAllCritters1InScene({ scene })
     const allCritters2 = this.getAllCritters2InScene({ scene })
@@ -159,8 +160,8 @@ class WorldBuilderScenesGrid extends Component {
     const hideScene = scene.location && scene.location.name === "blank"
 
     return (
-      <div className={css.gridCell}>
-        {/* <div className={css.gridCell} style={backgroundColor}> */}
+      // <div className={css.gridCell}>
+      <div className={css.gridCell} style={backgroundColor}>
         {!hideScene && (
           <Button
             className={css.scenePropsButton}

@@ -45,7 +45,7 @@ class WorldBuilder extends Component {
   // Changing this to DidMount breaks things
   async componentWillMount() {
     this.maps = this.props.maps || []
-    const defaultWorldId = "sdf"
+    const defaultWorldId = "1zRS8eoqWLrJc9QeamkT"
     this.onChangeWorld({ mapId: defaultWorldId })
   }
 
@@ -101,7 +101,7 @@ class WorldBuilder extends Component {
       map.endScene = name
     }
 
-    WorldBuilderUtils.updateMap({ newProps: { ...map }, mapToUpdate: map })
+    this.updateWorld({ newProps: { ...map }, mapToUpdate: map })
   }
 
   // turn this into a component
@@ -198,7 +198,7 @@ class WorldBuilder extends Component {
 
   saveTitle = async ({ event }) => {
     const title = event.target.value
-    await WorldBuilderUtils.updateMap({ title })
+    await this.updateWorld({ title })
   }
 
   createNewGrid = () => {
@@ -240,20 +240,26 @@ class WorldBuilder extends Component {
     return { grid, gridDimensions }
   }
 
+  updateWorld = async (props) => {
+    await WorldBuilderUtils.updateMap(props)
+    this.setState({ update: Date.now() })
+  }
+
   saveItems = async () => {
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
-    await WorldBuilderUtils.updateMap({ mapToUpdate: world })
+
+    await this.updateWorld({ mapToUpdate: world })
   }
 
   saveItemsDialogBuilder = async () => {
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
     this.setState({ dialogBuilderKey: new Date() })
-    await WorldBuilderUtils.updateMap({ mapToUpdate: world })
+    await this.updateWorld({ mapToUpdate: world })
   }
 
   onSaveQuestConfig = async ({ questConfig }) => {
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
-    await WorldBuilderUtils.updateMap({
+    await this.updateWorld({
       newProps: { questConfig },
       mapToUpdate: world,
     })

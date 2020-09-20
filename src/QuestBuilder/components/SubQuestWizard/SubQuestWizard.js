@@ -13,9 +13,9 @@ import MyAccordion from "../MyAccordion/MyAccordion"
 import MyAccordionGroup from "../MyAccordionGroup/MyAccordionGroup"
 import TriggersTable from "../TriggersTable/TriggersTable"
 import Utils from "../../Utils/Utils"
+import AutoComplete2 from "../AutoComplete2/AutoComplete2"
 
 import css from "./SubQuestWizard.module.scss"
-import AutoComplete2 from "../AutoComplete2/AutoComplete2"
 
 export default function SubQuestWizard({ props }) {
   const [questConfig, setQuestConfig] = useState(null)
@@ -136,7 +136,7 @@ export default function SubQuestWizard({ props }) {
               }}
             />
             <span className={css.mapPickerButton}>
-              <Checkbox
+              <checkbox
                 label="big"
                 onClick={() => toggleLargeImage()}
                 checked={largeImage}
