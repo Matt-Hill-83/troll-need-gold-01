@@ -9,7 +9,7 @@ import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
 import { uploadToFirebaseStorage } from "../../../app/firestore/firebaseService"
 import Character from "../Character/Character"
 import Constants from "../../Utils/Constants/Constants"
-import Images from "../../images/images"
+import Images from "../../../Common/images/images"
 import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget"
 import WordGroup from "../WordGroup/WordGroup"
 

@@ -3,7 +3,7 @@ import { Button } from "@blueprintjs/core"
 import cx from "classnames"
 import React, { useContext } from "react"
 
-import Images from "../../images/images"
+import Images from "../../../Common/images/images"
 import Utils from "../../Utils/Utils"
 import { myContext } from "../../../myProvider"
 

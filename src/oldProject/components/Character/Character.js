@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 
 import Head from "../Head/Head"
-import Images from "../../images/images"
+import Images from "../../../Common/images/images"
+
 import css from "./Character.module.scss"
-// import { toJS } from "mobx"
 
 const girlImages = Images.posableGirls
 

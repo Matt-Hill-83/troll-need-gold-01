@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 // import { toJS } from "mobx"
 
-import Images from "../../images/images"
+import Images from "../../../Common/images/images"
 
 import css from "./ImageDisplay.module.scss"
 

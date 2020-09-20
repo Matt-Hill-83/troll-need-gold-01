@@ -1,0 +1,111 @@
+.main {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border: 1px solid green !important;
+  position: relative;
+  overflow: auto;
+
+  :global {
+    --row-font-size: 1.5vh;
+    --row-height: calc(var(--row-font-size) * 1.15);
+    --row-font-family: Arial, Helvetica, sans-serif;
+  }
+}
+
+.frameButtons {
+  display: flex;
+  // align-items: center;
+  align-self: center;
+  margin-left: 8px;
+
+  > button {
+    display: flex;
+    // align-items: center;
+    // align-self: center;
+
+    height: 90% !important;
+    min-height: unset;
+
+    padding: 0px;
+    // border: 1px solid red !important;
+    // overflow: hidden;
+    font-size: 72%;
+  }
+}
+.containerToGetMaxHeight {
+  display: flex;
+  position: relative;
+  flex: 1 1;
+  height: fit-content;
+}
+
+.dialogBuilderButtonGroup {
+  display: flex;
+  overflow: hidden;
+  align-items: flex-end;
+  background: transparent;
+}
+
+.fakeDiv {
+  display: flex;
+  width: 100%;
+  position: relative;
+  white-space: nowrap;
+  font-family: var(--row-font-family);
+  font-size: var(--row-font-size);
+  min-height: 22px !important;
+  max-height: 22px !important;
+  align-items: center;
+  top: 4px;
+  overflow: hidden;
+  border-bottom: 1px solid gray !important;
+  align-items: flex-start;
+
+  &:nth-child(even) {
+    opacity: 0.5;
+  }
+}
+
+.controlPanel {
+  position: absolute;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.hidden {
+  visibility: hidden;
+  position: relative;
+  overflow: hidden;
+  width: 0px;
+  // min-width: 400px;
+  min-height: fit-content;
+}
+
+.textEditor {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  margin-left: 300px;
+  // make sure it is as tall at the .controlPanel
+  min-height: 200vh;
+}
+
+.frameSeparatorDiv {
+  background: rgb(216, 216, 216) !important;
+}
+
+.newSceneRow {
+  border-top: 2px solid black !important;
+  border-bottom: 2px solid black !important;
+  background: rgb(187, 187, 187) !important;
+}
+
+.emptySpace {
+  display: flex;
+  flex: 1;
+  height: 100%;
+}

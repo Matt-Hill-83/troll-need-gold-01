@@ -1,0 +1,29 @@
+.main {
+  .triggersTable {
+    max-width: 100%;
+    box-shadow: none;
+
+    :global {
+      .MuiTableCell-body {
+        padding: 2px 5px;
+        border-bottom: 1px solid black;
+      }
+
+      .MuiTableRow-root {
+        &:last-of-type {
+          .MuiTableCell-body {
+            border-bottom: none !important;
+          }
+        }
+      }
+
+      .MuiSelect-selectMenu {
+        max-height: 1em;
+        height: 1em !important;
+        max-height: 5px !important;
+        padding: 0px;
+        padding-right: 24px;
+      }
+    }
+  }
+}

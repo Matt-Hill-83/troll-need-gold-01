@@ -3,7 +3,7 @@ import _get from "lodash.get"
 import cx from "classnames"
 
 import Constants from "../../Utils/Constants/Constants.js"
-import Images from "../../images/images.js"
+import Images from "../../../Common/images/images"
 import QuestVisibilityUtils from "../../Utils/QuestVisibilityUtils.js"
 import Utils from "../../Utils/Utils.js"
 import useGlobalState from "../../../Context/useGlobalState.js"

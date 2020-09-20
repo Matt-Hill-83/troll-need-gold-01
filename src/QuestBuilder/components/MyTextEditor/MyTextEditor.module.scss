@@ -1,0 +1,24 @@
+.main {
+  display: flex;
+  min-width: 100% !important;
+  min-height: 100%;
+  white-space: nowrap;
+  background: transparent;
+  color: black;
+  font-family: var(--row-font-family);
+  line-height: var(--row-height);
+  font-size: var(--row-font-size);
+  margin-left: 8.3vw;
+  padding: 0px 2px !important;
+  margin-top: 4px;
+  height: unset !important;
+}
+
+.submitButton {
+  top: 0px;
+  right: 0px;
+  z-index: 20;
+  position: absolute;
+  border: 2px solid red !important;
+  background: pink !important;
+}

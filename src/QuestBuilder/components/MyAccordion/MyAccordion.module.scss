@@ -1,0 +1,22 @@
+.main {
+  :global {
+    .MuiAccordionSummary-root {
+      background: lightblue;
+      min-height: unset !important;
+      height: 40px;
+      padding: 0px 11px !important;
+    }
+
+    .MuiAccordionDetails-root {
+      padding: 0px !important;
+    }
+  }
+
+  .content {
+    background: #e6e6e6;
+    width: 100%;
+  }
+
+  .header {
+  }
+}

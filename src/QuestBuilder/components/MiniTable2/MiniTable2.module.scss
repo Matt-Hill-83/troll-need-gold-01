@@ -1,0 +1,47 @@
+.main {
+  display: flex;
+  justify-self: center;
+  align-self: flex-start;
+  --cell-height: 2vh;
+  --line-height: 4vh;
+  --font-siz: 2vh;
+
+  :global {
+    .bp3-table-truncated-format-text {
+      display: flex;
+    }
+
+    .bp3-table-header {
+      display: flex;
+      line-height: var(--line-height);
+      min-height: unset;
+      height: var(--cell-height);
+    }
+
+    // hide column headers
+    .bp3-table-quadrant.bp3-table-quadrant-top,
+    .bp3-table-top-container {
+      max-height: 5.1vh;
+    }
+
+    .bp3-table-column-name-text {
+      font-size: var(--font-size);
+      padding: unset;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding-left: 0.5vh;
+      line-height: var(--line-height);
+      min-height: var(--cell-height);
+      flex: 1;
+      width: 100%;
+    }
+  }
+
+  .cellClass {
+    display: flex;
+    line-height: var(--line-height);
+    border: 1px solid red !important;
+    font-size: var(--font-size);
+  }
+}

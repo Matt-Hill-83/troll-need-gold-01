@@ -2,7 +2,7 @@ import _get from "lodash.get"
 import React from "react"
 import cx from "classnames"
 
-import Images from "../../images/images.js"
+import Images from "../../../Common/images/images"
 import MiniLocation from "../MiniLocation/MiniLocation.js"
 import Utils from "../../Utils/Utils.js"
 import useGlobalState from "../../../Context/useGlobalState.js"
