@@ -79,6 +79,11 @@
   .titleInput {
     border: 1px solid green !important;
     width: 20vw;
+
+    input {
+      display: flex;
+      width: 100%;
+    }
   }
 }
 
