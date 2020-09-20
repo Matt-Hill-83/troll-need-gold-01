@@ -124,7 +124,11 @@ export default function BookPicker(props) {
   }
 
   const updateChapters = ({ newChapters }) => {
-    selectedBook.chapters.length = 0
+    if (selectedBook.chapters) {
+      selectedBook.chapters.length = 0
+    } else {
+      selectedBook.chapters = []
+    }
     selectedBook.chapters.push(...newChapters)
   }
 
@@ -241,7 +245,7 @@ export default function BookPicker(props) {
   }
 
   const addBook = async () => {
-    addBookToFirestore(Constants.getNewBook({}))
+    addBookToFirestore(Constants.getNewBook())
   }
 
   const renderProdBooks = ({ books }) => {

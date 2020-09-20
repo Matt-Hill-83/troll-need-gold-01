@@ -15,7 +15,10 @@ export default function NavBar({ setFormOpen }) {
     <Menu inverted fixed="top" className={css.main}>
       <Menu.Item as={NavLink} to="/books" name="Books" />
       {!Constants.isProdRelease && (
-        <Menu.Item as={NavLink} to="/quests" name="Quests List" />
+        <>
+          <Menu.Item as={NavLink} to="/quests" name="Quests List" />
+          <Menu.Item as={NavLink} to="/world-builder" name="Builder" />
+        </>
       )}
       {authenticated ? <SignedInMenu /> : <SignedOutMenu />}
     </Menu>
