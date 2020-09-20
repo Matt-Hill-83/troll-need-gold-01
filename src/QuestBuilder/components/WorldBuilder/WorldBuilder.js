@@ -27,7 +27,6 @@ import WorldPicker from "../WorldPicker/WorldPicker"
 
 import css from "./WorldBuilder.module.scss"
 
-const maps = []
 const NUM_ROWS_LOCATIONS_GRID = 8
 const NUM_COLS_LOCATIONS_GRID = 20
 
@@ -37,11 +36,9 @@ class WorldBuilder extends Component {
     showFrameBuilder: false,
     showQuestConfig: false,
     showSceneConfig: false,
-    // showSubQuestWizard: true,
     showSubQuestWizard: false,
     showDialogBuilder: true,
     expandedDialogAccordions: {},
-    // showDialogBuilder: false,
   }
 
   // Changing this to DidMount breaks things
@@ -67,8 +64,7 @@ class WorldBuilder extends Component {
       this.addNewWorld()
       return
     } else {
-      const world = maps.find((item) => item.id === mapId)
-      // const world = Utils.getWorldFromId2({ id: mapId })
+      const world = this.props.maps.find((item) => item.id === mapId)
       if (!world || !world.data) {
         return
       }
@@ -88,7 +84,7 @@ class WorldBuilder extends Component {
   }
 
   getMapById = (mapId) => {
-    const savedWorlds = Utils.getItemsFromDbObj({ dbList: maps })
+    const savedWorlds = Utils.getItemsFromDbObj({ dbList: this.props.maps })
 
     return savedWorlds.find((map) => {
       return map.id === mapId
@@ -208,7 +204,7 @@ class WorldBuilder extends Component {
 
     const newWorld = Constants.getNewWorld({ props: newWorldProps })
 
-    const newMapReturned = await maps.add(newWorld)
+    const newMapReturned = await this.props.maps.add(newWorld)
     worldBuilderStore.setWorldBuilderWorld(newMapReturned)
   }
 
