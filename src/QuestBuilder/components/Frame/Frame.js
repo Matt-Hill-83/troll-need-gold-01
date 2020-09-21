@@ -5,14 +5,13 @@ import { IconNames } from "@blueprintjs/icons"
 import cx from "classnames"
 import React, { Component } from "react"
 
-import Character from "../Character/Character"
 import CrudMachine from "../CrudMachine/CrudMachine"
-import Head from "../Head/Head"
 import Images from "../../../Common/images/images"
 import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
+import Character from "../../../Common/Components/Character/Character"
 
 import css from "./Frame.module.scss"
-
+import Head from "../../../Common/Components/Head/Head"
 class Frame extends Component {
   state = {
     showFacePicker: false,

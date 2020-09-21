@@ -1,8 +1,9 @@
 import React, { Component } from "react"
 
-import Head from "../Head/Head"
 import Images from "../../../Common/images/images"
+
 import css from "./Character.module.scss"
+import Head from "../Head/Head"
 
 const girlImages = Images.posableGirls
 

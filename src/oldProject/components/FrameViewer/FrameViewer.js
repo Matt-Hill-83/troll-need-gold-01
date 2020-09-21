@@ -7,7 +7,6 @@ import React, { useContext } from "react"
 import { myContext } from "../../../myProvider"
 import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
 import { uploadToFirebaseStorage } from "../../../app/firestore/firebaseService"
-import Character from "../Character/Character"
 import Constants from "../../../Common/Constants/Constants"
 import Images from "../../../Common/images/images"
 import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget"
@@ -15,6 +14,7 @@ import WordGroup from "../WordGroup/WordGroup"
 
 import AudioPlayer from "../AudioPlayer/AudioPlayer"
 import AudioRecorder from "../AudioRecorder/AudioRecorder"
+import Character from "../../../Common/Components/Character/Character"
 
 import css from "./FrameViewer.module.scss"
 
