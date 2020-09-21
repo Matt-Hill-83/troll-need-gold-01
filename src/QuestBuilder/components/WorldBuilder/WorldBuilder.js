@@ -292,7 +292,7 @@ class WorldBuilder extends Component {
     )
   }
 
-  openDialogBuilder = ({}) => {
+  openDialogBuilder = () => {
     this.hideAllModals()
     this.setState({ showDialogBuilder: !this.state.showDialogBuilder })
   }

@@ -24,11 +24,8 @@ export default {
       }
     },
     pagination: false,
-    filter: true,
     filterType: "dropdown",
-    responsive: "vertical",
     enableNestedDataAccess: ".",
-    customToolbar: null,
     filter: false,
     search: false,
     print: false,
