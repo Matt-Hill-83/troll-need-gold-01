@@ -2,10 +2,18 @@
 
 .main {
   display: flex;
-  flex: 1;
-  border: 1px solid red !important;
-  width: 100%;
-  height: 100%;
+  flex: 1 1;
+  border: 6px solid red !important;
+  width: 94vw;
+  height: 93vh;
+  position: fixed;
+  flex-direction: column;
+  top: 5vh;
+  left: 5vh;
+  z-index: 1000;
+  background: white;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .itemImageContainer {

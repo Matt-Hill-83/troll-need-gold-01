@@ -1,8 +1,7 @@
 import React, { Component } from "react"
+import { Button, Dialog } from "@blueprintjs/core"
 
 import css from "./CharacterPicker.module.scss"
-
-import { Button, Dialog } from "@blueprintjs/core"
 
 class CharacterPicker extends Component {
   state = {}
@@ -56,16 +55,16 @@ class CharacterPicker extends Component {
     })
 
     return (
-      <Dialog
-        isOpen={isOpen}
-        canEscapeKeyClose={true}
-        isCloseButtonShown={true}
+      <div
+        // isOpen={isOpen}
+        // canEscapeKeyClose={true}
+        // isCloseButtonShown={true}
         className={css.main}
         // onClose={onClose}
       >
         <Button onClick={() => onClose({})}>Close</Button>
         {renderedImageSets}
-      </Dialog>
+      </div>
     )
   }
 }
