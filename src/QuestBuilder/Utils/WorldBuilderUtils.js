@@ -1,9 +1,8 @@
 import _get from "lodash.get"
-import worldBuilderStore from "../Stores/WorldBuilderStore.js"
-import Utils from "./Utils.js"
-import { updateQuestInFirestore } from "../../app/firestore/firestoreService.js"
 
-const toJS = (item) => item
+import worldBuilderStore from "../Stores/WorldBuilderStore.js"
+import { updateQuestInFirestore } from "../../app/firestore/firestoreService.js"
+import Utils from "../../Common/Utils/Utils.js"
 
 export default class WorldBuilderUtils {
   static getAllItemsInScene = ({ scene }) => {
@@ -73,6 +72,18 @@ export default class WorldBuilderUtils {
     return condensedGrid
   }
 
+  static addIdToAllItemsInScene = ({ scene }) => {
+    const allItems = []
+    scene.frameSet.frames.forEach((item) => {
+      allItems.push(...item.critters1, ...item.critters2)
+    })
+    allItems.forEach((item) => {
+      if (!item.id) {
+        item.id = Utils.generateUuid()
+      }
+    })
+  }
+
   static updateMap = async ({ newProps = {}, mapToUpdate }) => {
     console.log("updateMap-------------")
     console.log("updateMap-------------")
@@ -81,7 +92,7 @@ export default class WorldBuilderUtils {
 
     map.newGrid5 = WorldBuilderUtils.createCondensedGridFromGrid({})
     map.newGrid5.forEach((scene) => {
-      Utils.addIdToAllItemsInScene({ scene })
+      this.addIdToAllItemsInScene({ scene })
     })
 
     delete map.grid
