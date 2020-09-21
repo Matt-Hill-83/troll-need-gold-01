@@ -136,7 +136,7 @@ export default function SubQuestWizard({ props }) {
               }}
             />
             <span className={css.mapPickerButton}>
-              <checkbox
+              <Checkbox
                 label="big"
                 onClick={() => toggleLargeImage()}
                 checked={largeImage}

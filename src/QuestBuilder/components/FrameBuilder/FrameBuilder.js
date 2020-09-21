@@ -24,13 +24,6 @@ class FrameBuilder extends Component {
     this.setState({ scene })
   }
 
-  onExitFrameBuilder = () => {
-    const { onExitFrameBuilder } = this.props
-
-    const frames = [{ test: 5 }]
-    onExitFrameBuilder && onExitFrameBuilder()
-  }
-
   getNewFrame = () => {
     const {
       scene: { characters = [] },
@@ -113,7 +106,7 @@ class FrameBuilder extends Component {
   }
 
   render() {
-    const { scene } = this.props
+    const { scene, onExitFrameBuilder } = this.props
 
     if (!scene) {
       return <div>no scene</div>
@@ -127,7 +120,7 @@ class FrameBuilder extends Component {
             <Icon icon={IconNames.CLOSE} />
             Add Frame
           </Button>
-          <Button className={css.closeButton} onClick={this.onExitFrameBuilder}>
+          <Button className={css.closeButton} onClick={onExitFrameBuilder}>
             <Icon icon={IconNames.CLOSE} />
             Close
           </Button>
