@@ -8,8 +8,8 @@ import React, { Component } from "react"
 import Character from "../Character/Character"
 import CrudMachine from "../CrudMachine/CrudMachine"
 import Head from "../Head/Head"
-import ImageDisplay from "../ImageDisplay/ImageDisplay"
 import Images from "../../../Common/images/images"
+import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
 
 import css from "./Frame.module.scss"
 

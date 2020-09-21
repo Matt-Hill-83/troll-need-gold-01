@@ -5,15 +5,13 @@ import React, { Component } from "react"
 
 import images from "../../../Common/images/images"
 import CrudMachine from "../CrudMachine/CrudMachine"
-import ImageDisplay from "../ImageDisplay/ImageDisplay"
 import worldBuilderStore from "../../Stores/WorldBuilderStore"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 import QuestVisibilityUtils from "../../../oldProject/Utils/QuestVisibilityUtils"
+import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
 
 import css from "./WorldBuilderScenesGrid.module.scss"
 class WorldBuilderScenesGrid extends Component {
-  state = {}
-
   saveItems = async () => {
     await this.props.saveItems()
   }

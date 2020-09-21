@@ -4,7 +4,7 @@ import _get from "lodash.get"
 import MiniTable2 from "../MiniTable2/MiniTable2"
 import TopLevelUtils from "../../Utils/TopLevelUtils"
 import useGlobalState from "../../../Context/useGlobalState.js"
-import ImageDisplay from "../../../QuestBuilder/components/ImageDisplay/ImageDisplay"
+import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
 
 import css from "./MissionConsole.module.scss"
 
