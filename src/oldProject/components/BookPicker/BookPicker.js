@@ -243,6 +243,11 @@ export default function BookPicker(props) {
     addBookToFirestore(Constants.getNewBook())
   }
 
+  const hardRefresh = async () => {
+    console.log("hardRefresh") // zzz
+    window.location.reload(true)
+  }
+
   const renderProdBooks = ({ books }) => {
     const prodBooks = getProdBooks({ books })
     return renderBookList({ books: prodBooks, showLocks: true })
@@ -332,9 +337,12 @@ export default function BookPicker(props) {
         </div>
 
         {!isProdRelease && (
-          <Button className={css.addBookButton} onClick={addBook}>
-            Add Book
-          </Button>
+          <ButtonGroup className={css.addBookButton}>
+            <Button onClick={addBook}>Add Book</Button>
+            <Button className={css.xxxaddBookButton} onClick={hardRefresh}>
+              Hard Refresh
+            </Button>
+          </ButtonGroup>
         )}
       </div>
     </div>
