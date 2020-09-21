@@ -1,16 +1,16 @@
-import { IconNames } from "@blueprintjs/icons"
 import _get from "lodash.get"
-import { Button, Classes, ButtonGroup } from "@blueprintjs/core"
-
+import { Button, ButtonGroup } from "@blueprintjs/core"
+import { IconNames } from "@blueprintjs/icons"
 import cx from "classnames"
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 
 import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 import AutoComplete2 from "../AutoComplete2/AutoComplete2"
-import Constants from "../../Utils/Constants/Constants"
+
 import MyTextEditor from "../MyTextEditor/MyTextEditor"
 import Utils from "../../Utils/Utils"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
+import Constants from "../../../Common/Constants/Constants"
 
 import css from "./DialogBuilder2.module.scss"
 

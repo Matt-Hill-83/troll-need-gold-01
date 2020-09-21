@@ -4,7 +4,7 @@ import { IconNames } from "@blueprintjs/icons"
 import cx from "classnames"
 import React, { useState, useEffect } from "react"
 
-import Constants from "../../Utils/Constants/Constants.js"
+import Constants from "../../../Common/Constants/Constants"
 import Images from "../../../Common/images/images"
 import JSONEditorDemo from "../JsonEdtor/JSONEditorDemo.js"
 import QuestList from "../../../features/questList/QuestList.jsx"

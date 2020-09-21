@@ -7,7 +7,7 @@ import cx from "classnames"
 import React, { useEffect, useState } from "react"
 
 import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
-import Constants from "../../Utils/Constants/Constants"
+import Constants from "../../../Common/Constants/Constants"
 import MissionsTable from "../MissionsTable/MissionsTable"
 import MyAccordion from "../MyAccordion/MyAccordion"
 import MyAccordionGroup from "../MyAccordionGroup/MyAccordionGroup"

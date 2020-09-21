@@ -9,7 +9,7 @@ import {
 } from "../../../app/firestore/firestoreService"
 import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc"
 import { listenToSelectedUserProfile } from "../../../features/profiles/profileActions"
-import Constants from "../../Utils/Constants/Constants"
+import Constants from "../../../Common/Constants/Constants"
 
 export default function useUpdateProfileWidget() {
   const dispatch = useDispatch()

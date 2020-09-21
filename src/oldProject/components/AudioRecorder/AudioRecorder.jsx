@@ -1,6 +1,6 @@
 import { ButtonGroup, Button } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
-import Constants from "../../Utils/Constants/Constants"
+import Constants from "../../../Common/Constants/Constants"
 import cx from "classnames"
 import MicRecorder from "mic-recorder-to-mp3"
 import React from "react"

@@ -3,7 +3,7 @@ import { IconNames } from "@blueprintjs/icons"
 import React from "react"
 
 import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
-import Constants from "../../Utils/Constants/Constants"
+import Constants from "../../../Common/Constants/Constants"
 import TextField from "@material-ui/core/TextField"
 import Utils from "../../Utils/Utils"
 

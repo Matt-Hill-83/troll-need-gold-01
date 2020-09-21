@@ -6,13 +6,13 @@ import cx from "classnames"
 import React from "react"
 
 import { deleteQuestInFirestore } from "../../app/firestore/firestoreService"
-import Constants from "../../oldProject/Utils/Constants/Constants"
 import QuestProgressUtils from "../../oldProject/Utils/QuestProgressUtils"
 import TopLevelUtils from "../../oldProject/Utils/TopLevelUtils"
 import useUpdateProfileWidget from "../../oldProject/components/TopLevel/useUpdateProfileWidget"
 import Utils from "../../oldProject/Utils/Utils"
 
 import css from "./QuestListItem.module.scss"
+import Constants from "../../Common/Constants/Constants"
 
 const { isProdRelease } = Constants
 

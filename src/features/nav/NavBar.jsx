@@ -1,11 +1,11 @@
-import React from "react"
 import { Menu } from "semantic-ui-react"
 import { NavLink } from "react-router-dom"
-import SignedOutMenu from "./SignedOutMenu"
-import SignedInMenu from "./SignedInMenu"
 import { useSelector } from "react-redux"
+import React from "react"
 
-import Constants from "../../oldProject/Utils/Constants/Constants"
+import SignedInMenu from "./SignedInMenu"
+import SignedOutMenu from "./SignedOutMenu"
+import Constants from "../../Common/Constants/Constants"
 
 import css from "./NavBar.module.scss"
 

@@ -1,6 +1,5 @@
 import React, { useState, createContext } from "react"
-import Constants from "./oldProject/Utils/Constants/Constants"
-
+import Constants from "./Common/Constants/Constants"
 export const myContext = createContext()
 
 export const MyProvider = (props) => {

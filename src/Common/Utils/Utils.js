@@ -1,5 +1,5 @@
 import _get from "lodash.get"
-import Constants from "../../Common/Constants/Constants"
+import Constants from "../Constants/Constants.js"
 
 export default class Utils {
   static addArrayElement = ({ newElement, before, index, array }) => {

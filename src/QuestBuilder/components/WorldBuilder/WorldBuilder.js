@@ -23,7 +23,7 @@ import SubQuestWizard from "../SubQuestWizard/SubQuestWizard"
 import Utils from "../../Utils/Utils"
 import WorldBuilderScenesGrid from "../WorldBuilderScenesGrid/WorldBuilderScenesGrid"
 import worldBuilderStore from "../../Stores/WorldBuilderStore"
-import Constants from "../../../oldProject/Utils/Constants/Constants"
+import Constants from "../../../Common/Constants/Constants"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 import WorldPicker from "../WorldPicker/WorldPicker"
 
