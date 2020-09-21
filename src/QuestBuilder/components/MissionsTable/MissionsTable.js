@@ -16,7 +16,7 @@ export default function MissionsTable({ props }) {
   const {
     items,
     saveQuestConfig,
-    setQuestConfig,
+    // setQuestConfig,
     dataTableKey,
     questConfig,
     scenes,
@@ -37,7 +37,7 @@ export default function MissionsTable({ props }) {
   // on change in props
   useEffect(() => {
     // TODO: store correct prop
-    setQuestConfig(props.questConfig || {})
+    props.setQuestConfig(props.questConfig || {})
   }, [props.questConfig, props.setQuestConfig])
 
   const renderItems = ({ items }) => {

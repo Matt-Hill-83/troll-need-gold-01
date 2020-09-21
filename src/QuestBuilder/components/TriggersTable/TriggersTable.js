@@ -29,7 +29,7 @@ export default function TriggersTable({ props }) {
   // on change in props
   useEffect(() => {
     setQuestConfig(props.questConfig || {})
-  }, [props.questConfig])
+  }, [props.questConfig, props.setQuestConfig])
 
   const renderTriggers = ({ triggers }) => {
     const onAddTriggerRow = ({ rowIndex, before }) => {

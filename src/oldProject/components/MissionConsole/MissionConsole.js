@@ -1,6 +1,5 @@
 import React from "react"
 import _get from "lodash.get"
-import cx from "classnames"
 
 import ImageDisplay from "../ImageDisplay/ImageDisplay"
 import MiniTable2 from "../MiniTable2/MiniTable2"
@@ -10,18 +9,15 @@ import useGlobalState from "../../../Context/useGlobalState.js"
 import css from "./MissionConsole.module.scss"
 
 const columnNames = ["Mission", "Gold", "Complete"]
-// const columnNames = ["Mission", "Bring the...", "to the...", "Gold", "Complete"]
 
 const getTableData = ({ missions, completedMissions }) => {
   return missions.map((mission, missionIndex) => {
     const { item = {}, recipient = "", rewards = [] } = mission
-    // const { name, item = {}, recipient = "", rewards = [] } = mission
     const rewardString = `${_get(rewards, "[0]amount")}`
     const completed = completedMissions.includes(missionIndex)
 
     const name = `Bring the ${item.name} to the ${recipient.name}`
     return [name, rewardString, completed]
-    // return [name, item.name, recipient.name, rewardString, completed]
   })
 }
 
