@@ -8,7 +8,7 @@ import { myContext } from "../../../myProvider"
 import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
 import { uploadToFirebaseStorage } from "../../../app/firestore/firebaseService"
 import Constants from "../../../Common/Constants/Constants"
-import Images from "../../../Common/images/images"
+import Images from "../../../Common/Images/images"
 import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget"
 import WordGroup from "../WordGroup/WordGroup"
 

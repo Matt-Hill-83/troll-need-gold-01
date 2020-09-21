@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-import Images from "../../../Common/images/images"
+import Images from "../../../Common/Images/images"
 
 import css from "./ImageDisplay.module.scss"
 

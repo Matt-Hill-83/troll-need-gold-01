@@ -1,6 +1,6 @@
 import React from "react"
 
-import Images from "../../../Common/images/images"
+import Images from "../../../Common/Images/images"
 import MiniLocation from "../MiniLocation/MiniLocation.js"
 import Utils from "../../../Common/Utils/Utils"
 import useGlobalState from "../../../Context/useGlobalState.js"

@@ -3,7 +3,7 @@ import { Button, Icon } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
 import React, { Component } from "react"
 
-import images from "../../../Common/images/images"
+import images from "../../../Common/Images/images"
 import CrudMachine from "../CrudMachine/CrudMachine"
 import worldBuilderStore from "../../Stores/WorldBuilderStore"
 import QuestVisibilityUtils from "../../../oldProject/Utils/QuestVisibilityUtils"

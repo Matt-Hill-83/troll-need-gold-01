@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import cx from "classnames"
 import React from "react"
 
-import Images from "../../../Common/images/images"
+import Images from "../../../Common/Images/images"
 import Utils from "../../../Common/Utils/Utils"
 
 import css from "./BookTableOfContents.module.scss"

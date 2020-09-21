@@ -3,7 +3,7 @@ import { IconNames } from "@blueprintjs/icons"
 
 import React, { Component } from "react"
 
-import images from "../../../Common/images/images"
+import images from "../../../Common/Images/images"
 import CharacterPicker from "../CharacterPicker/CharacterPicker"
 import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
 import Utils from "../../../Common/Utils/Utils"

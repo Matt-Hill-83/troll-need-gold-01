@@ -6,7 +6,7 @@ import cx from "classnames"
 import React, { Component } from "react"
 
 import CrudMachine from "../CrudMachine/CrudMachine"
-import Images from "../../../Common/images/images"
+import Images from "../../../Common/Images/images"
 import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
 import Character from "../../../Common/Components/Character/Character"
 
