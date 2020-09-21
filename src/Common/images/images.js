@@ -255,7 +255,6 @@ import rightArrow from "./backgrounds/right-arrow-01.png"
 import introBackground from "./backgrounds/introBackground.jpg"
 import paperBackground01 from "./backgrounds/paperBackground01.png"
 import stoneRectangle01 from "./backgrounds/stoneRectangle01.png"
-import roadLeftRight01 from "./backgrounds/roadLeftRight01.png"
 
 // liz2
 import liz1 from "./rigged-girls/liz/png/liz-1.png"
@@ -612,24 +611,20 @@ const creatures = {
   charlie02,
   fiona: charlie02,
   goose02,
-  // goose03,
   littleGoose: goose03,
   sillyGoose01: goose04,
-  // goose04,
   queenGoose01,
   pigeon01,
 }
 
 const items = {
   blank,
-  // roadLeftRight01,
   bag,
   smoke,
 
   skull01,
   lock02,
   ringOfZandar01,
-  // glenda01NoFace,
 
   bun,
   cap,

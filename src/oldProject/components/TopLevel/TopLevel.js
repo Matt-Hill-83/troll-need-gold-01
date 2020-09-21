@@ -1,7 +1,6 @@
 import React, { useEffect } from "react"
-import _get from "lodash.get"
-import _pick from "lodash.pick"
 import { Toaster, Position } from "@blueprintjs/core"
+
 import Constants from "../../../Common/Constants/Constants"
 import QuestProgressUtils from "../../Utils/QuestProgressUtils.js"
 import QuestVisibilityUtils from "../../Utils/QuestVisibilityUtils.js"

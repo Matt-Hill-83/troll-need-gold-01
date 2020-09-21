@@ -74,7 +74,6 @@ export default function MiniLocation(props) {
   const cloudImage = Images.backgrounds["cloud"]
   const lockImage = Images.items["lock02"]
 
-  const showLocationOnly = locationName === "roadLeftRight01"
   const scenesGrid = _get(world, "newGrid5") || []
 
   const neighbors = Utils.getNeighbors({ coordinates, grid: scenesGrid })
@@ -86,20 +85,6 @@ export default function MiniLocation(props) {
   const neighborIsActive = neighborsArray.some((neighbor) => {
     return neighbor && neighbor.id === activeScene.id
   })
-
-  // for when I add roads
-  if (showLocationOnly) {
-    const roadLeftRight01 = Images.items["roadLeftRight01"]
-    return (
-      <div className={`${css.main} ${className} ${isActiveClass} `}>
-        <div className={css.container}>
-          <div className={css.roadLeftRight01}>
-            <img className={css.none} src={roadLeftRight01} alt={"imagex"} />
-          </div>
-        </div>
-      </div>
-    )
-  }
 
   // apply position based clouded state
   // If cloud is still hidden, apply config based state

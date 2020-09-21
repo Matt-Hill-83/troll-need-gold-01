@@ -3,9 +3,9 @@ import { Button, Icon } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
 import React, { Component } from "react"
 
+import images from "../../../Common/images/images"
 import CrudMachine from "../CrudMachine/CrudMachine"
 import ImageDisplay from "../ImageDisplay/ImageDisplay"
-import images from "../../images/images"
 import worldBuilderStore from "../../Stores/WorldBuilderStore"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 import QuestVisibilityUtils from "../../../oldProject/Utils/QuestVisibilityUtils"
@@ -130,8 +130,6 @@ class WorldBuilderScenesGrid extends Component {
     const characterImageSets = [images.creatures]
     const locations = [scene.location]
 
-    // const world = worldBuilderStore.getWorldBuilderWorld() || {}
-    // const world = worldBuilderStore.getWorldBuilderWorld() || {}
     const backgroundColor = QuestVisibilityUtils.getSubQuestColor({
       world: world,
       sceneId: scene.id,

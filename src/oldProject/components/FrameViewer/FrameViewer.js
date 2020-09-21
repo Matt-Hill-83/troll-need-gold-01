@@ -205,7 +205,7 @@ export default function FrameViewer() {
   function saveAudio({ dialog, blob }) {
     // setLoading(true)
 
-    const filename = cuid() + "-audio" + "." + "blob"
+    const filename = cuid() + "-audio.blob"
     const uploadTask = uploadToFirebaseStorage(blob, filename)
     uploadTask.on(
       "state_changed",

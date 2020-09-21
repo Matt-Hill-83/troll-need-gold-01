@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Button, Dialog } from "@blueprintjs/core"
+import { Button } from "@blueprintjs/core"
 
 import css from "./CharacterPicker.module.scss"
 
