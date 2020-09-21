@@ -13,7 +13,7 @@ export default function MyTextEditor({ props }) {
 
   useEffect(() => {
     // on mount
-    setContent(props.content)
+    // setContent(props.content)
     // returned function will be called on component unmount
     return () => {}
   }, [])
@@ -35,7 +35,7 @@ export default function MyTextEditor({ props }) {
     <>
       <Button
         className={css.submitButton}
-        onClick={() => onSubmit({})}
+        onClick={onSubmit}
         icon={IconNames.SAVED}
       >
         Save Text

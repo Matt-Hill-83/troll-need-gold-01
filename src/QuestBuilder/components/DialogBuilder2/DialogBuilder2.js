@@ -112,7 +112,7 @@ export default function DialogBuilder2({ props }) {
 
     const { dialog = [] } = frame
 
-    const renderDuplicateFrameButton = ({}) => {
+    const renderDuplicateFrameButton = () => {
       return (
         <Button
           onClick={() =>
@@ -129,7 +129,7 @@ export default function DialogBuilder2({ props }) {
       )
     }
 
-    const renderDeleteFrameButton = ({}) => {
+    const renderDeleteFrameButton = () => {
       return (
         <Button
           onClick={() =>
@@ -146,7 +146,7 @@ export default function DialogBuilder2({ props }) {
       )
     }
 
-    const renderAddDialogRowButton = ({}) => {
+    const renderAddDialogRowButton = () => {
       return (
         <Button
           onClick={() =>
@@ -163,7 +163,7 @@ export default function DialogBuilder2({ props }) {
       )
     }
 
-    const renderJoinFramesButton = ({}) => {
+    const renderJoinFramesButton = () => {
       return (
         <Button
           onClick={() =>
@@ -174,7 +174,6 @@ export default function DialogBuilder2({ props }) {
               frame,
             })
           }
-          // icon={IconNames.ADD}
         >
           Join
         </Button>
@@ -279,7 +278,7 @@ export default function DialogBuilder2({ props }) {
     style,
   }) => {
     if (dialog.text.length >= 0) {
-      const renderSplitFrameButton = ({}) => {
+      const renderSplitFrameButton = () => {
         return (
           <Button
             onClick={() =>
@@ -298,7 +297,7 @@ export default function DialogBuilder2({ props }) {
 
       const moreButtons = [
         renderCritterPicker({ dialog, frame }),
-        renderSplitFrameButton({}),
+        renderSplitFrameButton(),
       ]
 
       metaInfoMap[rowNum.value] = { sceneIndex, frameIndex, dialogIndex }

@@ -1,8 +1,7 @@
-import _get from "lodash.get"
 import { createMuiTheme } from "@material-ui/core/styles"
 
 import cx from "classnames"
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 
 import { getSubQuestTableConfigFunc } from "./SubQuestTableConfig"
 import Constants from "../../../Common/Constants/Constants"

@@ -241,14 +241,21 @@ class WorldBuilder extends Component {
   }
 
   updateWorld = async (props) => {
-    await WorldBuilderUtils.updateMap(props)
+    console.log("updateWorld1") // zzz
+    WorldBuilderUtils.updateMap(props)
+    console.log("updateWorld1b") // zzz
+    this.forceUpdate2()
+  }
+
+  forceUpdate2 = async () => {
+    console.log("forceUpdate2") // zzz
     this.setState({ update: Date.now() })
   }
 
   saveItems = async () => {
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
 
-    await this.updateWorld({ mapToUpdate: world })
+    this.updateWorld({ mapToUpdate: world })
   }
 
   saveItemsDialogBuilder = async () => {
@@ -466,7 +473,7 @@ class WorldBuilder extends Component {
             <FrameBuilder
               world={world}
               scene={sceneToEdit}
-              onExitFrameBuilder={(frame) => this.onExitFrameBuilder({ frame })}
+              onExitFrameBuilder={this.onExitFrameBuilder}
               updateMap={WorldBuilderUtils.updateMap}
             />
           </div>

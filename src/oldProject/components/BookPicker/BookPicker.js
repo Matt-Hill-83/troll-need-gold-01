@@ -1,4 +1,3 @@
-import _get from "lodash.get"
 import { ButtonGroup, Button } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
 import cx from "classnames"
@@ -39,9 +38,7 @@ const sortBooks = ({ books }) => {
 
 const getInitialBook = ({ books }) => {
   const prodBooks = getProdBooks({ books })
-  console.log("prodBooks", prodBooks) // zzz
   const initialBook = prodBooks[0] || books[0]
-  console.log("initialBook", initialBook) // zzz
   return initialBook
 }
 
@@ -57,14 +54,12 @@ export default function BookPicker(props) {
   const { getCompletedQuests } = useUpdateProfileWidget()
 
   worlds = props.worlds || []
-  // books = props.books || []
   books = sortBooks({ books: props.books })
-  console.log("books", books) // zzz
 
   useEffect(() => {
     console.log("onMount-------------------------------->>>>")
-    worlds = props.worlds
-    books = sortBooks({ books: props.books })
+    // worlds = props.worlds
+    // books = sortBooks({ books: props.books })
 
     // returned function will be called on component unmount
     return () => {
@@ -76,6 +71,7 @@ export default function BookPicker(props) {
   useEffect(() => {
     console.log("new props =================================>>>>>")
     worlds = props.worlds
+    books = sortBooks({ books: props.books })
   }, [props.worlds])
 
   useEffect(() => {
@@ -171,8 +167,6 @@ export default function BookPicker(props) {
     if (selectedBook.titlePageImage) {
       titlePageImage = Images.backgrounds[selectedBook.titlePageImage]
     }
-
-    console.log("titlePageImage", titlePageImage) // zzz
 
     return (
       <div className={css.chapterView}>
@@ -279,8 +273,6 @@ export default function BookPicker(props) {
         completedQuests,
       })
 
-      console.log("book.name", book.name) // zzz
-      console.log("bookIsCompleted", bookIsCompleted) // zzz
       const lockImage = Images.items["lock02"]
 
       const onClick = showLocks

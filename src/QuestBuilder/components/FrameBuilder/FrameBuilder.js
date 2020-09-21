@@ -28,7 +28,7 @@ class FrameBuilder extends Component {
     const { onExitFrameBuilder } = this.props
 
     const frames = [{ test: 5 }]
-    onExitFrameBuilder && onExitFrameBuilder({ frames })
+    onExitFrameBuilder && onExitFrameBuilder()
   }
 
   getNewFrame = () => {
@@ -96,7 +96,7 @@ class FrameBuilder extends Component {
       scene.frameSet = { frames: [WorldBuilderUtils.getNewFrame()] }
     }
 
-    let frames = scene.frameSet.frames
+    let frames = scene?.frameSet?.frames || []
 
     return frames.map((frame, index) => {
       return (
@@ -114,8 +114,9 @@ class FrameBuilder extends Component {
 
   render() {
     const { scene } = this.props
+
     if (!scene) {
-      return null
+      return <div>no scene</div>
     }
 
     return (

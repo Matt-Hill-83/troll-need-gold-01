@@ -12,7 +12,7 @@ import css from "./MiniLocation.module.scss"
 
 export default function MiniLocation(props) {
   const { updateActiveScene, scene, className } = props
-  const { coordinates, isStartScene, id } = scene
+  const { coordinates, id } = scene
 
   const {
     globalState: { world, activeScene, questStatus = {} },

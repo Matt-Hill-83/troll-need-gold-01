@@ -123,14 +123,15 @@ class WorldBuilderScenesGrid extends Component {
   }
 
   renderCell = ({ scene }) => {
+    const { world } = this.props
     const buttons = { add: false, trash: false, edit: true }
     const onSave = this.saveItems
     const locationImageSets = [images.all]
     const characterImageSets = [images.creatures]
     const locations = [scene.location]
 
-    const world = worldBuilderStore.getWorldBuilderWorld() || {}
-    // const backgroundColor = "pink"
+    // const world = worldBuilderStore.getWorldBuilderWorld() || {}
+    // const world = worldBuilderStore.getWorldBuilderWorld() || {}
     const backgroundColor = QuestVisibilityUtils.getSubQuestColor({
       world: world,
       sceneId: scene.id,

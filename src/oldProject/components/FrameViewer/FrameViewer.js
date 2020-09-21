@@ -2,7 +2,7 @@ import { Button, ButtonGroup } from "@blueprintjs/core"
 import { Link } from "react-router-dom"
 import cuid from "cuid"
 import cx from "classnames"
-import React, { useContext, useState } from "react"
+import React, { useContext } from "react"
 
 import { myContext } from "../../../myProvider"
 import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
@@ -18,13 +18,12 @@ import AudioRecorder from "../AudioRecorder/AudioRecorder"
 
 import css from "./FrameViewer.module.scss"
 
-export default function FrameViewer(props) {
+export default function FrameViewer() {
   const [globalState, setGlobalState] = useContext(myContext)
-  const [loading, setLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
 
   const { getProfile } = useUpdateProfileWidget()
   const loggedIn = !!getProfile().id
-  console.log("getProfile().id", getProfile().id) // zzz
 
   const { activeFrameIndex, activeScene } = globalState
   const { frames = [] } = activeScene.frameSet
@@ -135,7 +134,6 @@ export default function FrameViewer(props) {
 
   const renderBackground = () => {
     const backgroundImageHill = Images.backgrounds["hill01"]
-    const brokenMonitor01 = Images.backgrounds["brokenMonitor01"]
 
     return (
       <div className={css.backgroundImageContainer}>
@@ -146,13 +144,6 @@ export default function FrameViewer(props) {
             alt={`backgroundImage`}
           />
         </div>
-        {/* <div className={css.backgroundGrass}>
-          <img
-            className={css.backgroundGrassImage}
-            src={brokenMonitor01}
-            alt={`backgroundImage`}
-          />
-        </div> */}
       </div>
     )
   }
@@ -212,7 +203,7 @@ export default function FrameViewer(props) {
   }
 
   function saveAudio({ dialog, blob }) {
-    setLoading(true)
+    // setLoading(true)
 
     const filename = cuid() + "-audio" + "." + "blob"
     const uploadTask = uploadToFirebaseStorage(blob, filename)

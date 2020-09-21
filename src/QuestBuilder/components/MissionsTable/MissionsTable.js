@@ -1,4 +1,3 @@
-import _get from "lodash.get"
 import { Button } from "@blueprintjs/core"
 import { createMuiTheme } from "@material-ui/core/styles"
 import { IconNames } from "@blueprintjs/icons"
@@ -22,7 +21,6 @@ export default function MissionsTable({ props }) {
     questConfig,
     scenes,
     sceneId,
-    worldId,
   } = props
 
   const allItems = Utils.getAllItemsInScenes({ scenes })
@@ -40,7 +38,7 @@ export default function MissionsTable({ props }) {
   useEffect(() => {
     // TODO: store correct prop
     setQuestConfig(props.questConfig || {})
-  }, [props.questConfig])
+  }, [props.questConfig, props.setQuestConfig])
 
   const renderItems = ({ items }) => {
     const onAddItem = ({ rowIndex, before }) => {

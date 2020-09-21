@@ -33,7 +33,7 @@ export default function WorldMultiPicker2(props) {
   }
 
   // append owning chapters to world name
-  worldsForPicker.map((world) => {
+  worldsForPicker.forEach((world) => {
     const { title, id: worldId } = world
     const belongsToABook = Utils.belongsToABook({ worldId, books })
 
@@ -44,7 +44,7 @@ export default function WorldMultiPicker2(props) {
     }
   })
 
-  worlds.map((world) => {
+  worlds.forEach((world) => {
     const { title, id: worldId } = world
     const belongsToABook = Utils.belongsToABook({ worldId, books })
 

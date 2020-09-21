@@ -1,6 +1,4 @@
-import _get from "lodash.get"
 import React from "react"
-import cx from "classnames"
 
 import Images from "../../../Common/images/images"
 import MiniLocation from "../MiniLocation/MiniLocation.js"
@@ -15,8 +13,6 @@ const bookCoil01 = Images.backgrounds["bookCoil01"]
 const mapBackground = Images.backgrounds["mapBackground11"]
 
 export default function WorldViewer(props) {
-  // console.log("WorldViewer-----------------------")
-
   const {
     globalState: {
       world: { gridDimensions, newGrid5 },

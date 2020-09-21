@@ -1,4 +1,3 @@
-import _get from "lodash.get"
 import cx from "classnames"
 import React, { Component } from "react"
 
@@ -20,11 +19,23 @@ class MiniTable2 extends Component {
     let cellContent = null
 
     if (typeof value === "undefined") {
-      cellContent = <span role="img">❌</span>
+      cellContent = (
+        <span role="img" aria-label={"test"}>
+          ❌
+        </span>
+      )
     } else if (value === true) {
-      cellContent = <span role="img">✅</span>
+      cellContent = (
+        <span role="img" aria-label={"test"}>
+          ✅
+        </span>
+      )
     } else if (value === false) {
-      cellContent = <span role="img">❌</span>
+      cellContent = (
+        <span role="img" aria-label={"test"}>
+          ❌
+        </span>
+      )
     } else {
       cellContent = value ? value.toString() : ""
     }

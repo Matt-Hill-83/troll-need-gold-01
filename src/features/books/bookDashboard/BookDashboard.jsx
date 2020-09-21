@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import _uniqBy from "lodash.uniqby"
 
@@ -10,7 +10,7 @@ import BookPicker from "../../../oldProject/components/BookPicker/BookPicker"
 import css from "./BookDashboard.module.scss"
 
 export default function BookDashboard() {
-  const limit = 20
+  const limit = 50
   const dispatch = useDispatch()
   const { quests, filter, startDate, retainState } = useSelector(
     (state) => state.quest
@@ -37,5 +37,11 @@ export default function BookDashboard() {
   const uniqueBooks = _uniqBy(books, "id")
   const uniqueWorlds = _uniqBy(quests, "id")
 
-  return <BookPicker worlds={uniqueWorlds} books={uniqueBooks}></BookPicker>
+  return (
+    <BookPicker
+      className={css.main}
+      worlds={uniqueWorlds}
+      books={uniqueBooks}
+    />
+  )
 }

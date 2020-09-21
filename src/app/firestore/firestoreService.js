@@ -60,8 +60,8 @@ export function addQuestToFirestore(item) {
   return db.collection("quests").add({ ...item })
 }
 
-export function updateQuestInFirestore(quest) {
-  return db.collection("quests").doc(quest.id).update(quest)
+export async function updateQuestInFirestore(quest) {
+  return await db.collection("quests").doc(quest.id).update(quest)
 }
 
 export function updateBookInFirestore(item) {

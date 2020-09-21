@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 
 import cx from "classnames"
 import MUIDataTable from "mui-datatables"

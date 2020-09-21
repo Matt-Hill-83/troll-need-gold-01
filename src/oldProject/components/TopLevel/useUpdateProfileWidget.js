@@ -1,7 +1,5 @@
-import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import _isEqual from "lodash.isequal"
-import _get from "lodash.get"
 
 import {
   getUserProfile,

@@ -1,6 +1,4 @@
-import _get from "lodash.get"
 import React, { useContext } from "react"
-import cx from "classnames"
 
 import { myContext } from "../../../myProvider.js"
 import MissionConsole from "../MissionConsole/MissionConsole.js"
@@ -10,14 +8,13 @@ import FrameViewer from "../FrameViewer/FrameViewer.js"
 import css from "./StoryMode.module.scss"
 
 export default function StoryMode(props) {
-  console.log("StoryMode------------------------>>>")
   const [globalState] = useContext(myContext)
   const { world, showMissionConsole } = globalState
 
   const { updateActiveScene } = props
 
   if (!world || !world.title) {
-    return null
+    return <div>no world</div>
   }
 
   const renderWorldName = (

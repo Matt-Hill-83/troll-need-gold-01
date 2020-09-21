@@ -1,5 +1,3 @@
-import _get from "lodash.get"
-
 import worldBuilderStore from "../Stores/WorldBuilderStore.js"
 import { updateQuestInFirestore } from "../../app/firestore/firestoreService.js"
 import Utils from "../../Common/Utils/Utils.js"
@@ -46,7 +44,7 @@ export default class WorldBuilderUtils {
     return newFrame
   }
 
-  static createCondensedGridFromGrid = ({ world }) => {
+  static createCondensedGridFromGrid = () => {
     // trim down the grid to just the non-blank scenes and make them accessible by id, instead of
     // defined by the 2 array position
 
@@ -90,6 +88,8 @@ export default class WorldBuilderUtils {
 
     delete map.grid
     await updateQuestInFirestore(map)
+    console.log("map", map) // zzz
+    return
   }
 
   static getCritters1New = ({ frameConfig, sceneConfig }) => {
