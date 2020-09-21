@@ -242,7 +242,7 @@ class WorldBuilder extends Component {
 
   updateWorld = async (props) => {
     console.log("updateWorld1") // zzz
-    WorldBuilderUtils.updateMap(props)
+    await WorldBuilderUtils.updateMap(props)
     console.log("updateWorld1b") // zzz
     this.forceUpdate2()
   }
