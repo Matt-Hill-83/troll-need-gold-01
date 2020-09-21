@@ -86,7 +86,7 @@ class FrameBuilder extends Component {
     const { scene, updateMap } = this.props
 
     if (!scene.frameSet) {
-      scene.frameSet = { frames: [WorldBuilderUtils.getNewFrame()] }
+      scene.frameSet = { frames: [WorldBuilderUtils.getNewFrame({})] }
     }
 
     let frames = scene?.frameSet?.frames || []
