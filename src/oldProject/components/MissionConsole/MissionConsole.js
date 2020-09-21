@@ -1,10 +1,10 @@
 import React from "react"
 import _get from "lodash.get"
 
-import ImageDisplay from "../ImageDisplay/ImageDisplay"
 import MiniTable2 from "../MiniTable2/MiniTable2"
 import TopLevelUtils from "../../Utils/TopLevelUtils"
 import useGlobalState from "../../../Context/useGlobalState.js"
+import ImageDisplay from "../../../QuestBuilder/components/ImageDisplay/ImageDisplay"
 
 import css from "./MissionConsole.module.scss"
 

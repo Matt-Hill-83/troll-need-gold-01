@@ -5,17 +5,17 @@ import Images from "../../../Common/images/images"
 import css from "./ImageDisplay.module.scss"
 
 class ImageDisplay extends Component {
-  state = {}
+  // state = {}
 
-  componentWillMount() {
-    let { items = [] } = this.props
-    this.setState({ items: [...items] })
-  }
+  // componentWillMount() {
+  //   let { items = [] } = this.props
+  //   this.setState({ items: [...items] })
+  // }
 
-  componentWillReceiveProps(newProps) {
-    let { items = [] } = newProps
-    this.setState({ items: [...items] })
-  }
+  // componentWillReceiveProps(newProps) {
+  //   let { items = [] } = newProps
+  //   this.setState({ items: [...items] })
+  // }
 
   render() {
     const {

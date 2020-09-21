@@ -38,7 +38,7 @@ export default function SubQuestWizard({ props }) {
 
   const scenes = props.scenes || []
 
-  const renderMissions = ({ missions, subQuestIndex }) => {
+  const renderMissions = ({ missions }) => {
     const missionTableProps = {
       items: missions,
       questConfig,
