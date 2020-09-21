@@ -4,18 +4,6 @@ import { Button } from "@blueprintjs/core"
 import css from "./CharacterPicker.module.scss"
 
 class CharacterPicker extends Component {
-  state = {}
-
-  componentWillMount() {
-    const { imageSets } = this.props
-    this.setState({ imageSets })
-  }
-
-  componentWillReceiveProps(newProps) {
-    const { imageSets } = newProps
-    this.setState({ imageSets })
-  }
-
   selectItem = ({ itemId, name }) => {
     const { onSelectItem } = this.props
     onSelectItem({ itemId, name })
@@ -47,8 +35,7 @@ class CharacterPicker extends Component {
   }
 
   render() {
-    const { imageSets } = this.state
-    const { onClose } = this.props
+    const { onClose, imageSets } = this.props
 
     const renderedImageSets = imageSets.map((imageSet, index) => {
       return this.renderItemPicker({ imageSet, index })
