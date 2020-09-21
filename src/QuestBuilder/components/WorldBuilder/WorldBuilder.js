@@ -46,7 +46,13 @@ class WorldBuilder extends Component {
   async componentWillMount() {
     this.maps = this.props.maps || []
     const defaultWorldId = "1zRS8eoqWLrJc9QeamkT"
-    this.onChangeWorld({ mapId: defaultWorldId })
+    const defaultWorld = this.maps.find((item) => item.id === defaultWorldId)
+    console.log("defaultWorld", defaultWorld) // zzz
+
+    const id = defaultWorld ? defaultWorldId : this.maps[0]?.id || ""
+    console.log("id", id) // zzz
+    this.onChangeWorld({ mapId: id })
+    // this.onChangeWorld({ mapId: defaultWorldId })
   }
 
   hideAllModals = () => {
