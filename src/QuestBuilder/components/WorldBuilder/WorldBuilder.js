@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import cx from "classnames"
+import { IconNames } from "@blueprintjs/icons"
 
 import { addQuestToFirestore } from "../../../app/firestore/firestoreService.js"
 
@@ -334,7 +335,7 @@ class WorldBuilder extends Component {
         content={buttons}
         position={Position.BOTTOM}
       >
-        <Button icon="share" text={"buttonText"} />
+        <Button icon={IconNames.SETTINGS} text={"customize"} />
       </Popover>
     )
   }
