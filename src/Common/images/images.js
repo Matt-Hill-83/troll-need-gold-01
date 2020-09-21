@@ -1,48 +1,29 @@
 import creatures from "./creatures"
+import items from "./items"
 
-import bag from "./locations/bag.png"
 import barn from "./locations/barn.png"
 import bees from "./locations/bees.png"
 import tree from "./locations/bees.png"
 import blank from "./locations/blank.png"
 import bog from "./locations/bog.png"
-import bun from "./locations/bun.png"
 import bus from "./locations/bus.png"
-import cap from "./locations/cap.png"
 import car from "./locations/car.png"
 import castle from "./locations/castle.png"
-import cave from "./locations/cave.png"
-import coop from "./locations/coop.png"
-import cup from "./locations/cup.png"
-import donutShop01 from "./locations/donutShop01.png"
-import drip from "./locations/drip.png"
-import fan from "./locations/fan.png"
-import fig from "./locations/fig.png"
-import flag from "./locations/flag.png"
-import hill from "./locations/hill.png"
-import hoop from "./locations/hoop.png"
-import house from "./locations/house.png"
-import hug from "./locations/hug.png"
-import jug from "./locations/jug.png"
 import lake from "./locations/lake.png"
 import log from "./locations/log.png"
-import mat from "./locations/mat.png"
-import mop from "./locations/mop.png"
-import mug from "./locations/mug.png"
-import pan from "./locations/pan.png"
-import pin from "./locations/pin.png"
 import pond from "./locations/pond.png"
 import pool from "./locations/pool.png"
-import rag from "./locations/rag.png"
 import slide from "./locations/slide.png"
-import stump from "./locations/stump.png"
-import swing from "./locations/swing.png"
-import tag from "./locations/tag.png"
-import top from "./locations/top.png"
-// import tree from "./locations/treehouse.png"
 import tug from "./locations/tug.png"
 import van from "./locations/van.png"
 import waterfall from "./locations/waterfall.png"
+import stump from "./locations/stump.png"
+import swing from "./locations/swing.png"
+import cave from "./locations/cave.png"
+import coop from "./locations/coop.png"
+import donutShop01 from "./locations/donutShop01.png"
+import hill from "./locations/hill.png"
+import house from "./locations/house.png"
 
 import bookCoil01 from "./backgrounds/bookCoil01.png"
 import mapBackground07 from "./backgrounds/mapBackground07.jpg"
@@ -61,23 +42,13 @@ import bookCoverMongo01 from "./bookcovers/bookCoverMongo01.png"
 import bookTableOfContents01 from "./bookcovers/bookTableOfContents01.png"
 import dummyQuest01 from "./bookcovers/dummyQuest01.png"
 
-// items
-import balloons01 from "./items/balloons01.png"
-import moon01 from "./items/moon01.png"
-import spaceShip01 from "./items/spaceShip01.png"
-import note01 from "./items/note01.png"
-
-import angusBalloon01 from "./creatures/angusBalloon01.png"
-import barkPhone01 from "./creatures/barkPhone01.png"
 import end from "./creatures/end.png"
-import rori from "./creatures/rori-front-01.png"
-import smoke from "./creatures/smoke.png"
 
 //doors
 import doorGreen from "./doors/doorGreen.png"
 import doorYellow from "./doors/doorYellow.jpg"
 
-// backgrounds
+// items
 import lock01 from "./backgrounds/lock01.png"
 import lock02 from "./items/lock02.png"
 import checkMarkRed01 from "./backgrounds/checkMarkRed01.png"
@@ -310,51 +281,6 @@ const locations = {
   end,
 }
 
-const items = {
-  blank,
-  bag,
-  smoke,
-
-  skull01,
-  lock02,
-  ringOfZandar01,
-
-  bun,
-  cap,
-  cup,
-  drip,
-  fan,
-  fig,
-  flag,
-  greenKey,
-  helicopter01,
-  frogHopper01,
-  hat,
-  hoop,
-  hug,
-  jug,
-  key,
-  gold,
-  mat,
-  mop,
-  mug,
-  pan,
-  pin,
-  rori,
-  barkPhone01,
-
-  spaceShip01,
-
-  angusBalloon01,
-  balloons01,
-  moon01,
-  note01,
-
-  rag,
-  tag,
-  top,
-}
-
 const vehicles = {
   car,
   tug,
@@ -411,7 +337,7 @@ const backgrounds = {
 
 const all = { ...locations, ...creatures, ...items, ...vehicles, ...doors }
 
-console.log("creatures", creatures) // zzz
+console.log("items", items) // zzz
 export default {
   all,
   locations,
