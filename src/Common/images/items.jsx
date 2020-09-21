@@ -1,8 +1,8 @@
 import angusBalloon01 from "./creatures/angusBalloon01.png"
-import blank from "./locations/blank.png"
 import bag from "./locations/bag.png"
 import balloons01 from "./items/balloons01.png"
 import barkPhone01 from "./creatures/barkPhone01.png"
+import blank from "./locations/blank.png"
 import bun from "./locations/bun.png"
 import cap from "./locations/cap.png"
 import cup from "./locations/cup.png"
@@ -35,15 +35,28 @@ import smoke from "./creatures/smoke.png"
 import spaceShip01 from "./items/spaceShip01.png"
 import tag from "./locations/tag.png"
 import top from "./locations/top.png"
+import bus from "./locations/bus.png"
+import car from "./locations/car.png"
+import tug from "./locations/tug.png"
+import van from "./locations/van.png"
+
+import doorGreen from "./doors/doorGreen.png"
+import doorYellow from "./doors/doorYellow.jpg"
 
 const items = {
   blank,
   bag,
   smoke,
-
+  doorGreen,
+  doorYellow,
   skull01,
   lock02,
   ringOfZandar01,
+
+  car,
+  tug,
+  van,
+  bus,
 
   bun,
   cap,
