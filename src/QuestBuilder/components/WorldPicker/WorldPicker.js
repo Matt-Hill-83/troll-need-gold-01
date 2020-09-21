@@ -11,7 +11,7 @@ import {
 
 import { IconNames } from "@blueprintjs/icons"
 
-import Utils from "../../Utils/Utils"
+import Utils from "../../../Common/Utils/Utils"
 
 import css from "./WorldPicker.module.scss"
 

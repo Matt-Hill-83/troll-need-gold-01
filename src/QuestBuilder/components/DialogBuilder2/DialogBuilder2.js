@@ -8,7 +8,7 @@ import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 import AutoComplete2 from "../AutoComplete2/AutoComplete2"
 
 import MyTextEditor from "../MyTextEditor/MyTextEditor"
-import Utils from "../../Utils/Utils"
+import Utils from "../../../Common/Utils/Utils"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 import Constants from "../../../Common/Constants/Constants"
 

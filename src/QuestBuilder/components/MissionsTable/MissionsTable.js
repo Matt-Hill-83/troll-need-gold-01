@@ -7,7 +7,7 @@ import React, { useEffect } from "react"
 
 import { getTableConfig } from "./MissionsTableConfig"
 import DataTable3 from "../DataTable3/DataTable3"
-import Utils from "../../Utils/Utils"
+import Utils from "../../../Common/Utils/Utils"
 
 import Constants from "../../../Common/Constants/Constants"
 

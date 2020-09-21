@@ -5,7 +5,7 @@ import cx from "classnames"
 import Constants from "../../../Common/Constants/Constants"
 import Images from "../../../Common/images/images"
 import QuestVisibilityUtils from "../../Utils/QuestVisibilityUtils.js"
-import Utils from "../../Utils/Utils.js"
+import Utils from "../../../Common/Utils/Utils"
 import useGlobalState from "../../../Context/useGlobalState.js"
 
 import css from "./MiniLocation.module.scss"

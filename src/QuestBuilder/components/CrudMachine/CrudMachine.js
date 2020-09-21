@@ -6,7 +6,7 @@ import React, { Component } from "react"
 import images from "../../images/images"
 import CharacterPicker from "../CharacterPicker/CharacterPicker"
 import ImageDisplay from "../ImageDisplay/ImageDisplay"
-import Utils from "../../Utils/Utils"
+import Utils from "../../../Common/Utils/Utils"
 
 import css from "./CrudMachine.module.scss"
 

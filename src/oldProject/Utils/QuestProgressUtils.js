@@ -1,6 +1,6 @@
 import _get from "lodash.get"
 import TopLevelUtils from "./TopLevelUtils"
-import Utils from "./Utils"
+import Utils from "../../Common/Utils/Utils"
 
 export default class QuestProgressUtils {
   static isDesiredRecipientHere = ({ desiredRecipient, charactersInScene }) => {

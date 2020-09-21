@@ -9,8 +9,9 @@ import Images from "../../../Common/images/images"
 import JSONEditorDemo from "../JsonEdtor/JSONEditorDemo.js"
 import QuestList from "../../../features/questList/QuestList.jsx"
 import QuestProgressUtils from "../../Utils/QuestProgressUtils.js"
-import Utils from "../../Utils/Utils.js"
 import WorldMultiPicker2 from "../WorldMultiPicker2/WorldMultiPicker2.js"
+
+import Utils from "../../../Common/Utils/Utils"
 
 import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget.js"
 

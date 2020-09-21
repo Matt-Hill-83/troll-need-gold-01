@@ -4,7 +4,7 @@ import cx from "classnames"
 import React from "react"
 
 import Images from "../../../Common/images/images"
-import Utils from "../../Utils/Utils.js"
+import Utils from "../../../Common/Utils/Utils"
 
 import css from "./BookTableOfContents.module.scss"
 

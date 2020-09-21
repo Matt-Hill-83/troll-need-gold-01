@@ -2,9 +2,9 @@ import React, { useEffect } from "react"
 
 import Autocomplete from "@material-ui/lab/Autocomplete"
 import TextField from "@material-ui/core/TextField"
-import Utils from "../../Utils/Utils"
 
 import css from "./WorldMultiPicker2.module.scss"
+import Utils from "../../../Common/Utils/Utils"
 
 export default function WorldMultiPicker2(props) {
   let { books = [], worlds, worldsForPicker } = props

@@ -2,7 +2,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete"
 import cx from "classnames"
 import React from "react"
 import TextField from "@material-ui/core/TextField"
-import Utils from "../../Utils/Utils"
+import Utils from "../../../Common/Utils/Utils"
 
 import css from "./AutoComplete2.module.scss"
 

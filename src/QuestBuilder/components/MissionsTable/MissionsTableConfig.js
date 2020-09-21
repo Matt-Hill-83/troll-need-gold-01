@@ -2,7 +2,7 @@ import React from "react"
 import TextField from "@material-ui/core/TextField"
 import _get from "lodash.get"
 
-import Utils from "../../Utils/Utils"
+import Utils from "../../../Common/Utils/Utils"
 import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 import AutoComplete2 from "../AutoComplete2/AutoComplete2"
 

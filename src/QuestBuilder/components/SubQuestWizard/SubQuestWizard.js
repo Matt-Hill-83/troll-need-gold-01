@@ -12,7 +12,7 @@ import MissionsTable from "../MissionsTable/MissionsTable"
 import MyAccordion from "../MyAccordion/MyAccordion"
 import MyAccordionGroup from "../MyAccordionGroup/MyAccordionGroup"
 import TriggersTable from "../TriggersTable/TriggersTable"
-import Utils from "../../Utils/Utils"
+import Utils from "../../../Common/Utils/Utils"
 import AutoComplete2 from "../AutoComplete2/AutoComplete2"
 
 import css from "./SubQuestWizard.module.scss"
