@@ -182,11 +182,17 @@ class WorldBuilder extends Component {
     }
 
     const newWorld = Constants.getNewWorld({ props: newWorldProps })
+    console.log("newWorld.id", newWorld.id) // zzz
+    console.log("newWorld", newWorld) // zzz
 
     const newMapReturned = await addQuestToFirestore(newWorld)
-    console.log({ newMapReturned })
-
-    worldBuilderStore.setWorldBuilderWorld(newMapReturned)
+    console.log("newMapReturned.id", newMapReturned.id) // zzz
+    newWorld.id = newMapReturned.id
+    console.log("this.maps[0].id", this.maps[0].id) // zzz
+    const test = this.maps.find((item) => item.id == newMapReturned.id)
+    console.log("test", test) // zzz
+    worldBuilderStore.setWorldBuilderWorld(newWorld)
+    this.forceUpdate2()
   }
 
   onChangeTitle = async ({ event }) => {
