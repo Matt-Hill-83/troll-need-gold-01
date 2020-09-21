@@ -326,8 +326,8 @@ class WorldBuilder extends Component {
 
     return (
       <Popover
-        // className={css.worldPickerDropdown}
-        // portalClassName={css.worldPickerDropdownPopover}
+        className={css.worldPickerDropdown}
+        portalClassName={css.worldPickerDropdownPopover}
         content={buttons}
         position={Position.BOTTOM}
       >
@@ -337,6 +337,8 @@ class WorldBuilder extends Component {
   }
 
   renderHeaders = ({ title, world }) => {
+    console.log("world.id", world.id)
+
     return (
       <div className={css.subTitle}>
         <div className={css.terminalScenePickers}>
@@ -345,7 +347,6 @@ class WorldBuilder extends Component {
           end:
           {this.renderTerminalScenePicker({ isStartScene: false })}
         </div>
-        {`${world.id}`}
         <Button
           text={"+ New Quest"}
           onClick={() => this.onChangeWorld({ newWorld: true })}
