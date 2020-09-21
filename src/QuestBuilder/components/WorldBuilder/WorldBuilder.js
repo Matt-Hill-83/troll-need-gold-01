@@ -317,11 +317,22 @@ class WorldBuilder extends Component {
       />
     )
 
-    return (
+    const buttons = (
       <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}>
         {dialogBuilderButton}
         {subQuestWizardButton}
       </ButtonGroup>
+    )
+
+    return (
+      <Popover
+        // className={css.worldPickerDropdown}
+        // portalClassName={css.worldPickerDropdownPopover}
+        content={buttons}
+        position={Position.BOTTOM}
+      >
+        <Button icon="share" text={"buttonText"} />
+      </Popover>
     )
   }
 

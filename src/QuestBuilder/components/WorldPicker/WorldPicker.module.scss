@@ -44,8 +44,12 @@
 }
 
 .popoverClassName {
+  position: relative;
   min-width: 20vw;
   max-width: 90vw;
-  border: 1px solid red !important;
+  // border: 1px solid red !important;
   width: 50vw;
+  top: 5vh;
+  left: 50%;
+  z-index: 20;
 }
