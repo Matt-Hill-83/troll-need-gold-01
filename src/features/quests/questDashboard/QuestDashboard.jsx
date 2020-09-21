@@ -48,13 +48,7 @@ export default function QuestDashboard() {
   return (
     <div className={css.main}>
       <div>
-        {loadingInitial && (
-          <>
-            Loading...
-            {/* <EventListItemPlaceholder />
-            <EventListItemPlaceholder /> */}
-          </>
-        )}
+        {loadingInitial && <>Loading...</>}
         <div className={css.questList}>
           <QuestList
             worlds={uniqueWorlds}
