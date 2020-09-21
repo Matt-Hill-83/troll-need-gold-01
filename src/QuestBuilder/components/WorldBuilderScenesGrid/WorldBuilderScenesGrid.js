@@ -6,7 +6,6 @@ import React, { Component } from "react"
 import images from "../../../Common/images/images"
 import CrudMachine from "../CrudMachine/CrudMachine"
 import worldBuilderStore from "../../Stores/WorldBuilderStore"
-import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 import QuestVisibilityUtils from "../../../oldProject/Utils/QuestVisibilityUtils"
 import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
 

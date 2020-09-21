@@ -4,7 +4,7 @@ import AboutTab from "./AboutTab"
 import PhotosTab from "./PhotosTab"
 
 export default function ProfileContent({ profile, isCurrentUser }) {
-  const [activeTab, setActiveTab] = useState(1)
+  // const [activeTab, setActiveTab] = useState(1)
   const panes = [
     {
       menuItem: "Photos",
@@ -29,7 +29,7 @@ export default function ProfileContent({ profile, isCurrentUser }) {
       menu={{ fluid: true, vertical: true }}
       menuPosition="right"
       panes={panes}
-      onTabChange={(e, data) => setActiveTab(data.activeIndex)}
+      // onTabChange={(e, data) => setActiveTab(data.activeIndex)}
     />
   )
 }
