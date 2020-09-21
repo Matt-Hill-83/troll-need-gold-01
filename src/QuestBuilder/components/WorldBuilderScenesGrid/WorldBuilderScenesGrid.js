@@ -13,6 +13,8 @@ import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
 import css from "./WorldBuilderScenesGrid.module.scss"
 class WorldBuilderScenesGrid extends Component {
   saveItems = async () => {
+    console.log("WorldBuilderScenesGrid") // zzz
+    console.log("saveItems") // zzz
     await this.props.saveItems()
   }
 
@@ -31,7 +33,8 @@ class WorldBuilderScenesGrid extends Component {
       ]
 
     location.name = randomName
-    WorldBuilderUtils.updateMap({ world: this.props.world })
+    this.props.saveItems()
+    // WorldBuilderUtils.updateMap({ world: this.props.world })
   }
 
   // TODO: on save, Crudmachine shoud return the mutated list and a callback should save it

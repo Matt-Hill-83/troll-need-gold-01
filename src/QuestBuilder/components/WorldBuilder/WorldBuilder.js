@@ -253,6 +253,7 @@ class WorldBuilder extends Component {
   }
 
   saveItems = async () => {
+    console.log("WB---saveItems") // zzz
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
 
     this.updateWorld({ mapToUpdate: world })

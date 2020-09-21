@@ -76,8 +76,8 @@ export default class WorldBuilderUtils {
   }
 
   static updateMap = async ({ newProps = {}, mapToUpdate }) => {
-    console.log("updateMap-------------")
-    console.log("updateMap-------------")
+    console.log("") // zzz
+    console.log("updateMap-------------start")
     const map = mapToUpdate || worldBuilderStore.getWorldBuilderWorld()
     Object.assign(map, { ...newProps })
 
@@ -87,9 +87,10 @@ export default class WorldBuilderUtils {
     })
 
     delete map.grid
-    await updateQuestInFirestore(map)
     console.log("map", map) // zzz
-    return
+    await updateQuestInFirestore(map)
+    console.log("updateMap------------end")
+    return true
   }
 
   static getCritters1New = ({ frameConfig, sceneConfig }) => {
