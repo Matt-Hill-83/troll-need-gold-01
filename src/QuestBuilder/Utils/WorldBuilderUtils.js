@@ -5,14 +5,6 @@ import { updateQuestInFirestore } from "../../app/firestore/firestoreService.js"
 import Utils from "../../Common/Utils/Utils.js"
 
 export default class WorldBuilderUtils {
-  static getAllItemsInScene = ({ scene }) => {
-    const allItems = []
-    scene.frameSet.frames.forEach((item) => {
-      allItems.push(...item.critters1, ...item.critters2)
-    })
-    return allItems
-  }
-
   static getNewFrame = ({ characters, props = {} }) => {
     let allCharacters = []
 
@@ -74,7 +66,8 @@ export default class WorldBuilderUtils {
 
   static addIdToAllItemsInScene = ({ scene }) => {
     const allItems = []
-    scene.frameSet.frames.forEach((item) => {
+    const frames = scene?.frameSet?.frames || []
+    frames.forEach((item) => {
       allItems.push(...item.critters1, ...item.critters2)
     })
     allItems.forEach((item) => {
