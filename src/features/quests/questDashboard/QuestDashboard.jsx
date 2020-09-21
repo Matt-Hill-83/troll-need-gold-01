@@ -6,12 +6,11 @@ import _uniqBy from "lodash.uniqby"
 import { fetchQuests } from "../questActions"
 import { RETAIN_STATE } from "../questConstants"
 import QuestList from "../../questList/QuestList.jsx"
-import WorldBuilder from "../../../QuestBuilder/components/WorldBuilder/WorldBuilder.js"
 
 import css from "./QuestDashboard.module.scss"
 
 export default function QuestDashboard() {
-  const limit = 50
+  const limit = 1000
   const dispatch = useDispatch()
   const {
     quests,
@@ -42,8 +41,6 @@ export default function QuestDashboard() {
   if (!quests || quests.length === 0) return <div>no data</div>
 
   const uniqueWorlds = _uniqBy(quests, "id")
-
-  return <WorldBuilder maps={uniqueWorlds}></WorldBuilder>
 
   return (
     <div className={css.main}>

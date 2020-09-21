@@ -17,6 +17,7 @@ import QuestDashboard from "../../features/quests/questDashboard/QuestDashboard"
 import QuestDetailedPage from "../../features/quests/eventDetailed/QuestDetailedPage"
 import BookDashboard from "../../features/books/bookDashboard/BookDashboard"
 import WorldBuilder from "../../QuestBuilder/components/WorldBuilder/WorldBuilder"
+import WorldBuilderBox from "../../features/quests/questDashboard/WorldBuilderBox"
 
 export default function App() {
   const { initialized } = useSelector((state) => state.async)
@@ -37,7 +38,7 @@ export default function App() {
             <NavBar />
             <Route exact path="/" component={BookDashboard} />
             <Container className="main">
-              <Route exact path="/quest-builder" component={WorldBuilder} />
+              <Route exact path="/quest-builder" component={WorldBuilderBox} />
               <Route exact path="/quests" component={QuestDashboard} />
               <Route exact path="/books" component={BookDashboard} />
               <Route path="/quests/:id" component={QuestDetailedPage} />
