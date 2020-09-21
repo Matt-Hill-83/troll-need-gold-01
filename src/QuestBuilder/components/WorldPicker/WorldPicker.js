@@ -14,6 +14,7 @@ import { IconNames } from "@blueprintjs/icons"
 import Utils from "../../../Common/Utils/Utils"
 
 import css from "./WorldPicker.module.scss"
+import { deleteQuestInFirestore } from "../../../app/firestore/firestoreService"
 
 class WorldPicker extends Component {
   state = { selectedMap: this.props.initialValue || "Select Map" }
@@ -33,7 +34,7 @@ class WorldPicker extends Component {
     this._deleting = true
     try {
       console.log("deleting")
-      await map.delete()
+      await deleteQuestInFirestore(map.id)
       this._deleting = false
     } catch (err) {
       this._deleting = false

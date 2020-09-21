@@ -56,6 +56,7 @@ export function addEventToFirestore(event) {
 export function addBookToFirestore(item) {
   return db.collection("books").add({ ...item })
 }
+
 export function addQuestToFirestore(item) {
   return db.collection("quests").add({ ...item })
 }

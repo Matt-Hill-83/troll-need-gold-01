@@ -53,23 +53,6 @@
     background: aliceblue;
   }
 
-  .jsonEditor {
-    position: absolute;
-    z-index: 20;
-
-    display: flex;
-    width: 40vw;
-
-    min-height: 80vh;
-    max-height: 80vh;
-
-    border: 1px solid blue !important;
-    right: 2vh;
-    top: 2vh;
-    background: papayawhip;
-    overflow: auto;
-  }
-
   .buttonGroup {
     display: flex;
     flex: 1 1;
@@ -117,32 +100,6 @@
   z-index: 1;
 }
 
-.source {
-  border: 1px solid green !important;
-  display: flex;
-  margin-right: 1%;
-  max-height: 80vh;
-  overflow: auto;
-}
-
-.destination {
-  border: 1px solid green !important;
-  display: flex;
-  flex: 0;
-  max-height: var(--cell-height);
-  min-height: var(--cell-height);
-}
-
-.targetGrid {
-  display: flex;
-  flex-direction: column;
-  margin: 5px;
-
-  .targetRow {
-    display: flex;
-  }
-}
-
 .title {
 }
 
@@ -151,7 +108,7 @@
   display: flex;
   justify-self: center;
   border: 1px solid green !important;
-  margin-left: auto;
+  margin-right: auto;
   width: min-content;
   white-space: nowrap;
 }

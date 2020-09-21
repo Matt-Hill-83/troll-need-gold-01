@@ -58,7 +58,6 @@ class WorldBuilder extends Component {
   }
 
   onChangeWorld = ({ mapId, newWorld }) => {
-    console.log("onChangeWorld") // zzz
     // new map
     if (newWorld) {
       this.addNewWorld()
@@ -182,15 +181,10 @@ class WorldBuilder extends Component {
     }
 
     const newWorld = Constants.getNewWorld({ props: newWorldProps })
-    console.log("newWorld.id", newWorld.id) // zzz
-    console.log("newWorld", newWorld) // zzz
 
     const newMapReturned = await addQuestToFirestore(newWorld)
-    console.log("newMapReturned.id", newMapReturned.id) // zzz
     newWorld.id = newMapReturned.id
-    console.log("this.maps[0].id", this.maps[0].id) // zzz
     const test = this.maps.find((item) => item.id == newMapReturned.id)
-    console.log("test", test) // zzz
     worldBuilderStore.setWorldBuilderWorld(newWorld)
     this.forceUpdate2()
   }
@@ -247,19 +241,15 @@ class WorldBuilder extends Component {
   }
 
   updateWorld = async (props) => {
-    console.log("updateWorld1") // zzz
     await WorldBuilderUtils.updateMap(props)
-    console.log("updateWorld1b") // zzz
     this.forceUpdate2()
   }
 
   forceUpdate2 = async () => {
-    console.log("forceUpdate2") // zzz
     this.setState({ update: Date.now() })
   }
 
   saveItems = async () => {
-    console.log("WB---saveItems") // zzz
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
 
     this.updateWorld({ mapToUpdate: world })
@@ -338,16 +328,6 @@ class WorldBuilder extends Component {
   renderHeaders = ({ title, world }) => {
     return (
       <div className={css.subTitle}>
-        <WorldPicker
-          maps={this.maps}
-          initialValue={title}
-          showDelete={true}
-          showReleased={true}
-          showReleasedToProd={true}
-          updateIsReleasedProperty={this.updateIsReleasedProperty}
-          updateReleasedToProd={this.updateReleasedToProd}
-          onChangeWorld={this.onChangeWorld}
-        />
         <div className={css.terminalScenePickers}>
           start:
           {this.renderTerminalScenePicker({ isStartScene: true })}
@@ -360,6 +340,16 @@ class WorldBuilder extends Component {
           onClick={() => this.onChangeWorld({ newWorld: true })}
         />
         {this.renderMainButtonGroup()}
+        <WorldPicker
+          maps={this.maps}
+          initialValue={title}
+          showDelete={true}
+          showReleased={true}
+          showReleasedToProd={true}
+          updateIsReleasedProperty={this.updateIsReleasedProperty}
+          updateReleasedToProd={this.updateReleasedToProd}
+          onChangeWorld={this.onChangeWorld}
+        />
       </div>
     )
   }
@@ -426,8 +416,6 @@ class WorldBuilder extends Component {
     } = this.state
 
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
-
-    console.log("world", world) // zzz
 
     let questConfig
     let newGrid5
