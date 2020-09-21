@@ -5,13 +5,10 @@
   flex-direction: column;
   align-items: flex-start;
 
-  // border: 2px solid red !important;
-
   width: 100%;
   height: 100%;
 
   .crudMachinePopoverWrapper {
-    // border: 10px solid red !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,7 +18,6 @@
     position: relative;
 
     [class*="bp3-popover-target"] {
-      // border: 1px solid green !important;
       display: flex;
       align-items: center;
       justify-content: center;
