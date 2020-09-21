@@ -338,7 +338,7 @@ export default function BookPicker(props) {
 
         {!isProdRelease && (
           <ButtonGroup className={css.addBookButton}>
-            <Button onClick={addBook}>Add Book -- refreshed-3</Button>
+            <Button onClick={addBook}>Add Book -- refreshed-6</Button>
             <Button className={css.xxxaddBookButton} onClick={hardRefresh}>
               Hard Refresh
             </Button>
