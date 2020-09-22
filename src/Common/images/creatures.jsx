@@ -155,7 +155,8 @@ const creatures = {
   fiona01,
   liz2,
   kat,
-  taffy01: marli01,
+  taffy01,
+  // taffy01: marli01,
   marli01,
 
   frizzle01,
