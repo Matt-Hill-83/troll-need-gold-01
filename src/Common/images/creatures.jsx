@@ -1,3 +1,6 @@
+import goblinKing01 from "./creatures/goblinKing01.png"
+import goblinKing02 from "./creatures/goblinKing02.png"
+
 import angus01 from "./creatures/angus01.png"
 import anna from "./creatures/anna.png"
 import anna02 from "./creatures/anna02.png"
@@ -292,6 +295,8 @@ const creatures = {
   zack01,
   zanyDog01: dog01,
   zita01,
+  goblinKing01,
+  goblinKing02,
 }
 
-export default { creatures }
+export default creatures
