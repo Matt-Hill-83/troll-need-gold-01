@@ -3,6 +3,7 @@ import goblinKing01 from "./creatures/goblinKing01.png"
 import goblinKing02 from "./creatures/goblinKing02.png"
 import misterWilson01 from "./creatures/misterWilson01.png"
 import fiona01 from "./creatures/fiona01.png"
+import marli01 from "./creatures/marli01.png"
 
 import angus01 from "./creatures/angus01.png"
 import anna from "./creatures/anna.png"
@@ -135,14 +136,13 @@ import uniBow01 from "./creatures/uniBow01.png"
 import unicorn from "./creatures/unicorn-1.png"
 import vanellope_little from "./creatures/vanellope_little.png"
 import vulcan01 from "./creatures/vulcan01.png"
-import wilda01 from "./creatures/wilda01.png"
+// import wilda01 from "./creatures/wilda01.png"
 import wizard from "./creatures/wizard.png"
 import zac01 from "./creatures/zac01.png"
 import zack01 from "./creatures/zack01.png"
 import zanzibar01 from "./creatures/zanzibar01.png"
 import zita01 from "./creatures/zita01.png"
 
-// liz2
 import liz2 from "./rigged-girls/liz/png/liz-2.png"
 
 const creatures = {
@@ -152,11 +152,15 @@ const creatures = {
   shuri: pantherGirl01,
   fionaFlying01,
   mongoFlying01,
+  fiona01,
+  liz2,
+  kat,
+  taffy01: marli01,
+  marli01,
 
   frizzle01,
   rockets01,
 
-  taffy01,
   parrot01,
   babyTroll01,
   // cleopatra01,
@@ -245,11 +249,9 @@ const creatures = {
   hog,
   // jasmine01,
   johnny02,
-  kat,
   katieKooper01,
   leah01,
   littleGoose: goose03,
-  liz2,
   lucy,
   lucy02,
   lulu01: brenda01,
@@ -290,7 +292,7 @@ const creatures = {
   unicorn,
   vanellope_little,
   vulcan01,
-  wilda01,
+  // wilda01,
   wizard,
   zac01,
   zack01,
@@ -299,7 +301,6 @@ const creatures = {
   goblinKing01,
   goblinKing02,
   misterWilson01,
-  fiona01,
   tree01,
 }
 
