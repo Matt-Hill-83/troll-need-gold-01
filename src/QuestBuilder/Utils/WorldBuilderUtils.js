@@ -76,7 +76,6 @@ export default class WorldBuilderUtils {
   }
 
   static updateMap = async ({ newProps = {}, mapToUpdate }) => {
-    console.log("") // zzz
     console.log("updateMap-------------start")
     const map = mapToUpdate || worldBuilderStore.getWorldBuilderWorld()
     Object.assign(map, { ...newProps })
@@ -90,7 +89,6 @@ export default class WorldBuilderUtils {
     })
 
     delete map.grid
-    console.log("map", map) // zzz
     await updateQuestInFirestore(map)
     console.log("updateMap------------end")
     return true

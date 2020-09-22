@@ -12,8 +12,6 @@ import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
 import css from "./WorldBuilderScenesGrid.module.scss"
 class WorldBuilderScenesGrid extends Component {
   saveItems = async () => {
-    console.log("WorldBuilderScenesGrid") // zzz
-    console.log("saveItems") // zzz
     await this.props.saveItems()
   }
 
@@ -48,13 +46,11 @@ class WorldBuilderScenesGrid extends Component {
 
   renderScenesGrid = () => {
     const scenesGrid = worldBuilderStore.getWorldBuilderScenesGrid()
-    console.log("scenesGrid", scenesGrid) // zzz
     const gridRows = []
 
     scenesGrid.forEach((row) => {
       const gridRow = []
       row.forEach((scene) => {
-        // console.log("scene", scene) // zzz
         gridRow.push(this.renderCell({ scene }))
       })
       gridRows.push(<div className={css.gridRow}>{gridRow}</div>)

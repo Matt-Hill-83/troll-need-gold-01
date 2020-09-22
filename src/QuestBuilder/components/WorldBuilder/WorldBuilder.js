@@ -48,8 +48,6 @@ class WorldBuilder extends Component {
     this.maps = this.props.maps || []
     const defaultWorldId = Constants.defaultWorldIdNonProdWB
     const defaultWorld = this.maps.find((item) => item.id === defaultWorldId)
-    console.log("defaultWorld", defaultWorld) // zzz
-    console.log("defaultWorldId", defaultWorldId) // zzz
 
     const id = defaultWorld ? defaultWorldId : this.maps[0]?.id || ""
     this.onChangeWorld({ mapId: id })
@@ -316,7 +314,7 @@ class WorldBuilder extends Component {
 
     const subQuestWizardButton = (
       <Button
-        icon="document"
+        // icon="document"
         text="SubQuest Wizard"
         onClick={this.toggleSubQuestPicker}
       />
@@ -372,7 +370,6 @@ class WorldBuilder extends Component {
   }
 
   renderScenesGrid = ({ world }) => {
-    console.log("world", world) // zzz
     const worldBuilderScenesGridProps = {
       editFrameSet: this.editFrameSet,
       saveItems: this.saveItems,

@@ -20,12 +20,10 @@ import css from "./FrameViewer.module.scss"
 
 export default function FrameViewer() {
   const [globalState, setGlobalState] = useContext(myContext)
-  // const [loading, setLoading] = useState(false)
 
   const { getProfile } = useUpdateProfileWidget()
   const loggedIn = !!getProfile().id
 
-  console.log("globalState", globalState) // zzz
   const { activeFrameIndex, activeScene } = globalState
   if (!activeScene?.frameSet) {
     return <div>no frames</div>
