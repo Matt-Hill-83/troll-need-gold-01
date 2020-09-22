@@ -1,4 +1,5 @@
 import Utils from "../Utils/Utils.js"
+import WorldBuilderUtils from "../../QuestBuilder/Utils/WorldBuilderUtils.js"
 
 export default class Constants {
   // static isProdRelease = true
@@ -29,10 +30,12 @@ export default class Constants {
   static getBlankScene = ({ props }) => {
     const id = Utils.generateUuid()
 
+    const newFrame = WorldBuilderUtils.getNewFrame({})
+
     const blankScene = {
       location: { name: "blank" },
       id,
-      frameSet: { frames: [] },
+      frameSet: { frames: [newFrame] },
     }
 
     props && Object.assign(blankScene, props)

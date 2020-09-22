@@ -84,6 +84,9 @@ export default class WorldBuilderUtils {
     map.newGrid5 = WorldBuilderUtils.createCondensedGridFromGrid()
     map.newGrid5.forEach((scene) => {
       this.addIdToAllItemsInScene({ scene })
+      // if (!scene.frameSet?.frames[0]) {
+      //   scene.frameSet = { frames: [WorldBuilderUtils.getNewFrame({})] }
+      // }
     })
 
     delete map.grid

@@ -40,6 +40,7 @@ class FrameBuilder extends Component {
 
     const newFrame = WorldBuilderUtils.getNewFrame({})
     frameSet.frames.push(newFrame)
+    console.log("frameSet.frames", frameSet.frames) // zzz
 
     await updateMap({})
   }
@@ -84,6 +85,7 @@ class FrameBuilder extends Component {
 
   renderFrames = () => {
     const { scene, updateMap } = this.props
+    console.log("scene", scene) // zzz
 
     if (!scene.frameSet) {
       scene.frameSet = { frames: [WorldBuilderUtils.getNewFrame({})] }
@@ -91,6 +93,7 @@ class FrameBuilder extends Component {
 
     let frames = scene?.frameSet?.frames || []
 
+    console.log("frames", frames) // zzz
     return frames.map((frame, index) => {
       return (
         <Frame
@@ -106,6 +109,7 @@ class FrameBuilder extends Component {
   }
 
   render() {
+    console.log("framebuilder render-------------") // zzz
     const { scene, onExitFrameBuilder } = this.props
 
     if (!scene) {
