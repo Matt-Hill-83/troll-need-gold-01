@@ -33,7 +33,6 @@ class WorldBuilderScenesGrid extends Component {
 
     location.name = randomName
     this.props.saveItems()
-    // WorldBuilderUtils.updateMap({ world: this.props.world })
   }
 
   // TODO: on save, Crudmachine shoud return the mutated list and a callback should save it
@@ -49,11 +48,13 @@ class WorldBuilderScenesGrid extends Component {
 
   renderScenesGrid = () => {
     const scenesGrid = worldBuilderStore.getWorldBuilderScenesGrid()
+    console.log("scenesGrid", scenesGrid) // zzz
     const gridRows = []
 
     scenesGrid.forEach((row) => {
       const gridRow = []
       row.forEach((scene) => {
+        // console.log("scene", scene) // zzz
         gridRow.push(this.renderCell({ scene }))
       })
       gridRows.push(<div className={css.gridRow}>{gridRow}</div>)
@@ -127,7 +128,7 @@ class WorldBuilderScenesGrid extends Component {
     const buttons = { add: false, trash: false, edit: true }
     const onSave = this.saveItems
     const locationImageSets = [images.all]
-    const characterImageSets = [images.creatures]
+    // const characterImageSets = [images.creatures]
     const locations = [scene.location]
 
     const backgroundColor = QuestVisibilityUtils.getSubQuestColor({
@@ -154,11 +155,9 @@ class WorldBuilderScenesGrid extends Component {
         ? this.renderRandomLocationGenerator({ scene })
         : locationCrudMachine
 
-    const characters = scene.characters
     const hideScene = scene.location && scene.location.name === "blank"
 
     return (
-      // <div className={css.gridCell}>
       <div className={css.gridCell} style={backgroundColor}>
         {!hideScene && (
           <Button
@@ -168,18 +167,7 @@ class WorldBuilderScenesGrid extends Component {
             <Icon icon={IconNames.SETTINGS} />
           </Button>
         )}
-        <div className={css.column1}>
-          {locationPicker}
-          {false && !hideScene && (
-            <CrudMachine
-              className={`${css.crudMachine} ${css.itemBox} ${css.charactersMachine}`}
-              items={characters}
-              itemRenderer={this.itemRenderer}
-              saveItems={onSave}
-              imageSets={characterImageSets}
-            />
-          )}
-        </div>
+        <div className={css.column1}>{locationPicker}</div>
         {!hideScene && (
           <div className={css.crittersContainer}>
             {this.renderCritters({

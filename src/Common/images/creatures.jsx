@@ -1,5 +1,8 @@
+import tree01 from "./creatures/tree01.png"
 import goblinKing01 from "./creatures/goblinKing01.png"
 import goblinKing02 from "./creatures/goblinKing02.png"
+import misterWilson01 from "./creatures/misterWilson01.png"
+import fiona01 from "./creatures/fiona01.png"
 
 import angus01 from "./creatures/angus01.png"
 import anna from "./creatures/anna.png"
@@ -23,11 +26,11 @@ import cat01 from "./creatures/cat01.png"
 import charlie02 from "./creatures/charlie02.png"
 import chick01 from "./creatures/chick01.png"
 import chooChoo01 from "./creatures/chooChoo01.png"
-import cleopatra01 from "./creatures/cleopatra01.png"
+// import cleopatra01 from "./creatures/cleopatra01.png"
 import coldGirl from "./creatures/cold_girl.png"
 import cop from "./creatures/cop.png"
 import cow01 from "./creatures/cow01.png"
-import crow01 from "./creatures/crow01.png"
+// import crow01 from "./creatures/crow01.png"
 import cub from "./creatures/cub.png"
 import dennisTheMenace from "./creatures/dennisTheMenace.png"
 import dog01 from "./creatures/dog01.png"
@@ -35,7 +38,7 @@ import dragon from "./creatures/dragon.png"
 import drake from "./creatures/drake.png"
 import drake01 from "./creatures/drake-01.png"
 import drake02 from "./creatures/drake02.png"
-import dress01 from "./creatures/dress01.png"
+// import dress01 from "./creatures/dress01.png"
 import dress02 from "./creatures/dress02.png"
 import dress03 from "./creatures/dress03.png"
 import dress04 from "./creatures/dress04.png"
@@ -66,7 +69,7 @@ import hippityHop01 from "./creatures/hippityHop01.png"
 import hobbit from "./creatures/hobbit.png"
 import hog from "./creatures/hog.png"
 import islandGirl01 from "./creatures/islandGirl01.png"
-import jasmine01 from "./creatures/jasmine01.png"
+// import jasmine01 from "./creatures/jasmine01.png"
 import johnny02 from "./creatures/johnny02.png"
 import kat from "./rigged-girls/kat/kat-normal.png"
 import katieKooper01 from "./creatures/katieKooper01.png"
@@ -92,7 +95,7 @@ import pig from "./creatures/pig.png"
 import pigeon01 from "./creatures/pigeon01.png"
 import pigInAWig from "./creatures/pigInAWig.png"
 import pinky01 from "./creatures/pinky01.png"
-import pooPoo01 from "./creatures/pooPoo01.png"
+// import pooPoo01 from "./creatures/pooPoo01.png"
 import princess_alibera from "./creatures/princess_alibera.png"
 import pug from "./creatures/pug.png"
 import pup01 from "./creatures/pup01.png"
@@ -132,7 +135,6 @@ import uniBow01 from "./creatures/uniBow01.png"
 import unicorn from "./creatures/unicorn-1.png"
 import vanellope_little from "./creatures/vanellope_little.png"
 import vulcan01 from "./creatures/vulcan01.png"
-import warriorGirl01 from "./creatures/warriorGirl01.png"
 import wilda01 from "./creatures/wilda01.png"
 import wizard from "./creatures/wizard.png"
 import zac01 from "./creatures/zac01.png"
@@ -144,21 +146,20 @@ import zita01 from "./creatures/zita01.png"
 import liz2 from "./rigged-girls/liz/png/liz-2.png"
 
 const creatures = {
-  blank,
+  // blank,
 
   mongo01,
   shuri: pantherGirl01,
   fionaFlying01,
   mongoFlying01,
 
-  warriorGirl01,
   frizzle01,
   rockets01,
 
   taffy01,
   parrot01,
   babyTroll01,
-  cleopatra01,
+  // cleopatra01,
   strawberry01,
   madElf01,
   swordGirl01,
@@ -175,7 +176,7 @@ const creatures = {
   islandGirl01,
   zanzibar01,
   rose01,
-  crow01,
+  // crow01,
   paradox01,
 
   razzleDazzle01,
@@ -191,7 +192,7 @@ const creatures = {
   elf,
   gerald01,
 
-  pooPoo01,
+  // pooPoo01,
 
   angus01,
   anna,
@@ -218,7 +219,7 @@ const creatures = {
   drake,
   drake01,
   drake02,
-  dress01,
+  // dress01,
   dress02,
   dress03,
   dress04,
@@ -242,7 +243,7 @@ const creatures = {
   hippityHop01,
   hobbit,
   hog,
-  jasmine01,
+  // jasmine01,
   johnny02,
   kat,
   katieKooper01,
@@ -297,6 +298,9 @@ const creatures = {
   zita01,
   goblinKing01,
   goblinKing02,
+  misterWilson01,
+  fiona01,
+  tree01,
 }
 
 export default creatures

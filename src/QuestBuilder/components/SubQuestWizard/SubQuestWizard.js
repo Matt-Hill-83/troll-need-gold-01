@@ -54,7 +54,7 @@ export default function SubQuestWizard({ props }) {
     const realScenes = props.scenes
 
     const onAddScene = ({ rowIndex, before }) => {
-      const newElement = Constants.getNewScene({})
+      const newElement = Constants.getNewSceneForSuqQuestData({})
       Utils.addArrayElement({
         newElement,
         before,
@@ -136,7 +136,7 @@ export default function SubQuestWizard({ props }) {
               }}
             />
             <span className={css.mapPickerButton}>
-              <Checkbox
+              <checkbox
                 label="big"
                 onClick={() => toggleLargeImage()}
                 checked={largeImage}

@@ -171,18 +171,6 @@ export default class Utils {
     return uuid
   }
 
-  static getBlankScene = ({ props }) => {
-    const id = Utils.generateUuid()
-
-    const blankScene = {
-      location: { name: "blank" },
-      id,
-    }
-
-    props && Object.assign(blankScene, props)
-    return blankScene
-  }
-
   static reCreateGridFromCondensedGrid = ({ gridDimensions, newGrid5 }) => {
     const { numRows, numCols } = gridDimensions
 
@@ -214,14 +202,14 @@ export default class Utils {
         const sceneObj =
           newGrid5.find((scene) => {
             if (!scene.coordinates) {
-              return Utils.getBlankScene({ props })
+              return Constants.getBlankScene({ props })
             }
 
             return (
               scene.coordinates.row === rowIndex &&
               scene.coordinates.col === colIndex
             )
-          }) || Utils.getBlankScene({ props })
+          }) || Constants.getBlankScene({ props })
 
         gridRow.push(sceneObj)
       })

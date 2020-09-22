@@ -25,7 +25,11 @@ export default function FrameViewer() {
   const { getProfile } = useUpdateProfileWidget()
   const loggedIn = !!getProfile().id
 
+  console.log("globalState", globalState) // zzz
   const { activeFrameIndex, activeScene } = globalState
+  if (!activeScene?.frameSet) {
+    return <div>no frames</div>
+  }
   const { frames = [] } = activeScene.frameSet
 
   const frame = frames[activeFrameIndex]

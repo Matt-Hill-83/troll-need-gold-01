@@ -44,7 +44,7 @@ import doorGreen from "./doors/doorGreen.png"
 import doorYellow from "./doors/doorYellow.jpg"
 
 const items = {
-  blank,
+  // blank,
   bag,
   smoke,
   doorGreen,

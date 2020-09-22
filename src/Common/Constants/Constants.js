@@ -4,9 +4,39 @@ export default class Constants {
   // static isProdRelease = true
   static isProdRelease = false
 
+  static defaultWorldIdNonProdWB = "7aAH3bf667hWs4LYXxlG"
+
   static featureFlags = {
     recordAudio: !this.isProdRelease,
     // recordAudio: true,
+  }
+
+  static getNewWorld = ({ props = {} }) => {
+    const questConfig = Constants.getNewQuestConfig({ props: {} })
+    const defaultProps = {
+      gridDimensions: {},
+      ignore: false,
+      name: "My New Name",
+      newGrid5: [],
+      questConfig,
+      released: true,
+      title: "My New Title",
+    }
+
+    return { ...defaultProps, ...props }
+  }
+
+  static getBlankScene = ({ props }) => {
+    const id = Utils.generateUuid()
+
+    const blankScene = {
+      location: { name: "blank" },
+      id,
+      frameSet: { frames: [] },
+    }
+
+    props && Object.assign(blankScene, props)
+    return blankScene
   }
 
   static getDefaultQuestStatus = () => {
@@ -44,7 +74,7 @@ export default class Constants {
 
   static posableCharacters = ["liz2", "kat"]
 
-  static getNewScene = ({ name = "blank" }) => {
+  static getNewSceneForSuqQuestData = ({ name = "blank" }) => {
     const id = Utils.generateUuid()
     return {
       name,
@@ -52,6 +82,7 @@ export default class Constants {
       sceneTriggers: [],
     }
   }
+
   static getNewBook = () => {
     const id = Utils.generateUuid()
     return {
@@ -70,28 +101,13 @@ export default class Constants {
       id,
       name,
       triggers: [],
-      scenes: [this.getNewScene({})],
+      scenes: [this.getNewSceneForSuqQuestData({})],
       missions: [Constants.getNewMission()],
     }
     return newSubQuest
   }
 
-  static getNewWorld = ({ props = {} }) => {
-    const questConfig = Constants.getNewQuestConfig({ props: {} })
-    const defaultProps = {
-      gridDimensions: {},
-      ignore: false,
-      name: "My New Name",
-      newGrid5: [],
-      questConfig,
-      released: true,
-      title: "My New Title",
-    }
-
-    return { ...defaultProps, ...props }
-  }
-
-  static getNewQuestConfig = ({ props = {} }) => {
+  static getNewQuestConfig = () => {
     const id = Utils.generateUuid()
 
     return {

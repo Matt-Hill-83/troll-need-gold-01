@@ -81,7 +81,7 @@ export default class WorldBuilderUtils {
     const map = mapToUpdate || worldBuilderStore.getWorldBuilderWorld()
     Object.assign(map, { ...newProps })
 
-    map.newGrid5 = WorldBuilderUtils.createCondensedGridFromGrid({})
+    map.newGrid5 = WorldBuilderUtils.createCondensedGridFromGrid()
     map.newGrid5.forEach((scene) => {
       this.addIdToAllItemsInScene({ scene })
     })

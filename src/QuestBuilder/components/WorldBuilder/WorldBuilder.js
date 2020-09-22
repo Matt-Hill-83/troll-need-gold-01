@@ -17,6 +17,7 @@ import {
 
 import _get from "lodash.get"
 
+import Constants from "../../../Common/Constants/Constants"
 import DialogBuilder2 from "../DialogBuilder2/DialogBuilder2"
 import FrameBuilder from "../FrameBuilder/FrameBuilder"
 import MyAccordion from "../MyAccordion/MyAccordion"
@@ -24,7 +25,6 @@ import SubQuestWizard from "../SubQuestWizard/SubQuestWizard"
 import Utils from "../../../Common/Utils/Utils"
 import WorldBuilderScenesGrid from "../WorldBuilderScenesGrid/WorldBuilderScenesGrid"
 import worldBuilderStore from "../../Stores/WorldBuilderStore"
-import Constants from "../../../Common/Constants/Constants"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 import WorldPicker from "../WorldPicker/WorldPicker"
 
@@ -46,8 +46,10 @@ class WorldBuilder extends Component {
   // Changing this to DidMount breaks things
   async componentWillMount() {
     this.maps = this.props.maps || []
-    const defaultWorldId = "1zRS8eoqWLrJc9QeamkT"
+    const defaultWorldId = Constants.defaultWorldIdNonProdWB
     const defaultWorld = this.maps.find((item) => item.id === defaultWorldId)
+    console.log("defaultWorld", defaultWorld) // zzz
+    console.log("defaultWorldId", defaultWorldId) // zzz
 
     const id = defaultWorld ? defaultWorldId : this.maps[0]?.id || ""
     this.onChangeWorld({ mapId: id })
@@ -188,7 +190,6 @@ class WorldBuilder extends Component {
 
     const newMapReturned = await addQuestToFirestore(newWorld)
     newWorld.id = newMapReturned.id
-    const test = this.maps.find((item) => item.id == newMapReturned.id)
     worldBuilderStore.setWorldBuilderWorld(newWorld)
     this.forceUpdate2()
   }
@@ -235,7 +236,7 @@ class WorldBuilder extends Component {
           id,
         }
 
-        const blankScene = Utils.getBlankScene({ props })
+        const blankScene = Constants.getBlankScene({ props })
 
         gridRow.push(blankScene)
       })
@@ -371,6 +372,7 @@ class WorldBuilder extends Component {
   }
 
   renderScenesGrid = ({ world }) => {
+    console.log("world", world) // zzz
     const worldBuilderScenesGridProps = {
       editFrameSet: this.editFrameSet,
       saveItems: this.saveItems,
