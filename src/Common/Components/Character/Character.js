@@ -5,7 +5,7 @@ import Images from "../../../Common/Images/images"
 import css from "./Character.module.scss"
 import Head from "../Head/Head"
 
-const girlImages = Images.posableGirls
+const girlImages = Images.posableCharacters
 
 // TODO - the else logic should be placed where this component is called?
 

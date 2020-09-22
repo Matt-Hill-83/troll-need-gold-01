@@ -81,16 +81,19 @@ export default function FrameViewer() {
           </div>
           {indexIsEven && renderedWordGroup}
 
-          <ButtonGroup className={css.audioButtons}>
-            {audioURL && (
-              <AudioPlayer className={css.audioPlayer} sound={audioURL} />
-            )}
-            {loggedIn && (
-              <AudioRecorder
-                saveAudio={({ blob }) => saveAudio({ dialog: line, blob })}
-              />
-            )}
-          </ButtonGroup>
+          <div className={css.audioButtonsContainer}>
+            <ButtonGroup className={css.audioButtons}>
+              {audioURL && (
+                <AudioPlayer className={css.audioPlayer} sound={audioURL} />
+              )}
+              {loggedIn && (
+                <AudioRecorder
+                  recorderClassName={css.audioRecorder}
+                  saveAudio={({ blob }) => saveAudio({ dialog: line, blob })}
+                />
+              )}
+            </ButtonGroup>
+          </div>
         </div>
       )
     })

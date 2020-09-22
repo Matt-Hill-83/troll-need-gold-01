@@ -66,7 +66,7 @@ class Frame extends Component {
   }
 
   renderFacePicker = ({ character }) => {
-    const girlImages = Images.posableGirls
+    const girlImages = Images.posableCharacters
     const images = girlImages.find((girl) => girl.name === character)
 
     // For characters with no posable images
