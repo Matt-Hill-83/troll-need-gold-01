@@ -484,7 +484,8 @@ class WorldBuilder extends Component {
               world={world}
               scene={sceneToEdit}
               onExitFrameBuilder={this.onExitFrameBuilder}
-              updateMap={WorldBuilderUtils.updateMap}
+              updateMap={() => this.updateWorld({})}
+              // updateMap={WorldBuilderUtils.updateMap}
             />
           </div>
         )}
