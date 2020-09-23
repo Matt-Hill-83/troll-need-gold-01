@@ -165,10 +165,7 @@ export default function SceneBuilder(props) {
 
     const hideScene = scene.location && scene.location.name === "blank"
 
-    const handleClose = async () => {
-      // await props.saveItems()
-      // setShowJsonEditor(false)
-    }
+    const handleClose = async () => {}
 
     return (
       <div className={css.gridCell} style={backgroundColor}>
@@ -192,18 +189,12 @@ export default function SceneBuilder(props) {
             aria-labelledby="customized-dialog-title"
             open={true}
           >
-            <DialogTitle id="customized-dialog-title" xxonClose={handleClose}>
+            <DialogTitle id="customized-dialog-title" onClose={handleClose}>
               Edit Scene JSON
             </DialogTitle>
             <DialogContent dividers>
-              {/* <MyJsonEditor world={world} json={scene} /> */}
               <MyJsonEditor world={world} json={scene} onSave={onSaveJson} />
             </DialogContent>
-            <DialogActions>
-              {/* <Button autoFocus onClick={handleClose} color="primary">
-                Save changes
-              </Button> */}
-            </DialogActions>
           </Dialog>
         )}
         {!hideScene && (
