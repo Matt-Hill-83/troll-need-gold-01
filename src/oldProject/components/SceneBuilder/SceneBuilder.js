@@ -1,12 +1,12 @@
 import { ButtonGroup, Button } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
+// Icons
 import cx from "classnames"
 import React, { useState, useEffect } from "react"
 
 import css from "./SceneBuilder.module.scss"
 import CrudMachine from "../../../QuestBuilder/components/CrudMachine/CrudMachine"
 import {
-  Icon,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -158,12 +158,12 @@ export default function SceneBuilder(props) {
     return (
       <div className={css.gridCell} style={backgroundColor}>
         {!hideScene && (
-          <ButtonGroup>
+          <ButtonGroup className={css.scenePropsButton}>
             <Button
-              className={css.scenePropsButton}
-              onClick={() => setShowJsonEditor(showJsonEditor)}
+              // className={css.scenePropsButton}
+              onClick={() => this.editFrameSet({ sceneToEdit: scene })}
             >
-              <Icon icon={IconNames.AIRPLANE} />
+              {/* <Icon icon={IconNames.AIRPLANE} /> */}Set
             </Button>
           </ButtonGroup>
         )}

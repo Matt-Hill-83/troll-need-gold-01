@@ -69,10 +69,6 @@ export function updateBookInFirestore(item) {
   return db.collection("books").doc(item.id).update(item)
 }
 
-export function deleteEventInFirestore(eventId) {
-  return db.collection("events").doc(eventId).delete()
-}
-
 export function deleteQuestInFirestore(eventId) {
   return db.collection("quests").doc(eventId).delete()
 }
