@@ -35,14 +35,8 @@ export default function MyJsonEditor(props) {
     setJsonUnderEdit(json)
   }
 
-  const updateWorld = async ({ newProps }) => {
-    // updateQuestInFirestore(props.world)
-  }
-
   const saveChanges = ({ jsonUnderEdit }) => {
-    console.log("jsonUnderEdit", jsonUnderEdit) // zzz
     props.onSave({ scene: jsonUnderEdit })
-    // updateWorld({ newProps: {} })
   }
 
   return (

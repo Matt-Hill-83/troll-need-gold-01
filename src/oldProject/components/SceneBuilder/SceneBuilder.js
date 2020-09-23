@@ -127,11 +127,7 @@ export default function SceneBuilder(props) {
     return <div className={css.critters1}>{renderedItems}</div>
   }
   const onSaveJson = ({ scene }) => {
-    console.log("scene", scene) // zzz
     Object.assign(props.scene, scene)
-    console.log("props.scene", props.scene) // zzz
-    console.log("onSaveJson") // zzz
-    console.log("scene", scene) // zzz
     props.saveItems()
     setShowJsonEditor(false)
   }
