@@ -3,10 +3,9 @@ import { IconNames } from "@blueprintjs/icons"
 import cx from "classnames"
 import React, { useState, useEffect } from "react"
 
-import Constants from "../../../Common/Constants/Constants"
 import JSONEditorDemo from "../JsonEdtor/JSONEditorDemo.js"
 
-import { updateQuestInFirestore } from "../../../app/firestore/firestoreService.js"
+// import { updateQuestInFirestore } from "../../../app/firestore/firestoreService.js"
 
 import css from "./MyJsonEditor.module.scss"
 
@@ -37,12 +36,13 @@ export default function MyJsonEditor(props) {
   }
 
   const updateWorld = async ({ newProps }) => {
-    updateQuestInFirestore(props.world)
+    // updateQuestInFirestore(props.world)
   }
 
   const saveChanges = ({ jsonUnderEdit }) => {
     console.log("jsonUnderEdit", jsonUnderEdit) // zzz
-    updateWorld({ newProps: {} })
+    props.onSave({ scene: jsonUnderEdit })
+    // updateWorld({ newProps: {} })
   }
 
   return (

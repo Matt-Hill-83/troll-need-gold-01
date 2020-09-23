@@ -81,6 +81,8 @@ export default class WorldBuilderUtils {
     Object.assign(map, { ...newProps })
 
     map.newGrid5 = WorldBuilderUtils.createCondensedGridFromGrid()
+    console.log("map.newGrid5[0]", map.newGrid5[0]) // zzz
+
     map.newGrid5.forEach((scene) => {
       this.addIdToAllItemsInScene({ scene })
       // if (!scene.frameSet?.frames[0]) {
@@ -89,6 +91,7 @@ export default class WorldBuilderUtils {
     })
 
     delete map.grid
+    console.log("map", map) // zzz
     await updateQuestInFirestore(map)
     console.log("updateMap------------end")
     return true

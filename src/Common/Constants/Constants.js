@@ -5,7 +5,8 @@ export default class Constants {
   // static isProdRelease = true
   static isProdRelease = false
 
-  static defaultWorldIdNonProdWB = "2rtgfhGUG7W1mC4Bvrph"
+  static defaultWorldIdNonProdWB = "R0viLtNU0LNDuB1a5hDF"
+  // static defaultWorldIdNonProdWB = "2rtgfhGUG7W1mC4Bvrph"
   // static defaultWorldIdNonProdWB = "7aAH3bf667hWs4LYXxlG"
   static allowRecordAudioInProd = true
   // static allowRecordAudioInProd = false

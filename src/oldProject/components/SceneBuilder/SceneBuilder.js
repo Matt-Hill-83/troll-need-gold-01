@@ -1,25 +1,28 @@
-import { ButtonGroup, Button } from "@blueprintjs/core"
-import { IconNames } from "@blueprintjs/icons"
-// Icons
+import { Popover, ButtonGroup, Button } from "@blueprintjs/core"
+import { Edit, OpenInNew } from "@material-ui/icons"
+
 import cx from "classnames"
 import React, { useState, useEffect } from "react"
 
-import css from "./SceneBuilder.module.scss"
 import CrudMachine from "../../../QuestBuilder/components/CrudMachine/CrudMachine"
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
+  // Popover,
 } from "@material-ui/core"
+
 import MyJsonEditor from "../MyJsonEditor/MyJsonEditor"
 import images from "../../../Common/Images/images"
 import QuestVisibilityUtils from "../../Utils/QuestVisibilityUtils"
 import worldBuilderStore from "../../../QuestBuilder/Stores/WorldBuilderStore"
 import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
 
+import css from "./SceneBuilder.module.scss"
+
 export default function SceneBuilder(props) {
-  const [showJsonEditor, setShowJsonEditor] = useState(null)
+  const [showJsonEditor, setShowJsonEditor] = useState(false)
 
   useEffect(() => {
     console.log("onMount-------------------------------->>>>")
@@ -54,6 +57,10 @@ export default function SceneBuilder(props) {
     })
 
     return Object.values(allCritters)
+  }
+
+  const editFrameSet = ({ sceneToEdit }) => {
+    props.editFrameSet && props.editFrameSet({ sceneToEdit })
   }
 
   const getAllCritters2InScene = ({ scene }) => {
@@ -119,11 +126,20 @@ export default function SceneBuilder(props) {
     })
     return <div className={css.critters1}>{renderedItems}</div>
   }
+  const onSaveJson = ({ scene }) => {
+    console.log("scene", scene) // zzz
+    Object.assign(props.scene, scene)
+    console.log("props.scene", props.scene) // zzz
+    console.log("onSaveJson") // zzz
+    console.log("scene", scene) // zzz
+    props.saveItems()
+    setShowJsonEditor(false)
+  }
 
   const renderCell = () => {
     const { world, saveItems, scene } = props
     const buttons = { add: false, trash: false, edit: true }
-    const onSave = saveItems
+
     const locationImageSets = [images.all]
     const locations = [scene.location]
 
@@ -141,7 +157,7 @@ export default function SceneBuilder(props) {
         items={locations}
         buttons={buttons}
         itemRenderer={itemRenderer}
-        saveItems={onSave}
+        saveItems={saveItems}
         imageSets={locationImageSets}
       />
     )
@@ -153,19 +169,25 @@ export default function SceneBuilder(props) {
 
     const hideScene = scene.location && scene.location.name === "blank"
 
-    const handleClose = () => {}
+    const handleClose = async () => {
+      // await props.saveItems()
+      // setShowJsonEditor(false)
+    }
 
     return (
       <div className={css.gridCell} style={backgroundColor}>
         {!hideScene && (
-          <ButtonGroup className={css.scenePropsButton}>
-            <Button
-              // className={css.scenePropsButton}
-              onClick={() => this.editFrameSet({ sceneToEdit: scene })}
-            >
-              {/* <Icon icon={IconNames.AIRPLANE} /> */}Set
-            </Button>
-          </ButtonGroup>
+          <Popover className={css.scenePropsButton}>
+            <Button>test</Button>
+            <ButtonGroup>
+              <Button onClick={() => editFrameSet({ sceneToEdit: scene })}>
+                <Edit />
+              </Button>
+              <Button onClick={() => setShowJsonEditor(!showJsonEditor)}>
+                JS
+              </Button>
+            </ButtonGroup>
+          </Popover>
         )}
         <div className={css.column1}>{locationPicker}</div>
         {showJsonEditor && (
@@ -174,16 +196,17 @@ export default function SceneBuilder(props) {
             aria-labelledby="customized-dialog-title"
             open={true}
           >
-            <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-              Modal title
+            <DialogTitle id="customized-dialog-title" xxonClose={handleClose}>
+              Edit Scene JSON
             </DialogTitle>
             <DialogContent dividers>
-              <MyJsonEditor world={world} json={scene} />
+              {/* <MyJsonEditor world={world} json={scene} /> */}
+              <MyJsonEditor world={world} json={scene} onSave={onSaveJson} />
             </DialogContent>
             <DialogActions>
-              <Button autoFocus onClick={handleClose} color="primary">
+              {/* <Button autoFocus onClick={handleClose} color="primary">
                 Save changes
-              </Button>
+              </Button> */}
             </DialogActions>
           </Dialog>
         )}

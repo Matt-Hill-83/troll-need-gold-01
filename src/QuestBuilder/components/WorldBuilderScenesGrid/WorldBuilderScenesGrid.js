@@ -12,10 +12,6 @@ class WorldBuilderScenesGrid extends Component {
     await this.props.saveItems()
   }
 
-  editFrameSet = ({ sceneToEdit }) => {
-    this.props.editFrameSet && this.props.editFrameSet({ sceneToEdit })
-  }
-
   renderScenesGrid = () => {
     const scenesGrid = worldBuilderStore.getWorldBuilderScenesGrid()
     const gridRows = []
