@@ -1,3 +1,4 @@
+import will01 from "./creatures/will01.png"
 import tree01 from "./creatures/tree01.png"
 import goblinKing01 from "./creatures/goblinKing01.png"
 import goblinKing02 from "./creatures/goblinKing02.png"
@@ -147,7 +148,7 @@ import liz2 from "./rigged-girls/liz/png/liz-2.png"
 
 const creatures = {
   // blank,
-
+  will01,
   mongo01,
   shuri: pantherGirl01,
   fionaFlying01,
