@@ -124,7 +124,7 @@ export default function SceneBuilder(props) {
 
   const duplicateScene = ({ scene }) => {
     const duplicateScene = JSON.parse(JSON.stringify(scene))
-    duplicateScene.coordinates = { row: -1, col: -1 }
+    duplicateScene.coordinates = { row: 0, col: 0 }
     duplicateScene.id = Utils.generateUuid()
 
     const scenesGrid = worldBuilderStore.getWorldBuilderScenesGrid()

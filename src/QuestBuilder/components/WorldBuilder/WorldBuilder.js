@@ -308,7 +308,7 @@ class WorldBuilder extends Component {
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
     const dialogBuilderButton = (
       <Button onClick={() => this.openDialogBuilder({ world })}>
-        Dialog Builder
+        Dialog Wizard
       </Button>
     )
 
@@ -320,6 +320,12 @@ class WorldBuilder extends Component {
       />
     )
 
+    return (
+      <>
+        {dialogBuilderButton}
+        {subQuestWizardButton}
+      </>
+    )
     const buttons = (
       <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}>
         {dialogBuilderButton}
