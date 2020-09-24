@@ -82,6 +82,7 @@ export default class WorldBuilderUtils {
 
     map.newGrid5 = WorldBuilderUtils.createCondensedGridFromGrid()
     console.log("map.newGrid5[0]", map.newGrid5[0]) // zzz
+    console.log("map.newGrid5", map.newGrid5) // zzz
 
     map.newGrid5.forEach((scene) => {
       this.addIdToAllItemsInScene({ scene })

@@ -38,10 +38,10 @@ class Frame extends Component {
     await deleteFrame({ frameIndex })
   }
 
-  cloneFrame = async () => {
-    const { cloneFrame, frameIndex } = this.props
-    await cloneFrame({ frameIndex })
-  }
+  // cloneFrame = async () => {
+  //   const { cloneFrame, frameIndex } = this.props
+  //   await cloneFrame({ frameIndex })
+  // }
 
   selectHead = ({ name, head }) => {
     const { updateFrameSet } = this.props

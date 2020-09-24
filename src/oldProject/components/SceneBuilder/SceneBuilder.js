@@ -20,6 +20,7 @@ import worldBuilderStore from "../../../QuestBuilder/Stores/WorldBuilderStore"
 import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
 
 import css from "./SceneBuilder.module.scss"
+import WorldBuilderUtils from "../../../QuestBuilder/Utils/WorldBuilderUtils"
 
 export default function SceneBuilder(props) {
   const [showJsonEditor, setShowJsonEditor] = useState(false)
@@ -34,13 +35,7 @@ export default function SceneBuilder(props) {
   }, [])
 
   // on change in props
-  useEffect(() => {
-    console.log("new props =================================>>>>>")
-  }, [props.worlds])
-
-  useEffect(() => {
-    console.log("new props =================================>>>>>")
-  }, [props.books])
+  useEffect(() => {}, [])
 
   const getAllCritters1InScene = ({ scene }) => {
     const frames = scene?.frameSet?.frames || []
@@ -126,6 +121,28 @@ export default function SceneBuilder(props) {
     })
     return <div className={css.critters1}>{renderedItems}</div>
   }
+
+  // Make this fucking thing work@@@@!!
+  // Make this fucking thing work@@@@!!
+  // Make this fucking thing work@@@@!!
+  // Make this fucking thing work@@@@!!
+  const duplicateScene = ({ scene }) => {
+    const duplicateScene = JSON.parse(JSON.stringify(scene))
+    duplicateScene.coordinates = { row: 4, col: 4 }
+    console.log("duplicateScene", duplicateScene)
+    console.log("props.world.newGrid5", props.world.newGrid5) // zzz // zzz
+
+    props.world.newGrid5.push(duplicateScene)
+    console.log("props.world.newGrid5", props.world.newGrid5) // zzz // zzz
+
+    // WorldBuilderUtils.updateMap({ newProps:{ 5:9 }})
+
+    WorldBuilderUtils.updateMap({
+      newProps: { newGrid5: [...props.world.newGrid5] },
+    })
+    // props.saveItems()
+  }
+
   const onSaveJson = ({ scene }) => {
     Object.assign(props.scene, scene)
     props.saveItems()
@@ -179,6 +196,7 @@ export default function SceneBuilder(props) {
               <Button onClick={() => setShowJsonEditor(!showJsonEditor)}>
                 JS
               </Button>
+              <Button onClick={() => duplicateScene({ scene })}>Dup</Button>
             </ButtonGroup>
           </Popover>
         )}
