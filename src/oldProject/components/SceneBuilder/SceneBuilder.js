@@ -127,18 +127,23 @@ export default function SceneBuilder(props) {
   // Make this fucking thing work@@@@!!
   // Make this fucking thing work@@@@!!
   const duplicateScene = ({ scene }) => {
+    const { world } = props
+
     const duplicateScene = JSON.parse(JSON.stringify(scene))
     duplicateScene.coordinates = { row: 4, col: 4 }
     console.log("duplicateScene", duplicateScene)
-    console.log("props.world.newGrid5", props.world.newGrid5) // zzz // zzz
+    // console.log("props.world.newGrid5", props.world.newGrid5) // zzz // zzz
 
-    props.world.newGrid5.push(duplicateScene)
-    console.log("props.world.newGrid5", props.world.newGrid5) // zzz // zzz
+    // props.world.newGrid5.push(duplicateScene)
+    // console.log("props.world.newGrid5", props.world.newGrid5) // zzz // zzz
 
     // WorldBuilderUtils.updateMap({ newProps:{ 5:9 }})
 
+    const scenesGrid = worldBuilderStore.getWorldBuilderScenesGrid()
+    scenesGrid[0][0] = duplicateScene
+
     WorldBuilderUtils.updateMap({
-      newProps: { newGrid5: [...props.world.newGrid5] },
+      mapToUpdate: world,
     })
     // props.saveItems()
   }

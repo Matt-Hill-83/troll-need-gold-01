@@ -77,7 +77,9 @@ export default class WorldBuilderUtils {
 
   static updateMap = async ({ newProps = {}, mapToUpdate }) => {
     console.log("updateMap-------------start")
+    console.log("mapToUpdate", mapToUpdate) // zzz
     const map = mapToUpdate || worldBuilderStore.getWorldBuilderWorld()
+
     Object.assign(map, { ...newProps })
 
     map.newGrid5 = WorldBuilderUtils.createCondensedGridFromGrid()
