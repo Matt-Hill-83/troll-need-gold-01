@@ -388,7 +388,8 @@ class WorldBuilder extends Component {
   renderDialogBuilder = ({ world }) => {
     const { expandedDialogAccordions } = this.state
 
-    const scenes = _get(world, "newGrid5") || []
+    const scenes = world?.newGrid5 || []
+    console.log("scenes", scenes) // zzz
 
     const dialogBuilders = scenes.map((scene, sceneIndex) => {
       const dialogBuilderProps = {

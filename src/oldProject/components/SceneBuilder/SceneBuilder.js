@@ -20,7 +20,7 @@ import worldBuilderStore from "../../../QuestBuilder/Stores/WorldBuilderStore"
 import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
 
 import css from "./SceneBuilder.module.scss"
-import WorldBuilderUtils from "../../../QuestBuilder/Utils/WorldBuilderUtils"
+import Utils from "../../../Common/Utils/Utils"
 
 export default function SceneBuilder(props) {
   const [showJsonEditor, setShowJsonEditor] = useState(false)
@@ -122,30 +122,15 @@ export default function SceneBuilder(props) {
     return <div className={css.critters1}>{renderedItems}</div>
   }
 
-  // Make this fucking thing work@@@@!!
-  // Make this fucking thing work@@@@!!
-  // Make this fucking thing work@@@@!!
-  // Make this fucking thing work@@@@!!
   const duplicateScene = ({ scene }) => {
-    const { world } = props
-
     const duplicateScene = JSON.parse(JSON.stringify(scene))
-    duplicateScene.coordinates = { row: 4, col: 4 }
-    console.log("duplicateScene", duplicateScene)
-    // console.log("props.world.newGrid5", props.world.newGrid5) // zzz // zzz
-
-    // props.world.newGrid5.push(duplicateScene)
-    // console.log("props.world.newGrid5", props.world.newGrid5) // zzz // zzz
-
-    // WorldBuilderUtils.updateMap({ newProps:{ 5:9 }})
+    duplicateScene.coordinates = { row: -1, col: -1 }
+    duplicateScene.id = Utils.generateUuid()
 
     const scenesGrid = worldBuilderStore.getWorldBuilderScenesGrid()
     scenesGrid[0][0] = duplicateScene
 
-    WorldBuilderUtils.updateMap({
-      mapToUpdate: world,
-    })
-    // props.saveItems()
+    props.saveItems()
   }
 
   const onSaveJson = ({ scene }) => {

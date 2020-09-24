@@ -14,7 +14,6 @@ import ash01 from "./creatures/ash01.png"
 import babyTroll01 from "./creatures/babyTroll01.png"
 import bat from "./creatures/bat.png"
 import bee01 from "./creatures/bee01.png"
-import blank from "./locations/blank.png"
 import blankDragon01 from "./creatures/blankDragon01.png"
 import boomALoo01 from "./creatures/boomALoo01.png"
 import brenda01 from "./creatures/brenda01.png"
@@ -156,8 +155,8 @@ const creatures = {
   fiona01,
   liz2,
   kat,
-  // taffy01,
-  taffy01: marli01,
+  taffy01,
+  // taffy01: marli01,
   marli01,
 
   frizzle01,

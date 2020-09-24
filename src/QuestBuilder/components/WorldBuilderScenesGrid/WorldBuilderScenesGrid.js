@@ -14,7 +14,6 @@ class WorldBuilderScenesGrid extends Component {
 
   renderScenesGrid = () => {
     const scenesGrid = worldBuilderStore.getWorldBuilderScenesGrid()
-    console.log("scenesGrid", scenesGrid) // zzz
     const gridRows = []
 
     scenesGrid.forEach((row) => {
