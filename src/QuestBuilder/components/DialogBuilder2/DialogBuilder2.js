@@ -3,6 +3,7 @@ import { Button, ButtonGroup } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
 import cx from "classnames"
 import React, { useEffect } from "react"
+import { TextareaAutosize } from "@material-ui/core"
 
 import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 import AutoComplete2 from "../AutoComplete2/AutoComplete2"
@@ -15,8 +16,8 @@ import Constants from "../../../Common/Constants/Constants"
 import css from "./DialogBuilder2.module.scss"
 
 export default function DialogBuilder2(props) {
-  const simpleView = false
-  // const simpleView = true || Constants.isProdRelease
+  // const simpleView = false
+  const simpleView = true || Constants.isProdRelease
 
   const fakeDivs = []
   const fakeDivs2 = []
@@ -383,10 +384,25 @@ export default function DialogBuilder2(props) {
 
       const text = `${dialog.text}`
 
+      const updateText = ({ dialog, event }) => {
+        const newValue = event.target.value
+        dialog.text = newValue
+        localSave()
+      }
+
       const fakeDiv2 = (
         <div className={css.fakeDiv} style={style}>
           test2
           {frameButtons}
+          <TextareaAutosize
+            rowsMax={4}
+            aria-label="maximum height"
+            placeholder="Maximum 4 rows"
+            defaultValue={text}
+            onBlur={(event) => {
+              updateText({ event, dialog })
+            }}
+          />
           <div className={css.emptySpace}>{text}</div>
         </div>
       )
