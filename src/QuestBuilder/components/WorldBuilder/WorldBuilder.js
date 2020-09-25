@@ -2,8 +2,6 @@ import React, { Component } from "react"
 import cx from "classnames"
 import { IconNames } from "@blueprintjs/icons"
 
-import { addQuestToFirestore } from "../../../app/firestore/firestoreService.js"
-
 import {
   Button,
   Menu,
@@ -200,7 +198,7 @@ class WorldBuilder extends Component {
 
   saveItemsDialogBuilder = async () => {
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
-    this.setState({ dialogBuilderKey: new Date() })
+    // this.setState({ dialogBuilderKey: new Date() })
     await this.updateWorld({ mapToUpdate: world })
   }
 
@@ -380,7 +378,7 @@ class WorldBuilder extends Component {
               <DialogBuilders
                 saveItemsDialogBuilder={this.saveItemsDialogBuilder}
                 world={world}
-              ></DialogBuilders>
+              />
             )}
           </div>
         )}
