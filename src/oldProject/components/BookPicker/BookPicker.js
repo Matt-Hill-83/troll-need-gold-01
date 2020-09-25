@@ -57,7 +57,6 @@ export default function BookPicker(props) {
   books = sortBooks({ books: props.books })
 
   useEffect(() => {
-    console.log("onMount-------------------------------->>>>")
     // worlds = props.worlds
     // books = sortBooks({ books: props.books })
 

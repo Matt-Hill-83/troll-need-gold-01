@@ -26,8 +26,6 @@ export default function SceneBuilder(props) {
   const [showJsonEditor, setShowJsonEditor] = useState(false)
 
   useEffect(() => {
-    console.log("onMount-------------------------------->>>>")
-
     // returned function will be called on component unmount
     return () => {
       console.log("unmount")

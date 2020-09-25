@@ -8,8 +8,6 @@ export default function MyJsonEditor(props) {
   const [jsonUnderEdit, setJsonUnderEdit] = useState(props.json || {})
 
   useEffect(() => {
-    console.log("onMount-------------------------------->>>>")
-
     // returned function will be called on component unmount
     return () => {
       console.log("unmount")

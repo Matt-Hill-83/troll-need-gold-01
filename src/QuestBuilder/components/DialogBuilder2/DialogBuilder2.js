@@ -16,6 +16,7 @@ import css from "./DialogBuilder2.module.scss"
 
 export default function DialogBuilder2(props) {
   const fakeDivs = []
+  const fakeDivs2 = []
   const metaInfoMap = {}
   let content = ""
 
@@ -93,8 +94,9 @@ export default function DialogBuilder2(props) {
     }
   }
 
-  const addNewRowToTextArea = ({ text, fakeDiv, rowNum }) => {
+  const addNewRowToTextArea = ({ fakeDiv2, text, fakeDiv, rowNum }) => {
     fakeDivs.push(fakeDiv)
+    fakeDivs2.push(fakeDiv2)
     const newText = `${text}\n`
     content += newText
     rowNum.value++
@@ -199,9 +201,27 @@ export default function DialogBuilder2(props) {
       </div>
     )
 
+    const fakeDiv2 = (
+      <div
+        className={`${css.fakeDiv} ${css.frameSeparatorDiv}
+   ${frameIndex === 0 ? css.newSceneRow : ""}
+   
+   `}
+        style={style}
+      >
+        {dummyRowLabel}
+        <ButtonGroup className={css.frameButtons}>
+          {renderJoinFramesButton({})}
+          {renderDuplicateFrameButton({})}
+          {renderDeleteFrameButton({})}
+          {showAddDialogButton && renderAddDialogRowButton({})}
+        </ButtonGroup>
+      </div>
+    )
+
     const text = dummyRowLabel
 
-    addNewRowToTextArea({ text, fakeDiv, rowNum })
+    addNewRowToTextArea({ text, fakeDiv, fakeDiv2, rowNum })
   }
 
   const onDuplicateFrame = ({ rowIndex, frames, frame }) => {
@@ -360,6 +380,23 @@ export default function DialogBuilder2(props) {
     content: content,
     className: css.textEditor,
     onSubmit: ({ content }) => updateTextChanges({ content }),
+  }
+
+  if (false) {
+    // if (true) {
+    // if (Constants.isProdRelease) {
+    return (
+      <div className={css.main}>
+        <div className={css.containerToGetMaxHeight}>
+          <div className={css.controlPanel}>{fakeDivs2}</div>
+          {/* To size the parent container of an absolute div, create a
+         dup of the absolute div that is hidden. */}
+          <div className={cx(css.controlPanel, css.hidden)}>{fakeDivs}</div>
+          <MyTextEditor props={myTextEditorProps}></MyTextEditor>
+        </div>
+      </div>
+    )
+    // return <div className={css.main}>{fakeDivs2}</div>
   }
 
   return (

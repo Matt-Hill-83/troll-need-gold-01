@@ -41,7 +41,6 @@ export default function TopLevel(props) {
 
   // on mount
   useEffect(() => {
-    console.log("onMount-------------------------------->>>>")
     toaster.clear()
 
     // returned function will be called on component unmount
