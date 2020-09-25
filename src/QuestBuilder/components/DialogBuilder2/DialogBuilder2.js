@@ -15,8 +15,8 @@ import Constants from "../../../Common/Constants/Constants"
 import css from "./DialogBuilder2.module.scss"
 
 export default function DialogBuilder2(props) {
-  // const simpleView = false
-  const simpleView = true || Constants.isProdRelease
+  const simpleView = false
+  // const simpleView = true || Constants.isProdRelease
 
   const fakeDivs = []
   const fakeDivs2 = []
@@ -263,7 +263,8 @@ export default function DialogBuilder2(props) {
     localSave()
   }
 
-  const splitFrame = ({ dialogIndex, frame, frames, frameIndex }) => {
+  const splitFrame = ({ dialogIndex, frames, frameIndex }) => {
+    const frame = frames[frameIndex]
     const newFrame = WorldBuilderUtils.getNewFrame({ props: { ...frame } })
     const dialog1 = frame.dialog.slice(0, dialogIndex)
     const dialog2 = frame.dialog.slice(dialogIndex)
@@ -289,7 +290,54 @@ export default function DialogBuilder2(props) {
     localSave()
   }
 
-  const renderTextAreaRow = ({
+  const renderFrameButtons = ({
+    // dialog,
+    dialogIndex,
+    dialogs,
+    // frame,
+    frameIndex,
+    frames,
+  }) => {
+    const frame = frames[frameIndex]
+    const dialog = dialogs[dialogIndex]
+    const renderSplitFrameButton = () => {
+      return (
+        <Button
+          onClick={() =>
+            splitFrame({
+              dialogIndex,
+              frameIndex,
+              frames,
+            })
+          }
+        >
+          Split
+        </Button>
+      )
+    }
+
+    const moreButtons = [
+      renderCritterPicker({ dialog, frame }),
+      renderSplitFrameButton(),
+    ]
+
+    return (
+      <AddDeleteButtonGroup
+        props={{
+          rowIndex: dialogIndex,
+          onDelete: ({ rowIndex }) => onDeleteRow({ items: dialogs, rowIndex }),
+          onAdd: ({ rowIndex, before }) =>
+            onAddDialogRow({ items: dialogs, rowIndex, before }),
+          vertical: false,
+          noPopover: true,
+          className: css.dialogBuilderButtonGroup,
+          moreButtons: moreButtons,
+        }}
+      />
+    )
+  }
+
+  const renderDialogRow = ({
     dialog,
     dialogIndex,
     dialogs,
@@ -324,14 +372,13 @@ export default function DialogBuilder2(props) {
       ]
 
       metaInfoMap[rowNum.value] = { sceneIndex, frameIndex, dialogIndex }
-
       const text = `${dialog.text}`
 
       const frameButtons = renderFrameButtons({
-        dialog,
+        // dialog,
         dialogIndex,
         dialogs,
-        frame,
+        // frame,
         frameIndex,
         frames,
       })
@@ -368,53 +415,7 @@ export default function DialogBuilder2(props) {
     }
   }
 
-  const renderFrameButtons = ({
-    dialog,
-    dialogIndex,
-    dialogs,
-    frame,
-    frameIndex,
-    frames,
-  }) => {
-    const renderSplitFrameButton = () => {
-      return (
-        <Button
-          onClick={() =>
-            splitFrame({
-              dialogIndex,
-              frameIndex,
-              frames,
-              frame,
-            })
-          }
-        >
-          Split
-        </Button>
-      )
-    }
-
-    const moreButtons = [
-      renderCritterPicker({ dialog, frame }),
-      renderSplitFrameButton(),
-    ]
-
-    return (
-      <AddDeleteButtonGroup
-        props={{
-          rowIndex: dialogIndex,
-          onDelete: ({ rowIndex }) => onDeleteRow({ items: dialogs, rowIndex }),
-          onAdd: ({ rowIndex, before }) =>
-            onAddDialogRow({ items: dialogs, rowIndex, before }),
-          vertical: false,
-          noPopover: true,
-          className: css.dialogBuilderButtonGroup,
-          moreButtons: moreButtons,
-        }}
-      />
-    )
-  }
-
-  const renderTextAreaRow2 = ({
+  const renderDialogRow2 = ({
     dialog,
     dialogIndex,
     dialogs,
@@ -425,10 +426,10 @@ export default function DialogBuilder2(props) {
   }) => {
     if (dialog.text.length >= 0) {
       const frameButtons = renderFrameButtons({
-        dialog,
+        // dialog,
         dialogIndex,
         dialogs,
-        frame,
+        // frame,
         frameIndex,
         frames,
       })
@@ -466,7 +467,7 @@ export default function DialogBuilder2(props) {
 
       if (simpleView) {
         frame.dialog.forEach((dialog, dialogIndex) => {
-          renderTextAreaRow2({
+          renderDialogRow2({
             dialog,
             dialogIndex,
             dialogs: frame.dialog,
@@ -480,7 +481,7 @@ export default function DialogBuilder2(props) {
         })
       } else {
         frame.dialog.forEach((dialog, dialogIndex) => {
-          renderTextAreaRow({
+          renderDialogRow({
             dialog,
             dialogIndex,
             dialogs: frame.dialog,
