@@ -290,14 +290,7 @@ export default function DialogBuilder2(props) {
     localSave()
   }
 
-  const renderFrameButtons = ({
-    // dialog,
-    dialogIndex,
-    dialogs,
-    // frame,
-    frameIndex,
-    frames,
-  }) => {
+  const renderFrameButtons = ({ dialogIndex, dialogs, frameIndex, frames }) => {
     const frame = frames[frameIndex]
     const dialog = dialogs[dialogIndex]
     const renderSplitFrameButton = () => {
@@ -338,16 +331,17 @@ export default function DialogBuilder2(props) {
   }
 
   const renderDialogRow = ({
-    dialog,
     dialogIndex,
     dialogs,
-    frame,
     frameIndex,
     frames,
     rowNum,
     sceneIndex,
     style,
   }) => {
+    const dialog = dialogs[dialogIndex]
+    const frame = frames[frameIndex]
+
     if (dialog.text.length >= 0) {
       const renderSplitFrameButton = () => {
         return (
@@ -375,10 +369,8 @@ export default function DialogBuilder2(props) {
       const text = `${dialog.text}`
 
       const frameButtons = renderFrameButtons({
-        // dialog,
         dialogIndex,
         dialogs,
-        // frame,
         frameIndex,
         frames,
       })
@@ -426,10 +418,8 @@ export default function DialogBuilder2(props) {
   }) => {
     if (dialog.text.length >= 0) {
       const frameButtons = renderFrameButtons({
-        // dialog,
         dialogIndex,
         dialogs,
-        // frame,
         frameIndex,
         frames,
       })
@@ -482,15 +472,12 @@ export default function DialogBuilder2(props) {
       } else {
         frame.dialog.forEach((dialog, dialogIndex) => {
           renderDialogRow({
-            dialog,
             dialogIndex,
             dialogs: frame.dialog,
-            frame,
             frameIndex,
             frames,
             rowNum,
             sceneIndex,
-
             style,
           })
         })
