@@ -392,43 +392,6 @@ class WorldBuilder extends Component {
     )
   }
 
-  renderDialogBuilder = ({ world }) => {
-    const { expandedDialogAccordions } = this.state
-
-    const scenes = world?.newGrid5 || []
-    console.log("scenes", scenes) // zzz
-
-    const dialogBuilders = scenes.map((scene, sceneIndex) => {
-      const dialogBuilderProps = {
-        saveItems: this.saveItemsDialogBuilder,
-        scene,
-        world,
-        sceneIndex,
-      }
-
-      const onChange = ({ expanded }) => {
-        const { expandedDialogAccordions } = this.state
-
-        expandedDialogAccordions[sceneIndex] = expanded
-        this.setState({ expandedDialogAccordions })
-      }
-
-      const subQuestAccordion = {
-        title: <div className={css.subQuestHeader}>{scene.location.name}</div>,
-        expanded: expandedDialogAccordions[sceneIndex],
-        onChange,
-        content: () => (
-          <DialogBuilder2 props={dialogBuilderProps}></DialogBuilder2>
-        ),
-        className: css.sceneDialogAccordion,
-      }
-
-      return <MyAccordion props={subQuestAccordion} />
-    })
-
-    return dialogBuilders
-  }
-
   render() {
     const {
       sceneToEdit,
@@ -474,8 +437,6 @@ class WorldBuilder extends Component {
                 {this.renderSubQuestWizard({ questConfig, newGrid5 })}
               </div>
             )}
-            {/* {showDialogBuilder && {this.renderDialogBuilder({ world })} */}
-            {/* {showDialogBuilder && this.renderDialogBuilder({ world })} */}
             {showDialogBuilder && (
               <DialogBuilders
                 saveItemsDialogBuilder={this.saveItemsDialogBuilder}
