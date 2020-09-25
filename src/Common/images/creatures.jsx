@@ -5,6 +5,7 @@ import goblinKing02 from "./creatures/goblinKing02.png"
 import misterWilson01 from "./creatures/misterWilson01.png"
 import fiona01 from "./creatures/fiona01.png"
 import marli01 from "./creatures/marli01.png"
+import solarSystem01 from "./creatures/solarSystem01.png"
 
 import angus01 from "./creatures/angus01.png"
 import anna from "./creatures/anna.png"
@@ -155,8 +156,8 @@ const creatures = {
   fiona01,
   liz2,
   kat,
-  taffy01,
-  // taffy01: marli01,
+  // taffy01,
+  taffy01: marli01,
   marli01,
 
   frizzle01,
@@ -303,6 +304,7 @@ const creatures = {
   goblinKing02,
   misterWilson01,
   tree01,
+  solarSystem01,
 }
 
 export default creatures
