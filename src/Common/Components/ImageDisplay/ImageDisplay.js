@@ -1,46 +1,30 @@
-import React, { Component } from "react"
+import React from "react"
 
 import Images from "../../../Common/Images/images"
 
 import css from "./ImageDisplay.module.scss"
 
-class ImageDisplay extends Component {
-  state = {}
+export default function ImageDisplay(props) {
+  const {
+    item: { name, id, index },
+    showLabel,
+    amount = 0,
+    className,
+    showAmount = false,
+  } = props
 
-  // componentWillMount() {
-  //   let { items = [] } = this.props
-  //   this.setState({ items: [...items] })
-  // }
+  const image = props.images || Images.all[name]
 
-  // componentWillReceiveProps(newProps) {
-  //   let { items = [] } = newProps
-  //   this.setState({ items: [...items] })
-  // }
-
-  render() {
-    const {
-      item: { name, id, index },
-      showLabel,
-      amount = 0,
-      className,
-      showAmount = false,
-    } = this.props
-
-    const image = this.props.images || Images.all[name]
-
-    return (
-      <div
-        className={`${css.main} ${className ? className : ""}`}
-        key={id || index}
-      >
-        {showAmount && <div className={css.amount}>{amount}</div>}
-        <div className={css.imageContainer}>
-          {image && <img className={css.image} src={image} alt={name} />}
-          {showLabel && <span className={`${css.itemLabel}`}>{name}</span>}
-        </div>
+  return (
+    <div
+      className={`${css.main} ${className ? className : ""}`}
+      key={id || index}
+    >
+      {showAmount && <div className={css.amount}>{amount}</div>}
+      <div className={css.imageContainer}>
+        {image && <img className={css.image} src={image} alt={name} />}
+        {showLabel && <span className={`${css.itemLabel}`}>{name}</span>}
       </div>
-    )
-  }
+    </div>
+  )
 }
-
-export default ImageDisplay
