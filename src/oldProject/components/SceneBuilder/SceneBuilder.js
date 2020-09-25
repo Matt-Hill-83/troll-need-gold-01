@@ -1,17 +1,11 @@
 import { Popover, ButtonGroup, Button } from "@blueprintjs/core"
-import { Edit, OpenInNew } from "@material-ui/icons"
+import { Edit } from "@material-ui/icons"
 
 import cx from "classnames"
 import React, { useState, useEffect } from "react"
 
 import CrudMachine from "../../../QuestBuilder/components/CrudMachine/CrudMachine"
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  // Popover,
-} from "@material-ui/core"
+import { Dialog, DialogTitle, DialogContent } from "@material-ui/core"
 
 import MyJsonEditor from "../MyJsonEditor/MyJsonEditor"
 import images from "../../../Common/Images/images"

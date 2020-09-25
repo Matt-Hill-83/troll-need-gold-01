@@ -7,6 +7,7 @@
 
   :global {
     --row-font-size: 1.5vh;
+    --dialog-image-width: 4vh;
     --row-height: calc(var(--row-font-size) * 1.15);
     --row-font-family: Arial, Helvetica, sans-serif;
   }
@@ -16,102 +17,127 @@
     display: flex;
     flex: 1;
   }
-}
 
-.frameButtons {
-  display: flex;
-  align-self: center;
-  margin-left: 8px;
+  .dialogImage {
+    border: 1px solid blue !important;
+    position: absolute;
+    background: white;
+    z-index: 1;
+    height: 1.7vh;
+    width: var(--dialog-image-width);
+    left: 0vh;
+  }
 
-  > button {
+  .frameButtons {
     display: flex;
+    align-self: center;
+    margin-left: 8px;
 
-    height: 90% !important;
-    min-height: unset;
+    > button {
+      display: flex;
 
-    padding: 0px;
-    font-size: 72%;
+      height: 90% !important;
+      min-height: unset;
+
+      padding: 0px;
+      font-size: 72%;
+    }
   }
-}
-.containerToGetMaxHeight {
-  display: flex;
-  position: relative;
-  flex: 1 1;
-  height: fit-content;
-}
 
-.dialogBuilderButtonGroup {
-  display: flex;
-  overflow: hidden;
-  align-items: flex-end;
-  background: transparent;
-}
-
-.fakeDiv {
-  display: flex;
-  width: 100%;
-  position: relative;
-  white-space: nowrap;
-  font-family: var(--row-font-family);
-  font-size: var(--row-font-size);
-  min-height: 22px !important;
-  max-height: 22px !important;
-  align-items: center;
-  top: 4px;
-  overflow: hidden;
-  border-bottom: 1px solid gray !important;
-  align-items: flex-start;
-
-  &:nth-child(even) {
-    opacity: 0.5;
+  .containerToGetMaxHeight {
+    display: flex;
+    position: relative;
+    flex: 1 1;
+    height: fit-content;
   }
-}
 
-.controlPanel {
-  position: absolute;
-  z-index: 0;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-}
+  .dialogBuilderButtonGroup {
+    display: flex;
+    overflow: hidden;
+    align-items: flex-end;
+    background: transparent;
+  }
 
-.controlPanel2 {
-  z-index: 0;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-}
+  .fakeDiv {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    position: relative;
+    white-space: nowrap;
+    font-family: var(--row-font-family);
+    font-size: var(--row-font-size);
+    min-height: 22px !important;
+    max-height: 22px !important;
+    top: 4px;
+    overflow: hidden;
+    border-bottom: 1px solid gray !important;
+    padding-left: var(--dialog-image-width);
 
-.hidden {
-  visibility: hidden;
-  position: relative;
-  overflow: hidden;
-  width: 0px;
-  width: 40%;
-  border: 4px solid blue !important;
-}
+    &:nth-child(even) {
+      :global {
+        [class*="DialogBuilder2_dialogImage"] {
+          // border: 1px solid green !important;
+        }
+      }
+    }
 
-.textEditor {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  margin-left: 300px;
-}
+    &:nth-child(odd) {
+      opacity: 0.5;
 
-.frameSeparatorDiv {
-  background: rgb(216, 216, 216) !important;
-}
+      :global {
+        [class*="DialogBuilder2_dialogImage"] {
+          // border: 1px solid red !important;
+        }
+      }
+    }
+  }
 
-.newSceneRow {
-  border-top: 2px solid black !important;
-  border-bottom: 2px solid black !important;
-  background: rgb(187, 187, 187) !important;
-}
+  .controlPanel {
+    position: absolute;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
 
-.emptySpace {
-  display: flex;
-  flex: 1;
-  height: 100%;
+  .controlPanel2 {
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hidden {
+    visibility: hidden;
+    position: relative;
+    overflow: hidden;
+    width: 0px;
+    width: 40%;
+    border: 4px solid blue !important;
+  }
+
+  .textEditor {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    margin-left: 350px;
+  }
+
+  .frameSeparatorDiv {
+    background: rgb(216, 216, 216) !important;
+  }
+
+  .newSceneRow {
+    border-top: 2px solid black !important;
+    border-bottom: 2px solid black !important;
+    background: rgb(187, 187, 187) !important;
+  }
+
+  .emptySpace {
+    display: flex;
+    flex: 1;
+    height: 100%;
+  }
 }

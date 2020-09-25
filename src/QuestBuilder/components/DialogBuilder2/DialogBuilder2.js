@@ -7,13 +7,14 @@ import { TextareaAutosize } from "@material-ui/core"
 
 import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 import AutoComplete2 from "../AutoComplete2/AutoComplete2"
-
+import Constants from "../../../Common/Constants/Constants"
 import MyTextEditor from "../MyTextEditor/MyTextEditor"
 import Utils from "../../../Common/Utils/Utils"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
-import Constants from "../../../Common/Constants/Constants"
 
 import css from "./DialogBuilder2.module.scss"
+import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
+import CrudMachine from "../CrudMachine/CrudMachine"
 
 export default function DialogBuilder2(props) {
   const simpleView = false
@@ -105,6 +106,7 @@ export default function DialogBuilder2(props) {
     rowNum.value++
   }
 
+  const renderDummyRowButtons = ({}) => {}
   const insertDummyRowBetweenFrames = ({
     frameIndex,
     frames,
@@ -113,9 +115,7 @@ export default function DialogBuilder2(props) {
     rowNum,
   }) => {
     const frame = frames[frameIndex]
-
     const dummyRowLabel = `${scene.location.name}  - frame ${frameIndex + 1}`
-
     const { dialog = [] } = frame
 
     const renderDuplicateFrameButton = () => {
@@ -134,23 +134,6 @@ export default function DialogBuilder2(props) {
       )
     }
 
-    const renderDeleteFrameButton = () => {
-      return (
-        <Button
-          onClick={() =>
-            onDeleteFrame({
-              rowIndex: frameIndex,
-              frames,
-              frame,
-            })
-          }
-          icon={IconNames.Trash}
-        >
-          Del
-        </Button>
-      )
-    }
-
     const renderAddDialogRowButton = () => {
       return (
         <Button
@@ -164,6 +147,23 @@ export default function DialogBuilder2(props) {
           icon={IconNames.ADD}
         >
           dialog
+        </Button>
+      )
+    }
+
+    const renderDeleteFrameButton = () => {
+      return (
+        <Button
+          onClick={() =>
+            onDeleteFrame({
+              rowIndex: frameIndex,
+              frames,
+              frame,
+            })
+          }
+          icon={IconNames.Trash}
+        >
+          Del
         </Button>
       )
     }
@@ -187,14 +187,25 @@ export default function DialogBuilder2(props) {
 
     const showAddDialogButton = !dialog || dialog.length === 0
 
+    const itemRenderer = ({ item }) => {
+      return <ImageDisplay item={item} />
+    }
+    const { critters1 = [], critters2 = [] } = frame
+    console.log("critters1", critters1) // zzz
+
     const fakeDiv = (
       <div
-        className={`${css.fakeDiv} ${css.frameSeparatorDiv}
-   ${frameIndex === 0 ? css.newSceneRow : ""}
-   
-   `}
+        className={cx(css.fakeDiv, css.frameSeparatorDiv, {
+          [css.newSceneRow]: frameIndex === 0,
+        })}
         style={style}
       >
+        {/* <div
+        className={`${css.fakeDiv} ${css.frameSeparatorDiv} ${
+          frameIndex === 0 ? css.newSceneRow : ""
+        } `}
+        style={style}
+      > */}
         {dummyRowLabel}
         <ButtonGroup className={css.frameButtons}>
           {renderJoinFramesButton({})}
@@ -202,31 +213,19 @@ export default function DialogBuilder2(props) {
           {renderDeleteFrameButton({})}
           {showAddDialogButton && renderAddDialogRowButton({})}
         </ButtonGroup>
-      </div>
-    )
-
-    const fakeDiv2 = <div>test</div>
-    const fakeDiv3 = (
-      <div
-        className={`${css.fakeDiv} ${css.frameSeparatorDiv}
-   ${frameIndex === 0 ? css.newSceneRow : ""}
-   
-   `}
-        style={style}
-      >
-        {dummyRowLabel}
-        <ButtonGroup className={css.frameButtons}>
-          {renderJoinFramesButton({})}
-          {renderDuplicateFrameButton({})}
-          {renderDeleteFrameButton({})}
-          {showAddDialogButton && renderAddDialogRowButton({})}
-        </ButtonGroup>
+        <CrudMachine
+          className={css.crudMachine}
+          items={critters1}
+          itemRenderer={itemRenderer}
+          // saveItems={this.saveItems}
+          title={"critters1"}
+        />
       </div>
     )
 
     const text = dummyRowLabel
 
-    addNewRowToTextArea({ text, fakeDiv, fakeDiv2, rowNum })
+    addNewRowToTextArea({ text, fakeDiv, rowNum })
   }
 
   const onDuplicateFrame = ({ rowIndex, frames, frame }) => {
@@ -353,9 +352,11 @@ export default function DialogBuilder2(props) {
         frameIndex,
         frames,
       })
+      const image = { name: dialog.character }
 
       const fakeDiv = (
         <div className={css.fakeDiv} style={style}>
+          <ImageDisplay item={image} className={css.dialogImage} />
           {frameButtons}
           <div className={css.emptySpace}></div>
         </div>
