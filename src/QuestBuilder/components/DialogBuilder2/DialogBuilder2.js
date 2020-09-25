@@ -15,6 +15,7 @@ import Constants from "../../../Common/Constants/Constants"
 import css from "./DialogBuilder2.module.scss"
 
 export default function DialogBuilder2(props) {
+  // const simpleView = false
   const simpleView = true || Constants.isProdRelease
 
   const fakeDivs = []
@@ -325,21 +326,20 @@ export default function DialogBuilder2(props) {
       metaInfoMap[rowNum.value] = { sceneIndex, frameIndex, dialogIndex }
 
       const text = `${dialog.text}`
+
+      const frameButtons = renderFrameButtons({
+        dialog,
+        dialogIndex,
+        dialogs,
+        frame,
+        frameIndex,
+        frames,
+      })
+
       const fakeDiv = (
         <div className={css.fakeDiv} style={style}>
-          <AddDeleteButtonGroup
-            props={{
-              rowIndex: dialogIndex,
-              onDelete: ({ rowIndex }) =>
-                onDeleteRow({ items: dialogs, rowIndex }),
-              onAdd: ({ rowIndex, before }) =>
-                onAddDialogRow({ items: dialogs, rowIndex, before }),
-              vertical: false,
-              noPopover: true,
-              className: css.dialogBuilderButtonGroup,
-              moreButtons: moreButtons,
-            }}
-          />
+          {frameButtons}
+
           <div className={css.emptySpace}></div>
         </div>
       )
@@ -368,6 +368,52 @@ export default function DialogBuilder2(props) {
     }
   }
 
+  const renderFrameButtons = ({
+    dialog,
+    dialogIndex,
+    dialogs,
+    frame,
+    frameIndex,
+    frames,
+  }) => {
+    const renderSplitFrameButton = () => {
+      return (
+        <Button
+          onClick={() =>
+            splitFrame({
+              dialogIndex,
+              frameIndex,
+              frames,
+              frame,
+            })
+          }
+        >
+          Split
+        </Button>
+      )
+    }
+
+    const moreButtons = [
+      renderCritterPicker({ dialog, frame }),
+      renderSplitFrameButton(),
+    ]
+
+    return (
+      <AddDeleteButtonGroup
+        props={{
+          rowIndex: dialogIndex,
+          onDelete: ({ rowIndex }) => onDeleteRow({ items: dialogs, rowIndex }),
+          onAdd: ({ rowIndex, before }) =>
+            onAddDialogRow({ items: dialogs, rowIndex, before }),
+          vertical: false,
+          noPopover: true,
+          className: css.dialogBuilderButtonGroup,
+          moreButtons: moreButtons,
+        }}
+      />
+    )
+  }
+
   const renderTextAreaRow2 = ({
     dialog,
     dialogIndex,
@@ -378,46 +424,21 @@ export default function DialogBuilder2(props) {
     style,
   }) => {
     if (dialog.text.length >= 0) {
-      const renderSplitFrameButton = () => {
-        return (
-          <Button
-            onClick={() =>
-              splitFrame({
-                dialogIndex,
-                frameIndex,
-                frames,
-                frame,
-              })
-            }
-          >
-            Split
-          </Button>
-        )
-      }
-
-      const moreButtons = [
-        renderCritterPicker({ dialog, frame }),
-        renderSplitFrameButton(),
-      ]
+      const frameButtons = renderFrameButtons({
+        dialog,
+        dialogIndex,
+        dialogs,
+        frame,
+        frameIndex,
+        frames,
+      })
 
       const text = `${dialog.text}`
 
       const fakeDiv2 = (
         <div className={css.fakeDiv} style={style}>
           test2
-          <AddDeleteButtonGroup
-            props={{
-              rowIndex: dialogIndex,
-              onDelete: ({ rowIndex }) =>
-                onDeleteRow({ items: dialogs, rowIndex }),
-              onAdd: ({ rowIndex, before }) =>
-                onAddDialogRow({ items: dialogs, rowIndex, before }),
-              vertical: false,
-              noPopover: true,
-              className: css.dialogBuilderButtonGroup,
-              moreButtons: moreButtons,
-            }}
-          />
+          {frameButtons}
           <div className={css.emptySpace}>{text}</div>
         </div>
       )
