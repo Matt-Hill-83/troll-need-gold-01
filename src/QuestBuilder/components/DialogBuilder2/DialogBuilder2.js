@@ -386,8 +386,10 @@ export default function DialogBuilder2(props) {
 
       const updateText = ({ dialog, event }) => {
         const newValue = event.target.value
-        dialog.text = newValue
-        localSave()
+        if (dialog.text !== newValue) {
+          dialog.text = newValue
+          localSave()
+        }
       }
 
       const fakeDiv2 = (
