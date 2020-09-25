@@ -43,6 +43,7 @@ export default function MyTextEditor({ props }) {
       <TextareaAutosize
         className={cx(css.main, className)}
         onChange={onTextAreaChange}
+        onBlur={onSubmit}
         value={content}
       >
         {content}

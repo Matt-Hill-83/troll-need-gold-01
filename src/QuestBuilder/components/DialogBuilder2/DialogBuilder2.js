@@ -16,8 +16,8 @@ import Constants from "../../../Common/Constants/Constants"
 import css from "./DialogBuilder2.module.scss"
 
 export default function DialogBuilder2(props) {
-  // const simpleView = false
-  const simpleView = true || Constants.isProdRelease
+  const simpleView = false
+  // const simpleView = true || Constants.isProdRelease
 
   const fakeDivs = []
   const fakeDivs2 = []
