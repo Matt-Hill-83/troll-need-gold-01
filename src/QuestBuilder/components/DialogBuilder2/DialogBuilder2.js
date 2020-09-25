@@ -108,7 +108,7 @@ export default function DialogBuilder2(props) {
     style,
     rowNum,
   }) => {
-    const dummyRowLabel = `${scene.location.name}  - F${frameIndex}`
+    const dummyRowLabel = `${scene.location.name}  - frame ${frameIndex + 1}`
 
     const { dialog = [] } = frame
 
