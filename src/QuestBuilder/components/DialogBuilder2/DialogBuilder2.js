@@ -343,13 +343,6 @@ export default function DialogBuilder2(props) {
     const dialog = dialogs[dialogIndex]
 
     if (dialog.text.length >= 0) {
-      const frameButtons = renderFrameButtons({
-        dialogIndex,
-        dialogs,
-        frameIndex,
-        frames,
-      })
-
       metaInfoMap[rowNum.value] = { sceneIndex, frameIndex, dialogIndex }
       const text = `${dialog.text}`
 
