@@ -27,6 +27,7 @@ import WorldBuilderScenesGrid from "../WorldBuilderScenesGrid/WorldBuilderScenes
 import worldBuilderStore from "../../Stores/WorldBuilderStore"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 import WorldPicker from "../WorldPicker/WorldPicker"
+import DialogBuilders from "../DialogBuilders/DialogBuilders"
 
 import css from "./WorldBuilder.module.scss"
 
@@ -473,15 +474,13 @@ class WorldBuilder extends Component {
                 {this.renderSubQuestWizard({ questConfig, newGrid5 })}
               </div>
             )}
+            {/* {showDialogBuilder && {this.renderDialogBuilder({ world })} */}
+            {/* {showDialogBuilder && this.renderDialogBuilder({ world })} */}
             {showDialogBuilder && (
-              <div className={css.right}>
-                <div
-                  key={dialogBuilderKey}
-                  className={css.dialogBuildersContainer}
-                >
-                  {this.renderDialogBuilder({ world })}
-                </div>
-              </div>
+              <DialogBuilders
+                saveItemsDialogBuilder={this.saveItemsDialogBuilder}
+                world={world}
+              ></DialogBuilders>
             )}
           </div>
         )}
