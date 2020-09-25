@@ -167,24 +167,7 @@ class WorldBuilder extends Component {
   }
 
   addNewWorld = async () => {
-    let previousMapName = 100
-
-    const newName = previousMapName + 1
-
-    const { grid, gridDimensions } = WorldBuilderUtils.createNewGrid()
-
-    worldBuilderStore.setWorldBuilderScenesGrid(grid)
-    const newWorldProps = {
-      name: newName,
-      title: "-------" + newName,
-      gridDimensions,
-    }
-
-    const newWorld = Constants.getNewWorld({ props: newWorldProps })
-
-    const newMapReturned = await addQuestToFirestore(newWorld)
-    newWorld.id = newMapReturned.id
-    worldBuilderStore.setWorldBuilderWorld(newWorld)
+    WorldBuilderUtils.addNewWorld()
     this.forceUpdate2()
   }
 

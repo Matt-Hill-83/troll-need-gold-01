@@ -1,5 +1,8 @@
 import worldBuilderStore from "../Stores/WorldBuilderStore.js"
-import { updateQuestInFirestore } from "../../app/firestore/firestoreService.js"
+import {
+  updateQuestInFirestore,
+  addQuestToFirestore,
+} from "../../app/firestore/firestoreService.js"
 import Utils from "../../Common/Utils/Utils.js"
 import Constants from "../../Common/Constants/Constants.js"
 
@@ -199,5 +202,25 @@ export default class WorldBuilderUtils {
       grid.push(gridRow)
     })
     return { grid, gridDimensions }
+  }
+
+  static addNewWorld = async () => {
+    const newName = ""
+
+    const { grid, gridDimensions } = WorldBuilderUtils.createNewGrid()
+
+    worldBuilderStore.setWorldBuilderScenesGrid(grid)
+    const newWorldProps = {
+      name: newName,
+      title: "-------" + newName,
+      gridDimensions,
+    }
+
+    const newWorld = Constants.getNewWorld({ props: newWorldProps })
+
+    const newMapReturned = await addQuestToFirestore(newWorld)
+    newWorld.id = newMapReturned.id
+    worldBuilderStore.setWorldBuilderWorld(newWorld)
+    this.forceUpdate2()
   }
 }
