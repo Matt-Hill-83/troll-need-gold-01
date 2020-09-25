@@ -14,7 +14,7 @@ import Constants from "../../../Common/Constants/Constants"
 
 import css from "./DialogBuilder2.module.scss"
 
-export default function DialogBuilder2({ props }) {
+export default function DialogBuilder2(props) {
   const fakeDivs = []
   const metaInfoMap = {}
   let content = ""

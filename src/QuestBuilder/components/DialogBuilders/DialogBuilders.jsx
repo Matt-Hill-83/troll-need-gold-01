@@ -23,28 +23,30 @@ export default function DialogBuilders(props) {
 
   const renderDialogBuilder = ({ world }) => {
     const scenes = world?.newGrid5 || []
-    console.log("scenes", scenes) // zzz
 
     const dialogBuilders = scenes.map((scene, sceneIndex) => {
-      const dialogBuilderProps = {
-        saveItems: saveItemsDialogBuilder,
-        scene,
-        world,
-        sceneIndex,
-      }
-
       const onChange = ({ expanded }) => {
         expandedDialogAccordions[sceneIndex] = expanded
         setExpandedDialogAccordions(expandedDialogAccordions)
       }
 
+      const title = (
+        <div className={css.subQuestHeader}>{scene.location.name}</div>
+      )
+
       const subQuestAccordion = {
-        title: <div className={css.subQuestHeader}>{scene.location.name}</div>,
+        title,
         expanded: expandedDialogAccordions[sceneIndex],
         onChange,
         content: () => (
-          <DialogBuilder2 props={dialogBuilderProps}></DialogBuilder2>
+          <DialogBuilder2
+            saveItems={saveItemsDialogBuilder}
+            scene={scene}
+            world={world}
+            sceneIndex={sceneIndex}
+          />
         ),
+
         className: css.sceneDialogAccordion,
       }
 

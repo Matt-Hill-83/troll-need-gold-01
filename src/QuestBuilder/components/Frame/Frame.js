@@ -9,9 +9,9 @@ import CrudMachine from "../CrudMachine/CrudMachine"
 import Images from "../../../Common/Images/images"
 import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
 import Character from "../../../Common/Components/Character/Character"
+import Head from "../../../Common/Components/Head/Head"
 
 import css from "./Frame.module.scss"
-import Head from "../../../Common/Components/Head/Head"
 class Frame extends Component {
   state = {
     showFacePicker: false,
