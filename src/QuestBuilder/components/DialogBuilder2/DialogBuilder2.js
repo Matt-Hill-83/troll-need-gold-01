@@ -97,9 +97,8 @@ export default function DialogBuilder2(props) {
     }
   }
 
-  const addNewRowToTextArea = ({ fakeDiv2, text, fakeDiv, rowNum }) => {
+  const addNewRowToTextArea = ({ text, fakeDiv, rowNum }) => {
     fakeDivs.push(fakeDiv)
-    fakeDivs2.push(fakeDiv2)
     const newText = `${text}\n`
     content += newText
     rowNum.value++
@@ -107,12 +106,13 @@ export default function DialogBuilder2(props) {
 
   const insertDummyRowBetweenFrames = ({
     frameIndex,
-    frame,
     frames,
     scene,
     style,
     rowNum,
   }) => {
+    const frame = frames[frameIndex]
+
     const dummyRowLabel = `${scene.location.name}  - frame ${frameIndex + 1}`
 
     const { dialog = [] } = frame
@@ -293,6 +293,7 @@ export default function DialogBuilder2(props) {
   const renderFrameButtons = ({ dialogIndex, dialogs, frameIndex, frames }) => {
     const frame = frames[frameIndex]
     const dialog = dialogs[dialogIndex]
+
     const renderSplitFrameButton = () => {
       return (
         <Button
@@ -324,7 +325,7 @@ export default function DialogBuilder2(props) {
           vertical: false,
           noPopover: true,
           className: css.dialogBuilderButtonGroup,
-          moreButtons: moreButtons,
+          moreButtons,
         }}
       />
     )
@@ -340,30 +341,14 @@ export default function DialogBuilder2(props) {
     style,
   }) => {
     const dialog = dialogs[dialogIndex]
-    const frame = frames[frameIndex]
 
     if (dialog.text.length >= 0) {
-      const renderSplitFrameButton = () => {
-        return (
-          <Button
-            onClick={() =>
-              splitFrame({
-                dialogIndex,
-                frameIndex,
-                frames,
-                frame,
-              })
-            }
-          >
-            Split
-          </Button>
-        )
-      }
-
-      const moreButtons = [
-        renderCritterPicker({ dialog, frame }),
-        renderSplitFrameButton(),
-      ]
+      const frameButtons = renderFrameButtons({
+        dialogIndex,
+        dialogs,
+        frameIndex,
+        frames,
+      })
 
       metaInfoMap[rowNum.value] = { sceneIndex, frameIndex, dialogIndex }
       const text = `${dialog.text}`
@@ -378,44 +363,23 @@ export default function DialogBuilder2(props) {
       const fakeDiv = (
         <div className={css.fakeDiv} style={style}>
           {frameButtons}
-
           <div className={css.emptySpace}></div>
         </div>
       )
 
-      const fakeDiv2 = (
-        <div className={css.fakeDiv} style={style}>
-          test2
-          <AddDeleteButtonGroup
-            props={{
-              rowIndex: dialogIndex,
-              onDelete: ({ rowIndex }) =>
-                onDeleteRow({ items: dialogs, rowIndex }),
-              onAdd: ({ rowIndex, before }) =>
-                onAddDialogRow({ items: dialogs, rowIndex, before }),
-              vertical: false,
-              noPopover: true,
-              className: css.dialogBuilderButtonGroup,
-              moreButtons: moreButtons,
-            }}
-          />
-          <div className={css.emptySpace}></div>
-        </div>
-      )
-
-      addNewRowToTextArea({ text, fakeDiv2, fakeDiv, rowNum })
+      addNewRowToTextArea({ text, fakeDiv, rowNum })
     }
   }
 
   const renderDialogRow2 = ({
-    dialog,
     dialogIndex,
     dialogs,
-    frame,
     frameIndex,
     frames,
     style,
   }) => {
+    const dialog = dialogs[dialogIndex]
+
     if (dialog.text.length >= 0) {
       const frameButtons = renderFrameButtons({
         dialogIndex,
@@ -444,7 +408,6 @@ export default function DialogBuilder2(props) {
     frames.forEach((frame, frameIndex) => {
       insertDummyRowBetweenFrames({
         frameIndex,
-        frame,
         frames,
         scene,
         style,
@@ -458,10 +421,8 @@ export default function DialogBuilder2(props) {
       if (simpleView) {
         frame.dialog.forEach((dialog, dialogIndex) => {
           renderDialogRow2({
-            dialog,
             dialogIndex,
             dialogs: frame.dialog,
-            frame,
             frameIndex,
             frames,
             rowNum,
