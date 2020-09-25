@@ -33,7 +33,6 @@ class WorldBuilder extends Component {
     showFrameBuilder: false,
     showSubQuestWizard: false,
     showDialogBuilder: true,
-    expandedDialogAccordions: {},
   }
 
   maps = []
@@ -192,7 +191,6 @@ class WorldBuilder extends Component {
 
   saveItems = async () => {
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
-
     this.updateWorld({ mapToUpdate: world })
   }
 
@@ -251,11 +249,7 @@ class WorldBuilder extends Component {
     )
 
     const subQuestWizardButton = (
-      <Button
-        // icon="document"
-        text="SubQuest Wizard"
-        onClick={this.toggleSubQuestPicker}
-      />
+      <Button text="SubQuest Wizard" onClick={this.toggleSubQuestPicker} />
     )
 
     return (
@@ -335,7 +329,6 @@ class WorldBuilder extends Component {
       showSubQuestWizard,
       showFrameBuilder,
       showDialogBuilder,
-      dialogBuilderKey,
     } = this.state
 
     const world = worldBuilderStore.getWorldBuilderWorld() || {}

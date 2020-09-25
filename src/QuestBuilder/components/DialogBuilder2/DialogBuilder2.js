@@ -46,7 +46,7 @@ export default function DialogBuilder2({ props }) {
 
         const { frameIndex, dialogIndex } = dataStructureIndices
 
-        const frames = _get(scene, "frameSet.frames") || []
+        const frames = scene?.frameSet?.frames || []
         const frame = frames[frameIndex]
         const dialog = frame.dialog[dialogIndex]
 
@@ -122,7 +122,6 @@ export default function DialogBuilder2({ props }) {
               frame,
             })
           }
-          // icon={IconNames.ADD}
         >
           Dup
         </Button>
@@ -325,7 +324,7 @@ export default function DialogBuilder2({ props }) {
     }
   }
 
-  const frames = _get(scene, "frameSet.frames") || []
+  const frames = scene?.frameSet?.frames || []
   const style = getStyles({ sceneIndex })
 
   frames.forEach((frame, frameIndex) => {
