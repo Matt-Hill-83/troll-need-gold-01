@@ -6,6 +6,8 @@ import DialogBuilder2 from "../DialogBuilder2/DialogBuilder2"
 
 import css from "./DialogBuilders.module.scss"
 import MyAccordion from "../MyAccordion/MyAccordion"
+import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
+import { CssBaseline } from "@material-ui/core"
 
 export default function DialogBuilders(props) {
   const { saveItemsDialogBuilder, world } = props
@@ -25,13 +27,20 @@ export default function DialogBuilders(props) {
     const scenes = world?.newGrid5 || []
 
     const dialogBuilders = scenes.map((scene, sceneIndex) => {
+      const { id } = scene
+
       const onChange = ({ expanded }) => {
         expandedDialogAccordions[sceneIndex] = expanded
         setExpandedDialogAccordions(expandedDialogAccordions)
       }
 
+      const sceneProps = { name: scene.location.name, id, index: sceneIndex }
+
       const title = (
-        <div className={css.subQuestHeader}>{scene.location.name}</div>
+        <div className={css.sceneAccordHeader}>
+          <ImageDisplay item={sceneProps} className={css.sceneImage} />
+          <div className={css.sceneName}>{scene.location.name}</div>
+        </div>
       )
 
       const subQuestAccordion = {
