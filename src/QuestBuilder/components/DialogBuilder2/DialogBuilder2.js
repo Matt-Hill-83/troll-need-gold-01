@@ -15,6 +15,8 @@ import Constants from "../../../Common/Constants/Constants"
 import css from "./DialogBuilder2.module.scss"
 
 export default function DialogBuilder2(props) {
+  const simpleView = true || Constants.isProdRelease
+
   const fakeDivs = []
   const fakeDivs2 = []
   const metaInfoMap = {}
@@ -201,7 +203,8 @@ export default function DialogBuilder2(props) {
       </div>
     )
 
-    const fakeDiv2 = (
+    const fakeDiv2 = <div>test</div>
+    const fakeDiv3 = (
       <div
         className={`${css.fakeDiv} ${css.frameSeparatorDiv}
    ${frameIndex === 0 ? css.newSceneRow : ""}
@@ -340,74 +343,164 @@ export default function DialogBuilder2(props) {
           <div className={css.emptySpace}></div>
         </div>
       )
-      addNewRowToTextArea({ text, fakeDiv, rowNum })
-    }
-  }
 
-  const frames = scene?.frameSet?.frames || []
-  const style = getStyles({ sceneIndex })
-
-  frames.forEach((frame, frameIndex) => {
-    insertDummyRowBetweenFrames({
-      frameIndex,
-      frame,
-      frames,
-      scene,
-      style,
-      rowNum,
-    })
-
-    if (!frame.dialog) {
-      frame.dialog = []
-    }
-
-    frame.dialog.forEach((dialog, dialogIndex) => {
-      renderTextAreaRow({
-        dialog,
-        dialogIndex,
-        dialogs: frame.dialog,
-        frame,
-        frameIndex,
-        frames,
-        rowNum,
-        sceneIndex,
-        style,
-      })
-    })
-  })
-
-  const myTextEditorProps = {
-    content: content,
-    className: css.textEditor,
-    onSubmit: ({ content }) => updateTextChanges({ content }),
-  }
-
-  if (false) {
-    // if (true) {
-    // if (Constants.isProdRelease) {
-    return (
-      <div className={css.main}>
-        <div className={css.containerToGetMaxHeight}>
-          <div className={css.controlPanel}>{fakeDivs2}</div>
-          {/* To size the parent container of an absolute div, create a
-         dup of the absolute div that is hidden. */}
-          <div className={cx(css.controlPanel, css.hidden)}>{fakeDivs}</div>
-          <MyTextEditor props={myTextEditorProps}></MyTextEditor>
+      const fakeDiv2 = (
+        <div className={css.fakeDiv} style={style}>
+          test2
+          <AddDeleteButtonGroup
+            props={{
+              rowIndex: dialogIndex,
+              onDelete: ({ rowIndex }) =>
+                onDeleteRow({ items: dialogs, rowIndex }),
+              onAdd: ({ rowIndex, before }) =>
+                onAddDialogRow({ items: dialogs, rowIndex, before }),
+              vertical: false,
+              noPopover: true,
+              className: css.dialogBuilderButtonGroup,
+              moreButtons: moreButtons,
+            }}
+          />
+          <div className={css.emptySpace}></div>
         </div>
-      </div>
-    )
-    // return <div className={css.main}>{fakeDivs2}</div>
+      )
+
+      addNewRowToTextArea({ text, fakeDiv2, fakeDiv, rowNum })
+    }
   }
 
-  return (
-    <div className={css.main}>
-      <div className={css.containerToGetMaxHeight}>
-        <div className={css.controlPanel}>{fakeDivs}</div>
-        {/* To size the parent container of an absolute div, create a
-         dup of the absolute div that is hidden. */}
-        <div className={cx(css.controlPanel, css.hidden)}>{fakeDivs}</div>
-        <MyTextEditor props={myTextEditorProps}></MyTextEditor>
-      </div>
-    </div>
-  )
+  const renderTextAreaRow2 = ({
+    dialog,
+    dialogIndex,
+    dialogs,
+    frame,
+    frameIndex,
+    frames,
+    style,
+  }) => {
+    if (dialog.text.length >= 0) {
+      const renderSplitFrameButton = () => {
+        return (
+          <Button
+            onClick={() =>
+              splitFrame({
+                dialogIndex,
+                frameIndex,
+                frames,
+                frame,
+              })
+            }
+          >
+            Split
+          </Button>
+        )
+      }
+
+      const moreButtons = [
+        renderCritterPicker({ dialog, frame }),
+        renderSplitFrameButton(),
+      ]
+
+      const text = `${dialog.text}`
+
+      const fakeDiv2 = (
+        <div className={css.fakeDiv} style={style}>
+          test2
+          <AddDeleteButtonGroup
+            props={{
+              rowIndex: dialogIndex,
+              onDelete: ({ rowIndex }) =>
+                onDeleteRow({ items: dialogs, rowIndex }),
+              onAdd: ({ rowIndex, before }) =>
+                onAddDialogRow({ items: dialogs, rowIndex, before }),
+              vertical: false,
+              noPopover: true,
+              className: css.dialogBuilderButtonGroup,
+              moreButtons: moreButtons,
+            }}
+          />
+          <div className={css.emptySpace}>{text}</div>
+        </div>
+      )
+      fakeDivs2.push(fakeDiv2)
+    }
+  }
+
+  const renderContent = () => {
+    const frames = scene?.frameSet?.frames || []
+    const style = getStyles({ sceneIndex })
+
+    frames.forEach((frame, frameIndex) => {
+      insertDummyRowBetweenFrames({
+        frameIndex,
+        frame,
+        frames,
+        scene,
+        style,
+        rowNum,
+      })
+
+      if (!frame.dialog) {
+        frame.dialog = []
+      }
+
+      if (simpleView) {
+        frame.dialog.forEach((dialog, dialogIndex) => {
+          renderTextAreaRow2({
+            dialog,
+            dialogIndex,
+            dialogs: frame.dialog,
+            frame,
+            frameIndex,
+            frames,
+            rowNum,
+            sceneIndex,
+            style,
+          })
+        })
+      } else {
+        frame.dialog.forEach((dialog, dialogIndex) => {
+          renderTextAreaRow({
+            dialog,
+            dialogIndex,
+            dialogs: frame.dialog,
+            frame,
+            frameIndex,
+            frames,
+            rowNum,
+            sceneIndex,
+
+            style,
+          })
+        })
+      }
+    })
+
+    const myTextEditorProps = {
+      content: content,
+      className: css.textEditor,
+      onSubmit: ({ content }) => updateTextChanges({ content }),
+    }
+
+    if (simpleView) {
+      return (
+        <div className={css.main}>
+          <div className={css.controlPanel2}>{fakeDivs2}</div>
+        </div>
+      )
+    } else {
+      return (
+        <div className={css.main}>
+          <div className={css.containerToGetMaxHeight}>
+            <div className={css.controlPanel}>{fakeDivs}</div>
+            {/* To size the parent container of an absolute div, create a
+           dup of the absolute div that is hidden. */}
+            <div className={cx(css.controlPanel, css.hidden)}>{fakeDivs}</div>
+            <MyTextEditor props={myTextEditorProps}></MyTextEditor>
+          </div>
+        </div>
+      )
+    }
+  }
+
+  return renderContent()
 }

@@ -45,7 +45,6 @@ export default function TopLevel(props) {
 
     // returned function will be called on component unmount
     return () => {
-      console.log("unmount")
       toaster.clear()
       setGlobalStateProps(Constants.getDefaultGameStatus())
     }

@@ -61,9 +61,7 @@ export default function BookPicker(props) {
     // books = sortBooks({ books: props.books })
 
     // returned function will be called on component unmount
-    return () => {
-      console.log("unmount")
-    }
+    return () => {}
   }, [])
 
   // on change in props

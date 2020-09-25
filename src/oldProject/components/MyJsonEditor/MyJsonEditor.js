@@ -9,9 +9,7 @@ export default function MyJsonEditor(props) {
 
   useEffect(() => {
     // returned function will be called on component unmount
-    return () => {
-      console.log("unmount")
-    }
+    return () => {}
   }, [])
 
   // on change in props
