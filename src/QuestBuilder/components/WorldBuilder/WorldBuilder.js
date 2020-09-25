@@ -18,9 +18,7 @@ import {
 import _get from "lodash.get"
 
 import Constants from "../../../Common/Constants/Constants"
-import DialogBuilder2 from "../DialogBuilder2/DialogBuilder2"
 import FrameBuilder from "../FrameBuilder/FrameBuilder"
-import MyAccordion from "../MyAccordion/MyAccordion"
 import SubQuestWizard from "../SubQuestWizard/SubQuestWizard"
 import Utils from "../../../Common/Utils/Utils"
 import WorldBuilderScenesGrid from "../WorldBuilderScenesGrid/WorldBuilderScenesGrid"
@@ -30,9 +28,6 @@ import WorldPicker from "../WorldPicker/WorldPicker"
 import DialogBuilders from "../DialogBuilders/DialogBuilders"
 
 import css from "./WorldBuilder.module.scss"
-
-const NUM_ROWS_LOCATIONS_GRID = 8
-const NUM_COLS_LOCATIONS_GRID = 20
 
 class WorldBuilder extends Component {
   state = {
@@ -176,7 +171,7 @@ class WorldBuilder extends Component {
 
     const newName = previousMapName + 1
 
-    const { grid, gridDimensions } = this.createNewGrid()
+    const { grid, gridDimensions } = WorldBuilderUtils.createNewGrid()
 
     worldBuilderStore.setWorldBuilderScenesGrid(grid)
     const newWorldProps = {
@@ -203,45 +198,6 @@ class WorldBuilder extends Component {
   saveTitle = async ({ event }) => {
     const title = event.target.value
     await this.updateWorld({ title })
-  }
-
-  createNewGrid = () => {
-    const rows = Array(NUM_ROWS_LOCATIONS_GRID).fill(0)
-    const columns = Array(NUM_COLS_LOCATIONS_GRID).fill(0)
-
-    const gridDimensions = {
-      numRows: NUM_ROWS_LOCATIONS_GRID,
-      numCols: NUM_COLS_LOCATIONS_GRID,
-    }
-
-    const grid = []
-
-    rows.forEach((row, rowIndex) => {
-      const gridRow = []
-      columns.forEach((col, colIndex) => {
-        const id = Utils.generateUuid()
-
-        const coordinates = {
-          col: colIndex,
-          row: rowIndex,
-        }
-        const isLastRow = rowIndex === NUM_ROWS_LOCATIONS_GRID - 1
-        const isLastCol = colIndex === NUM_COLS_LOCATIONS_GRID - 1
-
-        const props = {
-          isLastRow,
-          isLastCol,
-          coordinates,
-          id,
-        }
-
-        const blankScene = Constants.getBlankScene({ props })
-
-        gridRow.push(blankScene)
-      })
-      grid.push(gridRow)
-    })
-    return { grid, gridDimensions }
   }
 
   updateWorld = async (props) => {
@@ -452,7 +408,6 @@ class WorldBuilder extends Component {
               scene={sceneToEdit}
               onExitFrameBuilder={this.onExitFrameBuilder}
               updateMap={() => this.updateWorld({})}
-              // updateMap={WorldBuilderUtils.updateMap}
             />
           </div>
         )}

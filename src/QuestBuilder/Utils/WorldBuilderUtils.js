@@ -1,6 +1,10 @@
 import worldBuilderStore from "../Stores/WorldBuilderStore.js"
 import { updateQuestInFirestore } from "../../app/firestore/firestoreService.js"
 import Utils from "../../Common/Utils/Utils.js"
+import Constants from "../../Common/Constants/Constants.js"
+
+const NUM_ROWS_LOCATIONS_GRID = 8
+const NUM_COLS_LOCATIONS_GRID = 20
 
 export default class WorldBuilderUtils {
   static getNewFrame = ({ characters, props = {} }) => {
@@ -156,5 +160,44 @@ export default class WorldBuilderUtils {
     })
 
     return filteredCharacters
+  }
+
+  static createNewGrid = () => {
+    const rows = Array(NUM_ROWS_LOCATIONS_GRID).fill(0)
+    const columns = Array(NUM_COLS_LOCATIONS_GRID).fill(0)
+
+    const gridDimensions = {
+      numRows: NUM_ROWS_LOCATIONS_GRID,
+      numCols: NUM_COLS_LOCATIONS_GRID,
+    }
+
+    const grid = []
+
+    rows.forEach((row, rowIndex) => {
+      const gridRow = []
+      columns.forEach((col, colIndex) => {
+        const id = Utils.generateUuid()
+
+        const coordinates = {
+          col: colIndex,
+          row: rowIndex,
+        }
+        const isLastRow = rowIndex === NUM_ROWS_LOCATIONS_GRID - 1
+        const isLastCol = colIndex === NUM_COLS_LOCATIONS_GRID - 1
+
+        const props = {
+          isLastRow,
+          isLastCol,
+          coordinates,
+          id,
+        }
+
+        const blankScene = Constants.getBlankScene({ props })
+
+        gridRow.push(blankScene)
+      })
+      grid.push(gridRow)
+    })
+    return { grid, gridDimensions }
   }
 }
