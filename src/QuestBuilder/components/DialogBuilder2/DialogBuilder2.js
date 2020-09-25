@@ -392,9 +392,9 @@ export default function DialogBuilder2(props) {
 
       const fakeDiv2 = (
         <div className={css.fakeDiv} style={style}>
-          test2
           {frameButtons}
           <TextareaAutosize
+            className={css.dialogText}
             rowsMax={4}
             aria-label="maximum height"
             placeholder="Maximum 4 rows"
@@ -403,7 +403,6 @@ export default function DialogBuilder2(props) {
               updateText({ event, dialog })
             }}
           />
-          <div className={css.emptySpace}>{text}</div>
         </div>
       )
       fakeDivs2.push(fakeDiv2)
