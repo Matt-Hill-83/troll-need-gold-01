@@ -2,6 +2,7 @@ import { Button, Popover, PopoverInteractionKind } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
 
 import React, { Component } from "react"
+import cx from "classnames"
 
 import images from "../../../Common/Images/images"
 import CharacterPicker from "../CharacterPicker/CharacterPicker"
@@ -204,7 +205,8 @@ class CrudMachine extends Component {
     const imageSets = this.props.imageSets || defaultImageSets
 
     return (
-      <div className={`${css.main} ${className ? className : ""}`}>
+      // <div className={`${css.main} ${className ? className : ""}`}>
+      <div className={cx(css.main, { [className]: !!className })}>
         {title}
 
         {/* TODO - pass in itemsContainer class, that can be used elsewhere without all the buttons? */}
@@ -214,7 +216,6 @@ class CrudMachine extends Component {
           <CharacterPicker
             isOpen={showItemPicker}
             imageSets={imageSets}
-            // className={css.test}
             onClose={this.toggleItemPicker}
             onSelectItem={this.onSelectItem}
           />

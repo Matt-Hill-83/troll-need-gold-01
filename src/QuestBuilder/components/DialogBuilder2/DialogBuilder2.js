@@ -106,17 +106,10 @@ export default function DialogBuilder2(props) {
     rowNum.value++
   }
 
-  const renderDummyRowButtons = ({}) => {}
-  const insertDummyRowBetweenFrames = ({
-    frameIndex,
-    frames,
-    scene,
-    style,
-    rowNum,
-  }) => {
+  const renderFrameHeaderButtons = ({ frameIndex, frames }) => {
     const frame = frames[frameIndex]
-    const dummyRowLabel = `${scene.location.name}  - frame ${frameIndex + 1}`
     const { dialog = [] } = frame
+    const showAddDialogButton = !dialog || dialog.length === 0
 
     const renderDuplicateFrameButton = () => {
       return (
@@ -185,13 +178,38 @@ export default function DialogBuilder2(props) {
       )
     }
 
-    const showAddDialogButton = !dialog || dialog.length === 0
+    return (
+      <ButtonGroup className={css.frameButtons}>
+        {renderJoinFramesButton({})}
+        {renderDuplicateFrameButton({})}
+        {renderDeleteFrameButton({})}
+        {showAddDialogButton && renderAddDialogRowButton({})}
+      </ButtonGroup>
+    )
+  }
+
+  const insertDummyRowBetweenFrames = ({
+    frameIndex,
+    frames,
+    scene,
+    style,
+    rowNum,
+  }) => {
+    const frame = frames[frameIndex]
+    const dummyRowLabel = `${scene.location.name}  - frame ${frameIndex + 1}`
+
+    const frameHeaderButtons = renderFrameHeaderButtons({
+      frameIndex,
+      frames,
+      scene,
+      style,
+      rowNum,
+    })
 
     const itemRenderer = ({ item }) => {
       return <ImageDisplay item={item} />
     }
     const { critters1 = [], critters2 = [] } = frame
-    console.log("critters1", critters1) // zzz
 
     const fakeDiv = (
       <div
@@ -200,32 +218,23 @@ export default function DialogBuilder2(props) {
         })}
         style={style}
       >
-        {/* <div
-        className={`${css.fakeDiv} ${css.frameSeparatorDiv} ${
-          frameIndex === 0 ? css.newSceneRow : ""
-        } `}
-        style={style}
-      > */}
         {dummyRowLabel}
-        <ButtonGroup className={css.frameButtons}>
-          {renderJoinFramesButton({})}
-          {renderDuplicateFrameButton({})}
-          {renderDeleteFrameButton({})}
-          {showAddDialogButton && renderAddDialogRowButton({})}
-        </ButtonGroup>
+        {frameHeaderButtons}
+
         <CrudMachine
           className={css.crudMachine}
           items={critters1}
           itemRenderer={itemRenderer}
           // saveItems={this.saveItems}
-          title={"critters1"}
+          // title={"critters1"}
         />
       </div>
     )
 
-    const text = dummyRowLabel
+    // const text = dummyRowLabel
+    // const text = dummyRowLabel + "\n"
 
-    addNewRowToTextArea({ text, fakeDiv, rowNum })
+    addNewRowToTextArea({ text: dummyRowLabel, fakeDiv, rowNum })
   }
 
   const onDuplicateFrame = ({ rowIndex, frames, frame }) => {

@@ -9,7 +9,8 @@ export default class Constants {
   // static defaultWorldIdNonProdWB = "qxp5Dm2I3w3F7daVTDbh"
   // static defaultWorldIdNonProdWB = "R0viLtNU0LNDuB1a5hDF"
   // static defaultWorldIdNonProdWB = "2rtgfhGUG7W1mC4Bvrph"
-  static defaultWorldIdNonProdWB = "7aAH3bf667hWs4LYXxlG"
+  // static defaultWorldIdNonProdWB = "7aAH3bf667hWs4LYXxlG"
+  static defaultWorldIdNonProdWB = "fjziRuznRvTuG31US9yH"
   static allowRecordAudioInProd = true
   // static allowRecordAudioInProd = false
 
