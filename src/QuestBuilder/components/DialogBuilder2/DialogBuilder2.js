@@ -222,7 +222,7 @@ export default function DialogBuilder2(props) {
         {frameHeaderButtons}
 
         <CrudMachine
-          className={css.crudMachine}
+          className={css.crudMachineCritters1}
           items={critters1}
           itemRenderer={itemRenderer}
           // saveItems={this.saveItems}

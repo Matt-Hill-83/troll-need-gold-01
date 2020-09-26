@@ -27,6 +27,22 @@
     }
   }
 
+  .crudMachineCritters1 {
+    border: 2px solid red !important;
+    display: flex;
+    width: min-content;
+    background: white;
+
+    :global {
+      [class*="CrudMachine_itemsContainer__"] {
+        border: 1px solid blue !important;
+      }
+      [class*="CrudMachine_itemContainer__"] {
+        border: 1px solid red !important;
+      }
+    }
+  }
+
   .dialogText {
     // border: 4px solid blue !important;
     display: flex;
