@@ -44,6 +44,7 @@ export default function DialogBuilder2(props) {
   }
 
   const updateTextChanges = ({ content }) => {
+    console.log("updateTextChanges") // zzz
     const linesArray = content.split("\n")
     linesArray.forEach((line, lineIndex) => {
       const dataStructureIndices = metaInfoMap[lineIndex]
@@ -99,11 +100,10 @@ export default function DialogBuilder2(props) {
     }
   }
 
-  const addNewRowToTextArea = ({ text, rowNum }) => {
-    // fakeDivs.push(fakeDiv)
+  const addNewRowToTextArea = ({ text, rowNum, rowNumAdder = 0 }) => {
     const newText = `${text}\n`
     content += newText
-    rowNum.value++
+    rowNum.value = rowNum.value + 1 + rowNumAdder
   }
 
   const renderFrameHeaderButtons = ({ frameIndex, frames }) => {
@@ -196,7 +196,9 @@ export default function DialogBuilder2(props) {
     rowNum,
   }) => {
     const frame = frames[frameIndex]
-    const dummyRowLabel = `frame ${frameIndex + 1}\n\n`
+    const dummyRowLabel = `Scene: ${scene?.location?.name}\nFrame: ${
+      frameIndex + 1
+    }`
 
     const frameHeaderButtons = renderFrameHeaderButtons({
       frameIndex,
@@ -238,7 +240,7 @@ export default function DialogBuilder2(props) {
       </div>
     )
 
-    addNewRowToTextArea({ text: dummyRowLabel, rowNum })
+    addNewRowToTextArea({ text: dummyRowLabel, rowNum, rowNumAdder: 1 })
     fakeDivs.push(fakeDiv)
   }
 
