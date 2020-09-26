@@ -188,7 +188,7 @@ export default function DialogBuilder2(props) {
     )
   }
 
-  const insertDummyRowBetweenFrames = ({
+  const insertDummyRowForFrameHeader = ({
     frameIndex,
     frames,
     scene,
@@ -196,7 +196,8 @@ export default function DialogBuilder2(props) {
     rowNum,
   }) => {
     const frame = frames[frameIndex]
-    const dummyRowLabel = `${scene.location.name}  - frame ${frameIndex + 1}`
+    const dummyRowLabel = `frame ${frameIndex + 1}`
+    // const dummyRowLabel = `${scene.location.name}  - frame ${frameIndex + 1}`
 
     const frameHeaderButtons = renderFrameHeaderButtons({
       frameIndex,
@@ -209,6 +210,7 @@ export default function DialogBuilder2(props) {
     const itemRenderer = ({ item }) => {
       return <ImageDisplay item={item} />
     }
+
     const { critters1 = [], critters2 = [] } = frame
 
     const fakeDiv = (
@@ -218,16 +220,22 @@ export default function DialogBuilder2(props) {
         })}
         style={style}
       >
-        {dummyRowLabel}
-        {frameHeaderButtons}
-
         <CrudMachine
           className={css.crudMachineCritters1}
           items={critters1}
           itemRenderer={itemRenderer}
-          // saveItems={this.saveItems}
-          // title={"critters1"}
+          saveItems={localSave}
         />
+        <CrudMachine
+          className={css.crudMachineCritters1}
+          items={critters2}
+          itemRenderer={itemRenderer}
+          saveItems={localSave}
+        />
+        <div className={css.headerBox}>
+          {dummyRowLabel}
+          {frameHeaderButtons}
+        </div>
       </div>
     )
 
@@ -426,7 +434,7 @@ export default function DialogBuilder2(props) {
     const style = getStyles({ sceneIndex })
 
     frames.forEach((frame, frameIndex) => {
-      insertDummyRowBetweenFrames({
+      insertDummyRowForFrameHeader({
         frameIndex,
         frames,
         scene,

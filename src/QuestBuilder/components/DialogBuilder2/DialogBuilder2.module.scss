@@ -39,6 +39,10 @@
       }
       [class*="CrudMachine_itemContainer__"] {
         border: 1px solid red !important;
+        [class*="ImageDisplay_imageContainer__"] {
+          border: 1px solid orange !important;
+          width: 5vh;
+        }
       }
     }
   }
@@ -160,8 +164,9 @@
   .frameSeparatorDiv {
     border: 1px solid red !important;
     background: rgb(216, 216, 216) !important;
-    // height: 4vh !important;
     min-height: 3.5vh !important;
+    opacity: 1 !important;
+    padding-left: 0px;
   }
 
   .newSceneRow {
