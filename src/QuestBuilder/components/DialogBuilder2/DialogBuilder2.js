@@ -99,8 +99,8 @@ export default function DialogBuilder2(props) {
     }
   }
 
-  const addNewRowToTextArea = ({ text, fakeDiv, rowNum }) => {
-    fakeDivs.push(fakeDiv)
+  const addNewRowToTextArea = ({ text, rowNum }) => {
+    // fakeDivs.push(fakeDiv)
     const newText = `${text}\n`
     content += newText
     rowNum.value++
@@ -196,8 +196,7 @@ export default function DialogBuilder2(props) {
     rowNum,
   }) => {
     const frame = frames[frameIndex]
-    const dummyRowLabel = `frame ${frameIndex + 1}`
-    // const dummyRowLabel = `${scene.location.name}  - frame ${frameIndex + 1}`
+    const dummyRowLabel = `frame ${frameIndex + 1}\n\n`
 
     const frameHeaderButtons = renderFrameHeaderButtons({
       frameIndex,
@@ -227,7 +226,7 @@ export default function DialogBuilder2(props) {
           saveItems={localSave}
         />
         <CrudMachine
-          className={css.crudMachineCritters1}
+          className={css.crudMachineCritters2}
           items={critters2}
           itemRenderer={itemRenderer}
           saveItems={localSave}
@@ -239,10 +238,8 @@ export default function DialogBuilder2(props) {
       </div>
     )
 
-    // const text = dummyRowLabel
-    // const text = dummyRowLabel + "\n"
-
-    addNewRowToTextArea({ text: dummyRowLabel, fakeDiv, rowNum })
+    addNewRowToTextArea({ text: dummyRowLabel, rowNum })
+    fakeDivs.push(fakeDiv)
   }
 
   const onDuplicateFrame = ({ rowIndex, frames, frame }) => {
@@ -379,7 +376,8 @@ export default function DialogBuilder2(props) {
         </div>
       )
 
-      addNewRowToTextArea({ text, fakeDiv, rowNum })
+      addNewRowToTextArea({ text, rowNum })
+      fakeDivs.push(fakeDiv)
     }
   }
 

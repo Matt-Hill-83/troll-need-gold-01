@@ -27,24 +27,36 @@
     }
   }
 
+  .crudMachineCritters2,
   .crudMachineCritters1 {
-    border: 2px solid red !important;
+    // border: 1px solid red !important;
     display: flex;
     width: min-content;
     background: white;
+    margin-right: 1vh;
+    // min-width: 3vh !important;
 
     :global {
       [class*="CrudMachine_itemsContainer__"] {
-        border: 1px solid blue !important;
+        // border: 1px solid blue !important;
       }
       [class*="CrudMachine_itemContainer__"] {
-        border: 1px solid red !important;
+        border-right: 1px solid blue !important;
+
+        max-width: 3vh;
+        min-width: 3vh;
+        width: 3vh;
+
         [class*="ImageDisplay_imageContainer__"] {
-          border: 1px solid orange !important;
+          // border-right: 1px solid black !important;
           width: 5vh;
         }
       }
     }
+  }
+
+  .crudMachineCritters2 {
+    margin-left: 1vh;
   }
 
   .dialogText {
