@@ -196,9 +196,8 @@ export default function DialogBuilder2(props) {
     rowNum,
   }) => {
     const frame = frames[frameIndex]
-    const dummyRowLabel = `Scene: ${scene?.location?.name}\nFrame: ${
-      frameIndex + 1
-    }`
+    const frameLabel = `Frame: ${frameIndex + 1}`
+    const dummyRowLabel = `Scene: ${scene?.location?.name}\n${frameLabel}`
 
     const frameHeaderButtons = renderFrameHeaderButtons({
       frameIndex,
@@ -234,7 +233,7 @@ export default function DialogBuilder2(props) {
           saveItems={localSave}
         />
         <div className={css.headerBox}>
-          {dummyRowLabel}
+          {frameLabel}
           {frameHeaderButtons}
         </div>
       </div>
