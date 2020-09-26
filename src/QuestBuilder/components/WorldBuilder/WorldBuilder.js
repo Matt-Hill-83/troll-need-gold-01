@@ -368,10 +368,12 @@ class WorldBuilder extends Component {
               </div>
             )}
             {showDialogBuilder && (
-              <DialogBuilders
-                saveItemsDialogBuilder={this.saveItemsDialogBuilder}
-                world={world}
-              />
+              <div className={css.right}>
+                <DialogBuilders
+                  saveItemsDialogBuilder={this.saveItemsDialogBuilder}
+                  world={world}
+                />
+              </div>
             )}
           </div>
         )}
