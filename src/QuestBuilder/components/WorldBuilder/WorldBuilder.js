@@ -38,14 +38,10 @@ class WorldBuilder extends Component {
   maps = []
   // Changing this to DidMount breaks things
   async componentWillMount() {
-    // const { maps = [] } = this.props
     const { maps, defaultWorldId } = this.props
 
     this.maps = maps
-    // const defaultWorldId = Constants.defaultWorldIdNonProdWB
     const defaultWorld = this.maps.find((item) => item.id === defaultWorldId)
-
-    console.log("defaultWorldId", defaultWorldId) // zzz
 
     const id = defaultWorld ? defaultWorldId : this.maps[0]?.id || ""
     this.onChangeWorld({ mapId: id })
@@ -80,6 +76,8 @@ class WorldBuilder extends Component {
       worldBuilderStore.setWorldBuilderWorld(world)
       worldBuilderStore.setWorldBuilderScenesGrid(reCreatedScenesGrid)
     }
+    const world = worldBuilderStore.getWorldBuilderWorld()
+    this.setDefaultWorldId({ worldId: world.id })
     this.setState({ update: new Date() })
   }
 
@@ -245,6 +243,10 @@ class WorldBuilder extends Component {
     })
   }
 
+  setDefaultWorldId = ({ worldId }) => {
+    this.props.updateDefaultWorldId({ worldId })
+  }
+
   renderMainButtonGroup = () => {
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
     const dialogBuilderButton = (
@@ -252,10 +254,6 @@ class WorldBuilder extends Component {
         Dialog Wizard
       </Button>
     )
-
-    const setDefaultWorldId = ({ worldId }) => {
-      this.props.updateDefaultWorldId({ worldId })
-    }
 
     const subQuestWizardButton = (
       <Button text="SubQuest Wizard" onClick={this.toggleSubQuestPicker} />
@@ -266,7 +264,7 @@ class WorldBuilder extends Component {
         <Button
           icon={IconNames.SETTINGS}
           text={"set world as default"}
-          onClick={() => setDefaultWorldId({ worldId: world.id })}
+          onClick={() => this.setDefaultWorldId({ worldId: world.id })}
         />
         {dialogBuilderButton}
         {subQuestWizardButton}
