@@ -33,13 +33,13 @@ export default function MyTextEditor({ props }) {
 
   return (
     <>
-      <Button
+      {/* <Button
         className={css.submitButton}
         onClick={onSubmit}
         icon={IconNames.SAVED}
       >
         Save Text
-      </Button>
+      </Button> */}
       <TextareaAutosize
         className={cx(css.main, className)}
         onChange={onTextAreaChange}

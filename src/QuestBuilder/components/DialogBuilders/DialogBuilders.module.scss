@@ -5,6 +5,9 @@
   border: 2px solid orange !important;
   position: relative;
 
+  overflow-y: auto;
+  overflow-x: hidden;
+
   .dialogBuildersContainer {
     display: flex;
     flex-direction: column;
