@@ -100,5 +100,6 @@ export default function useUpdateProfileWidget() {
     getProfile,
     updateUserStatusPocketsIfChanged,
     getCompletedQuests,
+    updateProfilePropsIfChanged,
   }
 }

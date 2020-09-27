@@ -38,9 +38,14 @@ class WorldBuilder extends Component {
   maps = []
   // Changing this to DidMount breaks things
   async componentWillMount() {
-    this.maps = this.props.maps || []
-    const defaultWorldId = Constants.defaultWorldIdNonProdWB
+    // const { maps = [] } = this.props
+    const { maps, defaultWorldId } = this.props
+
+    this.maps = maps
+    // const defaultWorldId = Constants.defaultWorldIdNonProdWB
     const defaultWorld = this.maps.find((item) => item.id === defaultWorldId)
+
+    console.log("defaultWorldId", defaultWorldId) // zzz
 
     const id = defaultWorld ? defaultWorldId : this.maps[0]?.id || ""
     this.onChangeWorld({ mapId: id })
@@ -248,12 +253,21 @@ class WorldBuilder extends Component {
       </Button>
     )
 
+    const setDefaultWorldId = ({ worldId }) => {
+      this.props.updateDefaultWorldId({ worldId })
+    }
+
     const subQuestWizardButton = (
       <Button text="SubQuest Wizard" onClick={this.toggleSubQuestPicker} />
     )
 
     return (
       <>
+        <Button
+          icon={IconNames.SETTINGS}
+          text={"set world as default"}
+          onClick={() => setDefaultWorldId({ worldId: world.id })}
+        />
         {dialogBuilderButton}
         {subQuestWizardButton}
       </>
@@ -316,9 +330,7 @@ class WorldBuilder extends Component {
 
     return (
       <div className={css.left}>
-        <WorldBuilderScenesGrid
-          {...worldBuilderScenesGridProps}
-        ></WorldBuilderScenesGrid>
+        <WorldBuilderScenesGrid {...worldBuilderScenesGridProps} />
       </div>
     )
   }

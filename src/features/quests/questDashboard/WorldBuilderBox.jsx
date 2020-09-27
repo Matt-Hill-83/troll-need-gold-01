@@ -5,6 +5,8 @@ import _uniqBy from "lodash.uniqby"
 import { fetchQuests } from "../questActions"
 import { RETAIN_STATE } from "../questConstants"
 import WorldBuilder from "../../../QuestBuilder/components/WorldBuilder/WorldBuilder.js"
+import useUpdateProfileWidget from "../../../oldProject/components/TopLevel/useUpdateProfileWidget"
+import Constants from "../../../Common/Constants/Constants"
 
 export default function WorldBuilderBox() {
   const limit = 1000
@@ -14,6 +16,17 @@ export default function WorldBuilderBox() {
   )
   const { loading } = useSelector((state) => state.async)
   const [loadingInitial, setLoadingInitial] = useState(false)
+
+  const { getProfile, updateProfilePropsIfChanged } = useUpdateProfileWidget()
+
+  const updateDefaultWorldId = ({ worldId }) => {
+    const newProfile = { ...profile }
+    newProfile.defaultWorldId = worldId
+    updateProfilePropsIfChanged({ newProfileProps: newProfile })
+  }
+
+  const profile = getProfile()
+  console.log("profile", profile) // zzz
 
   useEffect(() => {
     if (retainState) return
@@ -30,5 +43,15 @@ export default function WorldBuilderBox() {
 
   const uniqueWorlds = _uniqBy(quests, "id")
 
-  return <WorldBuilder maps={uniqueWorlds}></WorldBuilder>
+  console.log("profile.defaultWorldId", profile.defaultWorldId) // zzz
+  const defaultWorldId =
+    profile.defaultWorldId || Constants.defaultWorldIdNonProdWB
+
+  return (
+    <WorldBuilder
+      maps={uniqueWorlds}
+      defaultWorldId={defaultWorldId}
+      updateDefaultWorldId={updateDefaultWorldId}
+    />
+  )
 }
