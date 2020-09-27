@@ -97,9 +97,13 @@ export const getTableConfig = ({
         item.id = Utils.generateUuid()
       }
     })
+    console.log("combinedItems", combinedItems) // zzz
 
     const scene = combinedItems.find((item) => {
-      const match = item.id === value.id
+      console.log("value", value) // zzz
+
+      console.log("item", item) // zzz
+      const match = item.id === value?.id
 
       return match
     })

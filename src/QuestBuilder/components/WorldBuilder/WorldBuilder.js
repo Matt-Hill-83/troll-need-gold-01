@@ -15,7 +15,6 @@ import {
 
 import _get from "lodash.get"
 
-import Constants from "../../../Common/Constants/Constants"
 import FrameBuilder from "../FrameBuilder/FrameBuilder"
 import SubQuestWizard from "../SubQuestWizard/SubQuestWizard"
 import Utils from "../../../Common/Utils/Utils"
@@ -31,8 +30,8 @@ class WorldBuilder extends Component {
   state = {
     sceneToEdit: null,
     showFrameBuilder: false,
-    showSubQuestWizard: false,
-    showDialogBuilder: true,
+    showSubQuestWizard: true,
+    showDialogBuilder: false,
   }
 
   maps = []

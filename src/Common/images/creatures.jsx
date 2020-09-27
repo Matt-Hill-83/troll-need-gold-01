@@ -1,4 +1,5 @@
 import will01 from "./creatures/will01.png"
+import jam01 from "./creatures/jam01.png"
 import tree01 from "./creatures/tree01.png"
 import goblinKing01 from "./creatures/goblinKing01.png"
 import goblinKing02 from "./creatures/goblinKing02.png"
@@ -305,6 +306,7 @@ const creatures = {
   misterWilson01,
   tree01,
   solarSystem01,
+  jam01,
 }
 
 export default creatures
