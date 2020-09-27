@@ -221,6 +221,5 @@ export default class WorldBuilderUtils {
     const newMapReturned = await addQuestToFirestore(newWorld)
     newWorld.id = newMapReturned.id
     worldBuilderStore.setWorldBuilderWorld(newWorld)
-    this.forceUpdate2()
   }
 }

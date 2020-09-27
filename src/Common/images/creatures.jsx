@@ -1,4 +1,10 @@
+import mitzyMeow01 from "./creatures/mitzyMeow01.png"
+import missyMeow01 from "./creatures/missyMeow01.png"
+import simon01 from "./creatures/simon01.png"
+import meAyNa01 from "./creatures/meAyNa01.png"
+
 import will01 from "./creatures/will01.png"
+import cricket01 from "./creatures/cricket01.png"
 import jam01 from "./creatures/jam01.png"
 import tree01 from "./creatures/tree01.png"
 import goblinKing01 from "./creatures/goblinKing01.png"
@@ -307,6 +313,12 @@ const creatures = {
   tree01,
   solarSystem01,
   jam01,
+  cricket01,
+
+  mitzyMeow01,
+  missyMeow01,
+  simon01,
+  meAyNa01,
 }
 
 export default creatures
