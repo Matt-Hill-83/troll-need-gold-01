@@ -195,31 +195,43 @@ class CrudMachine extends Component {
     const { showItemPicker } = this.state
     const { className, title = "" } = this.props
 
+    // const defaultImageSets = [
+    //   images.locations,
+    //   images.creatures2animals,
+    //   images.vehicles,
+    //   images.items,
+    // ]
     const defaultImageSets = [
-      images.creatures,
       images.locations,
+      images.creatures,
+      images.creatures2animals,
       images.vehicles,
       images.items,
     ]
 
-    const imageSets = this.props.imageSets || defaultImageSets
+    let imageSets = []
+    let characterPicker = null
+    console.log("showItemPicker", showItemPicker) // zzz
+    if (showItemPicker) {
+      imageSets = this.props.imageSets || defaultImageSets
+      console.log("this.props.imageSets", this.props.imageSets) // zzz
+      characterPicker = (
+        <CharacterPicker
+          isOpen={showItemPicker}
+          imageSets={imageSets}
+          onClose={this.toggleItemPicker}
+          onSelectItem={this.onSelectItem}
+        />
+      )
+    }
 
     return (
-      // <div className={`${css.main} ${className ? className : ""}`}>
       <div className={cx(css.main, { [className]: !!className })}>
         {title}
 
         {/* TODO - pass in itemsContainer class, that can be used elsewhere without all the buttons? */}
         <div className={css.itemsContainer}>{this.renderItems()}</div>
-
-        {showItemPicker && (
-          <CharacterPicker
-            isOpen={showItemPicker}
-            imageSets={imageSets}
-            onClose={this.toggleItemPicker}
-            onSelectItem={this.onSelectItem}
-          />
-        )}
+        {characterPicker}
       </div>
     )
   }

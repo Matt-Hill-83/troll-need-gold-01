@@ -151,7 +151,7 @@ export default function SceneBuilder(props) {
         buttons={buttons}
         itemRenderer={itemRenderer}
         saveItems={saveItems}
-        imageSets={locationImageSets}
+        // imageSets={locationImageSets}
       />
     )
 
