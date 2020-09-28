@@ -380,6 +380,8 @@ const creatures = {
 }
 
 const creatures2animals = {
+  parta01,
+  parta02,
   robby01,
   silica01,
   will01,
@@ -426,8 +428,7 @@ const creatures2animals = {
   asha01,
   harpoon01,
   opera01,
-  parta01,
-  parta02,
+
   omni01,
   catana01,
   maldara01,
