@@ -202,9 +202,9 @@ class CrudMachine extends Component {
     //   images.items,
     // ]
     const defaultImageSets = [
+      images.creatures2animals,
       images.locations,
       images.creatures,
-      images.creatures2animals,
       images.vehicles,
       images.items,
     ]

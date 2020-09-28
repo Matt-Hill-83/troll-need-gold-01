@@ -1,5 +1,11 @@
 // kitty claw paw
 
+// lucy01
+// lucy03
+// lucy04
+// lucy05
+// lucy06
+
 import artemis01 from "./creatures/artemis01.png"
 import asha01 from "./creatures/asha01.png"
 import atari01 from "./creatures/atari01.png"
@@ -26,6 +32,7 @@ import nagasaki01 from "./creatures/nagasaki01.png"
 import omni01 from "./creatures/omni01.png"
 import opera01 from "./creatures/opera01.png"
 import parta01 from "./creatures/parta01.png"
+import parta02 from "./creatures/parta02.png"
 import penny01 from "./creatures/penny01.png"
 import penta01 from "./creatures/penta01.png"
 import perpetua01 from "./creatures/perpetua01.png"
@@ -373,6 +380,8 @@ const creatures = {
 }
 
 const creatures2animals = {
+  robby01,
+  silica01,
   will01,
   mongo01,
   shuri: pantherGirl01,
@@ -418,6 +427,7 @@ const creatures2animals = {
   harpoon01,
   opera01,
   parta01,
+  parta02,
   omni01,
   catana01,
   maldara01,
@@ -427,7 +437,6 @@ const creatures2animals = {
   wind01,
   turk01,
   zap01,
-  silica01,
   tara01,
   lara01,
   minerva01,
@@ -446,7 +455,7 @@ const creatures2animals = {
   spacey01,
   scamper01,
   slipper01,
-  robby01,
+
   badBunny01,
   perpetua01,
   hoot01,
