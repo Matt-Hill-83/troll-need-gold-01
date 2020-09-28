@@ -252,7 +252,7 @@ export default function TopLevel(props) {
       const { rewards, item, recipient, name } = completedMission
 
       const reward = rewards[0]
-      const message = `You give the  ${item.name} to the ${recipient.name}.`
+      const message = `You bring the  ${item.name} to the ${recipient.name}.`
 
       const message2 = (
         <div>

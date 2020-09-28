@@ -30,8 +30,8 @@ class WorldBuilder extends Component {
   state = {
     sceneToEdit: null,
     showFrameBuilder: false,
-    showSubQuestWizard: true,
-    showDialogBuilder: false,
+    showSubQuestWizard: false,
+    showDialogBuilder: true,
   }
 
   maps = []
