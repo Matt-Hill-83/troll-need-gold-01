@@ -1,4 +1,5 @@
 import React from "react"
+import cx from "classnames"
 
 import Images from "../../../Common/Images/images"
 
@@ -6,6 +7,7 @@ import css from "./ImageDisplay.module.scss"
 
 export default function ImageDisplay(props) {
   const {
+    item,
     item: { name, id, index },
     showLabel,
     amount = 0,
@@ -13,11 +15,17 @@ export default function ImageDisplay(props) {
     showAmount = false,
   } = props
 
-  const image = props.images || Images.all[name]
+  const flipImage = item && item.flipImage
 
+  const image = props.images || Images.all[name]
+  console.log("flipImage", flipImage) // zzz
   return (
     <div
-      className={`${css.main} ${className ? className : ""}`}
+      className={cx(css.main, {
+        [className]: !!className,
+        [css.flipImage]: flipImage,
+      })}
+      // className={`${css.main} ${className ? className : ""}`}
       key={id || index}
     >
       {showAmount && <div className={css.amount}>{amount}</div>}

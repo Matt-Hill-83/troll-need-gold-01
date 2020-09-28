@@ -26,7 +26,6 @@ export default function WorldBuilderBox() {
   }
 
   const profile = getProfile()
-  console.log("profile", profile) // zzz
 
   useEffect(() => {
     if (retainState) return
@@ -43,7 +42,6 @@ export default function WorldBuilderBox() {
 
   const uniqueWorlds = _uniqBy(quests, "id")
 
-  console.log("profile.defaultWorldId", profile.defaultWorldId) // zzz
   const defaultWorldId =
     profile.defaultWorldId || Constants.defaultWorldIdNonProdWB
 

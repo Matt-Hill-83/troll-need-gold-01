@@ -161,10 +161,16 @@ export default function FrameViewer() {
 
     const critterNames = filteredCritters.map((item) => item.name)
 
-    return critterNames.map((character, index) => {
+    return filteredCritters.map((character, index) => {
+      // return critterNames.map((character, index) => {
       return (
         <div className={cx(css.characterContainer, className)} key={index}>
-          <Character name={character} isEditMode={false} showHeadOnly={false} />
+          <Character
+            name={character.name}
+            flipImage={character.flipImage}
+            isEditMode={false}
+            showHeadOnly={false}
+          />
         </div>
       )
     })

@@ -1,9 +1,10 @@
 import React, { Component } from "react"
 
 import Images from "../../../Common/Images/images"
+import Head from "../Head/Head"
+import ImageDisplay from "../ImageDisplay/ImageDisplay"
 
 import css from "./Character.module.scss"
-import Head from "../Head/Head"
 
 const girlImages = Images.posableCharacters
 
@@ -11,7 +12,14 @@ const girlImages = Images.posableCharacters
 
 class Character extends Component {
   render() {
-    const { headClassName, showHeadOnly, name, mood, isEditMode } = this.props
+    const {
+      headClassName,
+      showHeadOnly,
+      name,
+      mood,
+      isEditMode,
+      flipImage = false,
+    } = this.props
 
     const images = girlImages.find((girl) => girl.name === name)
 
@@ -19,9 +27,12 @@ class Character extends Component {
     if (!images) {
       const image = Images.all[name]
       if (!image) return null
+      const item = { name, id: name, flipImage }
+      // return <ImageDisplay item={item} />
       return (
         <div className={css.characterContainer}>
-          <img className={css.characterImage} src={image} alt={"imagex"} />
+          {/* <img className={css.characterImage} src={image} alt={"imagex"} /> */}
+          <ImageDisplay item={item} className={css.characterImage} />
         </div>
       )
     }

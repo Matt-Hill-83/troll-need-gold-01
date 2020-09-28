@@ -381,6 +381,7 @@ const creatures = {
 
 const creatures2animals = {
   parta01,
+  zarla: parta02,
   parta02,
   robby01,
   silica01,

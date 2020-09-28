@@ -1,4 +1,9 @@
-import { Button, Popover, PopoverInteractionKind } from "@blueprintjs/core"
+import {
+  Button,
+  ButtonGroup,
+  Popover,
+  PopoverInteractionKind,
+} from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
 
 import React, { Component } from "react"
@@ -68,7 +73,7 @@ class CrudMachine extends Component {
     const final = [...part1, ...part2]
 
     const statePropsToSave = {
-      [this.props.propNameForItems]: final,
+      // [this.props.propNameForItems]: final,
       items: final,
     }
 
@@ -85,6 +90,18 @@ class CrudMachine extends Component {
     const final = [...part1, newItem, ...part2]
 
     const statePropsToSave = { items: final }
+    this.setStateAndSave({ statePropsToSave })
+  }
+
+  onFlipImage = ({ index, item, event }) => {
+    const { items } = this.state
+    console.log("item.flipImage", item.flipImage) // zzz
+    console.log("onFlipImage") // zzz
+    console.log("item", item) // zzz
+    console.log("event", event) // zzz
+    item.flipImage = !item.flipImage
+    event.stopPropagation()
+    const statePropsToSave = { items }
     this.setStateAndSave({ statePropsToSave })
   }
 
@@ -125,11 +142,15 @@ class CrudMachine extends Component {
   }
 
   renderButtons = ({ item, index }) => {
-    const { buttons = DEFAULT_BUTTONS } = this.props
+    const {
+      buttons = DEFAULT_BUTTONS,
+      extraButtons = null,
+      allowFlipImage = true,
+    } = this.props
     const { edit, add, trash } = buttons
 
     return (
-      <div className={css.buttonsRow} key={index}>
+      <ButtonGroup className={css.buttonsRow} key={index}>
         {add && (
           <Button
             icon={IconNames.ADD}
@@ -142,6 +163,14 @@ class CrudMachine extends Component {
             icon={IconNames.EDIT}
             className={css.itemButton}
             onClick={(event) => this.onEditItem({ item, index, event })}
+          />
+        )}
+        <div>{extraButtons ? extraButtons : null}</div>
+        {allowFlipImage && (
+          <Button
+            icon={IconNames.FLAG}
+            className={css.itemButton}
+            onClick={(event) => this.onFlipImage({ item, index, event })}
           />
         )}
         {trash && (
@@ -158,7 +187,7 @@ class CrudMachine extends Component {
             onClick={(event) => this.onAddItemAfter({ item, index, event })}
           />
         )}
-      </div>
+      </ButtonGroup>
     )
   }
 
@@ -211,10 +240,8 @@ class CrudMachine extends Component {
 
     let imageSets = []
     let characterPicker = null
-    console.log("showItemPicker", showItemPicker) // zzz
     if (showItemPicker) {
       imageSets = this.props.imageSets || defaultImageSets
-      console.log("this.props.imageSets", this.props.imageSets) // zzz
       characterPicker = (
         <CharacterPicker
           isOpen={showItemPicker}
