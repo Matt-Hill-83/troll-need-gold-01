@@ -6,6 +6,7 @@ import WorldViewer from "../WorldViewer/WorldViewer.js"
 import FrameViewer from "../FrameViewer/FrameViewer.js"
 
 import css from "./StoryMode.module.scss"
+import images from "../../../Common/Images/images.js"
 
 export default function StoryMode(props) {
   const [globalState] = useContext(myContext)
@@ -23,8 +24,13 @@ export default function StoryMode(props) {
     </div>
   )
 
+  const mainBackground = images.backgrounds["hill01"]
+  const mainBackground2 = images.backgrounds["planetGlorp03"]
+
   return (
     <div className={`${css.main}`}>
+      <img className={css.backgroundImage} src={mainBackground} alt={"bk"} />
+      <img className={css.backgroundImage2} src={mainBackground2} alt={"bk"} />
       {renderWorldName}
       <div className={`${css.missionConsoleBox}`}>
         {showMissionConsole && <MissionConsole world={world} />}

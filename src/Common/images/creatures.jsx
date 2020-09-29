@@ -6,6 +6,9 @@
 // lucy05
 // lucy06
 
+import lucy07 from "./creatures/lucy07.png"
+import well01 from "./creatures/well01.png"
+
 import artemis01 from "./creatures/artemis01.png"
 import asha01 from "./creatures/asha01.png"
 import atari01 from "./creatures/atari01.png"
@@ -117,11 +120,9 @@ import cat01 from "./creatures/cat01.png"
 import charlie02 from "./creatures/charlie02.png"
 import chick01 from "./creatures/chick01.png"
 import chooChoo01 from "./creatures/chooChoo01.png"
-// import cleopatra01 from "./creatures/cleopatra01.png"
 import coldGirl from "./creatures/cold_girl.png"
 import cop from "./creatures/cop.png"
 import cow01 from "./creatures/cow01.png"
-// import crow01 from "./creatures/crow01.png"
 import cub from "./creatures/cub.png"
 import dennisTheMenace from "./creatures/dennisTheMenace.png"
 import dog01 from "./creatures/dog01.png"
@@ -184,7 +185,6 @@ import pig from "./creatures/pig.png"
 import pigeon01 from "./creatures/pigeon01.png"
 import pigInAWig from "./creatures/pigInAWig.png"
 import pinky01 from "./creatures/pinky01.png"
-// import pooPoo01 from "./creatures/pooPoo01.png"
 import princess_alibera from "./creatures/princess_alibera.png"
 import pug from "./creatures/pug.png"
 import pup01 from "./creatures/pup01.png"
@@ -212,7 +212,6 @@ import squirrel01 from "./creatures/squirrel01.png"
 import strawberry01 from "./creatures/strawberry01.png"
 import sweaterGirl01 from "./creatures/sweaterGirl01.png"
 import swordGirl01 from "./creatures/swordGirl01.png"
-import taffy01 from "./creatures/taffy01.png"
 import tink from "./creatures/tink.png"
 import tiredGirl from "./creatures/tired_girl.png"
 import toothless from "./creatures/toothless.png"
@@ -380,6 +379,8 @@ const creatures = {
 }
 
 const creatures2animals = {
+  lucy07,
+  well01,
   parta01,
   zarla: parta02,
   parta02,

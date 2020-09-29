@@ -138,7 +138,8 @@ export default function FrameViewer() {
   }
 
   const renderBackground = () => {
-    const backgroundImageHill = Images.backgrounds["hill01"]
+    // const backgroundImageHill = Images.backgrounds["hill01"]
+    const backgroundImageHill = null
 
     return (
       <div className={css.backgroundImageContainer}>

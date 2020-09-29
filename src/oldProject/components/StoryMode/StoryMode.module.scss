@@ -20,6 +20,26 @@
   background: white;
   padding: 1vh;
 
+  .backgroundImage {
+    position: absolute;
+    display: flex;
+
+    width: 100%;
+    height: 100%;
+    transform: scaleX(-1);
+  }
+
+  .backgroundImage2 {
+    position: absolute;
+    display: flex;
+    width: 32vh;
+    height: auto;
+    transform: scaleX(-1);
+    justify-self: center;
+    right: 4%;
+    top: 23%;
+  }
+
   .halfPage {
     display: flex;
     position: relative;
@@ -34,12 +54,13 @@
   }
 
   .leftHalf {
-    border-right: none;
-    max-width: 768px;
-    margin-right: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    box-shadow: 1px 6px 17px 3px #000000bd;
+    // border-right: none;
+    // max-width: 768px;
+    // margin-right: 0px;
+    // border-top-right-radius: 0px;
+    // border-bottom-right-radius: 0px;
+    // box-shadow: 1px 6px 17px 3px #000000bd;
+    border: 1px solid red !important;
   }
 
   .rightHalf {
@@ -69,15 +90,16 @@
 .worldTitle {
   position: fixed;
   display: flex;
+  justify-content: center;
   z-index: 20;
+
   font-size: 2vh;
-  padding: 1vh 2vh;
-  border-radius: 11px;
+  font-weight: bold;
+  padding: 0vh 1vh;
   border: 1px solid black;
-  left: 75%;
-  top: 2vh;
+  right: 0vh;
+  top: 4vh;
   background: white;
-  height: 3.2vh;
-  transform: translateX(-50%);
   white-space: nowrap;
+  min-width: 32vh;
 }

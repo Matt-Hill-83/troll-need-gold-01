@@ -18,14 +18,13 @@ export default function ImageDisplay(props) {
   const flipImage = item && item.flipImage
 
   const image = props.images || Images.all[name]
-  console.log("flipImage", flipImage) // zzz
+
   return (
     <div
       className={cx(css.main, {
         [className]: !!className,
         [css.flipImage]: flipImage,
       })}
-      // className={`${css.main} ${className ? className : ""}`}
       key={id || index}
     >
       {showAmount && <div className={css.amount}>{amount}</div>}
