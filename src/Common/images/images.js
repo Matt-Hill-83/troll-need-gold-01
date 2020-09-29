@@ -1,4 +1,5 @@
-import { creatures, creatures2animals } from "./creatures"
+import { creatures } from "./creatures"
+import { creatures2animals } from "./creatures2"
 import items from "./items"
 import locations from "./locations"
 import backgrounds from "./backgrounds"

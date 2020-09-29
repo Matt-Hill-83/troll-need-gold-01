@@ -246,8 +246,9 @@ export default function DialogBuilder2(props) {
   const onDuplicateFrame = ({ rowIndex, frames, frame }) => {
     const newElement = WorldBuilderUtils.getNewFrame({ props: { ...frame } })
 
+    const dupFrame = JSON.parse(JSON.stringify(frame))
     Utils.addArrayElement({
-      newElement,
+      newElement: dupFrame,
       before: false,
       index: rowIndex,
       array: frames,
@@ -320,7 +321,7 @@ export default function DialogBuilder2(props) {
             })
           }
         >
-          Split
+          Split-->
         </Button>
       )
     }
