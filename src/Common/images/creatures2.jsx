@@ -1,10 +1,4 @@
-// kitty claw paw
-
-// lucy01
-// lucy03
-// lucy04
-// lucy05
-// lucy06
+import parta03 from "./creatures/parta03.png"
 
 import artemis01 from "./creatures/artemis01.png"
 import asha01 from "./creatures/asha01.png"
@@ -93,6 +87,7 @@ import yofana01 from "./creatures/yofana01.png"
 import zap01 from "./creatures/zap01.png"
 
 const creatures2animals = {
+  parta03,
   lucy07,
   well01,
   parta01,
@@ -109,7 +104,6 @@ const creatures2animals = {
   liz2,
   kat,
   nazboo01,
-  // taffy01,
   taffy01: marli01,
   marli01,
 
