@@ -86,6 +86,17 @@ import wind01 from "./creatures/wind01.png"
 import yofana01 from "./creatures/yofana01.png"
 import zap01 from "./creatures/zap01.png"
 
+import raven001 from "./riggedGirls01/raven/faces/001.png"
+import raven002 from "./riggedGirls01/raven/faces/002.png"
+import raven003 from "./riggedGirls01/raven/faces/003.png"
+import raven004 from "./riggedGirls01/raven/faces/004.png"
+
+const raven = {
+  raven001,
+  raven002,
+  raven003,
+  raven004,
+}
 const creatures2animals = {
   parta03,
   lucy07,
@@ -179,5 +190,6 @@ const creatures2animals = {
   weasel01,
   rosco01,
   farf01,
+  ...raven,
 }
-export { creatures2animals }
+export { creatures2animals, raven }

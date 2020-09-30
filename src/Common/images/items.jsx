@@ -1,3 +1,4 @@
+import balloon01 from "./items/balloon01.png"
 import angusBalloon01 from "./creatures/angusBalloon01.png"
 import bag from "./locations/bag.png"
 import balloons01 from "./items/balloons01.png"
@@ -52,7 +53,7 @@ const items = {
   skull01,
   lock02,
   ringOfZandar01,
-
+  balloon01,
   car,
   tug,
   van,
