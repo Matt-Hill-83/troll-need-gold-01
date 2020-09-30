@@ -85,11 +85,21 @@ import will01 from "./creatures/will01.png"
 import wind01 from "./creatures/wind01.png"
 import yofana01 from "./creatures/yofana01.png"
 import zap01 from "./creatures/zap01.png"
+import swift01 from "./creatures/swift01.png"
+
+import britta02 from "./creatures/britta02.png"
+import britta03 from "./creatures/britta03.png"
+import britta04 from "./creatures/britta04.png"
 
 import raven001 from "./riggedGirls01/raven/faces/001.png"
 import raven002 from "./riggedGirls01/raven/faces/002.png"
 import raven003 from "./riggedGirls01/raven/faces/003.png"
 import raven004 from "./riggedGirls01/raven/faces/004.png"
+
+import tj001 from "./riggedGirls01/tj/faces/001.png"
+import tj002 from "./riggedGirls01/tj/faces/002.png"
+import tj003 from "./riggedGirls01/tj/faces/003.png"
+import tj004 from "./riggedGirls01/tj/faces/004.png"
 
 const raven = {
   raven001,
@@ -97,7 +107,18 @@ const raven = {
   raven003,
   raven004,
 }
+
+const tj = {
+  tj001,
+  tj002,
+  //   tj003,
+  //   tj004,
+}
 const creatures2animals = {
+  britta02,
+  britta03,
+  britta04,
+  swift01,
   parta03,
   lucy07,
   well01,
@@ -191,5 +212,6 @@ const creatures2animals = {
   rosco01,
   farf01,
   ...raven,
+  ...tj,
 }
-export { creatures2animals, raven }
+export { creatures2animals, raven, tj }
