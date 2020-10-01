@@ -10,7 +10,11 @@ import images from "../../../Common/Images/images.js"
 
 export default function StoryMode(props) {
   const [globalState] = useContext(myContext)
-  const { world, showMissionConsole } = globalState
+  const { world, showMissionConsole, activeScene } = globalState
+  console.log("activeScene", activeScene) // zzz
+  console.log("activeScene.backgroundImage", activeScene.backgroundImage) // zzz
+
+  const { backgroundImage } = activeScene
 
   const { updateActiveScene } = props
 
@@ -24,7 +28,10 @@ export default function StoryMode(props) {
     </div>
   )
 
-  const mainBackground = images.backgrounds["hill01"]
+  // const mainBackground = images.newBackgrounds["back01"]
+  const mainBackground = backgroundImage
+    ? images.newBackgrounds[backgroundImage]
+    : images.backgrounds["hill01"]
   const mainBackground2 = images.backgrounds["planetGlorp03"]
 
   return (

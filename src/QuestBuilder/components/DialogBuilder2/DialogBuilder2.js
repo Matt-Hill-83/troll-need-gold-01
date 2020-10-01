@@ -12,9 +12,10 @@ import MyTextEditor from "../MyTextEditor/MyTextEditor"
 import Utils from "../../../Common/Utils/Utils"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 
-import css from "./DialogBuilder2.module.scss"
 import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
 import CrudMachine from "../CrudMachine/CrudMachine"
+
+import css from "./DialogBuilder2.module.scss"
 
 export default function DialogBuilder2(props) {
   const simpleView = false

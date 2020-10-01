@@ -1,5 +1,23 @@
-import parta03 from "./creatures/parta03.png"
+import jasmine02 from "./creatures/jasmine02.png"
+import brenda01 from "./creatures/brenda01.png"
 
+import looney01 from "./creatures/looney01.png"
+import rupert01 from "./creatures/rupert01.png"
+import jasmine01 from "./creatures/jasmine01.png"
+
+// jasmine02
+// brenda01
+
+import olive01 from "./creatures/olive01.png"
+import olive02 from "./creatures/olive02.png"
+
+import oliveRori01cu from "./creatures/oliveRori01.png"
+import oliveRori01 from "./creatures/oliveRori01cu.png"
+
+import rori03cu from "./creatures/rori03cu.png"
+
+import parta03 from "./creatures/parta03.png"
+import lucy07small from "./creatures/lucy07small.png"
 import artemis01 from "./creatures/artemis01.png"
 import asha01 from "./creatures/asha01.png"
 import atari01 from "./creatures/atari01.png"
@@ -115,6 +133,18 @@ const tj = {
   //   tj004,
 }
 const creatures2animals = {
+  jasmine02,
+  brenda01,
+  looney01,
+  rupert01,
+  jasmine01,
+
+  olive01,
+  olive02,
+  oliveRori01cu,
+  oliveRori01,
+  lucy07small,
+  rori03cu,
   britta02,
   britta03,
   britta04,
