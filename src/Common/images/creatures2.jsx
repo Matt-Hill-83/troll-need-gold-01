@@ -1,3 +1,7 @@
+import vector01 from "./creatures/vector01.png"
+import vector02 from "./creatures/vector02.png"
+import vector03 from "./creatures/vector03.png"
+
 import tanya01 from "./creatures/tanya01.png"
 import tanya02 from "./creatures/tanya02.png"
 import jasmine02 from "./creatures/jasmine02.png"
@@ -142,7 +146,9 @@ const creatures2animals = {
   looney01,
   rupert01,
   jasmine01,
-
+  vector01,
+  vector02,
+  vector03,
   olive01,
   olive02,
   oliveRori01cu,
