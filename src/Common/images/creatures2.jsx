@@ -1,4 +1,5 @@
 import tanya01 from "./creatures/tanya01.png"
+import tanya02 from "./creatures/tanya02.png"
 import jasmine02 from "./creatures/jasmine02.png"
 import brenda01 from "./creatures/brenda01.png"
 
@@ -136,6 +137,7 @@ const tj = {
 const creatures2animals = {
   jasmine02,
   tanya01,
+  tanya02,
   brenda01,
   looney01,
   rupert01,
