@@ -267,6 +267,7 @@ const creatures = {
   zita01,
   goblinKing01,
   goblinKing02,
+  trollKing01: goblinKing02,
   misterWilson01,
   tree01,
   solarSystem01,

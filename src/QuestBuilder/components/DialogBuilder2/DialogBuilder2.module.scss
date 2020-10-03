@@ -80,6 +80,11 @@
     align-self: center;
     margin-left: 8px;
 
+    position: absolute;
+    top: 0;
+    left: -1vh;
+    border: 4px solid green !important;
+
     > button {
       display: flex;
 
