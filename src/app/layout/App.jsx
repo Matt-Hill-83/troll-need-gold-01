@@ -7,7 +7,7 @@ import React from "react"
 
 import AccountPage from "../../features/auth/AccountPage"
 import ErrorComponent from "../common/errors/ErrorComponent"
-// import HomePage from "../../features/home/HomePage"
+import HomePage from "../../features/home/HomePage"
 import LoadingComponent from "./LoadingComponent"
 import ModalManager from "../common/modals/ModalManager"
 import NavBar from "../../features/nav/NavBar"
@@ -29,10 +29,10 @@ export default function App() {
       <ModalManager />
       <ToastContainer position="bottom-right" hideProgressBar />
       {/* <Route exact path="/" component={QuestDashboard} /> */}
-      {/* <Route exact path="/" component={HomePage} /> */}
+      <Route exact path="/" component={HomePage} />
       <Route
-        path={"/(.*)"}
-        // path={"/(.+)"}
+        // path={"/(.*)"}
+        path={"/(.+)"}
         render={() => (
           <>
             <NavBar />
