@@ -28,11 +28,13 @@ class Character extends Component {
       const image = Images.all[name]
       if (!image) return null
       const item = { name, id: name, flipImage }
-      // return <ImageDisplay item={item} />
       return (
         <div className={css.characterContainer}>
-          {/* <img className={css.characterImage} src={image} alt={"imagex"} /> */}
-          <ImageDisplay item={item} className={css.characterImage} />
+          <ImageDisplay
+            item={item}
+            className={css.characterImage}
+            showLabel={true}
+          />
         </div>
       )
     }

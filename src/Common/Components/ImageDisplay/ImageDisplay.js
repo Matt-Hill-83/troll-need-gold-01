@@ -9,7 +9,7 @@ export default function ImageDisplay(props) {
   const {
     item,
     item: { name, id, index },
-    showLabel = true,
+    showLabel,
     amount = 0,
     className,
     showAmount = false,
