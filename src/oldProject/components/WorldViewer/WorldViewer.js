@@ -7,9 +7,6 @@ import useGlobalState from "../../../Context/useGlobalState.js"
 
 import css from "./WorldViewer.module.scss"
 
-const mainBackground = null
-// const mainBackground = Images.backgrounds["hill01"]
-const mainBackground2 = Images.backgrounds["planetGlorp03"]
 const bookCoil01 = Images.backgrounds["bookCoil01"]
 const mapBackground = Images.backgrounds["mapBackground11"]
 
@@ -51,8 +48,6 @@ export default function WorldViewer(props) {
 
   return (
     <>
-      {/* <img className={css.backgroundImage} src={mainBackground} alt={"bk"} />
-      <img className={css.backgroundImage2} src={mainBackground2} alt={"bk"} /> */}
       <div className={`${css.mapScroller}`}>
         <div className={`${css.innerMapScroller}`}>
           <img

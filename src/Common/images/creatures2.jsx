@@ -141,6 +141,7 @@ const tj = {
   //   tj004,
 }
 const creatures2animals = {
+  babyTroll02: will01,
   jasmine02,
   oliveRori01cu02Eyes,
   tanya01,
