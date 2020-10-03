@@ -1,4 +1,7 @@
-import React from "react"
+import React, { useState } from "react"
+import { IconNames } from "@blueprintjs/icons"
+import cx from "classnames"
+import { Button } from "@blueprintjs/core"
 
 import Images from "../../../Common/Images/images"
 import MiniLocation from "../MiniLocation/MiniLocation.js"
@@ -11,6 +14,10 @@ const bookCoil01 = Images.backgrounds["bookCoil01"]
 const mapBackground = Images.backgrounds["mapBackground11"]
 
 export default function WorldViewer(props) {
+  const { updateActiveScene } = props
+
+  const [showLargeMap, setShowLargeMap] = useState(false)
+
   const {
     globalState: {
       world: { gridDimensions, newGrid5 },
@@ -36,19 +43,20 @@ export default function WorldViewer(props) {
 
   const createSingleRow = ({ locationRow }) => {
     return locationRow.map((scene) => {
-      return renderMiniLocation({ scene })
+      return (
+        <MiniLocation scene={scene} updateActiveScene={updateActiveScene} />
+      )
     })
-  }
-
-  const renderMiniLocation = ({ scene }) => {
-    const { updateActiveScene } = props
-
-    return <MiniLocation scene={scene} updateActiveScene={updateActiveScene} />
   }
 
   return (
     <>
       <div className={`${css.mapScroller}`}>
+        <Button
+          className={cx({ [css.toggleMapButton]: showLargeMap })}
+          icon={showLargeMap ? IconNames.COLLAPSE_ALL : IconNames.EXPAND_ALL}
+          onClick={() => setShowLargeMap(!showLargeMap)}
+        />
         <div className={`${css.innerMapScroller}`}>
           <img
             className={css.mapBackground}
