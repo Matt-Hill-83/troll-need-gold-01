@@ -50,10 +50,14 @@ export default function WorldViewer(props) {
   }
 
   return (
-    <>
-      <div className={`${css.mapScroller}`}>
+    <div className={`${css.main}`}>
+      <div
+        className={cx(css.mapScroller, {
+          [css.mapScrollerSmall]: showLargeMap,
+        })}
+      >
         <Button
-          className={cx({ [css.toggleMapButton]: showLargeMap })}
+          className={cx({ [css.toggleMapButton]: true })}
           icon={showLargeMap ? IconNames.COLLAPSE_ALL : IconNames.EXPAND_ALL}
           onClick={() => setShowLargeMap(!showLargeMap)}
         />
@@ -68,6 +72,6 @@ export default function WorldViewer(props) {
         </div>
       </div>
       <img className={css.bookCoil01} src={bookCoil01} alt={"bk"} />
-    </>
+    </div>
   )
 }
