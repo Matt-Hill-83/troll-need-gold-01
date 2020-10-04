@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-
+import Draggable from "react-draggable"
 import { myContext } from "../../../myProvider.js"
 import MissionConsole from "../MissionConsole/MissionConsole.js"
 import WorldViewer from "../WorldViewer/WorldViewer.js"
@@ -86,14 +86,53 @@ export default function StoryMode(props) {
   const getMood = ({ name, faces }) => {
     let mood = "ok"
     const newMood = faces && faces.find((face) => face.character === name)
-    mood = (newMood && newMood.face) || mood
-    return mood
+    return newMood?.face || mood
+  }
+
+  const handleStart = () => {
+    console.log("handleStart")
+  }
+
+  const handleDrag = () => {
+    console.log("handleDrag")
+  }
+
+  const handleStop = () => {
+    console.log("handleStop")
   }
 
   const renderLocationImage = () => {
     const locationName = activeScene?.location?.name
-
     const newItem = { name: locationName }
+
+    const eventLogger = (e, data) => {
+      console.log("Event: ", e)
+      console.log("Data: ", data)
+    }
+
+    return (
+      <Draggable
+        axis="x"
+        handle=".handle"
+        defaultPosition={{ x: 0, y: 0 }}
+        position={null}
+        grid={[25, 25]}
+        scale={1}
+        onStart={handleStart}
+        onDrag={handleDrag}
+        onStop={handleStop}
+      >
+        <div>
+          <div className="handle">Drag from here</div>
+          <div>This readme is really dragging on...</div>
+          <ImageDisplay
+            className={css.locationImage}
+            item={newItem}
+            showLabel={true}
+          />
+        </div>
+      </Draggable>
+    )
 
     return (
       <ImageDisplay
@@ -130,9 +169,7 @@ export default function StoryMode(props) {
           critters: critters1,
         })}
       </div>
-      <div className={css.imageGroupsContainer}>
-        <div className={css.lizAndKatContainer}>{renderPosableCritters()}</div>
-      </div>
+      <div className={css.lizAndKatContainer}>{renderPosableCritters()}</div>
 
       <div className={`${css.halfPage} ${css.rightHalf}`}>
         <WorldViewer updateActiveScene={updateActiveScene} />
