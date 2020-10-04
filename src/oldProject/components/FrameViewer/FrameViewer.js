@@ -11,7 +11,6 @@ import AudioPlayer from "../AudioPlayer/AudioPlayer"
 import AudioRecorder from "../AudioRecorder/AudioRecorder"
 import Character from "../../../Common/Components/Character/Character"
 import Constants from "../../../Common/Constants/Constants"
-import Images from "../../../Common/Images/images"
 import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget"
 import WordGroup from "../WordGroup/WordGroup"
 
@@ -261,18 +260,18 @@ export default function FrameViewer() {
             <div className={css.lizAndKatContainer}>
               {renderPosableCritters()}
             </div>
-            <div className={css.charactersContainer}>
+            {/* <div className={css.charactersContainer}>
               {renderCritters({
                 critters: critters2,
               })}
-            </div>
-            <div
+            </div> */}
+            {/* <div
               className={cx(css.charactersContainer, css.charactersContainer2)}
             >
               {renderCritters({
                 critters: critters1,
               })}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
