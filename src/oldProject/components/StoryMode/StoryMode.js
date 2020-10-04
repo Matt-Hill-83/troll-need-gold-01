@@ -33,23 +33,14 @@ export default function StoryMode(props) {
 
   const renderLocationImage = () => {
     const locationName = activeScene?.location?.name
-    const locationImage = images.all[locationName]
     const newItem = { name: locationName }
+
     return (
       <ImageDisplay
         className={css.locationImage}
         item={newItem}
         showLabel={true}
-        // amount={amount}
-        // showAmount={true}
       />
-    )
-
-    return (
-      <div className={css.locationImageContainer}>
-        <img className={css.locationImage} src={locationImage} alt={"imagex"} />
-        <span className={`${css.locationLabel}`}>{locationName}</span>
-      </div>
     )
   }
 

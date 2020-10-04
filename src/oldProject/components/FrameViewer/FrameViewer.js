@@ -124,18 +124,6 @@ export default function FrameViewer() {
     return activeScene?.location?.name
   }
 
-  const renderLocationImage = () => {
-    const locationName = getLocationName()
-    const locationImage = Images.all[locationName]
-
-    return (
-      <div className={css.locationImageContainer}>
-        <img className={css.locationImage} src={locationImage} alt={"imagex"} />
-        <span className={`${css.locationLabel}`}>{locationName}</span>
-      </div>
-    )
-  }
-
   const renderCritters = ({ critters, className }) => {
     const filteredCritters =
       critters.filter((item) => {
@@ -263,8 +251,6 @@ export default function FrameViewer() {
 
     return (
       <div className={`${css.scenes}`}>
-        {/* {renderLocationImage()} */}
-
         <div className={css.relativePositionedContent}>
           <div className={css.wordsAndButtons}>
             <div className={css.sceneName}>{sceneName}</div>
