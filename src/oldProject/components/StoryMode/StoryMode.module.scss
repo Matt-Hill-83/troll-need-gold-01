@@ -22,6 +22,17 @@
   padding: 1vh;
   border: 1px solid green !important;
 
+  .locationImage {
+    border: 1px solid green !important;
+    z-index: 100;
+    height: 45vh;
+    width: auto;
+    bottom: 24vh;
+    top: unset;
+    position: absolute;
+    right: -1vh;
+  }
+
   .backgroundImage {
     position: absolute;
     display: flex;

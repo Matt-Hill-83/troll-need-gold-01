@@ -142,7 +142,7 @@ export default function FrameViewer() {
         return !Constants.posableCharacters.includes(item.name)
       }) || []
 
-    const critterNames = filteredCritters.map((item) => item.name)
+    // const critterNames = filteredCritters.map((item) => item.name)
 
     return filteredCritters.map((character, index) => {
       // return critterNames.map((character, index) => {
@@ -263,7 +263,7 @@ export default function FrameViewer() {
 
     return (
       <div className={`${css.scenes}`}>
-        {renderLocationImage()}
+        {/* {renderLocationImage()} */}
 
         <div className={css.relativePositionedContent}>
           <div className={css.wordsAndButtons}>
