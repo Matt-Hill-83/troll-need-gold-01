@@ -129,43 +129,12 @@ export default function FrameViewer() {
         return !Constants.posableCharacters.includes(item.name)
       }) || []
 
-    // const critterNames = filteredCritters.map((item) => item.name)
-
     return filteredCritters.map((character, index) => {
-      // return critterNames.map((character, index) => {
       return (
         <div className={cx(css.characterContainer, className)} key={index}>
           <Character
             name={character.name}
             flipImage={character.flipImage}
-            isEditMode={false}
-            showHeadOnly={false}
-          />
-        </div>
-      )
-    })
-  }
-
-  const renderPosableCritters = () => {
-    const { faces = [] } = frame
-    if (!frame) return null
-
-    const posableCharacters = Constants.posableCharacters
-
-    const critters =
-      frame.critters1.filter((item) => {
-        return posableCharacters.includes(item.name)
-      }) || []
-
-    const critterNames = critters.map((item) => item.name)
-    return critterNames.map((character, index) => {
-      const mood = getMood({ name: character, faces })
-
-      return (
-        <div className={`${css.characterContainer2}`} key={index}>
-          <Character
-            name={character}
-            mood={mood}
             isEditMode={false}
             showHeadOnly={false}
           />
@@ -255,11 +224,6 @@ export default function FrameViewer() {
             <div className={css.wordsContainer}>{cloneDialogs()}</div>
             {renderButtons()}
           </div>
-          {/* <div className={css.imageGroupsContainer}>
-            <div className={css.lizAndKatContainer}>
-              {renderPosableCritters()}
-            </div>
-          </div> */}
         </div>
       </div>
     )
