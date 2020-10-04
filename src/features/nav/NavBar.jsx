@@ -6,11 +6,17 @@ import React from "react"
 import SignedInMenu from "./SignedInMenu"
 import SignedOutMenu from "./SignedOutMenu"
 import Constants from "../../Common/Constants/Constants"
+import useGlobalState from "../../Context/useGlobalState"
 
 import css from "./NavBar.module.scss"
 
 export default function NavBar() {
   const { authenticated } = useSelector((state) => state.auth)
+  const { globalState, setGlobalStateProps } = useGlobalState()
+
+  const worldTitle = globalState?.world?.title || ""
+
+  console.log("worldTitle", worldTitle) // zzz
 
   return (
     <Menu inverted fixed="top" className={css.main}>
@@ -22,6 +28,7 @@ export default function NavBar() {
         </>
       )}
       {authenticated ? <SignedInMenu /> : <SignedOutMenu />}
+      <div className={css.worldTitle}>{worldTitle}</div>
     </Menu>
   )
 }

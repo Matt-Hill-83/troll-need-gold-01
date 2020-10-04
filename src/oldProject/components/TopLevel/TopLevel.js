@@ -9,7 +9,6 @@ import TopLevelUtils from "../../Utils/TopLevelUtils.js"
 import useGlobalState from "../../../Context/useGlobalState.js"
 import useUpdateProfileWidget from "./useUpdateProfileWidget.js"
 import Utils from "../../../Common/Utils/Utils"
-import Images from "../../../Common/Images/images"
 
 // import useLocalState from "./useLocalState.js"
 

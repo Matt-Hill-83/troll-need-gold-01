@@ -7,14 +7,13 @@ import React, { useContext } from "react"
 import { myContext } from "../../../myProvider"
 import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
 import { uploadToFirebaseStorage } from "../../../app/firestore/firebaseService"
+import AudioPlayer from "../AudioPlayer/AudioPlayer"
+import AudioRecorder from "../AudioRecorder/AudioRecorder"
+import Character from "../../../Common/Components/Character/Character"
 import Constants from "../../../Common/Constants/Constants"
 import Images from "../../../Common/Images/images"
 import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget"
 import WordGroup from "../WordGroup/WordGroup"
-
-import AudioPlayer from "../AudioPlayer/AudioPlayer"
-import AudioRecorder from "../AudioRecorder/AudioRecorder"
-import Character from "../../../Common/Components/Character/Character"
 
 import css from "./FrameViewer.module.scss"
 
@@ -133,23 +132,6 @@ export default function FrameViewer() {
       <div className={css.locationImageContainer}>
         <img className={css.locationImage} src={locationImage} alt={"imagex"} />
         <span className={`${css.locationLabel}`}>{locationName}</span>
-      </div>
-    )
-  }
-
-  const renderBackground = () => {
-    // const backgroundImageHill = Images.backgrounds["hill01"]
-    const backgroundImageHill = null
-
-    return (
-      <div className={css.backgroundImageContainer}>
-        <div className={css.backgroundGrass}>
-          <img
-            className={css.backgroundGrassImage}
-            src={backgroundImageHill}
-            alt={`backgroundImage`}
-          />
-        </div>
       </div>
     )
   }
@@ -281,7 +263,6 @@ export default function FrameViewer() {
 
     return (
       <div className={`${css.scenes}`}>
-        {renderBackground()}
         {renderLocationImage()}
 
         <div className={css.relativePositionedContent}>

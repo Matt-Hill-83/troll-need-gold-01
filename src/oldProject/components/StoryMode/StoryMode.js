@@ -4,19 +4,16 @@ import { myContext } from "../../../myProvider.js"
 import MissionConsole from "../MissionConsole/MissionConsole.js"
 import WorldViewer from "../WorldViewer/WorldViewer.js"
 import FrameViewer from "../FrameViewer/FrameViewer.js"
-
-import css from "./StoryMode.module.scss"
 import images from "../../../Common/Images/images.js"
 
+import css from "./StoryMode.module.scss"
+
 export default function StoryMode(props) {
+  const { updateActiveScene } = props
+
   const [globalState] = useContext(myContext)
   const { world, showMissionConsole, activeScene } = globalState
-  console.log("activeScene", activeScene) // zzz
-  console.log("activeScene.backgroundImage", activeScene.backgroundImage) // zzz
-
   const { backgroundImage } = activeScene
-
-  const { updateActiveScene } = props
 
   if (!world || !world.title) {
     return <div>no world</div>
@@ -28,7 +25,6 @@ export default function StoryMode(props) {
     </div>
   )
 
-  // const mainBackground = images.newBackgrounds["back01"]
   const mainBackground = backgroundImage
     ? images.newBackgrounds[backgroundImage]
     : images.backgrounds["hill01"]

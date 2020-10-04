@@ -9,6 +9,7 @@
   top: 2vh;
   left: 2vh;
   right: 51.6vw;
+  border: 1px solid blue !important;
 }
 
 .main {
@@ -19,6 +20,7 @@
   overflow: hidden;
   background: white;
   padding: 1vh;
+  border: 1px solid green !important;
 
   .backgroundImage {
     position: absolute;
