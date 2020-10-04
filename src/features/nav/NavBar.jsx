@@ -12,11 +12,9 @@ import css from "./NavBar.module.scss"
 
 export default function NavBar() {
   const { authenticated } = useSelector((state) => state.auth)
-  const { globalState, setGlobalStateProps } = useGlobalState()
+  const { globalState } = useGlobalState()
 
   const worldTitle = globalState?.world?.title || ""
-
-  console.log("worldTitle", worldTitle) // zzz
 
   return (
     <Menu inverted fixed="top" className={css.main}>
