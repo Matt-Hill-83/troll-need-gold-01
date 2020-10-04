@@ -217,14 +217,10 @@ export default function FrameViewer() {
     const sceneName = getLocationName()
 
     return (
-      <div className={`${css.scenes}`}>
-        <div className={css.relativePositionedContent}>
-          <div className={css.wordsAndButtons}>
-            <div className={css.sceneName}>{sceneName}</div>
-            <div className={css.wordsContainer}>{cloneDialogs()}</div>
-            {renderButtons()}
-          </div>
-        </div>
+      <div className={css.wordsAndButtons}>
+        <div className={css.sceneName}>{sceneName}</div>
+        <div className={css.wordsContainer}>{cloneDialogs()}</div>
+        {renderButtons()}
       </div>
     )
   }

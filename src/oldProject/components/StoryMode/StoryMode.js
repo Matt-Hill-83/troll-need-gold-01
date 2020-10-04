@@ -1,15 +1,17 @@
+import cx from "classnames"
+import { Rnd } from "react-rnd"
+
 import React, { useContext } from "react"
 import Draggable from "react-draggable"
+
 import { myContext } from "../../../myProvider.js"
+import Character from "../../../Common/Components/Character/Character.js"
+import Constants from "../../../Common/Constants/Constants.js"
+import FrameViewer from "../FrameViewer/FrameViewer.js"
+import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay.js"
+import images from "../../../Common/Images/images.js"
 import MissionConsole from "../MissionConsole/MissionConsole.js"
 import WorldViewer from "../WorldViewer/WorldViewer.js"
-import FrameViewer from "../FrameViewer/FrameViewer.js"
-import images from "../../../Common/Images/images.js"
-import cx from "classnames"
-
-import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay.js"
-import Constants from "../../../Common/Constants/Constants.js"
-import Character from "../../../Common/Components/Character/Character.js"
 
 import css from "./StoryMode.module.scss"
 
@@ -111,6 +113,18 @@ export default function StoryMode(props) {
     }
 
     return (
+      <Rnd
+        default={{
+          x: 0,
+          y: 0,
+          width: 620,
+          height: 400,
+        }}
+      >
+        <div className={css.locationDragger}>Rnd</div>
+      </Rnd>
+    )
+    return (
       <Draggable
         axis="x"
         handle=".handle"
@@ -126,7 +140,7 @@ export default function StoryMode(props) {
           <div className="handle">Drag from here</div>
           <div>This readme is really dragging on...</div>
           <ImageDisplay
-            className={css.locationImage}
+            xxxclassName={css.locationImage}
             item={newItem}
             showLabel={true}
           />
@@ -158,7 +172,6 @@ export default function StoryMode(props) {
       <div className={`${css.halfPage} ${css.leftHalf}`}>
         <FrameViewer />
       </div>
-      {renderLocationImage()}
       <div className={css.charactersContainer}>
         {renderCritters({
           critters: critters2,
@@ -174,6 +187,7 @@ export default function StoryMode(props) {
       <div className={`${css.halfPage} ${css.rightHalf}`}>
         <WorldViewer updateActiveScene={updateActiveScene} />
       </div>
+      {renderLocationImage()}
     </div>
   )
 }

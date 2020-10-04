@@ -133,7 +133,6 @@ export default function SceneBuilder(props) {
     const { world, saveItems, scene } = props
     const buttons = { add: false, trash: false, edit: true }
 
-    const locationImageSets = [images.all]
     const locations = [scene.location]
 
     const backgroundColor = QuestVisibilityUtils.getSubQuestColor({
@@ -151,7 +150,6 @@ export default function SceneBuilder(props) {
         buttons={buttons}
         itemRenderer={itemRenderer}
         saveItems={saveItems}
-        // imageSets={locationImageSets}
       />
     )
 
