@@ -245,7 +245,6 @@ export default function FrameViewer() {
   }
 
   const renderFrame = () => {
-    const { critters1, critters2 } = frame
     const sceneName = getLocationName()
 
     return (
@@ -256,23 +255,11 @@ export default function FrameViewer() {
             <div className={css.wordsContainer}>{cloneDialogs()}</div>
             {renderButtons()}
           </div>
-          <div className={css.imageGroupsContainer}>
+          {/* <div className={css.imageGroupsContainer}>
             <div className={css.lizAndKatContainer}>
               {renderPosableCritters()}
             </div>
-            {/* <div className={css.charactersContainer}>
-              {renderCritters({
-                critters: critters2,
-              })}
-            </div> */}
-            {/* <div
-              className={cx(css.charactersContainer, css.charactersContainer2)}
-            >
-              {renderCritters({
-                critters: critters1,
-              })}
-            </div> */}
-          </div>
+          </div> */}
         </div>
       </div>
     )

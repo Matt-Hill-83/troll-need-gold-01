@@ -30,12 +30,6 @@ export default function StoryMode(props) {
     return <div>no world</div>
   }
 
-  const renderWorldName = (
-    <div tabIndex={0} className={css.worldTitle}>
-      <span> {world.title} </span>
-    </div>
-  )
-
   const mainBackground = backgroundImage
     ? images.newBackgrounds[backgroundImage]
     : images.backgrounds["hill01"]
@@ -61,6 +55,41 @@ export default function StoryMode(props) {
     })
   }
 
+  const renderPosableCritters = () => {
+    const { faces = [] } = frame
+    if (!frame) return null
+
+    const posableCharacters = Constants.posableCharacters
+
+    const critters =
+      frame.critters1.filter((item) => {
+        return posableCharacters.includes(item.name)
+      }) || []
+
+    const critterNames = critters.map((item) => item.name)
+    return critterNames.map((character, index) => {
+      const mood = getMood({ name: character, faces })
+
+      return (
+        <div className={`${css.characterContainer2}`} key={index}>
+          <Character
+            name={character}
+            mood={mood}
+            isEditMode={false}
+            showHeadOnly={false}
+          />
+        </div>
+      )
+    })
+  }
+
+  const getMood = ({ name, faces }) => {
+    let mood = "ok"
+    const newMood = faces && faces.find((face) => face.character === name)
+    mood = (newMood && newMood.face) || mood
+    return mood
+  }
+
   const renderLocationImage = () => {
     const locationName = activeScene?.location?.name
 
@@ -84,14 +113,13 @@ export default function StoryMode(props) {
     <div className={`${css.main}`}>
       <img className={css.backgroundImage} src={mainBackground} alt={"bk"} />
       <img className={css.backgroundImage2} src={mainBackground2} alt={"bk"} />
-      {renderWorldName}
-      {/* <div className={`${css.missionConsoleBox}`}>
+      <div className={`${css.missionConsoleBox}`}>
         {showMissionConsole && <MissionConsole world={world} />}
-      </div> */}
-      <div className={`${css.halfPage} ${css.leftHalf}`}>
-        {/* <FrameViewer /> */}
       </div>
-      {/* {renderLocationImage()} */}
+      <div className={`${css.halfPage} ${css.leftHalf}`}>
+        <FrameViewer />
+      </div>
+      {renderLocationImage()}
       <div className={css.charactersContainer}>
         {renderCritters({
           critters: critters2,
@@ -102,10 +130,13 @@ export default function StoryMode(props) {
           critters: critters1,
         })}
       </div>
+      <div className={css.imageGroupsContainer}>
+        <div className={css.lizAndKatContainer}>{renderPosableCritters()}</div>
+      </div>
 
-      {/* <div className={`${css.halfPage} ${css.rightHalf}`}>
+      <div className={`${css.halfPage} ${css.rightHalf}`}>
         <WorldViewer updateActiveScene={updateActiveScene} />
-      </div> */}
+      </div>
     </div>
   )
 }
