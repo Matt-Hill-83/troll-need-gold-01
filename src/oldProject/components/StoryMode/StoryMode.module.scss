@@ -100,13 +100,13 @@
 
   .locationImage {
     border: 1px solid green !important;
+    position: relative;
     z-index: 100;
-    height: 45vh;
+    height: 100%;
     width: auto;
-    bottom: 24vh;
-    top: unset;
-    position: absolute;
-    right: -1vh;
+    // bottom: 24vh;
+    // top: unset;
+    // right: -1vh;
   }
 
   .backgroundImage {

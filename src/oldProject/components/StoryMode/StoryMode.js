@@ -1,7 +1,7 @@
 import cx from "classnames"
 import { Rnd } from "react-rnd"
 
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import Draggable from "react-draggable"
 
 import { myContext } from "../../../myProvider.js"
@@ -14,9 +14,19 @@ import MissionConsole from "../MissionConsole/MissionConsole.js"
 import WorldViewer from "../WorldViewer/WorldViewer.js"
 
 import css from "./StoryMode.module.scss"
+import { updateQuestInFirestore } from "../../../app/firestore/firestoreService.js"
 
 export default function StoryMode(props) {
   const { updateActiveScene } = props
+
+  const initialRnD = {
+    width: 200,
+    height: 200,
+    x: 10,
+    y: 10,
+  }
+
+  const [itemPosition, setItemPosition] = useState(initialRnD)
 
   const [globalState] = useContext(myContext)
   const {
@@ -91,26 +101,68 @@ export default function StoryMode(props) {
     return newMood?.face || mood
   }
 
-  const handleStart = () => {
-    console.log("handleStart")
-  }
-
-  const handleDrag = () => {
-    console.log("handleDrag")
-  }
-
-  const handleStop = () => {
-    console.log("handleStop")
-  }
-
   const renderLocationImage = () => {
     const locationName = activeScene?.location?.name
     const newItem = { name: locationName }
 
-    const eventLogger = (e, data) => {
-      console.log("Event: ", e)
-      console.log("Data: ", data)
+    const style = {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      border: "solid 1px #ddd",
+      background: "#f0f0f0",
     }
+
+    const onDragStop = (d) => {
+      // console.log("onDragStop") // zzz
+      setItemPosition({ x: d.x, y: d.y })
+
+      updateQuestInFirestore(world)
+    }
+
+    const onResizeStop = ({ ref, position }) => {
+      console.log("onResizeStop") // zzz
+      setItemPosition({
+        width: ref.style.width,
+        height: ref.style.height,
+        ...position,
+      })
+    }
+
+    return (
+      <Rnd
+        style={style}
+        size={{ width: itemPosition.width, height: itemPosition.height }}
+        position={{ x: itemPosition.x, y: itemPosition.y }}
+        onDragStop={(e, d) => {
+          console.log("e", e) // zzz
+          console.log("d", d) // zzz
+          onDragStop(d)
+        }}
+        onResizeStop={(e, direction, ref, delta, position) => {
+          onResizeStop({ ref, position })
+          // setItemPosition({
+          //   width: ref.style.width,
+          //   height: ref.style.height,
+          //   ...position,
+          // })
+          // this.setState({
+          //   width: ref.style.width,
+          //   height: ref.style.height,
+          //   ...position,
+          // })
+        }}
+      >
+        <div className={css.locationDragger}>
+          <ImageDisplay
+            className={css.locationImage}
+            item={newItem}
+            showLabel={true}
+          />
+        </div>
+        {/* <div className={css.locationDragger}>Rnd</div> */}
+      </Rnd>
+    )
 
     return (
       <Rnd
@@ -121,45 +173,23 @@ export default function StoryMode(props) {
           height: 400,
         }}
       >
-        <div className={css.locationDragger}>Rnd</div>
-      </Rnd>
-    )
-    return (
-      <Draggable
-        axis="x"
-        handle=".handle"
-        defaultPosition={{ x: 0, y: 0 }}
-        position={null}
-        grid={[25, 25]}
-        scale={1}
-        onStart={handleStart}
-        onDrag={handleDrag}
-        onStop={handleStop}
-      >
-        <div>
-          <div className="handle">Drag from here</div>
-          <div>This readme is really dragging on...</div>
+        <div className={css.locationDragger}>
           <ImageDisplay
-            xxxclassName={css.locationImage}
+            // className={css.locationImage}
             item={newItem}
             showLabel={true}
           />
         </div>
-      </Draggable>
-    )
-
-    return (
-      <ImageDisplay
-        className={css.locationImage}
-        item={newItem}
-        showLabel={true}
-      />
+        {/* <div className={css.locationDragger}>Rnd</div> */}
+      </Rnd>
     )
   }
+  const getActiveFrame = ({ activeFrameIndex }) => {
+    const frames = activeScene?.frameSet?.frames || []
+    return frames[activeFrameIndex]
+  }
 
-  const frames = activeScene?.frameSet?.frames || []
-  const frame = frames[activeFrameIndex]
-
+  const frame = getActiveFrame({ activeFrameIndex })
   const { critters1, critters2 } = frame
 
   return (

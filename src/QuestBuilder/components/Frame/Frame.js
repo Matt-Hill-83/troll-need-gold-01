@@ -20,16 +20,19 @@ class Frame extends Component {
 
   componentWillMount() {
     const { frameIndex, scene = {} } = this.props
-    const frameSet = scene.frameSet
-    const frame = frameSet && frameSet.frames && frameSet.frames[frameIndex]
+    // const frameSet = scene.frameSet
+    const frame = scene?.frameSet?.frames?.[frameIndex]
+
+    // const frame = frameSet && frameSet.frames && frameSet.frames[frameIndex]
 
     this.setState({ frame })
   }
 
   componentWillReceiveProps(newProps) {
     const { frameIndex, scene = {} } = newProps
-    const frameSet = scene.frameSet
-    const frame = frameSet && frameSet.frames && frameSet.frames[frameIndex]
+    const frame = scene?.frameSet?.frames?.[frameIndex]
+    // const frameSet = scene.frameSet
+    // const frame = frameSet && frameSet.frames && frameSet.frames[frameIndex]
     this.setState({ frame })
   }
 
