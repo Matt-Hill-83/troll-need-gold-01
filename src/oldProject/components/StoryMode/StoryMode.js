@@ -2,7 +2,6 @@ import cx from "classnames"
 import { Rnd } from "react-rnd"
 
 import React, { useContext, useState } from "react"
-// import Draggable from "react-draggable"
 
 import { myContext } from "../../../myProvider.js"
 import { updateQuestInFirestore } from "../../../app/firestore/firestoreService.js"
@@ -15,8 +14,14 @@ import MissionConsole from "../MissionConsole/MissionConsole.js"
 import WorldViewer from "../WorldViewer/WorldViewer.js"
 
 import css from "./StoryMode.module.scss"
+import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget.js"
 
 export default function StoryMode(props) {
+  const { getProfile } = useUpdateProfileWidget()
+  const profile = getProfile()
+
+  const isGod = profile.id === "AMAgzal2oAbHogUvO9vVeHWZygF3"
+
   const { updateActiveScene } = props
 
   const initialRnD = {
@@ -36,13 +41,6 @@ export default function StoryMode(props) {
     activeFrameIndex,
   } = globalState
   console.log("globalState", globalState) // zzz
-
-  // useEffect(() => {
-  //   const defaultPosition = { x: 500, y: 800 }
-  //   let position = activeScene?.location?.position || defaultPosition
-
-  //   return () => {}
-  // }, [dispatch, filter, startDate, retainState])
 
   const { backgroundImage } = activeScene
 
@@ -138,6 +136,13 @@ export default function StoryMode(props) {
         ...position,
       })
     }
+
+    // TODO - convert this to vw, vh and use it.
+    // TODO - convert this to vw, vh and use it.
+    // TODO - convert this to vw, vh and use it.
+    // TODO - convert this to vw, vh and use it.
+    // TODO - convert this to vw, vh and use it.
+    // position: {x: 1813, y: 596}
 
     const defaultPosition = { x: itemPosition.x, y: itemPosition.y }
     let position = activeScene?.location?.position || defaultPosition
