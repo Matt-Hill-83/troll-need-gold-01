@@ -2,9 +2,10 @@ import cx from "classnames"
 import { Rnd } from "react-rnd"
 
 import React, { useContext, useState } from "react"
-import Draggable from "react-draggable"
+// import Draggable from "react-draggable"
 
 import { myContext } from "../../../myProvider.js"
+import { updateQuestInFirestore } from "../../../app/firestore/firestoreService.js"
 import Character from "../../../Common/Components/Character/Character.js"
 import Constants from "../../../Common/Constants/Constants.js"
 import FrameViewer from "../FrameViewer/FrameViewer.js"
@@ -14,7 +15,6 @@ import MissionConsole from "../MissionConsole/MissionConsole.js"
 import WorldViewer from "../WorldViewer/WorldViewer.js"
 
 import css from "./StoryMode.module.scss"
-import { updateQuestInFirestore } from "../../../app/firestore/firestoreService.js"
 
 export default function StoryMode(props) {
   const { updateActiveScene } = props
@@ -36,6 +36,14 @@ export default function StoryMode(props) {
     activeFrameIndex,
   } = globalState
   console.log("globalState", globalState) // zzz
+
+  // useEffect(() => {
+  //   const defaultPosition = { x: 500, y: 800 }
+  //   let position = activeScene?.location?.position || defaultPosition
+
+  //   return () => {}
+  // }, [dispatch, filter, startDate, retainState])
+
   const { backgroundImage } = activeScene
 
   if (!world || !world.title) {
@@ -113,10 +121,12 @@ export default function StoryMode(props) {
       background: "#f0f0f0",
     }
 
-    const onDragStop = (d) => {
+    const onDragStop = ({ d, activeScene }) => {
       // console.log("onDragStop") // zzz
-      setItemPosition({ x: d.x, y: d.y })
-
+      const newPosition = { x: d.x, y: d.y }
+      setItemPosition(newPosition)
+      console.log("activeScene.location", activeScene.location) // zzz
+      activeScene.location.position = newPosition
       updateQuestInFirestore(world)
     }
 
@@ -129,28 +139,21 @@ export default function StoryMode(props) {
       })
     }
 
+    const defaultPosition = { x: itemPosition.x, y: itemPosition.y }
+    let position = activeScene?.location?.position || defaultPosition
+
     return (
       <Rnd
         style={style}
         size={{ width: itemPosition.width, height: itemPosition.height }}
-        position={{ x: itemPosition.x, y: itemPosition.y }}
+        position={position}
         onDragStop={(e, d) => {
           console.log("e", e) // zzz
           console.log("d", d) // zzz
-          onDragStop(d)
+          onDragStop({ d, activeScene })
         }}
         onResizeStop={(e, direction, ref, delta, position) => {
           onResizeStop({ ref, position })
-          // setItemPosition({
-          //   width: ref.style.width,
-          //   height: ref.style.height,
-          //   ...position,
-          // })
-          // this.setState({
-          //   width: ref.style.width,
-          //   height: ref.style.height,
-          //   ...position,
-          // })
         }}
       >
         <div className={css.locationDragger}>
@@ -217,7 +220,7 @@ export default function StoryMode(props) {
       <div className={`${css.halfPage} ${css.rightHalf}`}>
         <WorldViewer updateActiveScene={updateActiveScene} />
       </div>
-      {/* {renderLocationImage()} */}
+      {renderLocationImage()}
     </div>
   )
 }
