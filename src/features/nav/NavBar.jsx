@@ -26,7 +26,7 @@ export default function NavBar() {
         </>
       )}
       {authenticated ? <SignedInMenu /> : <SignedOutMenu />}
-      <div className={css.worldTitle}>{worldTitle}</div>
+      {worldTitle && <div className={css.worldTitle}>{worldTitle}</div>}
     </Menu>
   )
 }

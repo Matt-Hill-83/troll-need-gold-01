@@ -20,10 +20,7 @@ class Frame extends Component {
 
   componentWillMount() {
     const { frameIndex, scene = {} } = this.props
-    // const frameSet = scene.frameSet
     const frame = scene?.frameSet?.frames?.[frameIndex]
-
-    // const frame = frameSet && frameSet.frames && frameSet.frames[frameIndex]
 
     this.setState({ frame })
   }
@@ -31,8 +28,6 @@ class Frame extends Component {
   componentWillReceiveProps(newProps) {
     const { frameIndex, scene = {} } = newProps
     const frame = scene?.frameSet?.frames?.[frameIndex]
-    // const frameSet = scene.frameSet
-    // const frame = frameSet && frameSet.frames && frameSet.frames[frameIndex]
     this.setState({ frame })
   }
 
@@ -40,11 +35,6 @@ class Frame extends Component {
     const { deleteFrame, frameIndex } = this.props
     await deleteFrame({ frameIndex })
   }
-
-  // cloneFrame = async () => {
-  //   const { cloneFrame, frameIndex } = this.props
-  //   await cloneFrame({ frameIndex })
-  // }
 
   selectHead = ({ name, head }) => {
     const { updateFrameSet } = this.props
@@ -277,8 +267,6 @@ class Frame extends Component {
   }
 
   render() {
-    // const { scene } = this.props
-
     const { frame, showFacePicker, facePickerCharacter } = this.state
 
     if (!frame) {

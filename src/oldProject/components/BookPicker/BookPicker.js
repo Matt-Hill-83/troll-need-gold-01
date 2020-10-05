@@ -160,7 +160,9 @@ export default function BookPicker(props) {
 
     const bookTableOfContents01 = Images.backgrounds["bookTableOfContents01"]
     // const titlePageImage = selectedBook.titlePageImage || ""
-    let titlePageImage = ""
+    console.log("selectedBook.titlePageImage", selectedBook.titlePageImage) // zzz
+
+    let titlePageImage = "bookCover01BatOfDoom"
     if (selectedBook.titlePageImage) {
       titlePageImage = Images.backgrounds[selectedBook.titlePageImage]
     }
@@ -247,7 +249,10 @@ export default function BookPicker(props) {
 
   const renderProdBooks = ({ books }) => {
     const prodBooks = getProdBooks({ books })
-    return renderBookList({ books: prodBooks, showLocks: true })
+    return [
+      renderBookList({ books: prodBooks.slice(0, 4), showLocks: true }),
+      renderBookList({ books: prodBooks.slice(4), showLocks: true }),
+    ]
   }
 
   const renderNonProdBooks = ({ books }) => {
@@ -258,9 +263,10 @@ export default function BookPicker(props) {
   const renderBookList = ({ books, showLocks }) => {
     let prevBookCompleted = true
 
-    return books.map((book, index) => {
+    const renderedList = books.map((book, index) => {
       const { name, id: bookId } = book
-      const bookImage = Images.backgrounds[book.imageName]
+      // const bookImage = Images.backgrounds[book.imageName]
+      const bookImage = Images.backgrounds["bookSpines01"]
 
       const truncatedTitle = Utils.trimToDashIfProd({
         isProdRelease,
@@ -308,6 +314,8 @@ export default function BookPicker(props) {
       prevBookCompleted = bookIsCompleted
       return renderedBook
     })
+
+    return <div className={css.bookStack}> {renderedList} </div>
   }
 
   const backgroundImage = Images.backgrounds["meadow"]
@@ -323,7 +331,9 @@ export default function BookPicker(props) {
       <div className={css.questPage}>
         <div className={css.content}>
           <div className={css.questTable}>
+            Books
             <div className={css.scrollArea}>{renderProdBooks({ books })}</div>
+            Not Released
             {!isProdRelease && (
               <div className={css.scrollArea}>
                 {renderNonProdBooks({ books })}
