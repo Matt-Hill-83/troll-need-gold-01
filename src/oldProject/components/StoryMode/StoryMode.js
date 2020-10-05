@@ -217,7 +217,7 @@ export default function StoryMode(props) {
       <div className={`${css.halfPage} ${css.rightHalf}`}>
         <WorldViewer updateActiveScene={updateActiveScene} />
       </div>
-      {renderLocationImage()}
+      {/* {renderLocationImage()} */}
     </div>
   )
 }

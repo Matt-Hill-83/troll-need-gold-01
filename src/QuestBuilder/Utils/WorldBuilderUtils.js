@@ -84,14 +84,14 @@ export default class WorldBuilderUtils {
 
   static updateMap = async ({ newProps = {}, mapToUpdate }) => {
     console.log("updateMap-------------start")
-    console.log("mapToUpdate", mapToUpdate) // zzz
+    // console.log("mapToUpdate", mapToUpdate) // zzz
     const map = mapToUpdate || worldBuilderStore.getWorldBuilderWorld()
 
     Object.assign(map, { ...newProps })
 
     map.newGrid5 = WorldBuilderUtils.createCondensedGridFromGrid()
-    console.log("map.newGrid5[0]", map.newGrid5[0]) // zzz
-    console.log("map.newGrid5", map.newGrid5) // zzz
+    // console.log("map.newGrid5[0]", map.newGrid5[0]) // zzz
+    // console.log("map.newGrid5", map.newGrid5) // zzz
 
     map.newGrid5.forEach((scene) => {
       this.addIdToAllItemsInScene({ scene })
@@ -101,7 +101,7 @@ export default class WorldBuilderUtils {
     })
 
     delete map.grid
-    console.log("map", map) // zzz
+    // console.log("map", map) // zzz
     await updateQuestInFirestore(map)
     console.log("updateMap------------end")
     return true

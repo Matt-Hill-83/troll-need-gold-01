@@ -128,6 +128,18 @@ export default function DialogBuilder2(props) {
       )
     }
 
+    const onAddDialogRows = ({ numRowsToAdd, before, items, rowIndex }) => {
+      for (let i = 0; i < numRowsToAdd; i++) {
+        const newElement = Constants.getNewDialog()
+        Utils.addArrayElement({
+          newElement,
+          before,
+          index: rowIndex,
+          array: items,
+        })
+      }
+    }
+
     const renderAddDialogRowButton = () => {
       return (
         <Button
@@ -245,9 +257,12 @@ export default function DialogBuilder2(props) {
   }
 
   const onDuplicateFrame = ({ rowIndex, frames, frame }) => {
-    const newElement = WorldBuilderUtils.getNewFrame({ props: { ...frame } })
-
     const dupFrame = JSON.parse(JSON.stringify(frame))
+    const { critters1 = [], critters2 = [] } = dupFrame
+
+    critters1.forEach((item) => (item.id = Utils.generateUuid()))
+    critters2.forEach((item) => (item.id = Utils.generateUuid()))
+
     Utils.addArrayElement({
       newElement: dupFrame,
       before: false,
@@ -260,6 +275,20 @@ export default function DialogBuilder2(props) {
 
   const onDeleteFrame = ({ rowIndex, frames }) => {
     Utils.deleteArrayElement({ index: rowIndex, array: frames })
+    localSave()
+  }
+
+  const onAddDialogRows = ({ numRows = 5, rowIndex, before, items }) => {
+    for (let i = 0; i < numRows; i++) {
+      const newElement = Constants.getNewDialog()
+      Utils.addArrayElement({
+        newElement,
+        before,
+        index: rowIndex,
+        array: items,
+      })
+    }
+
     localSave()
   }
 
@@ -338,7 +367,8 @@ export default function DialogBuilder2(props) {
           rowIndex: dialogIndex,
           onDelete: ({ rowIndex }) => onDeleteRow({ items: dialogs, rowIndex }),
           onAdd: ({ rowIndex, before }) =>
-            onAddDialogRow({ items: dialogs, rowIndex, before }),
+            // onAddDialogRow({ items: dialogs, rowIndex, before }),
+            onAddDialogRows({ items: dialogs, rowIndex, before }),
           vertical: false,
           noPopover: true,
           className: css.dialogBuilderButtonGroup,
