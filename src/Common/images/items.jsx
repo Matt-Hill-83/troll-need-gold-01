@@ -1,3 +1,4 @@
+import portal01 from "./items/portal01.png"
 import balloon01 from "./items/balloon01.png"
 import angusBalloon01 from "./creatures/angusBalloon01.png"
 import bag from "./locations/bag.png"
@@ -92,6 +93,7 @@ const items = {
   rag,
   tag,
   top,
+  portal01,
 }
 
 export default items

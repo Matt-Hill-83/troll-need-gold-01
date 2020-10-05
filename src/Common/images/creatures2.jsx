@@ -1,3 +1,6 @@
+import azrael01 from "./creatures/azrael01.png"
+import gargamel01 from "./creatures/gargamel01.png"
+
 import oliveRori01cu02Eyes from "./creatures/oliveRori01cu02Eyes.png"
 import vector01 from "./creatures/vector01.png"
 import vector02 from "./creatures/vector02.png"
@@ -141,6 +144,8 @@ const tj = {
   //   tj004,
 }
 const creatures2animals = {
+  azrael01,
+  gargamel01,
   babyTroll02: will01,
   jasmine02,
   oliveRori01cu02Eyes,
