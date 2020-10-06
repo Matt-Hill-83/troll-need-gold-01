@@ -69,7 +69,7 @@ export default function StoryMode(props) {
       }) || []
 
     const critterNames = critters.map((item) => item.name)
-    return critterNames.map((character, index) => {
+    const output = critterNames.map((character, index) => {
       const mood = getMood({ name: character, faces })
 
       return (
@@ -83,6 +83,8 @@ export default function StoryMode(props) {
         </div>
       )
     })
+
+    return <div className={css.lizAndKatContainer}>{output}</div>
   }
 
   const getMood = ({ name, faces }) => {
@@ -120,11 +122,9 @@ export default function StoryMode(props) {
           critters: critters1,
         })}
       </div>
-      <div className={css.lizAndKatContainer}>{renderPosableCritters()}</div>
+      {renderPosableCritters()}
 
-      {/* <div className={`${css.halfPage} ${css.rightHalf}`}> */}
       <WorldViewer updateActiveScene={updateActiveScene} />
-      {/* </div> */}
       <LocationImage></LocationImage>
     </div>
   )
