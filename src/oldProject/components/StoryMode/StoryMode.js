@@ -4,18 +4,16 @@ import { Rnd } from "react-rnd"
 import React, { useContext, useState, useEffect } from "react"
 
 import { myContext } from "../../../myProvider.js"
-import { updateQuestInFirestore } from "../../../app/firestore/firestoreService.js"
 import Character from "../../../Common/Components/Character/Character.js"
 import Constants from "../../../Common/Constants/Constants.js"
 import FrameViewer from "../FrameViewer/FrameViewer.js"
-import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay.js"
 import images from "../../../Common/Images/images.js"
 import MissionConsole from "../MissionConsole/MissionConsole.js"
 import WorldViewer from "../WorldViewer/WorldViewer.js"
 import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget.js"
 
 import css from "./StoryMode.module.scss"
-import { Button } from "@blueprintjs/core"
+import LocationImage from "../LocationImage/LocationImage.jsx"
 
 export default function StoryMode(props) {
   const [globalState] = useContext(myContext)
@@ -143,152 +141,6 @@ export default function StoryMode(props) {
     return newMood?.face || mood
   }
 
-  // const renderLocationImage = () => {
-  //   const locationName = activeScene?.location?.name
-  //   const newItem = { name: locationName }
-
-  //   const style = {
-  //     right: "0",
-  //     bottom: "0",
-  //     top: "unset",
-  //     left: "unset",
-  //     display: "flex",
-  //     alignItems: "center",
-  //     justifyContent: "center",
-  //     border: "solid 1px #ddd",
-  //     background: "#f0f0f0",
-  //   }
-
-  //   const onDragStop = ({ d, e }) => {
-  //     const prevPosition = getPosition()
-  //     const newPosition = { x: d.x, y: d.y }
-  //     const mergedPosition = { ...prevPosition, ...newPosition }
-  //     setItemPosition(mergedPosition)
-
-  //     console.log("mergedPosition - drag", mergedPosition) // zzz
-  //     // if (activeScene?.location?.position) {
-  //     //   activeScene.location.position = mergedPosition
-  //     // }
-
-  //     // Object.assign(prevPosition, mergedPosition)
-  //     // updateQuestInFirestore(world)
-  //   }
-
-  //   const onResizeStop = ({ ref, position }) => {
-  //     console.log("onResizeStop---------------") // zzz
-  //     console.log("position", position) // zzz
-  //     const prevPosition = getPosition()
-  //     const newPosition = {
-  //       width: ref.style.width,
-  //       height: ref.style.height,
-  //       ...position,
-  //     }
-  //     console.log("position", position) // zzz
-  //     console.log("prevPosition", prevPosition) // zzz
-  //     const mergedPosition = { ...prevPosition, ...newPosition }
-
-  //     console.log("mergedPosition", mergedPosition) // zzz
-  //     setItemPosition(mergedPosition)
-
-  //     // if (activeScene?.location?.position) {
-  //     //   activeScene.location.position = mergedPosition
-  //     // }
-  //     // Object.assign(prevPosition, mergedPosition)
-
-  //     console.log(
-  //       "activeScene.location.position",
-  //       activeScene.location.position
-  //     ) // zzz
-  //     // updateQuestInFirestore(world)
-  //   }
-
-  //   const savePositions = () => {
-  //     console.log("savePositions") // zzz
-  //     console.log("itemPosition", itemPosition) // zzz
-  //     if (activeScene?.location?.position) {
-  //       activeScene.location.position = itemPosition
-  //     }
-  //     updateQuestInFirestore(world)
-  //   }
-
-  //   const defaultPosition = { x: itemPosition.x, y: itemPosition.y }
-  //   let position = defaultPosition
-  //   // let position = activeScene?.location?.position || defaultPosition
-  //   const { width, height } = position
-
-  //   const size = {
-  //     width: width || itemPosition.width,
-  //     height: height || itemPosition.height,
-  //   }
-  //   console.log("itemPosition", itemPosition) // zzz
-  //   console.log("size", size) // zzz
-
-  //   const buttons = <Button onClick={savePositions}>test</Button>
-
-  //   return (
-  //     <Rnd
-  //       className={css.locationImageDragger}
-  //       style={style}
-  //       size={size}
-  //       position={position}
-  //       onDragStop={(e, d) => {
-  //         onDragStop({ d, e })
-  //       }}
-  //       onResizeStop={(e, direction, ref, delta, position) => {
-  //         onResizeStop({ ref, position })
-  //       }}
-  //     >
-  //       <div className={css.locationDragger}>
-  //         {/* <img className={css.image} src={image} alt={"locationName"} /> */}
-  //         <ImageDisplay
-  //           className={css.locationImage}
-  //           item={newItem}
-  //           showLabel={true}
-  //           buttons={buttons}
-  //         />
-  //       </div>
-  //       {/* Div to shield child element from clicks */}
-  //       <div
-  //         style={{
-  //           width: "100%",
-  //           height: "100%",
-  //           // backgroundColor: "blue",
-  //           position: "absolute",
-  //           zIndex: "100",
-  //         }}
-  //       >
-  //         test-----
-  //       </div>
-  //       {/* <div className={css.locationDragger}>Rnd</div> */}
-  //     </Rnd>
-  //   )
-
-  //   // return (
-  //   //   <Rnd
-  //   //     default={{
-  //   //       x: 0,
-  //   //       y: 0,
-  //   //       width: 620,
-  //   //       height: 400,
-  //   //     }}
-  //   //     onDragStop={(e, d) => {
-  //   //       onDragStop({ d, e })
-  //   //     }}
-  //   //     onResizeStop={(e, direction, ref, delta, position) => {
-  //   //       onResizeStop({ ref, position })
-  //   //     }}
-  //   //   >
-  //   //     <div className={css.locationDragger}>
-  //   //       <ImageDisplay
-  //   //         // className={css.locationImage}
-  //   //         item={newItem}
-  //   //         showLabel={true}
-  //   //       />
-  //   //     </div>
-  //   //     {/* <div className={css.locationDragger}>Rnd</div> */}
-  //   //   </Rnd>
-  //   // )
-  // }
   const getActiveFrame = ({ activeFrameIndex }) => {
     const frames = activeScene?.frameSet?.frames || []
     return frames[activeFrameIndex]
@@ -324,7 +176,7 @@ export default function StoryMode(props) {
       <div className={`${css.halfPage} ${css.rightHalf}`}>
         <WorldViewer updateActiveScene={updateActiveScene} />
       </div>
-      {renderLocationImage()}
+      <LocationImage></LocationImage>
     </div>
   )
 }
