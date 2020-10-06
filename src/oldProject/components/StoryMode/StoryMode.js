@@ -128,19 +128,22 @@ export default function StoryMode(props) {
     const onDragStop = ({ d, e, activeScene }) => {
       // console.log("onDragStop") // zzz
       // console.log("e", e) // zzz
-      const newPosition = { x: d.x, y: d.y }
+
+      if (!activeScene?.location?.position) {
+        activeScene.location.position = {}
+      }
+      const prevPosition = activeScene?.location?.position || {}
+      const newPosition = { ...prevPosition, x: d.x, y: d.y }
       setItemPosition(newPosition)
+
       console.log("newPosition - drag", newPosition) // zzz
       console.log("activeScene.location", activeScene.location) // zzz
-      if (!activeScene?.location?.position) {
-        activeScene.location.position = newPosition
-      }
-      const prevPosition = activeScene?.location?.position
+
       console.log(
         "activeScene.location.position",
         activeScene.location.position
       ) // zzz
-      Object.assign(prevPosition || {}, newPosition)
+      Object.assign(prevPosition, newPosition)
       updateQuestInFirestore(world)
     }
 
@@ -150,7 +153,7 @@ export default function StoryMode(props) {
       const prevPosition = activeScene?.location?.position
       const newPosition = {
         // ...position,
-        prevPosition,
+        ...prevPosition,
         width: ref.style.width,
         height: ref.style.height,
       }
@@ -179,9 +182,15 @@ export default function StoryMode(props) {
     const defaultPosition = { x: itemPosition.x, y: itemPosition.y }
     // let position = defaultPosition
     let position = activeScene?.location?.position || defaultPosition
-    const image = images.all[locationName]
+    // const image = images.all[locationName]
 
-    const size = { width: itemPosition.width, height: itemPosition.height }
+    let { width, height } = activeScene?.location?.position
+
+    const size = {
+      width: width || itemPosition.width,
+      height: height || itemPosition.height,
+    }
+    console.log("itemPosition", itemPosition) // zzz
     console.log("size", size) // zzz
 
     return (
