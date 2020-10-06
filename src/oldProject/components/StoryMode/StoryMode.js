@@ -38,7 +38,7 @@ export default function StoryMode(props) {
 
     console.log("innerWidth", innerWidth) // zzz
     // x defines the NE corner
-    const x = innerWidth * 0.9
+    const x = innerWidth * 1
 
     // y defines the top
     const y = innerHeight * 0.7 - locationHeight
