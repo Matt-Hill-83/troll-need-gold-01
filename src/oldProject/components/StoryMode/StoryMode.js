@@ -125,7 +125,7 @@ export default function StoryMode(props) {
       {renderPosableCritters()}
 
       <WorldViewer updateActiveScene={updateActiveScene} />
-      <LocationImage></LocationImage>
+      <LocationImage />
     </div>
   )
 }
