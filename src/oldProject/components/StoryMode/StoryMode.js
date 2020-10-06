@@ -122,9 +122,9 @@ export default function StoryMode(props) {
       </div>
       <div className={css.lizAndKatContainer}>{renderPosableCritters()}</div>
 
-      <div className={`${css.halfPage} ${css.rightHalf}`}>
-        <WorldViewer updateActiveScene={updateActiveScene} />
-      </div>
+      {/* <div className={`${css.halfPage} ${css.rightHalf}`}> */}
+      <WorldViewer updateActiveScene={updateActiveScene} />
+      {/* </div> */}
       <LocationImage></LocationImage>
     </div>
   )

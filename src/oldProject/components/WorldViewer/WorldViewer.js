@@ -50,7 +50,8 @@ export default function WorldViewer(props) {
   }
 
   return (
-    <div className={`${css.main}`}>
+    <>
+      {/* <div className={`${css.main}`}> */}
       <div
         className={cx(css.mapScroller, {
           [css.mapScrollerSmall]: showLargeMap,
@@ -72,6 +73,7 @@ export default function WorldViewer(props) {
         </div>
       </div>
       <img className={css.bookCoil01} src={bookCoil01} alt={"bk"} />
-    </div>
+    </>
+    // </div>
   )
 }
