@@ -25,15 +25,11 @@ export default function LocationImage(props) {
     const locationWidth = 300
     const locationHeight = locationWidth
 
-    console.log("innerWidth", innerWidth) // zzz
     // x defines the NE corner
     const x = innerWidth * 0.9
 
     // y defines the top
     const y = innerHeight * 0.7 - locationHeight
-
-    console.log("x", x) // zzz
-    console.log("y", y) // zzz
 
     const savedPosition = {
       width: locationWidth,
@@ -50,7 +46,6 @@ export default function LocationImage(props) {
     }
   }
 
-  console.log("activeScene", activeScene) // zzz
   const [itemPosition, setItemPosition] = useState(getInitialRnD())
 
   useEffect(() => {
@@ -124,8 +119,6 @@ export default function LocationImage(props) {
       </Button>
     )
 
-    console.log("size", size) // zzz
-    console.log("itemPosition---------final", itemPosition) // zzz
     return (
       <Rnd
         className={css.locationImageDragger}
@@ -158,32 +151,6 @@ export default function LocationImage(props) {
         {isGod && buttons}
       </Rnd>
     )
-
-    // return (
-    //   <Rnd
-    //     default={{
-    //       x: 0,
-    //       y: 0,
-    //       width: 620,
-    //       height: 400,
-    //     }}
-    //     onDragStop={(e, d) => {
-    //       onDragStop({ d, e })
-    //     }}
-    //     onResizeStop={(e, direction, ref, delta, position) => {
-    //       onResizeStop({ ref, position })
-    //     }}
-    //   >
-    //     <div className={css.locationDragger}>
-    //       <ImageDisplay
-    //         // className={css.locationImage}
-    //         item={newItem}
-    //         showLabel={true}
-    //       />
-    //     </div>
-    //     {/* <div className={css.locationDragger}>Rnd</div> */}
-    //   </Rnd>
-    // )
   }
 
   return renderLocationImage()
