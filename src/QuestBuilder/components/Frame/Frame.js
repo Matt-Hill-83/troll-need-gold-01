@@ -100,7 +100,6 @@ class Frame extends Component {
 
   renderNarrative = () => {
     const { frame } = this.state
-    console.log("frame", frame) // zzz
     const { story = [] } = frame
 
     if (!story.length || !story[0]) return null
@@ -109,7 +108,6 @@ class Frame extends Component {
   renderDialog = () => {
     const { frame } = this.state
     const dialog = (frame && frame.dialog) || []
-    console.log("dialog", dialog) // zzz
 
     const renderedDialogs = dialog.map((line, lineIndex) => {
       const { text, characterIndex = 1 } = line
@@ -217,7 +215,6 @@ class Frame extends Component {
   }
 
   renderFrame = () => {
-    console.log("renderFrame") // zzz
     const { frame } = this.state
     if (!frame) return null
 

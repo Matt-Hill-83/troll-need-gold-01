@@ -95,10 +95,6 @@ class CrudMachine extends Component {
 
   onFlipImage = ({ index, item, event }) => {
     const { items } = this.state
-    console.log("item.flipImage", item.flipImage) // zzz
-    console.log("onFlipImage") // zzz
-    console.log("item", item) // zzz
-    console.log("event", event) // zzz
     item.flipImage = !item.flipImage
     event.stopPropagation()
     const statePropsToSave = { items }

@@ -12,10 +12,9 @@ import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay.j
 import images from "../../../Common/Images/images.js"
 import MissionConsole from "../MissionConsole/MissionConsole.js"
 import WorldViewer from "../WorldViewer/WorldViewer.js"
+import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget.js"
 
 import css from "./StoryMode.module.scss"
-import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget.js"
-import { unstable_batchedUpdates } from "react-dom"
 
 export default function StoryMode(props) {
   const { getProfile } = useUpdateProfileWidget()
@@ -24,23 +23,13 @@ export default function StoryMode(props) {
   const isGod = profile.id === "AMAgzal2oAbHogUvO9vVeHWZygF3"
 
   const { updateActiveScene } = props
-
   const innerWidth = window.innerWidth
   const innerHeight = window.innerHeight
-
-  console.log("innerHeight", innerHeight) // zzz
-  console.log("innerWidth", innerWidth) // zzz
-
-  console.log("window", window) // zzz
+  const locationWidth = 200
 
   const initialRnD = {
-    // width: 200,
-    // height: 200,
-    // top: "unset !important",
-    // left: "unset !important",
-    // right: "2 !important",
-    // bottom: "28vh !important",
-
+    width: locationWidth,
+    height: locationWidth,
     x: innerWidth * 0.8,
     y: innerHeight * 0.6,
   }
@@ -54,7 +43,6 @@ export default function StoryMode(props) {
     activeScene,
     activeFrameIndex,
   } = globalState
-  console.log("globalState", globalState) // zzz
 
   const { backgroundImage } = activeScene
 
@@ -138,22 +126,46 @@ export default function StoryMode(props) {
     }
 
     const onDragStop = ({ d, e, activeScene }) => {
-      console.log("e", e) // zzz
       // console.log("onDragStop") // zzz
+      // console.log("e", e) // zzz
       const newPosition = { x: d.x, y: d.y }
       setItemPosition(newPosition)
+      console.log("newPosition - drag", newPosition) // zzz
       console.log("activeScene.location", activeScene.location) // zzz
-      activeScene.location.position = newPosition
+      if (!activeScene?.location?.position) {
+        activeScene.location.position = newPosition
+      }
+      const prevPosition = activeScene?.location?.position
+      console.log(
+        "activeScene.location.position",
+        activeScene.location.position
+      ) // zzz
+      Object.assign(prevPosition || {}, newPosition)
       updateQuestInFirestore(world)
     }
 
     const onResizeStop = ({ ref, position }) => {
       console.log("onResizeStop") // zzz
-      setItemPosition({
+      console.log("position", position) // zzz
+      const newPosition = {
+        ...position,
         width: ref.style.width,
         height: ref.style.height,
-        ...position,
-      })
+      }
+      console.log("newPosition", newPosition) // zzz
+      setItemPosition(newPosition)
+      if (!activeScene?.location?.position) {
+        activeScene.location.position = newPosition
+      }
+
+      const prevPosition = activeScene?.location?.position
+      Object.assign(prevPosition || {}, newPosition)
+
+      console.log(
+        "activeScene.location.position",
+        activeScene.location.position
+      ) // zzz
+      updateQuestInFirestore(world)
     }
 
     // TODO - convert this to vw, vh and use it.
@@ -164,9 +176,9 @@ export default function StoryMode(props) {
     // const defaultPosition = { x: 1813, y: 596 }
 
     const defaultPosition = { x: itemPosition.x, y: itemPosition.y }
-    let position = defaultPosition
-    // let position = activeScene?.location?.position || defaultPosition
-
+    // let position = defaultPosition
+    let position = activeScene?.location?.position || defaultPosition
+    const image = images.all[locationName]
     return (
       <Rnd
         className={css.locationImageDragger}
@@ -183,11 +195,13 @@ export default function StoryMode(props) {
         }}
       >
         <div className={css.locationDragger}>
+          test
+          {/* <img className={css.image} src={image} alt={"locationName"} />
           <ImageDisplay
             className={css.locationImage}
             item={newItem}
             showLabel={true}
-          />
+          /> */}
         </div>
         {/* <div className={css.locationDragger}>Rnd</div> */}
       </Rnd>

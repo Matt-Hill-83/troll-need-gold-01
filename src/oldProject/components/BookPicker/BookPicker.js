@@ -159,8 +159,6 @@ export default function BookPicker(props) {
     }
 
     const bookTableOfContents01 = Images.backgrounds["bookTableOfContents01"]
-    // const titlePageImage = selectedBook.titlePageImage || ""
-    console.log("selectedBook.titlePageImage", selectedBook.titlePageImage) // zzz
 
     let titlePageImage = "bookCover01BatOfDoom"
     if (selectedBook.titlePageImage) {
@@ -243,7 +241,7 @@ export default function BookPicker(props) {
   }
 
   const hardRefresh = async () => {
-    console.log("hardRefresh") // zzz
+    console.log("hardRefresh")
     window.location.reload(true)
   }
 

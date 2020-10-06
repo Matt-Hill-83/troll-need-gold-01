@@ -38,8 +38,6 @@ export default function TopLevel(props) {
   const { globalState, setGlobalStateProps } = useGlobalState()
   const { questStatus = null, pocketsLoaded } = globalState
 
-  console.log("pocketsLoaded---------------------------->>>>", pocketsLoaded)
-
   // on mount
   useEffect(() => {
     toaster.clear()
@@ -53,7 +51,7 @@ export default function TopLevel(props) {
 
   // on change in props
   useEffect(() => {
-    console.log("new props =================================>>>>>")
+    // console.log("new props =================================>>>>>")
 
     world = props.quest
     addSavedPocketsToLocalPockets()
@@ -79,7 +77,6 @@ export default function TopLevel(props) {
 
   const onChangeWorld = ({ initialQuestStatus }) => {
     const _questStatus = questStatus || initialQuestStatus
-    console.log("onChangeWorld")
 
     toaster.clear()
 
@@ -89,6 +86,7 @@ export default function TopLevel(props) {
     const { questConfig } = world
 
     console.log("")
+    console.log("onChangeWorld")
     console.log("-----------------------mapId-------------", world.id)
 
     const startScene = TopLevelUtils.getTerminalScene({
