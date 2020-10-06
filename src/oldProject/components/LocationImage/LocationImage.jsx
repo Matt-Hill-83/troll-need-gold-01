@@ -88,8 +88,6 @@ export default function LocationImage(props) {
       setItemPosition(mergedPosition)
 
       console.log("mergedPosition - drag", mergedPosition) // zzz
-
-      // updateQuestInFirestore(world)
     }
 
     const onResizeStop = ({ ref, position }) => {
@@ -107,8 +105,6 @@ export default function LocationImage(props) {
 
       console.log("mergedPosition", mergedPosition) // zzz
       setItemPosition(mergedPosition)
-
-      // updateQuestInFirestore(world)
     }
 
     const savePositions = () => {
@@ -156,7 +152,6 @@ export default function LocationImage(props) {
             className={css.locationImage}
             item={newItem}
             showLabel={true}
-            // buttons={buttons}
           />
         </div>
         {/* Div to shield child element from clicks */}
@@ -168,7 +163,7 @@ export default function LocationImage(props) {
             zIndex: "100",
           }}
         />
-        {buttons}
+        {isGod && buttons}
       </Rnd>
     )
 
