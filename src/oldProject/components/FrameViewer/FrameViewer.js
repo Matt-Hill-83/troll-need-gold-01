@@ -15,6 +15,7 @@ import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget"
 import WordGroup from "../WordGroup/WordGroup"
 
 import css from "./FrameViewer.module.scss"
+import MyAudioConsole from "../MyAudioConsole/MyAudioConsole"
 
 export default function FrameViewer() {
   const [globalState, setGlobalState] = useContext(myContext)
@@ -80,20 +81,13 @@ export default function FrameViewer() {
             <span className={css.characterName}>{characterName}</span>
           </div>
           {indexIsEven && renderedWordGroup}
-
-          <div className={css.audioButtonsContainer}>
-            <ButtonGroup className={css.audioButtons}>
-              {audioURL && (
-                <AudioPlayer className={css.audioPlayer} sound={audioURL} />
-              )}
-              {loggedIn && (
-                <AudioRecorder
-                  recorderClassName={css.audioRecorder}
-                  saveAudio={({ blob }) => saveAudio({ dialog: line, blob })}
-                />
-              )}
-            </ButtonGroup>
-          </div>
+          <MyAudioConsole
+            className={css.audioConsole}
+            audioURL={audioURL}
+            saveAudio={saveAudio}
+            dialog={line}
+            loggedIn={loggedIn}
+          />
         </div>
       )
     })
@@ -112,35 +106,8 @@ export default function FrameViewer() {
     )
   }
 
-  const getMood = ({ name, faces }) => {
-    let mood = "ok"
-    const newMood = faces && faces.find((face) => face.character === name)
-    mood = (newMood && newMood.face) || mood
-    return mood
-  }
-
   const getLocationName = () => {
     return activeScene?.location?.name
-  }
-
-  const renderCritters = ({ critters, className }) => {
-    const filteredCritters =
-      critters.filter((item) => {
-        return !Constants.posableCharacters.includes(item.name)
-      }) || []
-
-    return filteredCritters.map((character, index) => {
-      return (
-        <div className={cx(css.characterContainer, className)} key={index}>
-          <Character
-            name={character.name}
-            flipImage={character.flipImage}
-            isEditMode={false}
-            showHeadOnly={false}
-          />
-        </div>
-      )
-    })
   }
 
   const onClickNext = () => {

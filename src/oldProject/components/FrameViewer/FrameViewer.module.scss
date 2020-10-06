@@ -1,5 +1,12 @@
 @import "../../../Common/Styles/mixins.modules.scss";
 
+.audioConsole {
+  position: absolute;
+  display: flex;
+  transform: translateX(-100%);
+  left: 0;
+}
+
 .main {
   border: 4px solid blue !important;
 
@@ -7,30 +14,6 @@
 
   display: flex;
   flex: 1;
-
-  .audioButtonsContainer {
-    left: 0;
-    position: absolute;
-    display: flex;
-    height: 100%;
-    transform: translateX(-100%);
-
-    .audioButtons {
-      cursor: pointer;
-      display: flex;
-      position: relative;
-      height: 100%;
-
-      button {
-        height: 2vh;
-        width: 2vh;
-      }
-    }
-  }
-
-  .audioPlayer {
-    border: 4px solid blue !important;
-  }
 
   .clickMapMsg {
     display: flex;
