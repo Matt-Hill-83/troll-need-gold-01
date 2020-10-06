@@ -1,7 +1,7 @@
 import cx from "classnames"
 import { Rnd } from "react-rnd"
 
-import React, { useContext, useState } from "react"
+import React, { useContext, useState, useEffect } from "react"
 
 import { myContext } from "../../../myProvider.js"
 import { updateQuestInFirestore } from "../../../app/firestore/firestoreService.js"
@@ -17,25 +17,6 @@ import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget.js"
 import css from "./StoryMode.module.scss"
 
 export default function StoryMode(props) {
-  const { getProfile } = useUpdateProfileWidget()
-  const profile = getProfile()
-
-  const isGod = profile.id === "AMAgzal2oAbHogUvO9vVeHWZygF3"
-
-  const { updateActiveScene } = props
-  const innerWidth = window.innerWidth
-  const innerHeight = window.innerHeight
-  const locationWidth = 200
-
-  const initialRnD = {
-    width: locationWidth,
-    height: locationWidth,
-    x: innerWidth * 0.8,
-    y: innerHeight * 0.6,
-  }
-
-  const [itemPosition, setItemPosition] = useState(initialRnD)
-
   const [globalState] = useContext(myContext)
   const {
     world,
@@ -43,6 +24,48 @@ export default function StoryMode(props) {
     activeScene,
     activeFrameIndex,
   } = globalState
+
+  const { getProfile } = useUpdateProfileWidget()
+  const profile = getProfile()
+
+  const isGod = profile.id === "AMAgzal2oAbHogUvO9vVeHWZygF3"
+  const { updateActiveScene } = props
+
+  const getInitialRnD = () => {
+    const innerWidth = window.innerWidth
+    const innerHeight = window.innerHeight
+    const locationWidth = 300
+    const locationHeight = locationWidth
+
+    console.log("innerWidth", innerWidth) // zzz
+    const x = innerWidth * 0.9 - locationWidth
+    const y = innerHeight * 0.6 - locationHeight
+
+    console.log("x", x) // zzz
+    console.log("y", y) // zzz
+    const initialRnD = {
+      // width: locationWidth,
+      // height: locationHeight,
+      x,
+      y,
+    }
+    return initialRnD
+  }
+
+  console.log("activeScene", activeScene) // zzz
+  const [itemPosition, setItemPosition] = useState(getInitialRnD())
+
+  useEffect(() => {
+    // returned function will be called on component unmount
+    return () => {}
+  }, [])
+
+  // on change in props
+  useEffect(() => {
+    const initialRnD = getInitialRnD()
+    setItemPosition(initialRnD)
+    console.log("new props =================================>>>>>")
+  }, [props])
 
   const { backgroundImage } = activeScene
 
@@ -103,6 +126,13 @@ export default function StoryMode(props) {
     })
   }
 
+  const getPosition = () => {
+    if (!activeScene?.location?.position) {
+      activeScene.location.position = {}
+    }
+    return activeScene?.location?.position || {}
+  }
+
   const getMood = ({ name, faces }) => {
     let mood = "ok"
     const newMood = faces && faces.find((face) => face.character === name)
@@ -125,45 +155,35 @@ export default function StoryMode(props) {
       background: "#f0f0f0",
     }
 
-    const onDragStop = ({ d, e, activeScene }) => {
-      // console.log("onDragStop") // zzz
-      // console.log("e", e) // zzz
+    const onDragStop = ({ d, e }) => {
+      const prevPosition = getPosition()
+      const newPosition = { x: d.x, y: d.y }
+      const mergedPosition = { ...prevPosition, ...newPosition }
+      setItemPosition(mergedPosition)
 
-      if (!activeScene?.location?.position) {
-        activeScene.location.position = {}
-      }
-      const prevPosition = activeScene?.location?.position || {}
-      const newPosition = { ...prevPosition, x: d.x, y: d.y }
-      setItemPosition(newPosition)
+      console.log("mergedPosition - drag", mergedPosition) // zzz
 
-      console.log("newPosition - drag", newPosition) // zzz
-      console.log("activeScene.location", activeScene.location) // zzz
-
-      console.log(
-        "activeScene.location.position",
-        activeScene.location.position
-      ) // zzz
-      Object.assign(prevPosition, newPosition)
+      Object.assign(prevPosition, mergedPosition)
       updateQuestInFirestore(world)
     }
 
     const onResizeStop = ({ ref, position }) => {
       console.log("onResizeStop") // zzz
       console.log("position", position) // zzz
-      const prevPosition = activeScene?.location?.position
+      const prevPosition = getPosition()
       const newPosition = {
-        // ...position,
-        ...prevPosition,
         width: ref.style.width,
         height: ref.style.height,
+        // ...position,
       }
-      console.log("newPosition", newPosition) // zzz
-      setItemPosition(newPosition)
-      if (!activeScene?.location?.position) {
-        activeScene.location.position = newPosition
-      }
+      console.log("position", position) // zzz
+      console.log("prevPosition", prevPosition) // zzz
+      const mergedPosition = { ...prevPosition, ...newPosition }
 
-      Object.assign(prevPosition || {}, newPosition)
+      console.log("mergedPosition", mergedPosition) // zzz
+      setItemPosition(mergedPosition)
+
+      Object.assign(prevPosition, mergedPosition)
 
       console.log(
         "activeScene.location.position",
@@ -172,19 +192,9 @@ export default function StoryMode(props) {
       updateQuestInFirestore(world)
     }
 
-    // TODO - convert this to vw, vh and use it.
-    // TODO - convert this to vw, vh and use it.
-    // TODO - convert this to vw, vh and use it.
-    // TODO - convert this to vw, vh and use it.
-    // TODO - convert this to vw, vh and use it.
-    // const defaultPosition = { x: 1813, y: 596 }
-
     const defaultPosition = { x: itemPosition.x, y: itemPosition.y }
-    // let position = defaultPosition
     let position = activeScene?.location?.position || defaultPosition
-    // const image = images.all[locationName]
-
-    let { width, height } = activeScene?.location?.position
+    const { width, height } = position
 
     const size = {
       width: width || itemPosition.width,
@@ -200,8 +210,6 @@ export default function StoryMode(props) {
         size={size}
         position={position}
         onDragStop={(e, d) => {
-          console.log("e", e) // zzz
-          console.log("d", d) // zzz
           onDragStop({ d, e, activeScene })
         }}
         onResizeStop={(e, direction, ref, delta, position) => {

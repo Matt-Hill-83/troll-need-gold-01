@@ -1,31 +1,27 @@
 @import "../../../Common/Styles/mixins.modules.scss";
 
 .locationDragger {
-  border: 4px solid blue !important;
+  border: 1px solid blue !important;
   height: 100%;
   width: auto;
   display: flex;
 }
 
 .locationImageDragger {
-  border: 4px solid red !important;
+  border: 1px solid red !important;
   width: unset !important;
-  right: 2vw !important;
-  bottom: 28vh !important;
+  // right: 2vw !important;
+  // bottom: 28vh !important;
   overflow: hidden;
+  background: transparent !important;
 }
 
-.xxxrelativePositionedContent {
-  display: flex;
-  width: 100%;
-  overflow: hidden;
-  flex-direction: column;
-  position: absolute;
+.locationImage {
+  // border: 1px solid green !important;
+  position: relative;
+  z-index: 100;
   height: 100%;
-  justify-content: space-between;
-  justify-content: flex-end;
-  overflow: visible;
-  border: 4px solid red !important;
+  width: auto;
 }
 
 .missionConsoleBox {
@@ -106,14 +102,6 @@
     position: absolute;
     bottom: 1vh;
     left: 16vh;
-  }
-
-  .locationImage {
-    border: 1px solid green !important;
-    position: relative;
-    z-index: 100;
-    height: 100%;
-    width: auto;
   }
 
   .backgroundImage {
