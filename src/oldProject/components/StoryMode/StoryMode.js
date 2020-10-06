@@ -147,8 +147,10 @@ export default function StoryMode(props) {
     const onResizeStop = ({ ref, position }) => {
       console.log("onResizeStop") // zzz
       console.log("position", position) // zzz
+      const prevPosition = activeScene?.location?.position
       const newPosition = {
-        ...position,
+        // ...position,
+        prevPosition,
         width: ref.style.width,
         height: ref.style.height,
       }
@@ -158,7 +160,6 @@ export default function StoryMode(props) {
         activeScene.location.position = newPosition
       }
 
-      const prevPosition = activeScene?.location?.position
       Object.assign(prevPosition || {}, newPosition)
 
       console.log(
@@ -179,11 +180,15 @@ export default function StoryMode(props) {
     // let position = defaultPosition
     let position = activeScene?.location?.position || defaultPosition
     const image = images.all[locationName]
+
+    const size = { width: itemPosition.width, height: itemPosition.height }
+    console.log("size", size) // zzz
+
     return (
       <Rnd
         className={css.locationImageDragger}
         style={style}
-        size={{ width: itemPosition.width, height: itemPosition.height }}
+        size={size}
         position={position}
         onDragStop={(e, d) => {
           console.log("e", e) // zzz
@@ -195,13 +200,12 @@ export default function StoryMode(props) {
         }}
       >
         <div className={css.locationDragger}>
-          test
-          {/* <img className={css.image} src={image} alt={"locationName"} />
+          {/* <img className={css.image} src={image} alt={"locationName"} /> */}
           <ImageDisplay
             className={css.locationImage}
             item={newItem}
             showLabel={true}
-          /> */}
+          />
         </div>
         {/* <div className={css.locationDragger}>Rnd</div> */}
       </Rnd>
