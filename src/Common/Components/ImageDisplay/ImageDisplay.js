@@ -13,6 +13,7 @@ export default function ImageDisplay(props) {
     amount = 0,
     className,
     showAmount = false,
+    buttons = null,
   } = props
 
   const flipImage = item && item.flipImage
@@ -32,6 +33,7 @@ export default function ImageDisplay(props) {
         {image && <img className={css.image} src={image} alt={name} />}
         {showLabel && <span className={`${css.itemLabel}`}>{name}</span>}
       </div>
+      <div className={css.buttons}>{buttons}</div>
     </div>
   )
 }
