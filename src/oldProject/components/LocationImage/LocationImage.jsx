@@ -93,54 +93,30 @@ export default function LocationImage(props) {
       const newPosition = { x: d.x, y: d.y }
       const mergedPosition = { ...prevPosition, ...newPosition }
       setItemPosition(mergedPosition)
-
-      console.log("mergedPosition - drag", mergedPosition) // zzz
     }
 
     const onResizeStop = ({ ref, position }) => {
-      console.log("onResizeStop---------------") // zzz
-      console.log("position", position) // zzz
       const prevPosition = getPosition()
       const newPosition = {
         width: ref.style.width,
         height: ref.style.height,
         ...position,
       }
-      console.log("position", position) // zzz
-      console.log("prevPosition", prevPosition) // zzz
       const mergedPosition = { ...prevPosition, ...newPosition }
 
-      console.log("mergedPosition", mergedPosition) // zzz
       setItemPosition(mergedPosition)
     }
 
     const savePositions = () => {
-      console.log("savePositions") // zzz
-      console.log("itemPosition", itemPosition) // zzz
       if (activeScene?.location?.position) {
         activeScene.location.position = itemPosition
       }
       updateQuestInFirestore(world)
     }
 
-    const defaultPosition = { x: itemPosition.x, y: itemPosition.y }
-    let position = defaultPosition
-    // if (activeScene?.location?.position) {
-    //   position = activeScene.location.position
-    // }
-
-    const { width, height } = position
-
-    console.log(
-      "activeScene.location.position",
-      activeScene?.location?.position || "no saved  position"
-    ) // zzz
-    console.log("position", position) // zzz
-
-    const size = {
-      width: width || itemPosition.width,
-      height: height || itemPosition.height,
-    }
+    const { x, y, width, height } = itemPosition
+    const position = { x, y }
+    const size = { width, height }
 
     const buttons = (
       <Button className={css.saveButton} onClick={savePositions}>
