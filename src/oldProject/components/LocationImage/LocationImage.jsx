@@ -34,13 +34,20 @@ export default function LocationImage(props) {
 
     console.log("x", x) // zzz
     console.log("y", y) // zzz
-    const initialRnD = {
+
+    const savedPosition = {
       width: locationWidth,
       height: locationHeight,
       x,
       y,
     }
-    return initialRnD
+
+    if (activeScene?.location?.position) {
+      const position = activeScene.location.position
+      return { ...savedPosition, ...position }
+    } else {
+      return savedPosition
+    }
   }
 
   console.log("activeScene", activeScene) // zzz
@@ -118,15 +125,22 @@ export default function LocationImage(props) {
 
     const defaultPosition = { x: itemPosition.x, y: itemPosition.y }
     let position = defaultPosition
+    // if (activeScene?.location?.position) {
+    //   position = activeScene.location.position
+    // }
 
     const { width, height } = position
+
+    console.log(
+      "activeScene.location.position",
+      activeScene?.location?.position || "no saved  position"
+    ) // zzz
+    console.log("position", position) // zzz
 
     const size = {
       width: width || itemPosition.width,
       height: height || itemPosition.height,
     }
-    console.log("itemPosition", itemPosition) // zzz
-    console.log("size", size) // zzz
 
     const buttons = (
       <Button className={css.saveButton} onClick={savePositions}>
@@ -134,6 +148,8 @@ export default function LocationImage(props) {
       </Button>
     )
 
+    console.log("size", size) // zzz
+    console.log("itemPosition---------final", itemPosition) // zzz
     return (
       <Rnd
         className={css.locationImageDragger}
@@ -193,8 +209,6 @@ export default function LocationImage(props) {
     //   </Rnd>
     // )
   }
-
-  console.log("itemPosition", itemPosition) // zzz
 
   return renderLocationImage()
 }
