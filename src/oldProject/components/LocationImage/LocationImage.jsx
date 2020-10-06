@@ -1,6 +1,6 @@
-import cx from "classnames"
+import { Button } from "@blueprintjs/core"
 import { Rnd } from "react-rnd"
-
+import cx from "classnames"
 import React, { useContext, useState, useEffect } from "react"
 
 import { myContext } from "../../../myProvider.js"
@@ -9,7 +9,6 @@ import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay.j
 import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget.js"
 
 import css from "./LocationImage.module.scss"
-import { Button } from "@blueprintjs/core"
 
 export default function LocationImage(props) {
   const [globalState] = useContext(myContext)

@@ -9,7 +9,6 @@ import FrameViewer from "../FrameViewer/FrameViewer.js"
 import images from "../../../Common/Images/images.js"
 import MissionConsole from "../MissionConsole/MissionConsole.js"
 import WorldViewer from "../WorldViewer/WorldViewer.js"
-import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget.js"
 import LocationImage from "../LocationImage/LocationImage.jsx"
 
 import css from "./StoryMode.module.scss"
@@ -23,35 +22,7 @@ export default function StoryMode(props) {
     activeFrameIndex,
   } = globalState
 
-  const { getProfile } = useUpdateProfileWidget()
-  const profile = getProfile()
-
-  const isGod = profile.id === "AMAgzal2oAbHogUvO9vVeHWZygF3"
   const { updateActiveScene } = props
-
-  const getInitialRnD = () => {
-    const innerWidth = window.innerWidth
-    const innerHeight = window.innerHeight
-    const locationWidth = 300
-    const locationHeight = locationWidth
-
-    console.log("innerWidth", innerWidth) // zzz
-    // x defines the NE corner
-    const x = innerWidth * 1
-
-    // y defines the top
-    const y = innerHeight * 0.7 - locationHeight
-
-    console.log("x", x) // zzz
-    console.log("y", y) // zzz
-    const initialRnD = {
-      width: locationWidth,
-      height: locationHeight,
-      x,
-      y,
-    }
-    return initialRnD
-  }
 
   console.log("activeScene", activeScene) // zzz
 
@@ -114,13 +85,6 @@ export default function StoryMode(props) {
     })
   }
 
-  const getPosition = () => {
-    if (!activeScene?.location?.position) {
-      activeScene.location.position = {}
-    }
-    return activeScene?.location?.position
-  }
-
   const getMood = ({ name, faces }) => {
     let mood = "ok"
     const newMood = faces && faces.find((face) => face.character === name)
@@ -133,7 +97,6 @@ export default function StoryMode(props) {
   }
 
   const frame = getActiveFrame({ activeFrameIndex })
-  // console.log("itemPosition", itemPosition) // zzz
 
   const { critters1, critters2 } = frame
 
