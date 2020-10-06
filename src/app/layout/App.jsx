@@ -16,16 +16,25 @@ import ProfilePage from "../../features/profiles/profilePage/ProfilePage"
 import QuestDashboard from "../../features/quests/questDashboard/QuestDashboard"
 import QuestDetailedPage from "../../features/quests/eventDetailed/QuestDetailedPage"
 import BookDashboard from "../../features/books/bookDashboard/BookDashboard"
-import WorldBuilder from "../../QuestBuilder/components/WorldBuilder/WorldBuilder"
+// import WorldBuilder from "../../QuestBuilder/components/WorldBuilder/WorldBuilder"
 import WorldBuilderBox from "../../features/quests/questDashboard/WorldBuilderBox"
+import images from "../../Common/Images/images"
+import css from "./App.module.scss"
 
 export default function App() {
   const { initialized } = useSelector((state) => state.async)
 
   if (!initialized) return <LoadingComponent content="Loading app..." />
 
+  const backgroundImage = images.backgrounds["meadow"]
+
   return (
     <>
+      <img
+        className={css.backgroundImage}
+        src={backgroundImage}
+        alt={"imagex"}
+      />
       <ModalManager />
       <ToastContainer position="bottom-right" hideProgressBar />
       {/* <Route exact path="/" component={QuestDashboard} /> */}
