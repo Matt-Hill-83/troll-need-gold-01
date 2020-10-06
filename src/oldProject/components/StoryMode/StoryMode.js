@@ -1,7 +1,6 @@
 import cx from "classnames"
-import { Rnd } from "react-rnd"
 
-import React, { useContext, useState, useEffect } from "react"
+import React, { useContext } from "react"
 
 import { myContext } from "../../../myProvider.js"
 import Character from "../../../Common/Components/Character/Character.js"
@@ -11,9 +10,9 @@ import images from "../../../Common/Images/images.js"
 import MissionConsole from "../MissionConsole/MissionConsole.js"
 import WorldViewer from "../WorldViewer/WorldViewer.js"
 import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget.js"
+import LocationImage from "../LocationImage/LocationImage.jsx"
 
 import css from "./StoryMode.module.scss"
-import LocationImage from "../LocationImage/LocationImage.jsx"
 
 export default function StoryMode(props) {
   const [globalState] = useContext(myContext)
@@ -55,19 +54,6 @@ export default function StoryMode(props) {
   }
 
   console.log("activeScene", activeScene) // zzz
-  const [itemPosition, setItemPosition] = useState(getInitialRnD())
-
-  useEffect(() => {
-    // returned function will be called on component unmount
-    return () => {}
-  }, [])
-
-  // on change in props
-  useEffect(() => {
-    const initialRnD = getInitialRnD()
-    setItemPosition(initialRnD)
-    console.log("new props =================================>>>>>")
-  }, [props])
 
   const { backgroundImage } = activeScene
 
@@ -147,7 +133,7 @@ export default function StoryMode(props) {
   }
 
   const frame = getActiveFrame({ activeFrameIndex })
-  console.log("itemPosition", itemPosition) // zzz
+  // console.log("itemPosition", itemPosition) // zzz
 
   const { critters1, critters2 } = frame
 

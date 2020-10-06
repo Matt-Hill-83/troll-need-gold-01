@@ -133,7 +133,11 @@ export default function LocationImage(props) {
     console.log("itemPosition", itemPosition) // zzz
     console.log("size", size) // zzz
 
-    const buttons = <Button onClick={savePositions}>save</Button>
+    const buttons = (
+      <Button className={css.saveButton} onClick={savePositions}>
+        save
+      </Button>
+    )
 
     return (
       <Rnd
@@ -153,7 +157,7 @@ export default function LocationImage(props) {
             className={css.locationImage}
             item={newItem}
             showLabel={true}
-            buttons={buttons}
+            // buttons={buttons}
           />
         </div>
         {/* Div to shield child element from clicks */}
@@ -165,6 +169,7 @@ export default function LocationImage(props) {
             zIndex: "100",
           }}
         />
+        {buttons}
       </Rnd>
     )
 

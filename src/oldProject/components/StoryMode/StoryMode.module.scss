@@ -1,29 +1,5 @@
 @import "../../../Common/Styles/mixins.modules.scss";
 
-.locationDragger {
-  border: 1px solid blue !important;
-  height: 100%;
-  width: auto;
-  display: flex;
-}
-
-.locationImageDragger {
-  border: 1px solid red !important;
-  width: unset !important;
-  // right: 2vw !important;
-  // bottom: 28vh !important;
-  overflow: hidden;
-  background: transparent !important;
-}
-
-.locationImage {
-  // border: 1px solid green !important;
-  position: relative;
-  z-index: 100;
-  height: 100%;
-  width: auto;
-}
-
 .missionConsoleBox {
   position: fixed;
   display: flex;

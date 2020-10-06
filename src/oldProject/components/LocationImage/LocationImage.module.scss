@@ -1,5 +1,13 @@
 @import "../../../Common/Styles/mixins.modules.scss";
 
+.saveButton {
+  z-index: 110;
+  border: 4px solid green !important;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 .locationDragger {
   border: 1px solid blue !important;
   height: 100%;
@@ -53,131 +61,4 @@
       margin-left: auto;
     }
   }
-}
-
-.main {
-  position: relative;
-  display: flex;
-  height: 100%;
-  width: 100vw;
-  overflow: hidden;
-  background: white;
-  padding: 1vh;
-  border: 5px solid orange !important;
-
-  .charactersContainer {
-    border: 4px solid green !important;
-    position: fixed;
-    display: flex;
-    z-index: 10;
-    justify-content: center;
-    background: none;
-    bottom: 8vh;
-    left: 54vw;
-
-    [class*="Character_characterImage"] {
-      width: 100%;
-      height: auto;
-      max-width: 30vh;
-      max-height: 31vh;
-    }
-  }
-
-  .charactersContainer2 {
-    border: 1px solid blue !important;
-    right: 53vw;
-    width: fit-content;
-    max-width: 39vw;
-    left: unset;
-  }
-
-  .imageGroupsContainer {
-    border: 1px solid purple !important;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    height: 100%;
-    width: 29vh;
-    position: absolute;
-    bottom: 1vh;
-    left: 16vh;
-  }
-
-  .backgroundImage {
-    position: absolute;
-    display: flex;
-
-    width: 100%;
-    height: 100%;
-    transform: scaleX(-1);
-  }
-
-  .backgroundImage2 {
-    position: absolute;
-    display: flex;
-    width: 32vh;
-    height: auto;
-    transform: scaleX(-1);
-    justify-self: center;
-    right: 4%;
-    top: 23%;
-  }
-
-  .halfPage {
-    display: flex;
-    position: relative;
-  }
-
-  .rightHalf,
-  .leftHalf {
-    flex: 1 1;
-    border-radius: 2.9vh;
-    border: 1px solid #565656;
-    overflow: hidden;
-  }
-
-  .leftHalf {
-    border: 1px solid red !important;
-  }
-
-  .rightHalf {
-    border-left: none;
-    width: 65%;
-    margin-left: 0px;
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-    box-shadow: 9px 8px 8px -5px #000000bd;
-  }
-}
-
-.yourItems {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-
-  font-size: 24px;
-  right: 0px;
-  bottom: 0px;
-  z-index: 20;
-  border: 1px solid var(--color-red) !important;
-  color: var(--color-purple);
-  background: var(--color-pink);
-}
-
-.worldTitle {
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  z-index: 20;
-
-  font-size: 2vh;
-  font-weight: bold;
-  padding: 0vh 1vh;
-  border: 1px solid black;
-  right: 0vh;
-  top: 4vh;
-  background: white;
-  white-space: nowrap;
-  min-width: 32vh;
 }
