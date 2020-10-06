@@ -15,6 +15,7 @@ import WorldViewer from "../WorldViewer/WorldViewer.js"
 
 import css from "./StoryMode.module.scss"
 import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget.js"
+import { unstable_batchedUpdates } from "react-dom"
 
 export default function StoryMode(props) {
   const { getProfile } = useUpdateProfileWidget()
@@ -24,11 +25,24 @@ export default function StoryMode(props) {
 
   const { updateActiveScene } = props
 
+  const innerWidth = window.innerWidth
+  const innerHeight = window.innerHeight
+
+  console.log("innerHeight", innerHeight) // zzz
+  console.log("innerWidth", innerWidth) // zzz
+
+  console.log("window", window) // zzz
+
   const initialRnD = {
-    width: 200,
-    height: 200,
-    x: 10,
-    y: 10,
+    // width: 200,
+    // height: 200,
+    // top: "unset !important",
+    // left: "unset !important",
+    // right: "2 !important",
+    // bottom: "28vh !important",
+
+    x: innerWidth * 0.8,
+    y: innerHeight * 0.6,
   }
 
   const [itemPosition, setItemPosition] = useState(initialRnD)
@@ -112,6 +126,10 @@ export default function StoryMode(props) {
     const newItem = { name: locationName }
 
     const style = {
+      right: "0",
+      bottom: "0",
+      top: "unset",
+      left: "unset",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -119,7 +137,8 @@ export default function StoryMode(props) {
       background: "#f0f0f0",
     }
 
-    const onDragStop = ({ d, activeScene }) => {
+    const onDragStop = ({ d, e, activeScene }) => {
+      console.log("e", e) // zzz
       // console.log("onDragStop") // zzz
       const newPosition = { x: d.x, y: d.y }
       setItemPosition(newPosition)
@@ -142,20 +161,22 @@ export default function StoryMode(props) {
     // TODO - convert this to vw, vh and use it.
     // TODO - convert this to vw, vh and use it.
     // TODO - convert this to vw, vh and use it.
-    // position: {x: 1813, y: 596}
+    // const defaultPosition = { x: 1813, y: 596 }
 
     const defaultPosition = { x: itemPosition.x, y: itemPosition.y }
-    let position = activeScene?.location?.position || defaultPosition
+    let position = defaultPosition
+    // let position = activeScene?.location?.position || defaultPosition
 
     return (
       <Rnd
+        className={css.locationImageDragger}
         style={style}
         size={{ width: itemPosition.width, height: itemPosition.height }}
         position={position}
         onDragStop={(e, d) => {
           console.log("e", e) // zzz
           console.log("d", d) // zzz
-          onDragStop({ d, activeScene })
+          onDragStop({ d, e, activeScene })
         }}
         onResizeStop={(e, direction, ref, delta, position) => {
           onResizeStop({ ref, position })
