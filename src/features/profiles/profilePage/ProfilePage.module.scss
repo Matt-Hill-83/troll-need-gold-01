@@ -2,18 +2,27 @@
   display: flex;
   padding: 3vh;
 
+  .itemsWrapper {
+    display: flex;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+  }
+
   .imagesContainer {
     display: inline-flex;
     flex-wrap: wrap;
     overflow: hidden;
     width: auto;
   }
+
   .image {
     border: 1px solid red !important;
     height: 6vh;
     width: 6vh;
     max-width: 6vh;
-    //   width: auto;
     margin-right: 1vh;
     margin-bottom: 1vh;
   }
@@ -38,6 +47,7 @@
       border-right: 1px solid black !important;
     }
   }
+
   .classNameCharPicker {
     border: 1px solid green !important;
     height: min-content;

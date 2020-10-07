@@ -16,8 +16,8 @@ import css from "./ProfilePage.module.scss"
 import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
 import CrudMachine from "../../../QuestBuilder/components/CrudMachine/CrudMachine"
 
-const renderItems = ({ items, title }) => {
-  const renderedTrophys = items.map((item) => {
+const renderItems = ({ items, title, wrapInCard = true }) => {
+  const trophys = items.map((item) => {
     const { image } = item
     return (
       <ImageDisplay
@@ -31,7 +31,16 @@ const renderItems = ({ items, title }) => {
     )
   })
 
-  const renderedItems = (
+  if (!wrapInCard) {
+    return (
+      <div className={cx(css.imagesContainer, css.column)}>
+        <div>{title}</div>
+        <div className={css.itemsWrapper}>{trophys}</div>
+      </div>
+    )
+  }
+
+  const boxedItems = (
     <div className={css.card}>
       <Item.Group>
         <Item>
@@ -41,13 +50,13 @@ const renderItems = ({ items, title }) => {
               style={{ display: "block", marginBottom: "0.5vh" }}
               content={title}
             />
-            <div className={css.imagesContainer}>{renderedTrophys}</div>
+            <div className={css.imagesContainer}>{trophys}</div>
           </Item.Content>
         </Item>
       </Item.Group>
     </div>
   )
-  return renderedItems
+  return boxedItems
 }
 
 export default function ProfilePage({ match }) {
@@ -127,7 +136,24 @@ export default function ProfilePage({ match }) {
       return { name: item }
     }) || []
 
-  const myDresses = renderItems({ items: selectedDresses, title: "My Dresses" })
+  const myDresses = renderItems({
+    items: selectedDresses,
+    title: "My Dresses",
+    wrapInCard: false,
+  })
+
+  const myAvatars = renderItems({
+    items: selectedDresses,
+    title: "My Avatars",
+    wrapInCard: false,
+  })
+
+  const myVehicles = renderItems({
+    items: selectedDresses,
+    title: "My Vehicles",
+    wrapInCard: false,
+  })
+
   const myTrophys = renderItems({ items: trophys, title: "My Trophies" })
   const myTreasures = renderItems({ items: treasures, title: "My Treasures" })
 
@@ -138,7 +164,9 @@ export default function ProfilePage({ match }) {
         isCurrentUser={currentUser.uid === profile?.id}
       />
 
+      <Grid.Column width={3}>{myAvatars}</Grid.Column>
       <Grid.Column width={3}>{myDresses}</Grid.Column>
+      <Grid.Column width={3}>{myVehicles}</Grid.Column>
     </Segment>
   )
 
