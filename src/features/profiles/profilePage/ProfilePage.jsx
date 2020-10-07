@@ -1,9 +1,12 @@
 import React from "react"
-import { Header, Segment, Grid, Item } from "semantic-ui-react"
+import { Header, Segment, Grid, Item, Button } from "semantic-ui-react"
 import { useDispatch, useSelector } from "react-redux"
 import cx from "classnames"
 
-import { getUserProfile } from "../../../app/firestore/firestoreService"
+import {
+  getUserProfile,
+  updateUserProfile,
+} from "../../../app/firestore/firestoreService"
 import { listenToSelectedUserProfile } from "../profileActions"
 import CrudMachine from "../../../QuestBuilder/components/CrudMachine/CrudMachine"
 import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
@@ -12,6 +15,7 @@ import LoadingComponent from "../../../app/layout/LoadingComponent"
 import ProfileContent from "./ProfileContent"
 import ProfileHeader from "./ProfileHeader"
 import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc"
+import useUpdateProfileWidget from "../../../oldProject/components/TopLevel/useUpdateProfileWidget"
 
 import css from "./ProfilePage.module.scss"
 
@@ -62,6 +66,10 @@ const trophys = [
 ]
 
 const renderItems = ({ items, title, wrapInCard = true }) => {
+  if (!items[0]) {
+    return null
+  }
+
   const trophys = items.map((item) => {
     const { image } = item
     return (
@@ -105,6 +113,8 @@ const renderItems = ({ items, title, wrapInCard = true }) => {
 }
 
 export default function ProfilePage({ match }) {
+  const { updateProfilePropsIfChanged } = useUpdateProfileWidget()
+
   const dispatch = useDispatch()
   const { selectedUserProfile, currentUserProfile } = useSelector(
     (state) => state.profile
@@ -129,29 +139,22 @@ export default function ProfilePage({ match }) {
   if ((loading && !profile) || (!profile && !error))
     return <LoadingComponent content="Loading profile..." />
 
-  const dresses = [images.dresses]
-  const selectedDresses =
-    Object.keys(images.dresses || {}).map((item) => {
-      return { name: item }
-    }) || []
+  const categories = Object.keys(profile?.myStuff)
+  console.log("categories", categories) // zzz
 
-  const myDresses = renderItems({
-    items: selectedDresses,
-    title: "My Dresses",
-    wrapInCard: false,
+  const newThing = categories.map((key) => {
+    const selectedItems = profile?.myStuff?.[key] || []
+
+    const items = renderItems({
+      items: selectedItems,
+      title: `My ${key}s`,
+      wrapInCard: false,
+    })
+
+    return <Grid.Column width={3}>{items}</Grid.Column>
   })
 
-  const myAvatars = renderItems({
-    items: selectedDresses,
-    title: "My Avatars",
-    wrapInCard: false,
-  })
-
-  const myVehicles = renderItems({
-    items: selectedDresses,
-    title: "My Vehicles",
-    wrapInCard: false,
-  })
+  const selectedDresses = profile?.myStuff?.dresses || []
 
   const myTrophys = renderItems({ items: trophys, title: "My Trophies" })
   const myFriends = renderItems({ items: trophys, title: "My Friends" })
@@ -164,9 +167,10 @@ export default function ProfilePage({ match }) {
         isCurrentUser={currentUser.uid === profile?.id}
       />
 
-      <Grid.Column width={3}>{myAvatars}</Grid.Column>
+      {/* <Grid.Column width={3}>{myAvatars}</Grid.Column>
       <Grid.Column width={3}>{myDresses}</Grid.Column>
-      <Grid.Column width={3}>{myVehicles}</Grid.Column>
+      <Grid.Column width={3}>{myVehicles}</Grid.Column> */}
+      {newThing}
     </Segment>
   )
 
@@ -179,8 +183,24 @@ export default function ProfilePage({ match }) {
     </Segment>
   )
 
+  const updateProfile = async () => {
+    console.log("profile", profile) // zzz
+    const myStuff = {
+      dresses: [{ name: "dress02" }],
+      vehicles: [{ name: "helicopter01" }],
+    }
+    const dupProfile = { ...profile }
+    dupProfile.myStuff = myStuff
+    await updateUserProfile(dupProfile)
+  }
+
+  const dresses = [images.dresses]
+
   return (
     <div className={css.main}>
+      <Button className={css.updateButton} onClick={updateProfile}>
+        update
+      </Button>
       {/* <Grid celled> */}
       <Grid>
         <Grid.Row>

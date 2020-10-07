@@ -66,6 +66,7 @@ export default function useUpdateProfileWidget() {
   const updateProfilePropsIfChanged = async ({ newProfileProps }) => {
     const updatedProps = { ...profile, ...newProfileProps }
     const needToUpdateProps = !_isEqual(updatedProps, profile)
+    console.log("needToUpdateProps", needToUpdateProps) // zzz
 
     if (needToUpdateProps) {
       _updateProps({ newProps: updatedProps })
