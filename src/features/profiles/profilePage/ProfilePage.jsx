@@ -117,7 +117,7 @@ export default function ProfilePage({ match }) {
     query: () => getUserProfile(match.params.id),
     data: (profile) => dispatch(listenToSelectedUserProfile(profile)),
     deps: [dispatch, match.params.id],
-    shouldExecute: match.params.id !== currentUser.uid,
+    shouldExecute: match?.params?.id !== currentUser?.uid,
   })
 
   if (match?.params?.id === currentUser?.uid) {

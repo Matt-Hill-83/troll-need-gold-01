@@ -45,37 +45,6 @@ export default function PhotoUploadWidget({ setEditMode }) {
     )
   }
 
-  // function saveAudio({ blob }) {
-  //   console.log("blob", blob) // zzz
-  //   setLoading(true)
-  //   const filename = cuid() + "-audio" + "." + "blob"
-  //   const uploadTask = uploadToFirebaseStorage(blob, filename)
-  //   uploadTask.on(
-  //     "state_changed",
-  //     (snapshot) => {
-  //       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-  //       console.log("Upload is " + progress + "% done")
-  //     },
-  //     (error) => {
-  //       toast.error(error.messege)
-  //     },
-  //     () => {
-  //       uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-  //         updateUserProfilePhoto(downloadURL, filename)
-  //           .then(() => {
-  //             setLoading(false)
-  //             handleCancelCrop()
-  //             setEditMode(false)
-  //           })
-  //           .catch((error) => {
-  //             toast.error(error.message)
-  //             setLoading(false)
-  //           })
-  //       })
-  //     }
-  //   )
-  // }
-
   function handleCancelCrop() {
     setFiles([])
     setImage(null)
