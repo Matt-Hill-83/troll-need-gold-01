@@ -86,6 +86,7 @@ export default function SceneBuilder(props) {
   const itemRenderer = ({ item, className }) => {
     return <ImageDisplay className={className} item={item} />
   }
+
   const renderRandomLocationGenerator = ({ scene }) => {
     const locationNames = Object.keys(images.locations)
 

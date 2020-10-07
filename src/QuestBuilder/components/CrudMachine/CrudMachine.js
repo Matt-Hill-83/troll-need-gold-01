@@ -220,12 +220,6 @@ class CrudMachine extends Component {
     const { showItemPicker } = this.state
     const { className, title = "" } = this.props
 
-    // const defaultImageSets = [
-    //   images.locations,
-    //   images.creatures2animals,
-    //   images.vehicles,
-    //   images.items,
-    // ]
     const defaultImageSets = [
       images.creatures2animals,
       images.locations,

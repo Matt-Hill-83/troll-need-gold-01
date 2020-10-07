@@ -48,6 +48,25 @@ export default function ProfilePage({ match }) {
   const trophys = [
     { name: "Get a Trophy", amount: 1, image: images.trophys01.trophy01 },
     { name: "Add a Friend", amount: 1, image: images.trophys01.trophy02 },
+    { name: "Record a Beat", amount: 1, image: images.trophys01.trophy02 },
+    { name: "Write a Rap", amount: 1, image: images.trophys01.trophy02 },
+    { name: "Like a line", amount: 1, image: images.trophys01.trophy02 },
+    { name: "Like a story", amount: 1, image: images.trophys01.trophy02 },
+    { name: "Buy a donut", amount: 1, image: images.trophys01.trophy02 },
+    { name: "Buy a donut", amount: 1, image: images.trophys01.trophy02 },
+    { name: "Buy a donut", amount: 1, image: images.trophys01.trophy02 },
+    { name: "Buy a donut", amount: 1, image: images.trophys01.trophy02 },
+    {
+      name: "Win the Rap Battle at Troll Cave",
+      amount: 1,
+      image: images.trophys01.trophy02,
+    },
+    { name: "Go in the cave", amount: 1, image: images.trophys01.trophy02 },
+    {
+      name: "Lose all your gold",
+      amount: 1,
+      image: images.trophys01.trophy02,
+    },
   ]
 
   const renderedTreasure = treasure.map((item) => {
@@ -77,35 +96,41 @@ export default function ProfilePage({ match }) {
     )
   })
 
+  const content01 = (
+    <>
+      <ProfileHeader
+        profile={profile}
+        isCurrentUser={currentUser.uid === profile?.id}
+      />
+      <ProfileContent
+        profile={profile}
+        isCurrentUser={currentUser.uid === profile && profile.id}
+      />
+    </>
+  )
+
+  const myTreasure = (
+    <div className={css.card}>
+      <Item.Group>
+        <Item>
+          <Item.Content verticalAlign="top">
+            <Header
+              as="h5"
+              style={{ display: "block", marginBottom: 10 }}
+              content={"My Treasure"}
+            />
+            <div className={css.imagesContainer}>{renderedTreasure}</div>
+          </Item.Content>
+        </Item>
+      </Item.Group>
+    </div>
+  )
+
   return (
     <div className={css.main}>
       <Grid>
-        <Grid.Column width={8}>
-          <ProfileHeader
-            profile={profile}
-            isCurrentUser={currentUser.uid === profile?.id}
-          />
-          <ProfileContent
-            profile={profile}
-            isCurrentUser={currentUser.uid === profile && profile.id}
-          />
-        </Grid.Column>
-        <Grid.Column width={8}>
-          <div className={css.card}>
-            <Item.Group>
-              <Item>
-                <Item.Content verticalAlign="top">
-                  <Header
-                    as="h5"
-                    style={{ display: "block", marginBottom: 10 }}
-                    content={"My Treasure"}
-                  />
-                  <div className={css.imagesContainer}>{renderedTreasure}</div>
-                </Item.Content>
-              </Item>
-            </Item.Group>
-          </div>
-        </Grid.Column>
+        <Grid.Column width={8}>{content01}</Grid.Column>
+        <Grid.Column width={8}>{myTreasure}</Grid.Column>
         <Grid.Column width={8}>
           <div className={css.card}>
             <Item.Group>
