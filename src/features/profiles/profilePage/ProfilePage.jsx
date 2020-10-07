@@ -43,6 +43,12 @@ export default function ProfilePage({ match }) {
     { name: "gold", amount: 1 },
     { name: "cap", amount: 1 },
     { name: "bag", amount: 1 },
+    { name: "hog", amount: 1 },
+    { name: "log", amount: 1 },
+    { name: "bag", amount: 1 },
+    { name: "gold", amount: 1 },
+    { name: "cap", amount: 1 },
+    { name: "bag", amount: 1 },
   ]
 
   const trophys = [
@@ -125,28 +131,60 @@ export default function ProfilePage({ match }) {
       </Item.Group>
     </div>
   )
-
+  const myTrophies = (
+    <div className={css.card}>
+      <Item.Group>
+        <Item>
+          <Item.Content verticalAlign="top">
+            <Header
+              as="h5"
+              style={{ display: "block", marginBottom: 10 }}
+              content={"My Trophies"}
+            />
+            <div className={css.imagesContainer}>{renderedTrophys}</div>
+          </Item.Content>
+        </Item>
+      </Item.Group>
+    </div>
+  )
+  const myTrophies2 = (
+    <div className={css.card}>
+      <Item.Group>
+        <Item>
+          <Item.Content verticalAlign="top">
+            <Header
+              as="h5"
+              style={{ display: "block", marginBottom: 10 }}
+              content={"My Trophies"}
+            />
+            <div className={css.imagesContainer}>{renderedTrophys}</div>
+          </Item.Content>
+        </Item>
+      </Item.Group>
+    </div>
+  )
   return (
     <div className={css.main}>
-      <Grid>
-        <Grid.Column width={8}>{content01}</Grid.Column>
-        <Grid.Column width={8}>{myTreasure}</Grid.Column>
-        <Grid.Column width={8}>
-          <div className={css.card}>
-            <Item.Group>
-              <Item>
-                <Item.Content verticalAlign="top">
-                  <Header
-                    as="h5"
-                    style={{ display: "block", marginBottom: 10 }}
-                    content={"My Trophies"}
-                  />
-                  <div className={css.imagesContainer}>{renderedTrophys}</div>
-                </Item.Content>
-              </Item>
-            </Item.Group>
-          </div>
-        </Grid.Column>
+      <Grid celled>
+        <Grid.Row>
+          <Grid.Column width={3}>
+            <Grid.Column width={4}>{content01}</Grid.Column>
+          </Grid.Column>
+          <Grid.Column width={13}>{myTrophies}</Grid.Column>
+        </Grid.Row>
+
+        <Grid.Row>
+          <Grid.Column width={8}>{myTreasure}</Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column width={8}>{myTrophies}</Grid.Column>
+        </Grid.Row>
+
+        <Grid.Row>
+          <Grid.Column width={3}>{myTreasure}</Grid.Column>
+          <Grid.Column width={3}>{myTreasure}</Grid.Column>
+          <Grid.Column width={4}>{myTrophies}</Grid.Column>
+        </Grid.Row>
       </Grid>
     </div>
   )
