@@ -52,7 +52,6 @@ export default function PhotosTab({ profile, isCurrentUser }) {
     }
   }
 
-  console.log("photos", photos) // zzz
   return (
     <Tab.Pane loading={loading}>
       <Grid>

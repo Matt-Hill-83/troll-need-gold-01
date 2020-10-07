@@ -2,6 +2,7 @@ import React from "react"
 import { Header, Segment, Image, Grid, Item } from "semantic-ui-react"
 import { useDispatch, useSelector } from "react-redux"
 import _get from "lodash.get"
+import cx from "classnames"
 
 import { getUserProfile } from "../../../app/firestore/firestoreService"
 import { listenToSelectedUserProfile } from "../profileActions"
@@ -13,6 +14,7 @@ import images from "../../../Common/Images/images"
 
 import css from "./ProfilePage.module.scss"
 import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
+import CrudMachine from "../../../QuestBuilder/components/CrudMachine/CrudMachine"
 
 export default function ProfilePage({ match }) {
   const dispatch = useDispatch()
@@ -52,22 +54,32 @@ export default function ProfilePage({ match }) {
   ]
 
   const trophys = [
-    // { name: "Get a Trophy", amount: 1, image: images.trophys01.trophy01 },
-    // { name: "Add a Friend", amount: 1, image: images.trophys01.trophy02 },
-    // { name: "Record a Beat", amount: 1, image: images.trophys01.trophy02 },
-    // { name: "Write a Rap", amount: 1, image: images.trophys01.trophy02 },
-    // { name: "Like a line", amount: 1, image: images.trophys01.trophy02 },
-    // { name: "Like a story", amount: 1, image: images.trophys01.trophy02 },
-    { name: "Buy a donut", amount: 1, image: images.trophys01.trophy02 },
-    { name: "Buy a donut", amount: 1, image: images.trophys01.trophy02 },
-    { name: "Buy a donut", amount: 1, image: images.trophys01.trophy02 },
-    { name: "Buy a donut", amount: 1, image: images.trophys01.trophy02 },
+    { name: "Get a Trophy", amount: 1, image: images.trophys01.trophy01 },
+    { name: "Add a Friend", amount: 1, image: images.trophys01.trophy02 },
+    { name: "Record a Beat", amount: 1, image: images.trophys01.trophy02 },
+    { name: "Write a Rap", amount: 1, image: images.trophys01.trophy02 },
+    { name: "Like a line", amount: 1, image: images.trophys01.trophy02 },
+    { name: "Like a story", amount: 1, image: images.trophys01.trophy02 },
+    {
+      name: "Beetle Scout 1st Class",
+      amount: 1,
+      image: images.trophys01.trophy02,
+    },
     {
       name: "Win the Rap Battle at Troll Cave",
       amount: 1,
       image: images.trophys01.trophy02,
     },
-    { name: "Go in the cave", amount: 1, image: images.trophys01.trophy02 },
+    {
+      name: "Don't go in the cave!",
+      amount: 1,
+      image: images.trophys01.trophy02,
+    },
+    {
+      name: "Ok, fine. Go in the cave.",
+      amount: 1,
+      image: images.trophys01.trophy02,
+    },
     {
       name: "Lose all your gold",
       amount: 1,
@@ -87,9 +99,7 @@ export default function ProfilePage({ match }) {
     )
   })
   const renderedTrophys = trophys.map((item) => {
-    console.log("item.image", item.image) // zzz
     const { image } = item
-    console.log("image", image) // zzz
     return (
       <ImageDisplay
         image={image}
@@ -104,14 +114,16 @@ export default function ProfilePage({ match }) {
 
   const content01 = (
     <>
-      <ProfileHeader
-        profile={profile}
-        isCurrentUser={currentUser.uid === profile?.id}
-      />
-      <ProfileContent
-        profile={profile}
-        isCurrentUser={currentUser.uid === profile && profile.id}
-      />
+      <Segment>
+        <ProfileHeader
+          profile={profile}
+          isCurrentUser={currentUser.uid === profile?.id}
+        />
+        <ProfileContent
+          profile={profile}
+          isCurrentUser={currentUser.uid === profile && profile.id}
+        />
+      </Segment>
     </>
   )
 
@@ -148,13 +160,34 @@ export default function ProfilePage({ match }) {
     </div>
   )
 
+  const locations =
+    Object.keys(images.dresses || {})
+      .slice(0, 4)
+      .map((item) => {
+        return { name: item }
+      }) || []
+
+  const dresses = [images.dresses]
+
   return (
     <div className={css.main}>
-      <Grid celled>
+      {/* <Grid celled> */}
+      <Grid>
         <Grid.Row>
           <Grid.Column width={4}>{content01}</Grid.Column>
           <Grid.Column width={8}></Grid.Column>
           <Grid.Column width={4}></Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column width={4}>
+            <CrudMachine
+              className={css.crudMachine}
+              classNameCharPicker={css.classNameCharPicker}
+              items={locations}
+              imageSets={dresses}
+              // saveItems={this.saveItems}
+            />
+          </Grid.Column>
         </Grid.Row>
 
         <Grid.Row>

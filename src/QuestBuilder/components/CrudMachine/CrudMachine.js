@@ -93,7 +93,7 @@ class CrudMachine extends Component {
     this.setStateAndSave({ statePropsToSave })
   }
 
-  onFlipImage = ({ index, item, event }) => {
+  onFlipImage = ({ item, event }) => {
     const { items } = this.state
     item.flipImage = !item.flipImage
     event.stopPropagation()
@@ -218,7 +218,7 @@ class CrudMachine extends Component {
 
   render() {
     const { showItemPicker } = this.state
-    const { className, title = "" } = this.props
+    const { className, classNameCharPicker = "", title = "" } = this.props
 
     const defaultImageSets = [
       images.creatures2animals,
@@ -234,6 +234,7 @@ class CrudMachine extends Component {
       imageSets = this.props.imageSets || defaultImageSets
       characterPicker = (
         <CharacterPicker
+          className={classNameCharPicker}
           isOpen={showItemPicker}
           imageSets={imageSets}
           onClose={this.toggleItemPicker}

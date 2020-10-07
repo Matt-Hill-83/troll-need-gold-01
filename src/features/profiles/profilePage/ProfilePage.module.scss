@@ -7,25 +7,44 @@
     flex-wrap: wrap;
     overflow: hidden;
     width: auto;
-
-    .image {
-      border: 1px solid red !important;
-      height: 6vh;
-      width: 6vh;
-      max-width: 6vh;
-      //   width: auto;
-      margin-right: 1vh;
-      margin-bottom: 1vh;
-    }
+  }
+  .image {
+    border: 1px solid red !important;
+    height: 6vh;
+    width: 6vh;
+    max-width: 6vh;
+    //   width: auto;
+    margin-right: 1vh;
+    margin-bottom: 1vh;
   }
 
   .card {
     position: relative;
-    background: #fff;
-    box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
-    // margin: 1rem 0;
-    padding: 1em 1em;
-    border-radius: 0.28571429rem;
+    background: white;
     border: 1px solid rgba(34, 36, 38, 0.15);
+    box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+    border-radius: 0.28571429rem;
+    padding: 1em 1em;
+    padding-bottom: 0;
+    padding-right: 0;
+  }
+
+  .crudMachine {
+    border: 1px solid black !important;
+    --item-height: 5vh;
+    height: var(--item-height);
+
+    [class*="ImageDisplay_main"] {
+      border-right: 1px solid black !important;
+    }
+  }
+  .classNameCharPicker {
+    border: 1px solid green !important;
+    height: min-content;
+
+    [class*="CharacterPicker_girlPickerContainer__"] {
+      border: 1px solid var(--set1-purple-brdr);
+      height: min-content;
+    }
   }
 }

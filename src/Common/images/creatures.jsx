@@ -193,13 +193,7 @@ const creatures = {
   drake,
   drake01,
   drake02,
-  dress02,
-  dress03,
-  dress04,
-  dress05,
-  dress06,
-  dress07,
-  dress08,
+
   elsa02,
   emmet01,
   fairy,
@@ -282,4 +276,14 @@ const creatures = {
   iceCream01,
 }
 
-export { creatures }
+const dresses = {
+  dress02,
+  dress03,
+  dress04,
+  dress05,
+  dress06,
+  dress07,
+  dress08,
+}
+
+export { creatures, dresses }

@@ -1,5 +1,5 @@
 import { trophys01 } from "./trophys01"
-import { creatures } from "./creatures"
+import { creatures, dresses } from "./creatures"
 import { creatures2animals } from "./creatures2"
 import items from "./items"
 import locations from "./locations"
@@ -13,6 +13,7 @@ const all = {
   ...creatures2animals,
   ...items,
   ...posableCharacters,
+  ...dresses,
 }
 
 export default {
@@ -25,4 +26,5 @@ export default {
   newBackgrounds,
   posableCharacters,
   trophys01,
+  dresses,
 }

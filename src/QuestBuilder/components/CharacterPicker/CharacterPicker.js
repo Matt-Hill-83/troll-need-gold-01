@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { Button } from "@blueprintjs/core"
+import cx from "classnames"
 
 import css from "./CharacterPicker.module.scss"
 
@@ -35,14 +36,14 @@ class CharacterPicker extends Component {
   }
 
   render() {
-    const { onClose, imageSets } = this.props
+    const { onClose, imageSets, className = "" } = this.props
 
     const renderedImageSets = imageSets.map((imageSet, index) => {
       return this.renderItemPicker({ imageSet, index })
     })
 
     return (
-      <div className={css.main}>
+      <div className={cx(css.main, className)}>
         <Button onClick={() => onClose({})}>Close</Button>
         {renderedImageSets}
       </div>

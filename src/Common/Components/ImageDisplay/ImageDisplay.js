@@ -17,7 +17,6 @@ export default function ImageDisplay(props) {
   } = props
 
   const flipImage = item && item.flipImage
-  console.log("props.image", props.image) // zzz
   const image = props.image || Images.all[name]
 
   return (
@@ -29,7 +28,7 @@ export default function ImageDisplay(props) {
       key={id || index}
     >
       <div className={css.imageContainer}>
-        {showAmount && <div className={css.amount}>{amount}</div>}
+        {showAmount && amount > 0 && <div className={css.amount}>{amount}</div>}
         {image && <img className={css.image} src={image} alt={name} />}
         {showLabel && <span className={`${css.itemLabel}`}>{name}</span>}
       </div>
