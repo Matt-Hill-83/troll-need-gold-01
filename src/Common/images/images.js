@@ -1,3 +1,4 @@
+import { trophys01 } from "./trophys01"
 import { creatures } from "./creatures"
 import { creatures2animals } from "./creatures2"
 import items from "./items"
@@ -23,4 +24,5 @@ export default {
   backgrounds,
   newBackgrounds,
   posableCharacters,
+  trophys01,
 }

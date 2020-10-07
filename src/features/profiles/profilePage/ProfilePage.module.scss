@@ -4,15 +4,28 @@
 
   .imagesContainer {
     display: inline-flex;
-    // height: 10vh;
+    flex-wrap: wrap;
     overflow: hidden;
     width: auto;
 
     .image {
       border: 1px solid red !important;
       height: 6vh;
-      width: auto;
+      width: 6vh;
+      max-width: 6vh;
+      //   width: auto;
       margin-right: 1vh;
+      margin-bottom: 1vh;
     }
+  }
+
+  .card {
+    position: relative;
+    background: #fff;
+    box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+    // margin: 1rem 0;
+    padding: 1em 1em;
+    border-radius: 0.28571429rem;
+    border: 1px solid rgba(34, 36, 38, 0.15);
   }
 }

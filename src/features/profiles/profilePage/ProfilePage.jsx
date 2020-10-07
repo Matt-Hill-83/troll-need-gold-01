@@ -1,5 +1,5 @@
 import React from "react"
-import { Header, Segment, Image, Grid } from "semantic-ui-react"
+import { Header, Segment, Image, Grid, Item } from "semantic-ui-react"
 import { useDispatch, useSelector } from "react-redux"
 import _get from "lodash.get"
 
@@ -45,8 +45,13 @@ export default function ProfilePage({ match }) {
     { name: "bag", amount: 1 },
   ]
 
+  const trophys = [
+    { name: "gold", amount: 1 },
+    { name: "cap", amount: 1 },
+    { name: "bag", amount: 1 },
+  ]
+
   const renderedTreasure = treasure.map((item) => {
-    const image = images.all[item.name]
     return (
       <ImageDisplay
         className={css.image}
@@ -72,9 +77,20 @@ export default function ProfilePage({ match }) {
           />
         </Grid.Column>
         <Grid.Column width={8}>
-          <Segment>
-            <div className={css.imagesContainer}>{renderedTreasure}</div>
-          </Segment>
+          <div className={css.card}>
+            <Item.Group>
+              <Item>
+                <Item.Content verticalAlign="top">
+                  <Header
+                    as="h5"
+                    style={{ display: "block", marginBottom: 10 }}
+                    content={"My Treasure"}
+                  />
+                  <div className={css.imagesContainer}>{renderedTreasure}</div>
+                </Item.Content>
+              </Item>
+            </Item.Group>
+          </div>
         </Grid.Column>
       </Grid>
     </div>
