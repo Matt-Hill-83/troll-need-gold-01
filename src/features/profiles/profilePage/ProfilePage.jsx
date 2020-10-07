@@ -52,12 +52,12 @@ export default function ProfilePage({ match }) {
   ]
 
   const trophys = [
-    { name: "Get a Trophy", amount: 1, image: images.trophys01.trophy01 },
-    { name: "Add a Friend", amount: 1, image: images.trophys01.trophy02 },
-    { name: "Record a Beat", amount: 1, image: images.trophys01.trophy02 },
-    { name: "Write a Rap", amount: 1, image: images.trophys01.trophy02 },
-    { name: "Like a line", amount: 1, image: images.trophys01.trophy02 },
-    { name: "Like a story", amount: 1, image: images.trophys01.trophy02 },
+    // { name: "Get a Trophy", amount: 1, image: images.trophys01.trophy01 },
+    // { name: "Add a Friend", amount: 1, image: images.trophys01.trophy02 },
+    // { name: "Record a Beat", amount: 1, image: images.trophys01.trophy02 },
+    // { name: "Write a Rap", amount: 1, image: images.trophys01.trophy02 },
+    // { name: "Like a line", amount: 1, image: images.trophys01.trophy02 },
+    // { name: "Like a story", amount: 1, image: images.trophys01.trophy02 },
     { name: "Buy a donut", amount: 1, image: images.trophys01.trophy02 },
     { name: "Buy a donut", amount: 1, image: images.trophys01.trophy02 },
     { name: "Buy a donut", amount: 1, image: images.trophys01.trophy02 },
@@ -147,30 +147,14 @@ export default function ProfilePage({ match }) {
       </Item.Group>
     </div>
   )
-  const myTrophies2 = (
-    <div className={css.card}>
-      <Item.Group>
-        <Item>
-          <Item.Content verticalAlign="top">
-            <Header
-              as="h5"
-              style={{ display: "block", marginBottom: 10 }}
-              content={"My Trophies"}
-            />
-            <div className={css.imagesContainer}>{renderedTrophys}</div>
-          </Item.Content>
-        </Item>
-      </Item.Group>
-    </div>
-  )
+
   return (
     <div className={css.main}>
       <Grid celled>
         <Grid.Row>
-          <Grid.Column width={3}>
-            <Grid.Column width={4}>{content01}</Grid.Column>
-          </Grid.Column>
-          <Grid.Column width={13}>{myTrophies}</Grid.Column>
+          <Grid.Column width={4}>{content01}</Grid.Column>
+          <Grid.Column width={8}></Grid.Column>
+          <Grid.Column width={4}></Grid.Column>
         </Grid.Row>
 
         <Grid.Row>
@@ -179,7 +163,6 @@ export default function ProfilePage({ match }) {
         <Grid.Row>
           <Grid.Column width={8}>{myTrophies}</Grid.Column>
         </Grid.Row>
-
         <Grid.Row>
           <Grid.Column width={3}>{myTreasure}</Grid.Column>
           <Grid.Column width={3}>{myTreasure}</Grid.Column>
