@@ -1,0 +1,18 @@
+.main {
+  display: flex;
+  padding: 3vh;
+
+  .imagesContainer {
+    display: inline-flex;
+    // height: 10vh;
+    overflow: hidden;
+    width: auto;
+
+    .image {
+      border: 1px solid red !important;
+      height: 6vh;
+      width: auto;
+      margin-right: 1vh;
+    }
+  }
+}

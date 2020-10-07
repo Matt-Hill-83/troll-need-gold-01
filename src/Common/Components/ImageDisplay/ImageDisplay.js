@@ -28,8 +28,8 @@ export default function ImageDisplay(props) {
       })}
       key={id || index}
     >
-      {showAmount && <div className={css.amount}>{amount}</div>}
       <div className={css.imageContainer}>
+        {showAmount && <div className={css.amount}>{amount}</div>}
         {image && <img className={css.image} src={image} alt={name} />}
         {showLabel && <span className={`${css.itemLabel}`}>{name}</span>}
       </div>

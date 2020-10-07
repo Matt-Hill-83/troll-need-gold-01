@@ -1,5 +1,5 @@
 import React from "react"
-import { Grid } from "semantic-ui-react"
+import { Header, Segment, Image, Grid } from "semantic-ui-react"
 import { useDispatch, useSelector } from "react-redux"
 import _get from "lodash.get"
 
@@ -9,6 +9,10 @@ import LoadingComponent from "../../../app/layout/LoadingComponent"
 import ProfileContent from "./ProfileContent"
 import ProfileHeader from "./ProfileHeader"
 import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc"
+import images from "../../../Common/Images/images"
+
+import css from "./ProfilePage.module.scss"
+import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
 
 export default function ProfilePage({ match }) {
   const dispatch = useDispatch()
@@ -35,18 +39,44 @@ export default function ProfilePage({ match }) {
   if ((loading && !profile) || (!profile && !error))
     return <LoadingComponent content="Loading profile..." />
 
+  const treasure = [
+    { name: "gold", amount: 1 },
+    { name: "cap", amount: 1 },
+    { name: "bag", amount: 1 },
+  ]
+
+  const renderedTreasure = treasure.map((item) => {
+    const image = images.all[item.name]
+    return (
+      <ImageDisplay
+        className={css.image}
+        item={item}
+        showLabel={true}
+        amount={item.amount}
+        showAmount={true}
+      />
+    )
+  })
+
   return (
-    <Grid>
-      <Grid.Column width={16}>
-        <ProfileHeader
-          profile={profile}
-          isCurrentUser={currentUser.uid === profile && profile.id}
-        />
-        <ProfileContent
-          profile={profile}
-          isCurrentUser={currentUser.uid === profile && profile.id}
-        />
-      </Grid.Column>
-    </Grid>
+    <div className={css.main}>
+      <Grid>
+        <Grid.Column width={8}>
+          <ProfileHeader
+            profile={profile}
+            isCurrentUser={currentUser.uid === profile && profile.id}
+          />
+          <ProfileContent
+            profile={profile}
+            isCurrentUser={currentUser.uid === profile && profile.id}
+          />
+        </Grid.Column>
+        <Grid.Column width={8}>
+          <Segment>
+            <div className={css.imagesContainer}>{renderedTreasure}</div>
+          </Segment>
+        </Grid.Column>
+      </Grid>
+    </div>
   )
 }

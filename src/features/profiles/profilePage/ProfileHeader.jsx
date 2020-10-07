@@ -128,7 +128,7 @@ export default function ProfileHeader({ profile, isCurrentUser }) {
               </>
             )}
           </Grid.Column>
-        )}{" "}
+        )}
       </Grid>
     </Segment>
   )
