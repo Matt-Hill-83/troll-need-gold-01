@@ -140,14 +140,13 @@ export default function ProfilePage({ match }) {
     return <LoadingComponent content="Loading profile..." />
 
   const categories = Object.keys(profile?.myStuff)
-  console.log("categories", categories) // zzz
 
   const newThing = categories.map((key) => {
     const selectedItems = profile?.myStuff?.[key] || []
 
     const items = renderItems({
       items: selectedItems,
-      title: `My ${key}s`,
+      title: `My ${key}`,
       wrapInCard: false,
     })
 
@@ -166,10 +165,6 @@ export default function ProfilePage({ match }) {
         profile={profile}
         isCurrentUser={currentUser.uid === profile?.id}
       />
-
-      {/* <Grid.Column width={3}>{myAvatars}</Grid.Column>
-      <Grid.Column width={3}>{myDresses}</Grid.Column>
-      <Grid.Column width={3}>{myVehicles}</Grid.Column> */}
       {newThing}
     </Segment>
   )
@@ -187,6 +182,7 @@ export default function ProfilePage({ match }) {
     console.log("profile", profile) // zzz
     const myStuff = {
       dresses: [{ name: "dress02" }],
+      avatars: [{ name: "fiona01" }],
       vehicles: [{ name: "helicopter01" }],
     }
     const dupProfile = { ...profile }
