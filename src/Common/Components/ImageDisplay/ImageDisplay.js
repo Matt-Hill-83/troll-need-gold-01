@@ -17,8 +17,8 @@ export default function ImageDisplay(props) {
   } = props
 
   const flipImage = item && item.flipImage
-
-  const image = props.images || Images.all[name]
+  console.log("props.image", props.image) // zzz
+  const image = props.image || Images.all[name]
 
   return (
     <div

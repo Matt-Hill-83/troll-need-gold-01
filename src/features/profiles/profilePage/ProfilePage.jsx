@@ -46,14 +46,28 @@ export default function ProfilePage({ match }) {
   ]
 
   const trophys = [
-    { name: "gold", amount: 1 },
-    { name: "cap", amount: 1 },
-    { name: "bag", amount: 1 },
+    { name: "Get a Trophy", amount: 1, image: images.trophys01.trophy01 },
+    { name: "Add a Friend", amount: 1, image: images.trophys01.trophy02 },
   ]
 
   const renderedTreasure = treasure.map((item) => {
     return (
       <ImageDisplay
+        className={css.image}
+        item={item}
+        showLabel={true}
+        amount={item.amount}
+        showAmount={true}
+      />
+    )
+  })
+  const renderedTrophys = trophys.map((item) => {
+    console.log("item.image", item.image) // zzz
+    const { image } = item
+    console.log("image", image) // zzz
+    return (
+      <ImageDisplay
+        image={image}
         className={css.image}
         item={item}
         showLabel={true}
@@ -69,7 +83,7 @@ export default function ProfilePage({ match }) {
         <Grid.Column width={8}>
           <ProfileHeader
             profile={profile}
-            isCurrentUser={currentUser.uid === profile && profile.id}
+            isCurrentUser={currentUser.uid === profile?.id}
           />
           <ProfileContent
             profile={profile}
@@ -87,6 +101,22 @@ export default function ProfilePage({ match }) {
                     content={"My Treasure"}
                   />
                   <div className={css.imagesContainer}>{renderedTreasure}</div>
+                </Item.Content>
+              </Item>
+            </Item.Group>
+          </div>
+        </Grid.Column>
+        <Grid.Column width={8}>
+          <div className={css.card}>
+            <Item.Group>
+              <Item>
+                <Item.Content verticalAlign="top">
+                  <Header
+                    as="h5"
+                    style={{ display: "block", marginBottom: 10 }}
+                    content={"My Trophies"}
+                  />
+                  <div className={css.imagesContainer}>{renderedTrophys}</div>
                 </Item.Content>
               </Item>
             </Item.Group>
