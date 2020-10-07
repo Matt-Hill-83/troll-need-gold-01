@@ -31,7 +31,7 @@
 
   .crudMachine {
     border: 1px solid black !important;
-    --item-height: 5vh;
+    --item-height: 10vh;
     height: var(--item-height);
 
     [class*="ImageDisplay_main"] {
