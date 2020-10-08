@@ -293,12 +293,6 @@ class WorldBuilder extends Component {
 
     return (
       <div className={css.subTitle}>
-        <div className={css.terminalScenePickers}>
-          start:
-          {this.renderTerminalScenePicker({ isStartScene: true })}
-          end:
-          {this.renderTerminalScenePicker({ isStartScene: false })}
-        </div>
         <Button
           text={"+ New Quest"}
           onClick={() => this.onChangeWorld({ newWorld: true })}
@@ -358,14 +352,23 @@ class WorldBuilder extends Component {
 
     return (
       <div className={css.main}>
-        <InputGroup
-          value={title}
-          id="text-input"
-          placeholder="Title"
-          onChange={(event) => this.onChangeTitle({ event })}
-          onBlur={(event) => this.saveTitle({ event })}
-          className={css.titleInput}
-        />
+        <div className={css.titleRow}>
+          <InputGroup
+            value={title}
+            id="text-input"
+            placeholder="Title"
+            onChange={(event) => this.onChangeTitle({ event })}
+            onBlur={(event) => this.saveTitle({ event })}
+            className={css.titleInput}
+          />
+
+          <div className={css.terminalScenePickers}>
+            start:
+            {this.renderTerminalScenePicker({ isStartScene: true })}
+            end:
+            {this.renderTerminalScenePicker({ isStartScene: false })}
+          </div>
+        </div>
 
         {!showFrameBuilder && this.renderHeaders({ title, world })}
         {!showFrameBuilder && (

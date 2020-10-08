@@ -127,8 +127,6 @@ import raven004 from "./riggedGirls01/raven/faces/004.png"
 
 import tj001 from "./riggedGirls01/tj/faces/001.png"
 import tj002 from "./riggedGirls01/tj/faces/002.png"
-import tj003 from "./riggedGirls01/tj/faces/003.png"
-import tj004 from "./riggedGirls01/tj/faces/004.png"
 
 const raven = {
   raven001,
@@ -140,11 +138,10 @@ const raven = {
 const tj = {
   tj001,
   tj002,
-  //   tj003,
-  //   tj004,
 }
 const creatures2animals = {
   frannyMay: hopps01,
+  vectra01: tanya01,
   azrael01,
   gargamel01,
   babyTroll02: will01,
@@ -159,7 +156,6 @@ const creatures2animals = {
   jasmine01,
   vector01,
   vector02,
-  vectra01: vector03,
   vector03,
   olive01,
   olive02,
