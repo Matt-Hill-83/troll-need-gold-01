@@ -84,14 +84,11 @@ export default class WorldBuilderUtils {
 
   static updateMap = async ({ newProps = {}, mapToUpdate }) => {
     console.log("updateMap-------------start")
-    // console.log("mapToUpdate", mapToUpdate) // zzz
     const map = mapToUpdate || worldBuilderStore.getWorldBuilderWorld()
 
     Object.assign(map, { ...newProps })
 
     map.newGrid5 = WorldBuilderUtils.createCondensedGridFromGrid()
-    // console.log("map.newGrid5[0]", map.newGrid5[0]) // zzz
-    // console.log("map.newGrid5", map.newGrid5) // zzz
 
     map.newGrid5.forEach((scene) => {
       this.addIdToAllItemsInScene({ scene })
@@ -101,7 +98,6 @@ export default class WorldBuilderUtils {
     })
 
     delete map.grid
-    // console.log("map", map) // zzz
     await updateQuestInFirestore(map)
     console.log("updateMap------------end")
     return true
@@ -205,7 +201,6 @@ export default class WorldBuilderUtils {
   }
 
   static addNewWorld = async () => {
-    console.log("addNewWorld - 2 ") // zzz
     const newName = ""
 
     const { grid, gridDimensions } = WorldBuilderUtils.createNewGrid()
@@ -218,11 +213,9 @@ export default class WorldBuilderUtils {
     }
 
     const newWorld = Constants.getNewWorld({ props: newWorldProps })
-    console.log("newWorld_+++++++", newWorld) // zzz
 
     const newMapReturned = await addQuestToFirestore(newWorld)
     newWorld.id = newMapReturned.id
-    console.log("newWorld.id", newWorld.id) // zzz
     worldBuilderStore.setWorldBuilderWorld(newWorld)
     return newWorld.id
   }

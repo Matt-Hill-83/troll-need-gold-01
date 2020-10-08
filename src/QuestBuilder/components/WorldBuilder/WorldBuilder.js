@@ -198,11 +198,7 @@ class WorldBuilder extends Component {
   }
 
   addNewWorld = async () => {
-    console.log("addNewWorld -  1") // zzz
     const questId = await WorldBuilderUtils.addNewWorld()
-    console.log("-------------------questId", questId) // zzz
-    // this.forceUpdate2()
-    console.log("this.props", this.props) // zzz
     this.props.history.push(`/quest-builder/${questId}`)
   }
 
