@@ -42,6 +42,12 @@ export default function QuestListItem({ event: world }) {
         >
           {truncatedTitle}
         </Link>
+        <Link
+          className={cx(css.tableCell, css.questName)}
+          to={`/quest-builder/${questId}`}
+        >
+          Bldr-{truncatedTitle}
+        </Link>
 
         <div className={cx(css.tableCell, css.dragonPoints)}>{totalGold} </div>
         <div className={cx(css.tableCell, css.questStatus)}>

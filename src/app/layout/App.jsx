@@ -20,6 +20,7 @@ import BookDashboard from "../../features/books/bookDashboard/BookDashboard"
 import WorldBuilderBox from "../../features/quests/questDashboard/WorldBuilderBox"
 import images from "../../Common/Images/images"
 import css from "./App.module.scss"
+import WorldBuilderDetailedPage from "../../features/quests/eventDetailed/WorldBuilderDetailedPage"
 
 export default function App() {
   const { initialized } = useSelector((state) => state.async)
@@ -48,6 +49,11 @@ export default function App() {
             <Route exact path="/" component={BookDashboard} />
             <Container className="main">
               <Route exact path="/quest-builder" component={WorldBuilderBox} />
+              <Route
+                exact
+                path="/quest-builder/:id"
+                component={WorldBuilderDetailedPage}
+              />
               <Route exact path="/quests" component={QuestDashboard} />
               <Route exact path="/books" component={BookDashboard} />
               <Route path="/quests/:id" component={QuestDetailedPage} />

@@ -8,7 +8,7 @@ import WorldBuilder from "../../../QuestBuilder/components/WorldBuilder/WorldBui
 import useUpdateProfileWidget from "../../../oldProject/components/TopLevel/useUpdateProfileWidget"
 import Constants from "../../../Common/Constants/Constants"
 
-export default function WorldBuilderBox() {
+export default function WorldBuilderBox(match) {
   const limit = 1000
   const dispatch = useDispatch()
   const { quests, filter, startDate, retainState } = useSelector(

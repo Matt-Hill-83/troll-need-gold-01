@@ -7,7 +7,6 @@ import SceneBuilder from "../../../oldProject/components/SceneBuilder/SceneBuild
 import css from "./WorldBuilderScenesGrid.module.scss"
 
 class WorldBuilderScenesGrid extends Component {
-  state = { showJsonEditor: false }
   saveItems = async () => {
     await this.props.saveItems()
   }

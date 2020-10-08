@@ -36,13 +36,27 @@ class WorldBuilder extends Component {
 
   maps = []
   // Changing this to DidMount breaks things
-  async componentWillMount() {
-    const { maps, defaultWorldId } = this.props
+  componentWillMount() {
+    this.init()
+  }
 
-    this.maps = maps
-    const defaultWorld = this.maps.find((item) => item.id === defaultWorldId)
+  componentWillReceiveProps() {
+    this.init()
+  }
 
-    const id = defaultWorld ? defaultWorldId : this.maps[0]?.id || ""
+  init() {
+    const { quest = null, maps, defaultWorldId } = this.props
+    console.log("this.props", this.props) // zzz
+    console.log("quest", this.props.quest) // zzz
+    let id = null
+
+    this.maps = maps || []
+    if (quest) {
+      id = quest.id
+    } else {
+      const defaultWorld = this.maps.find((item) => item.id === defaultWorldId)
+      id = defaultWorld ? defaultWorldId : this.maps[0]?.id || ""
+    }
     this.onChangeWorld({ mapId: id })
   }
 
@@ -54,29 +68,40 @@ class WorldBuilder extends Component {
     })
   }
 
+  setData = ({ world }) => {
+    const { gridDimensions, newGrid5 } = world
+
+    const reCreatedScenesGrid = Utils.reCreateGridFromCondensedGrid({
+      gridDimensions,
+      newGrid5,
+    })
+
+    worldBuilderStore.setWorldBuilderWorld(world)
+    worldBuilderStore.setWorldBuilderScenesGrid(reCreatedScenesGrid)
+  }
+
   onChangeWorld = async ({ mapId, newWorld }) => {
     // new map
-    if (newWorld) {
-      await this.addNewWorld()
-      // this.setDefaultWorldId({ worldId: world.id })
-      // return
+    let world = null
+    console.log("this.props.quest", this.props.quest) // zzz
+    if (this.props.quest) {
+      world = this.props.quest
+      this.setData({ world })
     } else {
-      const world = this.maps.find((item) => item.id === mapId)
-      if (!world) {
-        return <div>world not found</div>
+      if (newWorld) {
+        await this.addNewWorld()
+        // this.setDefaultWorldId({ worldId: world.id })
+        // return
+      } else {
+        const world = this.maps.find((item) => item.id === mapId)
+        if (!world) {
+          return <div>world not found</div>
+        }
+
+        this.setData({ world })
       }
-
-      const { gridDimensions, newGrid5 } = world
-
-      const reCreatedScenesGrid = Utils.reCreateGridFromCondensedGrid({
-        gridDimensions,
-        newGrid5,
-      })
-
-      worldBuilderStore.setWorldBuilderWorld(world)
-      worldBuilderStore.setWorldBuilderScenesGrid(reCreatedScenesGrid)
     }
-    const world = worldBuilderStore.getWorldBuilderWorld()
+    world = worldBuilderStore.getWorldBuilderWorld()
     this.setDefaultWorldId({ worldId: world.id })
     this.setState({ update: new Date() })
   }
@@ -244,7 +269,7 @@ class WorldBuilder extends Component {
   }
 
   setDefaultWorldId = ({ worldId }) => {
-    this.props.updateDefaultWorldId({ worldId })
+    // this.props.updateDefaultWorldId({ worldId })
   }
 
   renderMainButtonGroup = () => {
@@ -299,16 +324,19 @@ class WorldBuilder extends Component {
           onClick={() => this.onChangeWorld({ newWorld: true })}
         />
         {this.renderMainButtonGroup()}
-        <WorldPicker
-          maps={this.maps}
-          initialValue={title}
-          showDelete={true}
-          showReleased={true}
-          showReleasedToProd={true}
-          updateIsReleasedProperty={this.updateIsReleasedProperty}
-          updateReleasedToProd={this.updateReleasedToProd}
-          onChangeWorld={this.onChangeWorld}
-        />
+        {!this.props.quest &
+        (
+          <WorldPicker
+            maps={this.maps}
+            initialValue={title}
+            showDelete={true}
+            showReleased={true}
+            showReleasedToProd={true}
+            updateIsReleasedProperty={this.updateIsReleasedProperty}
+            updateReleasedToProd={this.updateReleasedToProd}
+            onChangeWorld={this.onChangeWorld}
+          />
+        )}
       </div>
     )
   }

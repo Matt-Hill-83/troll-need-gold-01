@@ -15,7 +15,7 @@ import LoadingComponent from "../../../app/layout/LoadingComponent"
 import ProfileContent from "./ProfileContent"
 import ProfileHeader from "./ProfileHeader"
 import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc"
-import useUpdateProfileWidget from "../../../oldProject/components/TopLevel/useUpdateProfileWidget"
+// import useUpdateProfileWidget from "../../../oldProject/components/TopLevel/useUpdateProfileWidget"
 
 import css from "./ProfilePage.module.scss"
 
@@ -113,7 +113,7 @@ const renderItems = ({ items, title, wrapInCard = true }) => {
 }
 
 export default function ProfilePage({ match }) {
-  const { updateProfilePropsIfChanged } = useUpdateProfileWidget()
+  // const { updateProfilePropsIfChanged } = useUpdateProfileWidget()
 
   const dispatch = useDispatch()
   const { selectedUserProfile, currentUserProfile } = useSelector(
