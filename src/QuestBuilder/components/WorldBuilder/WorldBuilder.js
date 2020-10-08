@@ -23,8 +23,10 @@ import worldBuilderStore from "../../Stores/WorldBuilderStore"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 import WorldPicker from "../WorldPicker/WorldPicker"
 import DialogBuilders from "../DialogBuilders/DialogBuilders"
+import { Redirect } from "react-router-dom"
 
 import css from "./WorldBuilder.module.scss"
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 class WorldBuilder extends Component {
   state = {
@@ -83,25 +85,29 @@ class WorldBuilder extends Component {
   onChangeWorld = async ({ mapId, newWorld }) => {
     // new map
     let world = null
+
     console.log("this.props.quest", this.props.quest) // zzz
+
+    if (newWorld) {
+      await this.addNewWorld()
+      // this.setData({ world })
+      // this.setDefaultWorldId({ worldId: world.id })
+      // return
+    }
+
     if (this.props.quest) {
       world = this.props.quest
       this.setData({ world })
     } else {
-      if (newWorld) {
-        await this.addNewWorld()
-        // this.setDefaultWorldId({ worldId: world.id })
-        // return
-      } else {
-        const world = this.maps.find((item) => item.id === mapId)
-        if (!world) {
-          return <div>world not found</div>
-        }
-
-        this.setData({ world })
+      const world = this.maps.find((item) => item.id === mapId)
+      if (!world) {
+        return <div>world not found</div>
       }
+
+      this.setData({ world })
     }
     world = worldBuilderStore.getWorldBuilderWorld()
+    console.log("world----------------------------", world) // zzz
     this.setDefaultWorldId({ worldId: world.id })
     this.setState({ update: new Date() })
   }
@@ -192,8 +198,12 @@ class WorldBuilder extends Component {
   }
 
   addNewWorld = async () => {
-    await WorldBuilderUtils.addNewWorld()
+    console.log("addNewWorld -  1") // zzz
+    const questId = await WorldBuilderUtils.addNewWorld()
+    console.log("-------------------questId", questId) // zzz
     // this.forceUpdate2()
+    console.log("this.props", this.props) // zzz
+    this.props.history.push(`/quest-builder/${questId}`)
   }
 
   onChangeTitle = async ({ event }) => {
