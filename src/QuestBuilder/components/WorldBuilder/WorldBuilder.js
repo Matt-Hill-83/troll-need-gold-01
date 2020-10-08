@@ -261,11 +261,11 @@ class WorldBuilder extends Component {
 
     return (
       <>
-        <Button
+        {/* <Button
           icon={IconNames.SETTINGS}
           text={"set world as default"}
           onClick={() => this.setDefaultWorldId({ worldId: world.id })}
-        />
+        /> */}
         {dialogBuilderButton}
         {subQuestWizardButton}
       </>

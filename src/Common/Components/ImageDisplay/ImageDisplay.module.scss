@@ -1,13 +1,13 @@
-.main {
-  .flipImage {
-    :global {
-      img {
-        -webkit-transform: scaleX(-1);
-        transform: scaleX(-1);
-      }
+.flipImage {
+  :global {
+    img {
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
     }
   }
+}
 
+.main {
   display: flex;
   flex: 1 1;
 
