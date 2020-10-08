@@ -54,11 +54,12 @@ class WorldBuilder extends Component {
     })
   }
 
-  onChangeWorld = ({ mapId, newWorld }) => {
+  onChangeWorld = async ({ mapId, newWorld }) => {
     // new map
     if (newWorld) {
-      this.addNewWorld()
-      return
+      await this.addNewWorld()
+      // this.setDefaultWorldId({ worldId: world.id })
+      // return
     } else {
       const world = this.maps.find((item) => item.id === mapId)
       if (!world) {
@@ -166,8 +167,8 @@ class WorldBuilder extends Component {
   }
 
   addNewWorld = async () => {
-    WorldBuilderUtils.addNewWorld()
-    this.forceUpdate2()
+    await WorldBuilderUtils.addNewWorld()
+    // this.forceUpdate2()
   }
 
   onChangeTitle = async ({ event }) => {
