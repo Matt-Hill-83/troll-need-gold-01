@@ -27,6 +27,9 @@ export default function useUpdateProfileWidget() {
   const getProfile = () => profile
 
   const getUserStatus = async () => {
+    console.log("profile", profile) // zzz
+
+    // if (true || !profile.userStatus) {
     if (!profile.userStatus) {
       profile.userStatus = Constants.getDefaultUserStatus()
     } else {

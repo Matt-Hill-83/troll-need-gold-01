@@ -159,6 +159,7 @@ const creatures2animals = {
   jasmine01,
   vector01,
   vector02,
+  vectra01: vector03,
   vector03,
   olive01,
   olive02,

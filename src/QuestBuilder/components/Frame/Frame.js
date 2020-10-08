@@ -278,7 +278,7 @@ class Frame extends Component {
 
     return (
       <div className={`${css.main}`}>
-        <div className={` ${css.scenesContainer}`}>
+        <div className={`${css.scenesContainer}`}>
           {this.renderFrame()}
 
           <CrudMachine
