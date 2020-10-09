@@ -26,30 +26,6 @@ let worlds = []
 let books = []
 const { isProdRelease } = Constants
 
-const sortBooks = ({ books }) => {
-  const sortedBooks = Utils.sortDataByNestedKey({
-    data: books,
-    keys: ["name"],
-    order: "ASC",
-  })
-
-  return sortedBooks
-}
-
-const getInitialBook = ({ books }) => {
-  const prodBooks = getProdBooks({ books })
-  const initialBook = prodBooks[0] || books[0]
-  return initialBook
-}
-
-const getProdBooks = ({ books }) => {
-  return books.filter((item) => item.releaseToProd)
-}
-
-const getNonProdBooks = ({ books }) => {
-  return books.filter((item) => !item.releaseToProd)
-}
-
 export default function BookPicker(props) {
   const { getCompletedQuests } = useUpdateProfileWidget()
 
@@ -352,4 +328,28 @@ export default function BookPicker(props) {
       </div>
     </div>
   )
+}
+
+const sortBooks = ({ books }) => {
+  const sortedBooks = Utils.sortDataByNestedKey({
+    data: books,
+    keys: ["name"],
+    order: "ASC",
+  })
+
+  return sortedBooks
+}
+
+const getInitialBook = ({ books }) => {
+  const prodBooks = getProdBooks({ books })
+  const initialBook = prodBooks[0] || books[0]
+  return initialBook
+}
+
+const getProdBooks = ({ books }) => {
+  return books.filter((item) => item.releaseToProd)
+}
+
+const getNonProdBooks = ({ books }) => {
+  return books.filter((item) => !item.releaseToProd)
 }

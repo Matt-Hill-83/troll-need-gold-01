@@ -1,3 +1,5 @@
+import treehouse from "./locations/treehouse.png"
+
 import barn from "./locations/barn.png"
 import bees from "./locations/bees.png"
 import blank from "./locations/blank.png"
@@ -21,6 +23,7 @@ import waterfall from "./locations/waterfall.png"
 
 const locations = {
   blank,
+  treehouse,
   barn,
   donutShop01,
   bees,

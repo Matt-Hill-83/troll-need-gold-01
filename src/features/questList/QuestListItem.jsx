@@ -21,6 +21,7 @@ export default function QuestListItem({ event: world }) {
 
   const { getProfile } = useUpdateProfileWidget()
   const profile = getProfile()
+  const isGod = profile.id === "AMAgzal2oAbHogUvO9vVeHWZygF3"
   const completedQuests = _get(profile, "userStatus.completedQuests") || []
 
   const missions = TopLevelUtils.getMissions({ questConfig }) || []
@@ -42,12 +43,14 @@ export default function QuestListItem({ event: world }) {
         >
           {truncatedTitle}
         </Link>
-        <Link
-          className={cx(css.tableCell, css.questName)}
-          to={`/quest-builder/${questId}`}
-        >
-          Bldr-{truncatedTitle}
-        </Link>
+        {isGod && (
+          <Link
+            className={cx(css.tableCell, css.questName)}
+            to={`/quest-builder/${questId}`}
+          >
+            Edit
+          </Link>
+        )}
 
         <div className={cx(css.tableCell, css.dragonPoints)}>{totalGold} </div>
         <div className={cx(css.tableCell, css.questStatus)}>

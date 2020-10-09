@@ -1,3 +1,5 @@
+import greyWolfTrap01 from "./creatures/greyWolfTrap01.png"
+import joker01 from "./creatures/joker01.png"
 import azrael01 from "./creatures/azrael01.png"
 import gargamel01 from "./creatures/gargamel01.png"
 
@@ -140,11 +142,14 @@ const tj = {
   tj002,
 }
 const creatures2animals = {
+  greyWolf: farf01,
+  babyTroll02: will01,
   frannyMay: hopps01,
   vectra01: tanya01,
   azrael01,
+  greyWolfTrap01,
+  joker01,
   gargamel01,
-  babyTroll02: will01,
   jasmine02,
   oliveRori01cu02Eyes,
   tanya01,
@@ -258,6 +263,7 @@ const creatures2animals = {
   plusha01,
   weasel01,
   rosco01,
+
   farf01,
   ...raven,
   ...tj,

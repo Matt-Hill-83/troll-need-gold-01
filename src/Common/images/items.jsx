@@ -1,3 +1,6 @@
+import trap01 from "./items/trap01.png"
+import popcorn01 from "./items/popcorn01.png"
+
 import portal01 from "./items/portal01.png"
 import balloon01 from "./items/balloon01.png"
 import angusBalloon01 from "./creatures/angusBalloon01.png"
@@ -47,6 +50,8 @@ import doorYellow from "./doors/doorYellow.jpg"
 
 const items = {
   // blank,
+  trap01,
+  popcorn01,
   bag,
   smoke,
   doorGreen,
