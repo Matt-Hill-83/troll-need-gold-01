@@ -22,7 +22,7 @@ export default function NavBar() {
       {!Constants.isProdRelease && (
         <>
           <Menu.Item as={NavLink} to="/quests" name="Quests List" />
-          <Menu.Item as={NavLink} to="/quest-builder" name="Builder" />
+          {/* <Menu.Item as={NavLink} to="/quest-builder" name="Builder" /> */}
         </>
       )}
       {authenticated ? <SignedInMenu /> : <SignedOutMenu />}
