@@ -7,12 +7,10 @@ import React, { useContext } from "react"
 import { myContext } from "../../../myProvider"
 import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
 import { uploadToFirebaseStorage } from "../../../app/firestore/firebaseService"
-import AudioPlayer from "../AudioPlayer/AudioPlayer"
-import AudioRecorder from "../AudioRecorder/AudioRecorder"
-import Character from "../../../Common/Components/Character/Character"
-import Constants from "../../../Common/Constants/Constants"
 import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget"
 import WordGroup from "../WordGroup/WordGroup"
+
+import ReactPlayer from "react-player"
 
 import css from "./FrameViewer.module.scss"
 import MyAudioConsole from "../MyAudioConsole/MyAudioConsole"
@@ -98,10 +96,21 @@ export default function FrameViewer() {
       "margin-top": `${cloneIndex * scalingFactor}vh`,
       border: "3px solid red",
     }
+    const backgroundTrack =
+      "https://firebasestorage.googleapis.com/v0/b/troll-need-gold-02-staging.appspot.com/o/AMAgzal2oAbHogUvO9vVeHWZygF3%2Fuser_images%2Fckg3rdbam00003h5oth71k2wt-audio.blob?alt=media&token=853c84d1-6671-40af-986e-b8eb8e5f6dfe"
 
+    const tracks = [backgroundTrack, backgroundTrack, backgroundTrack]
     return (
       <div className={css.dialogScroller} style={style}>
-        <div className={css.dialog}>{renderedDialogs}</div>
+        <div className={css.dialog}>
+          {/* <audio controls={true} loop={true} autoplay={true}>
+            <source src={backgroundTrack} type="audio/mp3" />
+          </audio> */}
+          <ReactPlayer autoplay={true} controls loop={true} url={tracks} />
+          {/* <ReactPlayer autoplay controls loop url={backgroundTrack} /> */}
+          test2 test!!!!!!!!!!!!!!!!!!!!
+          {renderedDialogs}
+        </div>
       </div>
     )
   }

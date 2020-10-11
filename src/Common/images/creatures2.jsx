@@ -1,3 +1,8 @@
+import fancyDudeFromFrance01 from "./creatures/fancyDudeFromFrance01.png"
+import fancyDudeFromFrance02 from "./creatures/fancyDudeFromFrance02.png"
+import ashe01 from "./creatures/ashe01.png"
+import miranda02 from "./creatures/miranda02.png"
+
 import greyWolfTrap01 from "./creatures/greyWolfTrap01.png"
 import joker01 from "./creatures/joker01.png"
 import azrael01 from "./creatures/azrael01.png"
@@ -142,6 +147,11 @@ const tj = {
   tj002,
 }
 const creatures2animals = {
+  fancyDudeFromFrance01,
+  fancyDudeFromFrance02,
+  ashe01,
+  miranda02,
+
   greyWolf: farf01,
   babyTroll02: will01,
   frannyMay: hopps01,
