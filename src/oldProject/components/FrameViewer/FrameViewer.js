@@ -106,9 +106,8 @@ export default function FrameViewer() {
           {/* <audio controls={true} loop={true} autoplay={true}>
             <source src={backgroundTrack} type="audio/mp3" />
           </audio> */}
-          <ReactPlayer autoplay={true} controls loop={true} url={tracks} />
+          {/* <ReactPlayer autoplay={true} controls loop={true} url={tracks} /> */}
           {/* <ReactPlayer autoplay controls loop url={backgroundTrack} /> */}
-          test2 test!!!!!!!!!!!!!!!!!!!!
           {renderedDialogs}
         </div>
       </div>
