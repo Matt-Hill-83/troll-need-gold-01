@@ -118,11 +118,13 @@ export default function FrameViewer() {
     return activeScene?.location?.name
   }
 
-  const onClickNext = () => {
+  const incrementFrame = ({ increment = true }) => {
     setGlobalState((prevVal) => {
+      let newFrameIndex = (prevVal.activeFrameIndex += 1 * increment ? 1 : -1)
+      newFrameIndex = newFrameIndex >= 0 ? newFrameIndex : 0
       return {
         ...prevVal,
-        activeFrameIndex: (prevVal.activeFrameIndex += 1),
+        activeFrameIndex: newFrameIndex,
       }
     })
   }
@@ -166,9 +168,20 @@ export default function FrameViewer() {
     return (
       <div className={css.buttonsContainer}>
         {!isLastFrame && (
-          <Button onClick={onClickNext} className={css.nextButton}>
-            Next Page
-          </Button>
+          <ButtonGroup className={css.nextButton}>
+            <Button
+              onClick={() => incrementFrame({ increment: false })}
+              xxxclassName={css.nextButton}
+            >
+              Prev Page
+            </Button>
+            <Button
+              onClick={() => incrementFrame({ increment: true })}
+              xxxclassName={css.nextButton}
+            >
+              Next Page
+            </Button>
+          </ButtonGroup>
         )}
         {isLastFrame && (
           <div className={css.clickMapMsg}>Click map to move.</div>
