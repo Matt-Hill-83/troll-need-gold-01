@@ -13,6 +13,10 @@ import Utils from "../../../Common/Utils/Utils"
 // import useLocalState from "./useLocalState.js"
 
 import css from "./TopLevel.module.scss"
+import cuid from "cuid"
+import { uploadToFirebaseStorage } from "../../../app/firestore/firebaseService"
+import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
+import RecordingStudio from "../RecordingStudio/RecordingStudio"
 
 const toaster = Toaster.create({
   position: Position.TOP,
@@ -36,7 +40,7 @@ export default function TopLevel(props) {
   // const initialLocalState = {}
   // const { localState, setLocalStateProps } = useLocalState(initialLocalState)
   const { globalState, setGlobalStateProps } = useGlobalState()
-  const { questStatus = null, pocketsLoaded } = globalState
+  const { questStatus = null, pocketsLoaded, activeScene } = globalState
 
   // on mount
   useEffect(() => {
@@ -270,6 +274,52 @@ export default function TopLevel(props) {
     }
   }
 
+  function saveAudioForScene({ blob }) {
+    console.log("saveAudioForScene") // zzz
+    // setLoading(true)
+    const filename = cuid() + "-audio.blob"
+    const uploadTask = uploadToFirebaseStorage(blob, filename)
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        console.log("Upload is " + progress + "% done")
+      },
+      (error) => {
+        // toast.error(error.messege)
+      },
+      () => {
+        uploadTask.snapshot.ref.getDownloadURL().then((audioURL) => {
+          activeScene.audioURLVocalTrack = audioURL
+          updateQuestInFirestore(globalState.world)
+        })
+      }
+    )
+  }
+
+  function saveBeatAudioForScene({ blob }) {
+    console.log("saveBeatAudioForFrame") // zzz
+    // setLoading(true)
+    const filename = cuid() + "-audio.blob"
+    const uploadTask = uploadToFirebaseStorage(blob, filename)
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        console.log("Upload is " + progress + "% done")
+      },
+      (error) => {
+        // toast.error(error.messege)
+      },
+      () => {
+        uploadTask.snapshot.ref.getDownloadURL().then((audioURL) => {
+          activeScene.audioURLBeatTrack = audioURL
+          updateQuestInFirestore(globalState.world)
+        })
+      }
+    )
+  }
+
   console.log("")
   console.log("main story render")
 
@@ -284,6 +334,11 @@ export default function TopLevel(props) {
   return (
     <div className={`${css.main} ${className}`}>
       <StoryMode updateActiveScene={updateActiveScene} />
+      <RecordingStudio
+        saveAudioForScene={saveAudioForScene}
+        saveBeatAudioForScene={saveBeatAudioForScene}
+        loggedIn={true}
+      />
     </div>
   )
 }

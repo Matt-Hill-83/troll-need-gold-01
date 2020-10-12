@@ -1,3 +1,6 @@
+// obsolete
+// use DataTable3
+
 import cx from "classnames"
 import React, { Component } from "react"
 

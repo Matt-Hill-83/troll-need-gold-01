@@ -8,7 +8,7 @@ import DataTable3Config from "./DataTable3Config"
 
 import css from "./DataTable3.module.scss"
 
-export default function DataTable3({ props }) {
+export default function DataTable3(props) {
   const { data, columns, options, getMuiTheme } = props
 
   const defaultOptions = DataTable3Config.options || {}

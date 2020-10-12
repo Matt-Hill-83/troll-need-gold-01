@@ -80,19 +80,14 @@ export default function TriggersTable({ props }) {
           },
         },
       })
-
-    return (
-      <DataTable3
-        key={dataTableKey}
-        props={{
-          className: css.triggersTable,
-          getMuiTheme,
-          data: triggers,
-          columns,
-          options,
-        }}
-      />
-    )
+    const props = {
+      className: css.triggersTable,
+      getMuiTheme,
+      data: triggers,
+      columns,
+      options,
+    }
+    return <DataTable3 key={dataTableKey} {...props} />
   }
   if (!questConfig) {
     return null

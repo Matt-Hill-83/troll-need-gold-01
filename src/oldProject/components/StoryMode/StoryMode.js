@@ -168,11 +168,11 @@ export default function StoryMode(props) {
       <div className={`${css.halfPage} ${css.leftHalf}`}>
         <FrameViewer />
 
-        <RecordingStudio
+        {/* <RecordingStudio
           saveAudioForScene={saveAudioForScene}
           saveBeatAudioForScene={saveBeatAudioForScene}
           loggedIn={loggedIn}
-        />
+        /> */}
       </div>
       <div className={css.charactersContainer}>
         {renderCritters({
