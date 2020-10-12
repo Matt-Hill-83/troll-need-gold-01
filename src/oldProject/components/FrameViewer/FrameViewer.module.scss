@@ -1,14 +1,24 @@
 @import "../../../Common/Styles/mixins.modules.scss";
 
-.audioConsole {
+.audioConsoleLine {
   position: absolute;
   display: flex;
   transform: translateX(-100%);
   left: 0;
 }
 
+.audioConsoleFrame {
+  position: absolute;
+  display: flex;
+  transform: translateX(-100%);
+  z-index: 20;
+  border: 1px solid red !important;
+  top: 0;
+  right: 0;
+}
+
 .main {
-  border: 4px solid blue !important;
+  // border: 4px solid blue !important;
 
   --mini-head-height: 15vh;
 
@@ -110,6 +120,7 @@
     position: relative;
     justify-content: flex-end;
     background: none;
+    border: 4px solid blue !important;
   }
 
   .narrative {

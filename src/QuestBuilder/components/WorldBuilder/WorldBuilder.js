@@ -26,7 +26,7 @@ import DialogBuilders from "../DialogBuilders/DialogBuilders"
 import { Redirect } from "react-router-dom"
 
 import css from "./WorldBuilder.module.scss"
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
+import { useHistory, Link } from "react-router-dom/cjs/react-router-dom.min"
 
 class WorldBuilder extends Component {
   state = {
@@ -290,6 +290,15 @@ class WorldBuilder extends Component {
       <Button text="SubQuest Wizard" onClick={this.toggleSubQuestPicker} />
     )
 
+    const viewButton = (
+      <Link
+        className={cx(css.tableCell, css.questName)}
+        to={`/quests/${world.id}`}
+      >
+        View
+      </Link>
+    )
+
     return (
       <>
         {/* <Button
@@ -299,6 +308,7 @@ class WorldBuilder extends Component {
         /> */}
         {dialogBuilderButton}
         {subQuestWizardButton}
+        {viewButton}
       </>
     )
     const buttons = (

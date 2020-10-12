@@ -30,7 +30,8 @@ export default function FrameViewer() {
   const frame = frames[activeFrameIndex]
   let isLastFrame = activeFrameIndex >= frames.length - 1
 
-  const renderDialog = ({ cloneIndex }) => {
+  const renderDialog = () => {
+    const cloneIndex = 0
     const dialog = frame?.dialog || []
     const allCharactersInScene = {}
 
@@ -80,10 +81,9 @@ export default function FrameViewer() {
           </div>
           {indexIsEven && renderedWordGroup}
           <MyAudioConsole
-            className={css.audioConsole}
+            className={css.audioConsoleLine}
             audioURL={audioURL}
-            saveAudio={saveAudio}
-            dialog={line}
+            saveAudio={(blob) => saveAudioForLine({ line, blob })}
             loggedIn={loggedIn}
           />
         </div>
@@ -100,8 +100,17 @@ export default function FrameViewer() {
       "https://firebasestorage.googleapis.com/v0/b/troll-need-gold-02-staging.appspot.com/o/AMAgzal2oAbHogUvO9vVeHWZygF3%2Fuser_images%2Fckg3rdbam00003h5oth71k2wt-audio.blob?alt=media&token=853c84d1-6671-40af-986e-b8eb8e5f6dfe"
 
     const tracks = [backgroundTrack, backgroundTrack, backgroundTrack]
+
+    const { audioURL } = frame
+
     return (
       <div className={css.dialogScroller} style={style}>
+        <MyAudioConsole
+          className={css.audioConsoleFrame}
+          audioURL={audioURL}
+          saveAudio={(blob) => saveAudioForFrame({ frame, blob })}
+          loggedIn={loggedIn}
+        />
         <div className={css.dialog}>
           {/* <audio controls={true} loop={true} autoplay={true}>
             <source src={backgroundTrack} type="audio/mp3" />
@@ -129,7 +138,30 @@ export default function FrameViewer() {
     })
   }
 
-  function saveAudio({ dialog, blob }) {
+  function saveAudioForFrame({ frame, blob }) {
+    // setLoading(true)
+    console.log("frame", frame) // zzz
+    const filename = cuid() + "-audio.blob"
+    const uploadTask = uploadToFirebaseStorage(blob, filename)
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        console.log("Upload is " + progress + "% done")
+      },
+      (error) => {
+        // toast.error(error.messege)
+      },
+      () => {
+        uploadTask.snapshot.ref.getDownloadURL().then((audioURL) => {
+          frame.audioURL = audioURL
+          updateQuestInFirestore(globalState.world)
+        })
+      }
+    )
+  }
+
+  function saveAudioForLine({ dialog, blob }) {
     // setLoading(true)
 
     const filename = cuid() + "-audio.blob"
@@ -144,8 +176,8 @@ export default function FrameViewer() {
         // toast.error(error.messege)
       },
       () => {
-        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-          dialog.audioURL = downloadURL
+        uploadTask.snapshot.ref.getDownloadURL().then((audioURL) => {
+          dialog.audioURL = audioURL
           updateQuestInFirestore(globalState.world)
         })
       }
@@ -190,24 +222,13 @@ export default function FrameViewer() {
     )
   }
 
-  const cloneDialogs = () => {
-    const numPages = 1
-    const dialogClones = []
-    for (let cloneIndex = 0; cloneIndex < numPages; cloneIndex++) {
-      const dialog = renderDialog({ cloneIndex })
-      dialogClones.push(dialog)
-    }
-
-    return dialogClones
-  }
-
   const renderFrame = () => {
     const sceneName = getLocationName()
 
     return (
       <div className={css.wordsAndButtons}>
         <div className={css.sceneName}>{sceneName}</div>
-        <div className={css.wordsContainer}>{cloneDialogs()}</div>
+        <div className={css.wordsContainer}>{renderDialog()}</div>
         {renderButtons()}
       </div>
     )

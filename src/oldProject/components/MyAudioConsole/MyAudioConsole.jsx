@@ -10,12 +10,11 @@ import css from "./MyAudioConsole.module.scss"
 
 export default function MyAudioConsole(props) {
   const { className, audioURL, dialog } = props
-  console.log("className", className) // zzz
 
   const { getProfile } = useUpdateProfileWidget()
   const loggedIn = !!getProfile().id
 
-  const renderDialog = () => {
+  const renderTools = () => {
     return (
       <div className={css.audioButtonsContainer}>
         <ButtonGroup className={css.audioButtons}>
@@ -25,7 +24,7 @@ export default function MyAudioConsole(props) {
           {loggedIn && (
             <AudioRecorder
               recorderClassName={css.audioRecorder}
-              saveAudio={({ blob }) => saveAudio({ dialog, blob })}
+              saveAudio={({ blob }) => saveAudio({ blob })}
             />
           )}
         </ButtonGroup>
@@ -33,13 +32,13 @@ export default function MyAudioConsole(props) {
     )
   }
 
-  function saveAudio({ dialog, blob }) {
-    props.saveAudio({ dialog, blob })
+  function saveAudio({ blob }) {
+    props.saveAudio({ blob })
   }
 
   return (
     <div className={cx(css.main, { [className]: !!className })}>
-      <div className={css.scenesContainer}>{renderDialog()}</div>
+      <div className={css.scenesContainer}>{renderTools()}</div>
     </div>
   )
 }
