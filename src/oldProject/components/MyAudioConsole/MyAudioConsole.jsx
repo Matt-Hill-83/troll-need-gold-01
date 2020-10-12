@@ -9,12 +9,14 @@ import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget"
 import css from "./MyAudioConsole.module.scss"
 
 export default function MyAudioConsole(props) {
-  const { className, audioURL, dialog } = props
+  const { className, audioURL } = props
 
   const { getProfile } = useUpdateProfileWidget()
   const loggedIn = !!getProfile().id
 
   const renderTools = () => {
+    console.log("renderTools") // zzz
+    console.log("audioURL", audioURL) // zzz
     return (
       <div className={css.audioButtonsContainer}>
         <ButtonGroup className={css.audioButtons}>

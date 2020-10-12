@@ -83,7 +83,7 @@ export default function FrameViewer() {
           <MyAudioConsole
             className={css.audioConsoleLine}
             audioURL={audioURL}
-            saveAudio={(blob) => saveAudioForLine({ line, blob })}
+            saveAudio={({ blob }) => saveAudioForLine({ dialog: line, blob })}
             loggedIn={loggedIn}
           />
         </div>
@@ -108,7 +108,7 @@ export default function FrameViewer() {
         <MyAudioConsole
           className={css.audioConsoleFrame}
           audioURL={audioURL}
-          saveAudio={(blob) => saveAudioForFrame({ frame, blob })}
+          saveAudio={({ blob }) => saveAudioForFrame({ frame, blob })}
           loggedIn={loggedIn}
         />
         <div className={css.dialog}>
@@ -139,6 +139,7 @@ export default function FrameViewer() {
   }
 
   function saveAudioForFrame({ frame, blob }) {
+    console.log("saveAudioForFrame") // zzz
     // setLoading(true)
     console.log("frame", frame) // zzz
     const filename = cuid() + "-audio.blob"
@@ -155,6 +156,7 @@ export default function FrameViewer() {
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then((audioURL) => {
           frame.audioURL = audioURL
+          console.log("frame", frame) // zzz
           updateQuestInFirestore(globalState.world)
         })
       }
