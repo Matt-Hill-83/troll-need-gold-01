@@ -1,4 +1,10 @@
-import { Popover, ButtonGroup, Button, Position } from "@blueprintjs/core"
+import {
+  PopoverInteractionKind,
+  Popover,
+  ButtonGroup,
+  Button,
+  Position,
+} from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
 import Constants from "../../../Common/Constants/Constants"
 import cx from "classnames"
@@ -66,7 +72,10 @@ class AudioRecorder extends React.Component {
 
     return (
       <div className={cx(css.main)}>
-        <Popover position={Position.TOP_RIGHT}>
+        <Popover
+          position={Position.TOP_RIGHT}
+          interactionKind={PopoverInteractionKind.CLICK_TARGET_ONLY}
+        >
           <Button
             className={cx(css.button, toggleClassName, {
               [css.disabled]: !recordAudioEnabled,
