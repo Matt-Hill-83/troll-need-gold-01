@@ -18,6 +18,7 @@ import css from "./StoryMode.module.scss"
 import cuid from "cuid"
 import { updateQuestInFirestore } from "../../../app/firestore/firestoreService.js"
 import { uploadToFirebaseStorage } from "../../../app/firestore/firebaseService.js"
+import RecordingStudio from "../RecordingStudio/RecordingStudio.js"
 
 export default function StoryMode(props) {
   const [globalState] = useContext(myContext)
@@ -107,7 +108,7 @@ export default function StoryMode(props) {
     return frames[activeFrameIndex]
   }
 
-  function saveAudioForScene({ frame, blob }) {
+  function saveAudioForScene({ blob }) {
     console.log("saveAudioForFrame") // zzz
     // setLoading(true)
     const filename = cuid() + "-audio.blob"
@@ -130,7 +131,7 @@ export default function StoryMode(props) {
     )
   }
 
-  function saveBeatAudioForScene({ frame, blob }) {
+  function saveBeatAudioForScene({ blob }) {
     console.log("saveBeatAudioForFrame") // zzz
     // setLoading(true)
     const filename = cuid() + "-audio.blob"
@@ -185,7 +186,12 @@ export default function StoryMode(props) {
       </div>
       <div className={`${css.halfPage} ${css.leftHalf}`}>
         <FrameViewer />
-        {multiTrackRecorder}
+        {/* {multiTrackRecorder} */}
+        <RecordingStudio
+          saveAudioForScene={saveAudioForScene}
+          saveBeatAudioForScene={saveBeatAudioForScene}
+          loggedIn={loggedIn}
+        />
       </div>
       <div className={css.charactersContainer}>
         {renderCritters({
