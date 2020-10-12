@@ -158,25 +158,6 @@ export default function StoryMode(props) {
 
   const { critters1, critters2 } = frame
 
-  const { audioURLVocalTrack, audioURLBeatTrack } = activeScene
-
-  const multiTrackRecorder = (
-    <ButtonGroup className={css.audioConsoleFrame}>
-      <MyAudioConsole
-        // className={css.audioConsoleFrame}
-        audioURL={audioURLVocalTrack}
-        saveAudio={({ blob }) => saveAudioForScene({ frame, blob })}
-        loggedIn={loggedIn}
-      />
-      <MyAudioConsole
-        // className={css.audioConsoleFrame}
-        audioURL={audioURLBeatTrack}
-        saveAudio={({ blob }) => saveBeatAudioForScene({ frame, blob })}
-        loggedIn={loggedIn}
-      />
-    </ButtonGroup>
-  )
-
   return (
     <div className={`${css.main}`}>
       <img className={css.backgroundImage} src={mainBackground} alt={"bk"} />
@@ -186,7 +167,7 @@ export default function StoryMode(props) {
       </div>
       <div className={`${css.halfPage} ${css.leftHalf}`}>
         <FrameViewer />
-        {/* {multiTrackRecorder} */}
+
         <RecordingStudio
           saveAudioForScene={saveAudioForScene}
           saveBeatAudioForScene={saveBeatAudioForScene}
