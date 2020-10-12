@@ -105,12 +105,20 @@ export default function FrameViewer() {
 
     return (
       <div className={css.dialogScroller} style={style}>
-        <MyAudioConsole
-          className={css.audioConsoleFrame}
-          audioURL={audioURL}
-          saveAudio={({ blob }) => saveAudioForFrame({ frame, blob })}
-          loggedIn={loggedIn}
-        />
+        <ButtonGroup className={css.audioConsoleFrame}>
+          <MyAudioConsole
+            // className={css.audioConsoleFrame}
+            audioURL={audioURL}
+            saveAudio={({ blob }) => saveAudioForFrame({ frame, blob })}
+            loggedIn={loggedIn}
+          />
+          <MyAudioConsole
+            // className={css.audioConsoleFrame}
+            audioURL={audioURL}
+            saveAudio={({ blob }) => saveBeatAudioForFrame({ frame, blob })}
+            loggedIn={loggedIn}
+          />
+        </ButtonGroup>
         <div className={css.dialog}>
           {/* <audio controls={true} loop={true} autoplay={true}>
             <source src={backgroundTrack} type="audio/mp3" />
@@ -141,7 +149,6 @@ export default function FrameViewer() {
   function saveAudioForFrame({ frame, blob }) {
     console.log("saveAudioForFrame") // zzz
     // setLoading(true)
-    console.log("frame", frame) // zzz
     const filename = cuid() + "-audio.blob"
     const uploadTask = uploadToFirebaseStorage(blob, filename)
     uploadTask.on(
@@ -156,7 +163,29 @@ export default function FrameViewer() {
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then((audioURL) => {
           frame.audioURL = audioURL
-          console.log("frame", frame) // zzz
+          updateQuestInFirestore(globalState.world)
+        })
+      }
+    )
+  }
+
+  function saveBeatAudioForFrame({ frame, blob }) {
+    console.log("saveBeatAudioForFrame") // zzz
+    // setLoading(true)
+    const filename = cuid() + "-audio.blob"
+    const uploadTask = uploadToFirebaseStorage(blob, filename)
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        console.log("Upload is " + progress + "% done")
+      },
+      (error) => {
+        // toast.error(error.messege)
+      },
+      () => {
+        uploadTask.snapshot.ref.getDownloadURL().then((audioURL) => {
+          frame.audioURLForBeat = audioURL
           updateQuestInFirestore(globalState.world)
         })
       }
@@ -203,18 +232,10 @@ export default function FrameViewer() {
       <div className={css.buttonsContainer}>
         {!isLastFrame && (
           <ButtonGroup className={css.nextButton}>
-            <Button
-              onClick={() => incrementFrame({ increment: false })}
-              xxxclassName={css.nextButton}
-            >
+            <Button onClick={() => incrementFrame({ increment: false })}>
               Prev Page
             </Button>
-            <Button
-              onClick={() => incrementFrame({ increment: true })}
-              xxxclassName={css.nextButton}
-            >
-              Next Page
-            </Button>
+            <Button onClick={() => incrementFrame({})}>Next Page</Button>
           </ButtonGroup>
         )}
         {isLastFrame && (

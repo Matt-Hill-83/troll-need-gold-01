@@ -22,7 +22,7 @@ export default function AudioPlayer(props) {
       icon={IconNames.PLAY}
     >
       <audio ref={audioElement}>
-        <source src={"sound"} type="audio/mp3" />
+        <source loop src={"sound"} type="audio/mp3" />
       </audio>
     </Button>
   )

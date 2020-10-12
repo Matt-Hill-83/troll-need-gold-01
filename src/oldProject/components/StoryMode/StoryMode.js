@@ -2,16 +2,22 @@ import cx from "classnames"
 
 import React, { useContext } from "react"
 
+import { ButtonGroup } from "@material-ui/core"
 import { myContext } from "../../../myProvider.js"
 import Character from "../../../Common/Components/Character/Character.js"
 import Constants from "../../../Common/Constants/Constants.js"
 import FrameViewer from "../FrameViewer/FrameViewer.js"
 import images from "../../../Common/Images/images.js"
-import MissionConsole from "../MissionConsole/MissionConsole.js"
-import WorldViewer from "../WorldViewer/WorldViewer.js"
 import LocationImage from "../LocationImage/LocationImage.jsx"
+import MissionConsole from "../MissionConsole/MissionConsole.js"
+import MyAudioConsole from "../MyAudioConsole/MyAudioConsole.jsx"
+import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget.js"
+import WorldViewer from "../WorldViewer/WorldViewer.js"
 
 import css from "./StoryMode.module.scss"
+import cuid from "cuid"
+import { updateQuestInFirestore } from "../../../app/firestore/firestoreService.js"
+import { uploadToFirebaseStorage } from "../../../app/firestore/firebaseService.js"
 
 export default function StoryMode(props) {
   const [globalState] = useContext(myContext)
@@ -23,6 +29,9 @@ export default function StoryMode(props) {
   } = globalState
 
   const { updateActiveScene } = props
+
+  const { getProfile } = useUpdateProfileWidget()
+  const loggedIn = !!getProfile().id
 
   console.log("activeScene", activeScene) // zzz
 
@@ -98,9 +107,74 @@ export default function StoryMode(props) {
     return frames[activeFrameIndex]
   }
 
+  function saveAudioForScene({ frame, blob }) {
+    console.log("saveAudioForFrame") // zzz
+    // setLoading(true)
+    const filename = cuid() + "-audio.blob"
+    const uploadTask = uploadToFirebaseStorage(blob, filename)
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        console.log("Upload is " + progress + "% done")
+      },
+      (error) => {
+        // toast.error(error.messege)
+      },
+      () => {
+        uploadTask.snapshot.ref.getDownloadURL().then((audioURL) => {
+          activeScene.audioURLVocalTrack = audioURL
+          updateQuestInFirestore(globalState.world)
+        })
+      }
+    )
+  }
+
+  function saveBeatAudioForScene({ frame, blob }) {
+    console.log("saveBeatAudioForFrame") // zzz
+    // setLoading(true)
+    const filename = cuid() + "-audio.blob"
+    const uploadTask = uploadToFirebaseStorage(blob, filename)
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        console.log("Upload is " + progress + "% done")
+      },
+      (error) => {
+        // toast.error(error.messege)
+      },
+      () => {
+        uploadTask.snapshot.ref.getDownloadURL().then((audioURL) => {
+          activeScene.audioURLBeatTrack = audioURL
+          updateQuestInFirestore(globalState.world)
+        })
+      }
+    )
+  }
+
   const frame = getActiveFrame({ activeFrameIndex })
 
   const { critters1, critters2 } = frame
+
+  const { audioURLVocalTrack, audioURLBeatTrack } = activeScene
+
+  const multiTrackRecorder = (
+    <ButtonGroup className={css.audioConsoleFrame}>
+      <MyAudioConsole
+        // className={css.audioConsoleFrame}
+        audioURL={audioURLVocalTrack}
+        saveAudio={({ blob }) => saveAudioForScene({ frame, blob })}
+        loggedIn={loggedIn}
+      />
+      <MyAudioConsole
+        // className={css.audioConsoleFrame}
+        audioURL={audioURLBeatTrack}
+        saveAudio={({ blob }) => saveBeatAudioForScene({ frame, blob })}
+        loggedIn={loggedIn}
+      />
+    </ButtonGroup>
+  )
 
   return (
     <div className={`${css.main}`}>
@@ -111,6 +185,7 @@ export default function StoryMode(props) {
       </div>
       <div className={`${css.halfPage} ${css.leftHalf}`}>
         <FrameViewer />
+        {multiTrackRecorder}
       </div>
       <div className={css.charactersContainer}>
         {renderCritters({
