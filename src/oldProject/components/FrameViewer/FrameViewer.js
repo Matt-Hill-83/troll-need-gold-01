@@ -6,17 +6,12 @@ import React, { useContext } from "react"
 
 import { myContext } from "../../../myProvider"
 import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
-import {
-  uploadToFirebaseStorage,
-  uploadAudio,
-} from "../../../app/firestore/firebaseService"
+import { uploadAudio } from "../../../app/firestore/firebaseService"
 import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget"
 import WordGroup from "../WordGroup/WordGroup"
-
-import ReactPlayer from "react-player"
+import MyAudioConsole from "../MyAudioConsole/MyAudioConsole"
 
 import css from "./FrameViewer.module.scss"
-import MyAudioConsole from "../MyAudioConsole/MyAudioConsole"
 
 export default function FrameViewer() {
   const [globalState, setGlobalState] = useContext(myContext)
@@ -86,8 +81,11 @@ export default function FrameViewer() {
           <MyAudioConsole
             className={css.audioConsoleLine}
             audioURL={audioURL}
-            saveAudio={({ blob }) => saveAudioForLine({ dialog: line, blob })}
+            // saveAudio={({ blob }) => saveAudioForLine({ dialog: line, blob })}
             loggedIn={loggedIn}
+            saveAudio={({ audioURL }) =>
+              onSaveAudioForLine({ dialog: line, audioURL })
+            }
           />
         </div>
       )
@@ -110,26 +108,12 @@ export default function FrameViewer() {
       <div className={css.dialogScroller} style={style}>
         <ButtonGroup className={css.audioConsoleFrame}>
           <MyAudioConsole
-            // className={css.audioConsoleFrame}
             audioURL={audioURL}
-            saveAudio={({ blob }) => saveAudioForFrame({ frame, blob })}
-            loggedIn={loggedIn}
-          />
-          <MyAudioConsole
-            // className={css.audioConsoleFrame}
-            audioURL={audioURL}
-            saveAudio={({ blob }) => saveBeatAudioForFrame({ frame, blob })}
+            saveAudio={onSaveAudioForFrame}
             loggedIn={loggedIn}
           />
         </ButtonGroup>
-        <div className={css.dialog}>
-          {/* <audio controls={true} loop={true} autoplay={true}>
-            <source src={backgroundTrack} type="audio/mp3" />
-          </audio> */}
-          {/* <ReactPlayer autoplay={true} controls loop={true} url={tracks} /> */}
-          {/* <ReactPlayer autoplay controls loop url={backgroundTrack} /> */}
-          {renderedDialogs}
-        </div>
+        <div className={css.dialog}>{renderedDialogs}</div>
       </div>
     )
   }
@@ -149,78 +133,21 @@ export default function FrameViewer() {
     })
   }
 
-  function saveAudioForFrame({ frame, blob }) {
+  function onSaveAudioForFrame({ audioURL }) {
     console.log("saveAudioForFrame") // zzz
-    // setLoading(true)
-    const filename = cuid() + "-audio.blob"
-    const uploadTask = uploadToFirebaseStorage(blob, filename)
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        console.log("Upload is " + progress + "% done")
-      },
-      (error) => {
-        // toast.error(error.messege)
-      },
-      () => {
-        uploadTask.snapshot.ref.getDownloadURL().then((audioURL) => {
-          frame.audioURL = audioURL
-          updateQuestInFirestore(globalState.world)
-        })
-      }
-    )
+
+    frame.audioURL = audioURL
+    updateQuestInFirestore(globalState.world)
   }
 
-  function saveBeatAudioForFrame({ frame, blob }) {
-    console.log("saveBeatAudioForFrame") // zzz
-    // setLoading(true)
-    const filename = cuid() + "-audio.blob"
-    const uploadTask = uploadToFirebaseStorage(blob, filename)
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        console.log("Upload is " + progress + "% done")
-      },
-      (error) => {
-        // toast.error(error.messege)
-      },
-      () => {
-        uploadTask.snapshot.ref.getDownloadURL().then((audioURL) => {
-          frame.audioURLForBeat = audioURL
-          updateQuestInFirestore(globalState.world)
-        })
-      }
-    )
-  }
+  function onSaveAudioForLine({ audioURL, dialog }) {
+    console.log("onSaveAudioForLine") // zzz
 
-  function saveAudioForLine({ dialog, blob }) {
-    console.log("blob", blob) // zzz
-    // setLoading(true)
+    dialog.audioURL = audioURL
 
-    const filename = cuid() + "-audio.blob"
-    const uploadTask = uploadAudio(blob, filename)
-    // const uploadTask = uploadToFirebaseStorage(blob, filename)
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        console.log("Upload is " + progress + "% done")
-      },
-      (error) => {
-        console.log("error", error) // zzz
-        // toast.error(error.messege)
-      },
-      () => {
-        console.log("uploadTask.snapshot", uploadTask.snapshot) // zzz
-        console.log("uploadTask", uploadTask) // zzz
-        uploadTask.snapshot.ref.getDownloadURL().then((audioURL) => {
-          dialog.audioURL = audioURL
-          updateQuestInFirestore(globalState.world)
-        })
-      }
-    )
+    console.log("dialog", dialog) // zzz
+    console.log("globalState.world", globalState.world) // zzz
+    updateQuestInFirestore(globalState.world)
   }
 
   const renderButtons = () => {

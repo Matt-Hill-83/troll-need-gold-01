@@ -37,7 +37,7 @@ export default function AudioPlayer(props) {
       <ReactPlayer
         playing={playing}
         // autoplay={true}
-        controls
+        // controls
         loop={false}
         url={sound}
         {...reactPlayerProps}

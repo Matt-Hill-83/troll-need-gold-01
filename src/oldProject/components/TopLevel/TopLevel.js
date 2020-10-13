@@ -14,7 +14,7 @@ import Utils from "../../../Common/Utils/Utils"
 
 import css from "./TopLevel.module.scss"
 import cuid from "cuid"
-import { uploadToFirebaseStorage } from "../../../app/firestore/firebaseService"
+import { uploadAudio } from "../../../app/firestore/firebaseService"
 import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
 import RecordingStudio from "../RecordingStudio/RecordingStudio"
 
@@ -278,7 +278,7 @@ export default function TopLevel(props) {
     console.log("saveAudioForScene") // zzz
     // setLoading(true)
     const filename = cuid() + "-audio.blob"
-    const uploadTask = uploadToFirebaseStorage(blob, filename)
+    const uploadTask = uploadAudio(blob, filename)
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -301,7 +301,7 @@ export default function TopLevel(props) {
     console.log("saveBeatAudioForFrame") // zzz
     // setLoading(true)
     const filename = cuid() + "-audio.blob"
-    const uploadTask = uploadToFirebaseStorage(blob, filename)
+    const uploadTask = uploadAudio(blob, filename)
     uploadTask.on(
       "state_changed",
       (snapshot) => {

@@ -17,7 +17,7 @@ import WorldViewer from "../WorldViewer/WorldViewer.js"
 import css from "./StoryMode.module.scss"
 import cuid from "cuid"
 import { updateQuestInFirestore } from "../../../app/firestore/firestoreService.js"
-import { uploadToFirebaseStorage } from "../../../app/firestore/firebaseService.js"
+import { uploadAudio } from "../../../app/firestore/firebaseService.js"
 import RecordingStudio from "../RecordingStudio/RecordingStudio.js"
 
 export default function StoryMode(props) {
@@ -112,7 +112,7 @@ export default function StoryMode(props) {
     console.log("saveAudioForFrame") // zzz
     // setLoading(true)
     const filename = cuid() + "-audio.blob"
-    const uploadTask = uploadToFirebaseStorage(blob, filename)
+    const uploadTask = uploadAudio(blob, filename)
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -135,7 +135,7 @@ export default function StoryMode(props) {
     console.log("saveBeatAudioForFrame") // zzz
     // setLoading(true)
     const filename = cuid() + "-audio.blob"
-    const uploadTask = uploadToFirebaseStorage(blob, filename)
+    const uploadTask = uploadAudio(blob, filename)
     uploadTask.on(
       "state_changed",
       (snapshot) => {
