@@ -25,7 +25,21 @@ export default function AudioPlayer(props) {
   //   player.play()
   // }
 
-  const reactPlayerProps = { width: "50vw" }
+  const reactPlayerProps = {
+    width: "100%",
+    height: "100%",
+    attributes: {
+      playsinline: true,
+      controlslist: {
+        nodownload: false,
+        nofullscreen: true,
+        noremoteplayback: true,
+      },
+    },
+  }
+
+  // const reactPlayerProps = { width: "50vw" }
+  const style = { border: "4px solid red !important;" }
 
   return (
     <Popover interactionKind={PopoverInteractionKind.CLICK_TARGET_ONLY}>
@@ -36,8 +50,10 @@ export default function AudioPlayer(props) {
       />
       <ReactPlayer
         playing={playing}
+        style={style}
+        // light
         // autoplay={true}
-        // controls
+        controls
         loop={false}
         url={sound}
         {...reactPlayerProps}
