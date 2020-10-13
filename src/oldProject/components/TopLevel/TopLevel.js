@@ -12,11 +12,12 @@ import Utils from "../../../Common/Utils/Utils"
 
 // import useLocalState from "./useLocalState.js"
 
-import css from "./TopLevel.module.scss"
 import cuid from "cuid"
 import { uploadAudio } from "../../../app/firestore/firebaseService"
 import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
 import RecordingStudio from "../RecordingStudio/RecordingStudio"
+
+import css from "./TopLevel.module.scss"
 
 const toaster = Toaster.create({
   position: Position.TOP,

@@ -25,7 +25,7 @@ export default function AudioPlayer(props) {
   //   player.play()
   // }
 
-  const reactPlayerProps = {
+  const defaultReactPlayerProps = {
     width: "100%",
     height: "100%",
     attributes: {
@@ -38,22 +38,28 @@ export default function AudioPlayer(props) {
     },
   }
 
+  const reactPlayerProps = {
+    ...defaultReactPlayerProps,
+    ...props.reactPlayerProps,
+  }
+
   // const reactPlayerProps = { width: "50vw" }
-  const style = { border: "4px solid red !important;" }
+  const defaultStyle = { border: "1px solid red", display: "none" }
+
+  const style = { ...defaultStyle, ...props.style }
 
   return (
-    <Popover interactionKind={PopoverInteractionKind.CLICK_TARGET_ONLY}>
+    <>
+      {/* <Popover interactionKind={PopoverInteractionKind.CLICK_TARGET_ONLY}> */}
       <Button
         className={cx(css.main)}
         onClick={() => playAudio({ sound })}
-        icon={IconNames.MUSIC}
+        icon={playing ? IconNames.PAUSE : IconNames.PLAY}
       />
       <ReactPlayer
         playing={playing}
         style={style}
-        // light
-        // autoplay={true}
-        controls
+        // controls
         loop={false}
         url={sound}
         {...reactPlayerProps}
@@ -61,6 +67,7 @@ export default function AudioPlayer(props) {
       {/* <audio ref={audioElement}>
         <source loop src={"sound"} type="audio/mp3" />
       </audio> */}
-    </Popover>
+      {/* </Popover> */}
+    </>
   )
 }
