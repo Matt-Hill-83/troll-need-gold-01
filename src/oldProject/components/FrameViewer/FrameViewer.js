@@ -105,13 +105,14 @@ export default function FrameViewer() {
 
     return (
       <div className={css.dialogScroller} style={style}>
-        <ButtonGroup className={css.audioConsoleFrame}>
-          <MyAudioConsole
-            audioURL={audioURL}
-            saveAudio={onSaveAudioForFrame}
-            loggedIn={loggedIn}
-          />
-        </ButtonGroup>
+        {/* <ButtonGroup className={css.audioConsoleFrame}> */}
+        <MyAudioConsole
+          className={css.audioConsoleFrame}
+          audioURL={audioURL}
+          saveAudio={onSaveAudioForFrame}
+          loggedIn={loggedIn}
+        />
+        {/* </ButtonGroup> */}
         <div className={css.dialog}>{renderedDialogs}</div>
       </div>
     )
