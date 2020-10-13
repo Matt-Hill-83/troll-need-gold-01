@@ -35,19 +35,14 @@ export default function MyAudioConsole(props) {
         uploadTask.snapshot.ref.getDownloadURL().then((audioURL) => {
           console.log("complete...") // zzz
           props.saveAudio({ audioURL })
-          // frame.audioURL = audioURL
-          // updateQuestInFirestore(globalState.world)
         })
       }
     )
   }
 
   const renderTools = () => {
-    console.log("renderTools") // zzz
-    console.log("audioURL", audioURL) // zzz
     return (
       <div className={css.audioButtonsContainer}>
-        {/* <ButtonGroup className={css.audioButtons}> */}
         {audioURL && (
           <AudioPlayer className={css.audioPlayer} sound={audioURL} />
         )}
@@ -57,14 +52,9 @@ export default function MyAudioConsole(props) {
             saveAudio={({ blob }) => saveAudio({ blob })}
           />
         )}
-        {/* </ButtonGroup> */}
       </div>
     )
   }
-
-  // function saveAudio({ blob }) {
-  //   props.saveAudio({ blob })
-  // }
 
   return (
     <div className={cx(css.main, { [className]: !!className })}>

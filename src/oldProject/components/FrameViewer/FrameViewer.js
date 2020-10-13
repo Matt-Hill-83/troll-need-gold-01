@@ -81,7 +81,6 @@ export default function FrameViewer() {
           <MyAudioConsole
             className={css.audioConsoleLine}
             audioURL={audioURL}
-            // saveAudio={({ blob }) => saveAudioForLine({ dialog: line, blob })}
             loggedIn={loggedIn}
             saveAudio={({ audioURL }) =>
               onSaveAudioForLine({ dialog: line, audioURL })
