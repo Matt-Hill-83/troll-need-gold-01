@@ -12,14 +12,14 @@ export default function AudioPlayer(props) {
 
   const [playing, setPlaying] = useState(false)
 
-  const playAudio = ({ sound }) => {
+  const toggleAudio = ({ sound }) => {
     setPlaying(!playing)
     // const player = audioElement.current
     // player.src = sound
     // player.play()
   }
 
-  // const playAudio = ({ sound }) => {
+  // const toggleAudio = ({ sound }) => {
   //   const player = audioElement.current
   //   player.src = sound
   //   player.play()
@@ -53,7 +53,7 @@ export default function AudioPlayer(props) {
       {/* <Popover interactionKind={PopoverInteractionKind.CLICK_TARGET_ONLY}> */}
       <Button
         className={cx(css.main)}
-        onClick={() => playAudio({ sound })}
+        onClick={() => toggleAudio({ sound })}
         icon={playing ? IconNames.PAUSE : IconNames.PLAY}
       />
       <ReactPlayer
