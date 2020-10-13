@@ -61,6 +61,11 @@ export function uploadToFirebaseStorage(file, filename) {
   const storageRef = firebase.storage().ref()
   return storageRef.child(`${user.uid}/user_images/${filename}`).put(file)
 }
+export function uploadAudio(file, filename) {
+  const user = firebase.auth().currentUser
+  const storageRef = firebase.storage().ref()
+  return storageRef.child(`${user.uid}/user_audio/${filename}`).put(file)
+}
 
 export function deleteFromFirebaseStorage(filename) {
   const userUid = firebase.auth().currentUser.uid

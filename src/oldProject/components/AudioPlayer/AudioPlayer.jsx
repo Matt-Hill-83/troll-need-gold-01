@@ -25,6 +25,8 @@ export default function AudioPlayer(props) {
   //   player.play()
   // }
 
+  const reactPlayerProps = { width: "50vw" }
+
   return (
     <Popover interactionKind={PopoverInteractionKind.CLICK_TARGET_ONLY}>
       <Button
@@ -38,6 +40,7 @@ export default function AudioPlayer(props) {
         controls
         loop={false}
         url={sound}
+        {...reactPlayerProps}
       />
       {/* <audio ref={audioElement}>
         <source loop src={"sound"} type="audio/mp3" />

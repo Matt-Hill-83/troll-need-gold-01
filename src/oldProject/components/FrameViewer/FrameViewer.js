@@ -6,7 +6,10 @@ import React, { useContext } from "react"
 
 import { myContext } from "../../../myProvider"
 import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
-import { uploadToFirebaseStorage } from "../../../app/firestore/firebaseService"
+import {
+  uploadToFirebaseStorage,
+  uploadAudio,
+} from "../../../app/firestore/firebaseService"
 import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget"
 import WordGroup from "../WordGroup/WordGroup"
 
@@ -193,10 +196,12 @@ export default function FrameViewer() {
   }
 
   function saveAudioForLine({ dialog, blob }) {
+    console.log("blob", blob) // zzz
     // setLoading(true)
 
     const filename = cuid() + "-audio.blob"
-    const uploadTask = uploadToFirebaseStorage(blob, filename)
+    const uploadTask = uploadAudio(blob, filename)
+    // const uploadTask = uploadToFirebaseStorage(blob, filename)
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -204,9 +209,12 @@ export default function FrameViewer() {
         console.log("Upload is " + progress + "% done")
       },
       (error) => {
+        console.log("error", error) // zzz
         // toast.error(error.messege)
       },
       () => {
+        console.log("uploadTask.snapshot", uploadTask.snapshot) // zzz
+        console.log("uploadTask", uploadTask) // zzz
         uploadTask.snapshot.ref.getDownloadURL().then((audioURL) => {
           dialog.audioURL = audioURL
           updateQuestInFirestore(globalState.world)

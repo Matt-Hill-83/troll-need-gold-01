@@ -19,17 +19,17 @@ export default function MyAudioConsole(props) {
     console.log("audioURL", audioURL) // zzz
     return (
       <div className={css.audioButtonsContainer}>
-        <ButtonGroup className={css.audioButtons}>
-          {audioURL && (
-            <AudioPlayer className={css.audioPlayer} sound={audioURL} />
-          )}
-          {loggedIn && (
-            <AudioRecorder
-              recorderClassName={css.audioRecorder}
-              saveAudio={({ blob }) => saveAudio({ blob })}
-            />
-          )}
-        </ButtonGroup>
+        {/* <ButtonGroup className={css.audioButtons}> */}
+        {audioURL && (
+          <AudioPlayer className={css.audioPlayer} sound={audioURL} />
+        )}
+        {loggedIn && (
+          <AudioRecorder
+            recorderClassName={css.audioRecorder}
+            saveAudio={({ blob }) => saveAudio({ blob })}
+          />
+        )}
+        {/* </ButtonGroup> */}
       </div>
     )
   }

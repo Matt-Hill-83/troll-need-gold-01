@@ -7,3 +7,13 @@
   top: 10vh;
   left: 10vh;
 }
+
+.content {
+  position: relative;
+  display: flex;
+  z-index: 1;
+  border: 4px solid green !important;
+  width: 50vw;
+  z-index: 100000000;
+  height: 50vh;
+}
