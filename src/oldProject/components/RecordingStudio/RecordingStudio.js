@@ -4,23 +4,20 @@ import React, { useContext } from "react"
 import { ButtonGroup } from "@material-ui/core"
 import { myContext } from "../../../myProvider.js"
 import MyAudioConsole from "../MyAudioConsole/MyAudioConsole.jsx"
-import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget.js"
 
 import { PopoverInteractionKind, Popover, Button } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
 
-// import { Segment } from "semantic-ui-react"
 import { Header, Segment, Grid, Item } from "semantic-ui-react"
 
 import css from "./RecordingStudio.module.scss"
 import DataTable3 from "../../../QuestBuilder/components/DataTable3/DataTable3.js"
-import { getSubQuestTableConfigFunc } from "../../../QuestBuilder/components/TriggersTable/SubQuestTableConfig.js"
 
 export default function RecordingStudio(props) {
   const [globalState] = useContext(myContext)
-  const { world, activeScene, activeFrameIndex } = globalState
+  const { activeScene } = globalState
 
-  const {} = props
+  const { trackList } = props
 
   console.log("activeScene", activeScene) // zzz
 
@@ -61,31 +58,33 @@ export default function RecordingStudio(props) {
       {
         name: "name",
         label: "Name",
-        // options: {
-        //   sort: false,
-        //   filter: true,
-        //   customBodyRender: renderName,
-        // },
+        options: {
+          sort: true,
+          filter: true,
+          // customBodyRender: renderName,
+        },
       },
       {
         name: "createdBy",
         label: "Creator",
-        // options: {
-        //   sort: false,
-        //   filter: true,
-        //   customBodyRender: renderConditions,
-        // },
+        options: {
+          sort: true,
+          filter: true,
+          // customBodyRender: renderConditions,
+        },
       },
     ],
   }
 
   const { options, columns } = tableConfig
 
-  const triggers = [{ name: 555, age: 99 }]
+  console.log("trackList", trackList) // zzz
+
   const tableProps = {
     className: css.triggersTable,
     // getMuiTheme,
-    data: triggers,
+    data: trackList,
+    // data: triggers,
     columns,
     options,
   }
@@ -99,26 +98,33 @@ export default function RecordingStudio(props) {
         // onClick={() => playAudio({ sound })}
         icon={IconNames.MUSIC}
       />
+      {/* <div>Recording Studio</div> */}
       <Segment className={css.content}>
-        <div>Recording Studio</div>
-        <Grid>
-          <Grid.Column width={4}>
-            {/* <ButtonGroup className={css.audioConsoleFrame}> */}
-            <div>record new track</div>
-            <MyAudioConsole
-              audioURL={audioURLVocalTrack}
-              saveAudio={saveAudioForScene}
-              loggedIn={loggedIn}
-            />
-            background track
-            <MyAudioConsole
-              audioURL={audioURLBeatTrack}
-              saveAudio={saveBeatAudioForScene}
-              loggedIn={loggedIn}
-            />
-            {/* </ButtonGroup> */}
-          </Grid.Column>
-          <Grid.Column width={12}>{table}</Grid.Column>
+        <Grid className={css.grid}>
+          <Grid.Row>
+            <Grid.Column width={8}>
+              {/* <ButtonGroup className={css.audioConsoleFrame}> */}
+              <div className={css.console}>
+                <div>New Vocal Track</div>
+                <MyAudioConsole
+                  audioURL={audioURLVocalTrack}
+                  saveAudio={saveAudioForScene}
+                  loggedIn={loggedIn}
+                />
+              </div>
+              <div className={css.console}>
+                <div>Background Track</div>
+
+                <MyAudioConsole
+                  audioURL={audioURLBeatTrack}
+                  saveAudio={saveBeatAudioForScene}
+                  loggedIn={loggedIn}
+                />
+              </div>
+              {/* </ButtonGroup> */}
+            </Grid.Column>
+            <Grid.Column width={8}>{table}</Grid.Column>
+          </Grid.Row>
         </Grid>
       </Segment>
     </Popover>

@@ -10,6 +10,8 @@ export default function AudioPlayer(props) {
   // const audioElement = useRef(null)
   const { sound } = props
 
+  const soundToPlay = sound?.url ? sound.url : sound
+
   const [playing, setPlaying] = useState(false)
 
   const toggleAudio = ({ sound }) => {
@@ -51,7 +53,7 @@ export default function AudioPlayer(props) {
       {/* <Popover interactionKind={PopoverInteractionKind.CLICK_TARGET_ONLY}> */}
       <Button
         className={cx(css.main)}
-        onClick={() => toggleAudio({ sound })}
+        onClick={() => toggleAudio({ sound: soundToPlay })}
         icon={playing ? IconNames.PAUSE : IconNames.PLAY}
       />
       <ReactPlayer

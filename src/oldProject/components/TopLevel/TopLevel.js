@@ -276,7 +276,7 @@ export default function TopLevel(props) {
   }
 
   function saveAudioForScene({ audioURL }) {
-    if (!activeScene.audioURLVocalTracks) {
+    if (!activeScene?.audioURLVocalTracks) {
       activeScene.audioURLVocalTracks = []
     }
     activeScene.audioURLVocalTracks.push(audioURL)
@@ -284,15 +284,26 @@ export default function TopLevel(props) {
   }
 
   function saveBeatAudioForScene({ audioURL }) {
-    if (!activeScene.audioURLBeatTracks) {
+    if (!activeScene?.audioURLBeatTracks) {
       activeScene.audioURLBeatTracks = []
     }
-    activeScene.audioURLBeatTracks.push(audioURL)
+    const audio = {
+      url: audioURL,
+      createdBy: "me",
+      createdDate: new Date(),
+      name: "test",
+    }
+    activeScene.audioURLBeatTracks.push(audio)
     updateQuestInFirestore(globalState.world)
   }
 
   console.log("")
   console.log("main story render")
+
+  console.log(
+    "activeScene.audioURLVocalTracks",
+    activeScene?.audioURLVocalTracks
+  ) // zzz
 
   if (!world || !world.title) {
     return <div>no world 2</div>
@@ -306,11 +317,12 @@ export default function TopLevel(props) {
     <div className={`${css.main} ${className}`}>
       <StoryMode updateActiveScene={updateActiveScene} />
       <RecordingStudio
+        audioURLBeatTrack={activeScene?.audioURLBeatTracks?.[0] || null}
+        audioURLVocalTrack={activeScene?.audioURLVocalTracks?.[0] || null}
+        loggedIn={true}
         saveAudioForScene={saveAudioForScene}
         saveBeatAudioForScene={saveBeatAudioForScene}
-        audioURLVocalTrack={activeScene.audioURLVocalTrack[0] || null}
-        audioURLBeatTrack={activeScene.audioURLBeatTrack[0] || null}
-        loggedIn={true}
+        trackList={activeScene?.audioURLBeatTracks}
       />
     </div>
   )
