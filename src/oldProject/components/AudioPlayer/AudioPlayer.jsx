@@ -43,9 +43,7 @@ export default function AudioPlayer(props) {
     ...props.reactPlayerProps,
   }
 
-  // const reactPlayerProps = { width: "50vw" }
   const defaultStyle = { border: "1px solid red", display: "none" }
-
   const style = { ...defaultStyle, ...props.style }
 
   return (

@@ -275,50 +275,20 @@ export default function TopLevel(props) {
     }
   }
 
-  function saveAudioForScene({ blob }) {
-    console.log("saveAudioForScene") // zzz
-    // setLoading(true)
-    const filename = cuid() + "-audio.blob"
-    const uploadTask = uploadAudio(blob, filename)
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        console.log("Upload is " + progress + "% done")
-      },
-      (error) => {
-        // toast.error(error.messege)
-      },
-      () => {
-        uploadTask.snapshot.ref.getDownloadURL().then((audioURL) => {
-          activeScene.audioURLVocalTrack = audioURL
-          updateQuestInFirestore(globalState.world)
-        })
-      }
-    )
+  function saveAudioForScene({ audioURL }) {
+    if (!activeScene.audioURLVocalTracks) {
+      activeScene.audioURLVocalTracks = []
+    }
+    activeScene.audioURLVocalTracks.push(audioURL)
+    updateQuestInFirestore(globalState.world)
   }
 
-  function saveBeatAudioForScene({ blob }) {
-    console.log("saveBeatAudioForFrame") // zzz
-    // setLoading(true)
-    const filename = cuid() + "-audio.blob"
-    const uploadTask = uploadAudio(blob, filename)
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        console.log("Upload is " + progress + "% done")
-      },
-      (error) => {
-        // toast.error(error.messege)
-      },
-      () => {
-        uploadTask.snapshot.ref.getDownloadURL().then((audioURL) => {
-          activeScene.audioURLBeatTrack = audioURL
-          updateQuestInFirestore(globalState.world)
-        })
-      }
-    )
+  function saveBeatAudioForScene({ audioURL }) {
+    if (!activeScene.audioURLBeatTracks) {
+      activeScene.audioURLBeatTracks = []
+    }
+    activeScene.audioURLBeatTracks.push(audioURL)
+    updateQuestInFirestore(globalState.world)
   }
 
   console.log("")
@@ -338,6 +308,8 @@ export default function TopLevel(props) {
       <RecordingStudio
         saveAudioForScene={saveAudioForScene}
         saveBeatAudioForScene={saveBeatAudioForScene}
+        audioURLVocalTrack={activeScene.audioURLVocalTrack[0] || null}
+        audioURLBeatTrack={activeScene.audioURLBeatTrack[0] || null}
         loggedIn={true}
       />
     </div>

@@ -60,7 +60,7 @@ export default function RecordingStudio(props) {
       },
       {
         name: "name",
-        label: "Trigger Type",
+        label: "Name",
         // options: {
         //   sort: false,
         //   filter: true,
@@ -68,8 +68,8 @@ export default function RecordingStudio(props) {
         // },
       },
       {
-        name: "conditions",
-        label: "Trigger Conditions",
+        name: "createdBy",
+        label: "Creator",
         // options: {
         //   sort: false,
         //   filter: true,
@@ -100,22 +100,23 @@ export default function RecordingStudio(props) {
         icon={IconNames.MUSIC}
       />
       <Segment className={css.content}>
+        <div>Recording Studio</div>
         <Grid>
           <Grid.Column width={4}>
-            <ButtonGroup className={css.audioConsoleFrame}>
-              record new track
-              <MyAudioConsole
-                audioURL={audioURLVocalTrack}
-                saveAudio={({ blob }) => saveAudioForScene({ blob })}
-                loggedIn={loggedIn}
-              />
-              background track
-              <MyAudioConsole
-                audioURL={audioURLBeatTrack}
-                saveAudio={({ blob }) => saveBeatAudioForScene({ blob })}
-                loggedIn={loggedIn}
-              />
-            </ButtonGroup>
+            {/* <ButtonGroup className={css.audioConsoleFrame}> */}
+            <div>record new track</div>
+            <MyAudioConsole
+              audioURL={audioURLVocalTrack}
+              saveAudio={saveAudioForScene}
+              loggedIn={loggedIn}
+            />
+            background track
+            <MyAudioConsole
+              audioURL={audioURLBeatTrack}
+              saveAudio={saveBeatAudioForScene}
+              loggedIn={loggedIn}
+            />
+            {/* </ButtonGroup> */}
           </Grid.Column>
           <Grid.Column width={12}>{table}</Grid.Column>
         </Grid>

@@ -17,7 +17,7 @@ export default function MyAudioConsole(props) {
   const { getProfile } = useUpdateProfileWidget()
   const loggedIn = !!getProfile().id
 
-  function saveAudio({ frame, blob }) {
+  function saveAudio({ blob }) {
     console.log("saveAudio....") // zzz
     // setLoading(true)
     const filename = cuid() + "-audio.blob"
@@ -39,6 +39,8 @@ export default function MyAudioConsole(props) {
       }
     )
   }
+
+  console.log("audioURL", audioURL) // zzz
 
   const renderTools = () => {
     return (
