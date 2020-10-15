@@ -9,14 +9,13 @@ import { PopoverInteractionKind, Popover, Button } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
 
 import { Header, Segment, Grid, Item } from "semantic-ui-react"
+import DataTable3 from "../../../QuestBuilder/components/DataTable3/DataTable3.js"
 
 import css from "./RecordingStudio.module.scss"
-import DataTable3 from "../../../QuestBuilder/components/DataTable3/DataTable3.js"
 
 export default function RecordingStudio(props) {
   const [globalState] = useContext(myContext)
   const { activeScene } = globalState
-
   const { trackList } = props
 
   console.log("activeScene", activeScene) // zzz

@@ -1,18 +1,17 @@
 import { Button, ButtonGroup } from "@blueprintjs/core"
 import cx from "classnames"
+import cuid from "cuid"
 import React from "react"
 
+import { uploadAudio } from "../../../app/firestore/firebaseService"
 import AudioPlayer from "../AudioPlayer/AudioPlayer"
 import AudioRecorder from "../AudioRecorder/AudioRecorder"
 import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget"
 
 import css from "./MyAudioConsole.module.scss"
-import cuid from "cuid"
-import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
-import { uploadAudio } from "../../../app/firestore/firebaseService"
 
 export default function MyAudioConsole(props) {
-  const { className, audioURL } = props
+  const { trackList, className, audioURL } = props
 
   const { getProfile } = useUpdateProfileWidget()
   const loggedIn = !!getProfile().id
@@ -42,6 +41,23 @@ export default function MyAudioConsole(props) {
 
   console.log("audioURL", audioURL) // zzz
 
+  const renderTrackPicker = ({ trackList }) => {
+    if (!trackList || trackList.length === 0) {
+      return <div>no tracklist</div>
+    }
+
+    const dropDownProps = {
+      className: css.sceneDropdown,
+      items: trackList,
+      // defaultValue: selectedItem,
+      getOptionLabel: (option) => option?.name || "--",
+      // onChange: onChangeCritter,
+    }
+
+    return null
+    // return <AutoComplete2 {...dropDownProps} />
+  }
+
   const renderTools = () => {
     return (
       <div className={css.audioButtonsContainer}>
@@ -54,6 +70,7 @@ export default function MyAudioConsole(props) {
             saveAudio={({ blob }) => saveAudio({ blob })}
           />
         )}
+        {renderTrackPicker({ trackList })}
       </div>
     )
   }

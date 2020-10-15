@@ -313,6 +313,8 @@ export default function TopLevel(props) {
     return <div>no active scene</div>
   }
 
+  console.log("activeScene------------------", activeScene) // zzz
+
   return (
     <div className={`${css.main} ${className}`}>
       <StoryMode updateActiveScene={updateActiveScene} />

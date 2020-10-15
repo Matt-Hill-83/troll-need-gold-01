@@ -22,7 +22,6 @@ import Utils from "../../../Common/Utils/Utils"
 import WorldBuilderScenesGrid from "../WorldBuilderScenesGrid/WorldBuilderScenesGrid"
 import worldBuilderStore from "../../Stores/WorldBuilderStore"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
-import WorldPicker from "../WorldPicker/WorldPicker"
 import DialogBuilders from "../DialogBuilders/DialogBuilders"
 
 import css from "./WorldBuilder.module.scss"
@@ -340,19 +339,6 @@ class WorldBuilder extends Component {
           onClick={() => this.onChangeWorld({ newWorld: true })}
         />
         {this.renderMainButtonGroup()}
-        {!this.props.quest &
-        (
-          <WorldPicker
-            maps={this.maps}
-            initialValue={title}
-            showDelete={true}
-            showReleased={true}
-            showReleasedToProd={true}
-            updateIsReleasedProperty={this.updateIsReleasedProperty}
-            updateReleasedToProd={this.updateReleasedToProd}
-            onChangeWorld={this.onChangeWorld}
-          />
-        )}
       </div>
     )
   }

@@ -86,7 +86,7 @@ export default function DialogBuilder2(props) {
       className: css.sceneDropdown,
       items: filteredCritters,
       defaultValue: selectedItem,
-      getOptionLabel: (option) => _get(option, "name") || "--",
+      getOptionLabel: (option) => option?.name || "--",
       onChange: onChangeCritter,
     }
     return <AutoComplete2 {...dropDownProps} />
