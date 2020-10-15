@@ -5,7 +5,9 @@ import React from "react"
 
 import { uploadAudio } from "../../../app/firestore/firebaseService"
 import AudioPlayer from "../AudioPlayer/AudioPlayer"
+import AudioPlayerWithPicker from "../AudioPlayerWithPicker/AudioPlayerWithPicker"
 import AudioRecorder from "../AudioRecorder/AudioRecorder"
+import AutoComplete2 from "../../../Common/Components/AutoComplete2/AutoComplete2"
 import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget"
 
 import css from "./MyAudioConsole.module.scss"
@@ -41,27 +43,19 @@ export default function MyAudioConsole(props) {
 
   console.log("audioURL", audioURL) // zzz
 
-  const renderTrackPicker = ({ trackList }) => {
-    if (!trackList || trackList.length === 0) {
-      return <div>no tracklist</div>
-    }
-
-    const dropDownProps = {
-      className: css.sceneDropdown,
-      items: trackList,
-      // defaultValue: selectedItem,
-      getOptionLabel: (option) => option?.name || "--",
-      // onChange: onChangeCritter,
-    }
-
-    return null
-    // return <AutoComplete2 {...dropDownProps} />
-  }
+  const hasTrackList = trackList && trackList.length > 0
 
   const renderTools = () => {
     return (
       <div className={css.audioButtonsContainer}>
-        {audioURL && (
+        {hasTrackList && (
+          <AudioPlayerWithPicker
+            className={css.audioPlayer}
+            sound={audioURL}
+            trackList={trackList}
+          />
+        )}
+        {!hasTrackList && audioURL && (
           <AudioPlayer className={css.audioPlayer} sound={audioURL} />
         )}
         {loggedIn && (
@@ -70,7 +64,6 @@ export default function MyAudioConsole(props) {
             saveAudio={({ blob }) => saveAudio({ blob })}
           />
         )}
-        {renderTrackPicker({ trackList })}
       </div>
     )
   }

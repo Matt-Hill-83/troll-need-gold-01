@@ -96,23 +96,28 @@ export default function FrameViewer() {
       "margin-top": `${cloneIndex * scalingFactor}vh`,
       border: "3px solid red",
     }
-    // const backgroundTrack =
-    //   "https://firebasestorage.googleapis.com/v0/b/troll-need-gold-02-staging.appspot.com/o/AMAgzal2oAbHogUvO9vVeHWZygF3%2Fuser_images%2Fckg3rdbam00003h5oth71k2wt-audio.blob?alt=media&token=853c84d1-6671-40af-986e-b8eb8e5f6dfe"
+    const backgroundTrack =
+      "https://firebasestorage.googleapis.com/v0/b/troll-need-gold-02-staging.appspot.com/o/AMAgzal2oAbHogUvO9vVeHWZygF3%2Fuser_images%2Fckg3rdbam00003h5oth71k2wt-audio.blob?alt=media&token=853c84d1-6671-40af-986e-b8eb8e5f6dfe"
 
     // const tracks = [backgroundTrack, backgroundTrack, backgroundTrack]
 
     const { audioURL } = frame
 
+    const trackList = [
+      { name: "test", url: backgroundTrack },
+      { name: "test", url: backgroundTrack },
+      { name: "test", url: backgroundTrack },
+      { name: "test", url: backgroundTrack },
+    ]
     return (
       <div className={css.dialogScroller} style={style}>
-        {/* <ButtonGroup className={css.audioConsoleFrame}> */}
         <MyAudioConsole
           className={css.audioConsoleFrame}
           audioURL={audioURL}
+          trackList={trackList}
           saveAudio={onSaveAudioForFrame}
           loggedIn={loggedIn}
         />
-        {/* </ButtonGroup> */}
         <div className={css.dialog}>{renderedDialogs}</div>
       </div>
     )
