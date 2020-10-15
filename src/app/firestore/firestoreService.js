@@ -37,22 +37,6 @@ export function fetchBooksFromFirestore() {
   return eventsRef
 }
 
-export function addEventToFirestore(event) {
-  const user = firebase.auth().currentUser
-  return db.collection("events").add({
-    ...event,
-    hostUid: user.uid,
-    hostedBy: user.displayName,
-    hostPhotoURL: user.photoURL || null,
-    attendees: firebase.firestore.FieldValue.arrayUnion({
-      id: user.uid,
-      displayName: user.displayName,
-      photoURL: user.photoURL || null,
-    }),
-    attendeeIds: firebase.firestore.FieldValue.arrayUnion(user.uid),
-  })
-}
-
 export function addBookToFirestore(item) {
   return db.collection("books").add({ ...item })
 }

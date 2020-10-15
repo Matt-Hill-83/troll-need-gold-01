@@ -1,3 +1,4 @@
+import staffOfSantara01 from "./items/staffOfSantara01.png"
 import trap01 from "./items/trap01.png"
 import popcorn01 from "./items/popcorn01.png"
 
@@ -50,6 +51,7 @@ import doorYellow from "./doors/doorYellow.jpg"
 
 const items = {
   // blank,
+  staffOfSantara01,
   trap01,
   popcorn01,
   bag,

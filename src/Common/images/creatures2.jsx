@@ -1,3 +1,10 @@
+// sketch01
+
+import tartar01 from "./creatures/tartar01.png"
+import mitzy02 from "./creatures/mitzy02.png"
+import spark01 from "./creatures/spark01.png"
+import madElf02 from "./creatures/madElf02.png"
+
 import fancyDudeFromFrance01 from "./creatures/fancyDudeFromFrance01.png"
 import fancyDudeFromFrance02 from "./creatures/fancyDudeFromFrance02.png"
 import ashe01 from "./creatures/ashe01.png"
@@ -40,6 +47,7 @@ import artemis01 from "./creatures/artemis01.png"
 import asha01 from "./creatures/asha01.png"
 import atari01 from "./creatures/atari01.png"
 import avatar01 from "./creatures/avatar01.png"
+
 import badBunny01 from "./creatures/badBunny01.png"
 import blazer01 from "./creatures/blazer01.png"
 import britta01 from "./creatures/britta01.png"
@@ -147,6 +155,10 @@ const tj = {
   tj002,
 }
 const creatures2animals = {
+  tartar01,
+  mitzy02,
+  spark01,
+  madElf02,
   fancyDudeFromFrance01,
   fancyDudeFromFrance02,
   ashe01,
@@ -176,12 +188,13 @@ const creatures2animals = {
   olive02,
   oliveRori01cu,
   oliveRori01,
-  lucy07small,
   rori03cu,
   britta02,
   britta03,
   britta04,
   swift01,
+  lucy07small,
+  // lucy07small: parta03,
   parta03,
   lucy07,
   well01,
