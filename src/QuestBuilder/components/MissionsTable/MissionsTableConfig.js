@@ -4,7 +4,7 @@ import _get from "lodash.get"
 
 import Utils from "../../../Common/Utils/Utils"
 import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
-import AutoComplete2 from "../AutoComplete2/AutoComplete2"
+import AutoComplete2 from "../../../Common/Components/AutoComplete2/AutoComplete2"
 
 import css from "./MissionsTableConfig.module.scss"
 

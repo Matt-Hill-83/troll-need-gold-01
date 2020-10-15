@@ -6,12 +6,11 @@ import React, { useEffect } from "react"
 import { TextareaAutosize } from "@material-ui/core"
 
 import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
-import AutoComplete2 from "../AutoComplete2/AutoComplete2"
+import AutoComplete2 from "../../../Common/Components/AutoComplete2/AutoComplete2"
 import Constants from "../../../Common/Constants/Constants"
 import MyTextEditor from "../MyTextEditor/MyTextEditor"
 import Utils from "../../../Common/Utils/Utils"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
-
 import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
 import CrudMachine from "../CrudMachine/CrudMachine"
 

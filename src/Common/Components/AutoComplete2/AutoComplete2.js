@@ -41,7 +41,6 @@ export default function AutoComplete2(props) {
   return (
     <div className={cx(css.main, className)}>
       <Autocomplete
-        // className={css.test}
         ListboxProps={listboxProps}
         disableListWrap={true}
         options={sortedData}

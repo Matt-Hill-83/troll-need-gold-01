@@ -6,9 +6,9 @@ import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 import Constants from "../../../Common/Constants/Constants"
 import TextField from "@material-ui/core/TextField"
 import Utils from "../../../Common/Utils/Utils"
+import AutoComplete2 from "../../../Common/Components/AutoComplete2/AutoComplete2"
 
 import css from "./SubQuestTableConfig.module.scss"
-import AutoComplete2 from "../AutoComplete2/AutoComplete2"
 
 const newCondition = { completedMission: 0 }
 
