@@ -89,14 +89,14 @@ exports.removeFollowing = functions.firestore
 //       return console.log('finished');
 //   })
 
-function newPost(user, code, eventId, event) {
-  return {
-    photoURL: user.photoURL,
-    date: admin.database.ServerValue.TIMESTAMP,
-    code,
-    displayName: user.displayName,
-    eventId,
-    userUid: user.id,
-    title: event.title,
-  }
+// function newPost(user, code, eventId, event) {
+//   return {
+//     photoURL: user.photoURL,
+//     date: admin.database.ServerValue.TIMESTAMP,
+//     code,
+//     displayName: user.displayName,
+//     eventId,
+//     userUid: user.id,
+//     title: event.title,
+//   }
 }
