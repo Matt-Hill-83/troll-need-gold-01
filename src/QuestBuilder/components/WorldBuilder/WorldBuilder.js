@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import cx from "classnames"
 import { IconNames } from "@blueprintjs/icons"
+import { Link } from "react-router-dom"
 
 import {
   Button,
@@ -23,10 +24,8 @@ import worldBuilderStore from "../../Stores/WorldBuilderStore"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 import WorldPicker from "../WorldPicker/WorldPicker"
 import DialogBuilders from "../DialogBuilders/DialogBuilders"
-import { Redirect } from "react-router-dom"
 
 import css from "./WorldBuilder.module.scss"
-import { useHistory, Link } from "react-router-dom/cjs/react-router-dom.min"
 
 class WorldBuilder extends Component {
   state = {
@@ -90,9 +89,6 @@ class WorldBuilder extends Component {
 
     if (newWorld) {
       await this.addNewWorld()
-      // this.setData({ world })
-      // this.setDefaultWorldId({ worldId: world.id })
-      // return
     }
 
     if (this.props.quest) {
@@ -198,7 +194,14 @@ class WorldBuilder extends Component {
   }
 
   addNewWorld = async () => {
-    const questId = await WorldBuilderUtils.addNewWorld()
+    console.log("profile", this.props.profile.id) // zzz
+
+    const worldProps = {
+      // createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      createdAt: Date.now(),
+      createdBy: this.props?.profile?.id || "none",
+    }
+    const questId = await WorldBuilderUtils.addNewWorld({ worldProps })
     this.props.history.push(`/quest-builder/${questId}`)
   }
 
@@ -230,7 +233,6 @@ class WorldBuilder extends Component {
 
   saveItemsDialogBuilder = async () => {
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
-    // this.setState({ dialogBuilderKey: new Date() })
     await this.updateWorld({ mapToUpdate: world })
   }
 

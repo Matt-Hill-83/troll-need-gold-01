@@ -157,7 +157,7 @@ export default function FrameViewer() {
       return (
         <div className={css.buttonsContainer}>
           <Link to={"/books"} className={css.newGameButton}>
-            New Quest
+            Play Again
           </Link>
         </div>
       )

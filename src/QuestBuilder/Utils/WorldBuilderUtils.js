@@ -200,7 +200,7 @@ export default class WorldBuilderUtils {
     return { grid, gridDimensions }
   }
 
-  static addNewWorld = async () => {
+  static addNewWorld = async ({ worldProps }) => {
     const newName = ""
 
     const { grid, gridDimensions } = WorldBuilderUtils.createNewGrid()
@@ -210,6 +210,7 @@ export default class WorldBuilderUtils {
       name: newName,
       title: "---" + newName,
       gridDimensions,
+      ...worldProps,
     }
 
     const newWorld = Constants.getNewWorld({ props: newWorldProps })
