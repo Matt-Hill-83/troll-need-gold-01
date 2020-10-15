@@ -194,8 +194,6 @@ class WorldBuilder extends Component {
   }
 
   addNewWorld = async () => {
-    console.log("profile", this.props.profile.id) // zzz
-
     const worldProps = {
       // createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       createdAt: Date.now(),
