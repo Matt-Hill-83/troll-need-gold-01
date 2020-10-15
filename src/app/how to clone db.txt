@@ -1,0 +1,26 @@
+
+Instructions:
+https://firebase.google.com/docs/firestore/manage-data/move-data
+
+
+gcloud config set project troll-need-gold-02-staging
+staging-output001
+gsutil mb gs://staging-output001
+gcloud firestore export gs://staging-output001 --async
+outputUriPrefix: gs://staging-output001/2020-10-15T05:02:24_24633
+
+
+gcloud config set project troll-need-gold-02
+import001
+gsutil mb gs://import001
+
+gsutil iam ch serviceAccount:troll-need-gold-02@appspot.gserviceaccount.com:admin gs://staging-output001
+
+gsutil cp -r gs://staging-output001/* gs://import001
+gcloud config set project troll-need-gold-02
+
+gcloud firestore import gs://staging-output001/2020-10-15T05:02:24_24633 --async
+
+
+To Deploy code to backup db:
+-------------------------------

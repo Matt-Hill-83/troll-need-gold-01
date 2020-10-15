@@ -61,12 +61,6 @@ export function deleteBookInFirestore(id) {
   return db.collection("books").doc(id).delete()
 }
 
-export function cancelEventToggle(event) {
-  return db.collection("events").doc(event.id).update({
-    isCancelled: !event.isCancelled,
-  })
-}
-
 export function setUserProfileData(user) {
   return db
     .collection("users")
@@ -240,6 +234,26 @@ export function getUserEventsQuery(activeTab, userUid) {
         .where("attendeeIds", "array-contains", userUid)
         .where("date", ">=", today)
         .orderBy("date")
+  }
+}
+
+export async function updateAllQuests(profile) {
+  const collectionName = "test"
+  // const collectionName = "quests"
+
+  const collection = await db.collection(collectionName).get()
+  const batch = db.batch()
+
+  collection.forEach((doc) => {
+    batch.update(doc.ref, {
+      cat: 333,
+    })
+  })
+
+  try {
+    return await batch.commit()
+  } catch (error) {
+    throw error
   }
 }
 

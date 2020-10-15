@@ -18,7 +18,7 @@ export default function UnauthModal({ history, setModalOpen }) {
     if (history && prevLocation) {
       history.push(prevLocation.pathname)
     } else {
-      history.push("/events")
+      history.push("/books")
     }
     setOpen(false)
   }

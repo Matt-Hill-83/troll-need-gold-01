@@ -1,0 +1,30 @@
+.main {
+  justify-content: center;
+  position: relative;
+  height: 97%;
+  width: 100%;
+  // border: 4px solid red !important;
+  overflow: auto;
+}
+
+.questList {
+  display: flex;
+  justify-content: center;
+  padding: 1vh;
+  margin-top: 3vh;
+  max-width: 56vw;
+  justify-self: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 4vh;
+  background: white;
+}
+
+.floatingButtons {
+  position: absolute;
+  display: flex;
+  z-index: 5;
+  left: 10vw;
+  z-index: 100;
+  top: 2vh;
+}

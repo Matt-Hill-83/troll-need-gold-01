@@ -14,10 +14,10 @@ export default function ErrorComponent() {
       />
       <Button
         as={Link}
-        to="/events"
+        to="/books"
         primary
         style={{ marginTop: 20 }}
-        content="Return to quests page"
+        content="Return to books page"
       />
     </Segment>
   )
