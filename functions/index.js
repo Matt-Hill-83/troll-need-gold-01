@@ -99,4 +99,4 @@ exports.removeFollowing = functions.firestore
 //     userUid: user.id,
 //     title: event.title,
 //   }
-}
+// }
