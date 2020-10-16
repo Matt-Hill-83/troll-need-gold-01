@@ -1,5 +1,19 @@
 @import "../../../Common/Styles/mixins.modules.scss";
 
+.locationPicker {
+  border: 1px solid green !important;
+  z-index: 100000;
+  position: absolute;
+  top: 0;
+  transform: translateY(-100%);
+}
+
+.backgroundPicker {
+  width: 50vw;
+  height: min-content;
+  left: -100vh;
+}
+
 .showPointer {
   cursor: pointer;
 }
