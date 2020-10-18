@@ -1,7 +1,7 @@
 import cx from "classnames"
 import React, { useContext } from "react"
 
-import { ButtonGroup } from "@material-ui/core"
+import { ButtonGroup, TextField } from "@material-ui/core"
 import { myContext } from "../../../myProvider.js"
 import MyAudioConsole from "../MyAudioConsole/MyAudioConsole.jsx"
 
@@ -28,6 +28,12 @@ export default function RecordingStudio(props) {
     saveAudioForScene,
     saveBeatAudioForScene,
   } = props
+
+  const renderName = (value, tableMeta, updateValue) => {
+    console.log("renderName") // zzz
+    const renderedName = <div>{value}</div>
+    return renderedName
+  }
 
   const tableConfig = {
     options: {
@@ -60,7 +66,7 @@ export default function RecordingStudio(props) {
         options: {
           sort: true,
           filter: true,
-          // customBodyRender: renderName,
+          customBodyRender: renderName,
         },
       },
       {

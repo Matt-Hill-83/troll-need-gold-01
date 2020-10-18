@@ -6,7 +6,6 @@ import React, { useContext } from "react"
 
 import { myContext } from "../../../myProvider"
 import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
-import { uploadAudio } from "../../../app/firestore/firebaseService"
 import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget"
 import WordGroup from "../WordGroup/WordGroup"
 import MyAudioConsole from "../MyAudioConsole/MyAudioConsole"

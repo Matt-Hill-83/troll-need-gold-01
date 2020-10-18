@@ -284,6 +284,7 @@ export default function TopLevel(props) {
   }
 
   function saveBeatAudioForScene({ audioURL }) {
+    console.log("saveBeatAudioForScene") // zzz
     if (!activeScene?.audioURLBeatTracks) {
       activeScene.audioURLBeatTracks = []
     }
