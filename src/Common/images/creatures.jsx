@@ -155,6 +155,7 @@ const creatures = {
   rose01,
   paradox01,
 
+  stella: razzleDazzle01,
   razzleDazzle01,
   queenZupula01,
 

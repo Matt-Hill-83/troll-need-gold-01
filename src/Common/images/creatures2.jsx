@@ -1,4 +1,6 @@
-// sketch01
+import sketch01 from "./creatures/sketch01.png"
+import lucy04 from "./creatures/lucy04.png"
+import lucy08 from "./creatures/lucy08.png"
 
 import tartar01 from "./creatures/tartar01.png"
 import mitzy02 from "./creatures/mitzy02.png"
@@ -155,6 +157,11 @@ const tj = {
   tj002,
 }
 const creatures2animals = {
+  lucy08,
+  sketch01,
+  lucy04,
+  brandon: scramper01,
+
   tartar01,
   mitzy02,
   spark01,

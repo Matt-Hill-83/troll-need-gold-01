@@ -17,11 +17,10 @@ import WorldBuilderUtils from "../../../QuestBuilder/Utils/WorldBuilderUtils"
 import TopLevelUtils from "../../Utils/TopLevelUtils"
 
 export default function MiniLocation(props) {
-  const { updateActiveScene, className } = props
-  // const { updateActiveScene, scene, className } = props
-  let { scene } = props
+  // const { updateActiveScene, className } = props
+  const { updateActiveScene, scene, className } = props
+  // let { scene } = props
 
-  // console.log("scene", scene) // zzz
   const { coordinates, id } = scene
 
   const {
