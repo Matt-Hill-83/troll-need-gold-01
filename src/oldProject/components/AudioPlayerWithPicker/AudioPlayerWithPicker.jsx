@@ -12,6 +12,7 @@ export default function AudioPlayerWithPicker(props) {
   const { sound, trackList } = props
   const soundToPlay = sound?.url ? sound.url : sound
   const [playing, setPlaying] = useState(false)
+  const [activeTrack, setActiveTrack] = useState(trackList[0])
 
   const toggleAudio = () => {
     setPlaying(!playing)
@@ -43,12 +44,23 @@ export default function AudioPlayerWithPicker(props) {
       return <div>no tracklist</div>
     }
 
+    const onChangeTrack = (newValue) => {
+      console.log("newValue", newValue) // zzz
+      setActiveTrack(newValue)
+    }
+
+    const getOptionLabel = (option) => {
+      return option?.name || "--"
+    }
+
+    const defaultValue = trackList[0]
+
     const dropDownProps = {
-      className: css.sceneDropdown,
+      // className: css.sceneDropdown,
       items: trackList,
-      // defaultValue: selectedItem,
-      getOptionLabel: (option) => option?.name || "--",
-      // onChange: onChangeCritter,
+      defaultValue,
+      getOptionLabel,
+      onChange: onChangeTrack,
     }
 
     // return null
@@ -61,6 +73,7 @@ export default function AudioPlayerWithPicker(props) {
   // TODO: add useState here to store selected track.
   // TODO: add useState here to store selected track.
 
+  console.log("activeTrack", activeTrack) // zzz
   return (
     <>
       <Button

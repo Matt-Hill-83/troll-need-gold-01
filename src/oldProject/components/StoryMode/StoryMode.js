@@ -158,10 +158,49 @@ export default function StoryMode(props) {
 
   const { critters1, critters2 } = frame
 
+  const backgroundImageStyle = {
+    border: "4px solid green",
+    // height: "80vh",
+    // width: "auto",
+    "background-image": `url("${mainBackground}")`,
+    "background-repeat": "repeat-x",
+  }
+
   return (
     <div className={`${css.main}`}>
-      <img className={css.backgroundImage} src={mainBackground} alt={"bk"} />
-      <img className={css.backgroundImage2} src={mainBackground2} alt={"bk"} />
+      <div className={css.backgroundImageBox}>
+        {/* <div
+          style={backgroundImageStyle}
+          className={css.backgroundImage1}
+          src={mainBackground}
+          alt={"bk"}
+        />
+        <div
+          style={backgroundImageStyle}
+          className={css.backgroundImage2}
+          src={mainBackground}
+          alt={"bk"}
+        /> */}
+        <img
+          xxxstyle={backgroundImageStyle}
+          className={css.backgroundImage1}
+          src={mainBackground}
+          alt={"bk"}
+        />
+        <img
+          xxxstyle={backgroundImageStyle}
+          className={css.backgroundImage2}
+          src={mainBackground}
+          alt={"bk"}
+        />
+      </div>
+      {false && (
+        <img
+          className={css.backgroundImage3}
+          src={mainBackground2}
+          alt={"bk"}
+        />
+      )}
       <div className={`${css.missionConsoleBox}`}>
         {showMissionConsole && <MissionConsole world={world} />}
       </div>

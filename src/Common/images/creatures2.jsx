@@ -1,3 +1,16 @@
+import girl08 from "./creatures/girl08.png"
+import girl07 from "./creatures/girl07.png"
+import puddyTat01 from "./creatures/puddyTat01.png"
+import bratty01 from "./creatures/bratty01.png"
+import girl09 from "./creatures/girl09.png"
+
+import girl01 from "./creatures/girl01.png"
+import girl02 from "./creatures/girl02.png"
+import girl03 from "./creatures/girl03.png"
+import girl04 from "./creatures/girl04.png"
+import girl05 from "./creatures/girl05.png"
+import girl06 from "./creatures/girl06.png"
+
 import sketch01 from "./creatures/sketch01.png"
 import lucy04 from "./creatures/lucy04.png"
 import lucy08 from "./creatures/lucy08.png"
@@ -156,7 +169,19 @@ const tj = {
   tj001,
   tj002,
 }
+
 const creatures2animals = {
+  girl01,
+  girl02,
+  girl03,
+  girl04,
+  girl05,
+  girl06,
+  girl08,
+  girl07,
+  puddyTat01,
+  bratty01,
+  girl09,
   lucy08,
   sketch01,
   lucy04,
