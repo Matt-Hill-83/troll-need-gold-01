@@ -1,4 +1,3 @@
-import { Button, ButtonGroup } from "@blueprintjs/core"
 import cx from "classnames"
 import cuid from "cuid"
 import React from "react"
@@ -7,7 +6,6 @@ import { uploadAudio } from "../../../app/firestore/firebaseService"
 import AudioPlayer from "../AudioPlayer/AudioPlayer"
 import AudioPlayerWithPicker from "../AudioPlayerWithPicker/AudioPlayerWithPicker"
 import AudioRecorder from "../AudioRecorder/AudioRecorder"
-import AutoComplete2 from "../../../Common/Components/AutoComplete2/AutoComplete2"
 import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget"
 
 import css from "./MyAudioConsole.module.scss"

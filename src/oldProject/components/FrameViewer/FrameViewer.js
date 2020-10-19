@@ -100,14 +100,15 @@ export default function FrameViewer() {
 
     // const tracks = [backgroundTrack, backgroundTrack, backgroundTrack]
 
-    const { audioURL } = frame
+    const { audioURL, trackList } = frame
+    console.log("frame.trackList", frame.trackList) // zzz
 
-    const trackList = [
-      { name: "test", url: backgroundTrack },
-      { name: "test", url: backgroundTrack },
-      { name: "test", url: backgroundTrack },
-      { name: "test", url: backgroundTrack },
-    ]
+    // const trackList = [
+    //   { name: "test", url: backgroundTrack },
+    //   { name: "test", url: backgroundTrack },
+    //   { name: "test", url: backgroundTrack },
+    //   { name: "test", url: backgroundTrack },
+    // ]
     return (
       <div className={css.dialogScroller} style={style}>
         <MyAudioConsole
@@ -139,8 +140,18 @@ export default function FrameViewer() {
 
   function onSaveAudioForFrame({ audioURL }) {
     console.log("saveAudioForFrame") // zzz
+    if (!frame.trackList) {
+      frame.trackList = []
+    }
+    const length = frame.trackList.length
 
-    frame.audioURL = audioURL
+    const item = {
+      name: `track-${length + 101}`,
+      url: audioURL,
+    }
+
+    frame.trackList.push(item)
+    // frame.audioURL = audioURL
     updateQuestInFirestore(globalState.world)
   }
 

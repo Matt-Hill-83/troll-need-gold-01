@@ -54,6 +54,7 @@ export default function AudioPlayerWithPicker(props) {
     }
 
     const defaultValue = trackList[0]
+    console.log("trackList - APWP", trackList) // zzz
 
     const dropDownProps = {
       // className: css.sceneDropdown,
@@ -63,7 +64,6 @@ export default function AudioPlayerWithPicker(props) {
       onChange: onChangeTrack,
     }
 
-    // return null
     return <AutoComplete2 {...dropDownProps} />
   }
 

@@ -319,14 +319,16 @@ export default function TopLevel(props) {
   return (
     <div className={`${css.main} ${className}`}>
       <StoryMode updateActiveScene={updateActiveScene} />
-      <RecordingStudio
-        audioURLBeatTrack={activeScene?.audioURLBeatTracks?.[0] || null}
-        audioURLVocalTrack={activeScene?.audioURLVocalTracks?.[0] || null}
-        loggedIn={true}
-        saveAudioForScene={saveAudioForScene}
-        saveBeatAudioForScene={saveBeatAudioForScene}
-        trackList={activeScene?.audioURLBeatTracks}
-      />
+      {false && (
+        <RecordingStudio
+          audioURLBeatTrack={activeScene?.audioURLBeatTracks?.[0] || null}
+          audioURLVocalTrack={activeScene?.audioURLVocalTracks?.[0] || null}
+          loggedIn={true}
+          saveAudioForScene={saveAudioForScene}
+          saveBeatAudioForScene={saveBeatAudioForScene}
+          trackList={activeScene?.audioURLBeatTracks}
+        />
+      )}
     </div>
   )
 }
