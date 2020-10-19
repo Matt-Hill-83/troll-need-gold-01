@@ -1,8 +1,7 @@
+import cuid from "cuid"
 import cx from "classnames"
-
 import React, { useContext } from "react"
 
-import { ButtonGroup } from "@material-ui/core"
 import { myContext } from "../../../myProvider.js"
 import Character from "../../../Common/Components/Character/Character.js"
 import Constants from "../../../Common/Constants/Constants.js"
@@ -10,15 +9,12 @@ import FrameViewer from "../FrameViewer/FrameViewer.js"
 import images from "../../../Common/Images/images.js"
 import LocationImage from "../LocationImage/LocationImage.jsx"
 import MissionConsole from "../MissionConsole/MissionConsole.js"
-import MyAudioConsole from "../MyAudioConsole/MyAudioConsole.jsx"
 import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget.js"
 import WorldViewer from "../WorldViewer/WorldViewer.js"
-
-import css from "./StoryMode.module.scss"
-import cuid from "cuid"
 import { updateQuestInFirestore } from "../../../app/firestore/firestoreService.js"
 import { uploadAudio } from "../../../app/firestore/firebaseService.js"
-import RecordingStudio from "../RecordingStudio/RecordingStudio.js"
+
+import css from "./StoryMode.module.scss"
 
 export default function StoryMode(props) {
   const [globalState] = useContext(myContext)
@@ -31,8 +27,7 @@ export default function StoryMode(props) {
 
   const { updateActiveScene } = props
 
-  const { getProfile } = useUpdateProfileWidget()
-  const loggedIn = !!getProfile().id
+  // const { getProfile } = useUpdateProfileWidget()
 
   console.log("activeScene", activeScene) // zzz
 
@@ -42,9 +37,12 @@ export default function StoryMode(props) {
     return <div>no world</div>
   }
 
+  const defaultBackground = images.backgrounds["hill01"]
+
   const mainBackground = backgroundImage
     ? images.newBackgrounds[backgroundImage]
-    : images.backgrounds["hill01"]
+    : defaultBackground
+
   const mainBackground2 = images.backgrounds["planetGlorp03"]
 
   const renderCritters = ({ critters, className }) => {
@@ -155,48 +153,18 @@ export default function StoryMode(props) {
   }
 
   const frame = getActiveFrame({ activeFrameIndex })
-
   const { critters1, critters2 } = frame
-
-  const backgroundImageStyle = {
-    border: "4px solid green",
-    // height: "80vh",
-    // width: "auto",
-    "background-image": `url("${mainBackground}")`,
-    "background-repeat": "repeat-x",
-  }
 
   return (
     <div className={`${css.main}`}>
       <div className={css.backgroundImageBox}>
-        {/* <div
-          style={backgroundImageStyle}
-          className={css.backgroundImage1}
-          src={mainBackground}
-          alt={"bk"}
-        />
-        <div
-          style={backgroundImageStyle}
-          className={css.backgroundImage2}
-          src={mainBackground}
-          alt={"bk"}
-        /> */}
-        <img
-          xxxstyle={backgroundImageStyle}
-          className={css.backgroundImage1}
-          src={mainBackground}
-          alt={"bk"}
-        />
-        <img
-          xxxstyle={backgroundImageStyle}
-          className={css.backgroundImage2}
-          src={mainBackground}
-          alt={"bk"}
-        />
+        <img className={css.backgroundImage1} src={mainBackground} alt={"bk"} />
+        <img className={css.backgroundImage2} src={mainBackground} alt={"bk"} />
+        <img className={css.backgroundImage3} src={mainBackground} alt={"bk"} />
       </div>
-      {false && (
+      {true && (
         <img
-          className={css.backgroundImage3}
+          className={css.extraBackgroundImage}
           src={mainBackground2}
           alt={"bk"}
         />
@@ -206,12 +174,6 @@ export default function StoryMode(props) {
       </div>
       <div className={`${css.halfPage} ${css.leftHalf}`}>
         <FrameViewer />
-
-        {/* <RecordingStudio
-          saveAudioForScene={saveAudioForScene}
-          saveBeatAudioForScene={saveBeatAudioForScene}
-          loggedIn={loggedIn}
-        /> */}
       </div>
       <div className={css.charactersContainer}>
         {renderCritters({
