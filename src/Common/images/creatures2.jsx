@@ -1,3 +1,4 @@
+import maceo01 from "./creatures/maceo01.png"
 import girl08 from "./creatures/girl08.png"
 import girl07 from "./creatures/girl07.png"
 import puddyTat01 from "./creatures/puddyTat01.png"
@@ -97,7 +98,7 @@ import mongoFlying01 from "./creatures/mongoFlying01.png"
 import nagasaki01 from "./creatures/nagasaki01.png"
 import nazboo01 from "./creatures/nazboo01.png"
 import omni01 from "./creatures/omni01.png"
-import opera01 from "./creatures/opera01.png"
+// import opera01 from "./creatures/opera01.png"
 import pantherGirl01 from "./creatures/pantherGirl01.png"
 import parta01 from "./creatures/parta01.png"
 import parta02 from "./creatures/parta02.png"
@@ -172,6 +173,7 @@ const tj = {
 
 const creatures2animals = {
   girl01,
+  maceo01,
   girl02,
   girl03,
   girl04,
@@ -277,7 +279,7 @@ const creatures2animals = {
   sartina01,
   asha01,
   harpoon01,
-  opera01,
+  // opera01,
 
   omni01,
   catana01,

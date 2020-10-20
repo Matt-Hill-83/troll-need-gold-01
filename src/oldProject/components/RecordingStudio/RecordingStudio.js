@@ -106,19 +106,13 @@ export default function RecordingStudio(props) {
       popoverClassName={css.popoverClass}
       portalClassName={css.portalClass}
       interactionKind={PopoverInteractionKind.CLICK_TARGET_ONLY}
-      isOpen={true}
+      // isOpen={true}
     >
-      <Button
-        // className={cx(css.main)}
-        // onClick={() => playAudio({ sound })}
-        icon={IconNames.MUSIC}
-      />
-      {/* <div>Recording Studio</div> */}
+      <Button icon={IconNames.MUSIC} />
       <Segment className={css.content}>
         <Grid className={css.grid}>
           <Grid.Row>
             <Grid.Column width={8}>
-              {/* <ButtonGroup className={css.audioConsoleFrame}> */}
               <div className={css.console}>
                 <div>New Vocal Track</div>
                 <MyAudioConsole
@@ -131,15 +125,15 @@ export default function RecordingStudio(props) {
               <div className={css.console}>
                 <div>Background Track</div>
 
-                {false && (
+                {true && (
                   <MyAudioConsole
                     audioURL={audioURLBeatTrack}
                     saveAudio={saveBeatAudioForScene}
                     loggedIn={loggedIn}
+                    trackList={props.beatsTrackList}
                   />
                 )}
               </div>
-              {/* </ButtonGroup> */}
             </Grid.Column>
             {false && <Grid.Column width={8}>{table}</Grid.Column>}
           </Grid.Row>

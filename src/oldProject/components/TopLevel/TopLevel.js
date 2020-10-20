@@ -298,8 +298,11 @@ export default function TopLevel(props) {
 
   function saveBeatAudioForScene({ audioURL }) {
     console.log("saveBeatAudioForScene") // zzz
-    if (!activeScene?.audioURLBeatTracks) {
-      activeScene.audioURLBeatTracks = []
+    // if (!activeScene?.audioURLBeatTracks) {
+    //   activeScene.audioURLBeatTracks = []
+    // }
+    if (!world?.audioURLBeatTracks) {
+      world.audioURLBeatTracks = []
     }
     const audio = {
       url: audioURL,
@@ -307,7 +310,8 @@ export default function TopLevel(props) {
       createdDate: new Date(),
       name: "test",
     }
-    activeScene.audioURLBeatTracks.push(audio)
+    // activeScene.audioURLBeatTracks.push(audio)
+    world.audioURLBeatTracks.push(audio)
     updateQuestInFirestore(globalState.world)
   }
 
@@ -340,7 +344,8 @@ export default function TopLevel(props) {
           saveAudioForScene={saveAudioForScene}
           saveBeatAudioForScene={saveBeatAudioForScene}
           vocalsTrackList={activeScene?.audioURLVocalTracks}
-          beatsTrackList={activeScene?.audioURLBeatTracks}
+          // beatsTrackList={activeScene?.audioURLBeatTracks}
+          beatsTrackList={world?.audioURLBeatTracks}
         />
       )}
     </div>

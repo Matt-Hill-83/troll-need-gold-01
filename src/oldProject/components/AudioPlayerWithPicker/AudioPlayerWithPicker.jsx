@@ -68,7 +68,8 @@ export default function AudioPlayerWithPicker(props) {
   }
 
   console.log("activeTrack", activeTrack) // zzz
-  console.log("sound", sound) // zzz
+  console.log("activeTrack?.url", activeTrack?.url) // zzz
+  console.log("reactPlayerProps", reactPlayerProps) // zzz
 
   return (
     <>
