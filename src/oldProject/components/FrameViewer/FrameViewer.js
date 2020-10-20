@@ -101,12 +101,6 @@ export default function FrameViewer() {
     const { audioURL, trackList } = frame
     console.log("frame.trackList", frame.trackList) // zzz
 
-    // const trackList = [
-    //   { name: "test", url: backgroundTrack },
-    //   { name: "test", url: backgroundTrack },
-    //   { name: "test", url: backgroundTrack },
-    //   { name: "test", url: backgroundTrack },
-    // ]
     return (
       <div className={css.dialogScroller} style={style}>
         <MyAudioConsole

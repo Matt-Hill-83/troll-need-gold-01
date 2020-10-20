@@ -102,7 +102,12 @@ export default function RecordingStudio(props) {
   // TODO: get audioURL from item selected in table
 
   const multiTrackRecorder = (
-    <Popover interactionKind={PopoverInteractionKind.CLICK_TARGET_ONLY}>
+    <Popover
+      popoverClassName={css.popoverClass}
+      portalClassName={css.portalClass}
+      interactionKind={PopoverInteractionKind.CLICK_TARGET_ONLY}
+      isOpen={true}
+    >
       <Button
         // className={cx(css.main)}
         // onClick={() => playAudio({ sound })}
@@ -120,20 +125,23 @@ export default function RecordingStudio(props) {
                   audioURL={audioURLVocalTrack}
                   saveAudio={saveAudioForScene}
                   loggedIn={loggedIn}
+                  trackList={props.vocalsTrackList}
                 />
               </div>
               <div className={css.console}>
                 <div>Background Track</div>
 
-                <MyAudioConsole
-                  audioURL={audioURLBeatTrack}
-                  saveAudio={saveBeatAudioForScene}
-                  loggedIn={loggedIn}
-                />
+                {false && (
+                  <MyAudioConsole
+                    audioURL={audioURLBeatTrack}
+                    saveAudio={saveBeatAudioForScene}
+                    loggedIn={loggedIn}
+                  />
+                )}
               </div>
               {/* </ButtonGroup> */}
             </Grid.Column>
-            <Grid.Column width={8}>{table}</Grid.Column>
+            {false && <Grid.Column width={8}>{table}</Grid.Column>}
           </Grid.Row>
         </Grid>
       </Segment>

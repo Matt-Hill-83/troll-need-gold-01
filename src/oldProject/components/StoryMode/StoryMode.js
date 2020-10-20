@@ -162,7 +162,7 @@ export default function StoryMode(props) {
         <img className={css.backgroundImage2} src={mainBackground} alt={"bk"} />
         <img className={css.backgroundImage3} src={mainBackground} alt={"bk"} />
       </div>
-      {true && (
+      {false && (
         <img
           className={css.extraBackgroundImage}
           src={mainBackground2}

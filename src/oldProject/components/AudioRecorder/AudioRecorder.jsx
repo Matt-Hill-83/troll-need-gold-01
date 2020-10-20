@@ -75,6 +75,7 @@ class AudioRecorder extends React.Component {
         <Popover
           position={Position.TOP_RIGHT}
           interactionKind={PopoverInteractionKind.CLICK_TARGET_ONLY}
+          portalClassName={css.portalClass}
         >
           <Button
             className={cx(css.button, toggleClassName, {

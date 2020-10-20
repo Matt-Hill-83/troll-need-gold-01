@@ -67,14 +67,9 @@ export default function AudioPlayerWithPicker(props) {
     return <AutoComplete2 {...dropDownProps} />
   }
 
-  // TODO: add useState here to store selected track.
-  // TODO: add useState here to store selected track.
-  // TODO: add useState here to store selected track.
-  // TODO: add useState here to store selected track.
-  // TODO: add useState here to store selected track.
-
   console.log("activeTrack", activeTrack) // zzz
   console.log("sound", sound) // zzz
+
   return (
     <>
       <Button
@@ -88,7 +83,6 @@ export default function AudioPlayerWithPicker(props) {
         style={style}
         loop={false}
         url={activeTrack?.url}
-        // url={sound}
         {...reactPlayerProps}
       />
     </>

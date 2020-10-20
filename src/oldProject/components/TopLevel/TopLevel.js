@@ -37,6 +37,8 @@ export default function TopLevel(props) {
   const { className } = props
   let world = props.quest
 
+  const profile = getProfile()
+
   // Save this in case I need localStorage
   // const initialLocalState = {}
   // const { localState, setLocalStateProps } = useLocalState(initialLocalState)
@@ -276,10 +278,21 @@ export default function TopLevel(props) {
   }
 
   function saveAudioForScene({ audioURL }) {
+    console.log("saveAudioForScene") // zzz
     if (!activeScene?.audioURLVocalTracks) {
       activeScene.audioURLVocalTracks = []
     }
-    activeScene.audioURLVocalTracks.push(audioURL)
+
+    const userName = profile?.displayName || ""
+    const length = activeScene.audioURLVocalTracks.length
+
+    const item = {
+      name: `track-${userName}-${length + 101}`,
+      url: audioURL,
+    }
+
+    activeScene.audioURLVocalTracks.push(item)
+
     updateQuestInFirestore(globalState.world)
   }
 
@@ -319,14 +332,15 @@ export default function TopLevel(props) {
   return (
     <div className={`${css.main} ${className}`}>
       <StoryMode updateActiveScene={updateActiveScene} />
-      {false && (
+      {true && (
         <RecordingStudio
           audioURLBeatTrack={activeScene?.audioURLBeatTracks?.[0] || null}
           audioURLVocalTrack={activeScene?.audioURLVocalTracks?.[0] || null}
           loggedIn={true}
           saveAudioForScene={saveAudioForScene}
           saveBeatAudioForScene={saveBeatAudioForScene}
-          trackList={activeScene?.audioURLBeatTracks}
+          vocalsTrackList={activeScene?.audioURLVocalTracks}
+          beatsTrackList={activeScene?.audioURLBeatTracks}
         />
       )}
     </div>
