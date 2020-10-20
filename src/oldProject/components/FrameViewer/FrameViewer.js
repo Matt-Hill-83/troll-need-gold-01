@@ -17,6 +17,8 @@ export default function FrameViewer() {
 
   const { getProfile } = useUpdateProfileWidget()
   const loggedIn = !!getProfile().id
+  const profile = getProfile()
+  console.log("profile", profile) // zzz
 
   const { activeFrameIndex, activeScene } = globalState
   if (!activeScene?.frameSet) {
@@ -95,10 +97,6 @@ export default function FrameViewer() {
       "margin-top": `${cloneIndex * scalingFactor}vh`,
       border: "3px solid red",
     }
-    const backgroundTrack =
-      "https://firebasestorage.googleapis.com/v0/b/troll-need-gold-02-staging.appspot.com/o/AMAgzal2oAbHogUvO9vVeHWZygF3%2Fuser_images%2Fckg3rdbam00003h5oth71k2wt-audio.blob?alt=media&token=853c84d1-6671-40af-986e-b8eb8e5f6dfe"
-
-    // const tracks = [backgroundTrack, backgroundTrack, backgroundTrack]
 
     const { audioURL, trackList } = frame
     console.log("frame.trackList", frame.trackList) // zzz
@@ -140,18 +138,20 @@ export default function FrameViewer() {
 
   function onSaveAudioForFrame({ audioURL }) {
     console.log("saveAudioForFrame") // zzz
+
+    const userName = profile?.displayName || ""
+
     if (!frame.trackList) {
       frame.trackList = []
     }
     const length = frame.trackList.length
 
     const item = {
-      name: `track-${length + 101}`,
+      name: `track-${userName}-${length + 101}`,
       url: audioURL,
     }
 
     frame.trackList.push(item)
-    // frame.audioURL = audioURL
     updateQuestInFirestore(globalState.world)
   }
 

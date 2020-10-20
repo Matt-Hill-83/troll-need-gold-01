@@ -74,6 +74,7 @@ export default function AudioPlayerWithPicker(props) {
   // TODO: add useState here to store selected track.
 
   console.log("activeTrack", activeTrack) // zzz
+  console.log("sound", sound) // zzz
   return (
     <>
       <Button
@@ -86,7 +87,8 @@ export default function AudioPlayerWithPicker(props) {
         playing={playing}
         style={style}
         loop={false}
-        url={sound}
+        url={activeTrack?.url}
+        // url={sound}
         {...reactPlayerProps}
       />
     </>
