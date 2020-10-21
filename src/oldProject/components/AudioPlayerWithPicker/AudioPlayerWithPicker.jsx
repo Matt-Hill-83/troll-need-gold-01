@@ -1,17 +1,21 @@
 import { IconNames } from "@blueprintjs/icons"
-import { PopoverInteractionKind, Popover, Button } from "@blueprintjs/core"
+// import { PopoverInteractionKind, Popover, Button } from "@blueprintjs/core"
 import cx from "classnames"
 import React, { useState } from "react"
 import ReactPlayer from "react-player"
 
 import AutoComplete2 from "../../../Common/Components/AutoComplete2/AutoComplete2"
+import DataTable3 from "../../../QuestBuilder/components/DataTable3/DataTable3.js"
 
 import css from "./AudioPlayerWithPicker.module.scss"
+import { Grid, Segment, Button } from "semantic-ui-react"
 
 export default function AudioPlayerWithPicker(props) {
   const { sound, trackList } = props
   const soundToPlay = sound?.url ? sound.url : sound
   const [playing, setPlaying] = useState(false)
+  const [showTrackTable, setShowTrackTable] = useState(false)
+
   const [activeTrack, setActiveTrack] = useState(trackList[0])
 
   const toggleAudio = () => {
@@ -71,21 +75,117 @@ export default function AudioPlayerWithPicker(props) {
   console.log("activeTrack?.url", activeTrack?.url) // zzz
   console.log("reactPlayerProps", reactPlayerProps) // zzz
 
+  const renderName = (value, tableMeta, updateValue) => {
+    console.log("renderName") // zzz
+    const renderedName = <div>{value}</div>
+    return renderedName
+  }
+
+  const renderCreator = (value, tableMeta, updateValue) => {
+    console.log("renderName") // zzz
+    const renderedName = <div>{value}</div>
+    return renderedName
+  }
+
+  const getTable = ({ trackList }) => {
+    console.log("trackList", trackList) // zzz
+    console.log("getTable") // zzz
+    const tableProps = {
+      className: css.triggersTable,
+      data: trackList,
+      columns,
+      options,
+    }
+
+    return <DataTable3 key={"dataTableKey"} {...tableProps} />
+  }
+
+  const tableConfig = {
+    options: {
+      selectableRows: "none",
+      onCellClick: () => {},
+      onRowClick: () => {},
+    },
+    columns: [
+      {
+        name: "none",
+        label: " ",
+        options: {
+          filter: false,
+          sort: false,
+          empty: true,
+          // customBodyRender: (value, tableMeta, updateValue) => (
+          //   <AddDeleteButtonGroup
+          //     props={{
+          //       rowIndex: tableMeta.rowIndex,
+          //       onDelete: onDeleteTriggerRow,
+          //       onAdd: onAddTriggerRow,
+          //     }}
+          //   />
+          // ),
+        },
+      },
+      {
+        name: "name",
+        label: "Name",
+        options: {
+          sort: true,
+          filter: true,
+          customBodyRender: renderName,
+        },
+      },
+      {
+        name: "createdBy",
+        label: "Creator",
+        options: {
+          sort: true,
+          filter: true,
+          customBodyRender: renderCreator,
+          // customBodyRender: renderConditions,
+        },
+      },
+    ],
+  }
+
+  const { options, columns } = tableConfig
+
+  const vocalsTable = getTable({ trackList })
+
+  const { url, name } = activeTrack
+
+  const toggleTrackTable = () => {
+    setShowTrackTable(!showTrackTable)
+  }
+
   return (
     <>
-      <Button
-        className={cx(css.main)}
-        onClick={() => toggleAudio({ sound: soundToPlay })}
-        icon={playing ? IconNames.PAUSE : IconNames.PLAY}
-      />
-      {renderTrackPicker({ trackList })}
-      <ReactPlayer
-        playing={playing}
-        style={style}
-        loop={false}
-        url={activeTrack?.url}
-        {...reactPlayerProps}
-      />
+      <Segment className={css.content}>
+        <Grid className={css.grid}>
+          <Grid.Row>
+            <Grid.Column width={16}>
+              <Button
+                className={cx(css.main)}
+                onClick={() => toggleAudio({ sound: soundToPlay })}
+                icon={playing ? IconNames.PAUSE : IconNames.PLAY}
+              />
+              {false && renderTrackPicker({ trackList })}
+              <ReactPlayer
+                playing={playing}
+                style={style}
+                loop={false}
+                url={url}
+                {...reactPlayerProps}
+              />
+              <Button onClick={toggleTrackTable}> {name} </Button>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column width={16}>
+              {showTrackTable && vocalsTable}
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Segment>
     </>
   )
 }

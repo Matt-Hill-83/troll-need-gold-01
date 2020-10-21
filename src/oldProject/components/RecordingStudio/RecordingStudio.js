@@ -16,7 +16,7 @@ import css from "./RecordingStudio.module.scss"
 export default function RecordingStudio(props) {
   const [globalState] = useContext(myContext)
   const { activeScene } = globalState
-  const { trackList } = props
+  const { trackList, vocalsTrackList, beatsTrackList } = props
 
   console.log("activeScene", activeScene) // zzz
 
@@ -85,16 +85,21 @@ export default function RecordingStudio(props) {
 
   console.log("trackList", trackList) // zzz
 
-  const tableProps = {
-    className: css.triggersTable,
-    // getMuiTheme,
-    data: trackList,
-    // data: triggers,
-    columns,
-    options,
+  const getTable = ({ trackList }) => {
+    console.log("getTable") // zzz
+    const tableProps = {
+      className: css.triggersTable,
+      data: trackList,
+      columns,
+      options,
+    }
+
+    return <DataTable3 key={"dataTableKey"} {...tableProps} />
   }
 
-  const table = <DataTable3 key={"dataTableKey"} {...tableProps} />
+  // const vocalsTable = getTable({ trackList: vocalsTrackList })
+
+  // const table = <DataTable3 key={"dataTableKey"} {...tableProps} />
 
   // TODO: get audioURL from item selected in table
   // TODO: get audioURL from item selected in table
@@ -106,15 +111,15 @@ export default function RecordingStudio(props) {
       popoverClassName={css.popoverClass}
       portalClassName={css.portalClass}
       interactionKind={PopoverInteractionKind.CLICK_TARGET_ONLY}
-      // isOpen={true}
+      isOpen={true}
     >
       <Button icon={IconNames.MUSIC} />
       <Segment className={css.content}>
         <Grid className={css.grid}>
           <Grid.Row>
-            <Grid.Column width={8}>
+            <Grid.Column width={12}>
+              <div>New Vocal Track</div>
               <div className={css.console}>
-                <div>New Vocal Track</div>
                 <MyAudioConsole
                   audioURL={audioURLVocalTrack}
                   saveAudio={saveAudioForScene}
@@ -122,9 +127,8 @@ export default function RecordingStudio(props) {
                   trackList={props.vocalsTrackList}
                 />
               </div>
+              <div>Background Track</div>
               <div className={css.console}>
-                <div>Background Track</div>
-
                 {true && (
                   <MyAudioConsole
                     audioURL={audioURLBeatTrack}
@@ -135,7 +139,7 @@ export default function RecordingStudio(props) {
                 )}
               </div>
             </Grid.Column>
-            {false && <Grid.Column width={8}>{table}</Grid.Column>}
+            {/* {true && <Grid.Column width={8}>{vocalsTable}</Grid.Column>} */}
           </Grid.Row>
         </Grid>
       </Segment>

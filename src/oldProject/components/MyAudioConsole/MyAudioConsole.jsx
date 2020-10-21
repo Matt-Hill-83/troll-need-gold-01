@@ -46,6 +46,12 @@ export default function MyAudioConsole(props) {
   const renderTools = () => {
     return (
       <div className={css.audioButtonsContainer}>
+        {loggedIn && (
+          <AudioRecorder
+            recorderClassName={css.audioRecorder}
+            saveAudio={({ blob }) => saveAudio({ blob })}
+          />
+        )}
         {hasTrackList && (
           <AudioPlayerWithPicker
             className={css.audioPlayer}
@@ -55,12 +61,6 @@ export default function MyAudioConsole(props) {
         )}
         {!hasTrackList && audioURL && (
           <AudioPlayer className={css.audioPlayer} sound={audioURL} />
-        )}
-        {loggedIn && (
-          <AudioRecorder
-            recorderClassName={css.audioRecorder}
-            saveAudio={({ blob }) => saveAudio({ blob })}
-          />
         )}
       </div>
     )
