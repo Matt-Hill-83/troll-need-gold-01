@@ -42,7 +42,7 @@ import elsa02 from "./creatures/elsa02.png"
 import emmet01 from "./creatures/emmet01.png"
 import fairy from "./creatures/fairy.png"
 import foxy01 from "./creatures/foxy01.png"
-import frogGirl01 from "./creatures/frogGirl01.png"
+// import frogGirl01 from "./creatures/frogGirl01.png"
 import genie01 from "./creatures/genie01.png"
 import gerald01 from "./creatures/gerald01.png"
 import ghandi01 from "./creatures/ghandi01.png"
@@ -200,7 +200,7 @@ const creatures = {
   fairy,
   fiona: charlie02,
   foxy01,
-  frogGirl01,
+  // frogGirl01,
   genie01,
   goat01,
   goatInABoat,

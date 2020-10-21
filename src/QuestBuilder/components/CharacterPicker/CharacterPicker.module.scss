@@ -16,31 +16,31 @@
   overflow-y: auto;
 
   width: 50%;
-}
 
-.itemImageContainer {
-  display: flex;
-  border: 1px solid green !important;
-  width: 100px;
-  height: 100px;
-  justify-content: center;
-  overflow: hidden;
-  background: var(--grass-color);
-  margin: 0.3%;
-  border-radius: 12px;
-
-  position: relative;
-
-  &:hover {
-    border: 2px solid green !important;
-    cursor: pointer;
-  }
-
-  .itemImage {
+  .itemImageContainer {
     display: flex;
+    border: 1px solid green !important;
+    width: 100px;
+    height: 100px;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--grass-color);
+    margin: 0.3%;
+    border-radius: 12px;
 
-    height: 100%;
-    width: auto;
+    position: relative;
+
+    &:hover {
+      border: 2px solid green !important;
+      cursor: pointer;
+    }
+
+    .itemImage {
+      display: flex;
+
+      height: 100%;
+      width: auto;
+    }
   }
 }
 

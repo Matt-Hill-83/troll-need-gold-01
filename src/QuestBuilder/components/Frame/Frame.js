@@ -246,7 +246,7 @@ class Frame extends Component {
 
       return (
         <div
-          className={css.itemImageContainer}
+          xxxclassName={css.itemImageContainer}
           key={index}
           onClick={() => this.selectItem({ name: key })}
         >

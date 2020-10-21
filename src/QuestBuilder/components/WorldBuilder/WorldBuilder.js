@@ -404,7 +404,7 @@ class WorldBuilder extends Component {
         {!showFrameBuilder && this.renderHeaders({ title, world })}
         {!showFrameBuilder && (
           <div className={css.content}>
-            {this.renderScenesGrid({ world })}
+            {/* {this.renderScenesGrid({ world })} */}
             {showSubQuestWizard && (
               <div className={css.right}>
                 {this.renderSubQuestWizard({ questConfig, newGrid5 })}
@@ -418,6 +418,7 @@ class WorldBuilder extends Component {
                 />
               </div>
             )}
+            {this.renderScenesGrid({ world })}
           </div>
         )}
         {showFrameBuilder && (

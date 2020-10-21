@@ -1,4 +1,10 @@
 import maceo01 from "./creatures/maceo01.png"
+
+import maceo03 from "./creatures/maceo03.png"
+import maceo02 from "./creatures/maceo02.png"
+import raven02 from "./creatures/raven02.png"
+import raven01 from "./creatures/raven01.png"
+
 import girl08 from "./creatures/girl08.png"
 import girl07 from "./creatures/girl07.png"
 import puddyTat01 from "./creatures/puddyTat01.png"
@@ -172,6 +178,11 @@ const tj = {
 }
 
 const creatures2animals = {
+  maceo03,
+  maceo02,
+  raven02,
+  raven01,
+
   girl01,
   maceo01,
   girl02,
