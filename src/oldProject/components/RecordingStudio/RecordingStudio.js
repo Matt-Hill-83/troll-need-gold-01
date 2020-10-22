@@ -16,7 +16,6 @@ import css from "./RecordingStudio.module.scss"
 export default function RecordingStudio(props) {
   const [globalState] = useContext(myContext)
   const { activeScene } = globalState
-  const { trackList, vocalsTrackList, beatsTrackList } = props
 
   console.log("activeScene", activeScene) // zzz
 
@@ -28,83 +27,6 @@ export default function RecordingStudio(props) {
     saveAudioForScene,
     saveBeatAudioForScene,
   } = props
-
-  const renderName = (value, tableMeta, updateValue) => {
-    console.log("renderName") // zzz
-    const renderedName = <div>{value}</div>
-    return renderedName
-  }
-
-  const tableConfig = {
-    options: {
-      selectableRows: "none",
-      onCellClick: () => {},
-      onRowClick: () => {},
-    },
-    columns: [
-      {
-        name: "none",
-        label: " ",
-        options: {
-          filter: false,
-          sort: false,
-          empty: true,
-          // customBodyRender: (value, tableMeta, updateValue) => (
-          //   <AddDeleteButtonGroup
-          //     props={{
-          //       rowIndex: tableMeta.rowIndex,
-          //       onDelete: onDeleteTriggerRow,
-          //       onAdd: onAddTriggerRow,
-          //     }}
-          //   />
-          // ),
-        },
-      },
-      {
-        name: "name",
-        label: "Name",
-        options: {
-          sort: true,
-          filter: true,
-          customBodyRender: renderName,
-        },
-      },
-      {
-        name: "createdBy",
-        label: "Creator",
-        options: {
-          sort: true,
-          filter: true,
-          // customBodyRender: renderConditions,
-        },
-      },
-    ],
-  }
-
-  const { options, columns } = tableConfig
-
-  console.log("trackList", trackList) // zzz
-
-  const getTable = ({ trackList }) => {
-    console.log("getTable") // zzz
-    const tableProps = {
-      className: css.triggersTable,
-      data: trackList,
-      columns,
-      options,
-    }
-
-    return <DataTable3 key={"dataTableKey"} {...tableProps} />
-  }
-
-  // const vocalsTable = getTable({ trackList: vocalsTrackList })
-
-  // const table = <DataTable3 key={"dataTableKey"} {...tableProps} />
-
-  // TODO: get audioURL from item selected in table
-  // TODO: get audioURL from item selected in table
-  // TODO: get audioURL from item selected in table
-  // TODO: get audioURL from item selected in table
 
   const multiTrackRecorder = (
     <Popover
@@ -129,7 +51,7 @@ export default function RecordingStudio(props) {
               </div>
               <div>Background Track</div>
               <div className={css.console}>
-                {true && (
+                {false && (
                   <MyAudioConsole
                     audioURL={audioURLBeatTrack}
                     saveAudio={saveBeatAudioForScene}

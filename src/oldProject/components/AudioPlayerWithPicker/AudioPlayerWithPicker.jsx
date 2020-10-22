@@ -13,9 +13,9 @@ import { Grid, Segment, Button } from "semantic-ui-react"
 export default function AudioPlayerWithPicker(props) {
   const { sound, trackList } = props
   const soundToPlay = sound?.url ? sound.url : sound
+
   const [playing, setPlaying] = useState(false)
   const [showTrackTable, setShowTrackTable] = useState(false)
-
   const [activeTrack, setActiveTrack] = useState(trackList[0])
 
   const toggleAudio = () => {
@@ -43,14 +43,19 @@ export default function AudioPlayerWithPicker(props) {
   const defaultStyle = { border: "1px solid red", display: "none" }
   const style = { ...defaultStyle, ...props.style }
 
+  const onChangeTrack = ({ track }) => {
+    console.log("track", track) // zzz
+    setActiveTrack(track)
+  }
+
+  // const onChangeTrack = (newValue) => {
+  //   console.log("newValue", newValue) // zzz
+  //   setActiveTrack(newValue)
+  // }
+
   const renderTrackPicker = ({ trackList }) => {
     if (!trackList || trackList.length === 0) {
       return <div>no tracklist</div>
-    }
-
-    const onChangeTrack = (newValue) => {
-      console.log("newValue", newValue) // zzz
-      setActiveTrack(newValue)
     }
 
     const getOptionLabel = (option) => {
@@ -72,17 +77,27 @@ export default function AudioPlayerWithPicker(props) {
   }
 
   console.log("activeTrack", activeTrack) // zzz
-  console.log("activeTrack?.url", activeTrack?.url) // zzz
-  console.log("reactPlayerProps", reactPlayerProps) // zzz
 
   const renderName = (value, tableMeta, updateValue) => {
+    // const test = trackList[tableMeta.rowIndex]
+    // console.log("test", test) // zzz
+
+    // console.log("updateValue", updateValue) // zzz
+    console.log("tableMeta", tableMeta) // zzz
+    console.log("value", value) // zzz
     console.log("renderName") // zzz
-    const renderedName = <div>{value}</div>
+    const track = props.trackList[tableMeta.rowIndex]
+    console.log("track", track) // zzz
+    // debugger
+    const renderedName = (
+      <div onClick={() => onChangeTrack({ track })}>{value}</div>
+    )
     return renderedName
   }
 
   const renderCreator = (value, tableMeta, updateValue) => {
-    console.log("renderName") // zzz
+    console.log("renderCreator") // zzz
+    console.log("value", value) // zzz
     const renderedName = <div>{value}</div>
     return renderedName
   }

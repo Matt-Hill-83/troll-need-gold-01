@@ -277,19 +277,36 @@ export default function TopLevel(props) {
     }
   }
 
+  function createAudioObj({ audioURL, trackList, profile }) {
+    const userName = profile?.displayName || ""
+    const length = trackList.length
+
+    const item = {
+      name: `track-${userName}-${length + 101}`,
+      url: audioURL,
+      createdBy: "me",
+      createdDate: new Date(),
+    }
+    return item
+  }
+
   function saveAudioForScene({ audioURL }) {
     console.log("saveAudioForScene") // zzz
     if (!activeScene?.audioURLVocalTracks) {
       activeScene.audioURLVocalTracks = []
     }
 
-    const userName = profile?.displayName || ""
-    const length = activeScene.audioURLVocalTracks.length
-
-    const item = {
-      name: `track-${userName}-${length + 101}`,
-      url: audioURL,
-    }
+    const item = createAudioObj({
+      audioURL,
+      trackList: activeScene.audioURLVocalTracks,
+      profile,
+    })
+    // const item = {
+    //   name: `track-${userName}-${length + 101}`,
+    //   url: audioURL,
+    //   createdBy: "me",
+    //   createdDate: new Date(),
+    // }
 
     activeScene.audioURLVocalTracks.push(item)
 
