@@ -1,4 +1,3 @@
-import cuid from "cuid"
 import cx from "classnames"
 import React, { useContext } from "react"
 
@@ -9,10 +8,7 @@ import FrameViewer from "../FrameViewer/FrameViewer.js"
 import images from "../../../Common/Images/images.js"
 import LocationImage from "../LocationImage/LocationImage.jsx"
 import MissionConsole from "../MissionConsole/MissionConsole.js"
-import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget.js"
 import WorldViewer from "../WorldViewer/WorldViewer.js"
-import { updateQuestInFirestore } from "../../../app/firestore/firestoreService.js"
-import { uploadAudio } from "../../../app/firestore/firebaseService.js"
 
 import css from "./StoryMode.module.scss"
 
@@ -26,10 +22,6 @@ export default function StoryMode(props) {
   } = globalState
 
   const { updateActiveScene } = props
-
-  // const { getProfile } = useUpdateProfileWidget()
-
-  console.log("activeScene", activeScene) // zzz
 
   const { backgroundImage } = activeScene
 
@@ -104,52 +96,6 @@ export default function StoryMode(props) {
   const getActiveFrame = ({ activeFrameIndex }) => {
     const frames = activeScene?.frameSet?.frames || []
     return frames[activeFrameIndex]
-  }
-
-  function saveVocalTrackForScene({ blob }) {
-    console.log("saveAudioForFrame") // zzz
-    // setLoading(true)
-    const filename = cuid() + "-audio.blob"
-    const uploadTask = uploadAudio(blob, filename)
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        console.log("Upload is " + progress + "% done")
-      },
-      (error) => {
-        // toast.error(error.messege)
-      },
-      () => {
-        uploadTask.snapshot.ref.getDownloadURL().then((audioURL) => {
-          activeScene.audioURLVocalTrack = audioURL
-          updateQuestInFirestore(globalState.world)
-        })
-      }
-    )
-  }
-
-  function saveBeatTrackGlobal({ blob }) {
-    console.log("saveBeatAudioForFrame") // zzz
-    // setLoading(true)
-    const filename = cuid() + "-audio.blob"
-    const uploadTask = uploadAudio(blob, filename)
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        console.log("Upload is " + progress + "% done")
-      },
-      (error) => {
-        // toast.error(error.messege)
-      },
-      () => {
-        uploadTask.snapshot.ref.getDownloadURL().then((audioURL) => {
-          activeScene.audioURLBeatTrack = audioURL
-          updateQuestInFirestore(globalState.world)
-        })
-      }
-    )
   }
 
   const frame = getActiveFrame({ activeFrameIndex })

@@ -46,8 +46,6 @@ class WorldBuilder extends Component {
 
   init() {
     const { quest = null, maps, defaultWorldId } = this.props
-    console.log("this.props", this.props) // zzz
-    console.log("quest", this.props.quest) // zzz
     let id = null
 
     this.maps = maps || []
@@ -84,8 +82,6 @@ class WorldBuilder extends Component {
     // new map
     let world = null
 
-    console.log("this.props.quest", this.props.quest) // zzz
-
     if (newWorld) {
       await this.addNewWorld()
     }
@@ -102,7 +98,6 @@ class WorldBuilder extends Component {
       this.setData({ world })
     }
     world = worldBuilderStore.getWorldBuilderWorld()
-    console.log("world----------------------------", world) // zzz
     this.setDefaultWorldId({ worldId: world.id })
     this.setState({ update: new Date() })
   }
@@ -404,7 +399,6 @@ class WorldBuilder extends Component {
         {!showFrameBuilder && this.renderHeaders({ title, world })}
         {!showFrameBuilder && (
           <div className={css.content}>
-            {/* {this.renderScenesGrid({ world })} */}
             {showSubQuestWizard && (
               <div className={css.right}>
                 {this.renderSubQuestWizard({ questConfig, newGrid5 })}

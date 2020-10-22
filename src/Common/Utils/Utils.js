@@ -78,7 +78,6 @@ export default class Utils {
     const output = array.filter((item) => {
       return item[idProp] !== id
     })
-    console.log("output", output) // zzz
     return output
   }
 

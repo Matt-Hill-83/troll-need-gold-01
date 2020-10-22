@@ -67,7 +67,6 @@ export default function AudioPlayerWithPicker(props) {
 
   const renderActions = (value, tableMeta, updateValue) => {
     const track = getTrackFromRowIndex({ rowIndex: tableMeta.rowIndex })
-    console.log("track", track) // zzz
 
     return (
       <ButtonGroup>

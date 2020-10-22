@@ -44,7 +44,6 @@ export default function DialogBuilder2(props) {
   }
 
   const updateTextChanges = ({ content }) => {
-    console.log("updateTextChanges") // zzz
     const linesArray = content.split("\n")
     linesArray.forEach((line, lineIndex) => {
       const dataStructureIndices = metaInfoMap[lineIndex]
