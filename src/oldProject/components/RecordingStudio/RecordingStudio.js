@@ -29,7 +29,7 @@ export default function RecordingStudio(props) {
       popoverClassName={css.popoverClass}
       portalClassName={css.portalClass}
       interactionKind={PopoverInteractionKind.CLICK_TARGET_ONLY}
-      isOpen={true}
+      // isOpen={true}
     >
       <Button icon={IconNames.MUSIC} />
       <Segment className={css.content}>
