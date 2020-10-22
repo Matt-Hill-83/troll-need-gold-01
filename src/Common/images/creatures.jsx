@@ -42,7 +42,6 @@ import elsa02 from "./creatures/elsa02.png"
 import emmet01 from "./creatures/emmet01.png"
 import fairy from "./creatures/fairy.png"
 import foxy01 from "./creatures/foxy01.png"
-// import frogGirl01 from "./creatures/frogGirl01.png"
 import genie01 from "./creatures/genie01.png"
 import gerald01 from "./creatures/gerald01.png"
 import ghandi01 from "./creatures/ghandi01.png"
@@ -66,7 +65,6 @@ import johnny02 from "./creatures/johnny02.png"
 import katieKooper01 from "./creatures/katieKooper01.png"
 import leah01 from "./creatures/leah01.png"
 import lucy from "./creatures/lucy.png"
-import lucy02 from "./creatures/lucy02.png"
 import madElf01 from "./creatures/madElf01.png"
 import magicGirl01 from "./creatures/magicGirl01.png"
 import man from "./creatures/man.png"
@@ -200,7 +198,6 @@ const creatures = {
   fairy,
   fiona: charlie02,
   foxy01,
-  // frogGirl01,
   genie01,
   goat01,
   goatInABoat,
@@ -216,7 +213,6 @@ const creatures = {
   leah01,
   littleGoose: goose03,
   lucy,
-  lucy02,
   lulu01: brenda01,
   magicGirl01,
   man,
