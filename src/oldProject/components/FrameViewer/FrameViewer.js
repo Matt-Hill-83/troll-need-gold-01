@@ -18,7 +18,6 @@ export default function FrameViewer() {
   const { getProfile } = useUpdateProfileWidget()
   const loggedIn = !!getProfile().id
   const profile = getProfile()
-  console.log("profile", profile) // zzz
 
   const { activeFrameIndex, activeScene } = globalState
   if (!activeScene?.frameSet) {
@@ -99,7 +98,6 @@ export default function FrameViewer() {
     }
 
     const { audioURL, trackList } = frame
-    console.log("frame.trackList", frame.trackList) // zzz
 
     return (
       <div className={css.dialogScroller} style={style}>
@@ -131,8 +129,6 @@ export default function FrameViewer() {
   }
 
   function onSaveAudioForFrame({ audioURL }) {
-    console.log("saveAudioForFrame") // zzz
-
     const userName = profile?.displayName || ""
 
     if (!frame.trackList) {
@@ -150,12 +146,8 @@ export default function FrameViewer() {
   }
 
   function onSaveAudioForLine({ audioURL, dialog }) {
-    console.log("onSaveAudioForLine") // zzz
-
     dialog.audioURL = audioURL
 
-    console.log("dialog", dialog) // zzz
-    console.log("globalState.world", globalState.world) // zzz
     updateQuestInFirestore(globalState.world)
   }
 

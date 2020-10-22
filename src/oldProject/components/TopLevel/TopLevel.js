@@ -9,11 +9,11 @@ import TopLevelUtils from "../../Utils/TopLevelUtils.js"
 import useGlobalState from "../../../Context/useGlobalState.js"
 import useUpdateProfileWidget from "./useUpdateProfileWidget.js"
 import Utils from "../../../Common/Utils/Utils"
+// import firebase from "firebase/app"
 
 // import useLocalState from "./useLocalState.js"
 
 import cuid from "cuid"
-import { uploadAudio } from "../../../app/firestore/firebaseService"
 import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
 import RecordingStudio from "../RecordingStudio/RecordingStudio"
 
@@ -281,17 +281,20 @@ export default function TopLevel(props) {
     const userName = profile?.displayName || ""
     const length = trackList.length
 
+    const uuid = cuid()
     const item = {
       name: `track-${userName}-${length + 101}`,
       url: audioURL,
-      createdBy: "me",
+      createdBy: userName || "none",
       createdDate: new Date(),
+      uuid,
     }
+
     return item
   }
 
-  function saveAudioForScene({ audioURL }) {
-    console.log("saveAudioForScene") // zzz
+  function saveVocalTrackForScene({ audioURL }) {
+    console.log("saveVocalTrackForScene") // zzz
     if (!activeScene?.audioURLVocalTracks) {
       activeScene.audioURLVocalTracks = []
     }
@@ -301,34 +304,41 @@ export default function TopLevel(props) {
       trackList: activeScene.audioURLVocalTracks,
       profile,
     })
-    // const item = {
-    //   name: `track-${userName}-${length + 101}`,
-    //   url: audioURL,
-    //   createdBy: "me",
-    //   createdDate: new Date(),
-    // }
 
     activeScene.audioURLVocalTracks.push(item)
+    updateQuestInFirestore(globalState.world)
+  }
+
+  function deleteVocalTrackForScene({ trackId }) {
+    console.log("deleteVocalTrackForScene") // zzz
+
+    const tracks = activeScene.audioURLVocalTracks
+
+    const newArray = Utils.deleteArrayElementById({
+      id: trackId,
+      array: tracks,
+    })
+
+    tracks.length = 0
+    tracks.push(...newArray)
+    console.log("tracks", tracks) // zzz
 
     updateQuestInFirestore(globalState.world)
   }
 
-  function saveBeatAudioForScene({ audioURL }) {
-    console.log("saveBeatAudioForScene") // zzz
-    // if (!activeScene?.audioURLBeatTracks) {
-    //   activeScene.audioURLBeatTracks = []
-    // }
+  function saveBeatTrackGlobal({ audioURL }) {
+    console.log("saveBeatTrackGlobal") // zzz
+
     if (!world?.audioURLBeatTracks) {
       world.audioURLBeatTracks = []
     }
-    const audio = {
-      url: audioURL,
-      createdBy: "me",
-      createdDate: new Date(),
-      name: "test",
-    }
-    // activeScene.audioURLBeatTracks.push(audio)
-    world.audioURLBeatTracks.push(audio)
+    const item = createAudioObj({
+      audioURL,
+      trackList: activeScene.audioURLVocalTracks,
+      profile,
+    })
+
+    world.audioURLBeatTracks.push(item)
     updateQuestInFirestore(globalState.world)
   }
 
@@ -353,18 +363,16 @@ export default function TopLevel(props) {
   return (
     <div className={`${css.main} ${className}`}>
       <StoryMode updateActiveScene={updateActiveScene} />
-      {true && (
-        <RecordingStudio
-          audioURLBeatTrack={activeScene?.audioURLBeatTracks?.[0] || null}
-          audioURLVocalTrack={activeScene?.audioURLVocalTracks?.[0] || null}
-          loggedIn={true}
-          saveAudioForScene={saveAudioForScene}
-          saveBeatAudioForScene={saveBeatAudioForScene}
-          vocalsTrackList={activeScene?.audioURLVocalTracks}
-          // beatsTrackList={activeScene?.audioURLBeatTracks}
-          beatsTrackList={world?.audioURLBeatTracks}
-        />
-      )}
+      <RecordingStudio
+        audioURLBeatTrack={activeScene?.audioURLBeatTracks?.[0] || null}
+        audioURLVocalTrack={activeScene?.audioURLVocalTracks?.[0] || null}
+        loggedIn={true}
+        saveVocalTrackForScene={saveVocalTrackForScene}
+        deleteVocalTrackForScene={deleteVocalTrackForScene}
+        saveBeatTrackGlobal={saveBeatTrackGlobal}
+        vocalsTrackList={activeScene?.audioURLVocalTracks}
+        beatsTrackList={world?.audioURLBeatTracks}
+      />
     </div>
   )
 }

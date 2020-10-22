@@ -1,4 +1,5 @@
 import _get from "lodash.get"
+import _remove from "lodash.remove"
 import Constants from "../Constants/Constants.js"
 
 export default class Utils {
@@ -67,6 +68,14 @@ export default class Utils {
 
   static deleteArrayElement = ({ array, index }) => {
     array.splice(index, 1)
+  }
+
+  static deleteArrayElementById = ({ array, id, idProp = "uuid" }) => {
+    const output = array.filter((item) => {
+      return item[idProp] !== id
+    })
+    console.log("output", output) // zzz
+    return output
   }
 
   static getRandomInt(max) {

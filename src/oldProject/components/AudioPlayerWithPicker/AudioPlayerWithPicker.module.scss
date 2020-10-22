@@ -1,5 +1,19 @@
 .main {
   cursor: pointer;
+
+  .trackName {
+    border: 4px solid green !important;
+  }
+}
+
+.popoverClass {
+  z-index: 100 !important;
+
+  :global {
+    .bp3-transition-container {
+      // z-index: 100 !important;
+    }
+  }
 }
 
 .reactPlayer {

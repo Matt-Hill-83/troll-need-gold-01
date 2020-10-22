@@ -3,6 +3,7 @@
 import maceo03 from "./creatures/maceo03.png"
 import maceo02 from "./creatures/maceo02.png"
 import raven02 from "./creatures/raven02.png"
+import raven03 from "./creatures/raven03.png"
 import raven01 from "./creatures/raven01.png"
 
 import girl08 from "./creatures/girl08.png"
@@ -181,6 +182,7 @@ const creatures2animals = {
   maceo03,
   maceo02,
   raven02,
+  raven03,
   raven01,
 
   girl01,

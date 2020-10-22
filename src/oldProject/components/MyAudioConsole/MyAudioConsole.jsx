@@ -17,7 +17,6 @@ export default function MyAudioConsole(props) {
   const loggedIn = !!getProfile().id
 
   function saveAudio({ blob }) {
-    console.log("saveAudio....") // zzz
     // setLoading(true)
     const filename = cuid() + "-audio.blob"
     const uploadTask = uploadAudio(blob, filename)
@@ -32,14 +31,11 @@ export default function MyAudioConsole(props) {
       },
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then((audioURL) => {
-          console.log("complete...") // zzz
           props.saveAudio({ audioURL })
         })
       }
     )
   }
-
-  console.log("audioURL", audioURL) // zzz
 
   const hasTrackList = trackList && trackList.length > 0
 
@@ -57,6 +53,7 @@ export default function MyAudioConsole(props) {
             className={css.audioPlayer}
             sound={audioURL}
             trackList={trackList}
+            deleteVocalTrackForScene={props.deleteVocalTrackForScene}
           />
         )}
         {!hasTrackList && audioURL && (

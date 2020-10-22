@@ -106,7 +106,7 @@ export default function StoryMode(props) {
     return frames[activeFrameIndex]
   }
 
-  function saveAudioForScene({ blob }) {
+  function saveVocalTrackForScene({ blob }) {
     console.log("saveAudioForFrame") // zzz
     // setLoading(true)
     const filename = cuid() + "-audio.blob"
@@ -129,7 +129,7 @@ export default function StoryMode(props) {
     )
   }
 
-  function saveBeatAudioForScene({ blob }) {
+  function saveBeatTrackGlobal({ blob }) {
     console.log("saveBeatAudioForFrame") // zzz
     // setLoading(true)
     const filename = cuid() + "-audio.blob"

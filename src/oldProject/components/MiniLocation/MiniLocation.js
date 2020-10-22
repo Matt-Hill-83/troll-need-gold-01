@@ -130,7 +130,6 @@ export default function MiniLocation(props) {
   const imageSets = defaultImageSets
 
   const onSelectItem = async ({ name }) => {
-    console.log("name----------------------------------", name) // zzz
     setItemPickerItem(name)
     scene.backgroundImage = name
 
@@ -140,8 +139,6 @@ export default function MiniLocation(props) {
   }
 
   const toggleItemPicker = ({ item = null }) => {
-    console.log("toggleItemPicker", toggleItemPicker) // zzz
-    console.log("item", item) // zzz
     setShowItemPicker(!showItemPicker)
     setItemPickerItem(item)
   }

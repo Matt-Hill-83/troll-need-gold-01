@@ -1,15 +1,11 @@
 import cx from "classnames"
 import React, { useContext } from "react"
-
-import { ButtonGroup, TextField } from "@material-ui/core"
-import { myContext } from "../../../myProvider.js"
-import MyAudioConsole from "../MyAudioConsole/MyAudioConsole.jsx"
-
 import { PopoverInteractionKind, Popover, Button } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
-
 import { Header, Segment, Grid, Item } from "semantic-ui-react"
-import DataTable3 from "../../../QuestBuilder/components/DataTable3/DataTable3.js"
+
+import { myContext } from "../../../myProvider.js"
+import MyAudioConsole from "../MyAudioConsole/MyAudioConsole.jsx"
 
 import css from "./RecordingStudio.module.scss"
 
@@ -17,15 +13,14 @@ export default function RecordingStudio(props) {
   const [globalState] = useContext(myContext)
   const { activeScene } = globalState
 
-  console.log("activeScene", activeScene) // zzz
-
   const { audioURLVocalTrack, audioURLBeatTrack } = activeScene
 
   const {
     className = "",
     loggedIn,
-    saveAudioForScene,
-    saveBeatAudioForScene,
+    saveVocalTrackForScene,
+    saveBeatTrackGlobal,
+    deleteVocalTrackForScene,
   } = props
 
   const multiTrackRecorder = (
@@ -40,13 +35,14 @@ export default function RecordingStudio(props) {
         <Grid className={css.grid}>
           <Grid.Row>
             <Grid.Column width={12}>
-              <div>New Vocal Track</div>
+              <div>Vocal Track</div>
               <div className={css.console}>
                 <MyAudioConsole
                   audioURL={audioURLVocalTrack}
-                  saveAudio={saveAudioForScene}
+                  saveAudio={saveVocalTrackForScene}
                   loggedIn={loggedIn}
                   trackList={props.vocalsTrackList}
+                  deleteVocalTrackForScene={deleteVocalTrackForScene}
                 />
               </div>
               <div>Background Track</div>
@@ -54,14 +50,13 @@ export default function RecordingStudio(props) {
                 {false && (
                   <MyAudioConsole
                     audioURL={audioURLBeatTrack}
-                    saveAudio={saveBeatAudioForScene}
+                    saveAudio={saveBeatTrackGlobal}
                     loggedIn={loggedIn}
                     trackList={props.beatsTrackList}
                   />
                 )}
               </div>
             </Grid.Column>
-            {/* {true && <Grid.Column width={8}>{vocalsTable}</Grid.Column>} */}
           </Grid.Row>
         </Grid>
       </Segment>

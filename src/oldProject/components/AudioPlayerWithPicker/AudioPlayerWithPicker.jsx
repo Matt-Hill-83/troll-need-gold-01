@@ -1,14 +1,15 @@
+import { Button, Popover, PopoverInteractionKind } from "@blueprintjs/core"
+import { Grid, Segment } from "semantic-ui-react"
 import { IconNames } from "@blueprintjs/icons"
-// import { PopoverInteractionKind, Popover, Button } from "@blueprintjs/core"
+import { ButtonGroup } from "@material-ui/core"
 import cx from "classnames"
 import React, { useState } from "react"
 import ReactPlayer from "react-player"
 
-import AutoComplete2 from "../../../Common/Components/AutoComplete2/AutoComplete2"
 import DataTable3 from "../../../QuestBuilder/components/DataTable3/DataTable3.js"
 
 import css from "./AudioPlayerWithPicker.module.scss"
-import { Grid, Segment, Button } from "semantic-ui-react"
+import Utils from "../../../Common/Utils/Utils.js"
 
 export default function AudioPlayerWithPicker(props) {
   const { sound, trackList } = props
@@ -44,67 +45,48 @@ export default function AudioPlayerWithPicker(props) {
   const style = { ...defaultStyle, ...props.style }
 
   const onChangeTrack = ({ track }) => {
-    console.log("track", track) // zzz
     setActiveTrack(track)
   }
 
-  // const onChangeTrack = (newValue) => {
-  //   console.log("newValue", newValue) // zzz
-  //   setActiveTrack(newValue)
-  // }
-
-  const renderTrackPicker = ({ trackList }) => {
-    if (!trackList || trackList.length === 0) {
-      return <div>no tracklist</div>
-    }
-
-    const getOptionLabel = (option) => {
-      return option?.name || "--"
-    }
-
-    const defaultValue = trackList[0]
-    console.log("trackList - APWP", trackList) // zzz
-
-    const dropDownProps = {
-      // className: css.sceneDropdown,
-      items: trackList,
-      defaultValue,
-      getOptionLabel,
-      onChange: onChangeTrack,
-    }
-
-    return <AutoComplete2 {...dropDownProps} />
+  const deleteTrack = ({ trackId }) => {
+    props.deleteVocalTrackForScene({ trackId })
   }
 
-  console.log("activeTrack", activeTrack) // zzz
+  const getTrackFromRowIndex = ({ rowIndex }) => {
+    return props.trackList[rowIndex]
+  }
 
   const renderName = (value, tableMeta, updateValue) => {
-    // const test = trackList[tableMeta.rowIndex]
-    // console.log("test", test) // zzz
-
-    // console.log("updateValue", updateValue) // zzz
-    console.log("tableMeta", tableMeta) // zzz
-    console.log("value", value) // zzz
-    console.log("renderName") // zzz
-    const track = props.trackList[tableMeta.rowIndex]
-    console.log("track", track) // zzz
-    // debugger
+    const track = getTrackFromRowIndex({ rowIndex: tableMeta.rowIndex })
     const renderedName = (
-      <div onClick={() => onChangeTrack({ track })}>{value}</div>
+      <div className={css.trackName} onClick={() => onChangeTrack({ track })}>
+        {value}
+      </div>
     )
     return renderedName
   }
 
+  const renderActions = (value, tableMeta, updateValue) => {
+    const track = getTrackFromRowIndex({ rowIndex: tableMeta.rowIndex })
+    console.log("track", track) // zzz
+
+    return (
+      <ButtonGroup>
+        <Button
+          onClick={() => deleteTrack({ trackId: track.uuid })}
+          icon={IconNames.DELETE}
+        />
+        <Button icon={IconNames.EDIT} />
+      </ButtonGroup>
+    )
+  }
+
   const renderCreator = (value, tableMeta, updateValue) => {
-    console.log("renderCreator") // zzz
-    console.log("value", value) // zzz
     const renderedName = <div>{value}</div>
     return renderedName
   }
 
   const getTable = ({ trackList }) => {
-    console.log("trackList", trackList) // zzz
-    console.log("getTable") // zzz
     const tableProps = {
       className: css.triggersTable,
       data: trackList,
@@ -123,24 +105,6 @@ export default function AudioPlayerWithPicker(props) {
     },
     columns: [
       {
-        name: "none",
-        label: " ",
-        options: {
-          filter: false,
-          sort: false,
-          empty: true,
-          // customBodyRender: (value, tableMeta, updateValue) => (
-          //   <AddDeleteButtonGroup
-          //     props={{
-          //       rowIndex: tableMeta.rowIndex,
-          //       onDelete: onDeleteTriggerRow,
-          //       onAdd: onAddTriggerRow,
-          //     }}
-          //   />
-          // ),
-        },
-      },
-      {
         name: "name",
         label: "Name",
         options: {
@@ -156,7 +120,24 @@ export default function AudioPlayerWithPicker(props) {
           sort: true,
           filter: true,
           customBodyRender: renderCreator,
-          // customBodyRender: renderConditions,
+        },
+      },
+      {
+        name: "none",
+        label: "Created Date",
+        options: {
+          sort: true,
+          filter: true,
+          // customBodyRender: renderDate,
+        },
+      },
+      {
+        name: "none",
+        label: "Actions",
+        options: {
+          sort: true,
+          filter: true,
+          customBodyRender: renderActions,
         },
       },
     ],
@@ -183,7 +164,6 @@ export default function AudioPlayerWithPicker(props) {
                 onClick={() => toggleAudio({ sound: soundToPlay })}
                 icon={playing ? IconNames.PAUSE : IconNames.PLAY}
               />
-              {false && renderTrackPicker({ trackList })}
               <ReactPlayer
                 playing={playing}
                 style={style}
