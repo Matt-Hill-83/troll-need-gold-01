@@ -279,7 +279,7 @@ export default function TopLevel(props) {
 
   function createAudioObj({ audioURL, trackList, profile }) {
     const userName = profile?.displayName || ""
-    const length = trackList.length
+    const length = trackList?.length || 0
 
     const uuid = cuid()
     const item = {
@@ -297,19 +297,37 @@ export default function TopLevel(props) {
     if (!activeScene?.audioURLVocalTracks) {
       activeScene.audioURLVocalTracks = []
     }
+    const trackList = activeScene.audioURLVocalTracks
 
     const item = createAudioObj({
       audioURL,
-      trackList: activeScene.audioURLVocalTracks,
+      trackList,
       profile,
     })
 
-    activeScene.audioURLVocalTracks.push(item)
+    trackList.push(item)
+    updateQuestInFirestore(globalState.world)
+  }
+
+  function saveBeatTrackGlobal({ audioURL }) {
+    if (!world?.audioURLBeatTracks) {
+      world.audioURLBeatTracks = []
+    }
+
+    const trackList = world?.audioURLBeatTracks
+
+    const item = createAudioObj({
+      audioURL,
+      trackList,
+      profile,
+    })
+
+    trackList.push(item)
     updateQuestInFirestore(globalState.world)
   }
 
   function deleteVocalTrackForScene({ trackId }) {
-    const tracks = world?.audioURLVocalTracks
+    const tracks = activeScene?.audioURLVocalTracks
 
     const newArray = Utils.deleteArrayElementById({
       id: trackId,
@@ -323,7 +341,7 @@ export default function TopLevel(props) {
   }
 
   function deleteBeatTrackGlobal({ trackId }) {
-    const tracks = world?.audioURLBeatTracks
+    const tracks = world?.audioURLBeatTracks || []
 
     const newArray = Utils.deleteArrayElementById({
       id: trackId,
@@ -333,20 +351,6 @@ export default function TopLevel(props) {
     tracks.length = 0
     tracks.push(...newArray)
 
-    updateQuestInFirestore(globalState.world)
-  }
-
-  function saveBeatTrackGlobal({ audioURL }) {
-    if (!world?.audioURLBeatTracks) {
-      world.audioURLBeatTracks = []
-    }
-    const item = createAudioObj({
-      audioURL,
-      trackList: activeScene.audioURLVocalTracks,
-      profile,
-    })
-
-    world.audioURLBeatTracks.push(item)
     updateQuestInFirestore(globalState.world)
   }
 
