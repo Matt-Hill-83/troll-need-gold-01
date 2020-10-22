@@ -71,6 +71,10 @@ export default class Utils {
   }
 
   static deleteArrayElementById = ({ array, id, idProp = "uuid" }) => {
+    if (!array) {
+      return array
+    }
+
     const output = array.filter((item) => {
       return item[idProp] !== id
     })

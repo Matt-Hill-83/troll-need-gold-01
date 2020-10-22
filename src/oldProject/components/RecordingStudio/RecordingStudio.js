@@ -21,6 +21,7 @@ export default function RecordingStudio(props) {
     saveVocalTrackForScene,
     saveBeatTrackGlobal,
     deleteVocalTrackForScene,
+    deleteBeatTrackGlobal,
   } = props
 
   const multiTrackRecorder = (
@@ -42,17 +43,18 @@ export default function RecordingStudio(props) {
                   saveAudio={saveVocalTrackForScene}
                   loggedIn={loggedIn}
                   trackList={props.vocalsTrackList}
-                  deleteVocalTrackForScene={deleteVocalTrackForScene}
+                  deleteTrack={deleteVocalTrackForScene}
                 />
               </div>
               <div>Background Track</div>
               <div className={css.console}>
-                {false && (
+                {true && (
                   <MyAudioConsole
                     audioURL={audioURLBeatTrack}
                     saveAudio={saveBeatTrackGlobal}
                     loggedIn={loggedIn}
                     trackList={props.beatsTrackList}
+                    deleteTrack={deleteBeatTrackGlobal}
                   />
                 )}
               </div>

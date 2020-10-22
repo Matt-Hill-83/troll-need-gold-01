@@ -53,7 +53,7 @@ export default function MyAudioConsole(props) {
             className={css.audioPlayer}
             sound={audioURL}
             trackList={trackList}
-            deleteVocalTrackForScene={props.deleteVocalTrackForScene}
+            deleteTrack={props.deleteTrack}
           />
         )}
         {!hasTrackList && audioURL && (

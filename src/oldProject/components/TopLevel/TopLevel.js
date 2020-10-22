@@ -294,7 +294,6 @@ export default function TopLevel(props) {
   }
 
   function saveVocalTrackForScene({ audioURL }) {
-    console.log("saveVocalTrackForScene") // zzz
     if (!activeScene?.audioURLVocalTracks) {
       activeScene.audioURLVocalTracks = []
     }
@@ -310,9 +309,7 @@ export default function TopLevel(props) {
   }
 
   function deleteVocalTrackForScene({ trackId }) {
-    console.log("deleteVocalTrackForScene") // zzz
-
-    const tracks = activeScene.audioURLVocalTracks
+    const tracks = world?.audioURLVocalTracks
 
     const newArray = Utils.deleteArrayElementById({
       id: trackId,
@@ -321,14 +318,25 @@ export default function TopLevel(props) {
 
     tracks.length = 0
     tracks.push(...newArray)
-    console.log("tracks", tracks) // zzz
+
+    updateQuestInFirestore(globalState.world)
+  }
+
+  function deleteBeatTrackGlobal({ trackId }) {
+    const tracks = world?.audioURLBeatTracks
+
+    const newArray = Utils.deleteArrayElementById({
+      id: trackId,
+      array: tracks,
+    })
+
+    tracks.length = 0
+    tracks.push(...newArray)
 
     updateQuestInFirestore(globalState.world)
   }
 
   function saveBeatTrackGlobal({ audioURL }) {
-    console.log("saveBeatTrackGlobal") // zzz
-
     if (!world?.audioURLBeatTracks) {
       world.audioURLBeatTracks = []
     }
@@ -345,11 +353,6 @@ export default function TopLevel(props) {
   console.log("")
   console.log("main story render")
 
-  console.log(
-    "activeScene.audioURLVocalTracks",
-    activeScene?.audioURLVocalTracks
-  ) // zzz
-
   if (!world || !world.title) {
     return <div>no world 2</div>
   }
@@ -357,8 +360,6 @@ export default function TopLevel(props) {
   if (!globalState.activeScene) {
     return <div>no active scene</div>
   }
-
-  console.log("activeScene------------------", activeScene) // zzz
 
   return (
     <div className={`${css.main} ${className}`}>
@@ -369,6 +370,7 @@ export default function TopLevel(props) {
         loggedIn={true}
         saveVocalTrackForScene={saveVocalTrackForScene}
         deleteVocalTrackForScene={deleteVocalTrackForScene}
+        deleteBeatTrackGlobal={deleteBeatTrackGlobal}
         saveBeatTrackGlobal={saveBeatTrackGlobal}
         vocalsTrackList={activeScene?.audioURLVocalTracks}
         beatsTrackList={world?.audioURLBeatTracks}

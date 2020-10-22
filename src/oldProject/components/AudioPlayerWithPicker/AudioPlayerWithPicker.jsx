@@ -9,7 +9,6 @@ import ReactPlayer from "react-player"
 import DataTable3 from "../../../QuestBuilder/components/DataTable3/DataTable3.js"
 
 import css from "./AudioPlayerWithPicker.module.scss"
-import Utils from "../../../Common/Utils/Utils.js"
 
 export default function AudioPlayerWithPicker(props) {
   const { sound, trackList } = props
@@ -49,11 +48,11 @@ export default function AudioPlayerWithPicker(props) {
   }
 
   const deleteTrack = ({ trackId }) => {
-    props.deleteVocalTrackForScene({ trackId })
+    props.deleteTrack({ trackId })
   }
 
   const getTrackFromRowIndex = ({ rowIndex }) => {
-    return props.trackList[rowIndex]
+    return trackList[rowIndex]
   }
 
   const renderName = (value, tableMeta, updateValue) => {
