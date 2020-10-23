@@ -93,7 +93,7 @@ export default class Constants {
     }
   }
 
-  static getNewBook = () => {
+  static getNewBook = (props = {}) => {
     const id = Utils.generateUuid()
     return {
       name: "new book",
@@ -101,6 +101,7 @@ export default class Constants {
       chapters: [],
       imageName: "bookCover01BatOfDoom",
       releaseToProd: false,
+      ...props,
     }
   }
 

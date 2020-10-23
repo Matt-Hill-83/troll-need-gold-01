@@ -6,7 +6,7 @@ import {
 import Utils from "../../Common/Utils/Utils.js"
 import Constants from "../../Common/Constants/Constants.js"
 
-const NUM_ROWS_LOCATIONS_GRID = 8
+const NUM_ROWS_LOCATIONS_GRID = 10
 const NUM_COLS_LOCATIONS_GRID = 20
 
 export default class WorldBuilderUtils {

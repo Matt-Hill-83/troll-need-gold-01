@@ -52,6 +52,10 @@ export default function BookPicker(props) {
     books = sortBooks({ books: props.books })
   }, [props.books])
 
+  const { getProfile } = useUpdateProfileWidget()
+
+  const profile = getProfile()
+
   const [jsonUnderEdit, setJsonUnderEdit] = useState(null)
 
   const [showBookEditor, setShowBookEditor] = useState(false)
@@ -213,7 +217,11 @@ export default function BookPicker(props) {
   }
 
   const addBook = async () => {
-    addBookToFirestore(Constants.getNewBook())
+    const props = {
+      createdAt: Date.now(),
+      createdBy: profile?.id || "none",
+    }
+    addBookToFirestore(Constants.getNewBook(props))
   }
 
   const hardRefresh = async () => {
