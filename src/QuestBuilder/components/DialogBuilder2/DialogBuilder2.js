@@ -250,7 +250,7 @@ export default function DialogBuilder2(props) {
         />
         <div className={css.headerBox}>
           <Button onClick={() => deleteScene({ scene })}>Del</Button>
-          {frameLabel}
+          {/* {frameLabel} */}
           {frameHeaderButtons}
         </div>
       </div>
