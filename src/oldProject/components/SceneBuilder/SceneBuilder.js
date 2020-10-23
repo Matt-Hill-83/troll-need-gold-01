@@ -113,6 +113,11 @@ export default function SceneBuilder(props) {
     return <div className={css.critters1}>{renderedItems}</div>
   }
 
+  const deleteScene = ({ scene }) => {
+    scene.location.name = "blank"
+    props.saveItems()
+  }
+
   const duplicateScene = ({ scene }) => {
     const duplicateScene = JSON.parse(JSON.stringify(scene))
     duplicateScene.coordinates = { row: 0, col: 0 }
@@ -176,6 +181,7 @@ export default function SceneBuilder(props) {
                 JS
               </Button>
               <Button onClick={() => duplicateScene({ scene })}>Dup</Button>
+              <Button onClick={() => deleteScene({ scene })}>Del</Button>
             </ButtonGroup>
           </Popover>
         )}
