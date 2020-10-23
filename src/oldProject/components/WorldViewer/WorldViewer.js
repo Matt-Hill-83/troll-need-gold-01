@@ -67,7 +67,6 @@ export default function WorldViewer(props) {
         <Button
           className={cx({ [css.toggleMapButton]: true })}
           icon={showMap ? IconNames.COLLAPSE_ALL : IconNames.EXPAND_ALL}
-          // onClick={() => setShowLargeMap(!showMap)}
           onClick={() => toggleMap()}
         />
         <div className={`${css.innerMapScroller}`}>

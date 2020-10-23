@@ -2,32 +2,27 @@ import React, { useState } from "react"
 import _get from "lodash.get"
 import { Popover } from "@blueprintjs/core"
 import cx from "classnames"
-
 import { Button } from "@material-ui/core"
+
 import CharacterPicker from "../../../QuestBuilder/components/CharacterPicker/CharacterPicker"
 import Constants from "../../../Common/Constants/Constants"
 import Images from "../../../Common/Images/images"
-import images from "../../../Common/Images/images"
 import QuestVisibilityUtils from "../../Utils/QuestVisibilityUtils.js"
 import useGlobalState from "../../../Context/useGlobalState.js"
 import Utils from "../../../Common/Utils/Utils"
-
-import css from "./MiniLocation.module.scss"
-import WorldBuilderUtils from "../../../QuestBuilder/Utils/WorldBuilderUtils"
 import TopLevelUtils from "../../Utils/TopLevelUtils"
 
-export default function MiniLocation(props) {
-  // const { updateActiveScene, className } = props
-  const { updateActiveScene, scene, className } = props
-  // let { scene } = props
+import css from "./MiniLocation.module.scss"
 
+export default function MiniLocation(props) {
+  const { updateActiveScene, scene, className } = props
   const { coordinates, id } = scene
 
   const {
-    globalState: { world, activeScene, questStatus = {} },
+    globalState: { showMap, world, activeScene, questStatus = {} },
+    setGlobalStateProps,
   } = useGlobalState()
 
-  const [itemPickerItem, setItemPickerItem] = useState(null)
   const [showItemPicker, setShowItemPicker] = useState(false)
 
   const isActive = scene.id === activeScene.id ? true : false
@@ -117,7 +112,14 @@ export default function MiniLocation(props) {
       updateActiveScene({
         sceneId: scene.id,
       })
+      toggleMap()
     }
+  }
+
+  const toggleMap = () => {
+    setGlobalStateProps({
+      showMap: !showMap,
+    })
   }
 
   const backgroundColor = QuestVisibilityUtils.getSubQuestColor({
@@ -126,11 +128,11 @@ export default function MiniLocation(props) {
   })
 
   const largeLocation = false
-  const defaultImageSets = [images.newBackgrounds]
+  const defaultImageSets = [Images.newBackgrounds]
   const imageSets = defaultImageSets
 
   const onSelectItem = async ({ name }) => {
-    setItemPickerItem(name)
+    // setItemPickerItem(name)
     scene.backgroundImage = name
 
     await TopLevelUtils.updateMap2({ mapToUpdate: world })
@@ -140,7 +142,7 @@ export default function MiniLocation(props) {
 
   const toggleItemPicker = ({ item = null }) => {
     setShowItemPicker(!showItemPicker)
-    setItemPickerItem(item)
+    // setItemPickerItem(item)
   }
 
   return (

@@ -1,6 +1,5 @@
 import { Button, ButtonGroup } from "@blueprintjs/core"
 import { Link } from "react-router-dom"
-import cuid from "cuid"
 import cx from "classnames"
 import React, { useContext } from "react"
 
@@ -9,6 +8,7 @@ import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
 import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget"
 import WordGroup from "../WordGroup/WordGroup"
 import MyAudioConsole from "../MyAudioConsole/MyAudioConsole"
+import useGlobalState from "../../../Context/useGlobalState"
 
 import css from "./FrameViewer.module.scss"
 
@@ -19,7 +19,13 @@ export default function FrameViewer() {
   const loggedIn = !!getProfile().id
   const profile = getProfile()
 
-  const { activeFrameIndex, activeScene } = globalState
+  // const { activeFrameIndex, activeScene } = globalState
+
+  const {
+    setGlobalStateProps,
+    globalState: { showMap, world, activeFrameIndex, activeScene },
+  } = useGlobalState()
+
   if (!activeScene?.frameSet) {
     return <div>no frames</div>
   }
@@ -142,13 +148,19 @@ export default function FrameViewer() {
     }
 
     frame.trackList.push(item)
-    updateQuestInFirestore(globalState.world)
+    updateQuestInFirestore(world)
   }
 
   function onSaveAudioForLine({ audioURL, dialog }) {
     dialog.audioURL = audioURL
 
-    updateQuestInFirestore(globalState.world)
+    updateQuestInFirestore(world)
+  }
+
+  const toggleMap = () => {
+    setGlobalStateProps({
+      showMap: !showMap,
+    })
   }
 
   const renderButtons = () => {
@@ -175,7 +187,8 @@ export default function FrameViewer() {
           </ButtonGroup>
         )}
         {isLastFrame && (
-          <div className={css.clickMapMsg}>Click map to move.</div>
+          <Button onClick={toggleMap}>Open Map</Button>
+          // <div className={css.clickMapMsg}>Click map to move.</div>
         )}
       </div>
     )
