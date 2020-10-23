@@ -87,8 +87,8 @@ export default function SceneBuilder(props) {
     props.saveItems()
   }
 
-  const itemRenderer = ({ item, className }) => {
-    return <ImageDisplay showLabel={true} className={className} item={item} />
+  const itemRenderer = ({ item, className, props = {} }) => {
+    return <ImageDisplay className={className} item={item} {...props} />
   }
 
   const renderRandomLocationGenerator = ({ scene }) => {
@@ -158,7 +158,10 @@ export default function SceneBuilder(props) {
         className={`${css.crudMachine} ${css.locationMachine}`}
         items={locations}
         buttons={buttons}
-        itemRenderer={itemRenderer}
+        // itemRenderer={() =>
+        itemRenderer={({ item, className }) =>
+          itemRenderer({ item, className, props: { showLabel: true } })
+        }
         saveItems={saveItems}
       />
     )
