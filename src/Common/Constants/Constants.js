@@ -79,6 +79,7 @@ export default class Constants {
       showMissionConsole: true,
       userStatus: null,
       world: null,
+      showMap: true,
     }
   }
 
@@ -197,7 +198,7 @@ export default class Constants {
       COMPLETED_MISSION: "completedMission",
       CURRENT_MISSION: "currentMission",
       // not yet implemented
-      CURRENT_SUBQUEST: "currentSubQuest",
+      // CURRENT_SUBQUEST: "currentSubQuest",
       COMPLETED_SCENE: "completedScene",
       POCKET_CONTAINS: "pocketContains",
       FRAME_SET_INDEX: "frameSetIndex", // remove this later

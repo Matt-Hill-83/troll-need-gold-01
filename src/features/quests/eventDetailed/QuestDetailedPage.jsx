@@ -18,5 +18,5 @@ export default function QuestDetailedPage({ match }) {
     deps: [match.params.id, dispatch],
   })
 
-  return <TopLevel quest={quest}></TopLevel>
+  return <TopLevel quest={quest} />
 }

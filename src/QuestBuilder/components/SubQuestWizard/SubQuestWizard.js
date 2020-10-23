@@ -1,6 +1,5 @@
 import _get from "lodash.get"
 import { Button, Classes, ButtonGroup } from "@blueprintjs/core"
-import { Checkbox } from "material-ui"
 import { TextField } from "@material-ui/core"
 import { IconNames } from "@blueprintjs/icons"
 import cx from "classnames"
@@ -198,7 +197,7 @@ export default function SubQuestWizard({ props }) {
     return (
       <>
         {includeAddButton && renderAddTriggerButton({ triggers })}
-        <TriggersTable props={triggerTableProps}></TriggersTable>
+        <TriggersTable props={triggerTableProps} />
       </>
     )
   }

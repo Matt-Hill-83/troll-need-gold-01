@@ -16,12 +16,14 @@ const mapBackground = Images.backgrounds["mapBackground11"]
 export default function WorldViewer(props) {
   const { updateActiveScene } = props
 
-  const [showLargeMap, setShowLargeMap] = useState(false)
+  // const [showMap, setShowLargeMap] = useState(false)
 
   const {
     globalState: {
       world: { gridDimensions, newGrid5 },
+      showMap,
     },
+    setGlobalStateProps,
   } = useGlobalState()
 
   const renderSceneRows = () => {
@@ -49,17 +51,24 @@ export default function WorldViewer(props) {
     })
   }
 
+  const toggleMap = () => {
+    setGlobalStateProps({
+      showMap: !showMap,
+    })
+  }
+
   return (
     <>
       <div
         className={cx(css.mapScroller, {
-          [css.mapScrollerSmall]: showLargeMap,
+          [css.mapScrollerSmall]: showMap,
         })}
       >
         <Button
           className={cx({ [css.toggleMapButton]: true })}
-          icon={showLargeMap ? IconNames.COLLAPSE_ALL : IconNames.EXPAND_ALL}
-          onClick={() => setShowLargeMap(!showLargeMap)}
+          icon={showMap ? IconNames.COLLAPSE_ALL : IconNames.EXPAND_ALL}
+          // onClick={() => setShowLargeMap(!showMap)}
+          onClick={() => toggleMap()}
         />
         <div className={`${css.innerMapScroller}`}>
           <img

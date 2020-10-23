@@ -186,7 +186,7 @@ export default function BookPicker(props) {
                 onChangeJSON={onChangeJSON}
               />
             </div>
-            <WorldMultiPicker2 {...worldMultiPickerProps}></WorldMultiPicker2>
+            <WorldMultiPicker2 {...worldMultiPickerProps} />
             <ButtonGroup className={css.buttonGroup} color="primary">
               <Button
                 onClick={() =>

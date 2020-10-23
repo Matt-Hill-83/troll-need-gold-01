@@ -528,7 +528,7 @@ export default function DialogBuilder2(props) {
             {/* To size the parent container of an absolute div, create a
            dup of the absolute div that is hidden. */}
             <div className={cx(css.controlPanel, css.hidden)}>{fakeDivs}</div>
-            <MyTextEditor props={myTextEditorProps}></MyTextEditor>
+            <MyTextEditor props={myTextEditorProps} />
           </div>
         </div>
       )
