@@ -190,7 +190,9 @@ class CrudMachine extends Component {
   renderItems = () => {
     const { items } = this.state
 
-    const defaultItemRenderer = ({ item }) => <ImageDisplay item={item} />
+    const defaultItemRenderer = ({ item }) => (
+      <ImageDisplay showLabel={true} item={item} />
+    )
     const itemRenderer = this.props.itemRenderer || defaultItemRenderer
 
     const renderedItems = items.map((item, index) => {

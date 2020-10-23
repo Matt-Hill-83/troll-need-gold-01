@@ -71,20 +71,25 @@ export default function SceneBuilder(props) {
     const usedNames = newGrid5.map((scene) => scene.location.name)
 
     const filteredLocationNames = locationNames.filter((name) => {
-      return !usedNames.includes(name)
+      return !usedNames.includes(name) || name !== "blank"
     })
 
     const randomName =
       filteredLocationNames[
         Math.floor(Math.random() * filteredLocationNames.length)
       ]
+    console.log("randomName", randomName) // zzz
 
-    location.name = randomName
+    if (randomName) {
+      location.name = randomName
+    } else {
+      location.name = locationNames[0]
+    }
     props.saveItems()
   }
 
   const itemRenderer = ({ item, className }) => {
-    return <ImageDisplay className={className} item={item} />
+    return <ImageDisplay showLabel={true} className={className} item={item} />
   }
 
   const renderRandomLocationGenerator = ({ scene }) => {
