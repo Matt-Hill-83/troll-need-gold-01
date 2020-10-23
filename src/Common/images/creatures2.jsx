@@ -1,7 +1,5 @@
-// import maceo01 from "./creatures/maceo01.png"
-
+import panda01 from "./creatures/panda01.png"
 import maceo03 from "./creatures/maceo03.png"
-// import maceo02 from "./creatures/maceo02.png"
 import raven02 from "./creatures/raven02.png"
 import raven03 from "./creatures/raven03.png"
 import raven01 from "./creatures/raven01.png"
@@ -25,7 +23,6 @@ import lucy08 from "./creatures/lucy08.png"
 
 import tartar01 from "./creatures/tartar01.png"
 import mitzy02 from "./creatures/mitzy02.png"
-// import spark01 from "./creatures/spark01.png"
 import madElf02 from "./creatures/madElf02.png"
 
 import fancyDudeFromFrance01 from "./creatures/fancyDudeFromFrance01.png"
@@ -45,16 +42,11 @@ import vector03 from "./creatures/vector03.png"
 
 import tanya01 from "./creatures/tanya01.png"
 import tanya02 from "./creatures/tanya02.png"
-// import jasmine02 from "./creatures/jasmine02.png"
 import brenda01 from "./creatures/brenda01.png"
 
 import looney01 from "./creatures/looney01.png"
 import looney01cu from "./creatures/looney01cu.png"
 import rupert01 from "./creatures/rupert01.png"
-// import jasmine01 from "./creatures/jasmine01.png"
-
-// jasmine02
-// brenda01
 
 import olive01 from "./creatures/olive01.png"
 import olive02 from "./creatures/olive02.png"
@@ -105,7 +97,6 @@ import mongoFlying01 from "./creatures/mongoFlying01.png"
 import nagasaki01 from "./creatures/nagasaki01.png"
 import nazboo01 from "./creatures/nazboo01.png"
 import omni01 from "./creatures/omni01.png"
-// import opera01 from "./creatures/opera01.png"
 import pantherGirl01 from "./creatures/pantherGirl01.png"
 import parta01 from "./creatures/parta01.png"
 import parta02 from "./creatures/parta02.png"
@@ -180,13 +171,12 @@ const tj = {
 
 const creatures2animals = {
   maceo03,
-  // maceo02,
+  panda01,
   raven02,
   raven03,
   raven01,
 
   girl01,
-  // maceo01,
   girl02,
   girl03,
   girl04,
@@ -204,7 +194,6 @@ const creatures2animals = {
 
   tartar01,
   mitzy02,
-  // spark01,
   madElf02,
   fancyDudeFromFrance01,
   fancyDudeFromFrance02,
@@ -219,7 +208,6 @@ const creatures2animals = {
   greyWolfTrap01,
   joker01,
   gargamel01,
-  // jasmine02,
   oliveRori01cu02Eyes,
   tanya01,
   tanya02,
@@ -227,7 +215,6 @@ const creatures2animals = {
   looney01,
   looney01cu,
   rupert01,
-  // jasmine01,
   vector01,
   vector02,
   vector03,
@@ -241,7 +228,6 @@ const creatures2animals = {
   britta04,
   swift01,
   lucy07small,
-  // lucy07small: parta03,
   parta03,
   lucy07,
   well01,
@@ -292,7 +278,6 @@ const creatures2animals = {
   sartina01,
   asha01,
   harpoon01,
-  // opera01,
 
   omni01,
   catana01,
