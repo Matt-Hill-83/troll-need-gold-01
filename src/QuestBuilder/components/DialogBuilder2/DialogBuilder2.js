@@ -222,6 +222,11 @@ export default function DialogBuilder2(props) {
       return <ImageDisplay item={item} />
     }
 
+    const deleteScene = ({ scene }) => {
+      scene.location.name = "blank"
+      localSave()
+    }
+
     const { critters1 = [], critters2 = [] } = frame
 
     const fakeDiv = (
@@ -244,6 +249,7 @@ export default function DialogBuilder2(props) {
           saveItems={localSave}
         />
         <div className={css.headerBox}>
+          <Button onClick={() => deleteScene({ scene })}>Del</Button>
           {frameLabel}
           {frameHeaderButtons}
         </div>
