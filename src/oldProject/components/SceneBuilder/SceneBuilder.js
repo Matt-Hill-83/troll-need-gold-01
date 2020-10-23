@@ -1,20 +1,19 @@
-import { Popover, ButtonGroup, Button } from "@blueprintjs/core"
+import { Dialog, DialogTitle, DialogContent } from "@material-ui/core"
 import { Edit } from "@material-ui/icons"
-
+import { IconNames } from "@blueprintjs/icons"
+import { Popover, ButtonGroup, Button } from "@blueprintjs/core"
 import cx from "classnames"
 import React, { useState, useEffect } from "react"
 
 import CrudMachine from "../../../QuestBuilder/components/CrudMachine/CrudMachine"
-import { Dialog, DialogTitle, DialogContent } from "@material-ui/core"
-
 import MyJsonEditor from "../MyJsonEditor/MyJsonEditor"
 import images from "../../../Common/Images/images"
 import QuestVisibilityUtils from "../../Utils/QuestVisibilityUtils"
 import worldBuilderStore from "../../../QuestBuilder/Stores/WorldBuilderStore"
 import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
+import Utils from "../../../Common/Utils/Utils"
 
 import css from "./SceneBuilder.module.scss"
-import Utils from "../../../Common/Utils/Utils"
 
 export default function SceneBuilder(props) {
   const [showJsonEditor, setShowJsonEditor] = useState(false)
@@ -177,13 +176,13 @@ export default function SceneBuilder(props) {
       <div className={css.gridCell} style={backgroundColor}>
         {!hideScene && (
           <Popover className={css.scenePropsButton}>
-            <Button>test</Button>
+            <Button icon={IconNames.SETTINGS} />
             <ButtonGroup>
-              <Button onClick={() => editFrameSet({ sceneToEdit: scene })}>
+              {/* <Button onClick={() => editFrameSet({ sceneToEdit: scene })}>
                 <Edit />
-              </Button>
+              </Button> */}
               <Button onClick={() => setShowJsonEditor(!showJsonEditor)}>
-                JS
+                JSON
               </Button>
               <Button onClick={() => duplicateScene({ scene })}>Dup</Button>
               <Button onClick={() => deleteScene({ scene })}>Del</Button>

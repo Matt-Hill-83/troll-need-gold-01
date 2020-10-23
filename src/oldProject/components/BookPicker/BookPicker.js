@@ -153,7 +153,7 @@ export default function BookPicker(props) {
           src={bookTableOfContents01}
           alt={"imagex"}
         />
-        test
+
         <img
           className={cx(css.titlePageImage)}
           src={titlePageImage}
