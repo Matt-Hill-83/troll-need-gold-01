@@ -43,9 +43,9 @@ export default function SceneBuilder(props) {
     return Object.values(allCritters)
   }
 
-  const editFrameSet = ({ sceneToEdit }) => {
-    props.editFrameSet && props.editFrameSet({ sceneToEdit })
-  }
+  // const editFrameSet = ({ sceneToEdit }) => {
+  //   props.editFrameSet && props.editFrameSet({ sceneToEdit })
+  // }
 
   const getAllCritters2InScene = ({ scene }) => {
     const frames = scene?.frameSet?.frames || []
@@ -88,7 +88,19 @@ export default function SceneBuilder(props) {
   }
 
   const itemRenderer = ({ item, className, props = {} }) => {
-    return <ImageDisplay className={className} item={item} {...props} />
+    console.log("item", item) // zzz
+    console.log("item.id", item.id) // zzz
+    if (!item.name || item.name === "empty") {
+      return null
+    }
+    return (
+      <ImageDisplay
+        key={item.id}
+        className={className}
+        item={item}
+        {...props}
+      />
+    )
   }
 
   const renderRandomLocationGenerator = ({ scene }) => {
