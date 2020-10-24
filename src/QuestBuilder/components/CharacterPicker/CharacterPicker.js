@@ -3,6 +3,7 @@ import { Button } from "@blueprintjs/core"
 import cx from "classnames"
 
 import css from "./CharacterPicker.module.scss"
+import { Dialog } from "@material-ui/core"
 
 export default function CharacterPicker(props) {
   const selectItem = ({ itemId, name }) => {
@@ -42,10 +43,20 @@ export default function CharacterPicker(props) {
   })
 
   return (
+    <Dialog
+      // onClose={handleClose}
+      aria-labelledby="simple-dialog-title"
+      open={true}
+      // open={open}
+    >
+      test
+    </Dialog>
+  )
+
+  return (
     <div className={cx(css.main, className)}>
       <Button onClick={() => onClose({})}>Close</Button>
       {renderedImageSets}
     </div>
   )
-  // }
 }

@@ -2,12 +2,13 @@
 
 .main {
   --image-width: 200px;
+  position: fixed;
   display: flex;
+
   flex: 1 1;
   border: 6px solid red !important;
   width: 55vw;
   height: 95vh;
-  position: fixed;
   flex-direction: column;
   top: 5vh;
   left: 5vh;
