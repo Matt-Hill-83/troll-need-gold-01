@@ -4,13 +4,13 @@ import cx from "classnames"
 
 import css from "./CharacterPicker.module.scss"
 
-class CharacterPicker extends Component {
-  selectItem = ({ itemId, name }) => {
-    const { onSelectItem } = this.props
+export default function CharacterPicker(props) {
+  const selectItem = ({ itemId, name }) => {
+    const { onSelectItem } = props
     onSelectItem({ itemId, name })
   }
 
-  renderItemPicker = ({ imageSet }) => {
+  const renderItemPicker = ({ imageSet }) => {
     if (!imageSet) return null
 
     const renderedImages = Object.keys(imageSet).map((key, index) => {
@@ -20,7 +20,7 @@ class CharacterPicker extends Component {
         <div
           className={css.itemImageContainer}
           key={index}
-          onClick={() => this.selectItem({ name: key })}
+          onClick={() => selectItem({ name: key })}
         >
           <span className={css.itemLabel}>{key}</span>
           <img className={css.itemImage} src={image} alt={"imagex"} />
@@ -35,20 +35,17 @@ class CharacterPicker extends Component {
     )
   }
 
-  render() {
-    const { onClose, imageSets, className = "" } = this.props
+  const { onClose, imageSets, className = "" } = props
 
-    const renderedImageSets = imageSets.map((imageSet, index) => {
-      return this.renderItemPicker({ imageSet, index })
-    })
+  const renderedImageSets = imageSets.map((imageSet, index) => {
+    return renderItemPicker({ imageSet, index })
+  })
 
-    return (
-      <div className={cx(css.main, className)}>
-        <Button onClick={() => onClose({})}>Close</Button>
-        {renderedImageSets}
-      </div>
-    )
-  }
+  return (
+    <div className={cx(css.main, className)}>
+      <Button onClick={() => onClose({})}>Close</Button>
+      {renderedImageSets}
+    </div>
+  )
+  // }
 }
-
-export default CharacterPicker
