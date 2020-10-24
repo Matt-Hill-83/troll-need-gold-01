@@ -2,22 +2,14 @@
 
 .main {
   --image-width: 200px;
-  position: fixed;
-  display: flex;
 
-  flex: 1 1;
-  border: 6px solid red !important;
-  width: 55vw;
-  height: 95vh;
-  flex-direction: column;
-  top: 5vh;
-  left: 5vh;
-  z-index: 1000;
-  background: white;
-  overflow-x: hidden;
-  overflow-y: auto;
-  right: 5vh;
-  bottom: 5vh;
+  :global {
+    .MuiDialog-paper {
+      // border: 4px solid green !important;
+      display: flex;
+      max-width: unset;
+    }
+  }
 
   .itemImageContainer {
     display: flex;

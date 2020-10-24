@@ -193,6 +193,7 @@ class CrudMachine extends Component {
     const defaultItemRenderer = ({ item }) => (
       <ImageDisplay showLabel={true} item={item} />
     )
+
     const itemRenderer = this.props.itemRenderer || defaultItemRenderer
 
     const renderedItems = items.map((item, index) => {
@@ -237,7 +238,7 @@ class CrudMachine extends Component {
       characterPicker = (
         <CharacterPicker
           className={classNameCharPicker}
-          isOpen={showItemPicker}
+          // isOpen={showItemPicker}
           imageSets={imageSets}
           onClose={this.toggleItemPicker}
           onSelectItem={this.onSelectItem}
