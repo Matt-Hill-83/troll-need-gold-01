@@ -43,7 +43,11 @@ export default function CharacterPicker(props) {
   })
 
   return (
-    <Dialog className={cx(css.main, { [className]: className })} open={true}>
+    <Dialog
+      className={cx(css.main, { [className]: className })}
+      open={true}
+      onEscapeKeyDown={onClose}
+    >
       <Button onClick={() => onClose({})}>Close</Button>
       {renderedImageSets}
     </Dialog>
