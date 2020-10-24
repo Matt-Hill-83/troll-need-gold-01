@@ -43,10 +43,6 @@ export default function SceneBuilder(props) {
     return Object.values(allCritters)
   }
 
-  // const editFrameSet = ({ sceneToEdit }) => {
-  //   props.editFrameSet && props.editFrameSet({ sceneToEdit })
-  // }
-
   const getAllCritters2InScene = ({ scene }) => {
     const frames = scene?.frameSet?.frames || []
     const allCritters = {}
@@ -170,7 +166,6 @@ export default function SceneBuilder(props) {
         className={`${css.crudMachine} ${css.locationMachine}`}
         items={locations}
         buttons={buttons}
-        // itemRenderer={() =>
         itemRenderer={({ item, className }) =>
           itemRenderer({ item, className, props: { showLabel: true } })
         }
@@ -193,9 +188,6 @@ export default function SceneBuilder(props) {
           <Popover className={css.scenePropsButton}>
             <Button icon={IconNames.SETTINGS} />
             <ButtonGroup>
-              {/* <Button onClick={() => editFrameSet({ sceneToEdit: scene })}>
-                <Edit />
-              </Button> */}
               <Button onClick={() => setShowJsonEditor(!showJsonEditor)}>
                 JSON
               </Button>
