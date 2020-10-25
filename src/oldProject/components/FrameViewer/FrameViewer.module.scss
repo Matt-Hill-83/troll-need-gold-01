@@ -155,7 +155,7 @@
       background: white;
       overflow: hidden;
       padding: 2vh;
-      padding-left: 4vh;
+      padding-left: 5vh;
       padding-bottom: 0px;
       padding-right: 2vh;
       margin-top: auto;
@@ -337,10 +337,8 @@
     left: 46vw;
     bottom: 35vh;
     box-shadow: 5px 5px 15px 5px #000000;
-    background: #ffffff24;
+    background: var(--set1-lav-bk);
     height: 7vh;
-    // width: 18vh;
-    background: white;
     justify-content: center;
     padding: 1vh;
     z-index: 25;
@@ -363,7 +361,6 @@
 
   .nextButton {
     border: 1px solid var(--set1-purple-brdr);
-    background: var(--set1-lav-bk);
     display: flex;
     align-items: center;
     font-size: 2.4vh;

@@ -16,8 +16,6 @@ const mapBackground = Images.backgrounds["mapBackground11"]
 export default function WorldViewer(props) {
   const { updateActiveScene } = props
 
-  // const [showMap, setShowLargeMap] = useState(false)
-
   const {
     globalState: {
       world: { gridDimensions, newGrid5 },

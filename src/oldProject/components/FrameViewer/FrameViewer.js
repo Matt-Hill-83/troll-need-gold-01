@@ -19,8 +19,6 @@ export default function FrameViewer() {
   const loggedIn = !!getProfile().id
   const profile = getProfile()
 
-  // const { activeFrameIndex, activeScene } = globalState
-
   const {
     setGlobalStateProps,
     globalState: { showMap, world, activeFrameIndex, activeScene },
@@ -32,7 +30,8 @@ export default function FrameViewer() {
   const { frames = [] } = activeScene.frameSet
 
   const frame = frames[activeFrameIndex]
-  let isLastFrame = activeFrameIndex >= frames.length - 1
+  const isLastFrame = activeFrameIndex >= frames.length - 1
+  const isFirstFrame = activeFrameIndex === 0
 
   const renderDialog = () => {
     const cloneIndex = 0
@@ -177,20 +176,20 @@ export default function FrameViewer() {
     }
 
     return (
-      <div className={css.buttonsContainer}>
-        {!isLastFrame && (
-          <ButtonGroup className={css.nextButton}>
-            <Button onClick={() => incrementFrame({ increment: false })}>
-              Prev Page
-            </Button>
-            <Button onClick={() => incrementFrame({})}>Next Page</Button>
-          </ButtonGroup>
-        )}
-        {isLastFrame && (
-          <Button onClick={toggleMap}>Open Map</Button>
-          // <div className={css.clickMapMsg}>Click map to move.</div>
-        )}
-      </div>
+      <ButtonGroup large={true} className={css.buttonsContainer}>
+        <Button onClick={toggleMap}>{`${
+          showMap ? "Open" : "Hide"
+        } Map`}</Button>
+        <Button
+          disabled={isFirstFrame}
+          onClick={() => incrementFrame({ increment: false })}
+        >
+          Prev Page
+        </Button>
+        <Button disabled={isLastFrame} onClick={() => incrementFrame({})}>
+          Next Page
+        </Button>
+      </ButtonGroup>
     )
   }
 
