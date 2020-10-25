@@ -98,12 +98,12 @@ class Frame extends Component {
     this.setState({ showItemPicker, itemPickerItem: item })
   }
 
-  renderNarrative = () => {
-    const { frame } = this.state
-    const { story = [] } = frame
+  // renderNarrative = () => {
+  //   const { frame } = this.state
+  //   const { story = [] } = frame
 
-    if (!story.length || !story[0]) return null
-  }
+  //   if (!story.length || !story[0]) return null
+  // }
 
   renderDialog = () => {
     const { frame } = this.state
@@ -117,7 +117,8 @@ class Frame extends Component {
 
       return (
         <div className={css.textAreaWrapper}>
-          <div className={cx(css.characterNameContainer)}>
+          <div>
+            {/* <div className={cx(css.characterNameContainer)}> */}
             <span className={css.characterName}>{characterName}</span>
           </div>
           <TextArea
@@ -224,7 +225,7 @@ class Frame extends Component {
       <div className={`${css.scenes}`}>
         <div className={css.relativePositionedContent}>
           <div className={css.wordsContainer}>
-            {this.renderNarrative()}
+            {/* {this.renderNarrative()} */}
             {this.renderDialog()}
           </div>
 

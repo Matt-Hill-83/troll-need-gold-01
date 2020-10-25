@@ -117,6 +117,7 @@ export default function FrameViewer() {
           loggedIn={loggedIn}
         />
         <div className={css.dialog}>{renderedDialogs}</div>
+        {renderButtons()}
       </div>
     )
   }
@@ -171,8 +172,13 @@ export default function FrameViewer() {
 
   const hideMap = () => {
     setGlobalStateProps({
-      // showMap: true,
       showMap: false,
+    })
+  }
+
+  const unHideMap = () => {
+    setGlobalStateProps({
+      showMap: true,
     })
   }
 
@@ -203,7 +209,7 @@ export default function FrameViewer() {
     return (
       <ButtonGroup large={true} className={css.buttonsContainer}>
         <Button onClick={toggleMap}>{`${
-          showMap ? "Hide" : "Open"
+          showMap ? "Hide" : "Show"
         } Map`}</Button>
         <Button
           disabled={isFirstFrame}
@@ -225,7 +231,7 @@ export default function FrameViewer() {
       <div className={css.wordsAndButtons}>
         <div className={css.sceneName}>{sceneName}</div>
         <div className={css.wordsContainer}>{renderDialog()}</div>
-        {renderButtons()}
+        {/* {renderButtons()} */}
       </div>
     )
   }

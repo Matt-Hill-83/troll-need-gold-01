@@ -41,6 +41,10 @@ export default function SceneBuilder(props) {
     return Object.values(allCritters)
   }
 
+  const editFrameSet = ({ sceneToEdit }) => {
+    props.editFrameSet && props.editFrameSet({ sceneToEdit })
+  }
+
   const getAllCritters2InScene = ({ scene }) => {
     const frames = scene?.frameSet?.frames || []
     const allCritters = {}
@@ -183,6 +187,10 @@ export default function SceneBuilder(props) {
           <Popover className={css.scenePropsButton}>
             <Button icon={IconNames.SETTINGS} />
             <ButtonGroup>
+              <Button
+                icon={IconNames.EDIT}
+                onClick={() => editFrameSet({ sceneToEdit: scene })}
+              ></Button>
               <Button onClick={() => setShowJsonEditor(!showJsonEditor)}>
                 JSON
               </Button>
