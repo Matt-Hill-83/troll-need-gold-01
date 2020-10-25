@@ -13,7 +13,7 @@ import useGlobalState from "../../../Context/useGlobalState"
 import css from "./FrameViewer.module.scss"
 
 export default function FrameViewer() {
-  const [setGlobalState] = useContext(myContext)
+  const [globalState, setGlobalState] = useContext(myContext)
 
   const { getProfile } = useUpdateProfileWidget()
   const loggedIn = !!getProfile().id
