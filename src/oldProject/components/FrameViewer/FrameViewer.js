@@ -162,16 +162,27 @@ export default function FrameViewer() {
     })
   }
 
+  const hideMap = () => {
+    setGlobalStateProps({
+      showMap: false,
+    })
+  }
+
   const renderButtons = () => {
     const { isEndScene } = activeScene
 
+    // TODO: add condition that mission is complete
+    // TODO: add condition that mission is complete
+    // TODO: add condition that mission is complete
     if (isEndScene && isLastFrame) {
       return (
-        <div className={css.buttonsContainer}>
-          <Link to={"/books"} className={css.newGameButton}>
-            Play Again
-          </Link>
-        </div>
+        <ButtonGroup large={true} className={css.buttonsContainer}>
+          <Button>
+            <Link to={"/books"} className={css.newGameButton}>
+              Play Again
+            </Link>
+          </Button>
+        </ButtonGroup>
       )
     }
 

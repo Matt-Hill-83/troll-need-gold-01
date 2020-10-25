@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react"
 
 import DialogBuilder2 from "../DialogBuilder2/DialogBuilder2"
-
-import css from "./DialogBuilders.module.scss"
 import MyAccordion from "../MyAccordion/MyAccordion"
 import ImageDisplay from "../../../Common/Components/ImageDisplay/ImageDisplay"
 import QuestVisibilityUtils from "../../../oldProject/Utils/QuestVisibilityUtils"
+
+import css from "./DialogBuilders.module.scss"
 
 export default function DialogBuilders(props) {
   const { saveItemsDialogBuilder, world } = props
@@ -43,7 +43,7 @@ export default function DialogBuilders(props) {
 
       const headerStyles = QuestVisibilityUtils.getSubQuestColor({
         world,
-        sceneId: scene.id,
+        sceneId: id,
       })
 
       const subQuestAccordion = {
