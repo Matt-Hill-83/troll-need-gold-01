@@ -34,6 +34,7 @@ export default function FrameViewer() {
 
   const frame = frames[activeFrameIndex]
   const isLastFrame = activeFrameIndex >= frames.length - 1
+  const isPenultimateFrame = activeFrameIndex >= frames.length - 2
   const isFirstFrame = activeFrameIndex === 0
 
   const renderDialog = () => {
@@ -128,7 +129,12 @@ export default function FrameViewer() {
 
   const incrementFrame = ({ increment = true }) => {
     if (increment) {
-      hideMap()
+      // Show map if the user advances to the last frame
+      if (isPenultimateFrame) {
+        unHideMap()
+      } else {
+        hideMap()
+      }
     }
 
     setGlobalState((prevVal) => {
@@ -193,9 +199,6 @@ export default function FrameViewer() {
       })
     }
 
-    // TODO: add condition that mission is complete
-    // TODO: add condition that mission is complete
-    // TODO: add condition that mission is complete
     if (isEndScene && isLastFrame && areAllMissionsCompleted) {
       return (
         <ButtonGroup large={true} className={css.buttonsContainer}>
@@ -231,7 +234,6 @@ export default function FrameViewer() {
       <div className={css.wordsAndButtons}>
         <div className={css.sceneName}>{sceneName}</div>
         <div className={css.wordsContainer}>{renderDialog()}</div>
-        {/* {renderButtons()} */}
       </div>
     )
   }
