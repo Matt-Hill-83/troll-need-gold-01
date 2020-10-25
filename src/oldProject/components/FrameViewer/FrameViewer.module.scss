@@ -8,13 +8,10 @@
 }
 
 .audioConsoleFrame {
-  position: absolute;
   display: flex;
-  transform: translateX(-100%);
   z-index: 20;
-  border: 1px solid red !important;
   top: 0;
-  right: 0;
+  margin-left: 1vh;
 }
 
 .main {
@@ -61,17 +58,17 @@
   }
 
   .sceneName {
-    display: flex;
-    display: none;
     z-index: 30;
+    position: absolute;
+    display: flex;
+    left: 1vh;
+    top: 0;
+    transform: translateY(-100%);
+
     font-size: 2vh;
-    padding: 0% 1%;
-    border-radius: 11px;
+    padding: 0 0.5vh;
     border: 1px solid black;
-    left: 85vh;
-    top: 3vh;
     background: white;
-    position: fixed;
   }
 
   .scenes {
@@ -85,33 +82,32 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    padding: 1vh;
-    width: 100%;
+    // padding: 1vh;
     bottom: 35vh;
+    right: 50.3vw;
+    left: 1vh;
   }
 
   .wordsContainer {
-    display: flex;
     z-index: 1;
+    position: relative;
+    display: flex;
     flex-direction: column;
+    justify-content: flex-end;
+
     border-radius: 0.6vh;
     background: white;
     overflow: hidden;
-    border-top-left-radius: 0px;
+    // border-top-left-radius: 0px;
     max-height: 63vh;
-    position: relative;
-    justify-content: flex-end;
     background: none;
+    // border: 4px solid green !important;
   }
 
   .dialogScroller {
-    position: fixed;
     display: flex;
     flex: 1 1;
     z-index: 10;
-    right: 51.3vw;
-    left: 2vw;
-    border: 1px solid black !important;
     box-shadow: 5px 5px 15px 5px #000000;
     border-radius: 6px;
     max-height: 40vh;
@@ -124,14 +120,16 @@
       flex: 1 1;
       justify-content: flex-end;
       flex-direction: column;
-      border-radius: 6px;
+      border-radius: 1vh;
       background: white;
       overflow: hidden;
+
       padding: 2vh;
       padding-left: 5vh;
       padding-bottom: 5vh;
-      padding-right: 2vh;
+      padding-right: 3vh;
       margin-top: auto;
+
       min-height: 15vh;
       height: fit-content;
 
@@ -283,14 +281,26 @@
     z-index: 50;
     position: fixed;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     border: 3px solid purple !important;
     border-radius: 0.4vh;
-    bottom: 41.6vh;
+    top: 58vh;
     right: 53vw;
-    transform: translateY(50%);
     padding: 0.5vh;
     background: #f7afff;
+  }
+
+  .buttonGroup {
+    display: flex;
+    justify-content: center;
+  }
+
+  .clickMapMsg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0.5vh;
   }
 
   .lock01 {

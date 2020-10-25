@@ -99,24 +99,24 @@ export default function FrameViewer() {
       )
     })
 
-    const scalingFactor = 1.6
-    const style = {
-      "margin-left": `-${cloneIndex * scalingFactor}vh`,
-      "margin-top": `${cloneIndex * scalingFactor}vh`,
-      border: "3px solid red",
-    }
+    // const scalingFactor = 1.6
+    // const style = {
+    //   "margin-left": `-${cloneIndex * scalingFactor}vh`,
+    //   "margin-top": `${cloneIndex * scalingFactor}vh`,
+    //   border: "3px solid red",
+    // }
 
-    const { audioURL, trackList } = frame
+    // const { audioURL, trackList } = frame
 
     return (
-      <div className={css.dialogScroller} style={style}>
-        <MyAudioConsole
+      <div className={css.dialogScroller}>
+        {/* <MyAudioConsole
           className={css.audioConsoleFrame}
           audioURL={audioURL}
           trackList={trackList}
           saveAudio={onSaveAudioForFrame}
           loggedIn={loggedIn}
-        />
+        /> */}
         <div className={css.dialog}>{renderedDialogs}</div>
         {renderButtons()}
       </div>
@@ -124,7 +124,7 @@ export default function FrameViewer() {
   }
 
   const getLocationName = () => {
-    return activeScene?.location?.name
+    return activeScene?.location?.name || "none"
   }
 
   const incrementFrame = ({ increment = true }) => {
@@ -210,29 +210,44 @@ export default function FrameViewer() {
     }
 
     return (
-      <ButtonGroup large={true} className={css.buttonsContainer}>
-        <Button onClick={toggleMap}>{`${
-          showMap ? "Hide" : "Show"
-        } Map`}</Button>
-        <Button
-          disabled={isFirstFrame}
-          onClick={() => incrementFrame({ increment: false })}
-        >
-          Prev Page
-        </Button>
-        <Button disabled={isLastFrame} onClick={() => incrementFrame({})}>
-          Next Page
-        </Button>
-      </ButtonGroup>
+      <div className={css.buttonsContainer}>
+        <ButtonGroup large={true} className={css.buttonGroup}>
+          <Button onClick={toggleMap}>{`${
+            showMap ? "Hide" : "Show"
+          } Map`}</Button>
+          <Button
+            disabled={isFirstFrame}
+            onClick={() => incrementFrame({ increment: false })}
+          >
+            Prev Page
+          </Button>
+          <Button disabled={isLastFrame} onClick={() => incrementFrame({})}>
+            Next Page
+          </Button>
+        </ButtonGroup>
+        {isLastFrame && (
+          <div className={css.clickMapMsg}>Click Map to Move</div>
+        )}
+      </div>
     )
   }
 
   const renderFrame = () => {
-    const sceneName = getLocationName()
+    const sceneName = getLocationName() || "none"
+    const { audioURL, trackList } = frame
 
     return (
       <div className={css.wordsAndButtons}>
-        <div className={css.sceneName}>{sceneName}</div>
+        <div className={css.sceneName}>
+          {sceneName}
+          <MyAudioConsole
+            className={css.audioConsoleFrame}
+            audioURL={audioURL}
+            trackList={trackList}
+            saveAudio={onSaveAudioForFrame}
+            loggedIn={loggedIn}
+          />
+        </div>
         <div className={css.wordsContainer}>{renderDialog()}</div>
       </div>
     )
