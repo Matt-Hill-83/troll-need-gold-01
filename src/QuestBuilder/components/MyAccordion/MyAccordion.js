@@ -1,5 +1,4 @@
 import { makeStyles } from "@material-ui/core/styles"
-
 import Accordion from "@material-ui/core/Accordion"
 import AccordionDetails from "@material-ui/core/AccordionDetails"
 import AccordionSummary from "@material-ui/core/AccordionSummary"
@@ -21,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function MyAccordion({ props }) {
-  const { title, content, className = "" } = props
+  const { title, content, className = "", headerStyles } = props
+
   const classes = useStyles()
   const [expanded, setExpanded] = useState(true)
 
@@ -45,18 +45,16 @@ export default function MyAccordion({ props }) {
 
   const renderedContent = expanded ? content() : null
 
-  const style = { backgroundColor: "yellowgreen !important" }
-
   const renderedAccordion = (
     <Accordion expanded={expanded} onChange={onChange}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
         id="panel1a-header"
-        className={style}
-        // className={css.test}
+        style={headerStyles}
       >
-        <Typography className={cx(classes.heading, css.header)}>
+        <Typography className={cx(css.header)}>
+          {/* <Typography className={cx(classes.heading, css.header)}> */}
           {title}
         </Typography>
       </AccordionSummary>

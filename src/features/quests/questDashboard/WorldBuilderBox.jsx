@@ -1,6 +1,6 @@
 // I think this is now unused
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import _uniqBy from "lodash.uniqby"
 
@@ -16,8 +16,8 @@ export default function WorldBuilderBox(match) {
   const { quests, filter, startDate, retainState } = useSelector(
     (state) => state.quest
   )
-  const { loading } = useSelector((state) => state.async)
-  const [loadingInitial, setLoadingInitial] = useState(false)
+  // const { loading } = useSelector((state) => state.async)
+  // const [loadingInitial, setLoadingInitial] = useState(false)
 
   const { getProfile, updateProfilePropsIfChanged } = useUpdateProfileWidget()
 
@@ -31,9 +31,9 @@ export default function WorldBuilderBox(match) {
 
   useEffect(() => {
     if (retainState) return
-    setLoadingInitial(true)
+    // setLoadingInitial(true)
     dispatch(fetchQuests(filter, startDate, limit)).then(() => {
-      setLoadingInitial(false)
+      // setLoadingInitial(false)
     })
     return () => {
       dispatch({ type: RETAIN_STATE })

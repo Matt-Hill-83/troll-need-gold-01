@@ -169,6 +169,15 @@ export default class Constants {
     top: "top",
   }
 
+  // static subQuestColors = [
+  //   "a9def9",
+  //   "d0f4de",
+  //   "e4c1f9",
+  //   "fcf6bd",
+  //   "ffe7bc",
+  //   "ffebf8",
+  // ]
+
   static subQuestColors = [
     "a9def9",
     "d0f4de",
@@ -176,6 +185,15 @@ export default class Constants {
     "fcf6bd",
     "ffe7bc",
     "ffebf8",
+
+    "5cf1ff",
+    "bbffad",
+    "ffbf70",
+    "fdffb6",
+    "70a7ff",
+    "a899ff",
+    "ffc2ff",
+    "ffadad",
   ]
 
   static sceneVisibilityPropNames = {
