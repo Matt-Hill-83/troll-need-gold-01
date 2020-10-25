@@ -34,10 +34,14 @@
 }
 
 .toasterContainer {
-  top: 20vh !important;
-  left: 2vw;
-  position: absolute !important;
-  z-index: 30;
+  top: 2vh !important;
+  border: 4px solid green !important;
+  width: min-content;
+  white-space: nowrap;
+  right: 1vw !important;
+  left: unset !important;
+  height: min-content;
+  padding: 0 !important;
 
   .toaster {
     position: relative;

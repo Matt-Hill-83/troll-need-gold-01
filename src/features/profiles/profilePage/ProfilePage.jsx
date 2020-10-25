@@ -113,8 +113,6 @@ const renderItems = ({ items, title, wrapInCard = true }) => {
 }
 
 export default function ProfilePage({ match }) {
-  // const { updateProfilePropsIfChanged } = useUpdateProfileWidget()
-
   const dispatch = useDispatch()
   const { selectedUserProfile, currentUserProfile } = useSelector(
     (state) => state.profile

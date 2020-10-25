@@ -73,7 +73,6 @@ export default function SceneBuilder(props) {
       filteredLocationNames[
         Math.floor(Math.random() * filteredLocationNames.length)
       ]
-    console.log("randomName", randomName) // zzz
 
     if (randomName) {
       location.name = randomName
@@ -84,8 +83,6 @@ export default function SceneBuilder(props) {
   }
 
   const itemRenderer = ({ item, className, props = {} }) => {
-    console.log("item", item) // zzz
-    console.log("item.id", item.id) // zzz
     if (!item.name || item.name === "empty") {
       return null
     }

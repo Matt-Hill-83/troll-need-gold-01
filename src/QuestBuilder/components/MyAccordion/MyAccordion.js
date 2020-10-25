@@ -45,16 +45,16 @@ export default function MyAccordion({ props }) {
 
   const renderedContent = expanded ? content() : null
 
+  const style = { backgroundColor: "yellowgreen !important" }
+
   const renderedAccordion = (
-    <Accordion
-      expanded={expanded}
-      // defaultExpanded={expanded}
-      onChange={onChange}
-    >
+    <Accordion expanded={expanded} onChange={onChange}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
         id="panel1a-header"
+        className={style}
+        // className={css.test}
       >
         <Typography className={cx(classes.heading, css.header)}>
           {title}

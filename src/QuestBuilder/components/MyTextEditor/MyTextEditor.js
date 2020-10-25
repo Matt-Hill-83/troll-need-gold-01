@@ -1,7 +1,4 @@
-import { Button } from "@blueprintjs/core"
-import { IconNames } from "@blueprintjs/icons"
 import { TextareaAutosize } from "@material-ui/core"
-
 import cx from "classnames"
 import React, { useState, useEffect } from "react"
 
@@ -13,7 +10,6 @@ export default function MyTextEditor({ props }) {
 
   useEffect(() => {
     // on mount
-    // setContent(props.content)
     // returned function will be called on component unmount
     return () => {}
   }, [])
@@ -32,22 +28,13 @@ export default function MyTextEditor({ props }) {
   }
 
   return (
-    <>
-      {/* <Button
-        className={css.submitButton}
-        onClick={onSubmit}
-        icon={IconNames.SAVED}
-      >
-        Save Text
-      </Button> */}
-      <TextareaAutosize
-        className={cx(css.main, className)}
-        onChange={onTextAreaChange}
-        onBlur={onSubmit}
-        value={content}
-      >
-        {content}
-      </TextareaAutosize>
-    </>
+    <TextareaAutosize
+      className={cx(css.main, className)}
+      onChange={onTextAreaChange}
+      onBlur={onSubmit}
+      value={content}
+    >
+      {content}
+    </TextareaAutosize>
   )
 }

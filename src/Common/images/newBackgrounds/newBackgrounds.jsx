@@ -20,6 +20,7 @@ import back18 from "./back18.jpg"
 import back19 from "./back19.jpg"
 import back20 from "./back20.jpg"
 import back21 from "./back21.jpg"
+import back22 from "./back22.jpg"
 
 const newBackgrounds = {
   back02,
@@ -44,6 +45,7 @@ const newBackgrounds = {
   back19,
   back20,
   back21,
+  back22,
 }
 
 export { newBackgrounds }

@@ -14,8 +14,6 @@ import {
   ButtonGroup,
 } from "@blueprintjs/core"
 
-import _get from "lodash.get"
-
 import FrameBuilder from "../FrameBuilder/FrameBuilder"
 import SubQuestWizard from "../SubQuestWizard/SubQuestWizard"
 import Utils from "../../../Common/Utils/Utils"
