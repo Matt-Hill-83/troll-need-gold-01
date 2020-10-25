@@ -9,7 +9,7 @@ import css from "./AutoComplete2.module.scss"
 export default function AutoComplete2(props) {
   const {
     className = "",
-    defaultValue = { title: "select an option" },
+    defaultValue,
     getOptionLabel,
     items = [],
     label,
@@ -50,7 +50,7 @@ export default function AutoComplete2(props) {
         id="auto-complete"
         autoComplete
         includeInputInList
-        // defaultValue={defaultValue}
+        defaultValue={defaultValue}
         renderInput={(params) => {
           return <TextField {...params} label={label} variant="outlined" />
         }}

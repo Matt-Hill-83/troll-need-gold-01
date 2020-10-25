@@ -8,7 +8,7 @@ import WorldBuilder from "../../../QuestBuilder/components/WorldBuilder/WorldBui
 import useUpdateProfileWidget from "../../../oldProject/components/TopLevel/useUpdateProfileWidget"
 
 export default function WorldBuilderDetailedPage({ match, history }) {
-  const { getProfile, updateProfilePropsIfChanged } = useUpdateProfileWidget()
+  const { getProfile } = useUpdateProfileWidget()
   const profile = getProfile()
 
   const dispatch = useDispatch()

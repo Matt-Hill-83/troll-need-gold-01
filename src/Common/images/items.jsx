@@ -9,7 +9,6 @@ import angusBalloon01 from "./creatures/angusBalloon01.png"
 import bag from "./locations/bag.png"
 import balloons01 from "./items/balloons01.png"
 import barkPhone01 from "./creatures/barkPhone01.png"
-import blank from "./locations/blank.png"
 import bun from "./locations/bun.png"
 import cap from "./locations/cap.png"
 import cup from "./locations/cup.png"
@@ -51,7 +50,6 @@ import doorGreen from "./doors/doorGreen.png"
 import doorYellow from "./doors/doorYellow.jpg"
 
 const items = {
-  // blank,
   piano01,
   staffOfSantara01,
   trap01,
