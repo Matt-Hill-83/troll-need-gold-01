@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react"
-import { PopoverInteractionKind, Popover, Button } from "@blueprintjs/core"
+import { Button } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
 import cx from "classnames"
 

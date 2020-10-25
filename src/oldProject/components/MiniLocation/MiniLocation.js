@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import _get from "lodash.get"
 import { Popover } from "@blueprintjs/core"
 import cx from "classnames"
 import { Button } from "@material-ui/core"
@@ -81,7 +80,7 @@ export default function MiniLocation(props) {
   const cloudImage = Images.backgrounds["cloud"]
   const lockImage = Images.items["lock02"]
 
-  const scenesGrid = _get(world, "newGrid5") || []
+  const scenesGrid = world?.newGrid5 || []
 
   const neighbors = Utils.getNeighbors({ coordinates, grid: scenesGrid })
   const neighborsArray = Utils.getNeighborsAsArray({
@@ -132,17 +131,14 @@ export default function MiniLocation(props) {
   const imageSets = defaultImageSets
 
   const onSelectItem = async ({ name }) => {
-    // setItemPickerItem(name)
     scene.backgroundImage = name
 
     await TopLevelUtils.updateMap2({ mapToUpdate: world })
-    // saveChanges()
     toggleItemPicker({})
   }
 
   const toggleItemPicker = ({ item = null }) => {
     setShowItemPicker(!showItemPicker)
-    // setItemPickerItem(item)
   }
 
   return (
@@ -166,7 +162,6 @@ export default function MiniLocation(props) {
         <CharacterPicker
           className={css.backgroundPicker}
           isOpen={true}
-          // isOpen={showItemPicker}
           imageSets={imageSets}
           onClose={toggleItemPicker}
           onSelectItem={onSelectItem}
