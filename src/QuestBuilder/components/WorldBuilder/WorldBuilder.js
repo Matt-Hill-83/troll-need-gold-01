@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import cx from "classnames"
-import { IconNames } from "@blueprintjs/icons"
 import { Link } from "react-router-dom"
 
 import {
@@ -10,8 +9,6 @@ import {
   Popover,
   Position,
   InputGroup,
-  Classes,
-  ButtonGroup,
 } from "@blueprintjs/core"
 
 import FrameBuilder from "../FrameBuilder/FrameBuilder"
@@ -292,36 +289,14 @@ class WorldBuilder extends Component {
 
     return (
       <>
-        {/* <Button
-          icon={IconNames.SETTINGS}
-          text={"set world as default"}
-          onClick={() => this.setDefaultWorldId({ worldId: world.id })}
-        /> */}
         {dialogBuilderButton}
         {subQuestWizardButton}
         {viewButton}
       </>
     )
-    const buttons = (
-      <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}>
-        {dialogBuilderButton}
-        {subQuestWizardButton}
-      </ButtonGroup>
-    )
-
-    return (
-      <Popover
-        className={css.worldPickerDropdown}
-        portalClassName={css.worldPickerDropdownPopover}
-        content={buttons}
-        position={Position.BOTTOM}
-      >
-        <Button icon={IconNames.SETTINGS} text={"customize"} />
-      </Popover>
-    )
   }
 
-  renderHeaders = ({ title, world }) => {
+  renderHeaders = ({ world }) => {
     console.log("world.id", world.id)
 
     return (

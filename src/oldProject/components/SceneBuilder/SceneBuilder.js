@@ -1,8 +1,6 @@
 import { Dialog, DialogTitle, DialogContent } from "@material-ui/core"
-import { Edit } from "@material-ui/icons"
 import { IconNames } from "@blueprintjs/icons"
 import { Popover, ButtonGroup, Button } from "@blueprintjs/core"
-import cx from "classnames"
 import React, { useState, useEffect } from "react"
 
 import CrudMachine from "../../../QuestBuilder/components/CrudMachine/CrudMachine"
