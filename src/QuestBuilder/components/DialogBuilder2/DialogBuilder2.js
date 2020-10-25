@@ -1,4 +1,3 @@
-import _get from "lodash.get"
 import { Button, ButtonGroup } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
 import cx from "classnames"
@@ -124,18 +123,6 @@ export default function DialogBuilder2(props) {
           Dup
         </Button>
       )
-    }
-
-    const onAddDialogRows = ({ numRowsToAdd, before, items, rowIndex }) => {
-      for (let i = 0; i < numRowsToAdd; i++) {
-        const newElement = Constants.getNewDialog()
-        Utils.addArrayElement({
-          newElement,
-          before,
-          index: rowIndex,
-          array: items,
-        })
-      }
     }
 
     const renderAddDialogRowButton = () => {

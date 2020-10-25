@@ -1,4 +1,3 @@
-import _get from "lodash.get"
 import React, { Component } from "react"
 
 import worldBuilderStore from "../../Stores/WorldBuilderStore"

@@ -1,4 +1,4 @@
-import { Button, Popover, PopoverInteractionKind } from "@blueprintjs/core"
+import { Button } from "@blueprintjs/core"
 import { Grid, Segment } from "semantic-ui-react"
 import { IconNames } from "@blueprintjs/icons"
 import { ButtonGroup } from "@material-ui/core"
