@@ -178,9 +178,7 @@ export default function FrameViewer() {
       return (
         <ButtonGroup large={true} className={css.buttonsContainer}>
           <Button>
-            <Link to={"/books"} className={css.newGameButton}>
-              Play Again
-            </Link>
+            <Link to={"/books"}>Play Again</Link>
           </Button>
         </ButtonGroup>
       )
