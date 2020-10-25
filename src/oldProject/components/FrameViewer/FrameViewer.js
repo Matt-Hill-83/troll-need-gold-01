@@ -9,8 +9,10 @@ import useUpdateProfileWidget from "../TopLevel/useUpdateProfileWidget"
 import WordGroup from "../WordGroup/WordGroup"
 import MyAudioConsole from "../MyAudioConsole/MyAudioConsole"
 import useGlobalState from "../../../Context/useGlobalState"
+import QuestProgressUtils from "../../Utils/QuestProgressUtils"
 
 import css from "./FrameViewer.module.scss"
+import TopLevelUtils from "../../Utils/TopLevelUtils"
 
 export default function FrameViewer() {
   const [globalState, setGlobalState] = useContext(myContext)
@@ -21,13 +23,14 @@ export default function FrameViewer() {
 
   const {
     setGlobalStateProps,
-    globalState: { showMap, world, activeFrameIndex, activeScene },
+    globalState: { showMap, world, activeFrameIndex, activeScene, questStatus },
   } = useGlobalState()
 
   if (!activeScene?.frameSet) {
     return <div>no frames</div>
   }
   const { frames = [] } = activeScene.frameSet
+  const { questConfig = {} } = world
 
   const frame = frames[activeFrameIndex]
   const isLastFrame = activeFrameIndex >= frames.length - 1
@@ -123,6 +126,10 @@ export default function FrameViewer() {
   }
 
   const incrementFrame = ({ increment = true }) => {
+    if (increment) {
+      hideMap()
+    }
+
     setGlobalState((prevVal) => {
       let newFrameIndex = (prevVal.activeFrameIndex += 1 * increment ? 1 : -1)
       newFrameIndex = newFrameIndex >= 0 ? newFrameIndex : 0
@@ -164,17 +171,26 @@ export default function FrameViewer() {
 
   const hideMap = () => {
     setGlobalStateProps({
+      // showMap: true,
       showMap: false,
     })
   }
 
   const renderButtons = () => {
     const { isEndScene } = activeScene
+    let areAllMissionsCompleted = true
+
+    if (questConfig) {
+      areAllMissionsCompleted = QuestProgressUtils.areAllMissionsCompleted({
+        completedMissions: questStatus.completedMissions,
+        missions: TopLevelUtils.getMissions({ questConfig }),
+      })
+    }
 
     // TODO: add condition that mission is complete
     // TODO: add condition that mission is complete
     // TODO: add condition that mission is complete
-    if (isEndScene && isLastFrame) {
+    if (isEndScene && isLastFrame && areAllMissionsCompleted) {
       return (
         <ButtonGroup large={true} className={css.buttonsContainer}>
           <Button>
@@ -187,7 +203,7 @@ export default function FrameViewer() {
     return (
       <ButtonGroup large={true} className={css.buttonsContainer}>
         <Button onClick={toggleMap}>{`${
-          showMap ? "Open" : "Hide"
+          showMap ? "Hide" : "Open"
         } Map`}</Button>
         <Button
           disabled={isFirstFrame}

@@ -1,5 +1,4 @@
 import React from "react"
-import _get from "lodash.get"
 
 import MiniTable2 from "../MiniTable2/MiniTable2"
 import TopLevelUtils from "../../Utils/TopLevelUtils"
@@ -12,18 +11,18 @@ const columnNames = ["Mission", "Gold", "Complete"]
 
 const getTableData = ({ missions, completedMissions }) => {
   return missions.map((mission, missionIndex) => {
-    const { item = {}, recipient = "", rewards = [] } = mission
     console.log("mission", mission) // zzz
-    const rewardString = `${_get(rewards, "[0]amount")}`
+    const { item = {}, recipient = "", rewards = [] } = mission
+    const rewardString = rewards?.[0]?.amount
     const completed = completedMissions.includes(missionIndex)
-
     const name = `Bring the ${item.name} to the ${recipient.name}`
+
     return [name, rewardString, completed]
   })
 }
 
 const renderPocketItems = ({ goldOnly = false, questStatus }) => {
-  const items = _get(questStatus, "pockets") || []
+  const items = questStatus.pockets || []
 
   const itemKeys = Object.keys(items)
   if (itemKeys.length === 0 || !items) {

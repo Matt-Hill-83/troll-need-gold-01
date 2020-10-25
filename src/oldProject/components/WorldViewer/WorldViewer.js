@@ -59,7 +59,7 @@ export default function WorldViewer(props) {
     <>
       <div
         className={cx(css.mapScroller, {
-          [css.mapScrollerSmall]: showMap,
+          [css.mapScrollerSmall]: !showMap,
         })}
       >
         <Button
