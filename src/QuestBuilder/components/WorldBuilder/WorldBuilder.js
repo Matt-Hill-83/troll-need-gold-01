@@ -121,7 +121,6 @@ class WorldBuilder extends Component {
   // turn this into a component
   renderTerminalScenePicker = ({ isStartScene }) => {
     const map = worldBuilderStore.getWorldBuilderWorld()
-    if (!map) return null
 
     if (!map) {
       return null
