@@ -33,27 +33,21 @@ export default function BookPicker(props) {
   books = sortBooks({ books: props.books })
 
   useEffect(() => {
-    // worlds = props.worlds
-    // books = sortBooks({ books: props.books })
-
     // returned function will be called on component unmount
     return () => {}
   }, [])
 
   // on change in props
   useEffect(() => {
-    console.log("new props =================================>>>>>")
     worlds = props.worlds
     books = sortBooks({ books: props.books })
   }, [props.worlds])
 
   useEffect(() => {
-    console.log("new props =================================>>>>>")
     books = sortBooks({ books: props.books })
   }, [props.books])
 
   const { getProfile } = useUpdateProfileWidget()
-
   const profile = getProfile()
 
   const [jsonUnderEdit, setJsonUnderEdit] = useState(null)
