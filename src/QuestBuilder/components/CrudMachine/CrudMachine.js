@@ -7,7 +7,6 @@ import {
 import { IconNames } from "@blueprintjs/icons"
 import React, { useState, useEffect } from "react"
 import cx from "classnames"
-import { useStateWithCallbackLazy } from "use-state-with-callback"
 
 import images from "../../../Common/Images/images"
 import CharacterPicker from "../CharacterPicker/CharacterPicker"
@@ -33,7 +32,6 @@ const addItemIfNone = ({ items = [] }) => {
 export default function CrudMachine(props) {
   const initialItems = addItemIfNone({ items: [...props.items] })
 
-  // const [items, setItems] = useStateWithCallbackLazy(initialItems)
   const [items, setItems] = useState(initialItems)
   const [showItemPicker, setShowItemPicker] = useState(false)
   const [itemPickerItem, setItemPickerItem] = useState(false)
