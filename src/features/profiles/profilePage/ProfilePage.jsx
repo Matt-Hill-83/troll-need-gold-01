@@ -210,7 +210,6 @@ export default function ProfilePage({ match }) {
                 classNameCharPicker={css.classNameCharPicker}
                 items={selectedDresses}
                 imageSets={dresses}
-                // saveItems={this.saveItems}
               />
             </Grid.Column>
           )}
