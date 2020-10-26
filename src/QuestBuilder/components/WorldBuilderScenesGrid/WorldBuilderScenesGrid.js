@@ -1,23 +1,23 @@
-import React, { Component } from "react"
+import React from "react"
 
 import worldBuilderStore from "../../Stores/WorldBuilderStore"
 import SceneBuilder from "../../../oldProject/components/SceneBuilder/SceneBuilder"
 
 import css from "./WorldBuilderScenesGrid.module.scss"
 
-class WorldBuilderScenesGrid extends Component {
-  saveItems = async () => {
-    await this.props.saveItems()
+export default function WorldBuilderScenesGrid(props) {
+  const saveItems = async () => {
+    await props.saveItems()
   }
 
-  renderScenesGrid = () => {
+  const renderScenesGrid = () => {
     const scenesGrid = worldBuilderStore.getWorldBuilderScenesGrid()
     const gridRows = []
 
     scenesGrid.forEach((row) => {
       const gridRow = []
       row.forEach((scene) => {
-        gridRow.push(this.renderCell({ scene }))
+        gridRow.push(renderCell({ scene }))
       })
       gridRows.push(<div className={css.gridRow}>{gridRow}</div>)
     })
@@ -25,21 +25,18 @@ class WorldBuilderScenesGrid extends Component {
     return <div className={css.main}>{gridRows}</div>
   }
 
-  renderCell = ({ scene }) => {
-    const { world, editFrameSet } = this.props
+  const renderCell = ({ scene }) => {
+    const { world, editFrameSet } = props
 
     return (
       <SceneBuilder
         scene={scene}
         world={world}
         editFrameSet={editFrameSet}
-        saveItems={this.saveItems}
+        saveItems={saveItems}
       />
     )
   }
 
-  render() {
-    return this.renderScenesGrid()
-  }
+  return renderScenesGrid()
 }
-export default WorldBuilderScenesGrid

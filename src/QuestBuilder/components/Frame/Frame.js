@@ -2,7 +2,6 @@ import _get from "lodash.get"
 import { Button, Icon, TextArea } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
 
-import cx from "classnames"
 import React, { Component } from "react"
 
 import CrudMachine from "../CrudMachine/CrudMachine"
