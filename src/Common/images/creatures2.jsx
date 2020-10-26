@@ -1,3 +1,6 @@
+import babyTroll04 from "./creatures/babyTroll04.png"
+import babyTroll03 from "./creatures/babyTroll03.png"
+
 import raven04 from "./creatures/raven04.png"
 import raven05 from "./creatures/raven05.png"
 
@@ -61,7 +64,7 @@ import rori03cu from "./creatures/rori03cu.png"
 
 import parta03 from "./creatures/parta03.png"
 import lucy07small from "./creatures/lucy07small.png"
-import artemis01 from "./creatures/artemis01.png"
+// import artemis01 from "./creatures/artemis01.png"
 import asha01 from "./creatures/asha01.png"
 import atari01 from "./creatures/atari01.png"
 import avatar01 from "./creatures/avatar01.png"
@@ -126,7 +129,7 @@ import snowFlake01 from "./creatures/snowFlake01.png"
 import snurtch01 from "./creatures/snurtch01.png"
 import spacey01 from "./creatures/spacey01.png"
 import sparrow01 from "./creatures/sparrow01.png"
-import spirit01 from "./creatures/spirit01.png"
+// import spirit01 from "./creatures/spirit01.png"
 import springer01 from "./creatures/springer01.png"
 import sprite01 from "./creatures/sprite01.png"
 import spruce01 from "./creatures/spruce01.png"
@@ -173,6 +176,9 @@ const tj = {
 }
 
 const creatures2animals = {
+  babyTroll04,
+  babyTroll03,
+
   maceo03,
   raven04,
   raven05,
@@ -206,7 +212,7 @@ const creatures2animals = {
   miranda02,
 
   greyWolf: farf01,
-  babyTroll02: will01,
+  // babyTroll02: will01,
   frannyMay: hopps01,
   vectra01: tanya01,
   azrael01,
@@ -220,6 +226,7 @@ const creatures2animals = {
   looney01,
   lucky: looney01,
   looney01cu,
+  lucky01: looney01cu,
   rupert01,
   vector01,
   vector02,
@@ -273,7 +280,7 @@ const creatures2animals = {
   clara01,
   saki: nagasaki01,
   vesper01,
-  spirit01,
+  // spirit01,
   avatar01,
   triad02,
   penny01,
@@ -288,8 +295,8 @@ const creatures2animals = {
   omni01,
   catana01,
   maldara01,
-  penta01,
-  yofana01,
+  // penta01,
+  // yofana01,
   indara01,
   wind01,
   turk01,
@@ -303,10 +310,10 @@ const creatures2animals = {
   vesuvia01,
   prancer01,
   britta01,
-  dart01,
+  // dart01,
   flight01,
-  artemis01,
-  cliff01,
+  // artemis01,
+  // cliff01,
   hopps01,
   sprite01,
   spacey01,
@@ -319,7 +326,7 @@ const creatures2animals = {
   sparrow01,
   staffOfTruth01,
   thorn01,
-  scarlet01,
+  // scarlet01,
   springer01,
   plusha01,
   weasel01,
