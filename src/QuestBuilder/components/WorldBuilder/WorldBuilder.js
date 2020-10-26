@@ -93,7 +93,6 @@ class WorldBuilder extends Component {
       this.setData({ world })
     }
     world = worldBuilderStore.getWorldBuilderWorld()
-    this.setDefaultWorldId({ worldId: world.id })
     this.setState({ update: new Date() })
   }
 
@@ -260,10 +259,6 @@ class WorldBuilder extends Component {
     this.setState({
       showSubQuestWizard: !this.state.showSubQuestWizard,
     })
-  }
-
-  setDefaultWorldId = ({ worldId }) => {
-    // this.props.updateDefaultWorldId({ worldId })
   }
 
   renderMainButtonGroup = () => {
