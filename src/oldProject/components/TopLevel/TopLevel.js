@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import { Toaster, Position } from "@blueprintjs/core"
+import cuid from "cuid"
 
 import Constants from "../../../Common/Constants/Constants"
 import QuestProgressUtils from "../../Utils/QuestProgressUtils.js"
@@ -9,12 +10,10 @@ import TopLevelUtils from "../../Utils/TopLevelUtils.js"
 import useGlobalState from "../../../Context/useGlobalState.js"
 import useUpdateProfileWidget from "./useUpdateProfileWidget.js"
 import Utils from "../../../Common/Utils/Utils"
-
-// import useLocalState from "./useLocalState.js"
-
-import cuid from "cuid"
 import { updateQuestInFirestore } from "../../../app/firestore/firestoreService"
 import RecordingStudio from "../RecordingStudio/RecordingStudio"
+
+// import useLocalState from "./useLocalState.js"
 
 import css from "./TopLevel.module.scss"
 
