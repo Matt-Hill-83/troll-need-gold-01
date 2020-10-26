@@ -218,6 +218,7 @@ const creatures2animals = {
   tanya02,
   brenda01,
   looney01,
+  lucky: looney01,
   looney01cu,
   rupert01,
   vector01,
