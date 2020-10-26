@@ -27,6 +27,7 @@ class WorldBuilder extends Component {
     showFrameBuilder: false,
     showSubQuestWizard: false,
     showDialogBuilder: true,
+    world: null,
   }
 
   maps = []
