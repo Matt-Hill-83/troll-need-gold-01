@@ -1,9 +1,12 @@
 import React, { Component } from "react"
 import cx from "classnames"
 import { Link } from "react-router-dom"
+import { IconNames } from "@blueprintjs/icons"
+import cuid from "cuid"
 
 import {
   Button,
+  ButtonGroup,
   Menu,
   MenuItem,
   Popover,
@@ -93,6 +96,7 @@ class WorldBuilder extends Component {
 
       this.setData({ world })
     }
+
     world = worldBuilderStore.getWorldBuilderWorld()
     this.setState({ update: new Date() })
   }
@@ -181,11 +185,15 @@ class WorldBuilder extends Component {
     this.setState({ sceneToEdit: "", showFrameBuilder: false })
   }
 
-  addNewWorld = async () => {
-    const worldProps = {
+  getNewWorldProps = () => {
+    return {
       createdAt: Date.now(),
       createdBy: this.props?.profile?.id || "none",
     }
+  }
+
+  addNewWorld = async () => {
+    const worldProps = this.getNewWorldProps()
     const questId = await WorldBuilderUtils.addNewWorld({ worldProps })
     this.props.history.push(`/quest-builder/${questId}`)
   }
@@ -274,12 +282,14 @@ class WorldBuilder extends Component {
     )
 
     const viewButton = (
-      <Link
-        className={cx(css.tableCell, css.questName)}
-        to={`/quests/${world.id}`}
-      >
-        View
-      </Link>
+      <Button>
+        <Link
+          className={cx(css.tableCell, css.questName)}
+          to={`/quests/${world.id}`}
+        >
+          View
+        </Link>
+      </Button>
     )
 
     return (
@@ -291,11 +301,37 @@ class WorldBuilder extends Component {
     )
   }
 
+  dupQuest = async () => {
+    const world = worldBuilderStore.getWorldBuilderWorld()
+
+    const dupWorld = JSON.parse(JSON.stringify(world))
+    dupWorld.id = "none"
+    // dupWorld.id = cuid()
+    dupWorld.title = world.title + "---copy"
+    console.log("world", world) // zzz
+    console.log("dupWorld", dupWorld) // zzz
+    worldBuilderStore.setWorldBuilderWorld(dupWorld)
+
+    dupWorld.newGrid5.forEach((scene) => {
+      WorldBuilderUtils.addIdToAllItemsInScene({ scene, overWrite: true })
+      // scene?.frameSet?.frames.map((frame) => (frame.id = cuid()))
+    })
+
+    await WorldBuilderUtils.addWorld({ world: dupWorld })
+    this.forceUpdate2()
+  }
+
   renderHeaders = ({ world }) => {
     console.log("world.id", world.id)
 
     return (
       <div className={css.subTitle}>
+        <Popover>
+          <Button icon={IconNames.SETTINGS} />
+          <ButtonGroup>
+            <Button icon={IconNames.DUPLICATE} onClick={this.dupQuest}></Button>
+          </ButtonGroup>
+        </Popover>
         <Button
           text={"+ New Quest"}
           onClick={() => this.onChangeWorld({ newWorld: true })}

@@ -69,14 +69,14 @@ export default class WorldBuilderUtils {
     return condensedGrid
   }
 
-  static addIdToAllItemsInScene = ({ scene }) => {
+  static addIdToAllItemsInScene = ({ scene, overWrite = false }) => {
     const allItems = []
     const frames = scene?.frameSet?.frames || []
     frames.forEach((item) => {
       allItems.push(...item.critters1, ...item.critters2)
     })
     allItems.forEach((item) => {
-      if (!item.id) {
+      if (overWrite || !item.id) {
         item.id = Utils.generateUuid()
       }
     })
@@ -219,5 +219,23 @@ export default class WorldBuilderUtils {
     newWorld.id = newMapReturned.id
     worldBuilderStore.setWorldBuilderWorld(newWorld)
     return newWorld.id
+  }
+
+  static addWorld = async ({ world }) => {
+    // const { grid, gridDimensions } = WorldBuilderUtils.createNewGrid()
+
+    // worldBuilderStore.setWorldBuilderScenesGrid(grid)
+    // const newWorldProps = {
+    //   title: "---" + newName,
+    //   gridDimensions,
+    //   ...worldProps,
+    // }
+
+    // const newWorld = Constants.getNewWorld({ props: newWorldProps })
+
+    const newMapReturned = await addQuestToFirestore(world)
+    world.id = newMapReturned.id
+    worldBuilderStore.setWorldBuilderWorld(world)
+    return world.id
   }
 }

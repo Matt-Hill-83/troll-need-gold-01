@@ -77,7 +77,6 @@ export default function DialogBuilder2(props) {
 
     const filteredCritters = crittersInFrame.filter((item) => {
       const excludedNames = ["blank", "empty"]
-      console.log("item.name", item.name) // zzz
       return !excludedNames.includes(item.name)
     })
 

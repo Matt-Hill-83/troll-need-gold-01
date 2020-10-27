@@ -38,26 +38,16 @@ export default function AutoComplete2(props) {
     sortedData = items
   }
 
-  const onClose = (e, v, r) => {
-    console.log("e", e) // zzz
-    console.log("v", v) // zzz
-    console.log("r", r) // zzz
-  }
-
   const listboxProps = { className: css.test }
   return (
     <div className={cx(css.main, className)}>
       <Autocomplete
-        // openOnFocus={true}
-        // autoHighlight={true}
-        // autoSelect={true}
         ListboxProps={listboxProps}
         disableListWrap={true}
         options={sortedData}
         clearOnEscape={true}
         getOptionLabel={getLabel}
         onChange={_onChange}
-        onClose={onClose}
         id="auto-complete"
         autoComplete
         includeInputInList
