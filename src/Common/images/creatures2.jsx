@@ -54,7 +54,7 @@ import looney01 from "./creatures/looney01.png"
 import looney01cu from "./creatures/looney01cu.png"
 import rupert01 from "./creatures/rupert01.png"
 
-import olive01 from "./creatures/olive01.png"
+// import olive01 from "./creatures/olive01.png"
 import olive02 from "./creatures/olive02.png"
 
 import oliveRori01cu from "./creatures/oliveRori01.png"
@@ -178,8 +178,9 @@ const tj = {
 
 const creatures2animals = {
   trollKing: goblinKing01,
-  babyTroll04,
+  // babyTroll04,
   babyTroll03,
+  jamTroll: babyTroll04,
 
   maceo03,
   raven04,
@@ -233,7 +234,7 @@ const creatures2animals = {
   vector01,
   vector02,
   vector03,
-  olive01,
+  // olive01,
   olive02,
   oliveRori01cu,
   oliveRori01,

@@ -2,8 +2,8 @@ import Utils from "../Utils/Utils.js"
 import WorldBuilderUtils from "../../QuestBuilder/Utils/WorldBuilderUtils.js"
 
 export default class Constants {
-  // static isProdRelease = true
-  static isProdRelease = false
+  static isProdRelease = true
+  // static isProdRelease = false
 
   static defaultWorldIdNonProdWB = "fjziRuznRvTuG31US9yH"
   static allowRecordAudioInProd = true
