@@ -75,9 +75,11 @@ export default function DialogBuilder2(props) {
       localSave()
     }
 
-    const filteredCritters = crittersInFrame.filter(
-      (item) => item.name !== "blank"
-    )
+    const filteredCritters = crittersInFrame.filter((item) => {
+      const excludedNames = ["blank", "empty"]
+      console.log("item.name", item.name) // zzz
+      return !excludedNames.includes(item.name)
+    })
 
     const dropDownProps = {
       className: css.sceneDropdown,
@@ -87,7 +89,6 @@ export default function DialogBuilder2(props) {
       onChange: onChangeCritter,
       autoCompleteProps: {
         openOnFocus: true,
-        // autoHighlight: true,
         autoSelect: true,
       },
     }
@@ -117,6 +118,7 @@ export default function DialogBuilder2(props) {
     const renderDuplicateFrameButton = () => {
       return (
         <Button
+          tabindex="-1"
           onClick={() =>
             onDuplicateFrame({
               rowIndex: frameIndex,
@@ -133,6 +135,7 @@ export default function DialogBuilder2(props) {
     const renderAddDialogRowButton = () => {
       return (
         <Button
+          tabindex="-1"
           onClick={() =>
             onAddDialogRow({
               items: dialog,
@@ -150,6 +153,7 @@ export default function DialogBuilder2(props) {
     const renderDeleteFrameButton = () => {
       return (
         <Button
+          tabindex="-1"
           onClick={() =>
             onDeleteFrame({
               rowIndex: frameIndex,
@@ -167,6 +171,7 @@ export default function DialogBuilder2(props) {
     const renderJoinFramesButton = () => {
       return (
         <Button
+          tabindex="-1"
           onClick={() =>
             joinFrames({
               rowIndex: frameIndex,
@@ -354,9 +359,23 @@ export default function DialogBuilder2(props) {
       )
     }
 
+    const addMultipleRows = () => {
+      return (
+        <Button
+          tabindex="-1"
+          onClick={({ rowIndex, before }) =>
+            onAddDialogRow({ items: dialogs, rowIndex, before })
+          }
+        >
+          ++
+        </Button>
+      )
+    }
+
     const moreButtons = [
       renderCritterPicker({ dialog, frame }),
       renderSplitFrameButton(),
+      addMultipleRows(),
     ]
 
     return (
@@ -365,8 +384,8 @@ export default function DialogBuilder2(props) {
           rowIndex: dialogIndex,
           onDelete: ({ rowIndex }) => onDeleteRow({ items: dialogs, rowIndex }),
           onAdd: ({ rowIndex, before }) =>
-            // onAddDialogRow({ items: dialogs, rowIndex, before }),
-            onAddDialogRows({ items: dialogs, rowIndex, before }),
+            onAddDialogRow({ items: dialogs, rowIndex, before }),
+
           vertical: false,
           noPopover: true,
           className: css.dialogBuilderButtonGroup,
