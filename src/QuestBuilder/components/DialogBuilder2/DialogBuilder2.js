@@ -71,6 +71,7 @@ export default function DialogBuilder2(props) {
     )
 
     const onChangeCritter = (newValue) => {
+      if (!newValue) return
       dialog.character = newValue.name
       localSave()
     }
@@ -353,7 +354,7 @@ export default function DialogBuilder2(props) {
             })
           }
         >
-          Split-->
+          Split
         </Button>
       )
     }

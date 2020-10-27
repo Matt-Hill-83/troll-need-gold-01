@@ -162,6 +162,7 @@ import raven004 from "./riggedGirls01/raven/faces/004.png"
 
 import tj001 from "./riggedGirls01/tj/faces/001.png"
 import tj002 from "./riggedGirls01/tj/faces/002.png"
+import goblinKing01 from "./creatures/goblinKing01.png"
 
 const raven = {
   raven001,
@@ -176,6 +177,7 @@ const tj = {
 }
 
 const creatures2animals = {
+  trollKing: goblinKing01,
   babyTroll04,
   babyTroll03,
 

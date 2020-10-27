@@ -7,7 +7,6 @@ import babyTroll01 from "./creatures/babyTroll01.png"
 import bat from "./creatures/bat.png"
 import bee01 from "./creatures/bee01.png"
 import blankDragon01 from "./creatures/blankDragon01.png"
-// import boomALoo01 from "./creatures/boomALoo01.png"
 import brenda01 from "./creatures/brenda01.png"
 import brindle01Happy from "./creatures/brindle01Happy.png"
 import bubbleGirl01 from "./creatures/bubbleGirl01.png"
@@ -20,7 +19,6 @@ import charlie02 from "./creatures/charlie02.png"
 import chick01 from "./creatures/chick01.png"
 import chooChoo01 from "./creatures/chooChoo01.png"
 import coldGirl from "./creatures/cold_girl.png"
-// import cop from "./creatures/cop.png"
 import cow01 from "./creatures/cow01.png"
 import cricket01 from "./creatures/cricket01.png"
 import cub from "./creatures/cub.png"
@@ -38,7 +36,6 @@ import dress06 from "./creatures/dress06.png"
 import dress07 from "./creatures/dress07.png"
 import dress08 from "./creatures/dress08.png"
 import elf from "./creatures/elf-1.png"
-// import elsa02 from "./creatures/elsa02.png"
 import emmet01 from "./creatures/emmet01.png"
 import fairy from "./creatures/fairy.png"
 import foxy01 from "./creatures/foxy01.png"
@@ -59,7 +56,6 @@ import hippityHop01 from "./creatures/hippityHop01.png"
 import hobbit from "./creatures/hobbit.png"
 import hog from "./creatures/hog.png"
 import iceCream01 from "./creatures/iceCream01.png"
-// import islandGirl01 from "./creatures/islandGirl01.png"
 import jam01 from "./creatures/jam01.png"
 import johnny02 from "./creatures/johnny02.png"
 import katieKooper01 from "./creatures/katieKooper01.png"
@@ -69,13 +65,11 @@ import madElf01 from "./creatures/madElf01.png"
 import magicGirl01 from "./creatures/magicGirl01.png"
 import man from "./creatures/man.png"
 import meAyNa01 from "./creatures/meAyNa01.png"
-// import merida02 from "./creatures/merida02.png"
 import mermaid from "./creatures/mermaid.png"
 import missyMeow01 from "./creatures/missyMeow01.png"
 import misterWilson01 from "./creatures/misterWilson01.png"
 import mitzyMeow01 from "./creatures/mitzyMeow01.png"
 import mom01 from "./creatures/mom01.png"
-// import monster from "./creatures/monster.png"
 import nahal01 from "./creatures/nahal01.png"
 import oopsieCat01 from "./creatures/oopsieCat01.png"
 import pantherGirl01 from "./creatures/pantherGirl01.png"
@@ -113,8 +107,6 @@ import splendaCat01 from "./creatures/splendaCat01.png"
 import squirrel01 from "./creatures/squirrel01.png"
 import strawberry01 from "./creatures/strawberry01.png"
 import sweaterGirl01 from "./creatures/sweaterGirl01.png"
-// // import swordGirl01 from "./creatures/swordGirl01.png"
-// import tink from "./creatures/tink.png"
 import tiredGirl from "./creatures/tired_girl.png"
 import toothless from "./creatures/toothless.png"
 import tree01 from "./creatures/tree01.png"
@@ -129,7 +121,6 @@ import vulcan01 from "./creatures/vulcan01.png"
 import wizard from "./creatures/wizard.png"
 import zac01 from "./creatures/zac01.png"
 import zack01 from "./creatures/zack01.png"
-// import zanzibar01 from "./creatures/zanzibar01.png"
 import zita01 from "./creatures/zita01.png"
 
 const creatures = {
@@ -137,7 +128,6 @@ const creatures = {
   babyTroll01,
   strawberry01,
   madElf01,
-  // swordGirl01,
   mom01,
   ghandi01,
   slicerDicer01,
@@ -148,8 +138,6 @@ const creatures = {
   sweaterGirl01,
   bubbleGirl01,
   bee01,
-  // islandGirl01,
-  // zanzibar01,
   rose01,
   paradox01,
 
@@ -162,7 +150,6 @@ const creatures = {
   dog01,
   pup01,
   cat01,
-  // boomALoo01,
   pug,
   elf,
   gerald01,
@@ -184,7 +171,6 @@ const creatures = {
   chick01,
   chooChoo01,
   coldGirl,
-  // cop,
   cow01,
   cub,
   dennisTheMenace,
@@ -193,7 +179,6 @@ const creatures = {
   drake01,
   drake02,
 
-  // elsa02,
   emmet01,
   fairy,
   fiona: charlie02,
@@ -216,9 +201,7 @@ const creatures = {
   lulu01: brenda01,
   magicGirl01,
   man,
-  // merida02,
   mermaid,
-  // monster,
 
   pig,
   pigeon01,
@@ -241,7 +224,6 @@ const creatures = {
   snake01,
   sparkle01,
   squirrel01,
-  // tink,
   tiredGirl,
   toothless,
   troll,
@@ -257,6 +239,7 @@ const creatures = {
   zanyDog01: dog01,
   zita01,
   goblinKing01,
+
   goblinKing02,
   trollKing01: goblinKing02,
   misterWilson01,
