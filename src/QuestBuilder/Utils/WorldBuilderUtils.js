@@ -222,17 +222,6 @@ export default class WorldBuilderUtils {
   }
 
   static addWorld = async ({ world }) => {
-    // const { grid, gridDimensions } = WorldBuilderUtils.createNewGrid()
-
-    // worldBuilderStore.setWorldBuilderScenesGrid(grid)
-    // const newWorldProps = {
-    //   title: "---" + newName,
-    //   gridDimensions,
-    //   ...worldProps,
-    // }
-
-    // const newWorld = Constants.getNewWorld({ props: newWorldProps })
-
     const newMapReturned = await addQuestToFirestore(world)
     world.id = newMapReturned.id
     worldBuilderStore.setWorldBuilderWorld(world)

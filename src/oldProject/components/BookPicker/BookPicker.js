@@ -215,7 +215,9 @@ export default function BookPicker(props) {
       createdAt: Date.now(),
       createdBy: profile?.id || "none",
     }
-    addBookToFirestore(Constants.getNewBook(props))
+    const newBook = Constants.getNewBook(props)
+    console.log("newBook", newBook) // zzz
+    addBookToFirestore(newBook)
   }
 
   const hardRefresh = async () => {
@@ -321,10 +323,12 @@ export default function BookPicker(props) {
 
         {!isProdRelease && (
           <ButtonGroup className={css.addBookButton}>
-            <Button onClick={addBook}>Add Book -- refreshed-6</Button>
-            <Button className={css.xxxaddBookButton} onClick={hardRefresh}>
-              Hard Refresh
-            </Button>
+            <Button onClick={addBook}>Add Book</Button>
+            {false && (
+              <Button className={css.xxxaddBookButton} onClick={hardRefresh}>
+                Hard Refresh
+              </Button>
+            )}
           </ButtonGroup>
         )}
       </div>

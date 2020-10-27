@@ -226,6 +226,9 @@ export default function ProfilePage({ match }) {
           <Grid.Column width={4}>{myTrophys}</Grid.Column>
           My Recordings
           <Grid.Column width={4}>{myTrophys}</Grid.Column>
+          <Grid.Column width={4}>{myTrophys}</Grid.Column>
+          My Liked Lines
+          <Grid.Column width={4}>{myTrophys}</Grid.Column>
         </Grid.Row>
       </Grid>
     </div>

@@ -3,6 +3,7 @@ import cx from "classnames"
 import { Link } from "react-router-dom"
 import { IconNames } from "@blueprintjs/icons"
 import cuid from "cuid"
+import _get from "lodash.get"
 
 import {
   Button,
@@ -306,15 +307,15 @@ class WorldBuilder extends Component {
 
     const dupWorld = JSON.parse(JSON.stringify(world))
     dupWorld.id = "none"
-    // dupWorld.id = cuid()
-    dupWorld.title = world.title + "---copy"
-    console.log("world", world) // zzz
-    console.log("dupWorld", dupWorld) // zzz
+    dupWorld.title = world.title + " --- copy"
     worldBuilderStore.setWorldBuilderWorld(dupWorld)
 
     dupWorld.newGrid5.forEach((scene) => {
       WorldBuilderUtils.addIdToAllItemsInScene({ scene, overWrite: true })
-      // scene?.frameSet?.frames.map((frame) => (frame.id = cuid()))
+      const frames = _get(scene, "frameSet.frames") || []
+      frames.map((frame) => {
+        frame.id = cuid()
+      })
     })
 
     await WorldBuilderUtils.addWorld({ world: dupWorld })
@@ -330,12 +331,12 @@ class WorldBuilder extends Component {
           <Button icon={IconNames.SETTINGS} />
           <ButtonGroup>
             <Button icon={IconNames.DUPLICATE} onClick={this.dupQuest}></Button>
+            <Button
+              icon={IconNames.ADD}
+              onClick={() => this.onChangeWorld({ newWorld: true })}
+            />
           </ButtonGroup>
         </Popover>
-        <Button
-          text={"+ New Quest"}
-          onClick={() => this.onChangeWorld({ newWorld: true })}
-        />
         {this.renderMainButtonGroup()}
       </div>
     )

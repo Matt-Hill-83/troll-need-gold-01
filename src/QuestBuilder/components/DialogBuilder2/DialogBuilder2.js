@@ -362,8 +362,12 @@ export default function DialogBuilder2(props) {
       return (
         <Button
           tabindex="-1"
-          onClick={({ rowIndex, before }) =>
-            onAddDialogRow({ items: dialogs, rowIndex, before })
+          onClick={() =>
+            onAddDialogRows({
+              items: dialogs,
+              rowIndex: dialogIndex,
+              before: false,
+            })
           }
         >
           ++
