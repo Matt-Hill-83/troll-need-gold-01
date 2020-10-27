@@ -15,6 +15,9 @@ import rock from "./backgrounds/rock02.png"
 import rock02Vertical from "./backgrounds/rock02Vertical.png"
 import stoneRectangle01 from "./backgrounds/stoneRectangle01.png"
 
+import heart01empty from "./backgrounds/heart01empty.png"
+import heart02full from "./backgrounds/heart02full.png"
+
 const backgrounds = {
   lock01,
 
