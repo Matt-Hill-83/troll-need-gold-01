@@ -85,6 +85,11 @@ export default function DialogBuilder2(props) {
       defaultValue: selectedItem,
       getOptionLabel: (option) => option?.name || "--",
       onChange: onChangeCritter,
+      autoCompleteProps: {
+        openOnFocus: true,
+        // autoHighlight: true,
+        autoSelect: true,
+      },
     }
     return <AutoComplete2 {...dropDownProps} />
   }
@@ -215,7 +220,7 @@ export default function DialogBuilder2(props) {
     }
 
     const { critters1 = [], critters2 = [] } = frame
-
+    const showDelete = frameIndex === 0
     const fakeDiv = (
       <div
         className={cx(css.fakeDiv, css.frameSeparatorDiv, {
@@ -236,7 +241,9 @@ export default function DialogBuilder2(props) {
           saveItems={localSave}
         />
         <div className={css.headerBox}>
-          <Button onClick={() => deleteScene({ scene })}>Del</Button>
+          {showDelete && (
+            <Button onClick={() => deleteScene({ scene })}>Del</Button>
+          )}
           {frameHeaderButtons}
         </div>
       </div>
@@ -333,6 +340,7 @@ export default function DialogBuilder2(props) {
     const renderSplitFrameButton = () => {
       return (
         <Button
+          tabindex="-1"
           onClick={() =>
             splitFrame({
               dialogIndex,

@@ -32,6 +32,7 @@ export default function AddDeleteButtonGroup({ props }) {
       {moreButtons}
       {moreNestedButtons}
       <Button
+        tabindex="-1"
         onClick={() =>
           onAdd({
             rowIndex,
@@ -40,8 +41,13 @@ export default function AddDeleteButtonGroup({ props }) {
         }
         icon={IconNames.ADD}
       />
-      <Button onClick={() => onDelete({ rowIndex })} icon={IconNames.TRASH} />
       <Button
+        tabindex="-1"
+        onClick={() => onDelete({ rowIndex })}
+        icon={IconNames.TRASH}
+      />
+      <Button
+        tabindex="-1"
         onClick={() =>
           onAdd({
             rowIndex,
