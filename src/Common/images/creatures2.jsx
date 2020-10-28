@@ -178,7 +178,8 @@ const tj = {
 
 const creatures2animals = {
   trollKing: goblinKing01,
-  // babyTroll04,
+  lucindaSmall: lucy07small,
+  lucinda: lucy07,
   babyTroll03,
   jamTroll: babyTroll04,
 
@@ -215,7 +216,7 @@ const creatures2animals = {
   miranda02,
 
   greyWolf: farf01,
-  // babyTroll02: will01,
+  babyTroll02: will01,
   frannyMay: hopps01,
   vectra01: tanya01,
   azrael01,
@@ -243,9 +244,10 @@ const creatures2animals = {
   britta03,
   britta04,
   swift01,
+
   lucy07small,
-  parta03,
   lucy07,
+  parta03,
   well01,
   parta01,
   zarla: parta02,
