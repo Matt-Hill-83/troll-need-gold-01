@@ -1,3 +1,6 @@
+import hudson01 from "./creatures/hudson01.png"
+import luke01 from "./creatures/luke01.png"
+
 import babyTroll04 from "./creatures/babyTroll04.png"
 import babyTroll03 from "./creatures/babyTroll03.png"
 
@@ -177,6 +180,8 @@ const tj = {
 }
 
 const creatures2animals = {
+  hudson01,
+  luke01,
   trollKing: goblinKing01,
   lucindaSmall: lucy07small,
   lucinda: lucy07,
