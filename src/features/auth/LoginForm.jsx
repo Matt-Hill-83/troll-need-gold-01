@@ -56,7 +56,7 @@ export default function LoginForm() {
               color="teal"
               content="Log in"
             />
-            <Divider horizontal>Or</Divider>
+            {/* <Divider horizontal>Or</Divider> */}
             <SocialLogin />
           </Form>
         )}

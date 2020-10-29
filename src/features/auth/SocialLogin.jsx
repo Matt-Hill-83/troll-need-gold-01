@@ -5,6 +5,7 @@ import { closeModal } from "../../app/common/modals/modalReducer"
 import { socialLogin } from "../../app/firestore/firebaseService"
 
 export default function SocialLogin() {
+  return null
   const dispatch = useDispatch()
 
   function handleSocialLogin(provider) {

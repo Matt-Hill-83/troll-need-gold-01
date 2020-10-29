@@ -31,7 +31,6 @@ export default class Constants {
 
   static getBlankScene = ({ props }) => {
     const id = Utils.generateUuid()
-
     const newFrame = WorldBuilderUtils.getNewFrame({})
 
     const blankScene = {

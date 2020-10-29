@@ -58,7 +58,7 @@ export default function RegisterForm() {
               color="teal"
               content="Register"
             />
-            <Divider horizontal>Or</Divider>
+            {/* <Divider horizontal>Or</Divider> */}
             <SocialLogin />
           </Form>
         )}
