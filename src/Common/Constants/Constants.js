@@ -172,10 +172,7 @@ export default class Constants {
     "ffebf8",
 
     "5cf1ff",
-    // "bbffad",
     "fdffb6",
-    // "a899ff",
-    // "ffc2ff",
     "ffadad",
 
     "eae4e9",
