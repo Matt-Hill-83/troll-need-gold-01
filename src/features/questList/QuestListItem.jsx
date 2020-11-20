@@ -23,20 +23,13 @@ const convertToLua = ({ config }) => {
     return item.location.name !== "blank"
   })
 
+  // filter out scenes with no dialog
   const scenes2 = scenes.filter((item) => {
-    // let sceneHasDialog = ""
-    const frames = item?.frameSet.frames || "no loc"
+    const frames = item?.frameSet?.frames || []
 
-    const sceneHasDialog = frames.every((frame) => {
-      const { dialog } = frame
-
-      return dialog.every((dialog) => {
-        return !dialog.text
-        if (dialog.text !== "") {
-          sceneHasDialog = true
-        }
-      })
-    })
+    const sceneHasDialog = frames.some((frame) =>
+      frame.dialog.some((dialog) => dialog.text)
+    )
 
     return !sceneHasDialog
   })
