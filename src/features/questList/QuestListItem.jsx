@@ -24,20 +24,21 @@ const convertToLua = ({ config }) => {
   })
 
   const scenes2 = scenes.filter((item) => {
-    let sceneHasDialog = ""
+    // let sceneHasDialog = ""
     const frames = item?.frameSet.frames || "no loc"
 
-    frames.forEach((frame) => {
+    const sceneHasDialog = frames.every((frame) => {
       const { dialog } = frame
 
-      dialog.forEach((dialog) => {
+      return dialog.every((dialog) => {
+        return !dialog.text
         if (dialog.text !== "") {
           sceneHasDialog = true
         }
       })
     })
 
-    return sceneHasDialog
+    return !sceneHasDialog
   })
 
   scenes2.map((item) => {
