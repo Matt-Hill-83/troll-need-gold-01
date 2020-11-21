@@ -34,12 +34,6 @@ export default function QuestList({ worlds, className }) {
   return (
     <div className={cx(className, css.main)}>
       <ExportToLua worlds={worlds} />
-      {/* <Button
-        onClick={() => {
-          convertAllQuestsToLua({ worlds })
-        }}
-        icon={IconNames.NINJA}
-      /> */}
       {tableHeader}
       {worlds.map((event) => (
         <QuestListItem event={event} key={event.id} />

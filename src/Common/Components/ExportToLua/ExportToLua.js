@@ -1,27 +1,35 @@
 import React from "react"
 
-import css from "./ExportToLua.module.scss"
 import { Button, ButtonGroup } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
 
-export const convertAllQuestsToLua = ({ worlds }) => {
+import css from "./ExportToLua.module.scss"
+import useUpdateProfileWidget from "../../../oldProject/components/TopLevel/useUpdateProfileWidget"
+
+let isGod = false
+
+export const convertAllQuestsToLua = (props) => {
+  const { worlds, maxItems = 10 } = props
   let luaStrings = "{"
+  let numWorldsConverted = 0
 
   // TODO: Do export based on Books
   // TODO: Pick a few stories and get them to work end to end
   // TODO: restrict camera angle so it's easier to read
 
-  worlds.slice(0, 10).map((world) => {
+  worlds.slice(0, maxItems).map((world, index) => {
     console.log("world.location.name", world.title) // zzz
     const newString = convertToLua({ config: world.newGrid5 })
 
     if (newString) {
       luaStrings += `${newString}, `
+      numWorldsConverted++
     }
   })
   luaStrings += `}`
 
-  console.log("luaStrings") // zzz
+  console.log("numWorldsConverted", numWorldsConverted) // zzz
+  console.log("luaStrings:-----------") // zzz
   console.log(luaStrings) // zzz
 }
 
@@ -95,10 +103,14 @@ const convertToLua = ({ config }) => {
 
 export function ExportToLua(props) {
   const { worlds } = props
+  const { getProfile } = useUpdateProfileWidget()
+  const profile = getProfile()
+  isGod = profile.id === "AMAgzal2oAbHogUvO9vVeHWZygF3"
 
   return (
     <ButtonGroup>
       <Button
+        disabled={!isGod}
         onClick={() => {
           convertAllQuestsToLua({ worlds })
         }}
