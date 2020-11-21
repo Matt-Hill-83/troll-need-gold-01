@@ -5,11 +5,9 @@ import cx from "classnames"
 
 import useUpdateProfileWidget from "../../oldProject/components/TopLevel/useUpdateProfileWidget"
 import QuestProgressUtils from "../../oldProject/Utils/QuestProgressUtils"
+import { ExportToLua } from "../../Common/Components/ExportToLua/ExportToLua"
 
 import css from "./QuestList.module.scss"
-import { Button } from "@blueprintjs/core"
-import { IconNames } from "@blueprintjs/icons"
-import { ExportToLua } from "../../Common/Components/ExportToLua/ExportToLua"
 
 export default function QuestList({ worlds, className }) {
   const { getProfile } = useUpdateProfileWidget()

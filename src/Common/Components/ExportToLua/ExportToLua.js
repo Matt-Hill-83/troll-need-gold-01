@@ -3,7 +3,6 @@ import React from "react"
 import { Button, ButtonGroup } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
 
-import css from "./ExportToLua.module.scss"
 import useUpdateProfileWidget from "../../../oldProject/components/TopLevel/useUpdateProfileWidget"
 
 let isGod = false
@@ -12,10 +11,6 @@ export const convertAllQuestsToLua = (props) => {
   const { worlds, maxItems = 10 } = props
   let luaStrings = "{"
   let numWorldsConverted = 0
-
-  // TODO: Do export based on Books
-  // TODO: Pick a few stories and get them to work end to end
-  // TODO: restrict camera angle so it's easier to read
 
   worlds.slice(0, maxItems).map((world, index) => {
     console.log("world.location.name", world.title) // zzz
@@ -50,9 +45,24 @@ const convertToLua = ({ config }) => {
     return sceneHasDialog
   })
 
-  scenes2.map((item) => {
-    const name = item?.location?.name || "no loc"
-    const frames = item?.frameSet?.frames || []
+  let minRow = 10000
+  let maxRow = -1
+  let minCol = 10000
+  let maxCol = -1
+
+  scenes2.map((scene) => {
+    const name = scene?.location?.name || "no loc"
+    const {
+      coordinates,
+      coordinates: { row, col },
+    } = scene
+
+    minRow = row < minRow ? row : minRow
+    maxRow = row > maxRow ? row : maxRow
+    minCol = col < minCol ? col : minCol
+    maxCol = col > maxCol ? col : maxCol
+
+    const frames = scene?.frameSet?.frames || []
 
     const newFrames = frames.map((frame) => {
       const { dialog, critters1, critters2 } = frame
@@ -65,12 +75,12 @@ const convertToLua = ({ config }) => {
         return dialog.character !== "empty"
       })
 
-      const newCharacters01 = critters1.map((item) => {
-        return { name: item.name }
+      const newCharacters01 = critters1.map((critter1) => {
+        return { name: critter1.name }
       })
 
-      const newCharacters02 = critters2.map((item) => {
-        return { name: item.name }
+      const newCharacters02 = critters2.map((critter2) => {
+        return { name: critter2.name }
       })
 
       return {
@@ -79,10 +89,38 @@ const convertToLua = ({ config }) => {
         characters02: newCharacters02,
       }
     })
-    const newScene = { name: name, frames: newFrames }
+    const newScene = { name: name, frames: newFrames, coordinates: coordinates }
+    console.log("newScene", newScene) // zzz
 
     output.push(newScene)
   })
+
+  // trim top and left row padding and set max rows
+  let newMaxRow = 0
+  let newMaxCol = 0
+  output.map((scene) => {
+    const name = scene?.location?.name || "no loc"
+    const {
+      coordinates,
+      coordinates: { row, col },
+    } = scene
+
+    const newRow = coordinates.row - minRow
+    const newCol = coordinates.col - minCol
+    coordinates.row = newRow
+    coordinates.col = newCol
+
+    newMaxRow = newRow > newMaxRow ? newRow : newMaxRow
+    newMaxCol = newCol > newMaxCol ? newCol : newMaxCol
+
+    scene.maxRow = newMaxRow
+    scene.maxCol = newMaxCol
+  })
+
+  console.log("maxRow", maxRow) // zzz
+  console.log("minRow", minRow) // zzz
+  console.log("maxCol", maxCol) // zzz
+  console.log("minCol", minCol) // zzz
 
   let testString = JSON.stringify(output)
   let testString02 = testString.replaceAll("[", "{")
