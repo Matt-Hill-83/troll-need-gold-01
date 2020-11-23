@@ -29,7 +29,7 @@ export const convertAllQuestsToLua = (props) => {
 }
 
 const convertToLua = ({ config }) => {
-  const output = []
+  const newScenes = []
   const scenes = config.filter((item) => {
     return item.location.name !== "blank"
   })
@@ -92,13 +92,13 @@ const convertToLua = ({ config }) => {
     const newScene = { name: name, frames: newFrames, coordinates: coordinates }
     console.log("newScene", newScene) // zzz
 
-    output.push(newScene)
+    newScenes.push(newScene)
   })
 
   // trim top and left row padding and set max rows
   let newMaxRow = 0
   let newMaxCol = 0
-  output.map((scene) => {
+  newScenes.map((scene) => {
     const name = scene?.location?.name || "no loc"
     const {
       coordinates,
@@ -122,7 +122,7 @@ const convertToLua = ({ config }) => {
   console.log("maxCol", maxCol) // zzz
   console.log("minCol", minCol) // zzz
 
-  let testString = JSON.stringify(output)
+  let testString = JSON.stringify(newScenes)
   let testString02 = testString.replaceAll("[", "{")
   testString02 = testString02.replaceAll("]", "}")
   testString02 = testString02.replaceAll(":", "=")
