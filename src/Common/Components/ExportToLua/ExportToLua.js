@@ -13,7 +13,6 @@ export const convertAllQuestsToLua = (props) => {
   let numWorldsConverted = 0
 
   worlds.slice(0, maxItems).map((world, index) => {
-    console.log("world.location.name", world.title) // zzz
     const newString = convertToLua({ config: world.newGrid5 })
 
     if (newString) {
@@ -22,9 +21,7 @@ export const convertAllQuestsToLua = (props) => {
     }
   })
   luaStrings += `}`
-
-  console.log("numWorldsConverted", numWorldsConverted) // zzz
-  console.log("luaStrings:-----------") // zzz
+  console.log("luaStrings") // zzz
   console.log(luaStrings) // zzz
 }
 
@@ -90,7 +87,6 @@ const convertToLua = ({ config }) => {
       }
     })
     const newScene = { name: name, frames: newFrames, coordinates: coordinates }
-    console.log("newScene", newScene) // zzz
 
     newScenes.push(newScene)
   })
@@ -98,15 +94,14 @@ const convertToLua = ({ config }) => {
   // trim top and left row padding and set max rows
   let newMaxRow = 0
   let newMaxCol = 0
-  newScenes.map((scene) => {
-    const name = scene?.location?.name || "no loc"
+  newScenes.forEach((scene) => {
     const {
       coordinates,
       coordinates: { row, col },
     } = scene
 
-    const newRow = coordinates.row - minRow
-    const newCol = coordinates.col - minCol
+    const newRow = row - minRow
+    const newCol = col - minCol
     coordinates.row = newRow
     coordinates.col = newCol
 
@@ -117,12 +112,15 @@ const convertToLua = ({ config }) => {
     scene.maxCol = newMaxCol
   })
 
-  console.log("maxRow", maxRow) // zzz
-  console.log("minRow", minRow) // zzz
-  console.log("maxCol", maxCol) // zzz
-  console.log("minCol", minCol) // zzz
+  const newQuest = {
+    sceneConfigs: newScenes,
+    gridSize: {
+      rows: newMaxRow + 1,
+      cols: newMaxCol + 1,
+    },
+  }
 
-  let testString = JSON.stringify(newScenes)
+  let testString = JSON.stringify(newQuest)
   let testString02 = testString.replaceAll("[", "{")
   testString02 = testString02.replaceAll("]", "}")
   testString02 = testString02.replaceAll(":", "=")
