@@ -4,6 +4,8 @@ import { Button, ButtonGroup } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
 
 import useUpdateProfileWidget from "../../../oldProject/components/TopLevel/useUpdateProfileWidget"
+import Utils from "../../Utils/Utils"
+import Constants from "../../Constants/Constants"
 
 let isGod = false
 
@@ -12,22 +14,27 @@ export const convertAllQuestsToLua = (props) => {
   let luaStrings = "{"
   let numWorldsConverted = 0
 
-  worlds.slice(0, maxItems).map((world, index) => {
-    const newString = convertToLua({ config: world.newGrid5 })
+  worlds.slice(0, maxItems).forEach((world, index) => {
+    const newString = convertToLua({ world })
 
     if (newString) {
       luaStrings += `${newString}, `
       numWorldsConverted++
     }
   })
+
   luaStrings += `}`
-  console.log("luaStrings") // zzz
-  console.log(luaStrings) // zzz
+
+  // Do not delete these console logs
+  console.log("luaStrings")
+  console.log(luaStrings)
+  // Do not delete these console logs
 }
 
-const convertToLua = ({ config }) => {
+const convertToLua = ({ world }) => {
+  const scenesGrid = world.newGrid5
   const newScenes = []
-  const scenes = config.filter((item) => {
+  const scenes = scenesGrid.filter((item) => {
     return item.location.name !== "blank"
   })
 
@@ -46,7 +53,7 @@ const convertToLua = ({ config }) => {
   let maxRow = -1
   let minCol = 10000
   let maxCol = -1
-
+  console.log("scenes2", scenes2) // zzz
   scenes2.map((scene) => {
     const name = scene?.location?.name || "no loc"
     const {
@@ -61,32 +68,61 @@ const convertToLua = ({ config }) => {
 
     const frames = scene?.frameSet?.frames || []
 
+    const isValidValue = ({ value }) => {
+      if (!value) return false
+
+      const unwantedNames = ["empty", "blank", ""]
+      const test = !unwantedNames.includes(value)
+      !test && console.log("-------------------------------value", value) // zzz
+      return test
+    }
+
     const newFrames = frames.map((frame) => {
       const { dialog, critters1, critters2 } = frame
 
-      const newDialogs = dialog.map((dialog) => {
-        return { char: dialog.character, text: dialog.text.trim() }
+      const newDialogs = dialog.filter((dialog) => {
+        const isValid = isValidValue({ value: dialog.character })
+        return dialog.text.trim() !== "" && isValid
       })
 
-      const newDialogs2 = newDialogs.filter((dialog) => {
-        return dialog.character !== "empty"
+      const newDialogs2 = newDialogs.map((dialog) => {
+        const text = dialog.text.trim()
+        const char = dialog.character
+        return { char, text }
       })
 
-      const newCharacters01 = critters1.map((critter1) => {
-        return { name: critter1.name }
+      const newCharacters01 = critters1.map((item) => {
+        const name = item.name
+        return isValidValue({ value: name }) ? { name } : null
       })
 
-      const newCharacters02 = critters2.map((critter2) => {
-        return { name: critter2.name }
+      const newCharacters02 = critters2.map((item) => {
+        const name = item.name
+        return isValidValue({ value: name }) ? { name } : null
       })
 
       return {
-        dialogs: newDialogs2,
-        characters01: newCharacters01,
-        characters02: newCharacters02,
+        dialogs: newDialogs2.filter((item) => !!item),
+        characters01: newCharacters01.filter((item) => !!item),
+        characters02: newCharacters02.filter((item) => !!item),
       }
     })
-    const newScene = { name: name, frames: newFrames, coordinates: coordinates }
+
+    const neighbors = Utils.getNeighbors({ coordinates, grid: scenesGrid })
+    const showBottomPath = !!neighbors[Constants.neighborPositionsEnum.bottom]
+    const showRightPath = !!neighbors[Constants.neighborPositionsEnum.right]
+    const showTopPath = !!neighbors[Constants.neighborPositionsEnum.top]
+    const showLeftPath = !!neighbors[Constants.neighborPositionsEnum.left]
+
+    const newScene = {
+      name: name,
+      frames: newFrames,
+      coordinates: coordinates,
+      showBottomPath,
+      showRightPath,
+      showTopPath,
+      showLeftPath,
+    }
 
     newScenes.push(newScene)
   })
@@ -113,6 +149,7 @@ const convertToLua = ({ config }) => {
   })
 
   const newQuest = {
+    questTitle: world.title,
     sceneConfigs: newScenes,
     gridSize: {
       rows: newMaxRow + 1,

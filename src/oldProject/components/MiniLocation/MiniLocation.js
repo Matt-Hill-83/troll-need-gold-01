@@ -111,7 +111,6 @@ export default function MiniLocation(props) {
       updateActiveScene({
         sceneId: scene.id,
       })
-      // toggleMap()
     }
   }
 
