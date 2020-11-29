@@ -1,3 +1,26 @@
+import olivia01 from "./creatures/olivia01.png"
+import babytroll05 from "./creatures/babytroll05.png"
+
+import pringle01 from "./creatures/pringle01.png"
+import brella01 from "./creatures/brella01.png"
+
+import mochi01 from "./creatures/mochi01.png"
+import magenta01 from "./creatures/magenta01.png"
+import tracy03 from "./creatures/tracy03.png"
+import tracy02 from "./creatures/tracy02.png"
+import tracy01 from "./creatures/tracy01.png"
+import mochi14 from "./creatures/mochi14.png"
+import mochi13 from "./creatures/mochi13.png"
+import mochi12 from "./creatures/mochi12.png"
+import mochi11 from "./creatures/mochi11.png"
+import mochi10 from "./creatures/mochi10.png"
+import mochi09 from "./creatures/mochi09.png"
+import mochi08 from "./creatures/mochi08.png"
+import mochi07 from "./creatures/mochi07.png"
+import mochi06 from "./creatures/mochi06.png"
+import mochi05 from "./creatures/mochi05.png"
+import mochi04 from "./creatures/mochi04.png"
+
 import hudson01 from "./creatures/hudson01.png"
 import luke01 from "./creatures/luke01.png"
 
@@ -180,6 +203,26 @@ const tj = {
 }
 
 const creatures2animals = {
+  pringle01,
+  babytroll05,
+  olivia01,
+  brella01,
+  mochi01,
+  magenta01,
+  tracy03,
+  tracy02,
+  tracy01,
+  mochi14,
+  mochi13,
+  mochi12,
+  mochi11,
+  mochi10,
+  mochi09,
+  mochi08,
+  mochi07,
+  mochi06,
+  mochi05,
+  mochi04,
   hudson01,
   luke01,
   trollKing: goblinKing01,
