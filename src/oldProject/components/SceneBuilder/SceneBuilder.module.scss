@@ -10,7 +10,7 @@
       input {
         border: 1px solid red !important;
         display: flex;
-        width: 2vh;
+        width: 3vh;
         padding: 0px;
       }
     }
@@ -22,15 +22,6 @@
     bottom: 1vh;
     right: 0;
     z-index: 1;
-
-    :global {
-      input {
-        border: 1px solid blue !important;
-        display: flex;
-        width: 2vh;
-        padding: 0px;
-      }
-    }
   }
 
   .gridRow {
