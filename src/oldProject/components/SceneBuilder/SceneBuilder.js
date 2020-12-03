@@ -194,12 +194,10 @@ export default function SceneBuilder(props) {
     const handleClose = async () => {}
 
     const handleColChange = async ({ event }) => {
-      console.log("event.target.value", event.target.value) // zzz
       setCol(parseInt(event.target.value || 0))
     }
 
     const handleRowChange = async ({ event }) => {
-      console.log("event.target.value", event.target.value) // zzz
       setRow(parseInt(event.target.value || 0))
     }
     const coordinateDisplay = (
@@ -227,7 +225,10 @@ export default function SceneBuilder(props) {
 
     return (
       <div className={css.gridCell} style={backgroundColor}>
-        {coordinateDisplay}
+        {!hideScene && coordinateDisplay}
+        {hideScene && (
+          <div className={css.actualCoordiates}>{`[${row}, ${col}]`}</div>
+        )}
         {!hideScene && (
           <Popover className={css.scenePropsButton}>
             <Button icon={IconNames.SETTINGS} />
