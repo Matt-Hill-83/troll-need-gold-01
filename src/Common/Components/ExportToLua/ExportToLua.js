@@ -63,6 +63,8 @@ const convertToLua = ({ world }) => {
     console.log("scene", scene) // zzz
     const {
       coordinates,
+      isEndScene,
+      isStartScene,
       coordinates: { row, col },
     } = scene
 
@@ -127,6 +129,8 @@ const convertToLua = ({ world }) => {
       showRightPath,
       showTopPath,
       showLeftPath,
+      isEndScene,
+      isStartScene,
     }
 
     newScenes.push(newScene)
