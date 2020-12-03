@@ -35,9 +35,13 @@ const convertToLua = ({ world }) => {
   const scenesGrid = world.newGrid5
   const newScenes = []
   const scenes = scenesGrid.filter((item) => {
+    console.log("item", item) // zzz
     return item.location.name !== "blank"
   })
 
+  const startScene = scenes.find((item) => item.isStartScene) || {}
+  const endScene = scenes.find((item) => item.isEndScene) || {}
+  console.log("startScene-------------------------->>", startScene) // zzz
   // filter out scenes with no dialog
   const scenes2 = scenes.filter((item) => {
     const frames = item?.frameSet?.frames || []
@@ -56,6 +60,7 @@ const convertToLua = ({ world }) => {
   console.log("scenes2", scenes2) // zzz
   scenes2.map((scene) => {
     const name = scene?.location?.name || "no loc"
+    console.log("scene", scene) // zzz
     const {
       coordinates,
       coordinates: { row, col },
@@ -150,6 +155,8 @@ const convertToLua = ({ world }) => {
 
   const newQuest = {
     questTitle: world.title,
+    startSceneCoords: startScene.coordinates,
+    endSceneCoords: endScene.coordinates,
     sceneConfigs: newScenes,
     gridSize: {
       rows: newMaxRow + 1,

@@ -1,4 +1,4 @@
-import { Dialog, DialogTitle, DialogContent } from "@material-ui/core"
+import { Dialog, DialogTitle, DialogContent, Input } from "@material-ui/core"
 import { IconNames } from "@blueprintjs/icons"
 import { Popover, ButtonGroup, Button } from "@blueprintjs/core"
 import React, { useState, useEffect } from "react"
@@ -15,6 +15,8 @@ import css from "./SceneBuilder.module.scss"
 
 export default function SceneBuilder(props) {
   const [showJsonEditor, setShowJsonEditor] = useState(false)
+  const [row, setRow] = useState(999)
+  const [col, setCol] = useState(999)
 
   useEffect(() => {
     // returned function will be called on component unmount
@@ -22,7 +24,10 @@ export default function SceneBuilder(props) {
   }, [])
 
   // on change in props
-  useEffect(() => {}, [])
+  useEffect(() => {
+    setRow(props?.scene?.coordinates?.row)
+    setCol(props?.scene?.coordinates?.col)
+  }, [props.scene.coordinates])
 
   const getAllCritters1InScene = ({ scene }) => {
     const frames = scene?.frameSet?.frames || []
@@ -129,6 +134,13 @@ export default function SceneBuilder(props) {
     props.saveItems()
   }
 
+  const moveScene = ({ scene }) => {
+    console.log("scene.coordinates", scene.coordinates) // zzz
+    scene.coordinates = { row, col }
+    console.log("scene.coordinates", scene.coordinates) // zzz
+    props.saveItems()
+  }
+
   const duplicateScene = ({ scene }) => {
     const duplicateScene = JSON.parse(JSON.stringify(scene))
     duplicateScene.coordinates = { row: 0, col: 0 }
@@ -181,6 +193,16 @@ export default function SceneBuilder(props) {
 
     const handleClose = async () => {}
 
+    const handleColChange = async ({ event }) => {
+      console.log("event.target.value", event.target.value) // zzz
+      setCol(parseInt(event.target.value || 0))
+    }
+
+    const handleRowChange = async ({ event }) => {
+      console.log("event.target.value", event.target.value) // zzz
+      setRow(parseInt(event.target.value || 0))
+    }
+
     return (
       <div className={css.gridCell} style={backgroundColor}>
         {!hideScene && (
@@ -196,6 +218,30 @@ export default function SceneBuilder(props) {
               </Button>
               <Button onClick={() => duplicateScene({ scene })}>Dup</Button>
               <Button onClick={() => deleteScene({ scene })}>Del</Button>
+              <Popover>
+                <Button>MV</Button>
+                <div>
+                  row:
+                  <input
+                    value={row}
+                    onChange={(event) => handleRowChange({ event, scene })}
+                    type="number"
+                  />
+                  col:
+                  <input
+                    value={col}
+                    onChange={(event) => handleColChange({ event, scene })}
+                    type="number"
+                  />
+                  <Button
+                    label={"submit"}
+                    onClick={() => moveScene({ scene })}
+                    type="button"
+                  >
+                    submit
+                  </Button>
+                </div>
+              </Popover>
             </ButtonGroup>
           </Popover>
         )}
