@@ -202,9 +202,32 @@ export default function SceneBuilder(props) {
       console.log("event.target.value", event.target.value) // zzz
       setRow(parseInt(event.target.value || 0))
     }
+    const coordinateDisplay = (
+      <div className={css.coordinateDisplay}>
+        <input
+          value={row}
+          onChange={(event) => handleRowChange({ event, scene })}
+          type="number"
+        />
+
+        <input
+          value={col}
+          onChange={(event) => handleColChange({ event, scene })}
+          type="number"
+        />
+        <Button
+          label={"submit"}
+          onClick={() => moveScene({ scene })}
+          type="button"
+        >
+          ✅
+        </Button>
+      </div>
+    )
 
     return (
       <div className={css.gridCell} style={backgroundColor}>
+        {coordinateDisplay}
         {!hideScene && (
           <Popover className={css.scenePropsButton}>
             <Button icon={IconNames.SETTINGS} />
@@ -218,30 +241,6 @@ export default function SceneBuilder(props) {
               </Button>
               <Button onClick={() => duplicateScene({ scene })}>Dup</Button>
               <Button onClick={() => deleteScene({ scene })}>Del</Button>
-              <Popover>
-                <Button>MV</Button>
-                <div>
-                  row:
-                  <input
-                    value={row}
-                    onChange={(event) => handleRowChange({ event, scene })}
-                    type="number"
-                  />
-                  col:
-                  <input
-                    value={col}
-                    onChange={(event) => handleColChange({ event, scene })}
-                    type="number"
-                  />
-                  <Button
-                    label={"submit"}
-                    onClick={() => moveScene({ scene })}
-                    type="button"
-                  >
-                    submit
-                  </Button>
-                </div>
-              </Popover>
             </ButtonGroup>
           </Popover>
         )}
