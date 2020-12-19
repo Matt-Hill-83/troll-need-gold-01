@@ -186,7 +186,7 @@ export default function CrudMachine(props) {
 
     const renderedItems = items.map((item, index) => {
       const isLastItem = index === items.length - 1
-
+      console.log("item", item) // zzz
       return (
         <div
           className={`${css.itemContainer}`}
@@ -208,11 +208,14 @@ export default function CrudMachine(props) {
   }
 
   const { className, classNameCharPicker = "", title = "" } = props
+  console.log("images.creatures2animals", images.creatures2animals) // zzz
+  console.log("images.creatures4LizAndKat", images.creatures4LizAndKat) // zzz
 
+  console.log("props.imageSets", props.imageSets) // zzz
   const defaultImageSets = [
+    images.creatures4LizAndKat,
     images.creatures2animals,
     images.creatures3animals,
-    images.creatures4LizAndKat,
     images.locations,
     images.creatures,
     images.vehicles,
@@ -222,6 +225,7 @@ export default function CrudMachine(props) {
   let imageSets = []
   let characterPicker = null
   if (showItemPicker) {
+    // imageSets = defaultImageSets
     imageSets = props.imageSets || defaultImageSets
     characterPicker = (
       <CharacterPicker

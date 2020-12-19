@@ -13,7 +13,7 @@ const all = {
   ...locations,
   ...creatures,
   ...creatures2animals,
-  // ...creatures4LizAndKat,
+  ...creatures4LizAndKat,
   ...items,
   ...posableCharacters,
   ...dresses,
