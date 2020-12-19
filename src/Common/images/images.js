@@ -2,6 +2,7 @@ import { trophys01 } from "./trophys01"
 import { creatures, dresses } from "./creatures"
 import { creatures2animals } from "./creatures2"
 import { creatures3animals } from "./creatures3"
+import { creatures4LizAndKat } from "./creatures4LizAndKat"
 import items from "./items"
 import locations from "./locations"
 import backgrounds from "./backgrounds"
@@ -12,6 +13,7 @@ const all = {
   ...locations,
   ...creatures,
   ...creatures2animals,
+  // ...creatures4LizAndKat,
   ...items,
   ...posableCharacters,
   ...dresses,
@@ -23,6 +25,7 @@ export default {
   creatures,
   creatures2animals,
   creatures3animals,
+  creatures4LizAndKat,
   items,
   backgrounds,
   newBackgrounds,

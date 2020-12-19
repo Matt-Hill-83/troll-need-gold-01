@@ -212,6 +212,7 @@ export default function CrudMachine(props) {
   const defaultImageSets = [
     images.creatures2animals,
     images.creatures3animals,
+    images.creatures4LizAndKat,
     images.locations,
     images.creatures,
     images.vehicles,

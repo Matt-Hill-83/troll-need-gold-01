@@ -78,7 +78,8 @@ const convertToLua = ({ world }) => {
     const isValidValue = ({ value }) => {
       if (!value) return false
 
-      const unwantedNames = ["empty", "blank", ""]
+      const unwantedNames = ["blank", ""]
+      // const unwantedNames = ["empty", "blank", ""]
       const test = !unwantedNames.includes(value)
       !test && console.log("-------------------------------value", value) // zzz
       return test
