@@ -221,8 +221,6 @@ class WorldBuilder extends Component {
   saveWords = async ({ event }) => {
     const words = event.target.value
     await this.updateWorld({ words })
-    // const test = JSON.parse(words)
-    // await this.updateWorld({ words: test })
   }
 
   updateWorld = async (props) => {
@@ -394,15 +392,6 @@ class WorldBuilder extends Component {
       title = (world && world.title) || this.previousTitle + " copy"
     }
     const words = (world && world.words) || ""
-    console.log("words", words) // zzz
-    if (words) {
-      // // const words = '[ "CAT", "HAT", "MAT", "PAT", "RAT", "SAT" ]'
-      // // const words = '[ "Ford", "BMW", "Fiat" ]'
-      // console.log("words", words) // zzz
-      // const test = JSON.parse(words)
-      // // const test = JSON.parse('["CAT", "HAT", "MAT", "PAT", "RAT", "SAT"]')
-      // console.log("test", test) // zzz
-    }
 
     return (
       <div className={css.main}>
