@@ -74,8 +74,6 @@ export default function PhotosTab({ profile, isCurrentUser }) {
             <Card.Group itemsPerRow={5}>
               {photos.map((photo) => {
                 if (photo.name.includes("blob")) {
-                  console.log("photo", photo) // zzz
-                  console.log("photo.url", photo.url) // zzz
                   return (
                     <div>
                       <audio src={photo.url} controls="controls" />

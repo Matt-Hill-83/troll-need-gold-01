@@ -35,13 +35,11 @@ const convertToLua = ({ world }) => {
   const scenesGrid = world.newGrid5
   const newScenes = []
   const scenes = scenesGrid.filter((item) => {
-    console.log("item", item) // zzz
     return item.location.name !== "blank"
   })
 
   const startScene = scenes.find((item) => item.isStartScene) || {}
   const endScene = scenes.find((item) => item.isEndScene) || {}
-  console.log("startScene-------------------------->>", startScene) // zzz
   // filter out scenes with no dialog
   const scenes2 = scenes.filter((item) => {
     const frames = item?.frameSet?.frames || []
@@ -57,10 +55,8 @@ const convertToLua = ({ world }) => {
   let maxRow = -1
   let minCol = 10000
   let maxCol = -1
-  console.log("scenes2", scenes2) // zzz
   scenes2.map((scene) => {
     const name = scene?.location?.name || "no loc"
-    console.log("scene", scene) // zzz
     const {
       coordinates,
       isEndScene,
@@ -81,7 +77,6 @@ const convertToLua = ({ world }) => {
       const unwantedNames = ["blank", ""]
       // const unwantedNames = ["empty", "blank", ""]
       const test = !unwantedNames.includes(value)
-      !test && console.log("-------------------------------value", value) // zzz
       return test
     }
 
@@ -160,6 +155,7 @@ const convertToLua = ({ world }) => {
 
   const newQuest = {
     questTitle: world.title,
+    words: world.words,
     startSceneCoords: startScene.coordinates,
     endSceneCoords: endScene.coordinates,
     sceneConfigs: newScenes,
@@ -168,7 +164,6 @@ const convertToLua = ({ world }) => {
       cols: newMaxCol + 1,
     },
   }
-
   let testString = JSON.stringify(newQuest)
   let testString02 = testString.replaceAll("[", "{")
   testString02 = testString02.replaceAll("]", "}")

@@ -135,9 +135,7 @@ export default function SceneBuilder(props) {
   }
 
   const moveScene = ({ scene }) => {
-    console.log("scene.coordinates", scene.coordinates) // zzz
     scene.coordinates = { row, col }
-    console.log("scene.coordinates", scene.coordinates) // zzz
     props.saveItems()
   }
 

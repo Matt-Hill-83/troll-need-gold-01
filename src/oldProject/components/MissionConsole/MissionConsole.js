@@ -11,7 +11,6 @@ const columnNames = ["Mission", "Gold", "Complete"]
 
 const getTableData = ({ missions, completedMissions }) => {
   return missions.map((mission, missionIndex) => {
-    console.log("mission", mission) // zzz
     const { item = {}, recipient = "", rewards = [] } = mission
     const rewardString = rewards?.[0]?.amount
     const completed = completedMissions.includes(missionIndex)

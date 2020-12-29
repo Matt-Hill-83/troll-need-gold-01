@@ -206,9 +206,23 @@ class WorldBuilder extends Component {
     this.setState({ world })
   }
 
+  onChangeWords = async ({ event }) => {
+    const world = worldBuilderStore.getWorldBuilderWorld()
+    world.words = event.target.value
+    worldBuilderStore.setWorldBuilderWorld(world)
+    this.setState({ world })
+  }
+
   saveTitle = async ({ event }) => {
     const title = event.target.value
     await this.updateWorld({ title })
+  }
+
+  saveWords = async ({ event }) => {
+    const words = event.target.value
+    await this.updateWorld({ words })
+    // const test = JSON.parse(words)
+    // await this.updateWorld({ words: test })
   }
 
   updateWorld = async (props) => {
@@ -379,6 +393,16 @@ class WorldBuilder extends Component {
 
       title = (world && world.title) || this.previousTitle + " copy"
     }
+    const words = (world && world.words) || ""
+    console.log("words", words) // zzz
+    if (words) {
+      // // const words = '[ "CAT", "HAT", "MAT", "PAT", "RAT", "SAT" ]'
+      // // const words = '[ "Ford", "BMW", "Fiat" ]'
+      // console.log("words", words) // zzz
+      // const test = JSON.parse(words)
+      // // const test = JSON.parse('["CAT", "HAT", "MAT", "PAT", "RAT", "SAT"]')
+      // console.log("test", test) // zzz
+    }
 
     return (
       <div className={css.main}>
@@ -389,6 +413,14 @@ class WorldBuilder extends Component {
             placeholder="Title"
             onChange={(event) => this.onChangeTitle({ event })}
             onBlur={(event) => this.saveTitle({ event })}
+            className={css.titleInput}
+          />
+          <InputGroup
+            value={words}
+            id="text-input"
+            placeholder="Title"
+            onChange={(event) => this.onChangeWords({ event })}
+            onBlur={(event) => this.saveWords({ event })}
             className={css.titleInput}
           />
 
